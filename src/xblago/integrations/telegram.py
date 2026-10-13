@@ -331,7 +331,10 @@ def _run_webhook_server(bot: TelegramBot, api: TelegramApi, token: str) -> None:
     thread.start()
 
     bot._print_startup_identity()
-    _register_webhook_with_retry(api, webhook_url, secret_token)
+    if _bool_from_env("TELEGRAM_SKIP_WEBHOOK_REGISTRATION", False):
+        print("Telegram webhook registration is skipped by configuration.")
+    else:
+        _register_webhook_with_retry(api, webhook_url, secret_token)
 
     while True:
         time.sleep(3600)
@@ -352,6 +355,14 @@ def _webhook_base_url() -> str:
 
 def _webhook_secret(token: str) -> str:
     return os.getenv("TELEGRAM_WEBHOOK_SECRET") or hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def _bool_from_env(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None:
+        return default
+
+    return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _register_webhook_with_retry(api: TelegramApi, webhook_url: str, secret_token: str) -> None:
