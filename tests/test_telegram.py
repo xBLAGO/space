@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
-from xblago.integrations.telegram import TelegramApi, TelegramBot, _split_telegram_text
+from xblago.integrations.telegram import TelegramApi, TelegramBot, _should_use_webhook, _split_telegram_text
 
 
 class FakeTelegramApi(TelegramApi):
@@ -38,6 +39,14 @@ class TelegramBotTest(unittest.TestCase):
         self.assertEqual(len(chunks), 2)
         self.assertEqual(len(chunks[0]), 4096)
         self.assertEqual(len(chunks[1]), 4)
+
+    def test_auto_delivery_uses_webhook_on_spaces(self) -> None:
+        with unittest.mock.patch.dict("os.environ", {"SPACE_HOST": "romanmaloev-space.hf.space"}):
+            self.assertTrue(_should_use_webhook("auto"))
+
+    def test_polling_delivery_overrides_space_detection(self) -> None:
+        with unittest.mock.patch.dict("os.environ", {"SPACE_HOST": "romanmaloev-space.hf.space"}):
+            self.assertFalse(_should_use_webhook("polling"))
 
 
 if __name__ == "__main__":
