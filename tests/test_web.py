@@ -106,6 +106,7 @@ class WebAppTest(unittest.TestCase):
         code = self.web.new_link_code(web_uid)
         self.assertEqual(self.web.redeem_telegram_link(tg_uid, code), web_uid)
         self.assertEqual(self.store.resolve_telegram_user(telegram), web_uid)
+        self.assertEqual(self.web.analytics(web_uid, community=True)["participants"], 1)
         self.assertEqual(self.store.all_memory(web_uid)["city"], "Krasnodar")
         self.assertEqual(self.store.all_memory(web_uid)["telegram.city"], "Moscow")
         self.assertTrue(any(m["text"] == "Telegram message" for m in self.web.history(web_uid)))
