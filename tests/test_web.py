@@ -5,6 +5,7 @@ import hmac
 import http.cookiejar
 import json
 import os
+import sqlite3
 import tempfile
 import threading
 import time
@@ -14,7 +15,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from unittest.mock import patch
 from urllib.error import HTTPError
-from urllib.request import HTTPCookieProcessor, Request, build_opener
+from urllib.request import HTTPCookieProcessor, Request, build_opener, urlopen
 from urllib.parse import urlencode
 
 from xblago.core.storage import SQLiteBlagoStore, TelegramIdentity
@@ -94,6 +95,40 @@ class WebAppTest(unittest.TestCase):
         with self.assertRaises(ApiError):
             verify_telegram_init_data(urlencode(params), token)
 
+    def test_existing_database_is_migrated_for_cached_telegram_replies(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / "blago.sqlite3"
+            connection = sqlite3.connect(database)
+            try:
+                connection.execute(
+                    """
+                    CREATE TABLE events (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        channel TEXT NOT NULL,
+                        external_update_id TEXT NOT NULL,
+                        blago_user_id TEXT NOT NULL,
+                        status TEXT NOT NULL,
+                        error TEXT,
+                        created_at TEXT NOT NULL,
+                        updated_at TEXT NOT NULL,
+                        UNIQUE(channel, external_update_id)
+                    )
+                    """
+                )
+                connection.commit()
+            finally:
+                connection.close()
+
+            SQLiteBlagoStore(database)
+
+            reopened = sqlite3.connect(database)
+            try:
+                columns = {row[1] for row in reopened.execute("PRAGMA table_info(events)")}
+            finally:
+                reopened.close()
+
+        self.assertIn("response_json", columns)
+
     def test_one_time_telegram_link_merges_history_without_memory_loss(self) -> None:
         token, _ = self.web.register("person", "a-long-password", "invite-only-test-code")
         web_uid = self.web.session(token)[0]
@@ -157,6 +192,43 @@ class WebAppTest(unittest.TestCase):
         self.assertEqual(len(json.loads(request("/api/v1/needs")[1])["items"]), 1)
         self.assertEqual(request("/api/v1/auth/logout", "POST", {}, csrf)[0], 200)
         self.assertEqual(request("/api/v1/me")[0], 401)
+
+    def test_web_data_survives_app_restart(self) -> None:
+        token, _ = self.web.register("persisted", "a-long-password", "invite-only-test-code")
+        uid = self.web.session(token)[0]
+        self.web.chat(uid, "запомни город = Краснодар")
+        self.web.create_item("needs", uid, {"title": "Нужна помощь", "visibility": "community"})
+        self.web.create_item("resources", uid, {"title": "Могу помочь", "visibility": "private"})
+
+        restarted_store = SQLiteBlagoStore(Path(self.tmp.name) / "blago.sqlite3")
+        restarted_web = WebApp(restarted_store)
+        restarted_uid = restarted_web.login("persisted", "a-long-password")[0]
+        restarted_uid = restarted_web.session(restarted_uid)[0]
+
+        self.assertEqual(restarted_store.all_memory(restarted_uid)["город"], "Краснодар")
+        self.assertEqual(len(restarted_web.history(restarted_uid)), 2)
+        self.assertEqual(len(restarted_web.rows("needs", restarted_uid)), 1)
+        self.assertEqual(len(restarted_web.rows("resources", restarted_uid)), 1)
+        self.assertEqual(restarted_web.analytics(restarted_uid)["memory_facts"], 1)
+
+    def test_app_shell_contains_required_navigation_without_auth_data(self) -> None:
+        httpd = ThreadingHTTPServer(("127.0.0.1", 0), BlagoWebHandler)
+        httpd.blago_web_app = self.web
+        thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+        thread.start()
+        self.addCleanup(thread.join, 5)
+        self.addCleanup(httpd.server_close)
+        self.addCleanup(httpd.shutdown)
+
+        with urlopen(f"http://127.0.0.1:{httpd.server_port}/app", timeout=4) as response:
+            html = response.read().decode()
+
+        self.assertIn("Чат с BLAGO", html)
+        self.assertIn("Потребности", html)
+        self.assertIn("Ресурсы", html)
+        self.assertIn("Аналитика", html)
+        self.assertIn("Профиль", html)
+        self.assertNotIn("local-invite-code", html)
 
 
 if __name__ == "__main__":
