@@ -8,7 +8,10 @@ version = "0.1.0"
 description = "The first xBLAGO personal assistant agent."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "certifi>=2024.2.2",
+    "requests>=2.32",
+]
 
 [project.scripts]
 xblago = "xblago.cli:main"
