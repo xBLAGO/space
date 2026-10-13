@@ -11,6 +11,8 @@ pinned: false
 
 Telegram entrypoint for the first xBLAGO personal assistant agent.
 
+Recommended Space repo: `RomanMaloev/space`.
+
 Required Space secrets:
 
 - `TELEGRAM_BOT_TOKEN`

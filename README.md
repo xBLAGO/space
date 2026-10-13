@@ -51,12 +51,12 @@ docker build -t xblago-bot .
 docker run --env-file .env xblago-bot
 ```
 
-For Hugging Face Spaces, create a Docker Space and add the secrets listed in `deploy/huggingface-space/README.md`.
+For Hugging Face Spaces, create a Docker Space at `RomanMaloev/space` and add the secrets listed in `deploy/huggingface-space/README.md`.
 
 The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can mirror `main` to a Hugging Face Docker Space after these GitHub settings are added:
 
 - secret `HF_TOKEN`
-- optional variable `HF_SPACE_REPO`, for example `xBLAGO/space`
+- optional variable `HF_SPACE_REPO`, for example `RomanMaloev/space`
 
 ## Test
 
