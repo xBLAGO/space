@@ -40,7 +40,9 @@ export TELEGRAM_BOT_TOKEN=your_bot_token
 PYTHONPATH=src python3 -m xblago.integrations.telegram
 ```
 
-The bot keeps separate persistent memory files per Telegram chat under `~/.xblago/telegram` by default.
+The bot stores participant identity, memory, dialogue history, and processed Telegram updates in a local SQLite database under `~/.xblago/telegram` by default. Set `XBLAGO_DATA_DIR` to move this database to another directory.
+
+Legacy `telegram_<chat_id>.json` memory files are migrated automatically and copied to a timestamped `backups/` directory before import.
 
 ## Deploy
 
@@ -51,7 +53,7 @@ docker build -t xblago-bot .
 docker run --env-file .env xblago-bot
 ```
 
-For Hugging Face Spaces, create a Docker Space at `RomanMaloev/space` and add the secrets listed in `deploy/huggingface-space/README.md`.
+For Hugging Face Spaces, create a Docker Space at `RomanMaloev/space` and add the secrets listed in `deploy/huggingface-space/README.md`. The default Space filesystem is ephemeral, so long-running participant data requires a mounted Hugging Face Storage Bucket/Volume and `XBLAGO_DATA_DIR` pointing to that mount.
 
 The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can mirror `main` to a Hugging Face Docker Space after these GitHub settings are added:
 
@@ -76,10 +78,12 @@ Useful commands inside the chat:
 - `/clear-history` clears the current session context.
 - `/exit` ends the session.
 
-The assistant keeps two kinds of context:
+The assistant keeps several kinds of context:
 
-- Persistent memory: stable facts stored in a local JSON file.
-- Session history: the current conversation, kept in memory while the CLI process runs.
+- Participant identity: an internal `blago_user_id` linked to Telegram `from.id`.
+- Persistent memory: stable facts scoped to the internal user.
+- Dialogue history: recent user and assistant turns restored after restart when stored on persistent disk.
+- Event ledger: processed Telegram `update_id` values used to avoid duplicate operations.
 
 ## Optional LLM Provider
 
