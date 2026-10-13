@@ -226,6 +226,23 @@ class SQLiteBlagoStore:
         with self._locked_transaction() as connection:
             connection.execute("DELETE FROM dialogue_turns WHERE blago_user_id = ?", (blago_user_id,))
 
+    def backup_database(self, destination_dir: Path | None = None) -> Path:
+        target_dir = destination_dir or (self.path.parent / "backups" / "sqlite")
+        target_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+        backup_path = target_dir / f"{self.path.stem}-{timestamp}.sqlite3"
+        with self._lock:
+            source = sqlite3.connect(self.path, timeout=30.0)
+            try:
+                target = sqlite3.connect(backup_path)
+                try:
+                    source.backup(target)
+                finally:
+                    target.close()
+            finally:
+                source.close()
+        return backup_path
+
     def begin_update(self, channel: str, external_update_id: str | None, blago_user_id: str) -> bool:
         if external_update_id is None:
             return True
