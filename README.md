@@ -139,6 +139,8 @@ The Docker-hosted webhook server now serves the **same** responsive Web/PWA UI a
 
 Set a long random `XBLAGO_WEB_INVITE_CODE` (pilot-only shared invitation code) and `XBLAGO_DATA_DIR` on a persistent volume. Visit `https://<your-host>/app`, choose **I have an invitation**, choose a username and a password of at least 12 characters, and provide the code. Passwords are salted and stretched with PBKDF2; session tokens are random, server-stored as hashes and sent in HttpOnly/SameSite cookies. Use HTTPS, which is required for Secure cookies and most PWA features. For local **HTTP-only development**, override `XBLAGO_COOKIE_SECURE=false` (never on production).
 
+For local web-only checks without contacting Telegram, set `TELEGRAM_DELIVERY_MODE=webhook`, `TELEGRAM_SKIP_WEBHOOK_REGISTRATION=true`, and `TELEGRAM_SKIP_STARTUP_CHECK=true`.
+
 ### Telegram Mini App
 
 Configure BotFather's Mini App/menu button URL to `https://<your-host>/app`. A Telegram WebApp obtains a session by submitting its raw `initData`; the backend verifies Telegram's HMAC and max login age with `TELEGRAM_BOT_TOKEN`. It does **not** trust `initDataUnsafe` or browser-supplied BLAGO user IDs. The existing bot webhook remains `/telegram/<configured secret>` on the same listening port.
