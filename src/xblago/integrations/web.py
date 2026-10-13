@@ -363,7 +363,7 @@ class WebApp:
         with self.store._connect() as db:
             if community:
                 return {
-                    "participants": db.execute("SELECT COUNT(*) FROM users").fetchone()[0],
+                    "participants": db.execute("SELECT COUNT(*) FROM users WHERE status = 'active'").fetchone()[0],
                     "published_needs": db.execute("SELECT COUNT(*) FROM blago_needs WHERE visibility = 'community'").fetchone()[0],
                     "published_resources": db.execute("SELECT COUNT(*) FROM blago_resources WHERE visibility = 'community'").fetchone()[0],
                 }
