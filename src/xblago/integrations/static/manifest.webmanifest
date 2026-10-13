@@ -1,0 +1,18 @@
+{
+  "name": "BLAGO — пространство взаимной помощи",
+  "short_name": "BLAGO",
+  "description": "Персональный ИИ-помощник и сообщество взаимной помощи",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#f7f6f2",
+  "icons": [
+    {
+      "src": "/app/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

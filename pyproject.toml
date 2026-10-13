@@ -19,3 +19,6 @@ xblago-telegram = "xblago.integrations.telegram:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"xblago.integrations" = ["static/*"]

@@ -17,6 +17,7 @@ from xblago.integrations.telegram import (
     _should_use_webhook,
     _split_telegram_text,
 )
+from xblago.integrations.web import WebApp
 
 
 class FakeTelegramApi(TelegramApi):
@@ -93,16 +94,18 @@ class TelegramBotTest(unittest.TestCase):
 
         self.assertIn("Собери план недели", str(history))
 
-    def test_duplicate_update_does_not_repeat_operation(self) -> None:
+    def test_duplicate_update_reuses_cached_reply_without_repeating_operation(self) -> None:
         update = _telegram_update(77, 101, 1001, "remember my timezone is Europe/Moscow")
         with tempfile.TemporaryDirectory() as directory:
             bot = TelegramBot(api=FakeTelegramApi(), memory_dir=Path(directory))
 
             first_reply = bot.replies_for_update(update)
             duplicate_reply = bot.replies_for_update(update)
+            memory = bot.replies_for_update(_telegram_update(78, 101, 1001, "/memory"))[0]["text"]
 
         self.assertEqual(len(first_reply), 1)
-        self.assertEqual(duplicate_reply, [])
+        self.assertEqual(duplicate_reply, first_reply)
+        self.assertEqual(str(memory).count("timezone: Europe/Moscow"), 1)
 
     def test_webhook_processing_error_returns_failure(self) -> None:
         body = json.dumps(_telegram_update(1, 101, 1001, "/help")).encode("utf-8")
@@ -153,6 +156,26 @@ class TelegramBotTest(unittest.TestCase):
         self.assertIn("/memory", str(reply))
         self.assertIn("/profile", str(reply))
 
+    def test_telegram_link_command_merges_with_web_account(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            data_dir = Path(directory)
+            store = SQLiteBlagoStore(data_dir / "blago.sqlite3", legacy_memory_dir=data_dir)
+            web = WebApp(store)
+            with unittest.mock.patch.dict("os.environ", {"XBLAGO_WEB_INVITE_CODE": "invite"}):
+                token, _ = web.register("web_person", "a-long-password", "invite")
+            web_uid = web.session(token)[0]
+            bot = TelegramBot(api=FakeTelegramApi(), memory_dir=data_dir, store=store)
+            bot.replies_for_update(_telegram_update(1, 777, 777, "remember my city is Telegram"))
+            code = web.new_link_code(web_uid)
+
+            reply = bot.replies_for_update(_telegram_update(2, 777, 777, f"/link {code}"))[0]["text"]
+            memory = web.store.all_memory(web_uid)
+            telegram_memory = bot.replies_for_update(_telegram_update(3, 777, 777, "/memory"))[0]["text"]
+
+        self.assertIn("общую память", str(reply))
+        self.assertEqual(memory["city"], "Telegram")
+        self.assertIn("city: Telegram", str(telegram_memory))
+
     def test_splits_long_telegram_messages(self) -> None:
         chunks = _split_telegram_text("a" * 4100, limit=4096)
 
@@ -167,6 +190,15 @@ class TelegramBotTest(unittest.TestCase):
     def test_polling_delivery_overrides_space_detection(self) -> None:
         with unittest.mock.patch.dict("os.environ", {"SPACE_HOST": "romanmaloev-space.hf.space"}):
             self.assertFalse(_should_use_webhook("polling"))
+
+    def test_startup_check_can_be_skipped_for_local_web_checks(self) -> None:
+        api = FakeTelegramApi()
+        with tempfile.TemporaryDirectory() as directory:
+            bot = TelegramBot(api=api, memory_dir=Path(directory))
+            with unittest.mock.patch.dict("os.environ", {"TELEGRAM_SKIP_STARTUP_CHECK": "true"}):
+                bot._print_startup_identity()
+
+        self.assertEqual(api.sent, [])
 
 
 def _telegram_update(

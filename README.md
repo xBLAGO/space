@@ -55,10 +55,12 @@ docker run --env-file .env xblago-bot
 
 For Hugging Face Spaces, create a Docker Space at `RomanMaloev/space` and add the secrets listed in `deploy/huggingface-space/README.md`. The default Space filesystem is ephemeral, so long-running participant data requires a mounted Hugging Face Storage Bucket/Volume and `XBLAGO_DATA_DIR` pointing to that mount.
 
-The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can mirror `main` to a Hugging Face Docker Space after these GitHub settings are added:
+The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can publish a reviewed commit to a Hugging Face Docker Space after these GitHub settings are added:
 
 - secret `HF_TOKEN`
 - optional variable `HF_SPACE_REPO`, for example `RomanMaloev/space`
+
+Deployment is intentionally manual: run the workflow only after the release owner approves publication and type `DEPLOY` in the workflow input. Follow `docs/BLAGO_RELEASE_01.md` before publishing.
 
 ## Test
 
@@ -130,3 +132,35 @@ tests/                 focused tests for the first behavior
 ```
 
 The first milestone is intentionally small: make the personal agent reliable, understandable, and easy to evolve.
+
+## Unified Web App / Telegram Mini App (Foundation 02)
+
+The Docker-hosted webhook server now serves the **same** responsive Web/PWA UI at `/app` and API at `/api/v1`. The existing Telegram webhook, CLI, SQLite identity, persisted memory, and chat behavior remain available. The browser interface uses the existing PersonalAssistantAgent; no mock messages or statistics are used.
+
+### Web access without Telegram
+
+Set a long random `XBLAGO_WEB_INVITE_CODE` (pilot-only shared invitation code) and `XBLAGO_DATA_DIR` on a persistent volume. Visit `https://<your-host>/app`, choose **I have an invitation**, choose a username and a password of at least 12 characters, and provide the code. Passwords are salted and stretched with PBKDF2; session tokens are random, server-stored as hashes and sent in HttpOnly/SameSite cookies. Use HTTPS, which is required for Secure cookies and most PWA features. For local **HTTP-only development**, override `XBLAGO_COOKIE_SECURE=false` (never on production).
+
+For local web-only checks without contacting Telegram, set `TELEGRAM_DELIVERY_MODE=webhook`, `TELEGRAM_SKIP_WEBHOOK_REGISTRATION=true`, and `TELEGRAM_SKIP_STARTUP_CHECK=true`.
+
+### Telegram Mini App
+
+Configure BotFather's Mini App/menu button URL to `https://<your-host>/app`. A Telegram WebApp obtains a session by submitting its raw `initData`; the backend verifies Telegram's HMAC and max login age with `TELEGRAM_BOT_TOKEN`. It does **not** trust `initDataUnsafe` or browser-supplied BLAGO user IDs. The existing bot webhook remains `/telegram/<configured secret>` on the same listening port.
+
+### Link existing Telegram and web accounts
+
+From the **website**, open **Profile → Get linking code**, then privately message `/link HEX_CODE` to `@xBLAGObot` within 10 minutes. Each code is one-time, and the verified Telegram sender is attached to the website's BLAGO ID. History, needs, resources, sessions and memory are preserved; conflicting Telegram memory keys get a `telegram.` prefix. Linking commands in groups are rejected. This intentionally doesn't automatically combine accounts based on matching names.
+
+### Available real endpoints
+
+- `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `POST /api/v1/auth/telegram`, `POST /api/v1/auth/link-code`, `POST /api/v1/auth/logout`
+- `GET/PATCH /api/v1/me`, `GET/POST /api/v1/chat/messages`, `GET /api/v1/memory`
+- `GET/POST /api/v1/needs`, `GET/POST /api/v1/resources`
+- `GET /api/v1/analytics/me`, `GET /api/v1/analytics/community`
+- Economy MVP endpoints are documented in `docs/BLAGO_ECONOMY_01.md`: assets, voluntary resource offers, simulated payment requests, fulfillment events, contribution events, and economy analytics.
+
+Private needs/resources are only accessible by their creator. Community numbers aggregate only records explicitly marked `community`, without disclosing personal record details. On-chain assets, NFTs, liquidity, DAO governance and matching are **not yet implemented**. The pilot requires one running server and durable SQLite storage; high-availability deployment will require a shared database and distributed login-rate-limiting later.
+
+**Security:** JSON only for API mutations, CSRF tokens on authenticated writes, explicit browser Origin checks, size limits, and basic in-memory throttling on login endpoints. Configure a separate secret/transport for an external email provider only if email authentication is added in a subsequent release. The temporary shared invite code should be rotated frequently or replaced with per-user invitations before broad onboarding.
+
+Run all checks with `PYTHONPATH=src python -m unittest discover -s tests -v`. Release readiness and publication gates are documented in `docs/BLAGO_RELEASE_01.md`.

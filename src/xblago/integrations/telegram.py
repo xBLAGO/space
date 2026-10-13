@@ -110,6 +110,10 @@ class TelegramBot:
                 retry_delay_seconds = min(retry_delay_seconds * 2, 60)
 
     def _print_startup_identity(self) -> None:
+        if _bool_from_env("TELEGRAM_SKIP_STARTUP_CHECK", False):
+            print("Telegram startup check is skipped by configuration.")
+            return
+
         try:
             bot = self.api.get_me()
         except (RuntimeError, urllib.error.URLError, TimeoutError) as exc:
@@ -142,20 +146,36 @@ class TelegramBot:
             blago_user_id = self.store.resolve_telegram_user(identity)
             update_id = _external_update_id(update)
             if not self.store.begin_update("telegram", update_id, blago_user_id):
-                return []
+                return self.store.cached_update_replies("telegram", update_id) or []
 
             try:
-                replies = self._replies_for_message(blago_user_id, chat_id, text)
+                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type)
             except Exception as exc:
                 self.store.mark_update_failed("telegram", update_id, str(exc))
                 raise
 
-            self.store.mark_update_processed("telegram", update_id)
+            self.store.mark_update_processed("telegram", update_id, replies)
             return replies
 
     _handle_update = handle_update
 
-    def _replies_for_message(self, blago_user_id: str, chat_id: int, text: str) -> list[dict[str, str | int]]:
+    def _replies_for_message(
+        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None,
+    ) -> list[dict[str, str | int]]:
+        if text.strip().startswith("/link"):
+            if chat_type != "private":
+                return _telegram_message_replies(chat_id, "Привязка возможна только в личном чате с ботом.")
+            parts = text.strip().split()
+            if len(parts) != 2 or parts[0] != "/link":
+                return _telegram_message_replies(chat_id, "Введите /link КОД из веб-профиля BLAGO.")
+            from xblago.integrations.web import ApiError, WebApp
+
+            try:
+                WebApp(self.store).redeem_telegram_link(blago_user_id, parts[1])
+            except ApiError as exc:
+                return _telegram_message_replies(chat_id, f"Не удалось привязать аккаунт: {exc}")
+            return _telegram_message_replies(chat_id, "Готово. Telegram и веб-аккаунт используют один BLAGO ID и общую память.")
+
         if text.strip() == "/start":
             welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")
             return _telegram_message_replies(chat_id, welcome_text)
@@ -164,18 +184,15 @@ class TelegramBot:
         return _telegram_message_replies(chat_id, response.text)
 
     def _agent_for_user(self, blago_user_id: str, chat_id: int) -> PersonalAssistantAgent:
-        if blago_user_id not in self.agents:
-            memory = self.store.memory_for_user(blago_user_id)
-            provider = build_chat_provider(load_llm_config())
-            self.agents[blago_user_id] = PersonalAssistantAgent(
-                memory=memory,
-                chat_provider=provider,
-                initial_history=self.store.recent_history(blago_user_id, 12),
-                history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
-                history_clearer=lambda: self.store.clear_history(blago_user_id),
-            )
-
-        return self.agents[blago_user_id]
+        # Load current shared history for every update, including turns from the web.
+        # Keeping an in-process agent cache would make other channels invisible.
+        return PersonalAssistantAgent(
+            memory=self.store.memory_for_user(blago_user_id),
+            chat_provider=build_chat_provider(load_llm_config()),
+            initial_history=self.store.recent_history(blago_user_id, 12),
+            history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
+            history_clearer=lambda: self.store.clear_history(blago_user_id),
+        )
 
     def _record_history(self, blago_user_id: str, chat_id: int, turn: ConversationTurn) -> None:
         self.store.append_history(blago_user_id, turn.role, turn.text, channel="telegram", chat_id=chat_id)
@@ -400,7 +417,11 @@ def _start_health_server_from_env() -> None:
     if not port:
         return
 
-    server = ThreadingHTTPServer(("0.0.0.0", int(port)), TelegramWebhookHandler)
+    from xblago.integrations.web import BlagoWebHandler, WebApp
+
+    data_dir = _path_from_env("XBLAGO_DATA_DIR", Path.home() / ".xblago" / "telegram")
+    server = ThreadingHTTPServer(("0.0.0.0", int(port)), BlagoWebHandler)
+    server.blago_web_app = WebApp(SQLiteBlagoStore(data_dir / "blago.sqlite3"))
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
     print(f"xBLAGO health server is listening on port {port}.")
@@ -421,7 +442,10 @@ def _run_webhook_server(bot: TelegramBot, api: TelegramApi, token: str) -> None:
     webhook_path = f"/telegram/{secret_token}"
     webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", f"{public_base_url}{webhook_path}")
 
-    server = ThreadingHTTPServer(("0.0.0.0", port), TelegramWebhookHandler)
+    from xblago.integrations.web import BlagoWebHandler, WebApp
+
+    server = ThreadingHTTPServer(("0.0.0.0", port), BlagoWebHandler)
+    server.blago_web_app = WebApp(bot.store)
     server.telegram_bot = bot
     server.telegram_webhook_path = urllib.parse.urlparse(webhook_url).path
     server.telegram_webhook_secret = secret_token
