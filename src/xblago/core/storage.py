@@ -263,24 +263,78 @@ class SQLiteBlagoStore:
 
             return False
 
-    def mark_update_processed(self, channel: str, external_update_id: str | None) -> None:
-        self._mark_update(channel, external_update_id, "processed", None)
+    def cached_update_replies(
+        self,
+        channel: str,
+        external_update_id: str | None,
+    ) -> list[dict[str, str | int]] | None:
+        if external_update_id is None:
+            return None
+
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT status, response_json
+                FROM events
+                WHERE channel = ? AND external_update_id = ?
+                """,
+                (channel, external_update_id),
+            ).fetchone()
+
+        if row is None or row["status"] != "processed" or row["response_json"] is None:
+            return None
+
+        try:
+            replies = json.loads(str(row["response_json"]))
+        except json.JSONDecodeError:
+            return None
+
+        if not isinstance(replies, list):
+            return None
+
+        safe_replies: list[dict[str, str | int]] = []
+        for reply in replies:
+            if not isinstance(reply, dict):
+                return None
+            chat_id = reply.get("chat_id")
+            text = reply.get("text")
+            if not isinstance(chat_id, int) or not isinstance(text, str):
+                return None
+            safe_replies.append({"chat_id": chat_id, "text": text})
+
+        return safe_replies
+
+    def mark_update_processed(
+        self,
+        channel: str,
+        external_update_id: str | None,
+        replies: list[dict[str, str | int]] | None = None,
+    ) -> None:
+        self._mark_update(channel, external_update_id, "processed", None, replies)
 
     def mark_update_failed(self, channel: str, external_update_id: str | None, error: str) -> None:
-        self._mark_update(channel, external_update_id, "failed", error)
+        self._mark_update(channel, external_update_id, "failed", error, None)
 
-    def _mark_update(self, channel: str, external_update_id: str | None, status: str, error: str | None) -> None:
+    def _mark_update(
+        self,
+        channel: str,
+        external_update_id: str | None,
+        status: str,
+        error: str | None,
+        replies: list[dict[str, str | int]] | None,
+    ) -> None:
         if external_update_id is None:
             return
 
+        response_json = json.dumps(replies, ensure_ascii=False) if replies is not None else None
         with self._locked_transaction() as connection:
             connection.execute(
                 """
                 UPDATE events
-                SET status = ?, error = ?, updated_at = ?
+                SET status = ?, error = ?, response_json = ?, updated_at = ?
                 WHERE channel = ? AND external_update_id = ?
                 """,
-                (status, error, _utc_now(), channel, external_update_id),
+                (status, error, response_json, _utc_now(), channel, external_update_id),
             )
 
     def _backup_legacy_file(self, legacy_path: Path) -> Path:
@@ -360,6 +414,7 @@ class SQLiteBlagoStore:
                     blago_user_id TEXT NOT NULL,
                     status TEXT NOT NULL,
                     error TEXT,
+                    response_json TEXT,
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL,
                     UNIQUE(channel, external_update_id),
@@ -375,6 +430,7 @@ class SQLiteBlagoStore:
                 );
                 """
             )
+            _ensure_column(connection, "events", "response_json", "TEXT")
 
     @contextmanager
     def _locked_transaction(self) -> Iterator[sqlite3.Connection]:
@@ -422,6 +478,12 @@ class SQLiteUserMemoryStore(MemoryStore):
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _ensure_column(connection: sqlite3.Connection, table: str, column: str, definition: str) -> None:
+    columns = {str(row["name"]) for row in connection.execute(f"PRAGMA table_info({table})")}
+    if column not in columns:
+        connection.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
 
 
 def _display_name(identity: TelegramIdentity) -> str | None:
