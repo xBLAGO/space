@@ -20,12 +20,20 @@ from xblago.core.messages import UserMessage
 
 
 class TelegramApi:
-    def __init__(self, token: str, timeout_seconds: float = 30.0) -> None:
+    def __init__(self, token: str, poll_timeout_seconds: float = 20.0, request_timeout_seconds: float = 90.0) -> None:
         self.base_url = f"https://api.telegram.org/bot{token}"
-        self.timeout_seconds = timeout_seconds
+        self.poll_timeout_seconds = poll_timeout_seconds
+        self.request_timeout_seconds = request_timeout_seconds
+
+    def get_me(self) -> dict[str, Any]:
+        response = self._request("getMe", {})
+        result = response.get("result", {})
+        if not isinstance(result, dict):
+            raise RuntimeError(f"Telegram API returned an unexpected getMe response: {response}")
+        return result
 
     def get_updates(self, offset: int | None) -> list[dict[str, Any]]:
-        params: dict[str, str | int] = {"timeout": int(self.timeout_seconds)}
+        params: dict[str, str | int] = {"timeout": int(self.poll_timeout_seconds)}
         if offset is not None:
             params["offset"] = offset
 
@@ -41,7 +49,7 @@ class TelegramApi:
         data = urllib.parse.urlencode(params).encode("utf-8")
         request = urllib.request.Request(f"{self.base_url}/{method}", data=data, method="POST")
 
-        with urllib.request.urlopen(request, timeout=self.timeout_seconds + 5) as response:
+        with urllib.request.urlopen(request, timeout=self.request_timeout_seconds) as response:
             body = json.loads(response.read().decode("utf-8"))
 
         if not body.get("ok"):
@@ -58,17 +66,31 @@ class TelegramBot:
 
     def run_forever(self) -> None:
         print("xBLAGO Telegram bot is running.")
+        self._print_startup_identity()
         offset: int | None = None
+        retry_delay_seconds = 3
 
         while True:
             try:
                 updates = self.api.get_updates(offset)
+                retry_delay_seconds = 3
                 for update in updates:
                     offset = int(update["update_id"]) + 1
                     self._handle_update(update)
             except (RuntimeError, urllib.error.URLError, TimeoutError) as exc:
                 print(f"Telegram polling error: {exc}")
-                time.sleep(3)
+                time.sleep(retry_delay_seconds)
+                retry_delay_seconds = min(retry_delay_seconds * 2, 60)
+
+    def _print_startup_identity(self) -> None:
+        try:
+            bot = self.api.get_me()
+        except (RuntimeError, urllib.error.URLError, TimeoutError) as exc:
+            print(f"Telegram startup check failed: {exc}")
+            return
+
+        username = bot.get("username", "unknown")
+        print(f"Telegram startup check succeeded: @{username}")
 
     def _handle_update(self, update: dict[str, Any]) -> None:
         message = update.get("message")
@@ -111,8 +133,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--poll-timeout",
         type=float,
-        default=30.0,
+        default=_float_from_env("TELEGRAM_POLL_TIMEOUT_SECONDS", 20.0),
         help="Telegram long-poll timeout in seconds.",
+    )
+    parser.add_argument(
+        "--request-timeout",
+        type=float,
+        default=_float_from_env("TELEGRAM_REQUEST_TIMEOUT_SECONDS", 90.0),
+        help="Telegram HTTP request timeout in seconds.",
     )
     return parser
 
@@ -125,7 +153,11 @@ def main() -> None:
 
     _start_health_server_from_env()
     args.memory_dir.mkdir(parents=True, exist_ok=True)
-    api = TelegramApi(token=token, timeout_seconds=args.poll_timeout)
+    api = TelegramApi(
+        token=token,
+        poll_timeout_seconds=args.poll_timeout,
+        request_timeout_seconds=args.request_timeout,
+    )
     TelegramBot(api=api, memory_dir=args.memory_dir).run_forever()
 
 
@@ -139,6 +171,17 @@ def _split_telegram_text(text: str, limit: int = 4096) -> list[str]:
         chunks.append(remaining[:limit])
         remaining = remaining[limit:]
     return chunks
+
+
+def _float_from_env(name: str, default: float) -> float:
+    value = os.getenv(name)
+    if value is None:
+        return default
+
+    try:
+        return float(value)
+    except ValueError:
+        return default
 
 
 class HealthHandler(BaseHTTPRequestHandler):
