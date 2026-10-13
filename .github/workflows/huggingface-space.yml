@@ -20,8 +20,38 @@ jobs:
           HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO || 'RomanMaloev/space' }}
         run: |
           if [ -z "$HF_TOKEN" ]; then
-            echo "HF_TOKEN secret is required."
+            echo "::error::HF_TOKEN secret is empty or missing in GitHub Actions."
             exit 1
           fi
-          git remote add hf "https://RomanMaloev:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_REPO}"
-          git push hf HEAD:main --force
+
+          echo "::add-mask::$HF_TOKEN"
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          request = urllib.request.Request(
+              "https://huggingface.co/api/whoami-v2",
+              headers={"Authorization": f"Bearer {os.environ['HF_TOKEN']}"},
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+          except Exception as exc:
+              raise SystemExit(f"HF_TOKEN could not authenticate with Hugging Face: {exc}")
+
+          print(f"Authenticated to Hugging Face as: {payload.get('name', 'unknown')}")
+          PY
+
+          cat > "$RUNNER_TEMP/hf-askpass.sh" <<'SH'
+          #!/usr/bin/env bash
+          case "$1" in
+            *Username*) echo "RomanMaloev" ;;
+            *Password*) echo "$HF_TOKEN" ;;
+            *) echo "" ;;
+          esac
+          SH
+          chmod +x "$RUNNER_TEMP/hf-askpass.sh"
+
+          git remote add hf "https://huggingface.co/spaces/${HF_SPACE_REPO}"
+          GIT_ASKPASS="$RUNNER_TEMP/hf-askpass.sh" git push hf HEAD:main --force
