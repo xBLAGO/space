@@ -67,8 +67,10 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 Useful commands inside the chat:
 
 - `/help` shows available commands.
-- `/profile` shows the active agent profile.
+- `/profile` shows the remembered user profile.
+- `/agent` shows the active agent profile.
 - `/memory` shows remembered facts.
+- `/forget <key>` removes one remembered fact.
 - `/history` shows the current session context.
 - `/clear-memory` clears local memory.
 - `/clear-history` clears the current session context.
@@ -108,6 +110,9 @@ xBLAGO: I remembered: timezone = Europe/Moscow.
 You: what do you remember?
 xBLAGO: I remember:
 - timezone: Europe/Moscow
+
+You: /forget timezone
+xBLAGO: Done. I forgot `timezone`.
 ```
 
 ## Project Shape
