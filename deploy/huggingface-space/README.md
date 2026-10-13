@@ -1,6 +1,6 @@
 ---
 title: xBLAGO Bot
-emoji: X
+emoji: 🤖
 colorFrom: blue
 colorTo: green
 sdk: docker
