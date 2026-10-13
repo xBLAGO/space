@@ -1,0 +1,27 @@
+name: Deploy Hugging Face Space
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO || 'xBLAGO/space' }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN secret is required."
+            exit 1
+          fi
+          git remote add hf "https://RomanMaloev:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_REPO}"
+          git push hf HEAD:main --force
