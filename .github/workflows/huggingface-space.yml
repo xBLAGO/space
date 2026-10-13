@@ -51,7 +51,6 @@ jobs:
               repo_id=os.environ["HF_SPACE_REPO"],
               repo_type="space",
               folder_path=".",
-              path_in_repo=".",
               commit_message="Deploy from GitHub Actions",
               ignore_patterns=[
                   ".git/*",
