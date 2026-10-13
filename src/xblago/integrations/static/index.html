@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f6f2"><meta name="description" content="BLAGO — персональный ИИ и сообщество взаимной помощи">
+<link rel="manifest" href="/app/manifest.webmanifest">
+<title>BLAGO · Пространство взаимной помощи</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{color-scheme:light;--bg:#f7f6f2;--surface:#fff;--ink:#233435;--muted:#82908e;--blue:#348fbb;--line:#e8ebe8;--sand:#eeeae0;--radius:20px;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px}button,input,textarea,select{font:inherit}button{cursor:pointer}
+#loading{display:grid;place-items:center;height:100dvh;color:var(--muted)}
+#auth{min-height:100dvh;display:none;place-items:center;padding:22px;background:radial-gradient(circle at 50% 0%,#e5f1f4,transparent 60%),var(--bg)}
+.auth-box{width:min(440px,100%);padding:36px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:0 20px 60px #304b4b0c}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.11em;font-size:19px}
+.orb{height:42px;width:42px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff 1%,#b9dfdf 30%,#55a5c8 65%,#447fa6 100%);box-shadow:0 2px 18px #62b4d455}
+.auth-box h1{font-size:28px;line-height:1.12;margin:34px 0 12px;letter-spacing:-.04em}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted);line-height:1.5}
+label{display:block;font-size:12px;font-weight:700;color:#657675;margin:15px 0 7px}
+input,textarea,select{display:block;width:100%;border:1px solid #dce3e0;border-radius:12px;background:#fbfcfa;padding:12px 13px;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #348fbb20}textarea{min-height:105px;resize:vertical}
+.primary{border:0;background:var(--blue);color:#fff;border-radius:13px;padding:12px 18px;font-weight:650}
+.primary:hover{background:#237ca6}.primary:disabled{opacity:.5;cursor:wait}
+.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px}
+.ghost{background:transparent;border:0;color:var(--blue);padding:10px;font-weight:650}
+.full{width:100%;margin-top:20px}.auth-switch{display:flex;justify-content:center;margin-top:12px}
+#shell{display:none;min-height:100dvh}
+aside{width:255px;position:fixed;inset:0 auto 0 0;background:#fcfcfa;border-right:1px solid var(--line);padding:32px 17px;display:flex;flex-direction:column;gap:30px;z-index:2}
+aside .logo{padding:0 12px}.tagline{font-size:12px;line-height:1.5;color:var(--muted);padding:0 12px;margin-top:-16px}
+nav{display:flex;flex-direction:column;gap:7px}.nav-btn{display:flex;align-items:center;text-align:left;gap:13px;padding:13px 14px;border:0;background:none;border-radius:13px;color:#667573;font-weight:600;width:100%}
+.nav-btn .ico{font-size:19px;width:23px;display:inline-block;text-align:center}.nav-btn.active{background:#e7f2f6;color:#277da5}.nav-btn:hover{background:#edf2f1}
+aside footer{margin-top:auto;border-top:1px solid var(--line);padding:17px 13px 0;display:flex;align-items:center;gap:11px}.avatar{height:35px;width:35px;flex:none;border-radius:12px;display:grid;place-items:center;background:#e6f0ee;color:#438f91;font-weight:800}.user-name{font-size:13px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+main{margin-left:255px;min-height:100dvh;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:25px 38px;border-bottom:1px solid var(--line);background:#ffffffa8}
+.topbar h1{font-size:20px;letter-spacing:-.03em;margin:0}.topbar p{margin:4px 0 0;color:var(--muted);font-size:12px}
+.pill{border:1px solid #d6e8e5;background:#f1f8f5;color:#528477;padding:8px 12px;border-radius:99px;font-size:12px;font-weight:650}
+.content{width:100%;max-width:1080px;margin:0 auto;padding:32px 38px 45px;flex:1}
+.screen{display:none}.screen.active{display:block}.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.panel h2{margin:0 0 10px;font-size:18px;letter-spacing:-.025em}.panel p{color:#738480;line-height:1.5}
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.section-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:18px}
+.section-head h2{margin:0;font-size:24px;letter-spacing:-.04em}.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.metric{border-radius:17px;background:#f8faf8;border:1px solid var(--line);padding:19px}.metric strong{display:block;font-size:32px;letter-spacing:-.04em;margin:10px 0}.metric span{font-size:12px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:10px}.item{padding:15px 17px;border:1px solid var(--line);border-radius:15px;background:#fff}.item h3{font-size:15px;margin:0 0 7px}.item p{font-size:13px;margin:0 0 8px;white-space:pre-wrap}.row{display:flex;align-items:center;gap:10px;justify-content:space-between}.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-size:11px;padding:5px 9px;border-radius:20px;background:#eff2f0;color:#637a71}.empty{padding:35px 15px;text-align:center;color:var(--muted);background:#fafbf9;border:1px dashed #d8dfdc;border-radius:17px}
+#chat-screen{height:calc(100dvh - 157px);min-height:420px}#chat-pane{height:100%;display:flex;flex-direction:column;overflow:hidden;padding:0}
+#chat-stream{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:27px;scrollbar-color:#ccd8d4 transparent}
+.bubble{white-space:pre-wrap;word-wrap:break-word;max-width:80%;padding:14px 17px;line-height:1.6;border-radius:18px;align-self:flex-start;background:#f2f6f5;font-size:14px}
+.bubble.user{align-self:flex-end;background:#e8f3f9}.bubble.pending{color:var(--muted);font-style:italic}
+.chat-compose{display:flex;align-items:end;gap:10px;border-top:1px solid var(--line);padding:16px;background:#fff}.chat-compose textarea{flex:1;max-height:140px;min-height:48px;resize:none}.chat-compose button{height:48px}
+.info{background:#f2f7f6;border-radius:14px;color:#55706c;padding:12px 15px;font-size:13px;line-height:1.6}
+#notice{position:fixed;z-index:99;left:50%;bottom:26px;transform:translateX(-50%);background:#2d4a4c;color:white;padding:13px 18px;border-radius:13px;display:none;max-width:min(500px,95%);box-shadow:0 8px 35px #2c484855}
+#mobile-nav{display:none}
+@media(max-width:900px){aside{width:205px}main{margin-left:205px}.content{padding:22px}.topbar{padding:23px}.two-col{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){aside{display:none}main{margin:0;padding-bottom:68px}.topbar{padding:17px 20px}.topbar h1{font-size:18px}.content{padding:20px 15px}.panel{padding:18px}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#chat-screen{height:calc(100dvh - 205px);min-height:380px}.bubble{max-width:94%}#chat-stream{padding:15px}.chat-compose{padding:10px}.section-head h2{font-size:22px}#mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:5;align-items:stretch;justify-content:space-around;background:#fffffff2;border-top:1px solid var(--line);padding:6px 2px max(6px,env(safe-area-inset-bottom))}.mobile-btn{border:0;background:transparent;color:#7c8c89;display:flex;align-items:center;flex-direction:column;gap:2px;font-size:10px;padding:5px 3px;min-width:56px}.mobile-btn.active{color:var(--blue)}.mobile-btn span{font-size:21px}}@media(prefers-reduced-motion:no-preference){button{transition:background .16s}}
+</style>
+</head>
+<body>
+<div id="loading">BLAGO · Загрузка…</div>
+<div id="auth"><div class="auth-box">
+<div class="logo"><span class="orb"></span><span>BLAGO</span></div>
+<h1>Человек важнее системы</h1>
+<p class="muted">Персональный ИИ-помощник и пространство взаимной помощи.</p>
+<form id="auth-form">
+<label for="username">Имя для входа</label><input id="username" autocomplete="username" minlength="3" maxlength="32" required>
+<label for="password">Пароль (от 12 символов)</label><input id="password" type="password" autocomplete="current-password" minlength="12" required>
+<div id="invite-wrap" hidden><label for="invite">Код приглашения</label><input id="invite" autocomplete="off"></div>
+<button id="auth-submit" class="primary full" type="submit">Войти в BLAGO</button>
+</form><div class="auth-switch"><button class="ghost" id="auth-toggle" type="button">У меня есть приглашение</button></div>
+<p class="small">Доступ в сообщество по приглашению. Данные остаются привязаны к вашему BLAGO ID.</p>
+</div></div>
+<div id="shell">
+<aside>
+<div class="logo"><span class="orb"></span><span>BLAGO</span></div>
+<div class="tagline">Сделай благо, получи благо.<br>Единое пространство заботы.</div>
+<nav id="desktop-nav">
+<button class="nav-btn active" data-tab="chat"><span class="ico">✦</span><span>Чат с BLAGO</span></button>
+<button class="nav-btn" data-tab="needs"><span class="ico">◇</span><span>Потребности</span></button>
+<button class="nav-btn" data-tab="resources"><span class="ico">◈</span><span>Ресурсы</span></button>
+<button class="nav-btn" data-tab="analytics"><span class="ico">▤</span><span>Аналитика</span></button>
+<button class="nav-btn" data-tab="profile"><span class="ico">◯</span><span>Профиль</span></button>
+</nav>
+<footer><div class="avatar" id="avatar">Б</div><div><div id="sidebar-user" class="user-name">Участник BLAGO</div><div class="small">Личное пространство</div></div></footer>
+</aside>
+<main>
+<header class="topbar"><div><h1 id="page-title">Чат с BLAGO</h1><p id="page-subtitle">Личный ИИ-помощник всегда рядом</p></div><span class="pill">✦ BLAGO</span></header>
+<div class="content">
+<section id="chat-screen" class="screen active"><div id="chat-pane" class="panel">
+<div id="chat-stream" aria-live="polite" aria-label="Сообщения">
+<div class="empty">Привет! Я BLAGO. Расскажи, чем могу быть полезен.</div>
+</div>
+<form id="chat-form" class="chat-compose"><textarea id="chat-input" maxlength="4000" rows="1" aria-label="Сообщение" placeholder="Напишите сообщение…" required></textarea><button id="send-btn" class="primary" type="submit">↑</button></form>
+</div></section>
+<section id="needs-screen" class="screen"><div class="section-head"><div><h2>Мои потребности</h2><p>Здесь можно рассказать, какая помощь вам нужна.</p></div></div>
+<div class="two-col"><form id="needs-form" class="panel"><h2>Новая потребность</h2><label for="needs-title">Что необходимо?</label><input id="needs-title" required minlength="2" maxlength="160" placeholder="Например, помощь с ремонтом">
+<label for="needs-description">Описание</label><textarea id="needs-description" maxlength="2000" placeholder="Расскажите подробнее"></textarea>
+<label for="needs-visibility">Кто увидит?</label><select id="needs-visibility"><option value="private">Только я</option><option value="community">В общей статистике</option></select>
+<p class="small">Публикация в аналитике не раскрывает описание другим участникам. Поиск взаимопомощи будет добавлен отдельно.</p><button class="primary" type="submit">Сохранить потребность</button></form><div><h2>Сохранённые запросы</h2><div id="needs-list" class="list"></div></div></div></section>
+<section id="resources-screen" class="screen"><div class="section-head"><div><h2>Мои ресурсы</h2><p>Что у вас есть и чем вы потенциально готовы поделиться.</p></div></div>
+<div class="two-col"><form id="resources-form" class="panel"><h2>Добавить ресурс</h2><label for="resources-title">Название</label><input id="resources-title" required minlength="2" maxlength="160" placeholder="Например, навыки дизайна">
+<label for="resources-description">Описание</label><textarea id="resources-description" maxlength="2000" placeholder="Навыки, вещи или время"></textarea><label for="resources-visibility">Видимость</label><select id="resources-visibility"><option value="private">Только я</option><option value="community">В общей статистике</option></select>
+<p class="small">Добавление не означает обязательство передать ресурс.</p><button class="primary" type="submit">Сохранить ресурс</button></form><div><h2>Сохранённые ресурсы</h2><div id="resources-list" class="list"></div></div></div></section>
+<section id="analytics-screen" class="screen">
+<div class="section-head"><div><h2>Аналитика благополучия</h2><p>Только реальные показатели. Личные записи других участников закрыты.</p></div><button id="refresh-analytics" class="secondary">Обновить</button></div>
+<div class="panel" style="margin-bottom:18px"><h2>Моё пространство</h2><div id="my-metrics" class="metric-grid"><div class="empty">Загрузка…</div></div></div>
+<div class="panel"><h2>Сообщество BLAGO</h2><p class="small">В агрегированные потребности и ресурсы попадают только записи, для которых разрешена публикация в статистике.</p><div id="community-metrics" class="metric-grid"><div class="empty">Загрузка…</div></div></div>
+</section>
+<section id="profile-screen" class="screen">
+<div class="section-head"><div><h2>Мой профиль</h2><p>Вы управляете тем, что о вас знает BLAGO.</p></div></div>
+<div class="two-col"><form id="profile-form" class="panel"><h2>Основное</h2><label for="profile-name">Имя</label><input id="profile-name" maxlength="80" required><label for="profile-language">Язык</label><select id="profile-language"><option value="ru">Русский</option><option value="en">English</option></select><label for="profile-timezone">Часовой пояс</label><input id="profile-timezone" maxlength="80" placeholder="Europe/Moscow"><button class="primary" type="submit" style="margin-top:18px">Сохранить</button><p class="small" id="profile-id"></p></form>
+<div class="panel"><h2>Память BLAGO</h2><p class="small">Факты, которые вы разрешили сохранить. Управлять удалением отдельных фактов можно через чат, например «забудь город».</p><div id="memory-list" class="list"></div><hr style="border:0;border-top:1px solid var(--line);margin:24px 0"><button id="logout" class="secondary">Выйти из аккаунта</button></div></div></section>
+</div></main>
+<div id="mobile-nav">
+<button class="mobile-btn active" data-tab="chat"><span>✦</span>Чат</button><button class="mobile-btn" data-tab="needs"><span>◇</span>Нужно</button><button class="mobile-btn" data-tab="resources"><span>◈</span>Есть</button><button class="mobile-btn" data-tab="analytics"><span>▤</span>Данные</button><button class="mobile-btn" data-tab="profile"><span>◯</span>Я</button>
+</div>
+</div>
+<div id="notice" role="status"></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);const state={csrf:'',profile:null,tab:'chat',register:false,busy:false};
+const tabs={chat:['Чат с BLAGO','Личный ИИ-помощник всегда рядом'],needs:['Потребности','Ваши запросы и планы'],resources:['Ресурсы','Возможности и навыки'],analytics:['Аналитика','Реальные данные сообщества'],profile:['Профиль','Личная информация и память']};
+function note(text){const n=$('notice');n.textContent=text;n.style.display='block';clearTimeout(note.timer);note.timer=setTimeout(()=>n.style.display='none',4500)}
+async function api(path,method='GET',payload){
+ const options={method,credentials:'same-origin',headers:{}};
+ if(method!=='GET'){options.headers['Content-Type']='application/json';if(state.csrf)options.headers['X-CSRF-Token']=state.csrf;options.body=JSON.stringify(payload||{})}
+ const response=await fetch('/api/v1/'+path,options);let data;try{data=await response.json()}catch{throw Error('Ошибка ответа сервера')}
+ if(!response.ok){if(response.status===401&& !path.startsWith('auth/'))showAuth();throw Error(data.error||'Ошибка сервера')}
+ return data;
+}
+function showAuth(){state.csrf='';$('loading').style.display='none';$('shell').style.display='none';$('auth').style.display='grid'}
+function showApp(){ $('loading').style.display='none';$('auth').style.display='none';$('shell').style.display='block';const name=state.profile.display_name||'Участник';$('sidebar-user').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();openTab(state.tab)}
+async function restore(){try{let data=await api('me');state.csrf=data.csrf;state.profile=data.profile;showApp();return}catch(e){if(!String(e).includes('sign in')&&!String(e).includes('Session')){}}
+ const initData=window.Telegram?.WebApp?.initData;
+ if(initData){try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();const data=await api('auth/telegram','POST',{init_data:initData});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();return}catch(e){note(e.message)}}
+ showAuth()
+}
+function openTab(tab){if(!tabs[tab])return;state.tab=tab;document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));document.querySelectorAll('.screen').forEach(n=>n.classList.toggle('active',n.id===tab+'-screen'));$('page-title').textContent=tabs[tab][0];$('page-subtitle').textContent=tabs[tab][1];loadTab(tab)}
+async function loadTab(tab){try{
+ if(tab==='chat')await loadHistory();
+ if(tab==='needs'||tab==='resources')await loadItems(tab);
+ if(tab==='analytics')await loadAnalytics();
+ if(tab==='profile')await loadProfile();
+ }catch(e){note(e.message)}}
+function bubble(role,text,pending=false){const div=document.createElement('div');div.className='bubble'+(role==='user'?' user':'')+(pending?' pending':'');div.textContent=text;$('chat-stream').append(div);$('chat-stream').scrollTop=$('chat-stream').scrollHeight;return div}
+async function loadHistory(){const data=await api('chat/messages');$('chat-stream').replaceChildren();if(!data.messages.length){bubble('assistant','Привет! Я BLAGO. Расскажи, чем могу быть полезен.')}else data.messages.forEach(m=>bubble(m.role,m.text))}
+$('chat-form').addEventListener('submit',async e=>{e.preventDefault();if(state.busy)return;const value=$('chat-input').value.trim();if(!value)return;state.busy=true;$('send-btn').disabled=true;$('chat-input').value='';bubble('user',value);const waiting=bubble('assistant','BLAGO думает…',true);try{const data=await api('chat/messages','POST',{text:value});waiting.textContent=data.reply;waiting.classList.remove('pending')}catch(error){waiting.textContent='Не удалось отправить: '+error.message;waiting.classList.remove('pending')}finally{state.busy=false;$('send-btn').disabled=false}});
+$('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('chat-form').requestSubmit()}});
+function textElement(tag,value,cls){const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=value;return el}
+async function loadItems(kind){const data=await api(kind);const container=$(kind+'-list');container.replaceChildren();if(!data.items.length){container.append(textElement('div','Пока нет записей','empty'));return}for(const item of data.items){const card=document.createElement('article');card.className='item';card.append(textElement('h3',item.title));if(item.description)card.append(textElement('p',item.description));const chips=document.createElement('div');chips.className='chips';chips.append(textElement('span',item.visibility==='private'?'Личное':'В общей статистике','chip'));if(item.status)chips.append(textElement('span',item.status==='open'?'Открыто':item.status,'chip'));chips.append(textElement('span',new Date(item.created_at).toLocaleDateString('ru'),'chip'));card.append(chips);container.append(card)}}
+for(const kind of ['needs','resources'])$(kind+'-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button[type=submit]');button.disabled=true;try{await api(kind,'POST',{title:$(kind+'-title').value,description:$(kind+'-description').value,visibility:$(kind+'-visibility').value});$(kind+'-title').value='';$(kind+'-description').value='';note('Сохранено');await loadItems(kind)}catch(error){note(error.message)}finally{button.disabled=false}});
+function metrics(container,values){container.replaceChildren();for(const [label,value] of values){const card=document.createElement('div');card.className='metric';card.append(textElement('span',label));card.append(textElement('strong',String(value)));container.append(card)}}
+async function loadAnalytics(){const [personal,community]=await Promise.all([api('analytics/me'),api('analytics/community')]);const p=personal.analytics,c=community.analytics;metrics($('my-metrics'),[['Мои потребности',p.needs],['Открытые запросы',p.open_needs],['Мои ресурсы',p.resources],['Факты в памяти',p.memory_facts]]);metrics($('community-metrics'),[['Участников',c.participants],['Опубликовано потребностей',c.published_needs],['Опубликовано ресурсов',c.published_resources]])}
+$('refresh-analytics').addEventListener('click',()=>loadAnalytics().catch(e=>note(e.message)));
+async function loadProfile(){const [me,memory]=await Promise.all([api('me'),api('memory')]);state.profile=me.profile;$('profile-name').value=me.profile.display_name||'';$('profile-language').value=me.profile.language||'ru';$('profile-timezone').value=me.profile.timezone||'';$('profile-id').textContent='BLAGO ID: '+me.profile.blago_user_id;const box=$('memory-list');box.replaceChildren();const facts=Object.entries(memory.facts);if(!facts.length)box.append(textElement('div','Память пока пустая','empty'));else for(const [key,value] of facts){const card=document.createElement('div');card.className='item';card.append(textElement('h3',key));card.append(textElement('p',typeof value==='string'?value:JSON.stringify(value)));box.append(card)}}
+$('profile-form').addEventListener('submit',async e=>{e.preventDefault();try{const data=await api('me','PATCH',{display_name:$('profile-name').value,language:$('profile-language').value,timezone:$('profile-timezone').value});state.profile=data.profile;$('sidebar-user').textContent=data.profile.display_name;$('avatar').textContent=data.profile.display_name.charAt(0).toUpperCase();note('Профиль сохранён')}catch(error){note(error.message)}});
+$('logout').addEventListener('click',async()=>{try{await api('auth/logout','POST');showAuth()}catch(error){note(error.message)}});
+$('auth-toggle').addEventListener('click',()=>{state.register=!state.register;$('invite-wrap').hidden=!state.register;$('invite').required=state.register;$('auth-submit').textContent=state.register?'Создать аккаунт':'Войти в BLAGO';$('auth-toggle').textContent=state.register?'У меня уже есть аккаунт':'У меня есть приглашение';$('password').autocomplete=state.register?'new-password':'current-password'});
+$('auth-form').addEventListener('submit',async e=>{e.preventDefault();const button=$('auth-submit');button.disabled=true;try{const path=state.register?'auth/register':'auth/login';const data=await api(path,'POST',{username:$('username').value,password:$('password').value,invite:$('invite').value});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp()}catch(error){note(error.message)}finally{button.disabled=false}});
+document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>openTab(button.dataset.tab)));
+restore();
+})();
+</script>
+</body></html>
