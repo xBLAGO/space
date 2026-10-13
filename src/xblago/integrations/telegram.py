@@ -287,10 +287,14 @@ def _run_webhook_server(bot: TelegramBot, api: TelegramApi, token: str) -> None:
     server.telegram_webhook_secret = secret_token
 
     print(f"xBLAGO Telegram webhook server is listening on port {port}.")
+    thread = Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+
     bot._print_startup_identity()
-    api.set_webhook(webhook_url, secret_token)
-    print("Telegram webhook is registered.")
-    server.serve_forever()
+    _register_webhook_with_retry(api, webhook_url, secret_token)
+
+    while True:
+        time.sleep(3600)
 
 
 def _webhook_base_url() -> str:
@@ -308,6 +312,21 @@ def _webhook_base_url() -> str:
 
 def _webhook_secret(token: str) -> str:
     return os.getenv("TELEGRAM_WEBHOOK_SECRET") or hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def _register_webhook_with_retry(api: TelegramApi, webhook_url: str, secret_token: str) -> None:
+    retry_delay_seconds = 3
+    while True:
+        try:
+            api.set_webhook(webhook_url, secret_token)
+        except (RuntimeError, urllib.error.URLError, TimeoutError) as exc:
+            print(f"Telegram webhook registration error: {exc}")
+            time.sleep(retry_delay_seconds)
+            retry_delay_seconds = min(retry_delay_seconds * 2, 60)
+            continue
+
+        print("Telegram webhook is registered.")
+        return
 
 
 if __name__ == "__main__":
