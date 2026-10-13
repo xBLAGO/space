@@ -155,6 +155,7 @@ $('auth-toggle').addEventListener('click',()=>{state.register=!state.register;$(
 $('auth-form').addEventListener('submit',async e=>{e.preventDefault();const button=$('auth-submit');button.disabled=true;try{const path=state.register?'auth/register':'auth/login';const data=await api(path,'POST',{username:$('username').value,password:$('password').value,invite:$('invite').value});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp()}catch(error){note(error.message)}finally{button.disabled=false}});
 document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>openTab(button.dataset.tab)));
 restore();
+if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('/app/sw.js').catch(()=>{});}
 })();
 </script>
 </body></html>
