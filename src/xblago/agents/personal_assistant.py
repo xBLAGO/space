@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Callable
+
 from xblago.core.llm import ChatContext, ChatProvider, LocalPlanningProvider
 from xblago.core.memory import MemoryStore
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
@@ -26,11 +28,16 @@ class PersonalAssistantAgent:
         memory: MemoryStore,
         chat_provider: ChatProvider | None = None,
         history_limit: int = 12,
+        initial_history: tuple[ConversationTurn, ...] = (),
+        history_recorder: Callable[[ConversationTurn], None] | None = None,
+        history_clearer: Callable[[], None] | None = None,
     ) -> None:
         self.memory = memory
         self.chat_provider = chat_provider or LocalPlanningProvider()
         self.history_limit = history_limit
-        self._history: list[ConversationTurn] = []
+        self.history_recorder = history_recorder
+        self.history_clearer = history_clearer
+        self._history: list[ConversationTurn] = list(initial_history[-history_limit:])
 
     def welcome_message(self) -> str:
         return (
@@ -70,6 +77,8 @@ class PersonalAssistantAgent:
 
         if intent.name == "clear_history":
             self._history.clear()
+            if self.history_clearer is not None:
+                self.history_clearer()
             return self._record_and_return(message, AgentResponse(_text(language, "history_cleared")))
 
         if intent.name == "remember" and intent.key and intent.value:
@@ -181,7 +190,10 @@ class PersonalAssistantAgent:
         return response
 
     def _append_history(self, role: MessageRole, text: str) -> None:
-        self._history.append(ConversationTurn(role=role, text=text))
+        turn = ConversationTurn(role=role, text=text)
+        self._history.append(turn)
+        if self.history_recorder is not None:
+            self.history_recorder(turn)
         if len(self._history) > self.history_limit:
             self._history = self._history[-self.history_limit :]
 
