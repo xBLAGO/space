@@ -145,7 +145,7 @@ class TelegramBot:
                 return []
 
             try:
-                replies = self._replies_for_message(blago_user_id, chat_id, text)
+                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type)
             except Exception as exc:
                 self.store.mark_update_failed("telegram", update_id, str(exc))
                 raise
@@ -155,7 +155,23 @@ class TelegramBot:
 
     _handle_update = handle_update
 
-    def _replies_for_message(self, blago_user_id: str, chat_id: int, text: str) -> list[dict[str, str | int]]:
+    def _replies_for_message(
+        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None,
+    ) -> list[dict[str, str | int]]:
+        if text.strip().startswith("/link"):
+            if chat_type != "private":
+                return _telegram_message_replies(chat_id, "Привязка возможна только в личном чате с ботом.")
+            parts = text.strip().split()
+            if len(parts) != 2 or parts[0] != "/link":
+                return _telegram_message_replies(chat_id, "Введите /link КОД из веб-профиля BLAGO.")
+            from xblago.integrations.web import ApiError, WebApp
+
+            try:
+                WebApp(self.store).redeem_telegram_link(blago_user_id, parts[1])
+            except ApiError as exc:
+                return _telegram_message_replies(chat_id, f"Не удалось привязать аккаунт: {exc}")
+            return _telegram_message_replies(chat_id, "Готово. Telegram и веб-аккаунт используют один BLAGO ID и общую память.")
+
         if text.strip() == "/start":
             welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")
             return _telegram_message_replies(chat_id, welcome_text)
