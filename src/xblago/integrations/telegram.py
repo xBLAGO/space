@@ -164,18 +164,15 @@ class TelegramBot:
         return _telegram_message_replies(chat_id, response.text)
 
     def _agent_for_user(self, blago_user_id: str, chat_id: int) -> PersonalAssistantAgent:
-        if blago_user_id not in self.agents:
-            memory = self.store.memory_for_user(blago_user_id)
-            provider = build_chat_provider(load_llm_config())
-            self.agents[blago_user_id] = PersonalAssistantAgent(
-                memory=memory,
-                chat_provider=provider,
-                initial_history=self.store.recent_history(blago_user_id, 12),
-                history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
-                history_clearer=lambda: self.store.clear_history(blago_user_id),
-            )
-
-        return self.agents[blago_user_id]
+        # Load current shared history for every update, including turns from the web.
+        # Keeping an in-process agent cache would make other channels invisible.
+        return PersonalAssistantAgent(
+            memory=self.store.memory_for_user(blago_user_id),
+            chat_provider=build_chat_provider(load_llm_config()),
+            initial_history=self.store.recent_history(blago_user_id, 12),
+            history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
+            history_clearer=lambda: self.store.clear_history(blago_user_id),
+        )
 
     def _record_history(self, blago_user_id: str, chat_id: int, turn: ConversationTurn) -> None:
         self.store.append_history(blago_user_id, turn.role, turn.text, channel="telegram", chat_id=chat_id)
@@ -400,7 +397,11 @@ def _start_health_server_from_env() -> None:
     if not port:
         return
 
-    server = ThreadingHTTPServer(("0.0.0.0", int(port)), TelegramWebhookHandler)
+    from xblago.integrations.web import BlagoWebHandler, WebApp
+
+    data_dir = _path_from_env("XBLAGO_DATA_DIR", Path.home() / ".xblago" / "telegram")
+    server = ThreadingHTTPServer(("0.0.0.0", int(port)), BlagoWebHandler)
+    server.blago_web_app = WebApp(SQLiteBlagoStore(data_dir / "blago.sqlite3"))
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
     print(f"xBLAGO health server is listening on port {port}.")
@@ -421,7 +422,10 @@ def _run_webhook_server(bot: TelegramBot, api: TelegramApi, token: str) -> None:
     webhook_path = f"/telegram/{secret_token}"
     webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", f"{public_base_url}{webhook_path}")
 
-    server = ThreadingHTTPServer(("0.0.0.0", port), TelegramWebhookHandler)
+    from xblago.integrations.web import BlagoWebHandler, WebApp
+
+    server = ThreadingHTTPServer(("0.0.0.0", port), BlagoWebHandler)
+    server.blago_web_app = WebApp(bot.store)
     server.telegram_bot = bot
     server.telegram_webhook_path = urllib.parse.urlparse(webhook_url).path
     server.telegram_webhook_secret = secret_token
