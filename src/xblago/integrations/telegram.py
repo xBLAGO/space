@@ -118,25 +118,29 @@ class TelegramBot:
         print(f"Telegram startup check succeeded: @{username}")
 
     def handle_update(self, update: dict[str, Any]) -> None:
+        for reply in self.replies_for_update(update):
+            self.api.send_message(int(reply["chat_id"]), str(reply["text"]))
+
+    def replies_for_update(self, update: dict[str, Any]) -> list[dict[str, str | int]]:
         message = update.get("message")
         if not isinstance(message, dict):
-            return
+            return []
 
         chat = message.get("chat")
         text = message.get("text")
         if not isinstance(chat, dict) or not isinstance(text, str):
-            return
+            return []
 
         chat_id = chat.get("id")
         if not isinstance(chat_id, int):
-            return
+            return []
 
         if text.strip() == "/start":
-            self.api.send_message(chat_id, self._agent_for_chat(chat_id).welcome_message().removeprefix("xBLAGO: "))
-            return
+            text = self._agent_for_chat(chat_id).welcome_message().removeprefix("xBLAGO: ")
+            return _telegram_message_replies(chat_id, text)
 
         response = self._agent_for_chat(chat_id).respond(UserMessage(text=text.strip()))
-        self.api.send_message(chat_id, response.text)
+        return _telegram_message_replies(chat_id, response.text)
 
     _handle_update = handle_update
 
@@ -212,6 +216,10 @@ def _split_telegram_text(text: str, limit: int = 4096) -> list[str]:
     return chunks
 
 
+def _telegram_message_replies(chat_id: int, text: str) -> list[dict[str, str | int]]:
+    return [{"chat_id": chat_id, "text": chunk} for chunk in _split_telegram_text(text)]
+
+
 def _float_from_env(name: str, default: float) -> float:
     value = os.getenv(name)
     if value is None:
@@ -279,7 +287,12 @@ class TelegramWebhookHandler(BaseHTTPRequestHandler):
 
         try:
             update = json.loads(self.rfile.read(length).decode("utf-8"))
-            getattr(server, "telegram_bot").handle_update(update)
+            bot = getattr(server, "telegram_bot")
+            if _bool_from_env("TELEGRAM_RETURN_WEBHOOK_REPLIES", False):
+                self._send_json({"ok": True, "replies": bot.replies_for_update(update)})
+                return
+
+            bot.handle_update(update)
         except Exception as exc:
             print(f"Telegram webhook error: {exc}")
 
@@ -287,6 +300,14 @@ class TelegramWebhookHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "text/plain; charset=utf-8")
         self.end_headers()
         self.wfile.write(b"ok\n")
+
+    def _send_json(self, payload: dict[str, Any]) -> None:
+        body = json.dumps(payload).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
     def log_message(self, format: str, *args: Any) -> None:
         return
