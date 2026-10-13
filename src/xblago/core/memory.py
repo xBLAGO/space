@@ -16,6 +16,10 @@ class MemoryStore(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def delete(self, key: str) -> bool:
+        raise NotImplementedError
+
+    @abstractmethod
     def clear(self) -> None:
         raise NotImplementedError
 
@@ -39,15 +43,24 @@ class JsonMemoryStore(MemoryStore):
     def set(self, key: str, value: Any) -> None:
         data = self.all()
         data[key] = value
+        self._write(data)
+
+    def delete(self, key: str) -> bool:
+        data = self.all()
+        if key not in data:
+            return False
+
+        del data[key]
+        self._write(data)
+        return True
+
+    def clear(self) -> None:
+        self._write({})
+
+    def _write(self, data: dict[str, Any]) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("w", encoding="utf-8") as file:
             json.dump(data, file, ensure_ascii=False, indent=2, sort_keys=True)
-            file.write("\n")
-
-    def clear(self) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.path.open("w", encoding="utf-8") as file:
-            json.dump({}, file)
             file.write("\n")
 
 
