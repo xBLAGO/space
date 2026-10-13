@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import time
@@ -44,6 +45,9 @@ class TelegramApi:
         chunks = _split_telegram_text(text)
         for chunk in chunks:
             self._request("sendMessage", {"chat_id": chat_id, "text": chunk})
+
+    def set_webhook(self, url: str, secret_token: str) -> None:
+        self._request("setWebhook", {"url": url, "secret_token": secret_token})
 
     def _request(self, method: str, params: dict[str, str | int]) -> dict[str, Any]:
         data = urllib.parse.urlencode(params).encode("utf-8")
@@ -92,7 +96,7 @@ class TelegramBot:
         username = bot.get("username", "unknown")
         print(f"Telegram startup check succeeded: @{username}")
 
-    def _handle_update(self, update: dict[str, Any]) -> None:
+    def handle_update(self, update: dict[str, Any]) -> None:
         message = update.get("message")
         if not isinstance(message, dict):
             return
@@ -112,6 +116,8 @@ class TelegramBot:
 
         response = self._agent_for_chat(chat_id).respond(UserMessage(text=text.strip()))
         self.api.send_message(chat_id, response.text)
+
+    _handle_update = handle_update
 
     def _agent_for_chat(self, chat_id: int) -> PersonalAssistantAgent:
         if chat_id not in self.agents:
@@ -142,6 +148,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=_float_from_env("TELEGRAM_REQUEST_TIMEOUT_SECONDS", 90.0),
         help="Telegram HTTP request timeout in seconds.",
     )
+    parser.add_argument(
+        "--delivery-mode",
+        choices=["auto", "polling", "webhook"],
+        default=os.getenv("TELEGRAM_DELIVERY_MODE", "auto").strip().lower(),
+        help="How Telegram updates should be delivered.",
+    )
     return parser
 
 
@@ -151,14 +163,20 @@ def main() -> None:
     if not token:
         raise SystemExit("TELEGRAM_BOT_TOKEN is required to run @xBLAGObot.")
 
-    _start_health_server_from_env()
     args.memory_dir.mkdir(parents=True, exist_ok=True)
     api = TelegramApi(
         token=token,
         poll_timeout_seconds=args.poll_timeout,
         request_timeout_seconds=args.request_timeout,
     )
-    TelegramBot(api=api, memory_dir=args.memory_dir).run_forever()
+    bot = TelegramBot(api=api, memory_dir=args.memory_dir)
+
+    if _should_use_webhook(args.delivery_mode):
+        _run_webhook_server(bot=bot, api=api, token=token)
+        return
+
+    _start_health_server_from_env()
+    bot.run_forever()
 
 
 def _split_telegram_text(text: str, limit: int = 4096) -> list[str]:
@@ -184,7 +202,7 @@ def _float_from_env(name: str, default: float) -> float:
         return default
 
 
-class HealthHandler(BaseHTTPRequestHandler):
+class TelegramWebhookHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         if self.path not in {"/", "/healthz"}:
             self.send_response(404)
@@ -198,8 +216,43 @@ class HealthHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def do_POST(self) -> None:
+        server = self.server
+        expected_path = getattr(server, "telegram_webhook_path", "")
+        expected_secret = getattr(server, "telegram_webhook_secret", "")
+
+        if self.path != expected_path:
+            self.send_response(404)
+            self.end_headers()
+            return
+
+        if self.headers.get("X-Telegram-Bot-Api-Secret-Token") != expected_secret:
+            self.send_response(403)
+            self.end_headers()
+            return
+
+        length_header = self.headers.get("Content-Length", "0")
+        try:
+            length = int(length_header)
+        except ValueError:
+            length = 0
+
+        try:
+            update = json.loads(self.rfile.read(length).decode("utf-8"))
+            getattr(server, "telegram_bot").handle_update(update)
+        except Exception as exc:
+            print(f"Telegram webhook error: {exc}")
+
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"ok\n")
+
     def log_message(self, format: str, *args: Any) -> None:
         return
+
+
+HealthHandler = TelegramWebhookHandler
 
 
 def _start_health_server_from_env() -> None:
@@ -207,10 +260,54 @@ def _start_health_server_from_env() -> None:
     if not port:
         return
 
-    server = ThreadingHTTPServer(("0.0.0.0", int(port)), HealthHandler)
+    server = ThreadingHTTPServer(("0.0.0.0", int(port)), TelegramWebhookHandler)
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
     print(f"xBLAGO health server is listening on port {port}.")
+
+
+def _should_use_webhook(delivery_mode: str) -> bool:
+    if delivery_mode == "webhook":
+        return True
+    if delivery_mode == "polling":
+        return False
+    return bool(os.getenv("SPACE_HOST") or os.getenv("TELEGRAM_WEBHOOK_URL"))
+
+
+def _run_webhook_server(bot: TelegramBot, api: TelegramApi, token: str) -> None:
+    port = int(os.getenv("PORT", "7860"))
+    public_base_url = _webhook_base_url()
+    secret_token = _webhook_secret(token)
+    webhook_path = f"/telegram/{secret_token}"
+    webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", f"{public_base_url}{webhook_path}")
+
+    server = ThreadingHTTPServer(("0.0.0.0", port), TelegramWebhookHandler)
+    server.telegram_bot = bot
+    server.telegram_webhook_path = urllib.parse.urlparse(webhook_url).path
+    server.telegram_webhook_secret = secret_token
+
+    print(f"xBLAGO Telegram webhook server is listening on port {port}.")
+    bot._print_startup_identity()
+    api.set_webhook(webhook_url, secret_token)
+    print("Telegram webhook is registered.")
+    server.serve_forever()
+
+
+def _webhook_base_url() -> str:
+    explicit_url = os.getenv("TELEGRAM_WEBHOOK_URL")
+    if explicit_url:
+        parsed = urllib.parse.urlparse(explicit_url)
+        return f"{parsed.scheme}://{parsed.netloc}"
+
+    host = os.getenv("SPACE_HOST")
+    if host:
+        return f"https://{host}"
+
+    raise SystemExit("TELEGRAM_WEBHOOK_URL or SPACE_HOST is required for Telegram webhook mode.")
+
+
+def _webhook_secret(token: str) -> str:
+    return os.getenv("TELEGRAM_WEBHOOK_SECRET") or hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
 if __name__ == "__main__":
