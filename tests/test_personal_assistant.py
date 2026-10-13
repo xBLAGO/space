@@ -18,6 +18,13 @@ class InMemoryStore(MemoryStore):
     def set(self, key: str, value: str) -> None:
         self.data[key] = value
 
+    def delete(self, key: str) -> bool:
+        if key not in self.data:
+            return False
+
+        del self.data[key]
+        return True
+
     def clear(self) -> None:
         self.data.clear()
 
@@ -41,6 +48,15 @@ class PersonalAssistantAgentTest(unittest.TestCase):
         self.assertEqual(response.text, "I remembered: timezone = Europe/Moscow.")
         self.assertEqual(memory.all(), {"timezone": "Europe/Moscow"})
 
+    def test_agent_remembers_user_fact_in_russian(self) -> None:
+        memory = InMemoryStore()
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("запомни город = Москва"))
+
+        self.assertEqual(response.text, "Запомнил: город = Москва.")
+        self.assertEqual(memory.all(), {"город": "Москва"})
+
     def test_agent_can_show_memory(self) -> None:
         memory = InMemoryStore()
         memory.set("timezone", "Europe/Moscow")
@@ -49,6 +65,54 @@ class PersonalAssistantAgentTest(unittest.TestCase):
         response = agent.respond(UserMessage("/memory"))
 
         self.assertIn("- timezone: Europe/Moscow", response.text)
+
+    def test_agent_can_forget_one_memory_fact(self) -> None:
+        memory = InMemoryStore()
+        memory.set("timezone", "Europe/Moscow")
+        memory.set("city", "Moscow")
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("/forget timezone"))
+
+        self.assertEqual(response.text, "Done. I forgot `timezone`.")
+        self.assertEqual(memory.all(), {"city": "Moscow"})
+
+    def test_agent_can_forget_one_memory_fact_in_russian(self) -> None:
+        memory = InMemoryStore()
+        memory.set("город", "Москва")
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("забудь город"))
+
+        self.assertEqual(response.text, "Готово. Забыл `город`.")
+        self.assertEqual(memory.all(), {})
+
+    def test_agent_reports_missing_memory_fact_when_forgetting(self) -> None:
+        agent = PersonalAssistantAgent(InMemoryStore())
+
+        response = agent.respond(UserMessage("/forget timezone"))
+
+        self.assertEqual(response.text, "I did not find `timezone` in memory.")
+
+    def test_profile_shows_user_memory(self) -> None:
+        memory = InMemoryStore()
+        memory.set("timezone", "Europe/Moscow")
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("/profile"))
+
+        self.assertIn("User profile:", response.text)
+        self.assertIn("- timezone: Europe/Moscow", response.text)
+
+    def test_profile_shows_user_memory_in_russian(self) -> None:
+        memory = InMemoryStore()
+        memory.set("город", "Москва")
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("профиль"))
+
+        self.assertIn("Профиль пользователя:", response.text)
+        self.assertIn("- город: Москва", response.text)
 
     def test_agent_exit_ends_session(self) -> None:
         agent = PersonalAssistantAgent(InMemoryStore())
@@ -90,7 +154,7 @@ class PersonalAssistantAgentTest(unittest.TestCase):
         clear_response = agent.respond(UserMessage("/clear-history"))
 
         self.assertIn("Собери план недели", history_response.text)
-        self.assertEqual(clear_response.text, "Готово. Сессионный контекст очищен.")
+        self.assertEqual(clear_response.text, "Done. This conversation context is cleared.")
         self.assertEqual(len(agent.history()), 2)
         self.assertEqual(agent.history()[0].text, "/clear-history")
 
