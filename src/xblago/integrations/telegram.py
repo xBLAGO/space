@@ -23,8 +23,8 @@ from xblago.core.messages import UserMessage
 class TelegramApi:
     def __init__(self, token: str, poll_timeout_seconds: float = 20.0, request_timeout_seconds: float = 90.0) -> None:
         self.token = token
-        api_base_url = os.getenv("TELEGRAM_API_BASE_URL", "https://api.telegram.org").rstrip("/")
-        self.base_url = f"{api_base_url}/bot{token}"
+        self.base_url = _telegram_api_base_url(token)
+        print(f"Telegram API base URL: {self._redact_secret(self.base_url)}")
         self.poll_timeout_seconds = poll_timeout_seconds
         self.request_timeout_seconds = request_timeout_seconds
 
@@ -213,6 +213,18 @@ def _float_from_env(name: str, default: float) -> float:
         return float(value)
     except ValueError:
         return default
+
+
+def _telegram_api_base_url(token: str) -> str:
+    relay_url = os.getenv("TELEGRAM_API_RELAY_URL")
+    if relay_url:
+        return relay_url.rstrip("/")
+
+    configured_url = os.getenv("TELEGRAM_API_BASE_URL")
+    if configured_url:
+        return f"{configured_url.rstrip('/')}/bot{token}"
+
+    return f"https://api.telegram.org/bot{token}"
 
 
 class TelegramWebhookHandler(BaseHTTPRequestHandler):
