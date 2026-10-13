@@ -11,13 +11,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Push to Hugging Face Space
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Hugging Face Hub
+        run: python -m pip install --upgrade huggingface_hub
+
+      - name: Check Hugging Face access
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO || 'RomanMaloev/space' }}
         run: |
           if [ -z "$HF_TOKEN" ]; then
             echo "::error::HF_TOKEN secret is empty or missing in GitHub Actions."
@@ -26,32 +31,36 @@ jobs:
 
           echo "::add-mask::$HF_TOKEN"
           python - <<'PY'
-          import json
           import os
-          import urllib.request
+          from huggingface_hub import HfApi
 
-          request = urllib.request.Request(
-              "https://huggingface.co/api/whoami-v2",
-              headers={"Authorization": f"Bearer {os.environ['HF_TOKEN']}"},
-          )
-          try:
-              with urllib.request.urlopen(request, timeout=20) as response:
-                  payload = json.loads(response.read().decode("utf-8"))
-          except Exception as exc:
-              raise SystemExit(f"HF_TOKEN could not authenticate with Hugging Face: {exc}")
-
-          print(f"Authenticated to Hugging Face as: {payload.get('name', 'unknown')}")
+          user = HfApi(token=os.environ["HF_TOKEN"]).whoami()
+          print(f"Authenticated to Hugging Face as: {user.get('name', 'unknown')}")
           PY
 
-          cat > "$RUNNER_TEMP/hf-askpass.sh" <<'SH'
-          #!/usr/bin/env bash
-          case "$1" in
-            *Username*) echo "RomanMaloev" ;;
-            *Password*) echo "$HF_TOKEN" ;;
-            *) echo "" ;;
-          esac
-          SH
-          chmod +x "$RUNNER_TEMP/hf-askpass.sh"
+      - name: Upload Space files
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO || 'RomanMaloev/space' }}
+        run: |
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi
 
-          git remote add hf "https://huggingface.co/spaces/${HF_SPACE_REPO}"
-          GIT_ASKPASS="$RUNNER_TEMP/hf-askpass.sh" git push hf HEAD:main --force
+          HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
+              repo_id=os.environ["HF_SPACE_REPO"],
+              repo_type="space",
+              folder_path=".",
+              path_in_repo=".",
+              commit_message="Deploy from GitHub Actions",
+              ignore_patterns=[
+                  ".git/*",
+                  ".github/*",
+                  "__pycache__/*",
+                  ".pytest_cache/*",
+                  ".mypy_cache/*",
+                  ".ruff_cache/*",
+                  "*.pyc",
+              ],
+          )
+          PY
