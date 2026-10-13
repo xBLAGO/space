@@ -43,6 +43,20 @@ class LocalPlanningProviderTest(unittest.TestCase):
         self.assertIn("контекст текущего диалога", response)
         self.assertNotIn("Понял.\n", response)
 
+    def test_generates_english_fallback_for_english_user_text(self) -> None:
+        provider = LocalPlanningProvider()
+        context = ChatContext(
+            agent_profile=PersonalAssistantAgent.profile,
+            user_text="Build a weekly plan",
+            memory={"timezone": "Europe/Moscow"},
+        )
+
+        response = provider.generate(context)
+
+        self.assertIn("Understood.", response)
+        self.assertIn("- goal: Build a weekly plan", response)
+        self.assertIn("memory context", response)
+
     def test_builds_local_provider_by_default(self) -> None:
         config = LlmConfig(
             provider="local",
