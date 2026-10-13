@@ -110,6 +110,10 @@ class TelegramBot:
                 retry_delay_seconds = min(retry_delay_seconds * 2, 60)
 
     def _print_startup_identity(self) -> None:
+        if _bool_from_env("TELEGRAM_SKIP_STARTUP_CHECK", False):
+            print("Telegram startup check is skipped by configuration.")
+            return
+
         try:
             bot = self.api.get_me()
         except (RuntimeError, urllib.error.URLError, TimeoutError) as exc:
@@ -142,7 +146,7 @@ class TelegramBot:
             blago_user_id = self.store.resolve_telegram_user(identity)
             update_id = _external_update_id(update)
             if not self.store.begin_update("telegram", update_id, blago_user_id):
-                return []
+                return self.store.cached_update_replies("telegram", update_id) or []
 
             try:
                 replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type)
@@ -150,7 +154,7 @@ class TelegramBot:
                 self.store.mark_update_failed("telegram", update_id, str(exc))
                 raise
 
-            self.store.mark_update_processed("telegram", update_id)
+            self.store.mark_update_processed("telegram", update_id, replies)
             return replies
 
     _handle_update = handle_update
