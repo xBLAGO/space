@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 import os
-import ssl
 import time
 import urllib.error
 import urllib.parse
@@ -26,7 +25,6 @@ class TelegramApi:
         self.base_url = f"https://api.telegram.org/bot{token}"
         self.poll_timeout_seconds = poll_timeout_seconds
         self.request_timeout_seconds = request_timeout_seconds
-        self.ssl_context = _build_ssl_context()
 
     def get_me(self) -> dict[str, Any]:
         response = self._request("getMe", {})
@@ -52,11 +50,19 @@ class TelegramApi:
         self._request("setWebhook", {"url": url, "secret_token": secret_token})
 
     def _request(self, method: str, params: dict[str, str | int]) -> dict[str, Any]:
-        data = urllib.parse.urlencode(params).encode("utf-8")
-        request = urllib.request.Request(f"{self.base_url}/{method}", data=data, method="POST")
+        import certifi
+        import requests
 
-        with urllib.request.urlopen(request, timeout=self.request_timeout_seconds, context=self.ssl_context) as response:
-            body = json.loads(response.read().decode("utf-8"))
+        try:
+            response = requests.post(
+                f"{self.base_url}/{method}",
+                data=params,
+                timeout=self.request_timeout_seconds,
+                verify=certifi.where(),
+            )
+            body = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            raise RuntimeError(f"Telegram API request failed for {method}: {exc}") from exc
 
         if not body.get("ok"):
             raise RuntimeError(f"Telegram API returned an error for {method}: {body}")
@@ -202,14 +208,6 @@ def _float_from_env(name: str, default: float) -> float:
         return float(value)
     except ValueError:
         return default
-
-
-def _build_ssl_context() -> ssl.SSLContext:
-    context = ssl.create_default_context()
-    ignore_unexpected_eof = getattr(ssl, "OP_IGNORE_UNEXPECTED_EOF", 0)
-    if ignore_unexpected_eof:
-        context.options |= ignore_unexpected_eof
-    return context
 
 
 class TelegramWebhookHandler(BaseHTTPRequestHandler):
