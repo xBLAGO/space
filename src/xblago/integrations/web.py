@@ -104,6 +104,11 @@ class WebApp:
                 expires_at TEXT NOT NULL
             );
             CREATE INDEX IF NOT EXISTS idx_web_sessions_user ON web_sessions(blago_user_id);
+            CREATE TABLE IF NOT EXISTS account_link_codes (
+                code_hash TEXT PRIMARY KEY,
+                target_user_id TEXT NOT NULL REFERENCES users(blago_user_id),
+                expires_at TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS blago_needs (
                 id TEXT PRIMARY KEY, blago_user_id TEXT NOT NULL REFERENCES users(blago_user_id),
                 title TEXT NOT NULL, description TEXT NOT NULL, visibility TEXT NOT NULL,
@@ -171,6 +176,74 @@ class WebApp:
             last_name=user.get("last_name") if isinstance(user.get("last_name"), str) else None,
         )
         return self.new_session(self.store.resolve_telegram_user(identity))
+
+    def new_link_code(self, web_uid: str) -> str:
+        # Only a signed-in web account can issue a Telegram linking code.
+        with self.store._connect() as db:
+            credential = db.execute(
+                "SELECT 1 FROM web_credentials WHERE blago_user_id = ?", (web_uid,),
+            ).fetchone()
+        if credential is None:
+            raise ApiError(403, "Sign in through the website to create a linking code")
+        code = secrets.token_hex(8).upper()
+        with self.store._locked_transaction() as db:
+            db.execute("DELETE FROM account_link_codes WHERE target_user_id = ? OR expires_at < ?",
+                       (web_uid, _iso()))
+            db.execute("INSERT INTO account_link_codes VALUES (?, ?, ?)",
+                       (hashlib.sha256(code.encode()).hexdigest(), web_uid, _iso(_now() + timedelta(minutes=10))))
+        return code
+
+    def redeem_telegram_link(self, telegram_uid: str, code: str) -> str:
+        # Caller MUST authenticate Telegram sender (webhook or verified initData).
+        # A one-time secret proves control of the destination web account.
+        if len(code) != 16 or any(c not in "0123456789ABCDEF" for c in code.upper()):
+            raise ApiError(400, "Invalid linking code")
+        with self.store._locked_transaction() as db:
+            row = db.execute(
+                "SELECT target_user_id FROM account_link_codes WHERE code_hash = ? AND expires_at > ?",
+                (hashlib.sha256(code.upper().encode()).hexdigest(), _iso()),
+            ).fetchone()
+            if row is None:
+                raise ApiError(400, "Linking code is invalid or expired")
+            target_uid = str(row["target_user_id"])
+            # Revoke the single-use code before any account modifications.
+            db.execute("DELETE FROM account_link_codes WHERE target_user_id = ?", (target_uid,))
+            if telegram_uid == target_uid:
+                return target_uid
+            if db.execute("SELECT 1 FROM web_credentials WHERE blago_user_id = ?", (telegram_uid,)).fetchone():
+                raise ApiError(409, "This Telegram identity belongs to another web account")
+            # Preserve all dialogue, needs, resources, and event audit records.
+            for table in ("dialogue_turns", "events", "blago_needs", "blago_resources", "web_sessions"):
+                db.execute(f"UPDATE {table} SET blago_user_id = ? WHERE blago_user_id = ?", (target_uid, telegram_uid))
+            # Memory keys can collide. Keep both values with a namespaced key.
+            memories = db.execute(
+                "SELECT key, value_json, updated_at FROM memory_facts WHERE blago_user_id = ?",
+                (telegram_uid,),
+            ).fetchall()
+            for memory in memories:
+                key = str(memory["key"])
+                if db.execute(
+                    "SELECT 1 FROM memory_facts WHERE blago_user_id = ? AND key = ?", (target_uid, key),
+                ).fetchone():
+                    candidate = "telegram." + key
+                    suffix = 2
+                    while db.execute(
+                        "SELECT 1 FROM memory_facts WHERE blago_user_id = ? AND key = ?", (target_uid, candidate),
+                    ).fetchone():
+                        candidate = f"telegram.{key}.{suffix}"
+                        suffix += 1
+                    key = candidate
+                db.execute(
+                    "INSERT INTO memory_facts (blago_user_id,key,value_json,source_event_id,updated_at) VALUES (?,?,?,?,?)",
+                    (target_uid, key, memory["value_json"], None, memory["updated_at"]),
+                )
+            db.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (telegram_uid,))
+            db.execute(
+                "UPDATE channel_links SET blago_user_id = ? WHERE channel = 'telegram' AND blago_user_id = ?",
+                (target_uid, telegram_uid),
+            )
+            db.execute("UPDATE users SET status = 'merged' WHERE blago_user_id = ?", (telegram_uid,))
+        return target_uid
 
     def new_session(self, uid: str) -> tuple[str, str]:
         token, csrf = secrets.token_urlsafe(32), secrets.token_urlsafe(24)
@@ -437,7 +510,10 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path == "/api/v1/auth/logout" and method == "POST":
+        if path == "/api/v1/auth/link-code" and method == "POST":
+            code = app.new_link_code(uid)
+            self._json({"code": code, "expires_in_seconds": 600})
+        elif path == "/api/v1/auth/logout" and method == "POST":
             app.logout(token)
             self._json({"ok": True}, cookie=self._cookie("", clear=True))
         elif path == "/api/v1/me" and method == "GET":
