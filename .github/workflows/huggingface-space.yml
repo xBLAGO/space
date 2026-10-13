@@ -38,6 +38,16 @@ jobs:
           print(f"Authenticated to Hugging Face as: {user.get('name', 'unknown')}")
           PY
 
+      - name: Prepare Space bundle
+        run: |
+          mkdir -p "$RUNNER_TEMP/space"
+          cp -R src "$RUNNER_TEMP/space/src"
+          cp Dockerfile pyproject.toml "$RUNNER_TEMP/space/"
+          cp deploy/huggingface-space/README.md "$RUNNER_TEMP/space/README.md"
+          find "$RUNNER_TEMP/space" -type d -name "__pycache__" -prune -exec rm -rf {} +
+          find "$RUNNER_TEMP/space" -type f -name "*.pyc" -delete
+          find "$RUNNER_TEMP/space" -maxdepth 2 -type f -print | sort
+
       - name: Upload Space files
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -45,21 +55,21 @@ jobs:
         run: |
           python - <<'PY'
           import os
+          import sys
+          import traceback
           from huggingface_hub import HfApi
 
-          HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
-              repo_id=os.environ["HF_SPACE_REPO"],
-              repo_type="space",
-              folder_path=".",
-              commit_message="Deploy from GitHub Actions",
-              ignore_patterns=[
-                  ".git/*",
-                  ".github/*",
-                  "__pycache__/*",
-                  ".pytest_cache/*",
-                  ".mypy_cache/*",
-                  ".ruff_cache/*",
-                  "*.pyc",
-              ],
-          )
+          try:
+              commit = HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
+                  repo_id=os.environ["HF_SPACE_REPO"],
+                  repo_type="space",
+                  folder_path=os.path.join(os.environ["RUNNER_TEMP"], "space"),
+                  commit_message="Deploy from GitHub Actions",
+              )
+          except Exception as exc:
+              print(f"::error::Hugging Face upload failed: {type(exc).__name__}: {exc}")
+              traceback.print_exc()
+              sys.exit(1)
+
+          print(f"Uploaded Space commit: {commit}")
           PY
