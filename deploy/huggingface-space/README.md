@@ -21,6 +21,8 @@ Required Space secrets:
 - optional `XBLAGO_LLM_API_KEY`
 - optional `XBLAGO_LLM_BASE_URL`
 - optional `XBLAGO_LLM_TIMEOUT_SECONDS`
+- optional `TELEGRAM_POLL_TIMEOUT_SECONDS`
+- optional `TELEGRAM_REQUEST_TIMEOUT_SECONDS`
 
 The Docker entrypoint runs:
 
