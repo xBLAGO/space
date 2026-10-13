@@ -155,6 +155,7 @@ From the **website**, open **Profile → Get linking code**, then privately mess
 - `GET/PATCH /api/v1/me`, `GET/POST /api/v1/chat/messages`, `GET /api/v1/memory`
 - `GET/POST /api/v1/needs`, `GET/POST /api/v1/resources`
 - `GET /api/v1/analytics/me`, `GET /api/v1/analytics/community`
+- Economy MVP endpoints are documented in `docs/BLAGO_ECONOMY_01.md`: assets, voluntary resource offers, simulated payment requests, fulfillment events, contribution events, and economy analytics.
 
 Private needs/resources are only accessible by their creator. Community numbers aggregate only records explicitly marked `community`, without disclosing personal record details. On-chain assets, NFTs, liquidity, DAO governance and matching are **not yet implemented**. The pilot requires one running server and durable SQLite storage; high-availability deployment will require a shared database and distributed login-rate-limiting later.
 
