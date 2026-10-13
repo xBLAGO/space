@@ -22,7 +22,9 @@ from xblago.core.messages import UserMessage
 
 class TelegramApi:
     def __init__(self, token: str, poll_timeout_seconds: float = 20.0, request_timeout_seconds: float = 90.0) -> None:
-        self.base_url = f"https://api.telegram.org/bot{token}"
+        self.token = token
+        api_base_url = os.getenv("TELEGRAM_API_BASE_URL", "https://api.telegram.org").rstrip("/")
+        self.base_url = f"{api_base_url}/bot{token}"
         self.poll_timeout_seconds = poll_timeout_seconds
         self.request_timeout_seconds = request_timeout_seconds
 
@@ -62,12 +64,15 @@ class TelegramApi:
             )
             body = response.json()
         except (requests.RequestException, ValueError) as exc:
-            raise RuntimeError(f"Telegram API request failed for {method}: {exc}") from exc
+            raise RuntimeError(f"Telegram API request failed for {method}: {self._redact_secret(str(exc))}") from exc
 
         if not body.get("ok"):
-            raise RuntimeError(f"Telegram API returned an error for {method}: {body}")
+            raise RuntimeError(f"Telegram API returned an error for {method}: {self._redact_secret(str(body))}")
 
         return dict(body)
+
+    def _redact_secret(self, text: str) -> str:
+        return text.replace(self.token, "[TELEGRAM_BOT_TOKEN]")
 
 
 class TelegramBot:
