@@ -24,6 +24,7 @@ class TelegramApi:
     def __init__(self, token: str, poll_timeout_seconds: float = 20.0, request_timeout_seconds: float = 90.0) -> None:
         self.token = token
         self.base_url = _telegram_api_base_url(token)
+        self.use_query_transport = bool(os.getenv("TELEGRAM_API_RELAY_URL"))
         print(f"Telegram API base URL: {self._redact_secret(self.base_url)}")
         self.poll_timeout_seconds = poll_timeout_seconds
         self.request_timeout_seconds = request_timeout_seconds
@@ -56,12 +57,19 @@ class TelegramApi:
         import requests
 
         try:
-            response = requests.post(
-                f"{self.base_url}/{method}",
-                data=params,
-                timeout=self.request_timeout_seconds,
-                verify=certifi.where(),
-            )
+            if self.use_query_transport:
+                response = requests.get(
+                    _url_with_query(f"{self.base_url}/{method}", params),
+                    timeout=self.request_timeout_seconds,
+                    verify=certifi.where(),
+                )
+            else:
+                response = requests.post(
+                    f"{self.base_url}/{method}",
+                    data=params,
+                    timeout=self.request_timeout_seconds,
+                    verify=certifi.where(),
+                )
             body = response.json()
         except (requests.RequestException, ValueError) as exc:
             raise RuntimeError(f"Telegram API request failed for {method}: {self._redact_secret(str(exc))}") from exc
@@ -213,6 +221,13 @@ def _float_from_env(name: str, default: float) -> float:
         return float(value)
     except ValueError:
         return default
+
+
+def _url_with_query(url: str, params: dict[str, str | int]) -> str:
+    if not params:
+        return url
+
+    return f"{url}?{urllib.parse.urlencode(params)}"
 
 
 def _telegram_api_base_url(token: str) -> str:
