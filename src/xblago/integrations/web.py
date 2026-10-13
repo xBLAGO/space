@@ -67,7 +67,25 @@ class WebApp:
     def __init__(self, store: SQLiteBlagoStore) -> None:
         self.store = store
         self._chat_lock = RLock()
+        self._auth_lock = RLock()
+        self._auth_attempts: dict[str, list[float]] = {}
         self._ensure_schema()
+
+    def check_auth_rate(self, key: str) -> None:
+        # In-memory coarse protection for a single-instance pilot deployment.
+        import time
+        now = time.monotonic()
+        with self._auth_lock:
+            if len(self._auth_attempts) > 500:
+                self._auth_attempts = {
+                    k: [x for x in v if x > now - 60]
+                    for k, v in self._auth_attempts.items() if any(x > now - 60 for x in v)
+                }
+            attempts = [x for x in self._auth_attempts.get(key, ()) if x > now - 60]
+            if len(attempts) >= 30:
+                raise ApiError(429, "Too many login attempts. Try again later")
+            attempts.append(now)
+            self._auth_attempts[key] = attempts
 
     def _ensure_schema(self) -> None:
         with self.store._locked_transaction() as db:
@@ -299,6 +317,21 @@ class BlagoWebHandler(TelegramWebhookHandler):
             self.end_headers()
             self.wfile.write(body)
             return
+        assets = {
+            "/app/manifest.webmanifest": ("manifest.webmanifest", "application/manifest+json"),
+            "/app/icon.svg": ("icon.svg", "image/svg+xml"),
+            "/app/sw.js": ("sw.js", "text/javascript"),
+        }
+        if path in assets:
+            filename, content_type = assets[path]
+            body = (Path(__file__).with_name("static") / filename).read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Cache-Control", "no-cache")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
         if path.startswith("/api/v1/"):
             self._api("GET", path)
             return
@@ -388,6 +421,7 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET":
             self._check_origin()
         if method == "POST" and path in ("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/telegram"):
+            app.check_auth_rate(self.client_address[0])
             body = self._body()
             if path.endswith("/register"):
                 token, csrf = app.register(str(body.get("username", "")), str(body.get("password", "")), str(body.get("invite", "")))
