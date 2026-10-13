@@ -30,13 +30,27 @@ class LocalPlanningProvider(ChatProvider):
     """Deterministic fallback that keeps the agent useful without network access."""
 
     def generate(self, context: ChatContext) -> str:
+        language = _language_for_text(context.user_text)
         memory_hint = ""
         if context.memory:
-            memory_hint = "\n- контекст из памяти: " + _compact_memory(context.memory)
+            prefix = "\n- контекст из памяти: " if language == "ru" else "\n- memory context: "
+            memory_hint = prefix + _compact_memory(context.memory)
 
         history_hint = ""
         if context.history:
-            history_hint = "\n- контекст текущего диалога: " + _compact_history(context.history)
+            prefix = "\n- контекст текущего диалога: " if language == "ru" else "\n- current conversation context: "
+            history_hint = prefix + _compact_history(context.history)
+
+        if language == "en":
+            return (
+                "Understood. I would frame this as a working request:\n"
+                f"- goal: {context.user_text}\n"
+                "- next step: clarify the desired outcome and time constraint\n"
+                "- what I can do now: help turn this into a plan, draft, task list, "
+                "or a request for a future specialized agent"
+                f"{memory_hint}"
+                f"{history_hint}"
+            )
 
         return (
             "Понял. Я бы оформил это как рабочий запрос:\n"
@@ -136,3 +150,7 @@ def _shorten(text: str, limit: int = 120) -> str:
         return compact_text
 
     return compact_text[: limit - 3].rstrip() + "..."
+
+
+def _language_for_text(text: str) -> str:
+    return "ru" if any("а" <= char.lower() <= "я" or char.lower() == "ё" for char in text) else "en"
