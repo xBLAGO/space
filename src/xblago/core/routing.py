@@ -16,6 +16,12 @@ REMEMBER_PATTERNS = (
     re.compile(r"^запомни[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s-]+?)\s+(?:это|=|-)\s+(?P<value>.+)$", re.I),
 )
 
+FORGET_PATTERNS = (
+    re.compile(r"^/(?:forget|delete-memory)\s+(?P<key>[\w\s-]+)$", re.I),
+    re.compile(r"^forget\s+(?:my\s+)?(?P<key>[\w\s-]+)$", re.I),
+    re.compile(r"^забудь[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s-]+)$", re.I),
+)
+
 
 def detect_intent(text: str) -> Intent:
     normalized = text.strip()
@@ -29,6 +35,9 @@ def detect_intent(text: str) -> Intent:
 
     if lower in {"/profile", "profile", "профиль"}:
         return Intent("profile")
+
+    if lower in {"/agent", "/agent-profile", "agent", "профиль агента"}:
+        return Intent("agent_profile")
 
     if lower in {"/memory", "memory", "что ты помнишь", "память"}:
         return Intent("memory")
@@ -53,6 +62,11 @@ def detect_intent(text: str) -> Intent:
                 key=_normalize_key(match.group("key")),
                 value=match.group("value").strip(),
             )
+
+    for pattern in FORGET_PATTERNS:
+        match = pattern.match(normalized)
+        if match:
+            return Intent("forget", key=_normalize_key(match.group("key")))
 
     return Intent("unknown")
 
