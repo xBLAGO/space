@@ -55,10 +55,12 @@ docker run --env-file .env xblago-bot
 
 For Hugging Face Spaces, create a Docker Space at `RomanMaloev/space` and add the secrets listed in `deploy/huggingface-space/README.md`. The default Space filesystem is ephemeral, so long-running participant data requires a mounted Hugging Face Storage Bucket/Volume and `XBLAGO_DATA_DIR` pointing to that mount.
 
-The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can mirror `main` to a Hugging Face Docker Space after these GitHub settings are added:
+The GitHub Actions workflow `.github/workflows/huggingface-space.yml` can publish a reviewed commit to a Hugging Face Docker Space after these GitHub settings are added:
 
 - secret `HF_TOKEN`
 - optional variable `HF_SPACE_REPO`, for example `RomanMaloev/space`
+
+Deployment is intentionally manual: run the workflow only after the release owner approves publication and type `DEPLOY` in the workflow input. Follow `docs/BLAGO_RELEASE_01.md` before publishing.
 
 ## Test
 
@@ -161,4 +163,4 @@ Private needs/resources are only accessible by their creator. Community numbers 
 
 **Security:** JSON only for API mutations, CSRF tokens on authenticated writes, explicit browser Origin checks, size limits, and basic in-memory throttling on login endpoints. Configure a separate secret/transport for an external email provider only if email authentication is added in a subsequent release. The temporary shared invite code should be rotated frequently or replaced with per-user invitations before broad onboarding.
 
-Run all checks with `PYTHONPATH=src python -m unittest discover -s tests -v`.
+Run all checks with `PYTHONPATH=src python -m unittest discover -s tests -v`. Release readiness and publication gates are documented in `docs/BLAGO_RELEASE_01.md`.

@@ -1,13 +1,20 @@
 name: Deploy Hugging Face Space
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
+    inputs:
+      confirm_deploy:
+        description: "Type DEPLOY to publish this commit to the configured Hugging Face Space."
+        required: true
+        type: string
 
 jobs:
   deploy:
+    if: ${{ github.event.inputs.confirm_deploy == 'DEPLOY' }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: huggingface-space-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4

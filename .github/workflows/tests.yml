@@ -21,3 +21,42 @@ jobs:
         run: PYTHONPATH=src python -m unittest discover -s tests -v
       - name: Check Python syntax
         run: python -m compileall -q src tests
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t xblago-space:${{ github.sha }} .
+      - name: Run Docker health check
+        run: |
+          cleanup() {
+            docker logs xblago-space-smoke || true
+            docker stop xblago-space-smoke || true
+          }
+          trap cleanup EXIT
+
+          docker run --rm -d \
+            --name xblago-space-smoke \
+            -p 7860:7860 \
+            -e TELEGRAM_BOT_TOKEN=123:ci-smoke-token \
+            -e TELEGRAM_DELIVERY_MODE=webhook \
+            -e TELEGRAM_WEBHOOK_URL=http://127.0.0.1:7860/telegram/ci-smoke \
+            -e TELEGRAM_WEBHOOK_SECRET=ci-smoke \
+            -e TELEGRAM_SKIP_STARTUP_CHECK=true \
+            -e TELEGRAM_SKIP_WEBHOOK_REGISTRATION=true \
+            -e XBLAGO_WEB_INVITE_CODE=ci-release-smoke-invite \
+            -e XBLAGO_COOKIE_SECURE=false \
+            xblago-space:${{ github.sha }}
+
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:7860/healthz \
+              && curl -fsS http://127.0.0.1:7860/app >/dev/null \
+              && curl -fsS http://127.0.0.1:7860/app/manifest.webmanifest >/dev/null \
+              && curl -fsS http://127.0.0.1:7860/app/sw.js >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+
+          exit 1

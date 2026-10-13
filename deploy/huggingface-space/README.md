@@ -56,10 +56,12 @@ Configure **Secret** `XBLAGO_WEB_INVITE_CODE` to enable invite-only website regi
 
 In BotFather, configure the Mini App/menu URL to your publicly reachable HTTPS `/app` endpoint. Raw Telegram WebApp initData is checked server-side, no separate Telegram frontend or database required. Browser users who have no Telegram account can register using the invitation code.
 
-Before publishing, verify:
+Before publishing, follow the full checklist in `docs/BLAGO_RELEASE_01.md`. At minimum, verify:
 
 - `/healthz` returns `ok`
 - `/app` loads over HTTPS
 - `/app/manifest.webmanifest` and `/app/sw.js` are reachable
 - `XBLAGO_DATA_DIR` points to attached persistent storage
 - `XBLAGO_WEB_INVITE_CODE`, `TELEGRAM_BOT_TOKEN`, and webhook/relay secrets are configured as Space secrets
+
+GitHub deployment is manual-only. Start the `Deploy Hugging Face Space` workflow only after owner approval and enter `DEPLOY` in the confirmation input.
