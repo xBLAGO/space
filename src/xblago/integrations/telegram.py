@@ -10,14 +10,14 @@ import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from threading import Thread
+from threading import RLock, Thread
 from typing import Any
 
 from xblago.agents.personal_assistant import PersonalAssistantAgent
 from xblago.core.config import load_llm_config
 from xblago.core.llm import build_chat_provider
-from xblago.core.memory import JsonMemoryStore
-from xblago.core.messages import UserMessage
+from xblago.core.messages import ConversationTurn, UserMessage
+from xblago.core.storage import SQLiteBlagoStore, TelegramIdentity
 
 
 class TelegramApi:
@@ -84,10 +84,12 @@ class TelegramApi:
 
 
 class TelegramBot:
-    def __init__(self, api: TelegramApi, memory_dir: Path) -> None:
+    def __init__(self, api: TelegramApi, memory_dir: Path, store: SQLiteBlagoStore | None = None) -> None:
         self.api = api
         self.memory_dir = memory_dir
-        self.agents: dict[int, PersonalAssistantAgent] = {}
+        self.store = store or SQLiteBlagoStore(memory_dir / "blago.sqlite3", legacy_memory_dir=memory_dir)
+        self.agents: dict[str, PersonalAssistantAgent] = {}
+        self._lock = RLock()
 
     def run_forever(self) -> None:
         print("xBLAGO Telegram bot is running.")
@@ -122,35 +124,61 @@ class TelegramBot:
             self.api.send_message(int(reply["chat_id"]), str(reply["text"]))
 
     def replies_for_update(self, update: dict[str, Any]) -> list[dict[str, str | int]]:
-        message = update.get("message")
-        if not isinstance(message, dict):
-            return []
+        with self._lock:
+            message = update.get("message")
+            if not isinstance(message, dict):
+                return []
 
-        chat = message.get("chat")
-        text = message.get("text")
-        if not isinstance(chat, dict) or not isinstance(text, str):
-            return []
+            chat = message.get("chat")
+            text = message.get("text")
+            if not isinstance(chat, dict) or not isinstance(text, str):
+                return []
 
-        chat_id = chat.get("id")
-        if not isinstance(chat_id, int):
-            return []
+            chat_id = chat.get("id")
+            if not isinstance(chat_id, int):
+                return []
 
-        if text.strip() == "/start":
-            text = self._agent_for_chat(chat_id).welcome_message().removeprefix("xBLAGO: ")
-            return _telegram_message_replies(chat_id, text)
+            identity = _telegram_identity_from_message(message, chat_id)
+            blago_user_id = self.store.resolve_telegram_user(identity)
+            update_id = _external_update_id(update)
+            if not self.store.begin_update("telegram", update_id, blago_user_id):
+                return []
 
-        response = self._agent_for_chat(chat_id).respond(UserMessage(text=text.strip()))
-        return _telegram_message_replies(chat_id, response.text)
+            try:
+                replies = self._replies_for_message(blago_user_id, chat_id, text)
+            except Exception as exc:
+                self.store.mark_update_failed("telegram", update_id, str(exc))
+                raise
+
+            self.store.mark_update_processed("telegram", update_id)
+            return replies
 
     _handle_update = handle_update
 
-    def _agent_for_chat(self, chat_id: int) -> PersonalAssistantAgent:
-        if chat_id not in self.agents:
-            memory = JsonMemoryStore(self.memory_dir / f"telegram_{chat_id}.json")
-            provider = build_chat_provider(load_llm_config())
-            self.agents[chat_id] = PersonalAssistantAgent(memory=memory, chat_provider=provider)
+    def _replies_for_message(self, blago_user_id: str, chat_id: int, text: str) -> list[dict[str, str | int]]:
+        if text.strip() == "/start":
+            welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")
+            return _telegram_message_replies(chat_id, welcome_text)
 
-        return self.agents[chat_id]
+        response = self._agent_for_user(blago_user_id, chat_id).respond(UserMessage(text=text.strip()))
+        return _telegram_message_replies(chat_id, response.text)
+
+    def _agent_for_user(self, blago_user_id: str, chat_id: int) -> PersonalAssistantAgent:
+        if blago_user_id not in self.agents:
+            memory = self.store.memory_for_user(blago_user_id)
+            provider = build_chat_provider(load_llm_config())
+            self.agents[blago_user_id] = PersonalAssistantAgent(
+                memory=memory,
+                chat_provider=provider,
+                initial_history=self.store.recent_history(blago_user_id, 12),
+                history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
+                history_clearer=lambda: self.store.clear_history(blago_user_id),
+            )
+
+        return self.agents[blago_user_id]
+
+    def _record_history(self, blago_user_id: str, chat_id: int, turn: ConversationTurn) -> None:
+        self.store.append_history(blago_user_id, turn.role, turn.text, channel="telegram", chat_id=chat_id)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -159,7 +187,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--memory-dir",
         type=Path,
         default=Path.home() / ".xblago" / "telegram",
-        help="Directory for per-chat memory files.",
+        help="Directory for legacy per-chat JSON memory files.",
+    )
+    parser.add_argument(
+        "--data-dir",
+        type=Path,
+        default=_path_from_env("XBLAGO_DATA_DIR", Path.home() / ".xblago" / "telegram"),
+        help="Directory for xBLAGO persistent data.",
     )
     parser.add_argument(
         "--poll-timeout",
@@ -189,12 +223,14 @@ def main() -> None:
         raise SystemExit("TELEGRAM_BOT_TOKEN is required to run @xBLAGObot.")
 
     args.memory_dir.mkdir(parents=True, exist_ok=True)
+    args.data_dir.mkdir(parents=True, exist_ok=True)
     api = TelegramApi(
         token=token,
         poll_timeout_seconds=args.poll_timeout,
         request_timeout_seconds=args.request_timeout,
     )
-    bot = TelegramBot(api=api, memory_dir=args.memory_dir)
+    store = SQLiteBlagoStore(args.data_dir / "blago.sqlite3", legacy_memory_dir=args.memory_dir)
+    bot = TelegramBot(api=api, memory_dir=args.memory_dir, store=store)
 
     if _should_use_webhook(args.delivery_mode):
         _run_webhook_server(bot=bot, api=api, token=token)
@@ -231,6 +267,14 @@ def _float_from_env(name: str, default: float) -> float:
         return default
 
 
+def _path_from_env(name: str, default: Path) -> Path:
+    value = os.getenv(name)
+    if not value:
+        return default
+
+    return Path(value)
+
+
 def _url_with_query(url: str, params: dict[str, str | int]) -> str:
     if not params:
         return url
@@ -248,6 +292,39 @@ def _telegram_api_base_url(token: str) -> str:
         return f"{configured_url.rstrip('/')}/bot{token}"
 
     return f"https://api.telegram.org/bot{token}"
+
+
+def _telegram_identity_from_message(message: dict[str, Any], chat_id: int) -> TelegramIdentity:
+    chat = message.get("chat")
+    chat_type = chat.get("type") if isinstance(chat, dict) else None
+    from_user = message.get("from")
+    if not isinstance(from_user, dict):
+        return TelegramIdentity(telegram_user_id=None, chat_id=chat_id, chat_type=chat_type)
+
+    telegram_user_id = from_user.get("id")
+    if not isinstance(telegram_user_id, int):
+        telegram_user_id = None
+
+    return TelegramIdentity(
+        telegram_user_id=telegram_user_id,
+        chat_id=chat_id,
+        chat_type=chat_type if isinstance(chat_type, str) else None,
+        username=_optional_string(from_user.get("username")),
+        first_name=_optional_string(from_user.get("first_name")),
+        last_name=_optional_string(from_user.get("last_name")),
+    )
+
+
+def _optional_string(value: Any) -> str | None:
+    return value if isinstance(value, str) and value else None
+
+
+def _external_update_id(update: dict[str, Any]) -> str | None:
+    update_id = update.get("update_id")
+    if isinstance(update_id, int):
+        return str(update_id)
+
+    return None
 
 
 class TelegramWebhookHandler(BaseHTTPRequestHandler):
@@ -295,15 +372,17 @@ class TelegramWebhookHandler(BaseHTTPRequestHandler):
             bot.handle_update(update)
         except Exception as exc:
             print(f"Telegram webhook error: {exc}")
+            self._send_json({"ok": False, "error": "update processing failed"}, status=500)
+            return
 
         self.send_response(200)
         self.send_header("Content-Type", "text/plain; charset=utf-8")
         self.end_headers()
         self.wfile.write(b"ok\n")
 
-    def _send_json(self, payload: dict[str, Any]) -> None:
+    def _send_json(self, payload: dict[str, Any], status: int = 200) -> None:
         body = json.dumps(payload).encode("utf-8")
-        self.send_response(200)
+        self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
