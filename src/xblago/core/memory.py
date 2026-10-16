@@ -3,9 +3,45 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+import re
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
+
+
+SENSITIVE_MEMORY_TERMS = (
+    "password", "пароль", "passcode", "token", "токен", "secret", "секрет",
+    "cvv", "cvc", "pin", "пин", "card number", "номер карты", "bank login",
+    "логин банка", "api key", "ключ api", "private key", "приватный ключ",
+)
+
+
+def is_sensitive_memory(key: str, value: Any) -> bool:
+    text = f"{key} {value}".lower()
+    return any(term in text for term in SENSITIVE_MEMORY_TERMS)
+
+
+def relevant_memory(memory: dict[str, Any], text: str, limit: int = 12) -> dict[str, Any]:
+    """Return facts useful for this turn, while keeping the prompt small."""
+    if not memory:
+        return {}
+    words = set(re.findall(r"[\w-]{3,}", text.lower()))
+    aliases = {
+        "name": {"имя", "зовут", "name"},
+        "city": {"город", "живу", "city", "live"},
+        "timezone": {"часовой", "пояс", "timezone"},
+        "work": {"работа", "работаю", "work", "job"},
+        "likes": {"люблю", "нравится", "любимое", "like", "love"},
+        "preferences": {"предпочитаю", "удобнее", "prefer"},
+    }
+    ranked = []
+    for key, value in memory.items():
+        haystack = f"{key} {value}".lower()
+        score = sum(1 for word in words if word in haystack)
+        score += sum(2 for word in aliases.get(str(key), set()) if word in words)
+        ranked.append((score, str(key), value))
+    ranked.sort(key=lambda item: (-item[0], item[1]))
+    return {key: value for score, key, value in ranked[:limit] if score > 0}
 
 
 class MemoryStore(ABC):

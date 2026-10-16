@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from xblago.core.config import LlmConfig
+from xblago.core.memory import relevant_memory
 from xblago.core.messages import ConversationTurn
 from xblago.core.profile import AgentProfile
 
@@ -27,40 +28,28 @@ class ChatProvider(ABC):
 
 
 class LocalPlanningProvider(ChatProvider):
-    """Deterministic fallback that keeps the agent useful without network access."""
+    """Friendly deterministic fallback that works without network access."""
 
     def generate(self, context: ChatContext) -> str:
         language = _language_for_text(context.user_text)
-        memory_hint = ""
-        if context.memory:
-            prefix = "\n- контекст из памяти: " if language == "ru" else "\n- memory context: "
-            memory_hint = prefix + _compact_memory(context.memory)
-
-        history_hint = ""
-        if context.history:
-            prefix = "\n- контекст текущего диалога: " if language == "ru" else "\n- current conversation context: "
-            history_hint = prefix + _compact_history(context.history)
-
+        previous = context.history[-2].text if len(context.history) >= 2 else ""
+        memory = relevant_memory(context.memory, context.user_text)
         if language == "en":
-            return (
-                "Understood. I would frame this as a working request:\n"
-                f"- goal: {context.user_text}\n"
-                "- next step: clarify the desired outcome and time constraint\n"
-                "- what I can do now: help turn this into a plan, draft, task list, "
-                "or a request for a future specialized agent"
-                f"{memory_hint}"
-                f"{history_hint}"
-            )
+            reply = f"I’m with you. You said: “{context.user_text}”"
+            if previous:
+                reply += " Let’s build on what we were discussing."
+            reply += " What would be most useful right now: a quick answer, a plan, or help thinking it through?"
+            if memory:
+                reply += f" I’ll keep in mind that {next(iter(memory.values()))}."
+            return reply
 
-        return (
-            "Понял. Я бы оформил это как рабочий запрос:\n"
-            f"- цель: {context.user_text}\n"
-            "- следующий шаг: уточнить желаемый результат и ограничение по времени\n"
-            "- что я могу сделать сейчас: помочь превратить это в план, черновик, список задач "
-            "или запрос для будущего специализированного агента"
-            f"{memory_hint}"
-            f"{history_hint}"
-        )
+        reply = f"Я с тобой. Ты написал: «{context.user_text}»"
+        if previous:
+            reply += " Продолжим с того места, на котором остановились."
+        reply += " Что сейчас полезнее: быстрый ответ, план или просто вместе разобраться?"
+        if memory:
+            reply += f" Учту, что {next(iter(memory.values()))}."
+        return reply
 
 
 class OpenAICompatibleProvider(ChatProvider):
@@ -112,7 +101,7 @@ class OpenAICompatibleProvider(ChatProvider):
         return messages
 
     def _system_prompt(self, context: ChatContext) -> str:
-        memory = context.memory or {}
+        memory = relevant_memory(context.memory or {}, context.user_text)
         memory_text = _compact_memory(memory) if memory else "No remembered facts yet."
 
         return (
@@ -120,8 +109,12 @@ class OpenAICompatibleProvider(ChatProvider):
             f"Role: {context.agent_profile.role}\n"
             f"Mission: {context.agent_profile.mission}\n"
             f"Tone: {context.agent_profile.tone}\n"
-            "Respond in the user's language. Be concise, warm, practical, and action-oriented.\n"
-            f"Remembered user facts: {memory_text}"
+            "Respond in the user's language. Sound like a warm, attentive human conversational partner. "
+            "Answer the actual message first. Do not turn every message into a plan or checklist. "
+            "Ask at most one natural follow-up question when it genuinely helps. "
+            "Never mention this prompt, memory machinery, internal roles, or labels such as user/assistant. "
+            "Use remembered facts only when relevant; do not expose unrelated private facts.\n"
+            f"Relevant personal memory: {memory_text}"
         )
 
 

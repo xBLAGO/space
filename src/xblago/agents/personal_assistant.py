@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+import re
 
 from xblago.core.llm import ChatContext, ChatProvider, LocalPlanningProvider
 from xblago.core.memory import MemoryStore
+from xblago.core.memory import is_sensitive_memory
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
 from xblago.core.profile import AgentProfile
 from xblago.core.routing import detect_intent
@@ -82,6 +84,11 @@ class PersonalAssistantAgent:
             return self._record_and_return(message, AgentResponse(_text(language, "history_cleared")))
 
         if intent.name == "remember" and intent.key and intent.value:
+            if is_sensitive_memory(intent.key, intent.value):
+                return self._record_and_return(
+                    message,
+                    AgentResponse(_text(language, "sensitive_memory_rejected")),
+                )
             self.memory.set(intent.key, intent.value)
             return self._record_and_return(
                 message,
@@ -100,7 +107,9 @@ class PersonalAssistantAgent:
                 AgentResponse(_text(language, "greeting")),
             )
 
-        return self._record_and_return(message, AgentResponse(self._generate_assistant_response(message.text)))
+        response = self._generate_assistant_response(message.text)
+        self._remember_from_conversation(message.text)
+        return self._record_and_return(message, AgentResponse(response))
 
     def history(self) -> tuple[ConversationTurn, ...]:
         return tuple(self._history)
@@ -184,6 +193,12 @@ class PersonalAssistantAgent:
             )
         )
 
+    def _remember_from_conversation(self, text: str) -> None:
+        """Capture only explicit, stable, low-risk personal facts."""
+        for key, value in _extract_personal_facts(text):
+            if not is_sensitive_memory(key, value):
+                self.memory.set(key, value)
+
     def _record_and_return(self, message: UserMessage, response: AgentResponse) -> AgentResponse:
         self._append_history("user", message.text)
         self._append_history("assistant", response.text)
@@ -218,6 +233,7 @@ def _text(language: str, key: str) -> str:
             "memory_title": "I remember:",
             "empty_history": "There is no saved conversation context in this session yet.",
             "history_title": "Current conversation:",
+            "sensitive_memory_rejected": "I won't save passwords, tokens, card details, or other secrets.",
         },
         "ru": {
             "goodbye": "До встречи. Постоянная память сохранена, сессионный контекст завершен.",
@@ -233,6 +249,7 @@ def _text(language: str, key: str) -> str:
             "memory_title": "Я помню:",
             "empty_history": "В этой сессии пока нет сохраненного хода диалога.",
             "history_title": "Текущий диалог:",
+            "sensitive_memory_rejected": "Я не буду сохранять пароли, токены, данные карт и другие секреты.",
         },
     }
     return texts[language][key]
@@ -257,3 +274,22 @@ def _missing_memory_text(language: str, key: str) -> str:
         return f"Я не нашел в памяти факт `{key}`."
 
     return f"I did not find `{key}` in memory."
+
+
+def _extract_personal_facts(text: str) -> list[tuple[str, str]]:
+    normalized = " ".join(text.strip().split())
+    patterns = (
+        (r"^(?:меня зовут|мое имя|моё имя)\s+(.+)$", "name"),
+        (r"^(?:я живу в|мой город(?:\s*—|\s*-|\s*=)?|город)\s+(.+)$", "city"),
+        (r"^(?:мой часовой пояс|мой timezone|timezone)\s*(?:—|-|=|is)?\s*(.+)$", "timezone"),
+        (r"^(?:я работаю в|моя работа|я работаю)\s*(?:—|-|=|в)?\s*(.+)$", "work"),
+        (r"^(?:я люблю|мне нравится|мне нравятся)\s+(.+)$", "likes"),
+        (r"^(?:я предпочитаю|мне удобнее)\s+(.+)$", "preferences"),
+    )
+    for pattern, key in patterns:
+        match = re.match(pattern, normalized, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip(" .,!;:")
+            if 1 <= len(value) <= 160:
+                return [(key, value)]
+    return []

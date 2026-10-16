@@ -9,7 +9,7 @@ from xblago.core.messages import ConversationTurn
 
 
 class LocalPlanningProviderTest(unittest.TestCase):
-    def test_generates_actionable_fallback_with_memory(self) -> None:
+    def test_generates_natural_fallback_without_template_labels(self) -> None:
         provider = LocalPlanningProvider()
         context = ChatContext(
             agent_profile=PersonalAssistantAgent.profile,
@@ -20,7 +20,8 @@ class LocalPlanningProviderTest(unittest.TestCase):
         response = provider.generate(context)
 
         self.assertIn("Собери план недели", response)
-        self.assertIn("timezone=Europe/Moscow", response)
+        self.assertNotIn("цель:", response)
+        self.assertNotIn("следующий шаг:", response)
 
     def test_generates_compact_fallback_with_session_history(self) -> None:
         provider = LocalPlanningProvider()
@@ -40,7 +41,9 @@ class LocalPlanningProviderTest(unittest.TestCase):
 
         response = provider.generate(context)
 
-        self.assertIn("контекст текущего диалога", response)
+        self.assertIn("Продолжим", response)
+        self.assertNotIn("user:", response)
+        self.assertNotIn("assistant:", response)
         self.assertNotIn("Понял.\n", response)
 
     def test_generates_english_fallback_for_english_user_text(self) -> None:
@@ -53,9 +56,9 @@ class LocalPlanningProviderTest(unittest.TestCase):
 
         response = provider.generate(context)
 
-        self.assertIn("Understood.", response)
-        self.assertIn("- goal: Build a weekly plan", response)
-        self.assertIn("memory context", response)
+        self.assertIn("Build a weekly plan", response)
+        self.assertNotIn("- goal:", response)
+        self.assertNotIn("memory context", response)
 
     def test_builds_local_provider_by_default(self) -> None:
         config = LlmConfig(

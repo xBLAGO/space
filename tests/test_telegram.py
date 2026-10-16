@@ -94,6 +94,17 @@ class TelegramBotTest(unittest.TestCase):
 
         self.assertIn("Собери план недели", str(history))
 
+    def test_automatic_memory_survives_bot_restart(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            data_dir = Path(directory)
+            first_bot = TelegramBot(api=FakeTelegramApi(), memory_dir=data_dir)
+            first_bot.replies_for_update(_telegram_update(1, 101, 1001, "Меня зовут Анна"))
+
+            restarted_bot = TelegramBot(api=FakeTelegramApi(), memory_dir=data_dir)
+            memory = restarted_bot.replies_for_update(_telegram_update(2, 101, 1001, "/memory"))[0]["text"]
+
+        self.assertIn("name: Анна", str(memory))
+
     def test_duplicate_update_reuses_cached_reply_without_repeating_operation(self) -> None:
         update = _telegram_update(77, 101, 1001, "remember my timezone is Europe/Moscow")
         with tempfile.TemporaryDirectory() as directory:
