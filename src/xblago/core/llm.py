@@ -36,6 +36,10 @@ class LlmProviderError(RuntimeError):
         self.retryable = retryable
 
 
+class LlmConfigurationError(RuntimeError):
+    """A provider cannot be constructed from the configured environment."""
+
+
 class LocalPlanningProvider(ChatProvider):
     """Friendly deterministic fallback that works without network access."""
 
@@ -66,7 +70,7 @@ class OpenAICompatibleProvider(ChatProvider):
 
     def __init__(self, config: LlmConfig) -> None:
         if not config.api_key:
-            raise ValueError("XBLAGO_LLM_API_KEY or the provider token environment variable is required.")
+            raise LlmConfigurationError("The language model provider token is not configured.")
 
         self.config = config
 
@@ -135,14 +139,24 @@ class OpenAICompatibleProvider(ChatProvider):
         )
 
 
+class UnavailableChatProvider(ChatProvider):
+    """No-op provider used when configuration prevents a network request."""
+
+    def generate(self, context: ChatContext) -> str:
+        raise LlmProviderError("The language model provider is not configured.")
+
+
 def build_chat_provider(config: LlmConfig) -> ChatProvider:
     if config.provider == "local":
         return LocalPlanningProvider()
 
     if config.provider in {"openai", "openai-compatible", "hf", "huggingface", "huggingface-inference"}:
-        return OpenAICompatibleProvider(config)
+        try:
+            return OpenAICompatibleProvider(config)
+        except LlmConfigurationError:
+            return UnavailableChatProvider()
 
-    raise ValueError(f"Unsupported LLM provider: {config.provider}")
+    return UnavailableChatProvider()
 
 
 def _provider_http_error(status: int) -> LlmProviderError:

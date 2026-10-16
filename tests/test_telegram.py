@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import urllib.error
 from email.message import Message
 from io import BytesIO
 import tempfile
@@ -9,7 +10,7 @@ import unittest.mock
 from pathlib import Path
 from types import SimpleNamespace
 
-from xblago.core.storage import SQLiteBlagoStore
+from xblago.core.storage import SQLiteBlagoStore, TelegramIdentity
 from xblago.integrations.telegram import (
     TelegramApi,
     TelegramBot,
@@ -34,6 +35,11 @@ class FailingBot:
 
     def handle_update(self, update: dict[str, object]) -> None:
         raise RuntimeError("boom")
+
+
+class FailingHistoryStore(SQLiteBlagoStore):
+    def append_history(self, *args: object, **kwargs: object) -> None:
+        raise RuntimeError("history write failed")
 
 
 class TelegramBotTest(unittest.TestCase):
@@ -143,6 +149,99 @@ class TelegramBotTest(unittest.TestCase):
             handler.do_POST()
 
         self.assertEqual(handler.status_code, 500)
+
+    def test_missing_hf_token_returns_fallback_through_webhook(self) -> None:
+        body = json.dumps(_telegram_update(1, 101, 1001, "Меня зовут Анна")).encode("utf-8")
+        headers = Message()
+        headers["Content-Length"] = str(len(body))
+        headers["X-Telegram-Bot-Api-Secret-Token"] = "secret"
+        with tempfile.TemporaryDirectory() as directory, unittest.mock.patch.dict(
+            "os.environ",
+            {
+                "XBLAGO_LLM_PROVIDER": "hf",
+                "XBLAGO_LLM_MODEL": "Qwen/Qwen3-14B:cheapest",
+                "TELEGRAM_RETURN_WEBHOOK_REPLIES": "true",
+            },
+            clear=True,
+        ):
+            data_dir = Path(directory)
+            bot = TelegramBot(api=FakeTelegramApi(), memory_dir=data_dir)
+            handler = TelegramWebhookHandler.__new__(TelegramWebhookHandler)
+            handler.path = "/telegram/secret"
+            handler.headers = headers
+            handler.rfile = BytesIO(body)
+            handler.wfile = BytesIO()
+            handler.server = SimpleNamespace(
+                telegram_bot=bot,
+                telegram_webhook_path="/telegram/secret",
+                telegram_webhook_secret="secret",
+            )
+            handler.status_code = None
+            handler.response_headers = []
+            handler.send_response = lambda status, message=None: setattr(handler, "status_code", status)
+            handler.send_header = lambda name, value: handler.response_headers.append((name, value))
+            handler.end_headers = lambda: None
+
+            handler.do_POST()
+
+            self.assertEqual(handler.status_code, 200)
+            payload = json.loads(handler.wfile.getvalue().decode("utf-8"))
+            self.assertIn("не получается связаться", payload["replies"][0]["text"])
+            uid = bot.store.resolve_telegram_user(TelegramIdentity(telegram_user_id=101, chat_id=1001, chat_type="private"))
+            self.assertEqual(bot.store.all_memory(uid)["name"], "Анна")
+            self.assertEqual(len(bot.store.recent_history(uid, 12)), 2)
+
+    def test_llm_fallback_does_not_mask_history_write_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, unittest.mock.patch.dict(
+            "os.environ", {"XBLAGO_LLM_PROVIDER": "hf"}, clear=True
+        ):
+            data_dir = Path(directory)
+            store = FailingHistoryStore(data_dir / "blago.sqlite3", legacy_memory_dir=data_dir)
+            bot = TelegramBot(api=FakeTelegramApi(), memory_dir=data_dir, store=store)
+
+            with self.assertRaisesRegex(RuntimeError, "history write failed"):
+                bot.replies_for_update(_telegram_update(1, 101, 1001, "Привет"))
+
+    def test_invalid_hf_token_returns_fallback_through_webhook_once(self) -> None:
+        body = json.dumps(_telegram_update(1, 101, 1001, "Составь план")).encode("utf-8")
+        headers = Message()
+        headers["Content-Length"] = str(len(body))
+        headers["X-Telegram-Bot-Api-Secret-Token"] = "secret"
+        provider_error = urllib.error.HTTPError("https://router.huggingface.co/v1/chat/completions", 401, "token", {}, None)
+        with tempfile.TemporaryDirectory() as directory, unittest.mock.patch.dict(
+            "os.environ",
+            {
+                "XBLAGO_LLM_PROVIDER": "hf",
+                "HF_TOKEN": "hf_invalid_token",
+                "TELEGRAM_RETURN_WEBHOOK_REPLIES": "true",
+            },
+            clear=True,
+        ), unittest.mock.patch(
+            "xblago.core.llm.urllib.request.urlopen", side_effect=provider_error
+        ) as urlopen:
+            bot = TelegramBot(api=FakeTelegramApi(), memory_dir=Path(directory))
+            handler = TelegramWebhookHandler.__new__(TelegramWebhookHandler)
+            handler.path = "/telegram/secret"
+            handler.headers = headers
+            handler.rfile = BytesIO(body)
+            handler.wfile = BytesIO()
+            handler.server = SimpleNamespace(
+                telegram_bot=bot,
+                telegram_webhook_path="/telegram/secret",
+                telegram_webhook_secret="secret",
+            )
+            handler.status_code = None
+            handler.response_headers = []
+            handler.send_response = lambda status, message=None: setattr(handler, "status_code", status)
+            handler.send_header = lambda name, value: handler.response_headers.append((name, value))
+            handler.end_headers = lambda: None
+
+            handler.do_POST()
+
+        self.assertEqual(handler.status_code, 200)
+        payload = json.loads(handler.wfile.getvalue().decode("utf-8"))
+        self.assertIn("не получается связаться", payload["replies"][0]["text"])
+        self.assertEqual(urlopen.call_count, 1)
 
     def test_legacy_json_memory_is_migrated_with_backup(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

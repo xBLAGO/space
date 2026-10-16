@@ -10,6 +10,7 @@ from xblago.core.config import LlmConfig, load_llm_config
 from xblago.core.llm import (
     ChatContext,
     LlmProviderError,
+    UnavailableChatProvider,
     LocalPlanningProvider,
     OpenAICompatibleProvider,
     build_chat_provider,
@@ -98,6 +99,23 @@ class LocalPlanningProviderTest(unittest.TestCase):
         self.assertEqual(config.model, "Qwen/Qwen3-14B:cheapest")
         self.assertEqual(config.api_key, "hf_test_token")
         self.assertIsInstance(build_chat_provider(config), OpenAICompatibleProvider)
+
+    def test_missing_provider_token_builds_non_networking_fallback(self) -> None:
+        config = LlmConfig(
+            provider="hf",
+            model="Qwen/Qwen3-14B:cheapest",
+            api_key=None,
+            base_url="https://router.huggingface.co/v1",
+            timeout_seconds=7.0,
+        )
+
+        with unittest.mock.patch("xblago.core.llm.urllib.request.urlopen") as urlopen:
+            provider = build_chat_provider(config)
+            with self.assertRaises(LlmProviderError):
+                provider.generate(ChatContext(PersonalAssistantAgent.profile, "Привет", {}, ()))
+
+        self.assertIsInstance(provider, UnavailableChatProvider)
+        urlopen.assert_not_called()
 
     def test_openai_compatible_request_matches_hf_chat_completion_shape(self) -> None:
         config = LlmConfig(
