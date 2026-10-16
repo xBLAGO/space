@@ -5,6 +5,7 @@ import os
 import tempfile
 import re
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +14,22 @@ SENSITIVE_MEMORY_TERMS = (
     "password", "пароль", "passcode", "token", "токен", "secret", "секрет",
     "cvv", "cvc", "pin", "пин", "card number", "номер карты", "bank login",
     "логин банка", "api key", "ключ api", "private key", "приватный ключ",
+    "health", "здоровье", "medical", "медицин", "diagnosis", "диагноз", "illness", "болезн",
+    "medication", "лекарств", "sexual", "сексуаль",
 )
+
+
+@dataclass(frozen=True)
+class SemanticMemoryRecord:
+    record_id: str
+    key: str
+    value: Any
+    category: str
+    source: str
+    status: str
+    confidence: float
+    created_at: str
+    updated_at: str
 
 
 def is_sensitive_memory(key: str, value: Any) -> bool:
@@ -60,6 +76,15 @@ class MemoryStore(ABC):
     @abstractmethod
     def clear(self) -> None:
         raise NotImplementedError
+
+    def semantic_records(self) -> tuple[SemanticMemoryRecord, ...]:
+        return ()
+
+    def save_semantic(self, record: SemanticMemoryRecord) -> None:
+        self.set(record.key, record.value)
+
+    def delete_semantic(self, key: str) -> bool:
+        return self.delete(key)
 
 
 class JsonMemoryStore(MemoryStore):

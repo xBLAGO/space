@@ -3,12 +3,13 @@ from __future__ import annotations
 from collections.abc import Callable
 import re
 
-from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider
+from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider, OpenAICompatibleProvider
 from xblago.core.memory import MemoryStore
 from xblago.core.memory import is_sensitive_memory
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
 from xblago.core.profile import AgentProfile
 from xblago.core.routing import detect_intent
+from xblago.core.semantic_memory import SemanticMemoryExtractor, candidates_to_records
 
 
 class PersonalAssistantAgent:
@@ -33,12 +34,19 @@ class PersonalAssistantAgent:
         initial_history: tuple[ConversationTurn, ...] = (),
         history_recorder: Callable[[ConversationTurn], None] | None = None,
         history_clearer: Callable[[], None] | None = None,
+        memory_extractor: SemanticMemoryExtractor | None = None,
     ) -> None:
         self.memory = memory
         self.chat_provider = chat_provider or LocalPlanningProvider()
         self.history_limit = history_limit
         self.history_recorder = history_recorder
         self.history_clearer = history_clearer
+        self.memory_extractor = memory_extractor or (
+            SemanticMemoryExtractor(self.chat_provider)
+            if isinstance(self.chat_provider, OpenAICompatibleProvider)
+            else None
+        )
+        self._last_generation_succeeded = True
         self._history: list[ConversationTurn] = list(initial_history[-history_limit:])
 
     def welcome_message(self) -> str:
@@ -109,6 +117,8 @@ class PersonalAssistantAgent:
 
         response = self._generate_assistant_response(message.text)
         self._remember_from_conversation(message.text)
+        if self._last_generation_succeeded:
+            self._extract_semantic_memory(message.text)
         return self._record_and_return(message, AgentResponse(response))
 
     def history(self) -> tuple[ConversationTurn, ...]:
@@ -166,6 +176,13 @@ class PersonalAssistantAgent:
 
     def _memory_text(self, language: str) -> str:
         facts = self.memory.all()
+        facts.update(
+            {
+                record.key: record.value
+                for record in self.memory.semantic_records()
+                if record.status == "confirmed"
+            }
+        )
         if not facts:
             return _text(language, "empty_memory")
 
@@ -191,9 +208,12 @@ class PersonalAssistantAgent:
             history=self.history(),
         )
         try:
-            return self.chat_provider.generate(context)
+            response = self.chat_provider.generate(context)
+            self._last_generation_succeeded = True
+            return response
         except (LlmProviderError, TimeoutError) as exc:
             # One provider attempt only; local fallback avoids Telegram retry loops and extra spend.
+            self._last_generation_succeeded = False
             language = _language_for_text(text)
             return _text(language, "provider_unavailable")
 
@@ -202,6 +222,22 @@ class PersonalAssistantAgent:
         for key, value in _extract_personal_facts(text):
             if not is_sensitive_memory(key, value):
                 self.memory.set(key, value)
+
+    def _extract_semantic_memory(self, text: str) -> None:
+        if self.memory_extractor is None:
+            return
+        try:
+            context = ChatContext(
+                agent_profile=self.profile,
+                user_text=text,
+                memory=self.memory.all(),
+                history=self.history(),
+            )
+            for record in candidates_to_records(self.memory_extractor.extract(context)):
+                self.memory.save_semantic(record)
+        except (LlmProviderError, TimeoutError, ValueError, TypeError):
+            # Memory analysis is best-effort and must never block or alter the reply.
+            return
 
     def _record_and_return(self, message: UserMessage, response: AgentResponse) -> AgentResponse:
         self._append_history("user", message.text)

@@ -11,7 +11,7 @@ from threading import RLock
 from typing import Any, Iterator
 from uuid import uuid4
 
-from xblago.core.memory import MemoryStore
+from xblago.core.memory import MemoryStore, SemanticMemoryRecord
 from xblago.core.messages import ConversationTurn, MessageRole
 
 
@@ -159,7 +159,95 @@ class SQLiteBlagoStore:
                 (blago_user_id,),
             ).fetchall()
 
-        return {str(row["key"]): json.loads(str(row["value_json"])) for row in rows}
+        facts = {str(row["key"]): json.loads(str(row["value_json"])) for row in rows}
+        for record in self.all_semantic_memory(blago_user_id):
+            facts[record.key] = record.value
+        return facts
+
+    def all_semantic_memory(
+        self,
+        blago_user_id: str,
+        include_inactive: bool = False,
+        include_candidates: bool = False,
+    ) -> tuple[SemanticMemoryRecord, ...]:
+        query = """
+            SELECT id, memory_key, value_json, category, source, status, confidence, created_at, updated_at
+            FROM semantic_memory
+            WHERE blago_user_id = ?
+        """
+        parameters: list[Any] = [blago_user_id]
+        if not include_inactive:
+            query += " AND status IN ('confirmed', 'candidate')" if include_candidates else " AND status = 'confirmed'"
+        query += " ORDER BY updated_at DESC, id DESC"
+        with self._connect() as connection:
+            rows = connection.execute(query, parameters).fetchall()
+        return tuple(
+            SemanticMemoryRecord(
+                record_id=str(row["id"]),
+                key=str(row["memory_key"]),
+                value=json.loads(str(row["value_json"])),
+                category=str(row["category"]),
+                source=str(row["source"]),
+                status=str(row["status"]),
+                confidence=float(row["confidence"]),
+                created_at=str(row["created_at"]),
+                updated_at=str(row["updated_at"]),
+            )
+            for row in rows
+        )
+
+    def upsert_semantic_memory(
+        self,
+        blago_user_id: str,
+        key: str,
+        value: Any,
+        category: str,
+        source: str,
+        status: str,
+        confidence: float,
+    ) -> SemanticMemoryRecord:
+        now = _utc_now()
+        encoded = json.dumps(value, ensure_ascii=False)
+        with self._locked_transaction() as connection:
+            current = connection.execute(
+                """
+                SELECT id, value_json, category, source, status, confidence, created_at, updated_at
+                FROM semantic_memory
+                WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')
+                ORDER BY updated_at DESC, id DESC LIMIT 1
+                """,
+                (blago_user_id, key),
+            ).fetchone()
+            if current is not None and current["value_json"] == encoded and current["status"] == status:
+                return _semantic_record_from_row(current, key=key)
+            supersedes_id = str(current["id"]) if current is not None else None
+            if current is not None:
+                connection.execute(
+                    "UPDATE semantic_memory SET status = 'superseded', updated_at = ? WHERE id = ?",
+                    (now, supersedes_id),
+                )
+            record_id = str(uuid4())
+            connection.execute(
+                """
+                INSERT INTO semantic_memory (
+                    id, blago_user_id, memory_key, value_json, category, source, status,
+                    confidence, created_at, updated_at, supersedes_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (record_id, blago_user_id, key, encoded, category, source, status, confidence, now, now, supersedes_id),
+            )
+        return SemanticMemoryRecord(record_id, key, value, category, source, status, confidence, now, now)
+
+    def delete_semantic_memory(self, blago_user_id: str, key: str) -> bool:
+        with self._locked_transaction() as connection:
+            cursor = connection.execute(
+                """
+                UPDATE semantic_memory SET status = 'deleted', updated_at = ?
+                WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')
+                """,
+                (_utc_now(), blago_user_id, key),
+            )
+            return cursor.rowcount > 0
 
     def set_memory(self, blago_user_id: str, key: str, value: Any) -> None:
         with self._locked_transaction() as connection:
@@ -410,6 +498,25 @@ class SQLiteBlagoStore:
                     FOREIGN KEY (source_event_id) REFERENCES events(id)
                 );
 
+                CREATE TABLE IF NOT EXISTS semantic_memory (
+                    id TEXT PRIMARY KEY,
+                    blago_user_id TEXT NOT NULL,
+                    memory_key TEXT NOT NULL,
+                    value_json TEXT NOT NULL,
+                    category TEXT NOT NULL,
+                    source TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    confidence REAL NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    supersedes_id TEXT,
+                    FOREIGN KEY (blago_user_id) REFERENCES users(blago_user_id),
+                    FOREIGN KEY (supersedes_id) REFERENCES semantic_memory(id)
+                );
+
+                CREATE INDEX IF NOT EXISTS idx_semantic_memory_user_key
+                    ON semantic_memory(blago_user_id, memory_key, updated_at);
+
                 CREATE TABLE IF NOT EXISTS dialogue_turns (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     blago_user_id TEXT NOT NULL,
@@ -486,15 +593,50 @@ class SQLiteUserMemoryStore(MemoryStore):
     def set(self, key: str, value: Any) -> None:
         self.store.set_memory(self.blago_user_id, key, value)
 
+    def semantic_records(self) -> tuple[SemanticMemoryRecord, ...]:
+        return self.store.all_semantic_memory(self.blago_user_id, include_candidates=True)
+
+    def save_semantic(self, record: SemanticMemoryRecord) -> None:
+        self.store.upsert_semantic_memory(
+            self.blago_user_id,
+            record.key,
+            record.value,
+            record.category,
+            record.source,
+            record.status,
+            record.confidence,
+        )
+
     def delete(self, key: str) -> bool:
-        return self.store.delete_memory(self.blago_user_id, key)
+        flat_deleted = self.store.delete_memory(self.blago_user_id, key)
+        semantic_deleted = self.store.delete_semantic_memory(self.blago_user_id, key)
+        return flat_deleted or semantic_deleted
 
     def clear(self) -> None:
         self.store.clear_memory(self.blago_user_id)
+        with self.store._locked_transaction() as connection:
+            connection.execute(
+                "UPDATE semantic_memory SET status = 'deleted', updated_at = ? WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')",
+                (_utc_now(), self.blago_user_id),
+            )
 
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _semantic_record_from_row(row: sqlite3.Row, key: str | None = None) -> SemanticMemoryRecord:
+    return SemanticMemoryRecord(
+        record_id=str(row["id"]),
+        key=key or str(row["memory_key"]),
+        value=json.loads(str(row["value_json"])),
+        category=str(row["category"]),
+        source=str(row["source"]),
+        status=str(row["status"]),
+        confidence=float(row["confidence"]),
+        created_at=str(row["created_at"]),
+        updated_at=str(row["updated_at"]),
+    )
 
 
 def _ensure_column(connection: sqlite3.Connection, table: str, column: str, definition: str) -> None:

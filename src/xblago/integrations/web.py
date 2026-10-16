@@ -430,7 +430,32 @@ class WebApp:
                     "INSERT INTO memory_facts (blago_user_id,key,value_json,source_event_id,updated_at) VALUES (?,?,?,?,?)",
                     (target_uid, key, memory["value_json"], None, memory["updated_at"]),
                 )
+            semantic_memories = db.execute(
+                """
+                SELECT id, memory_key, value_json, category, source, status, confidence, created_at, updated_at
+                FROM semantic_memory
+                WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')
+                """,
+                (telegram_uid,),
+            ).fetchall()
+            for memory in semantic_memories:
+                key = str(memory["memory_key"])
+                if db.execute(
+                    "SELECT 1 FROM semantic_memory WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')",
+                    (target_uid, key),
+                ).fetchone():
+                    key = "telegram." + key
+                db.execute(
+                    """
+                    INSERT INTO semantic_memory (
+                        id, blago_user_id, memory_key, value_json, category, source, status,
+                        confidence, created_at, updated_at, supersedes_id
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)
+                    """,
+                    (str(uuid4()), target_uid, key, memory["value_json"], memory["category"], memory["source"], memory["status"], memory["confidence"], memory["created_at"], memory["updated_at"]),
+                )
             db.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (telegram_uid,))
+            db.execute("UPDATE semantic_memory SET status = 'deleted', updated_at = ? WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')", (_iso(), telegram_uid))
             db.execute(
                 "UPDATE channel_links SET blago_user_id = ? WHERE channel = 'telegram' AND blago_user_id = ?",
                 (target_uid, telegram_uid),
@@ -1241,7 +1266,27 @@ class BlagoWebHandler(TelegramWebhookHandler):
                 raise ApiError(400, "Message must contain 1-4000 characters")
             self._json({"reply": app.chat(uid, message.strip())})
         elif path == "/api/v1/memory" and method == "GET":
-            self._json({"facts": app.store.all_memory(uid)})
+            self._json({
+                "facts": app.store.all_memory(uid),
+                "records": [
+                    {
+                        "id": record.record_id,
+                        "key": record.key,
+                        "value": record.value,
+                        "category": record.category,
+                        "source": record.source,
+                        "status": record.status,
+                        "confidence": record.confidence,
+                        "created_at": record.created_at,
+                        "updated_at": record.updated_at,
+                    }
+                    for record in app.store.all_semantic_memory(uid, include_candidates=True)
+                ],
+            })
+        elif path == "/api/v1/memory" and method == "DELETE":
+            body = self._body()
+            key = _required_text(body.get("key"), "Memory key", 1, 80)
+            self._json({"deleted": app.store.memory_for_user(uid).delete(key)})
         elif path == "/api/v1/analytics/me" and method == "GET":
             self._json({"analytics": app.analytics(uid)})
         elif path == "/api/v1/analytics/community" and method == "GET":
