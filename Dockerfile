@@ -6,7 +6,7 @@ ENV PYTHONPATH=/app/src
 WORKDIR /app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates \
+    && apt-get install -y --no-install-recommends ca-certificates git git-lfs \
     && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml README.md ./
