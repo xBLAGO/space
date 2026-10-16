@@ -12,6 +12,7 @@ class LlmConfig:
     base_url: str
     timeout_seconds: float
     max_tokens: int = 384
+    thinking: str = "auto"
 
     @property
     def is_enabled(self) -> bool:
@@ -32,6 +33,10 @@ def load_llm_config() -> LlmConfig:
     base_url = os.getenv("XBLAGO_LLM_BASE_URL", default_base_url).rstrip("/")
     timeout_seconds = _float_from_env("XBLAGO_LLM_TIMEOUT_SECONDS", 30.0)
     max_tokens = _int_from_env("XBLAGO_LLM_MAX_TOKENS", 384, minimum=1, maximum=2048)
+    thinking = _thinking_from_env(
+        "XBLAGO_LLM_THINKING",
+        default="off" if provider in {"hf", "huggingface", "huggingface-inference"} else "auto",
+    )
 
     return LlmConfig(
         provider=provider,
@@ -40,6 +45,7 @@ def load_llm_config() -> LlmConfig:
         base_url=base_url,
         timeout_seconds=timeout_seconds,
         max_tokens=max_tokens,
+        thinking=thinking,
     )
 
 
@@ -63,3 +69,8 @@ def _int_from_env(name: str, default: int, minimum: int, maximum: int) -> int:
     except ValueError:
         return default
     return max(minimum, min(parsed, maximum))
+
+
+def _thinking_from_env(name: str, default: str) -> str:
+    value = (os.getenv(name) or default).strip().lower()
+    return value if value in {"auto", "on", "off"} else default

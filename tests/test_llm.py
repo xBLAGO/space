@@ -98,6 +98,7 @@ class LocalPlanningProviderTest(unittest.TestCase):
         self.assertEqual(config.base_url, "https://router.huggingface.co/v1")
         self.assertEqual(config.model, "Qwen/Qwen3-14B:cheapest")
         self.assertEqual(config.api_key, "hf_test_token")
+        self.assertEqual(config.thinking, "off")
         self.assertIsInstance(build_chat_provider(config), OpenAICompatibleProvider)
 
     def test_missing_provider_token_builds_non_networking_fallback(self) -> None:
@@ -146,6 +147,79 @@ class LocalPlanningProviderTest(unittest.TestCase):
         self.assertEqual(payload["max_tokens"], 384)
         self.assertFalse(payload["stream"])
         self.assertEqual(urlopen.call_count, 1)
+
+    def test_null_content_is_rejected_without_stringifying_none(self) -> None:
+        result = self._provider_response({"content": None, "reasoning_content": "internal reasoning"})
+
+        with self.assertRaises(LlmProviderError) as raised:
+            result.generate(ChatContext(PersonalAssistantAgent.profile, "Развёрнутый вопрос", {}, ()))
+
+        self.assertNotIn("None", str(raised.exception))
+        self.assertIn("usable answer", str(raised.exception))
+
+    def test_empty_content_is_rejected(self) -> None:
+        result = self._provider_response({"content": "   "})
+
+        with self.assertRaises(LlmProviderError):
+            result.generate(ChatContext(PersonalAssistantAgent.profile, "Вопрос", {}, ()))
+
+    def test_reasoning_only_response_with_length_finish_is_rejected(self) -> None:
+        result = self._provider_response(
+            {"content": None, "reasoning_content": "internal reasoning"},
+            finish_reason="length",
+            usage={"prompt_tokens": 210, "completion_tokens": 384, "total_tokens": 594},
+        )
+
+        with self.assertRaises(LlmProviderError):
+            result.generate(ChatContext(PersonalAssistantAgent.profile, "Сложный вопрос", {}, ()))
+
+    def test_successful_completion_returns_only_content(self) -> None:
+        result = self._provider_response(
+            {"content": "  Готовый ответ  ", "reasoning_content": "internal reasoning"},
+            finish_reason="stop",
+            usage={"prompt_tokens": 20, "completion_tokens": 8, "total_tokens": 28},
+        )
+
+        self.assertEqual(result.generate(ChatContext(PersonalAssistantAgent.profile, "Вопрос", {}, ())), "Готовый ответ")
+
+    def test_hugging_face_thinking_mode_is_configurable(self) -> None:
+        config = LlmConfig(
+            provider="hf",
+            model="Qwen/Qwen3-14B:cheapest",
+            api_key="hf_test_token",
+            base_url="https://router.huggingface.co/v1",
+            timeout_seconds=7.0,
+            thinking="off",
+        )
+        provider = OpenAICompatibleProvider(config)
+        response = unittest.mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = json.dumps(
+            {"choices": [{"message": {"content": "Ответ"}, "finish_reason": "stop"}]}
+        ).encode()
+
+        with unittest.mock.patch("xblago.core.llm.urllib.request.urlopen", return_value=response) as urlopen:
+            provider.generate(ChatContext(PersonalAssistantAgent.profile, "Вопрос", {}, ()))
+
+        payload = json.loads(urlopen.call_args.args[0].data.decode())
+        self.assertEqual(payload["chat_template_kwargs"], {"enable_thinking": False})
+
+    def _provider_response(
+        self,
+        message: dict[str, object],
+        finish_reason: str = "stop",
+        usage: dict[str, int] | None = None,
+    ) -> OpenAICompatibleProvider:
+        config = LlmConfig("hf", "Qwen/Qwen3-14B:cheapest", "hf_test_token", "https://router.huggingface.co/v1", 7.0)
+        provider = OpenAICompatibleProvider(config)
+        response = unittest.mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = json.dumps(
+            {"choices": [{"message": message, "finish_reason": finish_reason}], "usage": usage or {}}
+        ).encode()
+        self.addCleanup(unittest.mock.patch.stopall)
+        unittest.mock.patch("xblago.core.llm.urllib.request.urlopen", return_value=response).start()
+        return provider
 
     def test_provider_errors_are_sanitized_and_never_retried(self) -> None:
         config = LlmConfig("hf", "Qwen/Qwen3-14B:cheapest", "hf_secret", "https://router.huggingface.co/v1", 7.0)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import urllib.error
 import urllib.request
 from abc import ABC, abstractmethod
@@ -11,6 +12,9 @@ from xblago.core.config import LlmConfig
 from xblago.core.memory import relevant_memory
 from xblago.core.messages import ConversationTurn
 from xblago.core.profile import AgentProfile
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -82,6 +86,8 @@ class OpenAICompatibleProvider(ChatProvider):
             "max_tokens": self.config.max_tokens,
             "stream": False,
         }
+        if self.config.provider in {"hf", "huggingface", "huggingface-inference"} and self.config.thinking != "auto":
+            payload["chat_template_kwargs"] = {"enable_thinking": self.config.thinking == "on"}
         request = urllib.request.Request(
             f"{self.config.base_url}/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
@@ -104,12 +110,7 @@ class OpenAICompatibleProvider(ChatProvider):
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
             raise LlmProviderError("The language model returned an invalid response.") from exc
 
-        try:
-            content = body["choices"][0]["message"]["content"]
-        except (KeyError, IndexError, TypeError) as exc:
-            raise LlmProviderError("The language model returned an unusable response.") from exc
-
-        return str(content).strip()
+        return _extract_completion_text(body)
 
     def _messages(self, context: ChatContext) -> list[dict[str, str]]:
         messages = [{"role": "system", "content": self._system_prompt(context)}]
@@ -168,6 +169,52 @@ def _provider_http_error(status: int) -> LlmProviderError:
     }
     message = messages.get(status, "The language model request was rejected by the provider.")
     return LlmProviderError(message, status=status, retryable=status == 429)
+
+
+def _extract_completion_text(body: Any) -> str:
+    """Validate a completion without exposing provider payloads or reasoning."""
+    if not isinstance(body, dict):
+        raise LlmProviderError("The language model returned an unusable response. Please try again.")
+
+    choices = body.get("choices")
+    choice = choices[0] if isinstance(choices, list) and choices else None
+    message = choice.get("message") if isinstance(choice, dict) else None
+    content = message.get("content") if isinstance(message, dict) else None
+    finish_reason = choice.get("finish_reason") if isinstance(choice, dict) else None
+    usage = body.get("usage")
+    usage = usage if isinstance(usage, dict) else {}
+    completion_details = usage.get("completion_tokens_details")
+    completion_details = completion_details if isinstance(completion_details, dict) else {}
+
+    logger.info(
+        "LLM completion response: content_type=%s finish_reason=%s prompt_tokens=%s "
+        "completion_tokens=%s total_tokens=%s",
+        type(content).__name__,
+        _safe_diagnostic_value(finish_reason),
+        _safe_diagnostic_value(usage.get("prompt_tokens")),
+        _safe_diagnostic_value(usage.get("completion_tokens")),
+        _safe_diagnostic_value(usage.get("total_tokens")),
+    )
+    logger.info(
+        "LLM reasoning diagnostics: reasoning_tokens=%s",
+        _safe_diagnostic_value(completion_details.get("reasoning_tokens")),
+    )
+
+    if not isinstance(content, str) or not content.strip():
+        # reasoning_content is deliberately ignored: it is internal model reasoning,
+        # not a user-facing answer, and must never be used as a fallback response.
+        raise LlmProviderError("The language model did not return a usable answer. Please try again.")
+
+    return content.strip()
+
+
+def _safe_diagnostic_value(value: Any) -> str | int | float | None:
+    """Keep diagnostics scalar and bounded; never log arbitrary provider values."""
+    if value is None or isinstance(value, (int, float)):
+        return value
+    if isinstance(value, str):
+        return value[:32]
+    return type(value).__name__
 
 
 def _compact_memory(memory: dict[str, Any]) -> str:

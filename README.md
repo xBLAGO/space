@@ -121,6 +121,7 @@ export XBLAGO_LLM_MODEL='Qwen/Qwen3-14B:cheapest'
 # export XBLAGO_LLM_BASE_URL=https://router.huggingface.co/v1
 # export XBLAGO_LLM_TIMEOUT_SECONDS=30
 # export XBLAGO_LLM_MAX_TOKENS=384
+# export XBLAGO_LLM_THINKING=off  # off, on, or auto; defaults to off for HF/Qwen3
 ```
 
 The default test model is Qwen3-14B with HF's `:cheapest` routing policy. The
@@ -129,6 +130,9 @@ router supports OpenAI-compatible `chat/completions`; BLAGO sends `system`,
 and `stream=false`. The client makes one request per user message and does not
 retry automatically. Authentication, credit, rate-limit, timeout, and unavailable
 model errors are sanitized and never include the token or provider response body.
+For Qwen3, `XBLAGO_LLM_THINKING=off` avoids spending a small response budget on
+hidden reasoning before a natural dialogue answer is formed. Reasoning metadata is
+never returned to users.
 Use `XBLAGO_LLM_PROVIDER=local` to avoid external requests entirely.
 
 ## Example

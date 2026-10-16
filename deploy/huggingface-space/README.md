@@ -22,6 +22,7 @@ Required Space secrets:
 - optional `XBLAGO_LLM_BASE_URL`
 - optional `XBLAGO_LLM_TIMEOUT_SECONDS`
 - optional `XBLAGO_LLM_MAX_TOKENS`
+- optional `XBLAGO_LLM_THINKING` (`off`, `on`, or `auto`; defaults to `off` for Hugging Face/Qwen3)
 
 For Hugging Face Inference Providers, set `XBLAGO_LLM_PROVIDER=hf`,
 `HF_TOKEN` (or `XBLAGO_LLM_API_KEY`), and `XBLAGO_LLM_MODEL=Qwen/Qwen3-14B:cheapest`.
