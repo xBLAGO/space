@@ -104,10 +104,12 @@ class OpenAICompatibleProvider(ChatProvider):
         except urllib.error.HTTPError as exc:
             raise _provider_http_error(exc.code) from exc
         except (urllib.error.URLError, TimeoutError) as exc:
+            logger.warning("LLM provider transport error: category=unavailable")
             raise LlmProviderError(
                 "The language model is temporarily unavailable. Please try again later."
             ) from exc
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            logger.warning("LLM provider response error: category=invalid_response")
             raise LlmProviderError("The language model returned an invalid response.") from exc
 
         return _extract_completion_text(body)
@@ -168,7 +170,26 @@ def _provider_http_error(status: int) -> LlmProviderError:
         404: "The configured language model is unavailable or does not support chat completions.",
     }
     message = messages.get(status, "The language model request was rejected by the provider.")
+    category = _http_error_category(status)
+    logger.warning("LLM provider HTTP error: status=%s category=%s", status, category)
     return LlmProviderError(message, status=status, retryable=status == 429)
+
+
+def _http_error_category(status: int) -> str:
+    categories = {
+        400: "invalid_request",
+        401: "authentication",
+        402: "billing_or_credits",
+        404: "not_found",
+        429: "rate_limit",
+    }
+    if status in categories:
+        return categories[status]
+    if 400 <= status < 500:
+        return "client_error"
+    if 500 <= status < 600:
+        return "provider_server_error"
+    return "unexpected_http_status"
 
 
 def _extract_completion_text(body: Any) -> str:

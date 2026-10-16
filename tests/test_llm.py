@@ -146,7 +146,54 @@ class LocalPlanningProviderTest(unittest.TestCase):
         self.assertEqual(payload["messages"][-1], {"role": "user", "content": "Привет"})
         self.assertEqual(payload["max_tokens"], 384)
         self.assertFalse(payload["stream"])
+        self.assertNotIn("chat_template_kwargs", payload)
         self.assertEqual(urlopen.call_count, 1)
+
+    def test_http_errors_log_only_status_and_category_without_retry(self) -> None:
+        config = LlmConfig("hf", "Qwen/Qwen3-14B:cheapest", "hf_secret", "https://router.huggingface.co/v1", 7.0)
+        provider = OpenAICompatibleProvider(config)
+        context = ChatContext(PersonalAssistantAgent.profile, "личное сообщение", {}, ())
+
+        cases = ((400, "invalid_request"), (401, "authentication"), (402, "billing_or_credits"),
+                 (404, "not_found"), (429, "rate_limit"), (503, "provider_server_error"))
+        for status, category in cases:
+            error = urllib.error.HTTPError(
+                "https://router.huggingface.co/v1/chat/completions",
+                status,
+                "private provider body",
+                {},
+                None,
+            )
+            with self.subTest(status=status), self.assertLogs("xblago.core.llm", level="WARNING") as logs:
+                with unittest.mock.patch("xblago.core.llm.urllib.request.urlopen", side_effect=error) as urlopen:
+                    with self.assertRaises(LlmProviderError) as raised:
+                        provider.generate(context)
+
+            self.assertEqual(urlopen.call_count, 1)
+            diagnostic = "\n".join(logs.output)
+            self.assertIn(f"status={status}", diagnostic)
+            self.assertIn(f"category={category}", diagnostic)
+            self.assertNotIn("hf_secret", diagnostic)
+            self.assertNotIn("private provider body", diagnostic)
+            self.assertNotIn("личное сообщение", diagnostic)
+            self.assertEqual(raised.exception.status, status)
+
+    def test_thinking_auto_omits_provider_specific_parameter(self) -> None:
+        config = LlmConfig(
+            "hf", "Qwen/Qwen3-14B:nscale", "hf_test_token", "https://router.huggingface.co/v1", 7.0, thinking="auto"
+        )
+        provider = OpenAICompatibleProvider(config)
+        response = unittest.mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = json.dumps(
+            {"choices": [{"message": {"content": "Ответ"}, "finish_reason": "stop"}]}
+        ).encode()
+
+        with unittest.mock.patch("xblago.core.llm.urllib.request.urlopen", return_value=response) as urlopen:
+            provider.generate(ChatContext(PersonalAssistantAgent.profile, "Вопрос", {}, ()))
+
+        payload = json.loads(urlopen.call_args.args[0].data.decode())
+        self.assertNotIn("chat_template_kwargs", payload)
 
     def test_null_content_is_rejected_without_stringifying_none(self) -> None:
         result = self._provider_response({"content": None, "reasoning_content": "internal reasoning"})
