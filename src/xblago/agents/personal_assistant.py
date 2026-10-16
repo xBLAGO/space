@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 import re
 
-from xblago.core.llm import ChatContext, ChatProvider, LocalPlanningProvider
+from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider
 from xblago.core.memory import MemoryStore
 from xblago.core.memory import is_sensitive_memory
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
@@ -184,14 +184,18 @@ class PersonalAssistantAgent:
         return "\n".join(lines)
 
     def _generate_assistant_response(self, text: str) -> str:
-        return self.chat_provider.generate(
-            ChatContext(
-                agent_profile=self.profile,
-                user_text=text,
-                memory=self.memory.all(),
-                history=self.history(),
-            )
+        context = ChatContext(
+            agent_profile=self.profile,
+            user_text=text,
+            memory=self.memory.all(),
+            history=self.history(),
         )
+        try:
+            return self.chat_provider.generate(context)
+        except (LlmProviderError, TimeoutError) as exc:
+            # One provider attempt only; local fallback avoids Telegram retry loops and extra spend.
+            language = _language_for_text(text)
+            return _text(language, "provider_unavailable")
 
     def _remember_from_conversation(self, text: str) -> None:
         """Capture only explicit, stable, low-risk personal facts."""
@@ -234,6 +238,7 @@ def _text(language: str, key: str) -> str:
             "empty_history": "There is no saved conversation context in this session yet.",
             "history_title": "Current conversation:",
             "sensitive_memory_rejected": "I won't save passwords, tokens, card details, or other secrets.",
+            "provider_unavailable": "I can't reach the language model right now, but I'm still here. Please try again later.",
         },
         "ru": {
             "goodbye": "До встречи. Постоянная память сохранена, сессионный контекст завершен.",
@@ -250,6 +255,7 @@ def _text(language: str, key: str) -> str:
             "empty_history": "В этой сессии пока нет сохраненного хода диалога.",
             "history_title": "Текущий диалог:",
             "sensitive_memory_rejected": "Я не буду сохранять пароли, токены, данные карт и другие секреты.",
+            "provider_unavailable": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
         },
     }
     return texts[language][key]

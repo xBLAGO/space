@@ -27,6 +27,15 @@ class ChatProvider(ABC):
         raise NotImplementedError
 
 
+class LlmProviderError(RuntimeError):
+    """Safe, user-facing provider failure without response bodies or secrets."""
+
+    def __init__(self, message: str, status: int | None = None, retryable: bool = False) -> None:
+        super().__init__(message)
+        self.status = status
+        self.retryable = retryable
+
+
 class LocalPlanningProvider(ChatProvider):
     """Friendly deterministic fallback that works without network access."""
 
@@ -57,7 +66,7 @@ class OpenAICompatibleProvider(ChatProvider):
 
     def __init__(self, config: LlmConfig) -> None:
         if not config.api_key:
-            raise ValueError("XBLAGO_LLM_API_KEY or OPENAI_API_KEY is required for remote LLM providers.")
+            raise ValueError("XBLAGO_LLM_API_KEY or the provider token environment variable is required.")
 
         self.config = config
 
@@ -66,6 +75,8 @@ class OpenAICompatibleProvider(ChatProvider):
             "model": self.config.model,
             "messages": self._messages(context),
             "temperature": 0.4,
+            "max_tokens": self.config.max_tokens,
+            "stream": False,
         }
         request = urllib.request.Request(
             f"{self.config.base_url}/chat/completions",
@@ -80,13 +91,19 @@ class OpenAICompatibleProvider(ChatProvider):
         try:
             with urllib.request.urlopen(request, timeout=self.config.timeout_seconds) as response:
                 body = json.loads(response.read().decode("utf-8"))
-        except urllib.error.URLError as exc:
-            raise RuntimeError(f"LLM request failed: {exc}") from exc
+        except urllib.error.HTTPError as exc:
+            raise _provider_http_error(exc.code) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            raise LlmProviderError(
+                "The language model is temporarily unavailable. Please try again later."
+            ) from exc
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise LlmProviderError("The language model returned an invalid response.") from exc
 
         try:
             content = body["choices"][0]["message"]["content"]
         except (KeyError, IndexError, TypeError) as exc:
-            raise RuntimeError("LLM response did not include assistant content.") from exc
+            raise LlmProviderError("The language model returned an unusable response.") from exc
 
         return str(content).strip()
 
@@ -122,10 +139,21 @@ def build_chat_provider(config: LlmConfig) -> ChatProvider:
     if config.provider == "local":
         return LocalPlanningProvider()
 
-    if config.provider in {"openai", "openai-compatible"}:
+    if config.provider in {"openai", "openai-compatible", "hf", "huggingface", "huggingface-inference"}:
         return OpenAICompatibleProvider(config)
 
     raise ValueError(f"Unsupported LLM provider: {config.provider}")
+
+
+def _provider_http_error(status: int) -> LlmProviderError:
+    messages = {
+        401: "The language model credentials were rejected. Check the provider token.",
+        402: "The language model account has no available inference credits.",
+        429: "The language model is rate-limited. Please try again later.",
+        404: "The configured language model is unavailable or does not support chat completions.",
+    }
+    message = messages.get(status, "The language model request was rejected by the provider.")
+    return LlmProviderError(message, status=status, retryable=status == 429)
 
 
 def _compact_memory(memory: dict[str, Any]) -> str:

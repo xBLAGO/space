@@ -21,6 +21,14 @@ Required Space secrets:
 - optional `XBLAGO_LLM_API_KEY`
 - optional `XBLAGO_LLM_BASE_URL`
 - optional `XBLAGO_LLM_TIMEOUT_SECONDS`
+- optional `XBLAGO_LLM_MAX_TOKENS`
+
+For Hugging Face Inference Providers, set `XBLAGO_LLM_PROVIDER=hf`,
+`HF_TOKEN` (or `XBLAGO_LLM_API_KEY`), and `XBLAGO_LLM_MODEL=Qwen/Qwen3-14B:cheapest`.
+The application uses the OpenAI-compatible router at
+`https://router.huggingface.co/v1` by default. Keep the provider disabled (`local`)
+until the token and model have been tested; no deployment or secret is changed by
+the repository configuration.
 - optional `TELEGRAM_DELIVERY_MODE`
 - optional `TELEGRAM_WEBHOOK_SECRET`
 - optional `TELEGRAM_WEBHOOK_URL`

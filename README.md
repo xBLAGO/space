@@ -107,6 +107,30 @@ export XBLAGO_LLM_BASE_URL=https://api.openai.com/v1
 export XBLAGO_LLM_TIMEOUT_SECONDS=30
 ```
 
+### Hugging Face Inference Providers
+
+BLAGO can use Hugging Face's OpenAI-compatible chat endpoint without changing the
+Telegram, SQLite, `blago_user_id`, memory, or privacy layers. Configure it locally
+or as a Space Secret (the repository never contains the token):
+
+```bash
+export XBLAGO_LLM_PROVIDER=hf
+export HF_TOKEN=hf_...
+export XBLAGO_LLM_MODEL='Qwen/Qwen3-14B:cheapest'
+# Optional overrides:
+# export XBLAGO_LLM_BASE_URL=https://router.huggingface.co/v1
+# export XBLAGO_LLM_TIMEOUT_SECONDS=30
+# export XBLAGO_LLM_MAX_TOKENS=384
+```
+
+The default test model is Qwen3-14B with HF's `:cheapest` routing policy. The
+router supports OpenAI-compatible `chat/completions`; BLAGO sends `system`,
+`user`, and `assistant` history, `temperature=0.4`, `max_tokens` (capped at 2048),
+and `stream=false`. The client makes one request per user message and does not
+retry automatically. Authentication, credit, rate-limit, timeout, and unavailable
+model errors are sanitized and never include the token or provider response body.
+Use `XBLAGO_LLM_PROVIDER=local` to avoid external requests entirely.
+
 ## Example
 
 ```text
