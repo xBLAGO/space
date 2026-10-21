@@ -11,7 +11,7 @@ from threading import RLock
 from typing import Any, Iterator
 from uuid import uuid4
 
-from xblago.core.memory import MemoryStore, SemanticMemoryRecord
+from xblago.core.memory import MemoryStore, SemanticMemoryRecord, is_sensitive_memory
 from xblago.core.messages import ConversationTurn, MessageRole
 
 
@@ -30,6 +30,7 @@ class SQLiteBlagoStore:
         self.path = path
         self.legacy_memory_dir = legacy_memory_dir
         self._lock = RLock()
+        self.conversation_lock = RLock()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._ensure_schema()
 
@@ -123,6 +124,8 @@ class SQLiteBlagoStore:
         now = _utc_now()
         with self._locked_transaction() as connection:
             for key, value in data.items():
+                if is_sensitive_memory(str(key), value):
+                    continue
                 exists = connection.execute(
                     "SELECT 1 FROM memory_facts WHERE blago_user_id = ? AND key = ?",
                     (blago_user_id, str(key)),
@@ -206,6 +209,14 @@ class SQLiteBlagoStore:
         status: str,
         confidence: float,
     ) -> SemanticMemoryRecord:
+        if (not isinstance(key, str) or not isinstance(value, str)
+                or not 1 <= len(key) <= 64 or not 1 <= len(value) <= 240
+                or category not in {"fact", "interest", "preference", "skill", "goal", "need"}
+                or status not in {"confirmed", "candidate"}
+                or (category == "need" and status != "candidate")
+                or isinstance(confidence, bool) or not isinstance(confidence, (int, float))
+                or not 0.8 <= confidence <= 1 or is_sensitive_memory(key, value)):
+            raise ValueError("Invalid semantic memory")
         now = _utc_now()
         encoded = json.dumps(value, ensure_ascii=False)
         with self._locked_transaction() as connection:
@@ -226,6 +237,7 @@ class SQLiteBlagoStore:
                     "UPDATE semantic_memory SET status = 'superseded', updated_at = ? WHERE id = ?",
                     (now, supersedes_id),
                 )
+            connection.execute("DELETE FROM memory_facts WHERE blago_user_id = ? AND key = ?", (blago_user_id, key))
             record_id = str(uuid4())
             connection.execute(
                 """
@@ -239,18 +251,16 @@ class SQLiteBlagoStore:
         return SemanticMemoryRecord(record_id, key, value, category, source, status, confidence, now, now)
 
     def delete_semantic_memory(self, blago_user_id: str, key: str) -> bool:
-        with self._locked_transaction() as connection:
-            cursor = connection.execute(
-                """
-                UPDATE semantic_memory SET status = 'deleted', updated_at = ?
-                WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')
-                """,
-                (_utc_now(), blago_user_id, key),
-            )
-            return cursor.rowcount > 0
+        return self.delete_memory(blago_user_id, key)
 
     def set_memory(self, blago_user_id: str, key: str, value: Any) -> None:
+        if is_sensitive_memory(key, value):
+            raise ValueError("Sensitive memory is not supported")
         with self._locked_transaction() as connection:
+            connection.execute(
+                "UPDATE semantic_memory SET status = 'superseded', updated_at = ? WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')",
+                (_utc_now(), blago_user_id, key),
+            )
             connection.execute(
                 """
                 INSERT INTO memory_facts (blago_user_id, key, value_json, source_event_id, updated_at)
@@ -268,11 +278,16 @@ class SQLiteBlagoStore:
                 "DELETE FROM memory_facts WHERE blago_user_id = ? AND key = ?",
                 (blago_user_id, key),
             )
-            return cursor.rowcount > 0
+            semantic = connection.execute(
+                "DELETE FROM semantic_memory WHERE blago_user_id = ? AND memory_key = ?",
+                (blago_user_id, key),
+            )
+            return cursor.rowcount > 0 or semantic.rowcount > 0
 
     def clear_memory(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
             connection.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (blago_user_id,))
+            connection.execute("DELETE FROM semantic_memory WHERE blago_user_id = ?", (blago_user_id,))
 
     def recent_history(self, blago_user_id: str, limit: int) -> tuple[ConversationTurn, ...]:
         with self._connect() as connection:
@@ -608,17 +623,10 @@ class SQLiteUserMemoryStore(MemoryStore):
         )
 
     def delete(self, key: str) -> bool:
-        flat_deleted = self.store.delete_memory(self.blago_user_id, key)
-        semantic_deleted = self.store.delete_semantic_memory(self.blago_user_id, key)
-        return flat_deleted or semantic_deleted
+        return self.store.delete_memory(self.blago_user_id, key)
 
     def clear(self) -> None:
         self.store.clear_memory(self.blago_user_id)
-        with self.store._locked_transaction() as connection:
-            connection.execute(
-                "UPDATE semantic_memory SET status = 'deleted', updated_at = ? WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')",
-                (_utc_now(), self.blago_user_id),
-            )
 
 
 def _utc_now() -> str:

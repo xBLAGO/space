@@ -188,7 +188,7 @@ class TelegramBotTest(unittest.TestCase):
             payload = json.loads(handler.wfile.getvalue().decode("utf-8"))
             self.assertIn("не получается связаться", payload["replies"][0]["text"])
             uid = bot.store.resolve_telegram_user(TelegramIdentity(telegram_user_id=101, chat_id=1001, chat_type="private"))
-            self.assertEqual(bot.store.all_memory(uid)["name"], "Анна")
+            self.assertEqual(bot.store.all_memory(uid), {})
             self.assertEqual(len(bot.store.recent_history(uid, 12)), 2)
 
     def test_llm_fallback_does_not_mask_history_write_failure(self) -> None:

@@ -128,7 +128,7 @@ class TelegramBot:
             self.api.send_message(int(reply["chat_id"]), str(reply["text"]))
 
     def replies_for_update(self, update: dict[str, Any]) -> list[dict[str, str | int]]:
-        with self._lock:
+        with self._lock, self.store.conversation_lock:
             message = update.get("message")
             if not isinstance(message, dict):
                 return []

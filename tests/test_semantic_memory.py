@@ -74,17 +74,17 @@ class SemanticMemoryTest(unittest.TestCase):
     def test_extracts_only_direct_self_assertions(self) -> None:
         provider = ScriptedProvider([{
             "items": [
-                {"key": "interest:books", "value": "научная фантастика", "category": "interest", "claim": "assertion", "subject": "self", "confidence": 0.95},
+                {"key": "interest:books", "value": "научная фантастика", "evidence": "Мне близка научная фантастика", "category": "interest", "claim": "assertion", "subject": "self", "confidence": 0.95},
                 {"key": "city", "value": "Берлин", "category": "fact", "claim": "negation", "subject": "self", "confidence": 0.99},
                 {"key": "city", "value": "Москва", "category": "fact", "claim": "assertion", "subject": "other", "confidence": 0.99},
                 {"key": "goal:learn", "value": "французский", "category": "goal", "claim": "hypothesis", "subject": "self", "confidence": 0.95},
-                {"key": "need:childcare", "value": "присмотр", "category": "need", "claim": "assertion", "subject": "self", "confidence": 0.9},
+                {"key": "need:childcare", "value": "присмотр", "evidence": "Мне нужен присмотр", "category": "need", "claim": "assertion", "subject": "self", "confidence": 0.9},
             ]
         }])
         memory = SemanticInMemoryStore()
         agent = PersonalAssistantAgent(memory, chat_provider=provider, memory_extractor=SemanticMemoryExtractor(provider))
 
-        response = agent.respond(UserMessage("Научная фантастика мне особенно близка; возможно, мне нужна помощь с присмотром"))
+        response = agent.respond(UserMessage("Мне близка научная фантастика; Мне нужен присмотр"))
 
         self.assertEqual(response.text, "Ответ без заявления о сохранении памяти")
         self.assertEqual(memory.all(), {"interest:books": "научная фантастика"})
@@ -92,7 +92,7 @@ class SemanticMemoryTest(unittest.TestCase):
         self.assertEqual(next(item for item in memory.semantic_records() if item.category == "need").status, "candidate")
         self.assertEqual(len(provider.calls), 2)
 
-    def test_correction_supersedes_previous_value_without_duplicate(self) -> None:
+    def test_local_correction_avoids_extra_extraction(self) -> None:
         provider = ScriptedProvider([
             {"items": [{"key": "city", "value": "Москва", "category": "fact", "claim": "assertion", "subject": "self", "confidence": 0.95}]},
             {"items": [{"key": "city", "value": "Берлин", "category": "fact", "claim": "assertion", "subject": "self", "confidence": 0.95}]},
@@ -100,12 +100,12 @@ class SemanticMemoryTest(unittest.TestCase):
         memory = SemanticInMemoryStore()
         agent = PersonalAssistantAgent(memory, chat_provider=provider, memory_extractor=SemanticMemoryExtractor(provider))
 
-        agent.respond(UserMessage("Я живу в Москве"))
-        agent.respond(UserMessage("Исправление: теперь я живу в Берлине"))
+        agent.respond(UserMessage("Мой город Москва"))
+        agent.respond(UserMessage("Исправление: мой город Берлин"))
 
         self.assertEqual(memory.all(), {"city": "Берлин"})
-        self.assertEqual(len([item for item in memory.records if item.status == "superseded"]), 1)
-        self.assertEqual(len(provider.calls), 4)
+        self.assertEqual(len(memory.records), 0)
+        self.assertEqual(len(provider.calls), 2)
 
     def test_sensitive_and_invalid_extraction_does_not_reach_memory(self) -> None:
         provider = ScriptedProvider([{

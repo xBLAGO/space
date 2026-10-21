@@ -34,7 +34,13 @@ class SemanticMemoryRecord:
 
 def is_sensitive_memory(key: str, value: Any) -> bool:
     text = f"{key} {value}".lower()
-    return any(term in text for term in SENSITIVE_MEMORY_TERMS)
+    return any(term in text for term in SENSITIVE_MEMORY_TERMS) or bool(re.search(
+        r"(?:\d[ -]?){13,19}|sk-[a-zA-Z0-9_-]{12,}|hf_[a-zA-Z0-9]{12,}|"
+        r"\b\d{6,12}:[a-zA-Z0-9_-]{20,}|-----BEGIN .*PRIVATE KEY|"
+        r"\b(?:iban|bic|swift|паспорт|снилс|инн|адрес|address|seed phrase|recovery phrase)\b|"
+        r"\b[А-Яа-яA-Za-z0-9._%+-]+@[А-Яа-яA-Za-z0-9.-]+\.[A-Za-z]{2,}\b|"
+        r"(?:\+7|\+1|8)[ ()-]*(?:\d[ ()-]*){10}", text, re.I,
+    ))
 
 
 def relevant_memory(memory: dict[str, Any], text: str, limit: int = 12) -> dict[str, Any]:
@@ -52,6 +58,8 @@ def relevant_memory(memory: dict[str, Any], text: str, limit: int = 12) -> dict[
     }
     ranked = []
     for key, value in memory.items():
+        if is_sensitive_memory(str(key), value):
+            continue
         haystack = f"{key} {value}".lower()
         score = sum(1 for word in words if word in haystack)
         score += sum(2 for word in aliases.get(str(key), set()) if word in words)
@@ -81,7 +89,8 @@ class MemoryStore(ABC):
         return ()
 
     def save_semantic(self, record: SemanticMemoryRecord) -> None:
-        self.set(record.key, record.value)
+        if record.status == "confirmed" and record.category != "need":
+            self.set(record.key, record.value)
 
     def delete_semantic(self, key: str) -> bool:
         return self.delete(key)

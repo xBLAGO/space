@@ -6,6 +6,7 @@ import re
 from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider, OpenAICompatibleProvider
 from xblago.core.memory import MemoryStore
 from xblago.core.memory import is_sensitive_memory
+from xblago.core.memory_policy import may_extract, memory_veto
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
 from xblago.core.profile import AgentProfile
 from xblago.core.routing import detect_intent
@@ -47,7 +48,10 @@ class PersonalAssistantAgent:
             else None
         )
         self._last_generation_succeeded = True
-        self._history: list[ConversationTurn] = list(initial_history[-history_limit:])
+        self._history: list[ConversationTurn] = [
+            ConversationTurn(role=t.role, text=_safe_history_text(t.text))
+            for t in initial_history[-history_limit:]
+        ]
 
     def welcome_message(self) -> str:
         return (
@@ -59,6 +63,10 @@ class PersonalAssistantAgent:
     def respond(self, message: UserMessage) -> AgentResponse:
         intent = detect_intent(message.text)
         language = _language_for_text(message.text)
+
+        if memory_veto(message.text):
+            reply = "Хорошо, не буду добавлять это в память." if language == "ru" else "Okay, I won't add this to memory."
+            return self._record_and_return(message, AgentResponse(reply))
 
         if intent.name == "exit":
             return self._record_and_return(
@@ -116,9 +124,11 @@ class PersonalAssistantAgent:
             )
 
         response = self._generate_assistant_response(message.text)
-        self._remember_from_conversation(message.text)
         if self._last_generation_succeeded:
-            self._extract_semantic_memory(message.text)
+            self._forget_denied_fact(message.text)
+        if self._last_generation_succeeded and may_extract(message.text):
+            if not self._remember_from_conversation(message.text):
+                self._extract_semantic_memory(message.text)
         return self._record_and_return(message, AgentResponse(response))
 
     def history(self) -> tuple[ConversationTurn, ...]:
@@ -128,7 +138,8 @@ class PersonalAssistantAgent:
         if language == "ru":
             return (
                 "Я умею:\n"
-                "- запоминать факты: `remember my timezone is Europe/Moscow`\n"
+                "- запоминать факты из разговора или командой: `запомни city = Москва`\n"
+                "- исправлять факты: `исправь city на Казань`\n"
                 "- забывать отдельный факт: `/forget timezone`\n"
                 "- показывать память: `/memory`\n"
                 "- показывать текущий диалог: `/history`\n"
@@ -183,11 +194,14 @@ class PersonalAssistantAgent:
                 if record.status == "confirmed"
             }
         )
-        if not facts:
+        candidates = [r for r in self.memory.semantic_records() if r.status == "candidate"]
+        if not facts and not candidates:
             return _text(language, "empty_memory")
 
         lines = [_text(language, "memory_title")]
         lines.extend(f"- {key}: {value}" for key, value in sorted(facts.items()))
+        label = "возможная потребность, не заявка" if language == "ru" else "possible need, no request created"
+        lines.extend(f"- {r.key}: {r.value} ({label})" for r in candidates)
         return "\n".join(lines)
 
     def _history_text(self, language: str) -> str:
@@ -203,25 +217,36 @@ class PersonalAssistantAgent:
     def _generate_assistant_response(self, text: str) -> str:
         context = ChatContext(
             agent_profile=self.profile,
-            user_text=text,
+            user_text=_safe_history_text(text),
             memory=self.memory.all(),
             history=self.history(),
         )
         try:
             response = self.chat_provider.generate(context)
+            if not isinstance(response, str) or not response.strip() or len(response) > 32000:
+                raise LlmProviderError("Invalid assistant response")
             self._last_generation_succeeded = True
             return response
-        except (LlmProviderError, TimeoutError) as exc:
+        except (LlmProviderError, TimeoutError, ValueError, TypeError):
             # One provider attempt only; local fallback avoids Telegram retry loops and extra spend.
             self._last_generation_succeeded = False
             language = _language_for_text(text)
             return _text(language, "provider_unavailable")
 
-    def _remember_from_conversation(self, text: str) -> None:
+    def _forget_denied_fact(self, text: str) -> None:
+        # A direct retraction removes only the exact old fact; it invents no replacement.
+        match = re.fullmatch(r"я (?:больше )?не живу в ([^.!?;]+)[.!]?", text.strip(), re.I)
+        current = self.memory.all().get("city")
+        if match and isinstance(current, str) and current.casefold() == match[1].strip().casefold():
+            self.memory.delete("city")
+
+    def _remember_from_conversation(self, text: str) -> bool:
         """Capture only explicit, stable, low-risk personal facts."""
         for key, value in _extract_personal_facts(text):
             if not is_sensitive_memory(key, value):
                 self.memory.set(key, value)
+                return True
+        return False
 
     def _extract_semantic_memory(self, text: str) -> None:
         if self.memory_extractor is None:
@@ -240,12 +265,14 @@ class PersonalAssistantAgent:
             return
 
     def _record_and_return(self, message: UserMessage, response: AgentResponse) -> AgentResponse:
+        if response.text not in {_text("ru", "sensitive_memory_rejected"), _text("en", "sensitive_memory_rejected")}:
+            response = AgentResponse(_safe_history_text(response.text), response.should_end_session)
         self._append_history("user", message.text)
         self._append_history("assistant", response.text)
         return response
 
     def _append_history(self, role: MessageRole, text: str) -> None:
-        turn = ConversationTurn(role=role, text=text)
+        turn = ConversationTurn(role=role, text=_safe_history_text(text))
         self._history.append(turn)
         if self.history_recorder is not None:
             self.history_recorder(turn)
@@ -322,7 +349,7 @@ def _extract_personal_facts(text: str) -> list[tuple[str, str]]:
     normalized = " ".join(text.strip().split())
     patterns = (
         (r"^(?:меня зовут|мое имя|моё имя)\s+(.+)$", "name"),
-        (r"^(?:я живу в|мой город(?:\s*—|\s*-|\s*=)?|город)\s+(.+)$", "city"),
+        (r"^(?:(?:исправление:|теперь)\s+)*(?:я живу в|мой город(?:\s*—|\s*-|\s*=)?|город)\s+(.+)$", "city"),
         (r"^(?:мой часовой пояс|мой timezone|timezone)\s*(?:—|-|=|is)?\s*(.+)$", "timezone"),
         (r"^(?:я работаю в|моя работа|я работаю)\s*(?:—|-|=|в)?\s*(.+)$", "work"),
         (r"^(?:я люблю|мне нравится|мне нравятся)\s+(.+)$", "likes"),
@@ -332,6 +359,12 @@ def _extract_personal_facts(text: str) -> list[tuple[str, str]]:
         match = re.match(pattern, normalized, re.IGNORECASE)
         if match:
             value = match.group(1).strip(" .,!;:")
-            if 1 <= len(value) <= 160:
+            if 1 <= len(value) <= 160 and not re.search(r"[.;!\n]|,|\b(?:но|а|и)\b", value, re.I):
                 return [(key, value)]
     return []
+
+
+def _safe_history_text(text: str) -> str:
+    if is_sensitive_memory("", text):
+        return "[Чувствительные сведения скрыты / sensitive content redacted]"
+    return text
