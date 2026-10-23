@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from dataclasses import replace
 import re
 
 from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider, OpenAICompatibleProvider
 from xblago.core.memory import MemoryStore
-from xblago.core.memory import is_sensitive_memory
+from xblago.core.memory import is_sensitive_memory, redact_sensitive_text, MemoryConflictError
 from xblago.core.memory_policy import may_extract, memory_veto
+from xblago.core.memory_commands import (
+    MemoryEdit, clarification, family, natural_forget_query, parse_edit,
+    resolve_edit, resolve_forget,
+)
 from xblago.core.messages import AgentResponse, ConversationTurn, MessageRole, UserMessage
 from xblago.core.profile import AgentProfile
 from xblago.core.routing import detect_intent
@@ -64,8 +69,19 @@ class PersonalAssistantAgent:
         intent = detect_intent(message.text)
         language = _language_for_text(message.text)
 
-        if memory_veto(message.text):
-            reply = "Хорошо, не буду добавлять это в память." if language == "ru" else "Okay, I won't add this to memory."
+        veto = memory_veto(message.text)
+        forget_query = natural_forget_query(message.text)
+        if forget_query is not None:
+            entries = tuple(self.memory.all().items()) + tuple((r.key, r.value) for r in self.memory.semantic_history())
+            resolution = resolve_forget(forget_query, entries)
+            if resolution.choices:
+                return self._record_and_return(message, AgentResponse(clarification(resolution.choices)))
+            if resolution.keys:
+                key = resolution.keys[0]
+                deleted = self.memory.delete(key)
+                reply = _forgot_text(language, key) if deleted else _missing_memory_text(language, key)
+            else:
+                reply = _missing_memory_text(language, forget_query.split(":", 1)[1] if forget_query.startswith("@") else forget_query)
             return self._record_and_return(message, AgentResponse(reply))
 
         if intent.name == "exit":
@@ -99,16 +115,27 @@ class PersonalAssistantAgent:
                 self.history_clearer()
             return self._record_and_return(message, AgentResponse(_text(language, "history_cleared")))
 
-        if intent.name == "remember" and intent.key and intent.value:
+        if intent.name == "remember" and intent.key and intent.value and not veto:
             if is_sensitive_memory(intent.key, intent.value):
                 return self._record_and_return(
                     message,
                     AgentResponse(_text(language, "sensitive_memory_rejected")),
                 )
-            self.memory.set(intent.key, intent.value)
+            canonical = family(intent.key, intent.value)
+            category = "preference" if canonical.startswith("preference:") else "fact"
+            edit = MemoryEdit(canonical, intent.value, category)
+            facts = self.memory.all()
+            targets = tuple(k for k, v in facts.items() if family(k, v) == canonical)
+            if targets or canonical.startswith("preference:"):
+                try:
+                    self.memory.replace_semantic(edit.record(), targets, facts)
+                except MemoryConflictError:
+                    return self._record_and_return(message, AgentResponse("Память уже изменилась. Повтори, пожалуйста, исправление."))
+            else:
+                self.memory.set(intent.key, intent.value)
             return self._record_and_return(
                 message,
-                AgentResponse(_remembered_text(language, intent.key, intent.value)),
+                AgentResponse(_remembered_text(language, intent.key, intent.value) if self.memory.all() != facts else ("Это уже есть в памяти." if language == "ru" else "This is already in memory.")),
             )
 
         if intent.name == "forget" and intent.key:
@@ -123,13 +150,36 @@ class PersonalAssistantAgent:
                 AgentResponse(_text(language, "greeting")),
             )
 
-        response = self._generate_assistant_response(message.text)
-        if self._last_generation_succeeded:
+        edit = None if veto else parse_edit(message.text)
+        facts = self.memory.all()
+        resolution = resolve_edit(edit, facts) if edit else None
+        if resolution and resolution.question:
+            return self._record_and_return(message, AgentResponse(resolution.question))
+        if resolution and resolution.choices:
+            return self._record_and_return(message, AgentResponse(clarification(resolution.choices, replacement=edit.value)))
+        if edit and edit.key == "preference:choice" and resolution.keys:
+            target = resolution.keys[0]
+            edit = replace(edit, key=family(target, facts[target]))
+        preview = dict(facts)
+        if edit:
+            for key in resolution.keys:
+                preview.pop(key, None)
+            preview[edit.key] = edit.value
+        response = self._generate_assistant_response(message.text, preview)
+        if self._last_generation_succeeded and edit:
+            try:
+                self.memory.replace_semantic(edit.record(), resolution.keys, facts)
+            except MemoryConflictError:
+                response = "Память уже изменилась. Повтори, пожалуйста, исправление."
+            else:
+                response = (f"Хорошо, теперь буду учитывать: {edit.value}." if self.memory.all() != facts else f"Это уже учтено: {edit.value}.")
+        elif self._last_generation_succeeded and not veto:
             self._forget_denied_fact(message.text)
-        if self._last_generation_succeeded and may_extract(message.text):
-            if not self._remember_from_conversation(message.text):
-                self._extract_semantic_memory(message.text)
-        return self._record_and_return(message, AgentResponse(response))
+            if may_extract(message.text) and not self._remember_from_conversation(message.text):
+                question = self._extract_semantic_memory(message.text)
+                if question:
+                    response = question
+        return self._record_and_return(message, AgentResponse(_without_unconfirmed_claims(response)))
 
     def history(self) -> tuple[ConversationTurn, ...]:
         return tuple(self._history)
@@ -214,11 +264,11 @@ class PersonalAssistantAgent:
             lines.append(f"- {label}: {turn.text}")
         return "\n".join(lines)
 
-    def _generate_assistant_response(self, text: str) -> str:
+    def _generate_assistant_response(self, text: str, memory: dict | None = None) -> str:
         context = ChatContext(
             agent_profile=self.profile,
             user_text=_safe_history_text(text),
-            memory=self.memory.all(),
+            memory=self.memory.all() if memory is None else memory,
             history=self.history(),
         )
         try:
@@ -244,11 +294,16 @@ class PersonalAssistantAgent:
         """Capture only explicit, stable, low-risk personal facts."""
         for key, value in _extract_personal_facts(text):
             if not is_sensitive_memory(key, value):
-                self.memory.set(key, value)
+                facts = self.memory.all()
+                keys = tuple(k for k, v in facts.items() if family(k, v) == key)
+                if keys and (facts.get(key) != value or keys != (key,)):
+                    self.memory.replace_semantic(MemoryEdit(key, value, "fact").record(), keys, facts)
+                else:
+                    self.memory.set(key, value)
                 return True
         return False
 
-    def _extract_semantic_memory(self, text: str) -> None:
+    def _extract_semantic_memory(self, text: str) -> str | None:
         if self.memory_extractor is None:
             return
         try:
@@ -258,8 +313,23 @@ class PersonalAssistantAgent:
                 memory=self.memory.all(),
                 history=self.history(),
             )
-            for record in candidates_to_records(self.memory_extractor.extract(context)):
-                self.memory.save_semantic(record)
+            records = candidates_to_records(self.memory_extractor.extract(context))
+            normalized = [replace(r, key=family(r.key, r.value)) if r.category == "preference" else r for r in records]
+            keys = [r.key for r in normalized]
+            if len(keys) != len(set(keys)):
+                return "В сообщении несколько вариантов одного предпочтения. Какой сейчас актуален?"
+            for record in normalized:
+                if record.category == "preference":
+                    facts = self.memory.all()
+                    edit = MemoryEdit(record.key, record.value, "preference", replacement=bool(re.search(r"\bтеперь\b", text, re.I)))
+                    resolution = resolve_edit(edit, facts)
+                    if resolution.question:
+                        return resolution.question
+                    if resolution.choices:
+                        return clarification(resolution.choices, replacement=record.value)
+                    self.memory.replace_semantic(record, resolution.keys, facts)
+                else:
+                    self.memory.save_semantic(record)
         except (LlmProviderError, TimeoutError, ValueError, TypeError):
             # Memory analysis is best-effort and must never block or alter the reply.
             return
@@ -365,6 +435,19 @@ def _extract_personal_facts(text: str) -> list[tuple[str, str]]:
 
 
 def _safe_history_text(text: str) -> str:
-    if is_sensitive_memory("", text):
-        return "[Чувствительные сведения скрыты / sensitive content redacted]"
-    return text
+    intent = detect_intent(text)
+    if intent.name == "remember" and intent.key and intent.value and is_sensitive_memory(intent.key, intent.value):
+        return text.replace(intent.value, "[скрыто]")
+    return redact_sensitive_text(text)
+
+
+def _without_unconfirmed_claims(text: str) -> str:
+    # Provider prose cannot attest to a database write. Local command replies are
+    # constructed only after commit and do not pass through this guard.
+    claim = re.compile(
+        r"(?:\b(?:я\s+)?(?:запомнил[а]?|сохранил[а]?|обновил[а]?|изменил[а]?|удалил[а]?|забыл[а]?|сохраняю|запоминаю|обновляю)\b|"
+        r"теперь (?:я )?помню|\bI(?:'ve| have)? (?:saved|remembered|updated|deleted|forgotten)\b)", re.I,
+    )
+    sentences = re.split(r"(?<=[.!?])\s+|\n+", text)
+    kept = [sentence for sentence in sentences if not claim.search(sentence)]
+    return " ".join(kept).strip() or "Я на связи. Чем помочь дальше?"

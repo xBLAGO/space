@@ -519,6 +519,11 @@ class WebApp:
             )
             return agent.respond(UserMessage(text=text)).text
 
+    def delete_memory(self, uid: str, key: str) -> bool:
+        # A completed delete must not be undone by an already running chat turn.
+        with self.store.conversation_lock:
+            return self.store.memory_for_user(uid).delete(key)
+
     def rows(self, kind: str, uid: str) -> list[dict[str, Any]]:
         table = self._table(kind)
         with self.store._connect() as db:
@@ -1266,7 +1271,7 @@ class BlagoWebHandler(TelegramWebhookHandler):
         elif path == "/api/v1/memory" and method == "DELETE":
             body = self._body()
             key = _required_text(body.get("key"), "Memory key", 1, 80)
-            self._json({"deleted": app.store.memory_for_user(uid).delete(key)})
+            self._json({"deleted": app.delete_memory(uid, key)})
         elif path == "/api/v1/analytics/me" and method == "GET":
             self._json({"analytics": app.analytics(uid)})
         elif path == "/api/v1/analytics/community" and method == "GET":

@@ -104,7 +104,7 @@ class SemanticMemoryTest(unittest.TestCase):
         agent.respond(UserMessage("Исправление: мой город Берлин"))
 
         self.assertEqual(memory.all(), {"city": "Берлин"})
-        self.assertEqual(len(memory.records), 0)
+        self.assertEqual(len(memory.records), 1)
         self.assertEqual(len(provider.calls), 2)
 
     def test_sensitive_and_invalid_extraction_does_not_reach_memory(self) -> None:

@@ -62,7 +62,8 @@ class БезопаснаяПамять(unittest.TestCase):
         agent = self.agent()
         agent.respond(UserMessage("исправь city на Казань"))
         self.assertEqual(self.memory.all(), {"city": "Казань"})
-        self.assertEqual(self.store.all_semantic_memory(self.uid, include_inactive=True)[0].status, "superseded")
+        self.assertTrue(any(r.status == "superseded" and r.value == "Москва"
+                            for r in self.store.all_semantic_memory(self.uid, include_inactive=True)))
         self.memory.save_semantic(record("city", "Тула"))
         self.assertEqual(self.memory.all(), {"city": "Тула"})
         with self.store._connect() as db:
@@ -111,7 +112,8 @@ class БезопаснаяПамять(unittest.TestCase):
             with self.subTest(text=text):
                 p = Provider([item()])
                 self.agent(p).respond(UserMessage(text))
-                self.assertEqual(p.calls, [])
+                self.assertEqual(len(p.calls), 1)
+                self.assertFalse(p.calls[0].user_text.startswith("Extract only"))
                 self.assertEqual(self.memory.all(), {})
 
     def test_отрицания_цитаты_предположения_и_другие_люди(self):

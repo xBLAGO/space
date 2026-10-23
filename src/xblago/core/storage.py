@@ -11,7 +11,7 @@ from threading import RLock
 from typing import Any, Iterator
 from uuid import uuid4
 
-from xblago.core.memory import MemoryStore, SemanticMemoryRecord, is_sensitive_memory
+from xblago.core.memory import MemoryStore, SemanticMemoryRecord, is_sensitive_memory, MemoryConflictError
 from xblago.core.messages import ConversationTurn, MessageRole
 
 
@@ -209,14 +209,7 @@ class SQLiteBlagoStore:
         status: str,
         confidence: float,
     ) -> SemanticMemoryRecord:
-        if (not isinstance(key, str) or not isinstance(value, str)
-                or not 1 <= len(key) <= 64 or not 1 <= len(value) <= 240
-                or category not in {"fact", "interest", "preference", "skill", "goal", "need"}
-                or status not in {"confirmed", "candidate"}
-                or (category == "need" and status != "candidate")
-                or isinstance(confidence, bool) or not isinstance(confidence, (int, float))
-                or not 0.8 <= confidence <= 1 or is_sensitive_memory(key, value)):
-            raise ValueError("Invalid semantic memory")
+        _validate_semantic_input(key, value, category, status, confidence)
         now = _utc_now()
         encoded = json.dumps(value, ensure_ascii=False)
         with self._locked_transaction() as connection:
@@ -249,6 +242,55 @@ class SQLiteBlagoStore:
                 (record_id, blago_user_id, key, encoded, category, source, status, confidence, now, now, supersedes_id),
             )
         return SemanticMemoryRecord(record_id, key, value, category, source, status, confidence, now, now)
+
+    def replace_semantic_memory(
+        self, uid: str, record: SemanticMemoryRecord, keys: tuple[str, ...], expected: dict[str, Any],
+    ) -> None:
+        """Archive aliases and legacy values, then publish one version in one transaction."""
+        _validate_semantic_input(record.key, record.value, record.category, record.status, record.confidence)
+        keys = tuple(dict.fromkeys((*keys, record.key)))
+        marks = ",".join("?" for _ in keys)
+        now = _utc_now()
+        with self._locked_transaction() as db:
+            facts = {str(r["key"]): json.loads(r["value_json"]) for r in db.execute(
+                "SELECT key, value_json FROM memory_facts WHERE blago_user_id = ?", (uid,),
+            )}
+            for r in db.execute(
+                "SELECT memory_key, value_json FROM semantic_memory WHERE blago_user_id = ? AND status = 'confirmed' ORDER BY updated_at DESC, id DESC", (uid,),
+            ):
+                facts[str(r["memory_key"])] = json.loads(r["value_json"])
+            if facts != expected:
+                raise MemoryConflictError("Memory changed")
+            if keys == (record.key,) and facts.get(record.key) == record.value:
+                return
+            parent = db.execute(
+                f"SELECT id FROM semantic_memory WHERE blago_user_id = ? AND memory_key IN ({marks}) AND status IN ('confirmed','candidate') ORDER BY updated_at DESC, id DESC LIMIT 1",
+                (uid, *keys),
+            ).fetchone()
+            parent_id = str(parent["id"]) if parent else None
+            db.execute(
+                f"""UPDATE semantic_memory SET
+                    source = CASE WHEN memory_key != ? THEN source || '|previous_key=' || memory_key ELSE source END,
+                    memory_key = ?, status = CASE WHEN status IN ('confirmed','candidate') THEN 'superseded' ELSE status END,
+                    updated_at = ? WHERE blago_user_id = ? AND memory_key IN ({marks})""",
+                (record.key, record.key, now, uid, *keys),
+            )
+            for old in db.execute(
+                f"SELECT key, value_json, updated_at FROM memory_facts WHERE blago_user_id = ? AND key IN ({marks})", (uid, *keys),
+            ).fetchall():
+                archive_id = str(uuid4())
+                db.execute(
+                    "INSERT INTO semantic_memory (id,blago_user_id,memory_key,value_json,category,source,status,confidence,created_at,updated_at,supersedes_id) VALUES (?,?,?,?,?,?,'superseded',1.0,?,?,?)",
+                    (archive_id, uid, record.key, old["value_json"], record.category,
+                     "legacy_fact|previous_key=" + str(old["key"]), old["updated_at"], now, parent_id),
+                )
+                parent_id = archive_id
+            db.execute(f"DELETE FROM memory_facts WHERE blago_user_id = ? AND key IN ({marks})", (uid, *keys))
+            db.execute(
+                "INSERT INTO semantic_memory (id,blago_user_id,memory_key,value_json,category,source,status,confidence,created_at,updated_at,supersedes_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                (str(uuid4()), uid, record.key, json.dumps(record.value, ensure_ascii=False), record.category,
+                 record.source, record.status, record.confidence, now, now, parent_id),
+            )
 
     def delete_semantic_memory(self, blago_user_id: str, key: str) -> bool:
         return self.delete_memory(blago_user_id, key)
@@ -622,6 +664,12 @@ class SQLiteUserMemoryStore(MemoryStore):
             record.confidence,
         )
 
+    def semantic_history(self) -> tuple[SemanticMemoryRecord, ...]:
+        return self.store.all_semantic_memory(self.blago_user_id, include_inactive=True)
+
+    def replace_semantic(self, record: SemanticMemoryRecord, keys: tuple[str, ...], expected: dict[str, Any]) -> None:
+        self.store.replace_semantic_memory(self.blago_user_id, record, keys, expected)
+
     def delete(self, key: str) -> bool:
         return self.store.delete_memory(self.blago_user_id, key)
 
@@ -659,3 +707,14 @@ def _display_name(identity: TelegramIdentity) -> str | None:
         return " ".join(parts)
 
     return identity.username
+
+
+def _validate_semantic_input(key: str, value: Any, category: str, status: str, confidence: float) -> None:
+    if (not isinstance(key, str) or not isinstance(value, str)
+            or not 1 <= len(key) <= 64 or not 1 <= len(value) <= 240
+            or category not in {"fact", "interest", "preference", "skill", "goal", "need"}
+            or status not in {"confirmed", "candidate"}
+            or (category == "need" and status != "candidate")
+            or isinstance(confidence, bool) or not isinstance(confidence, (int, float))
+            or not 0.8 <= confidence <= 1 or is_sensitive_memory(key, value)):
+        raise ValueError("Invalid semantic memory")
