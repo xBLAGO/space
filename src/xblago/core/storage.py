@@ -27,6 +27,8 @@ class TelegramIdentity:
 
 class SQLiteBlagoStore:
     def __init__(self, path: Path, legacy_memory_dir: Path | None = None) -> None:
+        from xblago.core.sqlite_safety import enforce_pilot_sqlite
+        enforce_pilot_sqlite()
         self.path = path
         self.legacy_memory_dir = legacy_memory_dir
         self._lock = RLock()
@@ -397,6 +399,7 @@ class SQLiteBlagoStore:
     def clear_history(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
             connection.execute("DELETE FROM dialogue_turns WHERE blago_user_id = ?", (blago_user_id,))
+            connection.execute('UPDATE events SET response_json=NULL,error=NULL WHERE blago_user_id=?',(blago_user_id,))
 
     def backup_database(self, destination_dir: Path | None = None) -> Path:
         target_dir = destination_dir or (self.path.parent / "backups" / "sqlite")

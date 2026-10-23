@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime"]
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery"]
   workflow_dispatch:
 
 jobs:
@@ -12,17 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install package
         run: python -m pip install -e .
+      - name: Build verified patched SQLite (no system replacement)
+        run: |
+          python tools/build_sqlite.py --prefix "$RUNNER_TEMP/blago-sqlite"
+          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/blago-sqlite" >> "$GITHUB_ENV"
+          echo "LD_PRELOAD=$RUNNER_TEMP/blago-sqlite/libsqlite3.so.0" >> "$GITHUB_ENV"
+      - name: Block unverified pilot SQLite
+        run: python -m xblago.core.sqlite_safety --require-safe
       - name: Run tests
         run: PYTHONPATH=src python -m unittest discover -s tests -v
       - name: Record SQLite runtime for security review
         run: python -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'
       - name: Check Python syntax
         run: python -m compileall -q src tests
+      - name: Install browser acceptance tool
+        run: python -m pip install playwright==1.64.1
+      - name: Real Chrome WebAuthn UI (virtual CTAP2, synthetic localhost)
+        run: python tools/pilot_browser_check.py --chrome "$(command -v google-chrome)" --output "$RUNNER_TEMP/browser-evidence"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pilot-browser-evidence
+          path: ${{ runner.temp }}/browser-evidence
 
   docker:
     runs-on: ubuntu-latest
@@ -30,6 +47,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Docker image
         run: docker build -t xblago-space:${{ github.sha }} .
+      - name: Verify actual Docker Python SQLite
+        run: docker run --rm --entrypoint python xblago-space:${{ github.sha }} -m xblago.core.sqlite_safety --require-safe
       - name: Run Docker health check
         run: |
           cleanup() {
@@ -131,4 +150,36 @@ jobs:
               SecurityJournal(journal).read()
               print('SQLite runtime:', sqlite3.sqlite_version)
               print('Privacy journal, export, delete, TTL and restore smoke OK')
+          PY
+      - name: Docker strict pilot gate and independent checkpoint
+        run: |
+          docker run --rm -i --entrypoint python xblago-space:${{ github.sha }} - <<'PY'
+          import os, tempfile
+          from pathlib import Path
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.integrations.web import WebApp
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.core.privacy_schema import migrate_privacy
+          from xblago.core.pilot_schema import migrate_pilot
+          from xblago.core.security_journal import SecurityJournal
+          from xblago.core.journal_witness import initialize
+          from xblago.core.sqlite_safety import require_safe_sqlite
+          with tempfile.TemporaryDirectory() as root:
+              root = Path(root)
+              path, journal, witness = root/'app.sqlite3', root/'journal', root/'witness'
+              WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              migrate_identity_runtime(path)
+              SecurityJournal.initialize(journal)
+              migrate_privacy(path, journal)
+              os.environ['XBLAGO_SECURITY_JOURNAL_DIR'] = str(journal)
+              migrate_pilot(path)
+              initialize(SecurityJournal(journal), witness)
+              os.environ['XBLAGO_JOURNAL_WITNESS_DIR'] = str(witness)
+              os.environ['XBLAGO_PILOT_MODE'] = 'true'
+              require_safe_sqlite()
+              WebApp(SQLiteBlagoStore(path))
+              SecurityJournal(journal).read()
+              print('Strict pilot SQLite, lineage baseline and independent witness gate OK')
           PY
