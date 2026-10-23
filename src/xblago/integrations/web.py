@@ -140,6 +140,8 @@ class WebApp:
         self._auth_lock = RLock()
         self._auth_attempts: dict[str, list[float]] = {}
         self._ensure_schema()
+        from xblago.integrations.identity import IdentityRuntime
+        self.identity = IdentityRuntime(store)
 
     def check_auth_rate(self, key: str) -> None:
         # In-memory coarse protection for a single-instance pilot deployment.
@@ -310,7 +312,9 @@ class WebApp:
             raise ApiError(409, "Username already exists") from exc
         return self.new_session(uid)
 
-    def login(self, username: str, password: str) -> tuple[str, str]:
+    def login(self, username: str, password: str, old_token: str | None = None, expected_uid: str | None = None) -> tuple[str, str]:
+        if len(password) > 256:
+            raise ApiError(400, 'Password is too long')
         with self.store._connect() as db:
             row = db.execute(
                 "SELECT blago_user_id, password_hash, salt FROM web_credentials WHERE username = ?",
@@ -322,9 +326,23 @@ class WebApp:
         candidate = hashlib.pbkdf2_hmac("sha256", password.encode(), bytes.fromhex(salt), 400_000).hex()
         if not row or not hmac.compare_digest(expected, candidate):
             raise ApiError(401, "Incorrect username or password")
+        if expected_uid is not None and expected_uid != row['blago_user_id']:
+            raise ApiError(403, 'Account mismatch')
+        if self.identity.enabled:
+            with self.store._locked_transaction() as db:
+                current = db.execute('SELECT password_hash,salt FROM web_credentials WHERE blago_user_id=?', (row['blago_user_id'],)).fetchone()
+                if current is None or current['password_hash'] != expected or current['salt'] != salt:
+                    raise ApiError(401, 'Access method changed. Please sign in again')
+                if expected_uid is not None:
+                    current_session = self.identity.session_row(db, old_token)
+                    if current_session['blago_user_id'] != expected_uid:
+                        raise ApiError(403, 'Account mismatch')
+                return self.identity.mint(db, str(row['blago_user_id']), 'password', old_token)
         return self.new_session(str(row["blago_user_id"]))
 
-    def telegram_login(self, init_data: str) -> tuple[str, str]:
+    def telegram_login(self, init_data: str, challenge: str = '', binding: str = '', old_token: str | None = None) -> tuple[str, str]:
+        if self.identity.enabled:
+            return self.identity.telegram_login(init_data, challenge, binding, old_token)
         token = os.getenv("TELEGRAM_BOT_TOKEN")
         if not token:
             raise ApiError(503, "Telegram login is not configured")
@@ -337,16 +355,24 @@ class WebApp:
         )
         return self.new_session(self.store.resolve_telegram_user(identity))
 
-    def new_link_code(self, web_uid: str) -> str:
+    def new_link_code(self, web_uid: str, token: str | None = None) -> str:
+        if self.identity.enabled:
+            self.identity.require_fresh(token, web_uid)
         # Only a signed-in web account can issue a Telegram linking code.
         with self.store._connect() as db:
             credential = db.execute(
                 "SELECT 1 FROM web_credentials WHERE blago_user_id = ?", (web_uid,),
             ).fetchone()
+            if credential is None and self.identity.enabled:
+                credential = db.execute('SELECT 1 FROM passkey_credentials WHERE blago_user_id=? AND revoked_at IS NULL', (web_uid,)).fetchone()
         if credential is None:
             raise ApiError(403, "Sign in through the website to create a linking code")
         code = secrets.token_hex(8).upper()
         with self.store._locked_transaction() as db:
+            if self.identity.enabled:
+                authenticated = self.identity.session_row(db, token, fresh=True)
+                if authenticated['blago_user_id'] != web_uid:
+                    raise ApiError(403, 'Account mismatch')
             db.execute("DELETE FROM account_link_codes WHERE target_user_id = ? OR expires_at < ?",
                        (web_uid, _iso()))
             db.execute("INSERT INTO account_link_codes VALUES (?, ?, ?)",
@@ -354,6 +380,12 @@ class WebApp:
         return code
 
     def redeem_telegram_link(self, telegram_uid: str, code: str) -> str:
+        try:
+            return self._redeem_telegram_link(telegram_uid, code)
+        except sqlite3.IntegrityError as exc:
+            raise ApiError(409, 'Account merge conflicts with existing data; no changes were applied') from exc
+
+    def _redeem_telegram_link(self, telegram_uid: str, code: str) -> str:
         # Caller MUST authenticate Telegram sender (webhook or verified initData).
         # A one-time secret proves control of the destination web account.
         if len(code) != 16 or any(c not in "0123456789ABCDEF" for c in code.upper()):
@@ -372,6 +404,8 @@ class WebApp:
                 return target_uid
             if db.execute("SELECT 1 FROM web_credentials WHERE blago_user_id = ?", (telegram_uid,)).fetchone():
                 raise ApiError(409, "This Telegram identity belongs to another web account")
+            if db.execute("SELECT 1 FROM sqlite_master WHERE name='passkey_credentials'").fetchone():
+                self.identity.merge(db, telegram_uid, target_uid, revoke_sessions=self.identity.enabled)
             # Preserve all dialogue, needs, resources, and event audit records.
             for table in (
                 "dialogue_turns",
@@ -444,8 +478,11 @@ class WebApp:
         return target_uid
 
     def new_session(self, uid: str) -> tuple[str, str]:
+        if self.identity.enabled:
+            return self.identity.new_session(uid)
         token, csrf = secrets.token_urlsafe(32), secrets.token_urlsafe(24)
         with self.store._locked_transaction() as db:
+            self.identity.active(db, uid)
             db.execute(
                 "INSERT INTO web_sessions VALUES (?, ?, ?, ?)",
                 (hashlib.sha256(token.encode()).hexdigest(), uid, csrf, _iso(_now() + timedelta(days=7))),
@@ -453,11 +490,13 @@ class WebApp:
         return token, csrf
 
     def session(self, token: str | None) -> tuple[str, str]:
+        if self.identity.enabled:
+            return self.identity.session(token)
         if not token:
             raise ApiError(401, "Please sign in")
         with self.store._connect() as db:
             row = db.execute(
-                "SELECT blago_user_id, csrf FROM web_sessions WHERE session_hash = ? AND expires_at > ?",
+                "SELECT s.blago_user_id, s.csrf FROM web_sessions s JOIN users u USING(blago_user_id) WHERE session_hash = ? AND expires_at > ? AND u.status='active'",
                 (hashlib.sha256(token.encode()).hexdigest(), _iso()),
             ).fetchone()
         if row is None:
@@ -1152,12 +1191,12 @@ class BlagoWebHandler(TelegramWebhookHandler):
             f"{'Secure; ' if secure else ''}{'Max-Age=0' if clear else 'Max-Age=604800'}"
         )
 
-    def _token(self) -> str | None:
+    def _token(self, name: str = 'blago_session') -> str | None:
         from http.cookies import SimpleCookie
         try:
             cookies = SimpleCookie()
             cookies.load(self.headers.get("Cookie", ""))
-            morsel = cookies.get("blago_session")
+            morsel = cookies.get(name)
             return morsel.value if morsel else None
         except Exception:
             return None
@@ -1215,15 +1254,43 @@ class BlagoWebHandler(TelegramWebhookHandler):
         app: WebApp = getattr(self.server, "blago_web_app")
         if method != "GET":
             self._check_origin()
+        if method == 'GET' and path == '/api/v1/auth/capabilities':
+            configured = False
+            try:
+                app.identity.rp()
+                configured = True
+            except ApiError:
+                pass
+            self._json({'secure_identity': app.identity.enabled, 'passkeys': configured and app.identity.enabled})
+            return
+        if method == 'POST' and path in ('/api/v1/auth/telegram/challenge', '/api/v1/auth/passkeys/authenticate/options'):
+            app.check_auth_rate(self.client_address[0])
+            self._body()
+            binding = self._token('blago_auth_binding') or secrets.token_urlsafe(32)
+            if not 32 <= len(binding) <= 128:
+                binding = secrets.token_urlsafe(32)
+            if path.endswith('/challenge'):
+                data = {'challenge': app.identity.telegram_challenge(binding)}
+            else:
+                data = app.identity.passkey_options(binding)
+            cookie = self._cookie(binding).replace('blago_session=', 'blago_auth_binding=', 1).replace('Max-Age=604800', 'Max-Age=600')
+            self._json(data, cookie=cookie)
+            return
+        if method == 'POST' and path == '/api/v1/auth/passkeys/authenticate/verify':
+            app.check_auth_rate(self.client_address[0])
+            token, csrf = app.identity.passkey_verify(self._body(), self._token('blago_auth_binding') or '', self._token())
+            self._json({'ok': True, 'csrf': csrf}, cookie=self._cookie(token))
+            return
         if method == "POST" and path in ("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/telegram"):
             app.check_auth_rate(self.client_address[0])
             body = self._body()
             if path.endswith("/register"):
                 token, csrf = app.register(str(body.get("username", "")), str(body.get("password", "")), str(body.get("invite", "")))
             elif path.endswith("/telegram"):
-                token, csrf = app.telegram_login(str(body.get("init_data", "")))
+                token, csrf = app.telegram_login(str(body.get("init_data", "")), str(body.get('challenge', '')),
+                                                self._token('blago_auth_binding') or '', self._token())
             else:
-                token, csrf = app.login(str(body.get("username", "")), str(body.get("password", "")))
+                token, csrf = app.login(str(body.get("username", "")), str(body.get("password", "")), self._token())
             self._json({"ok": True, "csrf": csrf}, cookie=self._cookie(token))
             return
 
@@ -1232,8 +1299,36 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path == "/api/v1/auth/link-code" and method == "POST":
-            code = app.new_link_code(uid)
+        if path == '/api/v1/auth/sessions' and method == 'GET':
+            self._json({'sessions': app.identity.sessions(token)})
+        elif path == '/api/v1/auth/sessions/revoke' and method == 'POST':
+            body = self._body()
+            app.identity.revoke(token, body.get('id'), others=body.get('others') is True)
+            self._json({'ok': True})
+        elif path == '/api/v1/auth/reauthenticate' and method == 'POST':
+            body = self._body()
+            replacement, csrf = app.login(str(body.get('username', '')), str(body.get('password', '')), token, uid)
+            self._json({'ok': True, 'csrf': csrf}, cookie=self._cookie(replacement))
+        elif path == '/api/v1/auth/methods' and method == 'GET':
+            self._json({'methods': app.identity.methods(token)})
+        elif path == '/api/v1/auth/methods' and method == 'DELETE':
+            body = self._body()
+            replacement, csrf = app.identity.remove_method(token, body.get('kind'), body.get('id'))
+            self._json({'ok': True, 'csrf': csrf}, cookie=self._cookie(replacement))
+        elif path == '/api/v1/auth/password' and method == 'POST':
+            body = self._body()
+            replacement, csrf = app.identity.set_password(token, str(body.get('username', '')), str(body.get('password', '')))
+            self._json({'ok': True, 'csrf': csrf}, cookie=self._cookie(replacement))
+        elif path == '/api/v1/auth/passkeys/register/options' and method == 'POST':
+            self._body()
+            binding = self._token('blago_auth_binding') or secrets.token_urlsafe(32)
+            data = app.identity.passkey_options(binding, token, register=True)
+            self._json(data, cookie=self._cookie(binding).replace('blago_session=', 'blago_auth_binding=', 1).replace('Max-Age=604800', 'Max-Age=600'))
+        elif path == '/api/v1/auth/passkeys/register/verify' and method == 'POST':
+            replacement, csrf = app.identity.passkey_verify(self._body(), self._token('blago_auth_binding') or '', token, register=True)
+            self._json({'ok': True, 'csrf': csrf}, cookie=self._cookie(replacement))
+        elif path == "/api/v1/auth/link-code" and method == "POST":
+            code = app.new_link_code(uid, token)
             self._json({"code": code, "expires_in_seconds": 600})
         elif path == "/api/v1/auth/logout" and method == "POST":
             app.logout(token)

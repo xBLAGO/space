@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot"]
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store"]
   workflow_dispatch:
 
 jobs:
@@ -60,3 +60,30 @@ jobs:
           done
 
           exit 1
+      - name: Docker Identity Runtime smoke (temporary SQLite only)
+        run: |
+          docker run --rm -i --entrypoint python \
+            -e XBLAGO_WEB_INVITE_CODE=ci-synthetic-identity-invite \
+            -e XBLAGO_REQUIRE_SECURE_IDENTITY=true \
+            xblago-space:${{ github.sha }} - <<'PY'
+          import tempfile
+          from pathlib import Path
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.integrations.web import WebApp
+          with tempfile.TemporaryDirectory() as root:
+              path = Path(root) / 'ci-only.sqlite3'
+              app = WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              assert migrate_identity_runtime(path)
+              assert not migrate_identity_runtime(path)
+              token, csrf = app.register('ci_identity', 'ci-only-long-password', 'ci-synthetic-identity-invite')
+              assert app.session(token)[1] == csrf
+              assert len(app.identity.sessions(token)) == 1
+              replacement, _ = app.login('ci_identity', 'ci-only-long-password', token)
+              assert WebApp(SQLiteBlagoStore(path)).session(replacement)
+              backup = app.store.backup_database()
+              assert WebApp(SQLiteBlagoStore(backup)).session(replacement)
+              print('Identity runtime, restart and backup smoke OK')
+          PY
