@@ -50,6 +50,48 @@ main{margin-left:255px;min-height:100dvh;display:flex;flex-direction:column}
 #mobile-nav{display:none}
 @media(max-width:900px){aside{width:205px}main{margin-left:205px}.content{padding:22px}.topbar{padding:23px}.two-col{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){aside{display:none}main{margin:0;padding-bottom:68px}.topbar{padding:17px 20px}.topbar h1{font-size:18px}.content{padding:20px 15px}.panel{padding:18px}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#chat-screen{height:calc(100dvh - 205px);min-height:380px}.bubble{max-width:94%}#chat-stream{padding:15px}.chat-compose{padding:10px}.section-head h2{font-size:22px}#mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:5;align-items:stretch;justify-content:space-around;background:#fffffff2;border-top:1px solid var(--line);padding:6px 2px max(6px,env(safe-area-inset-bottom))}.mobile-btn{border:0;background:transparent;color:#7c8c89;display:flex;align-items:center;flex-direction:column;gap:2px;font-size:10px;padding:5px 3px;min-width:56px}.mobile-btn.active{color:var(--blue)}.mobile-btn span{font-size:21px}}@media(prefers-reduced-motion:no-preference){button{transition:background .16s}}
+
+/* Foundation 06 — the conversation is the interface. Preserve existing screens as opt-in tools. */
+:root{color-scheme:dark;--bg:#101719;--surface:#172120;--ink:#e8f1ec;--muted:#92a49b;--blue:#80b99d;--line:#30413b;--sand:#26342f}
+body{background:var(--bg);color:var(--ink)}
+#shell{background:var(--bg)}
+main{margin:0;min-height:100dvh}
+.topbar{background:var(--bg);border-bottom:0;padding:21px 28px;max-width:900px;width:100%;margin:auto}
+.topbar h1{font-weight:600;font-size:18px;letter-spacing:0}
+.topbar p,.pill{display:none}
+.content{max-width:900px;padding:0 20px 24px;display:flex;flex-direction:column}
+#chat-screen{flex:1;min-height:0;height:calc(100dvh - 102px)}
+#chat-pane{background:transparent;border:0;box-shadow:none}
+#chat-stream{padding:24px clamp(2px,4vw,42px);gap:20px;scrollbar-color:#40564a transparent}
+.bubble{background:transparent;border-radius:18px;padding:9px 0;font-size:15px;line-height:1.75;max-width:88%;color:var(--ink)}
+.bubble.user{background:#263b33;padding:12px 17px;border-radius:18px;max-width:80%;color:#e8f5ec}
+.bubble.pending{color:var(--muted)}
+.chat-compose{background:#202d29;border:1px solid #35473f;border-radius:24px;align-items:center;margin:0 clamp(2px,4vw,42px) 8px;padding:8px 10px 8px 15px}
+.chat-compose textarea{background:transparent;border:0;color:var(--ink);min-height:43px;max-height:160px;padding:11px 5px;box-shadow:none;resize:none}
+.chat-compose textarea:focus{border:0;box-shadow:none}
+.chat-compose textarea::placeholder{color:#91a59a}
+.chat-compose .primary{border-radius:50%;width:42px;height:42px;padding:0;background:#9ecbb0;color:#183027}
+.panel,.item,.metric,.empty{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.panel p,.small,.muted,.section-head p,.metric span{color:var(--muted)}
+input,textarea,select{background:#202d29;color:var(--ink);border-color:var(--line)}
+.secondary{background:#25352e;color:var(--ink);border-color:var(--line)}
+.nav-btn{color:#b0c3b7}.nav-btn.active,.nav-btn:hover{background:#263b32;color:#e9f3ec}
+aside{width:min(290px,86vw);background:#182420;border-color:var(--line);box-shadow:15px 0 45px #0006;transform:translateX(-110%);transition:transform .2s ease;z-index:20}
+body.tools-open aside{transform:translateX(0)}
+body.tools-open #tools-scrim{display:block}
+#tools-scrim{display:none;position:fixed;inset:0;background:#0008;border:0;z-index:19}
+#tools-toggle{border:0;background:transparent;color:var(--ink);border-radius:12px;font-size:23px;width:44px;height:44px;cursor:pointer}
+#tools-toggle:focus-visible,.nav-btn:focus-visible{outline:2px solid #a1d9b7;outline-offset:2px}
+#mobile-nav{display:none!important}
+.auth-box{background:var(--surface);border-color:var(--line)}
+#auth{background:var(--bg)}
+.orb{background:radial-gradient(circle at 28% 25%,#d2efdb,#568d72 64%,#2d5648);box-shadow:0 0 18px #58977933}
+.logo{letter-spacing:.01em;text-transform:lowercase;font-weight:600}
+#chat-stream:empty:after{content:"";display:block;flex:1}
+@media(max-width:900px){main{margin-left:0}.content{padding:0 15px 18px}.topbar{padding:18px}.two-col{grid-template-columns:1fr}}
+@media(max-width:640px){main{padding-bottom:0}.topbar{padding:12px 14px}.content{padding:0 10px max(12px,env(safe-area-inset-bottom))}#chat-screen{height:calc(100dvh - 82px);min-height:0}.chat-compose{margin:0 2px 5px}.bubble{max-width:94%}#chat-stream{padding:16px 6px}.topbar h1{font-size:17px}}
+@media(prefers-reduced-motion:reduce){aside{transition:none}}
+
 </style>
 </head>
 <body>
@@ -67,6 +109,7 @@ main{margin-left:255px;min-height:100dvh;display:flex;flex-direction:column}
 <p class="small">Доступ в сообщество по приглашению. Данные остаются привязаны к вашему BLAGO ID.</p>
 </div></div>
 <div id="shell">
+<button id="tools-scrim" type="button" aria-label="Закрыть личное пространство" tabindex="-1"></button>
 <aside>
 <div class="logo"><span class="orb"></span><span>BLAGO</span></div>
 <div class="tagline">Сделай благо, получи благо.<br>Единое пространство заботы.</div>
@@ -80,13 +123,13 @@ main{margin-left:255px;min-height:100dvh;display:flex;flex-direction:column}
 <footer><div class="avatar" id="avatar">Б</div><div><div id="sidebar-user" class="user-name">Участник BLAGO</div><div class="small">Личное пространство</div></div></footer>
 </aside>
 <main>
-<header class="topbar"><div><h1 id="page-title">Чат с BLAGO</h1><p id="page-subtitle">Личный ИИ-помощник всегда рядом</p></div><span class="pill">✦ BLAGO</span></header>
+<header class="topbar"><div><h1 id="page-title">благо</h1><p id="page-subtitle"></p></div><button id="tools-toggle" type="button" aria-label="Открыть личное пространство" aria-expanded="false" aria-controls="desktop-nav">⋯</button></header>
 <div class="content">
 <section id="chat-screen" class="screen active"><div id="chat-pane" class="panel">
 <div id="chat-stream" aria-live="polite" aria-label="Сообщения">
-<div class="empty">Привет! Я BLAGO. Расскажи, чем могу быть полезен.</div>
+
 </div>
-<form id="chat-form" class="chat-compose"><textarea id="chat-input" maxlength="4000" rows="1" aria-label="Сообщение" placeholder="Напишите сообщение…" required></textarea><button id="send-btn" class="primary" type="submit">↑</button></form>
+<form id="chat-form" class="chat-compose"><textarea id="chat-input" maxlength="4000" rows="1" aria-label="Сообщение" placeholder="О чём думаешь?" required></textarea><button id="send-btn" class="primary" type="submit">↑</button></form>
 </div></section>
 <section id="needs-screen" class="screen"><div class="section-head"><div><h2>Мои потребности</h2><p>Здесь можно рассказать, какая помощь вам нужна.</p></div></div>
 <div class="two-col"><form id="needs-form" class="panel"><h2>Новая потребность</h2><label for="needs-title">Что необходимо?</label><input id="needs-title" required minlength="2" maxlength="160" placeholder="Например, помощь с ремонтом">
@@ -131,7 +174,7 @@ async function restore(){try{let data=await api('me');state.csrf=data.csrf;state
  if(initData){try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();const capability=await api('auth/capabilities');const exchange=capability.secure_identity?await api('auth/telegram/challenge','POST'):{};const data=await api('auth/telegram','POST',{init_data:initData,challenge:exchange.challenge});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();return}catch(e){note(e.message)}}
  showAuth()
 }
-function openTab(tab){if(!tabs[tab])return;state.tab=tab;document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));document.querySelectorAll('.screen').forEach(n=>n.classList.toggle('active',n.id===tab+'-screen'));$('page-title').textContent=tabs[tab][0];$('page-subtitle').textContent=tabs[tab][1];loadTab(tab)}
+function openTab(tab){if(!tabs[tab])return;document.body.classList.remove('tools-open');$('tools-toggle').setAttribute('aria-expanded','false');state.tab=tab;document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));document.querySelectorAll('.screen').forEach(n=>n.classList.toggle('active',n.id===tab+'-screen'));$('page-title').textContent=tab==='chat'?'благо':tabs[tab][0];$('page-subtitle').textContent=tabs[tab][1];loadTab(tab)}
 async function loadTab(tab){try{
  if(tab==='chat')await loadHistory();
  if(tab==='needs'||tab==='resources')await loadItems(tab);
@@ -139,7 +182,7 @@ async function loadTab(tab){try{
  if(tab==='profile')await loadProfile();
  }catch(e){note(e.message)}}
 function bubble(role,text,pending=false){const div=document.createElement('div');div.className='bubble'+(role==='user'?' user':'')+(pending?' pending':'');div.textContent=text;$('chat-stream').append(div);$('chat-stream').scrollTop=$('chat-stream').scrollHeight;return div}
-async function loadHistory(){const data=await api('chat/messages');$('chat-stream').replaceChildren();if(!data.messages.length){bubble('assistant','Привет! Я BLAGO. Расскажи, чем могу быть полезен.')}else data.messages.forEach(m=>bubble(m.role,m.text))}
+async function loadHistory(){const data=await api('chat/messages');$('chat-stream').replaceChildren();data.messages.forEach(m=>bubble(m.role,m.text))}
 $('chat-form').addEventListener('submit',async e=>{e.preventDefault();if(state.busy)return;const value=$('chat-input').value.trim();if(!value)return;state.busy=true;$('send-btn').disabled=true;$('chat-input').value='';bubble('user',value);const waiting=bubble('assistant','BLAGO думает…',true);try{const data=await api('chat/messages','POST',{text:value});waiting.textContent=data.reply;waiting.classList.remove('pending')}catch(error){waiting.textContent='Не удалось отправить: '+error.message;waiting.classList.remove('pending')}finally{state.busy=false;$('send-btn').disabled=false}});
 $('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('chat-form').requestSubmit()}});
 function textElement(tag,value,cls){const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=value;return el}
@@ -186,6 +229,9 @@ $('refresh-access').onclick=()=>loadAccess().catch(e=>note(e.message));
 $('revoke-others').onclick=async()=>{try{await api('auth/sessions/revoke','POST',{others:true});await loadAccess();note('Другие сессии завершены')}catch(error){note(error.message)}};
 api('auth/capabilities').then(c=>{access.hidden=!c.secure_identity;privacyPanel.hidden=!c.privacy;$('passkey-login').hidden=!c.passkeys;$('add-passkey').hidden=!c.passkeys;$('confirm-passkey').hidden=!c.passkeys}).catch(()=>{});
 document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>openTab(button.dataset.tab)));
+$('tools-toggle').addEventListener('click',()=>{const open=document.body.classList.toggle('tools-open');$('tools-toggle').setAttribute('aria-expanded',String(open))});
+$('tools-scrim').addEventListener('click',()=>{$('tools-toggle').click()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('tools-open'))$('tools-toggle').click()});
 restore();
 if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('/app/sw.js').catch(()=>{});}
 })();
