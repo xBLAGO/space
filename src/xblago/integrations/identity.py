@@ -352,7 +352,7 @@ class IdentityRuntime:
             'web_credentials','web_sessions','account_link_codes','blago_needs','blago_resources','blago_assets',
             'blago_resource_offers','blago_payment_requests','blago_payment_request_offers',
             'blago_fulfillment_events','blago_contribution_events','user_devices','passkey_credentials',
-            'auth_challenges','activity_events','security_signals','consent_records','telegram_proofs'}
+            'auth_challenges','activity_events','security_signals','consent_records','telegram_proofs','privacy_aliases','privacy_delete_challenges'}
         for record in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall():
             name = record[0]
             if name in known_tables:
@@ -364,6 +364,10 @@ class IdentityRuntime:
                     if db.execute(f'SELECT 1 FROM {quoted} WHERE {column}=? LIMIT 1', (source,)).fetchone():
                         raise ApiError(409, 'Account merge requires support for an additional ownership table')
         db.execute('PRAGMA defer_foreign_keys=ON')
+        if db.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_aliases'").fetchone():
+            db.execute('DELETE FROM privacy_delete_challenges WHERE blago_user_id IN (?,?)',(source,target))
+            db.execute('UPDATE privacy_aliases SET target_uid=? WHERE target_uid=?',(target,source))
+            db.execute('INSERT INTO privacy_aliases VALUES (?,?)',(source,target))
         db.execute('DELETE FROM account_link_codes WHERE target_user_id IN (?,?)', (source, target))
         db.execute('DELETE FROM auth_challenges WHERE blago_user_id IN (?,?)', (source, target))
         # Composite device/credential ownership is validated together at commit.

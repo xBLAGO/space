@@ -143,7 +143,11 @@ class TelegramBot:
                 return []
 
             identity = _telegram_identity_from_message(message, chat_id)
-            blago_user_id = self.store.resolve_telegram_user(identity)
+            from xblago.core.security_journal import JournalUnavailable
+            try:
+                blago_user_id = self.store.resolve_telegram_user(identity, allow_reenroll=text.strip()=='/start')
+            except JournalUnavailable:
+                return _telegram_message_replies(chat_id, 'Доступ закрыт до проверки журнала безопасности. После удаления Telegram-привязки отправьте /start для явного создания нового аккаунта.')
             with self.store._connect() as db:
                 status = db.execute('SELECT status FROM users WHERE blago_user_id=?', (blago_user_id,)).fetchone()
             if status is None or status[0] != 'active':

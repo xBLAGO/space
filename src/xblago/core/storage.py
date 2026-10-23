@@ -37,17 +37,25 @@ class SQLiteBlagoStore:
     def memory_for_user(self, blago_user_id: str) -> MemoryStore:
         return SQLiteUserMemoryStore(self, blago_user_id)
 
-    def resolve_telegram_user(self, identity: TelegramIdentity) -> str:
+    def resolve_telegram_user(self, identity: TelegramIdentity, allow_reenroll: bool = False) -> str:
         with self._locked_transaction() as connection:
-            blago_user_id = self._resolve_telegram_user(connection, identity)
+            blago_user_id = self._resolve_telegram_user(connection, identity, allow_reenroll)
+            privacy_enabled = connection.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_state'").fetchone() is not None
 
-        self.migrate_legacy_telegram_memory(identity.chat_id, blago_user_id)
+        if not privacy_enabled:
+            self.migrate_legacy_telegram_memory(identity.chat_id, blago_user_id)
         return blago_user_id
 
-    def _resolve_telegram_user(self, connection: sqlite3.Connection, identity: TelegramIdentity) -> str:
+    def _resolve_telegram_user(self, connection: sqlite3.Connection, identity: TelegramIdentity, allow_reenroll: bool = False) -> str:
         """Resolve within an existing transaction (auth proof + session commit)."""
         channel_user_id = str(identity.telegram_user_id) if identity.telegram_user_id is not None else f"chat:{identity.chat_id}"
         now = _utc_now()
+        from xblago.core.privacy_control import PrivacyControl
+        privacy = PrivacyControl.open(connection)
+        expected_uid, blocked = privacy.channel_owner('telegram',channel_user_id) if privacy else (None,False)
+        if blocked and not allow_reenroll:
+            from xblago.core.security_journal import JournalUnavailable
+            raise JournalUnavailable('Telegram link was removed. Use /start to explicitly create a new account')
 
         row = connection.execute(
             """
@@ -59,6 +67,15 @@ class SQLiteBlagoStore:
         ).fetchone()
         if row:
             blago_user_id = str(row["blago_user_id"])
+            if expected_uid is not None and blago_user_id != expected_uid:
+                from xblago.core.security_journal import JournalUnavailable
+                raise JournalUnavailable('Telegram identity requires offline reconciliation')
+        elif expected_uid is not None:
+            status = connection.execute('SELECT status FROM users WHERE blago_user_id=?',(expected_uid,)).fetchone()
+            if not status or status[0] != 'active':
+                from xblago.core.security_journal import JournalUnavailable
+                raise JournalUnavailable('Telegram identity is not active')
+            blago_user_id = expected_uid
         else:
             blago_user_id = str(uuid4())
             connection.execute(
@@ -105,6 +122,10 @@ class SQLiteBlagoStore:
         return blago_user_id
 
     def migrate_legacy_telegram_memory(self, chat_id: int, blago_user_id: str) -> bool:
+        with self._connect() as db:
+            if db.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_state'").fetchone():
+                from xblago.core.security_journal import JournalUnavailable
+                raise JournalUnavailable('Legacy JSON imports are disabled after privacy activation')
         if self.legacy_memory_dir is None:
             return False
 
@@ -625,7 +646,17 @@ class SQLiteBlagoStore:
             with self._connect() as connection:
                 try:
                     connection.execute("BEGIN IMMEDIATE")
+                    from xblago.core.privacy_control import PrivacyControl
+                    privacy = PrivacyControl.open(connection)
+                    # Persist already-durable revocations before evaluating a request that
+                    # might be rejected (and therefore roll back its business transaction).
+                    while privacy and privacy.reconcile():
+                        connection.commit()
+                        connection.execute('BEGIN IMMEDIATE')
+                        privacy = PrivacyControl.open(connection)
                     yield connection
+                    if privacy:
+                        privacy.flush()
                 except Exception:
                     connection.rollback()
                     raise
