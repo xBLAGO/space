@@ -18,7 +18,15 @@
     "evidence": "PR6 Tests42 Docker job"
   },
   "docker_candidate": {
-    "status": "awaiting current PR CI attestation"
+    "status": "VERIFIED in Tests45 Docker job",
+    "source_sha": "8eefbc5a14c0d84ef641f1de6d824f3cf3377268",
+    "python": "3.12.15",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/usr/local/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+    "wal_reset_fix_verified": true,
+    "ci_run": "https://github.com/xBLAGO/space/actions/runs/40014837849",
+    "job_id": 120624119186
   },
   "hf": {
     "space": "RomanMaloev/space",

@@ -51,7 +51,7 @@ Docker и Linux CI подключают библиотеку к Python `_sqlite3
 | Исходный локальный Python 3.12.10 | SQLite 3.49.1, статически связанный macOS `_sqlite3` | Не разрешён для pilot |
 | Изолированный Python driver локального прогона | SQLite 3.54.1, точный source ID совпал | Исправление подтверждено для этого процесса |
 | Docker PR #6 | SQLite 3.46.1, старый CI Tests #42 | Backport не подтверждён; не разрешён |
-| Docker этого PR | Проверяется отдельным CI шагом внутри собранного image | При несовпадении CI красный |
+| Docker этого PR | Python 3.12.15, SQLite 3.54.1, точный source ID; Tests #45 | PASS, внутри собранного image |
 | Действующий HF Space | Python/SQLite/source ID **не установлены** | Блокер; floating `python:3.12-slim` не доказательство |
 
 [Runtime inventory](validation05_4/runtime-inventory.json) содержит исходные
@@ -214,14 +214,20 @@ CI выполняет полный набор, compileall, patched-library gate,
 публикует browser-evidence artifact; Docker job собирает image и проверяет
 фактическую Python SQLite, health/PWA, Identity Runtime, Privacy Recovery и
 строгую pilot конфигурацию с 05.4 baseline + независимым witness.
-Точный CI run и SHA приводятся в draft PR; зелёный статус относится только к
-проверенному коммиту и не является разрешением deployment.
+[CI Tests #45](https://github.com/xBLAGO/space/actions/runs/40014837849)
+на source SHA `8eefbc5a14c0d84ef641f1de6d824f3cf3377268`: оба jobs SUCCESS,
+225/225 тестов за 19.929 s на Linux/Python 3.12.15, фактическая SQLite 3.54.1,
+Chrome 155.0.8059.39 с 8/8 UI checks, Docker build и все четыре smoke/gate шага.
+[Выдержки логов](validation05_4/ci-source-evidence.txt),
+[browser artifact](https://github.com/xBLAGO/space/actions/runs/40014837849/artifacts/12527747457).
+Последующий коммит добавляет только эти доказательства/документацию; его CI
+также указан в PR. Зелёный статус не является разрешением deployment.
 
 ## Таблица блокеров и доказательства
 
 | Gate | Состояние | Доказательство / условие закрытия |
 |---|---|---|
-| Проверенный SQLite candidate и fail-closed CI/runtime | Исправлено в коде; image подтверждает CI | sqlite_safety, official hashes, runtime inventory, CI Docker log |
+| Проверенный SQLite candidate и fail-closed CI/runtime | **PASS CI Tests #45** | sqlite_safety, official hashes, runtime inventory, CI Docker log |
 | HIGH resurrection после изменения/merge | Исправлено для 05.4 lineage | Independent recheck + old-backup negative tests |
 | Журнал/head rollback, повреждение, key loss, fsync failures | Тесты PASS в заявленной trusted-host модели | 17 safety tests, независимый review |
 | Синтетический новый экземпляр DR | PASS локально/автоматически | Отдельный процесс, AES bundle + внешняя вершина |

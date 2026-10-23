@@ -7,8 +7,8 @@
   "gates": [
     {
       "id": "candidate_sqlite",
-      "status": "IMPLEMENTED_CI_REQUIRED",
-      "evidence": "Runtime source-id gate and pinned upstream hashes; Docker result in PR CI"
+      "status": "PASS_CI",
+      "evidence": "Tests45 Docker actual Python 3.12.15 / SQLite 3.54.1 exact source-id; ci-source-evidence.txt"
     },
     {
       "id": "privacy_resurrection",
