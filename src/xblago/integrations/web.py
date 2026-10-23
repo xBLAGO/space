@@ -1241,10 +1241,18 @@ class BlagoWebHandler(TelegramWebhookHandler):
             raise ApiError(403, "Cross-site request blocked")
 
     def _api(self, method: str, path: str) -> None:
+        from xblago.core.security_journal import JournalUnavailable
         try:
             self._api_impl(method, path)
         except ApiError as exc:
             self._json({"error": str(exc)}, status=exc.status)
+        except JournalUnavailable:
+            self._json({'error':'Privacy journal unavailable or recovery pending. Access is closed until reconciliation.'},status=503)
+        except sqlite3.IntegrityError as exc:
+            if 'Account deleted; stale write rejected' in str(exc):
+                self._json({'error':'Account deleted. Please confirm access again.'},status=401)
+            else:
+                self._json({'error':'Operation conflicts with retained data'},status=409)
         except Exception:
             # Never leak password/token/database diagnostics to public clients.
             self._json({"error": "Internal server error"}, status=500)
@@ -1261,7 +1269,11 @@ class BlagoWebHandler(TelegramWebhookHandler):
                 configured = True
             except ApiError:
                 pass
-            self._json({'secure_identity': app.identity.enabled, 'passkeys': configured and app.identity.enabled})
+            data = {'secure_identity': app.identity.enabled, 'passkeys': configured and app.identity.enabled}
+            with app.store._connect() as db:
+                if db.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_state'").fetchone():
+                    data['privacy']=True
+            self._json(data)
             return
         if method == 'POST' and path in ('/api/v1/auth/telegram/challenge', '/api/v1/auth/passkeys/authenticate/options'):
             app.check_auth_rate(self.client_address[0])
@@ -1299,7 +1311,27 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path == '/api/v1/auth/sessions' and method == 'GET':
+        if path.startswith('/api/v1/privacy/'):
+            from xblago.integrations.privacy import PrivacyService
+            privacy = PrivacyService(app)
+            if path=='/api/v1/privacy/export' and method=='POST':
+                if self._body():
+                    raise ApiError(400,'Export scope is determined by your authenticated account')
+                self._json(privacy.export(token))
+            elif path=='/api/v1/privacy/delete-preview' and method=='POST':
+                if self._body():
+                    raise ApiError(400,'Deletion scope is determined by your authenticated account')
+                self._json(privacy.preview(token))
+            elif path=='/api/v1/privacy/account' and method=='DELETE':
+                data = self._body()
+                if set(data)!={'challenge','confirm'}:
+                    raise ApiError(400,'Only confirmation and challenge are accepted')
+                self._json(privacy.delete(token,data['challenge'],data['confirm']),cookie=self._cookie('',clear=True))
+            elif path=='/api/v1/privacy/analytics' and method=='GET':
+                self._json(privacy.analytics(token))
+            else:
+                raise ApiError(404,'Unknown privacy operation')
+        elif path == '/api/v1/auth/sessions' and method == 'GET':
             self._json({'sessions': app.identity.sessions(token)})
         elif path == '/api/v1/auth/sessions/revoke' and method == 'POST':
             body = self._body()
