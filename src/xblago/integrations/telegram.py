@@ -144,6 +144,12 @@ class TelegramBot:
 
             identity = _telegram_identity_from_message(message, chat_id)
             blago_user_id = self.store.resolve_telegram_user(identity)
+            with self.store._connect() as db:
+                status = db.execute('SELECT status FROM users WHERE blago_user_id=?', (blago_user_id,)).fetchone()
+            if status is None or status[0] != 'active':
+                return _telegram_message_replies(chat_id, 'Доступ к этому аккаунту приостановлен. Используйте другой ранее подтверждённый способ входа.')
+            if identity.telegram_user_id is None and text.strip().startswith('/link'):
+                return _telegram_message_replies(chat_id, 'Для привязки нужен подтверждённый отправитель Telegram.')
             update_id = _external_update_id(update)
             if not self.store.begin_update("telegram", update_id, blago_user_id):
                 return self.store.cached_update_replies("telegram", update_id) or []
@@ -171,10 +177,12 @@ class TelegramBot:
             from xblago.integrations.web import ApiError, WebApp
 
             try:
-                WebApp(self.store).redeem_telegram_link(blago_user_id, parts[1])
+                app = WebApp(self.store)
+                app.redeem_telegram_link(blago_user_id, parts[1])
             except ApiError as exc:
                 return _telegram_message_replies(chat_id, f"Не удалось привязать аккаунт: {exc}")
-            return _telegram_message_replies(chat_id, "Готово. Telegram и веб-аккаунт используют один BLAGO ID и общую память.")
+            suffix = ' Для безопасности войдите в Web или Mini App повторно.' if app.identity.enabled else ''
+            return _telegram_message_replies(chat_id, "Готово. Telegram и веб-аккаунт используют один BLAGO ID и общую память." + suffix)
 
         if text.strip() == "/start":
             welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")

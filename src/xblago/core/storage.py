@@ -38,64 +38,70 @@ class SQLiteBlagoStore:
         return SQLiteUserMemoryStore(self, blago_user_id)
 
     def resolve_telegram_user(self, identity: TelegramIdentity) -> str:
+        with self._locked_transaction() as connection:
+            blago_user_id = self._resolve_telegram_user(connection, identity)
+
+        self.migrate_legacy_telegram_memory(identity.chat_id, blago_user_id)
+        return blago_user_id
+
+    def _resolve_telegram_user(self, connection: sqlite3.Connection, identity: TelegramIdentity) -> str:
+        """Resolve within an existing transaction (auth proof + session commit)."""
         channel_user_id = str(identity.telegram_user_id) if identity.telegram_user_id is not None else f"chat:{identity.chat_id}"
         now = _utc_now()
 
-        with self._locked_transaction() as connection:
-            row = connection.execute(
-                """
-                SELECT blago_user_id
-                FROM channel_links
-                WHERE channel = ? AND channel_user_id = ?
-                """,
-                ("telegram", channel_user_id),
-            ).fetchone()
-            if row:
-                blago_user_id = str(row["blago_user_id"])
-            else:
-                blago_user_id = str(uuid4())
-                connection.execute(
-                    "INSERT INTO users (blago_user_id, created_at, status) VALUES (?, ?, ?)",
-                    (blago_user_id, now, "active"),
-                )
-                connection.execute(
-                    """
-                    INSERT INTO profiles (blago_user_id, display_name, language, timezone, updated_at)
-                    VALUES (?, ?, ?, ?, ?)
-                    """,
-                    (blago_user_id, _display_name(identity), None, None, now),
-                )
-
+        row = connection.execute(
+            """
+            SELECT blago_user_id
+            FROM channel_links
+            WHERE channel = ? AND channel_user_id = ?
+            """,
+            ("telegram", channel_user_id),
+        ).fetchone()
+        if row:
+            blago_user_id = str(row["blago_user_id"])
+        else:
+            blago_user_id = str(uuid4())
+            connection.execute(
+                "INSERT INTO users (blago_user_id, created_at, status) VALUES (?, ?, ?)",
+                (blago_user_id, now, "active"),
+            )
             connection.execute(
                 """
-                INSERT INTO channel_links (
-                    channel, channel_user_id, channel_chat_id, chat_type, blago_user_id,
-                    username, first_name, last_name, created_at, updated_at
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(channel, channel_user_id) DO UPDATE SET
-                    channel_chat_id = excluded.channel_chat_id,
-                    chat_type = excluded.chat_type,
-                    username = excluded.username,
-                    first_name = excluded.first_name,
-                    last_name = excluded.last_name,
-                    updated_at = excluded.updated_at
+                INSERT INTO profiles (blago_user_id, display_name, language, timezone, updated_at)
+                VALUES (?, ?, ?, ?, ?)
                 """,
-                (
-                    "telegram",
-                    channel_user_id,
-                    str(identity.chat_id),
-                    identity.chat_type,
-                    blago_user_id,
-                    identity.username,
-                    identity.first_name,
-                    identity.last_name,
-                    now,
-                    now,
-                ),
+                (blago_user_id, _display_name(identity), None, None, now),
             )
 
-        self.migrate_legacy_telegram_memory(identity.chat_id, blago_user_id)
+        connection.execute(
+            """
+            INSERT INTO channel_links (
+                channel, channel_user_id, channel_chat_id, chat_type, blago_user_id,
+                username, first_name, last_name, created_at, updated_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(channel, channel_user_id) DO UPDATE SET
+                channel_chat_id = excluded.channel_chat_id,
+                chat_type = excluded.chat_type,
+                username = excluded.username,
+                first_name = excluded.first_name,
+                last_name = excluded.last_name,
+                updated_at = excluded.updated_at
+            """,
+            (
+                "telegram",
+                channel_user_id,
+                str(identity.chat_id),
+                identity.chat_type,
+                blago_user_id,
+                identity.username,
+                identity.first_name,
+                identity.last_name,
+                now,
+                now,
+            ),
+        )
+
         return blago_user_id
 
     def migrate_legacy_telegram_memory(self, chat_id: int, blago_user_id: str) -> bool:

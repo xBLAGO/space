@@ -63,7 +63,7 @@ main{margin-left:255px;min-height:100dvh;display:flex;flex-direction:column}
 <label for="password">Пароль (от 12 символов)</label><input id="password" type="password" autocomplete="current-password" minlength="12" required>
 <div id="invite-wrap" hidden><label for="invite">Код приглашения</label><input id="invite" autocomplete="off"></div>
 <button id="auth-submit" class="primary full" type="submit">Войти в BLAGO</button>
-</form><div class="auth-switch"><button class="ghost" id="auth-toggle" type="button">У меня есть приглашение</button></div>
+</form><button id="passkey-login" class="secondary full" type="button" hidden>Подтвердить доступ ключом устройства</button><p class="small">Подтвердите доступ, чтобы продолжить личный диалог и открыть свою память BLAGO. Паспорт не нужен.</p><div class="auth-switch"><button class="ghost" id="auth-toggle" type="button">У меня есть приглашение</button></div>
 <p class="small">Доступ в сообщество по приглашению. Данные остаются привязаны к вашему BLAGO ID.</p>
 </div></div>
 <div id="shell">
@@ -128,7 +128,7 @@ function showAuth(){state.csrf='';$('loading').style.display='none';$('shell').s
 function showApp(){ $('loading').style.display='none';$('auth').style.display='none';$('shell').style.display='block';const name=state.profile.display_name||'Участник';$('sidebar-user').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();openTab(state.tab)}
 async function restore(){try{let data=await api('me');state.csrf=data.csrf;state.profile=data.profile;showApp();return}catch(e){if(!String(e).includes('sign in')&&!String(e).includes('Session')){}}
  const initData=window.Telegram?.WebApp?.initData;
- if(initData){try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();const data=await api('auth/telegram','POST',{init_data:initData});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();return}catch(e){note(e.message)}}
+ if(initData){try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();const capability=await api('auth/capabilities');const exchange=capability.secure_identity?await api('auth/telegram/challenge','POST'):{};const data=await api('auth/telegram','POST',{init_data:initData,challenge:exchange.challenge});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();return}catch(e){note(e.message)}}
  showAuth()
 }
 function openTab(tab){if(!tabs[tab])return;state.tab=tab;document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));document.querySelectorAll('.screen').forEach(n=>n.classList.toggle('active',n.id===tab+'-screen'));$('page-title').textContent=tabs[tab][0];$('page-subtitle').textContent=tabs[tab][1];loadTab(tab)}
@@ -154,6 +154,33 @@ $('get-link-code').addEventListener('click',async()=>{try{const data=await api('
 $('logout').addEventListener('click',async()=>{try{await api('auth/logout','POST');showAuth()}catch(error){note(error.message)}});
 $('auth-toggle').addEventListener('click',()=>{state.register=!state.register;$('invite-wrap').hidden=!state.register;$('invite').required=state.register;$('auth-submit').textContent=state.register?'Создать аккаунт':'Войти в BLAGO';$('auth-toggle').textContent=state.register?'У меня уже есть аккаунт':'У меня есть приглашение';$('password').autocomplete=state.register?'new-password':'current-password'});
 $('auth-form').addEventListener('submit',async e=>{e.preventDefault();const button=$('auth-submit');button.disabled=true;try{const path=state.register?'auth/register':'auth/login';const data=await api(path,'POST',{username:$('username').value,password:$('password').value,invite:$('invite').value});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp()}catch(error){note(error.message)}finally{button.disabled=false}});
+// Access controls stay optional and separate from conversation/LLM decisions.
+const access=document.createElement('details');access.hidden=true;
+access.innerHTML='<summary>Доступ и устройства</summary><p class="small">Ключ устройства позволяет вернуться к диалогу без пароля. Изменения требуют недавнего подтверждения доступа.</p><button type="button" id="add-passkey" class="secondary">Добавить ключ доступа</button><button type="button" id="confirm-passkey" class="secondary">Подтвердить доступ ключом</button><form id="confirm-access"><label>Имя для входа<input name="username" autocomplete="username" required></label><label>Пароль<input name="password" type="password" autocomplete="current-password" required></label><button class="secondary">Подтвердить доступ паролем</button></form><button type="button" id="refresh-access" class="secondary">Показать способы доступа и сессии</button><div id="access-methods"></div><div id="access-sessions"></div><button type="button" id="revoke-others" class="secondary">Завершить все другие сессии</button><p class="small">После связывания аккаунтов войдите повторно. При отключении Telegram новые обращения к боту создадут отдельный аккаунт.</p>';
+$('profile-screen').append(access);
+const passwordRecovery=document.createElement('details');passwordRecovery.innerHTML='<summary>Добавить или заменить вход паролем</summary><p class="small">Если пароль забыт, сначала войдите через ранее привязанный Telegram или ключ доступа.</p><form id="set-access-password"><label>Имя для входа<input name="username" autocomplete="username" minlength="3" maxlength="32" required></label><label>Новый пароль<input name="password" type="password" autocomplete="new-password" minlength="12" required></label><button class="secondary">Сохранить способ доступа</button></form>';access.append(passwordRecovery);
+$('set-access-password').onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;try{const data=await api('auth/password','POST',{username:form.elements.username.value,password:form.elements.password.value});state.csrf=data.csrf;form.reset();note('Пароль сохранён, другие сессии завершены')}catch(error){note(error.message)}};
+function decode64(text){return Uint8Array.from(atob(text.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0))}
+function encode64(buffer){return btoa(String.fromCharCode(...new Uint8Array(buffer))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+async function passkey(register=false){
+ if(!window.PublicKeyCredential)throw Error('Откройте BLAGO в браузере с поддержкой ключей доступа');
+ const path=register?'auth/passkeys/register/':'auth/passkeys/authenticate/';
+ const options=await api(path+'options','POST');const challenge=options.challenge;
+ options.challenge=decode64(options.challenge);if(options.user)options.user.id=decode64(options.user.id);
+ for(const name of ['allowCredentials','excludeCredentials'])if(options[name])options[name]=options[name].map(item=>({...item,id:decode64(item.id)}));
+ const value=await navigator.credentials[register?'create':'get']({publicKey:options});if(!value)throw Error('Подтверждение отменено');
+ const response={clientDataJSON:encode64(value.response.clientDataJSON)};
+ for(const name of ['attestationObject','authenticatorData','signature','userHandle'])if(value.response[name])response[name]=encode64(value.response[name]);
+ const data=await api(path+'verify','POST',{challenge,credential:{id:value.id,rawId:encode64(value.rawId),type:value.type,response}});
+ state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();note(register?'Ключ доступа добавлен':'Доступ подтверждён');
+}
+for(const id of ['passkey-login','confirm-passkey'])$(id).onclick=()=>passkey().catch(e=>note(e.message));
+$('add-passkey').onclick=()=>passkey(true).catch(e=>note(e.message));
+$('confirm-access').onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;try{const data=await api('auth/reauthenticate','POST',{username:form.elements.username.value,password:form.elements.password.value});state.csrf=data.csrf;form.reset();note('Доступ подтверждён')}catch(error){note(error.message)}};
+async function loadAccess(){const [methods,sessions]=await Promise.all([api('auth/methods'),api('auth/sessions')]);$('access-methods').replaceChildren();$('access-sessions').replaceChildren();for(const method of methods.methods){const row=textElement('p',({passkey:'Ключ доступа',password:'Пароль',telegram:'Telegram'})[method.kind]);const remove=textElement('button','Отключить','secondary');remove.type='button';remove.onclick=async()=>{if(!confirm('Отключить этот способ доступа? Другие сессии будут завершены.'))return;try{const data=await api('auth/methods','DELETE',method);state.csrf=data.csrf;await loadAccess()}catch(error){note(error.message)}};row.append(remove);$('access-methods').append(row)}for(const session of sessions.sessions){const row=textElement('p',(session.current?'Эта сессия · ':'')+session.auth_method+' · '+new Date(session.last_seen_at*1000).toLocaleString('ru'));if(!session.current){const remove=textElement('button','Завершить','secondary');remove.type='button';remove.onclick=async()=>{try{await api('auth/sessions/revoke','POST',{id:session.public_id});await loadAccess()}catch(error){note(error.message)}};row.append(remove)}$('access-sessions').append(row)}}
+$('refresh-access').onclick=()=>loadAccess().catch(e=>note(e.message));
+$('revoke-others').onclick=async()=>{try{await api('auth/sessions/revoke','POST',{others:true});await loadAccess();note('Другие сессии завершены')}catch(error){note(error.message)}};
+api('auth/capabilities').then(c=>{access.hidden=!c.secure_identity;$('passkey-login').hidden=!c.passkeys;$('add-passkey').hidden=!c.passkeys;$('confirm-passkey').hidden=!c.passkeys}).catch(()=>{});
 document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>openTab(button.dataset.tab)));
 restore();
 if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('/app/sw.js').catch(()=>{});}
