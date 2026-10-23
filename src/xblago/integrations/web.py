@@ -137,7 +137,6 @@ def _classify_payment_risk(
 class WebApp:
     def __init__(self, store: SQLiteBlagoStore) -> None:
         self.store = store
-        self._chat_lock = RLock()
         self._auth_lock = RLock()
         self._auth_attempts: dict[str, list[float]] = {}
         self._ensure_schema()
@@ -359,7 +358,7 @@ class WebApp:
         # A one-time secret proves control of the destination web account.
         if len(code) != 16 or any(c not in "0123456789ABCDEF" for c in code.upper()):
             raise ApiError(400, "Invalid linking code")
-        with self.store._locked_transaction() as db:
+        with self.store.conversation_lock, self.store._locked_transaction() as db:
             row = db.execute(
                 "SELECT target_user_id FROM account_link_codes WHERE code_hash = ? AND expires_at > ?",
                 (hashlib.sha256(code.upper().encode()).hexdigest(), _iso()),
@@ -408,54 +407,35 @@ class WebApp:
                 "UPDATE blago_contribution_events SET recipient_user_id = ? WHERE recipient_user_id = ?",
                 (target_uid, telegram_uid),
             )
-            # Memory keys can collide. Keep both values with a namespaced key.
-            memories = db.execute(
-                "SELECT key, value_json, updated_at FROM memory_facts WHERE blago_user_id = ?",
-                (telegram_uid,),
+            # Allocate once per logical key across both memory representations.
+            # Keep the destination's facts and all source versions under a unique key.
+            source_keys = db.execute(
+                "SELECT key FROM memory_facts WHERE blago_user_id = ? UNION SELECT memory_key FROM semantic_memory WHERE blago_user_id = ?",
+                (telegram_uid, telegram_uid),
             ).fetchall()
-            for memory in memories:
-                key = str(memory["key"])
-                if db.execute(
-                    "SELECT 1 FROM memory_facts WHERE blago_user_id = ? AND key = ?", (target_uid, key),
-                ).fetchone():
-                    candidate = "telegram." + key
+            occupied = {str(row[0]) for row in db.execute(
+                "SELECT key FROM memory_facts WHERE blago_user_id = ? UNION SELECT memory_key FROM semantic_memory WHERE blago_user_id = ?",
+                (target_uid, target_uid),
+            )}
+            reserved = occupied | {str(row[0]) for row in source_keys}
+            for row in source_keys:
+                original = str(row[0])
+                key = original
+                if key in occupied:
+                    key = "telegram." + original
                     suffix = 2
-                    while db.execute(
-                        "SELECT 1 FROM memory_facts WHERE blago_user_id = ? AND key = ?", (target_uid, candidate),
-                    ).fetchone():
-                        candidate = f"telegram.{key}.{suffix}"
+                    while key in reserved:
+                        key = f"telegram.{original}.{suffix}"
                         suffix += 1
-                    key = candidate
+                reserved.add(key)
                 db.execute(
-                    "INSERT INTO memory_facts (blago_user_id,key,value_json,source_event_id,updated_at) VALUES (?,?,?,?,?)",
-                    (target_uid, key, memory["value_json"], None, memory["updated_at"]),
+                    "UPDATE memory_facts SET blago_user_id = ?, key = ? WHERE blago_user_id = ? AND key = ?",
+                    (target_uid, key, telegram_uid, original),
                 )
-            semantic_memories = db.execute(
-                """
-                SELECT id, memory_key, value_json, category, source, status, confidence, created_at, updated_at
-                FROM semantic_memory
-                WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')
-                """,
-                (telegram_uid,),
-            ).fetchall()
-            for memory in semantic_memories:
-                key = str(memory["memory_key"])
-                if db.execute(
-                    "SELECT 1 FROM semantic_memory WHERE blago_user_id = ? AND memory_key = ? AND status IN ('confirmed', 'candidate')",
-                    (target_uid, key),
-                ).fetchone():
-                    key = "telegram." + key
                 db.execute(
-                    """
-                    INSERT INTO semantic_memory (
-                        id, blago_user_id, memory_key, value_json, category, source, status,
-                        confidence, created_at, updated_at, supersedes_id
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)
-                    """,
-                    (str(uuid4()), target_uid, key, memory["value_json"], memory["category"], memory["source"], memory["status"], memory["confidence"], memory["created_at"], memory["updated_at"]),
+                    "UPDATE semantic_memory SET blago_user_id = ?, memory_key = ? WHERE blago_user_id = ? AND memory_key = ?",
+                    (target_uid, key, telegram_uid, original),
                 )
-            db.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (telegram_uid,))
-            db.execute("UPDATE semantic_memory SET status = 'deleted', updated_at = ? WHERE blago_user_id = ? AND status IN ('confirmed', 'candidate')", (_iso(), telegram_uid))
             db.execute(
                 "UPDATE channel_links SET blago_user_id = ? WHERE channel = 'telegram' AND blago_user_id = ?",
                 (target_uid, telegram_uid),
@@ -529,7 +509,7 @@ class WebApp:
         return [{"role": t.role, "text": t.text} for t in self.store.recent_history(uid, 100)]
 
     def chat(self, uid: str, text: str) -> str:
-        with self._chat_lock:
+        with self.store.conversation_lock:
             agent = PersonalAssistantAgent(
                 memory=self.store.memory_for_user(uid),
                 chat_provider=build_chat_provider(load_llm_config()),
@@ -538,6 +518,11 @@ class WebApp:
                 history_clearer=lambda: self.store.clear_history(uid),
             )
             return agent.respond(UserMessage(text=text)).text
+
+    def delete_memory(self, uid: str, key: str) -> bool:
+        # A completed delete must not be undone by an already running chat turn.
+        with self.store.conversation_lock:
+            return self.store.memory_for_user(uid).delete(key)
 
     def rows(self, kind: str, uid: str) -> list[dict[str, Any]]:
         table = self._table(kind)
@@ -1286,7 +1271,7 @@ class BlagoWebHandler(TelegramWebhookHandler):
         elif path == "/api/v1/memory" and method == "DELETE":
             body = self._body()
             key = _required_text(body.get("key"), "Memory key", 1, 80)
-            self._json({"deleted": app.store.memory_for_user(uid).delete(key)})
+            self._json({"deleted": app.delete_memory(uid, key)})
         elif path == "/api/v1/analytics/me" and method == "GET":
             self._json({"analytics": app.analytics(uid)})
         elif path == "/api/v1/analytics/community" and method == "GET":

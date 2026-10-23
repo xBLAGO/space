@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: ["feat/**"]
+    branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "feat/foundation-04-semantic-memory"]
   workflow_dispatch:
 
 jobs:
