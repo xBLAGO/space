@@ -1,0 +1,27 @@
+[
+  {
+    "pr": 2,
+    "sha": "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a",
+    "ancestor_of_pr6": true
+  },
+  {
+    "pr": 3,
+    "sha": "af94ac93dde649747b1a89104000f92f75ecb7fc",
+    "ancestor_of_pr6": true
+  },
+  {
+    "pr": 4,
+    "sha": "8820d7852f0db6c4fc5101f9e281211ba7b6b074",
+    "ancestor_of_pr6": true
+  },
+  {
+    "pr": 5,
+    "sha": "8b63b8795490a11ad2b5a709b9a258033b7d6381",
+    "ancestor_of_pr6": true
+  },
+  {
+    "pr": 6,
+    "sha": "224ad9d2a1775a8372354af35d542f433cb8bdde",
+    "ancestor_of_pr6": true
+  }
+]

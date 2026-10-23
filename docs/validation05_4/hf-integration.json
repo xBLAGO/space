@@ -1,0 +1,297 @@
+{
+  "synthetic_only": true,
+  "model": "Qwen/Qwen3-14B:cheapest",
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "checks": [
+    {
+      "name": "Web_Telegram_MiniApp_one_ID",
+      "passed": true
+    },
+    {
+      "name": "preference_changed",
+      "passed": true
+    },
+    {
+      "name": "city_corrected",
+      "passed": true
+    },
+    {
+      "name": "optout_memory_unchanged",
+      "passed": true
+    },
+    {
+      "name": "optout_no_extractor",
+      "passed": true
+    },
+    {
+      "name": "city_forgotten",
+      "passed": true
+    },
+    {
+      "name": "no_implicit_need_created",
+      "passed": true
+    },
+    {
+      "name": "sessions_survive_restart",
+      "passed": true
+    },
+    {
+      "name": "provider_failure_memory_unchanged",
+      "passed": true
+    },
+    {
+      "name": "recovery_reached_real_provider",
+      "passed": true
+    },
+    {
+      "name": "integrity",
+      "passed": true
+    },
+    {
+      "name": "foreign_keys",
+      "passed": true
+    },
+    {
+      "name": "export_same_principal",
+      "passed": true
+    }
+  ],
+  "turns": [
+    {
+      "scenario": "01_знакомство",
+      "channel": "telegram",
+      "input": "Привет!",
+      "response": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "latency_ms": 927.07
+    },
+    {
+      "scenario": "01_знакомство",
+      "channel": "web",
+      "input": "Меня зовут Тестовая Ольга.",
+      "response": "Привет, Тестовая Ольга! Рада познакомиться. Чем могу вам помочь?",
+      "latency_ms": 1208.06
+    },
+    {
+      "scenario": "02_уточнение_потребности",
+      "channel": "web",
+      "input": "Хочу починить велосипед. С чего начать?",
+      "response": "Привет, Тестовая Ольга! Рада познакомиться. Чем могу вам помочь?",
+      "latency_ms": 967.56
+    },
+    {
+      "scenario": "02_уточнение_потребности",
+      "channel": "telegram",
+      "input": "Поскрипывают тормоза, особенно после дождя.",
+      "response": "Спасибо, что уточнили! Скрип тормозов, особенно после дождя, часто связан с влагой или загрязнением. Вот что можно сделать: 1. **Очистите тормозные колодки** — используйте сухую ткань или щётку, чтобы удалить грязь и влагу. 2. **Проверьте наличие масла или смазки** — если на колодках или роторах есть следы масла, это может вызывать скрип. Очистите их спиртом или специальной жидкостью. 3. **Проверьте натяжение тормозных тросов** — если они слишком ослаблены или перенатянуты, это может вызывать неправильное сцепление и скрип. 4. **Проверьте роторы** — они должны быть чистыми и не иметь повреждений. Если после этого скрип остался, возможно, стоит заменить тормозные колодки или посетить веломастерскую. Нужно ли я помогу составить список покупок или посоветую, где это сделать?",
+      "latency_ms": 3245.79
+    },
+    {
+      "scenario": "03_предпочтения",
+      "channel": "web",
+      "input": "Я предпочитаю короткие ответы.",
+      "response": "Хорошо, теперь буду учитывать: короткие ответы.",
+      "latency_ms": 1510.77
+    },
+    {
+      "scenario": "03_предпочтения",
+      "channel": "web",
+      "input": "Теперь мне удобнее подробные объяснения с примерами.",
+      "response": "Хорошо, теперь буду учитывать: подробные объяснения с примерами.",
+      "latency_ms": 883.57
+    },
+    {
+      "scenario": "04_исправление",
+      "channel": "web",
+      "input": "Я живу в Москве.",
+      "response": "Хорошо, теперь буду учитывать: вы живёте в Москве.",
+      "latency_ms": 1096.46
+    },
+    {
+      "scenario": "04_исправление",
+      "channel": "telegram",
+      "input": "Я больше не живу в Москве, теперь живу в Казани.",
+      "response": "Хорошо, теперь буду учитывать: Казани.",
+      "latency_ms": 1674.76
+    },
+    {
+      "scenario": "05_не_запоминать",
+      "channel": "web",
+      "input": "Не запоминай это, но расскажи, как починить велосипед.",
+      "response": "Вот как можно починить велосипед: 1. **Проверьте тормоза** — если они скрипят, очистите колодки и роторы, убедитесь, что тросы не перетянуты и не загрязнены. 2. **Проверьте цепь** — очистите её от грязи, смажьте, если нужно. 3. **Проверьте колёса** — убедитесь, что спицы не ослаблены, покрышки не повреждены. 4. **Проверьте переключение скоростей** — если переключение не работает, возможно, нужно регулировать тросы или заменить изношенные детали. 5. **Проверьте крепления** — убедитесь, что все болты и гайки затянуты. Если не уверены — можно обратиться в веломастерскую. Нужно ли я помогу найти ближайшую?",
+      "latency_ms": 2804.59
+    },
+    {
+      "scenario": "06_забыть",
+      "channel": "telegram",
+      "input": "Забудь мой город.",
+      "response": "Готово. Забыл `city`.",
+      "latency_ms": 83.41
+    },
+    {
+      "scenario": "07_чужая_потребность",
+      "channel": "web",
+      "input": "Моему знакомому нужен велосипед. Это не моя потребность.",
+      "response": "Хорошо, это не ваша потребность. Если понадобится — помогу найти информацию или варианты для вашего знакомого.",
+      "latency_ms": 916.74
+    },
+    {
+      "scenario": "08_повторное_обращение",
+      "channel": "web",
+      "input": "Помнишь, какие ответы мне удобны?",
+      "response": "Ваши удобные ответы — **подробные объяснения с примерами**.",
+      "latency_ms": 983.67
+    },
+    {
+      "scenario": "09_сбой_провайдера",
+      "channel": "web",
+      "input": "Помоги продумать следующий шаг ремонта.",
+      "response": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "latency_ms": 29.89
+    },
+    {
+      "scenario": "10_восстановление",
+      "channel": "telegram",
+      "input": "Хорошо, продолжим: как проверить тормоза велосипеда?",
+      "response": "Чтобы проверить тормоза велосипеда, следуйте этим шагам: 1. **Визуальный осмотр**:    - Проверьте, нет ли трещин или износа на тормозных колодках. - Убедитесь, что колодки не касаются ротора (диска) при неработающих тормозах — это может вызывать ненужное трение и износ. 2. **Проверка тормозного механизма**:    - Нажмите на ручку тормоза. Тормозные колодки должны плотно прижиматься к ротору. - Если тормоза не срабатывают или срабатывают слабо — возможно, тросы ослабли или загрязнены. 3. **Проверка троса и кабеля**:    - Убедитесь, что трос не перетянут, не изношен и не заедает в оболочке. - Если трос грязный — аккуратно очистите его, смажьте смазкой для тросов. 4. **Проверка ротора**:    - Убедитесь, что ротор ровный, без царапин или загрязнений. При необходимости очистите его влажной тканью. 5. **Проверка на дороге**:    - Прокатитесь на велосипеде и проверьте, как тормозит велосипед. Тормоз должен срабатывать равномерно, без скрипов и задержек. Если всё выглядит в порядке, но",
+      "latency_ms": 4057.6
+    }
+  ],
+  "calls": [
+    {
+      "scenario": "01_знакомство",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": false,
+      "error_type": "LlmProviderError",
+      "status": 503,
+      "latency_ms": 857.0
+    },
+    {
+      "scenario": "01_знакомство",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 1157.83
+    },
+    {
+      "scenario": "02_уточнение_потребности",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 933.05
+    },
+    {
+      "scenario": "02_уточнение_потребности",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 3182.54
+    },
+    {
+      "scenario": "03_предпочтения",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 1464.95
+    },
+    {
+      "scenario": "03_предпочтения",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 824.87
+    },
+    {
+      "scenario": "04_исправление",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 1043.7
+    },
+    {
+      "scenario": "04_исправление",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 1586.0
+    },
+    {
+      "scenario": "05_не_запоминать",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 2776.61
+    },
+    {
+      "scenario": "07_чужая_потребность",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 885.76
+    },
+    {
+      "scenario": "08_повторное_обращение",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 951.14
+    },
+    {
+      "scenario": "09_сбой_провайдера",
+      "stage": "answer",
+      "http_attempted": false,
+      "success": false,
+      "injected": true,
+      "error_type": "LlmProviderError",
+      "status": null,
+      "latency_ms": 0.02
+    },
+    {
+      "scenario": "10_восстановление",
+      "stage": "answer",
+      "http_attempted": true,
+      "success": true,
+      "latency_ms": 3977.21
+    }
+  ],
+  "summary": {
+    "turns": 14,
+    "provider_invocations": 13,
+    "http_attempts": 12,
+    "real_successes": 11,
+    "real_failures": 1,
+    "extractor_calls": 0,
+    "median_turn_ms": 1040.065,
+    "failed_checks": []
+  },
+  "scope": "Local temporary SQLite; direct HF inference only; production Space chat/DB untouched",
+  "manual_review": {
+    "method": "implementer read all synthetic answers; not an automatic pilot approval",
+    "findings": [
+      {
+        "scenario": "01_знакомство",
+        "finding": "one actual provider HTTP 503; safe fallback returned"
+      },
+      {
+        "scenario": "02_уточнение_потребности",
+        "finding": "first bicycle question received a repeated greeting instead of an answer; cause unconfirmed"
+      },
+      {
+        "scenario": "04_исправление",
+        "finding": "deterministic saved-city acknowledgement ends with grammatically incomplete Казани"
+      },
+      {
+        "scenario": "10_восстановление",
+        "finding": "answer ends mid-sentence; provider finish_reason was not recorded, token-budget cause is unconfirmed"
+      }
+    ],
+    "decision": "HF availability/answer-quality acceptance remains open"
+  }
+}

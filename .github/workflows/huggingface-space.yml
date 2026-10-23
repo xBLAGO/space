@@ -50,6 +50,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/space"
           cp -R src "$RUNNER_TEMP/space/src"
           cp Dockerfile pyproject.toml "$RUNNER_TEMP/space/"
+          mkdir -p "$RUNNER_TEMP/space/tools"
+          cp tools/build_sqlite.py "$RUNNER_TEMP/space/tools/build_sqlite.py"
           cp deploy/huggingface-space/README.md "$RUNNER_TEMP/space/README.md"
           find "$RUNNER_TEMP/space" -type d -name "__pycache__" -prune -exec rm -rf {} +
           find "$RUNNER_TEMP/space" -type f -name "*.pyc" -delete

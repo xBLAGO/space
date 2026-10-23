@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-10-23T19:35:08.157265+00:00",
+  "local_patched": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "local_baseline": {
+    "python": "3.12.10",
+    "sqlite_version": "3.49.1",
+    "source_id": "2025-02-18 13:38:58 873d4e274b4988d260ba8354a9718324a1c26187a4ab4c1cc0227c03d0f10e70"
+  },
+  "docker_baseline": {
+    "sqlite_version": "3.46.1",
+    "evidence": "PR6 Tests42 Docker job"
+  },
+  "docker_candidate": {
+    "status": "awaiting current PR CI attestation"
+  },
+  "hf": {
+    "space": "RomanMaloev/space",
+    "repo_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+    "runtime_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+    "stage": "RUNNING",
+    "dev_mode": true,
+    "sdk": "docker",
+    "python_version": null,
+    "sqlite_version": null,
+    "sqlite_source_id": null,
+    "sqlite_attestation": "UNVERIFIED: read-only SSH refused because trusted host key is unavailable; no insecure host-key bypass",
+    "mounts": [
+      {
+        "type": "bucket",
+        "mount_path": "/data",
+        "read_only": false
+      }
+    ],
+    "dockerfile_sha256": "1839a9144eade8b9f58a4d87ced5107c3e7ce7b26afdf2e9814f8a8f8e33dcc9",
+    "declared_base": [
+      "FROM python:3.12-slim"
+    ],
+    "limitations": "Floating Docker base is not evidence of the actual running Python SQLite; bucket mount POSIX WAL/fsync semantics unqualified"
+  },
+  "mutations": "none: metadata and source GET only; no production SQLite, secrets, deployment or restart"
+}

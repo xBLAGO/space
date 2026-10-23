@@ -122,7 +122,7 @@ def migrate_privacy(path: Path, journal_directory: Path) -> bool:
             if db.execute('SELECT version,checksum FROM privacy_schema_migrations').fetchall() != [(VERSION,CHECKSUM)]:
                 raise ValueError('Privacy migration checksum mismatch')
             state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
-            if not state or state[0] != journal.journal_id or state[1] >= len(chain) or chain[state[1]] != state[2]:
+            if not state or state[0] != journal.journal_id or type(state[1]) is not int or state[1]<0 or state[1] >= len(chain) or chain[state[1]] != state[2]:
                 raise ValueError('Privacy journal binding/rollback mismatch')
             db.commit()
             return False

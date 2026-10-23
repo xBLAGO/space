@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "decision": "NO_GO",
+  "evaluated_at": "2026-10-23",
+  "base_sha": "224ad9d2a1775a8372354af35d542f433cb8bdde",
+  "evidence_directory": "docs/validation05_4",
+  "gates": [
+    {
+      "id": "candidate_sqlite",
+      "status": "IMPLEMENTED_CI_REQUIRED",
+      "evidence": "Runtime source-id gate and pinned upstream hashes; Docker result in PR CI"
+    },
+    {
+      "id": "privacy_resurrection",
+      "status": "PASS_PROSPECTIVE_ONLY",
+      "evidence": "17 safety tests and independent recheck; coverage begins at 05.4"
+    },
+    {
+      "id": "synthetic_disaster_recovery",
+      "status": "PASS",
+      "evidence": "Separate process after primary app/journal/key/head deletion"
+    },
+    {
+      "id": "hf_runtime_and_filesystem",
+      "status": "OPEN",
+      "evidence": "Trusted host-key unavailable; actual library and bucket POSIX durability unverified"
+    },
+    {
+      "id": "physical_offsite_custody",
+      "status": "OPEN",
+      "evidence": "No independently administered storage/IAM/replication provisioning in this task"
+    },
+    {
+      "id": "historical_baseline",
+      "status": "OPEN",
+      "evidence": "Pre-05.4 lineage/deletions and legacy merges require reviewed golden baseline"
+    },
+    {
+      "id": "financial_retention",
+      "status": "OPEN_FOR_FINANCIAL_SCOPE",
+      "evidence": "Policy is a proposal; current API refuses financially dependent deletion"
+    },
+    {
+      "id": "physical_devices_and_webviews",
+      "status": "OPEN",
+      "evidence": "Chrome virtual CTAP2 passed; actual iOS/Android Telegram and platform authenticators untested"
+    },
+    {
+      "id": "hf_product_acceptance",
+      "status": "OPEN",
+      "evidence": "One actual HTTP503; repeated greeting and incomplete answer observed"
+    }
+  ],
+  "authorization": "No merge or deployment authorized by this decision"
+}

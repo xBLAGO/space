@@ -64,8 +64,9 @@ class PrivacyControl:
     def open(cls, db):
         present = db.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_state'").fetchone()
         if not present:
+            from xblago.core.sqlite_safety import pilot_enabled
             if (os.getenv('XBLAGO_SECURITY_JOURNAL_DIR','') or
-                    os.getenv('XBLAGO_REQUIRE_PRIVACY_JOURNAL','').lower() in ('true','1','yes')):
+                    os.getenv('XBLAGO_REQUIRE_PRIVACY_JOURNAL','').lower() in ('true','1','yes') or pilot_enabled()):
                 raise JournalUnavailable('Privacy migration required')
             return None
         directory = os.getenv('XBLAGO_SECURITY_JOURNAL_DIR','')
@@ -87,9 +88,13 @@ class PrivacyControl:
             raise JournalUnavailable('Privacy schema/trigger drift detected')
         self.rows,self.chain = journal.read()
         state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
-        if (not state or state[0]!=journal.journal_id or state[1]>=len(self.chain) or self.chain[state[1]]!=state[2]):
+        if (not state or state[0]!=journal.journal_id or type(state[1]) is not int or state[1]<0
+                or state[1]>=len(self.chain) or self.chain[state[1]]!=state[2]):
             raise JournalUnavailable('Security journal binding/rollback mismatch')
         self.applied = state[1]
+        from xblago.core.pilot_schema import validate
+        from xblago.core.sqlite_safety import pilot_enabled
+        validate(db,required=pilot_enabled())
         if db.execute('SELECT 1 FROM privacy_outbox LIMIT 1').fetchone():
             raise JournalUnavailable('Uncommitted privacy protocol requires offline review')
 
@@ -97,6 +102,7 @@ class PrivacyControl:
         self.replaying = True
         try:
             for seq,event_id,payload,previous,mac in self.rows[self.applied:]:
+                self.replay_seq=seq
                 self._apply(json.loads(payload))
             changed = self.applied != len(self.rows)
             if changed:
@@ -120,6 +126,23 @@ class PrivacyControl:
     def _uid(self, tag):
         row = self.db.execute("SELECT blago_user_id FROM users WHERE blago_tag('user',blago_user_id)=?",(tag,)).fetchone()
         return row[0] if row else None
+
+    def _lineage_targets(self, kind, target):
+        reverse={}
+        for row in self.rows:
+            if row[0]>self.replay_seq:
+                break
+            event=json.loads(row[2])
+            if event['kind']==kind:
+                reverse.setdefault(event['state'],set()).add(event['target'])
+        found,pending={target},[target]
+        while pending:
+            current=pending.pop()
+            for previous in reverse.get(current,()):
+                if previous not in found:
+                    found.add(previous)
+                    pending.append(previous)
+        return sorted(found)
 
     def _apply(self, event):
         db = self.db
@@ -150,7 +173,8 @@ class PrivacyControl:
             if uid:
                 db.execute("UPDATE channel_links SET blago_user_id=? WHERE blago_tag('channel',channel,channel_user_id)=?",(uid,target))
         elif kind=='memory_legacy':
-            db.execute("DELETE FROM memory_facts WHERE blago_tag('memory_legacy',blago_user_id,key,value_json,updated_at)=?",(target,))
+            for previous in self._lineage_targets('memory_lineage',target):
+                db.execute("DELETE FROM memory_facts WHERE blago_tag('memory_legacy',blago_user_id,key,value_json,updated_at)=?",(previous,))
         elif kind=='memory_semantic':
             # Delete descendants together so self-FKs cannot resurrect erased versions.
             db.execute("""WITH RECURSIVE removed(id,uid) AS (
@@ -158,7 +182,16 @@ class PrivacyControl:
                 UNION SELECT s.id,s.blago_user_id FROM semantic_memory s JOIN removed r ON s.supersedes_id=r.id AND s.blago_user_id=r.uid)
                 DELETE FROM semantic_memory WHERE id IN (SELECT id FROM removed)""",(target,))
         elif kind=='history':
-            db.execute("DELETE FROM dialogue_turns WHERE blago_tag('history',id,blago_user_id,created_at,role,text)=?",(target,))
+            for previous in self._lineage_targets('history_lineage',target):
+                db.execute("DELETE FROM dialogue_turns WHERE blago_tag('history',id,blago_user_id,created_at,role,text)=?",(previous,))
+            if uid:
+                db.execute('''WITH RECURSIVE family(uid) AS (SELECT ? UNION
+                    SELECT a.source_uid FROM privacy_aliases a JOIN family f ON a.target_uid=f.uid)
+                    UPDATE events SET response_json=NULL,error=NULL WHERE blago_user_id IN (SELECT uid FROM family)''',(uid,))
+        elif kind=='response_cache':
+            db.execute("UPDATE events SET response_json=NULL,error=NULL WHERE blago_tag('response_cache',channel,external_update_id)=?",(target,))
+        elif kind in ('memory_lineage','history_lineage'):
+            pass  # Signed provenance only; ordinary post-backup writes are not replicated.
         elif kind=='consent_withdrawal':
             if uid:
                 if state not in ('optional_activity','device_label'):
