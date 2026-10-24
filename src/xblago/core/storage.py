@@ -401,6 +401,20 @@ class SQLiteBlagoStore:
             connection.execute("DELETE FROM dialogue_turns WHERE blago_user_id = ?", (blago_user_id,))
             connection.execute('UPDATE events SET response_json=NULL,error=NULL WHERE blago_user_id=?',(blago_user_id,))
 
+    def append_exchange(
+        self, blago_user_id: str, exchange: tuple[ConversationTurn, ConversationTurn],
+        channel: str = "telegram", chat_id: int | None = None,
+    ) -> None:
+        """Commit a user/assistant pair together using the existing privacy writer."""
+        if len(exchange) != 2 or tuple(t.role for t in exchange) != ("user", "assistant"):
+            raise ValueError("A complete user/assistant exchange is required")
+        with self._locked_transaction() as connection:
+            connection.executemany(
+                "INSERT INTO dialogue_turns (blago_user_id,channel,chat_id,role,text,created_at) VALUES (?,?,?,?,?,?)",
+                [(blago_user_id, channel, str(chat_id) if chat_id is not None else None, turn.role, turn.text, _utc_now())
+                 for turn in exchange],
+            )
+
     def backup_database(self, destination_dir: Path | None = None) -> Path:
         target_dir = destination_dir or (self.path.parent / "backups" / "sqlite")
         target_dir.mkdir(parents=True, exist_ok=True)

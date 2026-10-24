@@ -41,6 +41,9 @@ class FailingHistoryStore(SQLiteBlagoStore):
     def append_history(self, *args: object, **kwargs: object) -> None:
         raise RuntimeError("history write failed")
 
+    def append_exchange(self, *args: object, **kwargs: object) -> None:
+        raise RuntimeError("history write failed")
+
 
 class TelegramBotTest(unittest.TestCase):
     def test_start_sends_welcome_message(self) -> None:

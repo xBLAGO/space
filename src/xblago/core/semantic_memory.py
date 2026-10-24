@@ -40,6 +40,7 @@ class SemanticMemoryExtractor:
                 user_text=prompt,
                 memory={},
                 history=(),
+                purpose="memory_extraction",
             )
         )
         return _parse_candidates(raw, text)

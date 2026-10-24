@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery"]
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 jobs:
@@ -182,4 +182,34 @@ jobs:
               WebApp(SQLiteBlagoStore(path))
               SecurityJournal(journal).read()
               print('Strict pilot SQLite, lineage baseline and independent witness gate OK')
+          PY
+      - name: Docker natural conversation and bounded text repair
+        run: |
+          docker run --rm -i --entrypoint python xblago-space:${{ github.sha }} - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          from unittest.mock import MagicMock, patch
+          from xblago.core.config import LlmConfig
+          from xblago.core.llm import OpenAICompatibleProvider
+          from xblago.core.storage import SQLiteBlagoStore, TelegramIdentity
+          from xblago.integrations.web import WebApp
+          def completion(text, reason):
+              response = MagicMock()
+              response.__enter__.return_value = response
+              response.read.return_value = json.dumps({'choices': [{'message': {'content': text}, 'finish_reason': reason}]}).encode()
+              return response
+          with tempfile.TemporaryDirectory() as root:
+              store = SQLiteBlagoStore(Path(root)/'conversation.sqlite3')
+              uid = store.resolve_telegram_user(TelegramIdentity(1000000001,1000000001,'private'))
+              app = WebApp(store)
+              provider = OpenAICompatibleProvider(LlmConfig('hf','synthetic','synthetic-key','https://example.invalid',7))
+              with patch('xblago.integrations.web.build_chat_provider',return_value=provider), patch('xblago.core.llm.urllib.request.urlopen',side_effect=[completion('Проверь изно','length'),completion('Проверь износ цепи.','stop')]) as calls:
+                  assert app.chat(uid,'Почему цепь перескакивает?') == 'Проверь износ цепи.'
+              assert calls.call_count == 2
+              assert len(store.recent_history(uid,100)) == 2
+              assert store.all_memory(uid) == {}
+              assert not app.rows('needs',uid)
+              assert not app.rows('resources',uid)
+              assert WebApp(SQLiteBlagoStore(store.path)).history(uid) == app.history(uid)
+              print('Natural conversation, single text repair, atomic history and no economic actions smoke OK')
           PY

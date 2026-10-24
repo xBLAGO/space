@@ -11,7 +11,7 @@ class LlmConfig:
     api_key: str | None
     base_url: str
     timeout_seconds: float
-    max_tokens: int = 384
+    max_tokens: int = 768
     thinking: str = "auto"
 
     @property
@@ -32,7 +32,7 @@ def load_llm_config() -> LlmConfig:
     )
     base_url = os.getenv("XBLAGO_LLM_BASE_URL", default_base_url).rstrip("/")
     timeout_seconds = _float_from_env("XBLAGO_LLM_TIMEOUT_SECONDS", 30.0)
-    max_tokens = _int_from_env("XBLAGO_LLM_MAX_TOKENS", 384, minimum=1, maximum=2048)
+    max_tokens = _int_from_env("XBLAGO_LLM_MAX_TOKENS", 768, minimum=1, maximum=2048)
     thinking = _thinking_from_env(
         "XBLAGO_LLM_THINKING",
         default="off" if provider in {"hf", "huggingface", "huggingface-inference"} else "auto",

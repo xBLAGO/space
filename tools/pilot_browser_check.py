@@ -45,7 +45,11 @@ def main():
                     page.locator('#password').fill('synthetic-browser-password')
                     page.locator('#auth-submit').click()
                     expect(page.locator('#shell')).to_be_visible()
-                    page.locator('[data-tab="profile"]').first.click()
+                    def profile():
+                        # Foundation 06 keeps tools in a deliberately closed drawer.
+                        page.locator('#tools-toggle').click()
+                        page.locator('[data-tab="profile"]').first.click()
+                    profile()
                     page.get_by_text('Доступ и устройства',exact=True).click()
                     before=next(c['value'] for c in context.cookies() if c['name']=='blago_session')
                     with page.expect_response(lambda r:r.url.endswith('/auth/passkeys/register/verify')) as registered:
@@ -58,14 +62,14 @@ def main():
                         app.session(before);checks['old_cookie_denied']=False
                     except ApiError:
                         checks['old_cookie_denied']=True
-                    page.locator('[data-tab="profile"]').first.click()
+                    profile()
                     page.locator('#logout').click()
                     expect(page.locator('#auth')).to_be_visible()
                     with page.expect_response(lambda r:r.url.endswith('/auth/passkeys/authenticate/verify')) as authenticated:
                         page.locator('#passkey-login').click()
                     checks['real_browser_discoverable_login']=authenticated.value.status==200
                     expect(page.locator('#shell')).to_be_visible()
-                    page.locator('[data-tab="profile"]').first.click()
+                    profile()
                     details=page.locator('details').filter(has=page.locator('#refresh-access'))
                     if details.get_attribute('open') is None:
                         details.locator(':scope > summary').click()

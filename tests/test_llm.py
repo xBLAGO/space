@@ -29,7 +29,8 @@ class LocalPlanningProviderTest(unittest.TestCase):
 
         response = provider.generate(context)
 
-        self.assertIn("Собери план недели", response)
+        self.assertIn("плана недели", response)
+        self.assertNotIn("?", response)
         self.assertNotIn("цель:", response)
         self.assertNotIn("следующий шаг:", response)
 
@@ -66,7 +67,8 @@ class LocalPlanningProviderTest(unittest.TestCase):
 
         response = provider.generate(context)
 
-        self.assertIn("Build a weekly plan", response)
+        self.assertIn("weekly plan", response)
+        self.assertNotIn("?", response)
         self.assertNotIn("- goal:", response)
         self.assertNotIn("memory context", response)
 
