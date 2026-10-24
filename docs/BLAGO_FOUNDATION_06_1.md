@@ -177,6 +177,17 @@ gate smoke, а также контейнерный chat/один repair/atomic h
 с fake provider. PR base filter дополнен веткой #9. Точный run/SHA/result — в draft PR.
 Workflow deployment не запускался и не изменялся.
 
+[Source CI Tests #53](https://github.com/xBLAGO/space/actions/runs/40074676282)
+на SHA `c5d04498a20076efb2ab1ebf20c1c1925236176c`: **оба jobs SUCCESS**,
+301/301 тест за 17.720 s, Linux Python 3.12.15, фактическая SQLite 3.54.1
+с ожидаемым source ID; Chrome 155.0.8059.39 — 8/8 checks. Docker build,
+health/PWA/identity/privacy/strict-pilot и новый conversation/repair smoke PASS.
+[Выдержки логов](validation06_1/ci-source-evidence.txt),
+[browser artifact](https://github.com/xBLAGO/space/actions/runs/40074676282/artifacts/12552319197).
+Следующий коммит меняет только эту документацию/evidence; CI окончательного
+head SHA указан в draft PR #10. Успех CI не закрывает качественную приёмку HF
+или эксплуатационные блокеры пилота.
+
 Для локального Linux воспроизведения использовать инструкции verified SQLite из
 [05.4 runbook](BLAGO_FOUNDATION_05_4_MIGRATION.md), затем:
 
