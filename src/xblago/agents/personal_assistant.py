@@ -5,6 +5,7 @@ from dataclasses import replace
 import re
 
 from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPlanningProvider, OpenAICompatibleProvider
+from xblago.core.conversation import HISTORY_TURN_LIMIT, SERVICE_STATUS_TEXTS, understand
 from xblago.core.memory import MemoryStore
 from xblago.core.memory import is_sensitive_memory, redact_sensitive_text, MemoryConflictError
 from xblago.core.memory_policy import may_extract, memory_veto
@@ -25,27 +26,29 @@ class PersonalAssistantAgent:
         name="xBLAGO Personal Assistant",
         role="User-facing coordinator and personal helper",
         mission=(
-            "Help the user clarify intentions, remember stable preferences, "
-            "turn loose ideas into next actions, and prepare requests for "
-            "future specialized xBLAGO agents."
+            "Understand the person's conversation, help them think and learn, "
+            "remember only grounded stable preferences, and support voluntary cooperation "
+            "when they choose it. Conversation alone authorizes no external action."
         ),
-        tone="Warm, concise, practical, and quietly proactive.",
+        tone="Attentive, natural, candid and proportionate; respect silence and refusal.",
     )
 
     def __init__(
         self,
         memory: MemoryStore,
         chat_provider: ChatProvider | None = None,
-        history_limit: int = 12,
+        history_limit: int = HISTORY_TURN_LIMIT,
         initial_history: tuple[ConversationTurn, ...] = (),
         history_recorder: Callable[[ConversationTurn], None] | None = None,
         history_clearer: Callable[[], None] | None = None,
         memory_extractor: SemanticMemoryExtractor | None = None,
+        exchange_recorder: Callable[[tuple[ConversationTurn, ConversationTurn]], None] | None = None,
     ) -> None:
         self.memory = memory
         self.chat_provider = chat_provider or LocalPlanningProvider()
         self.history_limit = history_limit
         self.history_recorder = history_recorder
+        self.exchange_recorder = exchange_recorder
         self.history_clearer = history_clearer
         self.memory_extractor = memory_extractor or (
             SemanticMemoryExtractor(self.chat_provider)
@@ -59,10 +62,11 @@ class PersonalAssistantAgent:
         ]
 
     def welcome_message(self) -> str:
+        if self._history:
+            return "xBLAGO: Диалог сохранён. Можно продолжить."
         return (
             "xBLAGO: Привет. Я первый агент сети xBLAGO, твой персональный помощник. "
-            "Могу запоминать важные факты, помогать формулировать задачи и раскладывать "
-            "идеи на следующие шаги. Напиши /help, если нужен список команд."
+            "Здесь можно просто поговорить."
         )
 
     def respond(self, message: UserMessage) -> AgentResponse:
@@ -147,7 +151,7 @@ class PersonalAssistantAgent:
         if intent.name == "greeting":
             return self._record_and_return(
                 message,
-                AgentResponse(_text(language, "greeting")),
+                AgentResponse(("Я здесь." if language == "ru" else "I'm here.") if self._history else _text(language, "greeting")),
             )
 
         edit = None if veto else parse_edit(message.text)
@@ -172,7 +176,12 @@ class PersonalAssistantAgent:
             except MemoryConflictError:
                 response = "Память уже изменилась. Повтори, пожалуйста, исправление."
             else:
-                response = (f"Хорошо, теперь буду учитывать: {edit.value}." if self.memory.all() != facts else f"Это уже учтено: {edit.value}.")
+                confirmation = (("Теперь буду учитывать новое место жительства." if edit.key == "city"
+                                 else f"Буду учитывать новое предпочтение: {edit.value}.")
+                                if self.memory.all() != facts else "Это уже учтено.")
+                # An edit with a substantive question must not erase the answer.
+                # Pure corrections need only the committed acknowledgement.
+                response = confirmation + (" " + _without_unconfirmed_claims(response) if "?" in message.text else "")
         elif self._last_generation_succeeded and not veto:
             self._forget_denied_fact(message.text)
             if may_extract(message.text) and not self._remember_from_conversation(message.text):
@@ -198,7 +207,7 @@ class PersonalAssistantAgent:
                 "- показывать профиль пользователя: `/profile`\n"
                 "- показывать профиль агента: `/agent`\n"
                 "- завершать сессию: `/exit`\n\n"
-                "Если напишешь обычную задачу, я помогу выделить цель и следующий шаг."
+                "Можно просто общаться; не обязательно формулировать задачу."
             )
 
         return (
@@ -212,7 +221,7 @@ class PersonalAssistantAgent:
             "- show your profile: `/profile`\n"
             "- show the agent profile: `/agent`\n"
             "- end the session: `/exit`\n\n"
-            "If you send a regular task, I will help clarify the goal and next step."
+            "You can simply talk; there is no need to formulate a task."
         )
 
     def _user_profile_text(self, language: str) -> str:
@@ -270,18 +279,21 @@ class PersonalAssistantAgent:
             user_text=_safe_history_text(text),
             memory=self.memory.all() if memory is None else memory,
             history=self.history(),
+            conversation=understand(_safe_history_text(text), self.history()),
         )
         try:
             response = self.chat_provider.generate(context)
-            if not isinstance(response, str) or not response.strip() or len(response) > 32000:
+            if (not isinstance(response, str) or not response.strip() or len(response) > 32000
+                    or response in SERVICE_STATUS_TEXTS):
                 raise LlmProviderError("Invalid assistant response")
             self._last_generation_succeeded = True
             return response
-        except (LlmProviderError, TimeoutError, ValueError, TypeError):
-            # One provider attempt only; local fallback avoids Telegram retry loops and extra spend.
+        except (LlmProviderError, TimeoutError, ValueError, TypeError) as exc:
+            # Transport errors are not retried. The provider may repair one
+            # incomplete text internally, without replaying this agent turn.
             self._last_generation_succeeded = False
             language = _language_for_text(text)
-            return _text(language, "provider_unavailable")
+            return _text(language, "incomplete_answer" if getattr(exc, "category", "") == "incomplete" else "provider_unavailable")
 
     def _forget_denied_fact(self, text: str) -> None:
         # A direct retraction removes only the exact old fact; it invents no replacement.
@@ -337,8 +349,15 @@ class PersonalAssistantAgent:
     def _record_and_return(self, message: UserMessage, response: AgentResponse) -> AgentResponse:
         if response.text not in {_text("ru", "sensitive_memory_rejected"), _text("en", "sensitive_memory_rejected")}:
             response = AgentResponse(_safe_history_text(response.text), response.should_end_session)
-        self._append_history("user", message.text)
-        self._append_history("assistant", response.text)
+        exchange = (ConversationTurn("user", _safe_history_text(message.text)),
+                    ConversationTurn("assistant", _safe_history_text(response.text)))
+        if self.exchange_recorder is not None:
+            self.exchange_recorder(exchange)
+        elif self.history_recorder is not None:
+            for turn in exchange:
+                self.history_recorder(turn)
+        self._history.extend(exchange)
+        self._history = self._history[-self.history_limit:]
         return response
 
     def _append_history(self, role: MessageRole, text: str) -> None:
@@ -360,7 +379,7 @@ def _text(language: str, key: str) -> str:
             "goodbye": "See you. Persistent memory is saved, and this session context is closed.",
             "memory_cleared": "Done. Local memory is cleared.",
             "history_cleared": "Done. This conversation context is cleared.",
-            "greeting": "Hi. I am here. Where shall we start: a task, an idea, a daily plan, or memory setup?",
+            "greeting": "Hi.",
             "empty_user_profile": (
                 "Your profile is empty for now.\n"
                 "You can add a fact like this: `remember my timezone is Europe/Moscow`."
@@ -371,13 +390,14 @@ def _text(language: str, key: str) -> str:
             "empty_history": "There is no saved conversation context in this session yet.",
             "history_title": "Current conversation:",
             "sensitive_memory_rejected": "I won't save passwords, tokens, card details, or other secrets.",
-            "provider_unavailable": "I can't reach the language model right now, but I'm still here. Please try again later.",
+            "incomplete_answer": "I couldn't finish that answer. Your question is still in the conversation.",
+            "provider_unavailable": "I couldn't answer just now. Your message is still in the conversation.",
         },
         "ru": {
             "goodbye": "До встречи. Постоянная память сохранена, сессионный контекст завершен.",
             "memory_cleared": "Готово. Локальная память очищена.",
             "history_cleared": "Готово. Сессионный контекст очищен.",
-            "greeting": "Привет. Я на связи. С чего начнем: задача, идея, план дня или настройка памяти?",
+            "greeting": "Привет.",
             "empty_user_profile": (
                 "Профиль пользователя пока пуст.\n"
                 "Можно добавить факт так: `remember my timezone is Europe/Moscow`."
@@ -388,7 +408,8 @@ def _text(language: str, key: str) -> str:
             "empty_history": "В этой сессии пока нет сохраненного хода диалога.",
             "history_title": "Текущий диалог:",
             "sensitive_memory_rejected": "Я не буду сохранять пароли, токены, данные карт и другие секреты.",
-            "provider_unavailable": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+            "incomplete_answer": "Не получилось закончить ответ. Твой вопрос остался в диалоге.",
+            "provider_unavailable": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
         },
     }
     return texts[language][key]
@@ -445,9 +466,21 @@ def _without_unconfirmed_claims(text: str) -> str:
     # Provider prose cannot attest to a database write. Local command replies are
     # constructed only after commit and do not pass through this guard.
     claim = re.compile(
-        r"(?:\b(?:я\s+)?(?:запомнил[а]?|сохранил[а]?|обновил[а]?|изменил[а]?|удалил[а]?|забыл[а]?|сохраняю|запоминаю|обновляю)\b|"
-        r"теперь (?:я )?помню|\bI(?:'ve| have)? (?:saved|remembered|updated|deleted|forgotten)\b)", re.I,
+        r"^(?:готово[,.:]?\s*)?(?:теперь\s+)?(?:я\s+)?(?:"
+        r"(?:запомнил[а]?|запоминаю)(?=[,:.]|\s+(?:что|это|ты|тво\w*|город|имя|предпочт\w*))|"
+        r"(?:сохранил[а]?|обновил[а]?|изменил[а]?|удалил[а]?|забыл[а]?|сохраняю|обновляю)\s+"
+        r"(?:(?:тво\w*|этот|эту|это|новый|новое)\s+)?(?:память|информац\w*|факт\w*|данные|предпочт\w*|город|имя)|"
+        r"помню[, ]+что|"
+        r"(?:создал[а]?|опубликовал[а]?|отправил[а]?|оформил[а]?|оплатил[а]?|перев[её]л|перевела)\s+"
+        r"(?:(?:тво\w*|эту|этот|новую|новый)\s+)?(?:заявк\w*|заказ\w*|ресурс\w*|предложени\w*|деньги|плат[её]ж\w*|номер|данные))|"
+        r"^(?:заявка|заказ|ресурс|плат[её]ж)\s+(?:создан\w*|опубликован\w*|отправлен\w*|выполнен\w*|провед[её]н\w*)|"
+        r"^I(?:'ve| have)? (?:saved|remembered|updated|deleted|forgotten)\s+(?:your|this|that|the fact|in memory)\b|"
+        r"^I(?:'ve| have)? (?:published|submitted|paid|transferred|sent)\s+(?:your|this|that|the|money)\b",
+        re.I,
     )
     sentences = re.split(r"(?<=[.!?])\s+|\n+", text)
     kept = [sentence for sentence in sentences if not claim.search(sentence)]
-    return " ".join(kept).strip() or "Я на связи. Чем помочь дальше?"
+    return " ".join(kept).strip() or (
+        "Не могу подтвердить выполнение этого действия." if _language_for_text(text) == "ru"
+        else "I can't confirm that this action was carried out."
+    )

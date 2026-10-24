@@ -1,0 +1,263 @@
+{
+  "label": "before_PR9_trusted_CA",
+  "synthetic_only": true,
+  "model": "Qwen/Qwen3-14B:cheapest",
+  "normal_budget": 384,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "turns": [
+    {
+      "scenario": "знакомство",
+      "user": "Привет, я хочу просто поговорить, без планов и заявок.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 20402.17
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "user": "Почему после дождя иногда видны две радуги? Объясни в двух предложениях.",
+      "answer": "После дождя видны две радуги из-за того, что свет отражается от капель воды дважды — сначала от внешней поверхности капли, а затем от её внутренней. Вторая, более тусклая радуга, называется вторичной, и она образуется при двойном преломлении и отражении света.",
+      "http_calls": 1,
+      "latency_ms": 1404.16
+    },
+    {
+      "scenario": "благодарность",
+      "user": "Спасибо.",
+      "answer": "Пожалуйста! Если захочешь поговорить или узнать что-то ещё — я всегда рядом.",
+      "http_calls": 1,
+      "latency_ms": 1020.31
+    },
+    {
+      "scenario": "размышление",
+      "user": "Иногда думаю, что быть полезным — не единственный смысл жизни.",
+      "answer": "Это глубокая мысль. Жизнь — это не только дела и помощь другим, но и то, как мы чувствуем, воспринимаем мир и находим своё внутреннее равновесие. Иногда просто быть — тоже важное и значимое дело.",
+      "http_calls": 1,
+      "latency_ms": 1493.22
+    },
+    {
+      "scenario": "эмоция",
+      "user": "Мне грустно. Не предлагай решений, я просто хочу выговориться.",
+      "answer": "Хорошо, я просто слушаю. Расскажи, что тебя грустит.",
+      "http_calls": 1,
+      "latency_ms": 928.62
+    },
+    {
+      "scenario": "чужая_потребность",
+      "user": "У соседа сломался велосипед. Я просто рассказываю об этом.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 20287.88
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "user": "Могу помочь ему с ремонтом, но пока ничего не публикуй.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 20240.75
+    },
+    {
+      "scenario": "смена_намерения",
+      "user": "Я передумал, не хочу предлагать помощь. Давай просто разберём, почему перескакивает цепь.",
+      "answer": "Хорошо, давай разберёмся. Цепь может перескакивать из-за износа звёзд, неправильного натяжения цепи или загрязнения. Проверь, не растянулась ли цепь — если да, то её нужно заменить. Также стоит осмотреть звёзды на наличие заусенцев или износа.",
+      "http_calls": 1,
+      "latency_ms": 1757.51
+    },
+    {
+      "scenario": "после_restart",
+      "user": "Вернёмся к цепи: что проверить первым?",
+      "answer": "Первым делом проверь **натяжение цепи** — оно должно быть умеренным. Если цепь слишком ослаблена, она может съезжать с звёзд. Для проверки можно попробовать сдвинуть цепь вверх и вниз — если она легко смещается, натяжение, скорее всего, неправильное. Если натяжение в порядке, посмотри на **состояние звёзд** — нет ли заусенцев, износа или деформации. Также проверь, **не растянута ли цепь** — для этого можно использовать специальный инструмент или просто попробовать натянуть её на звезде: если звенья «проскальзывают», цепь уже не подходит.",
+      "http_calls": 1,
+      "latency_ms": 2323.94
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "user": "Не запоминай это, но расскажи, как безопасно проверить тормоза.",
+      "answer": "Хорошо, расскажу. Чтобы безопасно проверить тормоза на велосипеде, сделай следующее: 1. **Проверь тормозные колодки** — они должны плотно прилегать к ободу или диску, но не царапать его. Если колодки изношены или загрязнены, их нужно заменить или очистить. 2. **Проверь натяжение тормозных проводов** — они должны быть натянуты, но не слишком туго. Если провода слишком слабы, тормоза будут «проскальзывать». 3. **Проверь работу тормозов в движении** — медленно покатайся и попробуй затормозить. Тормоза должны сработать плавно и без щелчков или задержек. 4. **Убедись, что тормозные ручки не заедают** — они должны легко возвращаться в исходное положение после нажатия. Если в процессе заметишь что-то подозрительное — лучше обратиться к специалисту.",
+      "http_calls": 1,
+      "latency_ms": 3284.95
+    },
+    {
+      "scenario": "предпочтение",
+      "user": "Я предпочитаю короткие ответы",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 20233.77
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "user": "Чем отличается гипотеза от теории?",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 28546.13
+    }
+  ],
+  "pressure": {
+    "returned": true,
+    "answer": "Велосипедная трансмиссия — это система, которая передаёт усилие от педалей к колёсам, позволяя велосипеду двигаться. Основные компоненты трансмиссии включают цепь, кассету, переключатель и требуют регулярного ухода.\n\nЦепь — это гибкая метал"
+  },
+  "calls": [
+    {
+      "scenario": "знакомство",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20357.1
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 359,
+      "completion_tokens": 90,
+      "total_tokens": 449,
+      "latency_ms": 1358.62
+    },
+    {
+      "scenario": "благодарность",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 463,
+      "completion_tokens": 27,
+      "total_tokens": 490,
+      "latency_ms": 964.41
+    },
+    {
+      "scenario": "размышление",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 518,
+      "completion_tokens": 67,
+      "total_tokens": 585,
+      "latency_ms": 1442.3
+    },
+    {
+      "scenario": "эмоция",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 614,
+      "completion_tokens": 25,
+      "total_tokens": 639,
+      "latency_ms": 860.08
+    },
+    {
+      "scenario": "чужая_потребность",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20233.93
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20192.74
+    },
+    {
+      "scenario": "смена_намерения",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 739,
+      "completion_tokens": 99,
+      "total_tokens": 838,
+      "latency_ms": 1706.09
+    },
+    {
+      "scenario": "после_restart",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 738,
+      "completion_tokens": 192,
+      "total_tokens": 930,
+      "latency_ms": 2276.85
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": true,
+      "finish_reason": "stop",
+      "prompt_tokens": 919,
+      "completion_tokens": 273,
+      "total_tokens": 1192,
+      "latency_ms": 3241.31
+    },
+    {
+      "scenario": "предпочтение",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20189.56
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 28500.16
+    },
+    {
+      "scenario": "реальный_малый_бюджет",
+      "purpose": "conversation",
+      "max_tokens": 96,
+      "success": true,
+      "finish_reason": "length",
+      "prompt_tokens": 323,
+      "completion_tokens": 96,
+      "total_tokens": 419,
+      "latency_ms": 3571.43
+    }
+  ],
+  "summary": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 5,
+    "extraction_calls": 0,
+    "length_finishes": 1,
+    "prompt_tokens": 4673,
+    "completion_tokens": 869,
+    "median_turn_ms": 2804.4449999999997,
+    "max_turn_ms": 28546.13
+  },
+  "checks": {
+    "integrity": true,
+    "foreign_keys": true,
+    "no_economic_actions": true,
+    "one_pair_per_turn": true,
+    "no_unexpected_memory": true
+  },
+  "quality": "Requires manual reading; automatic invariants do not prove naturalness or pilot readiness."
+}

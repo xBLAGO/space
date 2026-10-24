@@ -1,0 +1,243 @@
+{
+  "label": "before_PR9",
+  "synthetic_only": true,
+  "model": "Qwen/Qwen3-14B:cheapest",
+  "normal_budget": 384,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "turns": [
+    {
+      "scenario": "знакомство",
+      "user": "Привет, я хочу просто поговорить, без планов и заявок.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 357.94
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "user": "Почему после дождя иногда видны две радуги? Объясни в двух предложениях.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 235.02
+    },
+    {
+      "scenario": "благодарность",
+      "user": "Спасибо.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 242.3
+    },
+    {
+      "scenario": "размышление",
+      "user": "Иногда думаю, что быть полезным — не единственный смысл жизни.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 247.26
+    },
+    {
+      "scenario": "эмоция",
+      "user": "Мне грустно. Не предлагай решений, я просто хочу выговориться.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 237.27
+    },
+    {
+      "scenario": "чужая_потребность",
+      "user": "У соседа сломался велосипед. Я просто рассказываю об этом.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 228.53
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "user": "Могу помочь ему с ремонтом, но пока ничего не публикуй.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 274.14
+    },
+    {
+      "scenario": "смена_намерения",
+      "user": "Я передумал, не хочу предлагать помощь. Давай просто разберём, почему перескакивает цепь.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 250.25
+    },
+    {
+      "scenario": "после_restart",
+      "user": "Вернёмся к цепи: что проверить первым?",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 395.74
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "user": "Не запоминай это, но расскажи, как безопасно проверить тормоза.",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 247.04
+    },
+    {
+      "scenario": "предпочтение",
+      "user": "Я предпочитаю короткие ответы",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 250.82
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "user": "Чем отличается гипотеза от теории?",
+      "answer": "Сейчас не получается связаться с языковой моделью, но я здесь. Попробуй ещё раз позже.",
+      "http_calls": 1,
+      "latency_ms": 236.46
+    }
+  ],
+  "pressure": {
+    "returned": false,
+    "error_type": "LlmProviderError"
+  },
+  "calls": [
+    {
+      "scenario": "знакомство",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 313.93
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 192.07
+    },
+    {
+      "scenario": "благодарность",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 199.23
+    },
+    {
+      "scenario": "размышление",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 205.87
+    },
+    {
+      "scenario": "эмоция",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 202.28
+    },
+    {
+      "scenario": "чужая_потребность",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 189.83
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 235.09
+    },
+    {
+      "scenario": "смена_намерения",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 210.27
+    },
+    {
+      "scenario": "после_restart",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 351.45
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 198.93
+    },
+    {
+      "scenario": "предпочтение",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 203.82
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "purpose": "conversation",
+      "max_tokens": 384,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 191.94
+    },
+    {
+      "scenario": "реальный_малый_бюджет",
+      "purpose": "conversation",
+      "max_tokens": 96,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 343.29
+    }
+  ],
+  "summary": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 13,
+    "extraction_calls": 0,
+    "length_finishes": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "median_turn_ms": 247.14999999999998,
+    "max_turn_ms": 395.74
+  },
+  "checks": {
+    "integrity": true,
+    "foreign_keys": true,
+    "no_economic_actions": true,
+    "one_pair_per_turn": true,
+    "no_unexpected_memory": true
+  },
+  "quality": "Requires manual reading; automatic invariants do not prove naturalness or pilot readiness.",
+  "measurement_scope": "Local CA verification failure; not a model-quality/provider-availability benchmark. Separate public TLS probe observed SSLCertVerificationError code 20; verification was not disabled."
+}

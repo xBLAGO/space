@@ -201,8 +201,8 @@ class TelegramBot:
         return PersonalAssistantAgent(
             memory=self.store.memory_for_user(blago_user_id),
             chat_provider=build_chat_provider(load_llm_config()),
-            initial_history=self.store.recent_history(blago_user_id, 12),
-            history_recorder=lambda turn: self._record_history(blago_user_id, chat_id, turn),
+            initial_history=self.store.recent_history(blago_user_id, 24),
+            exchange_recorder=lambda turns: self.store.append_exchange(blago_user_id, turns, channel="telegram", chat_id=chat_id),
             history_clearer=lambda: self.store.clear_history(blago_user_id),
         )
 

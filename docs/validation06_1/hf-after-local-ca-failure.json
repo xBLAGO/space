@@ -1,0 +1,243 @@
+{
+  "label": "after_Foundation061",
+  "synthetic_only": true,
+  "model": "Qwen/Qwen3-14B:cheapest",
+  "normal_budget": 768,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "turns": [
+    {
+      "scenario": "знакомство",
+      "user": "Привет, я хочу просто поговорить, без планов и заявок.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 245.06
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "user": "Почему после дождя иногда видны две радуги? Объясни в двух предложениях.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 256.48
+    },
+    {
+      "scenario": "благодарность",
+      "user": "Спасибо.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 216.26
+    },
+    {
+      "scenario": "размышление",
+      "user": "Иногда думаю, что быть полезным — не единственный смысл жизни.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 221.9
+    },
+    {
+      "scenario": "эмоция",
+      "user": "Мне грустно. Не предлагай решений, я просто хочу выговориться.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 220.35
+    },
+    {
+      "scenario": "чужая_потребность",
+      "user": "У соседа сломался велосипед. Я просто рассказываю об этом.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 234.04
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "user": "Могу помочь ему с ремонтом, но пока ничего не публикуй.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 224.61
+    },
+    {
+      "scenario": "смена_намерения",
+      "user": "Я передумал, не хочу предлагать помощь. Давай просто разберём, почему перескакивает цепь.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 234.52
+    },
+    {
+      "scenario": "после_restart",
+      "user": "Вернёмся к цепи: что проверить первым?",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 219.42
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "user": "Не запоминай это, но расскажи, как безопасно проверить тормоза.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 225.01
+    },
+    {
+      "scenario": "предпочтение",
+      "user": "Я предпочитаю короткие ответы",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 217.86
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "user": "Чем отличается гипотеза от теории?",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 218.0
+    }
+  ],
+  "pressure": {
+    "returned": false,
+    "error_type": "LlmProviderError"
+  },
+  "calls": [
+    {
+      "scenario": "знакомство",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 196.61
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 198.96
+    },
+    {
+      "scenario": "благодарность",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 189.24
+    },
+    {
+      "scenario": "размышление",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 193.66
+    },
+    {
+      "scenario": "эмоция",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 189.59
+    },
+    {
+      "scenario": "чужая_потребность",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 205.57
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 190.41
+    },
+    {
+      "scenario": "смена_намерения",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 202.7
+    },
+    {
+      "scenario": "после_restart",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 189.06
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 194.01
+    },
+    {
+      "scenario": "предпочтение",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 189.74
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 187.63
+    },
+    {
+      "scenario": "реальный_малый_бюджет",
+      "purpose": "conversation",
+      "max_tokens": 96,
+      "success": false,
+      "status": null,
+      "error_type": "URLError",
+      "latency_ms": 194.83
+    }
+  ],
+  "summary": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 13,
+    "extraction_calls": 0,
+    "length_finishes": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "median_turn_ms": 223.255,
+    "max_turn_ms": 256.48
+  },
+  "checks": {
+    "integrity": true,
+    "foreign_keys": true,
+    "no_economic_actions": true,
+    "one_pair_per_turn": true,
+    "no_unexpected_memory": true
+  },
+  "quality": "Requires manual reading; automatic invariants do not prove naturalness or pilot readiness.",
+  "measurement_scope": "Local CA verification failure; not a model-quality/provider-availability benchmark. Separate public TLS probe observed SSLCertVerificationError code 20; verification was not disabled."
+}

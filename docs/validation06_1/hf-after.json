@@ -1,0 +1,287 @@
+{
+  "label": "after_Foundation061_context_projection",
+  "synthetic_only": true,
+  "model": "Qwen/Qwen3-14B:cheapest",
+  "normal_budget": 768,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "turns": [
+    {
+      "scenario": "знакомство",
+      "user": "Привет, я хочу просто поговорить, без планов и заявок.",
+      "answer": "Привет. Рад, что ты захотел поговорить. Я здесь, чтобы просто слушать и, если нужно, помогать. Расскажи, о чём хочешь поговорить.",
+      "http_calls": 1,
+      "latency_ms": 1319.83
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "user": "Почему после дождя иногда видны две радуги? Объясни в двух предложениях.",
+      "answer": "После дождя иногда видны две радуги из-за того, что свет отражается от капель дождя дважды — сначала от внешней поверхности капли, а затем от внутренней. Вторая, более тусклая радуга, называется вторичной, и её цвета расположены в обратном порядке по сравнению с основной радугой.",
+      "http_calls": 1,
+      "latency_ms": 1653.3
+    },
+    {
+      "scenario": "благодарность",
+      "user": "Спасибо.",
+      "answer": "Не за что. Если захочешь — продолжим разговор.",
+      "http_calls": 1,
+      "latency_ms": 902.29
+    },
+    {
+      "scenario": "размышление",
+      "user": "Иногда думаю, что быть полезным — не единственный смысл жизни.",
+      "answer": "Иногда это действительно кажется сложным — искать смысл в том, что кажется не всегда ясным. Жизнь может быть разной, и не всё, что кажется важным, всегда легко понять.",
+      "http_calls": 1,
+      "latency_ms": 1199.24
+    },
+    {
+      "scenario": "эмоция",
+      "user": "Мне грустно. Не предлагай решений, я просто хочу выговориться.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 20840.93
+    },
+    {
+      "scenario": "чужая_потребность",
+      "user": "У соседа сломался велосипед. Я просто рассказываю об этом.",
+      "answer": "Понимаю. Иногда просто рассказать о чём-то — уже шаг к тому, чтобы почувствовать себя чуть легче.",
+      "http_calls": 1,
+      "latency_ms": 1084.94
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "user": "Могу помочь ему с ремонтом, но пока ничего не публикуй.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 20226.03
+    },
+    {
+      "scenario": "смена_намерения",
+      "user": "Я передумал, не хочу предлагать помощь. Давай просто разберём, почему перескакивает цепь.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 20239.31
+    },
+    {
+      "scenario": "после_restart",
+      "user": "Вернёмся к цепи: что проверить первым?",
+      "answer": "Первым делом стоит проверить натяжение цепи — она может быть слишком ослабленной или, наоборот, слишком туго затянутой. Также стоит осмотреть саму цепь на наличие износа, загрязнения или повреждённых звеньев.",
+      "http_calls": 1,
+      "latency_ms": 1482.52
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "user": "Не запоминай это, но расскажи, как безопасно проверить тормоза.",
+      "answer": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "http_calls": 1,
+      "latency_ms": 20248.07
+    },
+    {
+      "scenario": "предпочтение",
+      "user": "Я предпочитаю короткие ответы",
+      "answer": "Буду учитывать новое предпочтение: короткие ответы.",
+      "http_calls": 1,
+      "latency_ms": 1371.25
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "user": "Чем отличается гипотеза от теории?",
+      "answer": "Гипотеза — это предположение, которое нужно проверить. Теория — это проверенная и подтверждённая гипотеза.",
+      "http_calls": 1,
+      "latency_ms": 948.94
+    }
+  ],
+  "pressure": {
+    "returned": false,
+    "error_type": "LlmProviderError"
+  },
+  "calls": [
+    {
+      "scenario": "знакомство",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 514,
+      "completion_tokens": 49,
+      "total_tokens": 563,
+      "latency_ms": 1266.69
+    },
+    {
+      "scenario": "фактический_вопрос",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 612,
+      "completion_tokens": 93,
+      "total_tokens": 705,
+      "latency_ms": 1598.39
+    },
+    {
+      "scenario": "благодарность",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 720,
+      "completion_tokens": 16,
+      "total_tokens": 736,
+      "latency_ms": 857.92
+    },
+    {
+      "scenario": "размышление",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 765,
+      "completion_tokens": 48,
+      "total_tokens": 813,
+      "latency_ms": 1153.01
+    },
+    {
+      "scenario": "эмоция",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20808.83
+    },
+    {
+      "scenario": "чужая_потребность",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 865,
+      "completion_tokens": 32,
+      "total_tokens": 897,
+      "latency_ms": 1043.95
+    },
+    {
+      "scenario": "предложение_ресурса",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20195.43
+    },
+    {
+      "scenario": "смена_намерения",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20207.63
+    },
+    {
+      "scenario": "после_restart",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 983,
+      "completion_tokens": 72,
+      "total_tokens": 1055,
+      "latency_ms": 1440.24
+    },
+    {
+      "scenario": "отказ_от_памяти",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20221.24
+    },
+    {
+      "scenario": "предпочтение",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 1109,
+      "completion_tokens": 55,
+      "total_tokens": 1164,
+      "latency_ms": 1321.84
+    },
+    {
+      "scenario": "применение_предпочтения",
+      "purpose": "conversation",
+      "max_tokens": 768,
+      "success": true,
+      "finish_reason": "stop",
+      "content_type": "str",
+      "has_visible_text": true,
+      "echoed_service_status": false,
+      "prompt_tokens": 1151,
+      "completion_tokens": 37,
+      "total_tokens": 1188,
+      "latency_ms": 910.78
+    },
+    {
+      "scenario": "реальный_малый_бюджет",
+      "purpose": "conversation",
+      "max_tokens": 96,
+      "success": false,
+      "status": null,
+      "error_type": "TimeoutError",
+      "transport_reason_type": "NoneType",
+      "latency_ms": 20184.7
+    }
+  ],
+  "summary": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 5,
+    "extraction_calls": 0,
+    "length_finishes": 0,
+    "prompt_tokens": 6719,
+    "completion_tokens": 402,
+    "median_turn_ms": 1426.885,
+    "max_turn_ms": 20840.93
+  },
+  "checks": {
+    "integrity": true,
+    "foreign_keys": true,
+    "no_economic_actions": true,
+    "one_pair_per_turn": true,
+    "no_unexpected_memory": true
+  },
+  "quality": "Requires manual reading; automatic invariants do not prove naturalness or pilot readiness."
+}

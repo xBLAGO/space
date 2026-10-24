@@ -552,8 +552,8 @@ class WebApp:
             agent = PersonalAssistantAgent(
                 memory=self.store.memory_for_user(uid),
                 chat_provider=build_chat_provider(load_llm_config()),
-                initial_history=self.store.recent_history(uid, 12),
-                history_recorder=lambda t: self.store.append_history(uid, t.role, t.text, channel="web"),
+                initial_history=self.store.recent_history(uid, 24),
+                exchange_recorder=lambda turns: self.store.append_exchange(uid, turns, channel="web"),
                 history_clearer=lambda: self.store.clear_history(uid),
             )
             return agent.respond(UserMessage(text=text)).text
