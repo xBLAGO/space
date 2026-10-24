@@ -114,12 +114,15 @@ class NaturalDialogueTests(unittest.TestCase):
 
     def test_предпочтение_стиля_применяется_к_обычному_вопросу(self):
         context = ChatContext(PersonalAssistantAgent.profile,'Почему Луна видна днём?',
-                              {'preference:response_style':'кратко','api_token':'sensitive-fixture','city':'Нерелевантный город'})
+                              {'preference:response_style':'кратко','api_token':'sensitive-fixture','city':'Нерелевантный город',
+                               'preference:drink':'Нерелевантный напиток','preference:hobby':'Личное увлечение'})
         provider = OpenAICompatibleProvider(LlmConfig('hf','synthetic','synthetic','https://example.invalid',7))
         prompt = provider._system_prompt(context)
         self.assertIn('кратко',prompt)
         self.assertNotIn('sensitive-fixture',prompt)
         self.assertNotIn('Нерелевантный город',prompt)
+        self.assertNotIn('Нерелевантный напиток',prompt)
+        self.assertNotIn('Личное увлечение',prompt)
 
     def test_отказ_ложному_подтверждению_не_путает_платёж_с_памятью(self):
         self.assertEqual(_without_unconfirmed_claims('Я перевёл деньги.'),'Не могу подтвердить выполнение этого действия.')

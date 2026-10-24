@@ -181,7 +181,9 @@ class OpenAICompatibleProvider(ChatProvider):
             previous = next((turn.text for turn in reversed(context.history) if turn.role == "user"), "")
             query += " " + previous
         memory = relevant_memory(context.memory or {}, query)
-        memory.update(relevant_memory(context.memory or {}, "preference:response_style"))
+        style_memory = {key: value for key, value in (context.memory or {}).items()
+                        if key == "preference:response_style"}
+        memory.update(relevant_memory(style_memory, "preference:response_style"))
         memory_text = _compact_memory(memory) if memory else "No remembered facts yet."
         guidance = context.conversation or understand(context.user_text, context.history)
 

@@ -188,6 +188,13 @@ health/PWA/identity/privacy/strict-pilot и новый conversation/repair smoke
 head SHA указан в draft PR #10. Успех CI не закрывает качественную приёмку HF
 или эксплуатационные блокеры пилота.
 
+В заключительном review дополнительно сужен always-relevant selector формата:
+он выбирает только `preference:response_style`. Общий поиск слова `preference`
+мог включить другие, не относящиеся к вопросу предпочтения. Регрессия проверяет
+отсутствие drink/hobby/city и чувствительного значения в обычном factual prompt.
+Окончательный CI в PR проверяет и это исправление; evidence source CI выше
+относится к явно указанному предшествующему SHA.
+
 Для локального Linux воспроизведения использовать инструкции verified SQLite из
 [05.4 runbook](BLAGO_FOUNDATION_05_4_MIGRATION.md), затем:
 
