@@ -1,0 +1,8 @@
+{
+  "python": "3.12.10",
+  "sqlite_version": "3.54.1",
+  "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+  "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+  "wal_reset_fix_verified": true,
+  "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+}
