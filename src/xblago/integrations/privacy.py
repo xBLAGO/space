@@ -112,6 +112,17 @@ class PrivacyService:
             }
             for table in ('blago_needs','blago_resources','blago_assets','blago_resource_offers'):
                 fields[table]='*'
+            from xblago.core.sovereign_recovery import present
+            if present(db):
+                # Own private mappings only; no public discovery and no challenge/session bindings.
+                fields.update({
+                    'sovereign_identities':'identity_id,blago_user_id,status,version,created_at',
+                    'identity_controllers':'controller_id,identity_id,blago_user_id,algorithm,role,status,created_at,revoked_at',
+                    'identity_wallet_links':'link_id,identity_id,blago_user_id,chain,network,address,role,status,created_at,revoked_at',
+                    'identity_credentials':'reference_id,identity_id,blago_user_id,kind,created_at',
+                    'identity_events':'event_id,identity_id,blago_user_id,action,version,recorded_at',
+                    'identity_consents':'consent_id,identity_id,blago_user_id,purpose,policy_version,decision,recorded_at',
+                })
             for table,columns in fields.items():
                 tables[table] = collect(f'SELECT {columns} FROM {table} WHERE blago_user_id IN ({marks})',family)
             requests = []

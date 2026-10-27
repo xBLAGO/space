@@ -43,12 +43,14 @@ class PersonalAssistantAgent:
         history_clearer: Callable[[], None] | None = None,
         memory_extractor: SemanticMemoryExtractor | None = None,
         exchange_recorder: Callable[[tuple[ConversationTurn, ConversationTurn]], None] | None = None,
+        identity_capabilities_reader: Callable[[], dict[str, bool]] | None = None,
     ) -> None:
         self.memory = memory
         self.chat_provider = chat_provider or LocalPlanningProvider()
         self.history_limit = history_limit
         self.history_recorder = history_recorder
         self.exchange_recorder = exchange_recorder
+        self._identity_capabilities_reader = identity_capabilities_reader
         self.history_clearer = history_clearer
         self.memory_extractor = memory_extractor or (
             SemanticMemoryExtractor(self.chat_provider)
@@ -192,6 +194,17 @@ class PersonalAssistantAgent:
 
     def history(self) -> tuple[ConversationTurn, ...]:
         return tuple(self._history)
+
+    def identity_capabilities(self) -> dict[str, bool]:
+        """Explicit read-only host interface; not a conversational action or LLM tool."""
+        if self._identity_capabilities_reader is None:
+            return {'available':False}
+        values=self._identity_capabilities_reader()
+        allowed={'enabled','test_only','account_authenticated','key_control_configured','can_request_key_proof',
+                 'recovery_required','local_user_verification','unique_human_verified','semantic_memory_is_auth_factor','wallet_operations'}
+        if not isinstance(values,dict) or set(values)-allowed or any(type(v) is not bool for v in values.values()):
+            raise ValueError('Invalid identity capability response; private data cannot enter the agent interface')
+        return {'available':True,**values}
 
     def _help_text(self, language: str) -> str:
         if language == "ru":

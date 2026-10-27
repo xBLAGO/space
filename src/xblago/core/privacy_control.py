@@ -36,6 +36,11 @@ def deletion_blockers(db, uid):
         if db.execute(f'SELECT 1 FROM {table} WHERE {column} IN (SELECT id FROM {parent} WHERE blago_user_id=?) LIMIT 1',(uid,)).fetchone():
             blockers.append(table)
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
+    from xblago.core.sovereign_recovery import present
+    if present(db):
+        from xblago.core.sovereign_schema import validate,TABLES
+        validate(db,required=True)
+        known.update(TABLES)
     for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall():
         name = row[0]
         if name in known:
@@ -52,6 +57,8 @@ def deletion_blockers(db, uid):
 def purge_user(db, uid):
     if deletion_blockers(db,uid):
         raise DeletionBlocked('Economic/unknown ownership retention requires review before account deletion')
+    from xblago.core.sovereign_recovery import purge
+    purge(db,uid)
     for table in OWNED:
         column = 'target_user_id' if table=='account_link_codes' else 'blago_user_id'
         db.execute(f'DELETE FROM {table} WHERE {column}=?',(uid,))
@@ -95,6 +102,8 @@ class PrivacyControl:
         from xblago.core.pilot_schema import validate
         from xblago.core.sqlite_safety import pilot_enabled
         validate(db,required=pilot_enabled())
+        from xblago.core.sovereign_schema import validate as validate_sovereign,enabled
+        validate_sovereign(db,required=enabled())
         if db.execute('SELECT 1 FROM privacy_outbox LIMIT 1').fetchone():
             raise JournalUnavailable('Uncommitted privacy protocol requires offline review')
 
@@ -148,7 +157,10 @@ class PrivacyControl:
         db = self.db
         kind, owner, target, state = (event[k] for k in ('kind','owner','target','state'))
         uid = self._uid(owner)
-        if kind == 'user_status' and uid:
+        if kind.startswith('sovereign_'):
+            from xblago.core.sovereign_recovery import replay
+            replay(db,event,uid)
+        elif kind == 'user_status' and uid:
             if state=='deleted':
                 purge_user(db,uid)
             elif state in ('blocked','merged'):

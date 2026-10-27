@@ -547,14 +547,23 @@ class WebApp:
     def history(self, uid: str) -> list[dict[str, str]]:
         return [{"role": t.role, "text": t.text} for t in self.store.recent_history(uid, 100)]
 
-    def chat(self, uid: str, text: str) -> str:
+    def chat(self, uid: str, text: str, *, token: str | None = None) -> str:
         with self.store.conversation_lock:
+            reader=None
+            if token is not None:
+                if self.session(token)[0]!=uid:
+                    raise ApiError(403,'Chat account does not match the authenticated session')
+                from xblago.core.sovereign_schema import enabled
+                if enabled():
+                    from xblago.core.sovereign import SovereignIdentity
+                    reader=lambda:SovereignIdentity(self).capabilities(token)
             agent = PersonalAssistantAgent(
                 memory=self.store.memory_for_user(uid),
                 chat_provider=build_chat_provider(load_llm_config()),
                 initial_history=self.store.recent_history(uid, 24),
                 exchange_recorder=lambda turns: self.store.append_exchange(uid, turns, channel="web"),
                 history_clearer=lambda: self.store.clear_history(uid),
+                identity_capabilities_reader=reader,
             )
             return agent.respond(UserMessage(text=text)).text
 
@@ -1311,7 +1320,28 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path.startswith('/api/v1/privacy/'):
+        if path.startswith('/api/v1/identity-core/'):
+            from xblago.core.sovereign import SovereignIdentity
+            core=SovereignIdentity(app)
+            if method=='GET' and path=='/api/v1/identity-core/capabilities':
+                self._json(core.capabilities(token))
+            elif method=='GET' and path=='/api/v1/identity-core/me':
+                self._json(core.inspect(token))
+            elif method=='POST':
+                body=self._body()
+                if path=='/api/v1/identity-core/create' and set(body)=={'confirm','policy_version'}:
+                    self._json(core.create(token,body['confirm'],body['policy_version']))
+                elif path=='/api/v1/identity-core/challenge' and {'action'}<=body.keys()<= {'action','authorizer','new_public_key','role','target'}:
+                    self._json(core.challenge(token,**body))
+                elif path=='/api/v1/identity-core/complete' and {'challenge','confirmation'}<=body.keys()<= {'challenge','confirmation','signature','new_key_signature'}:
+                    self._json(core.complete(token,**body))
+                elif path=='/api/v1/identity-core/withdraw' and set(body)=={'confirm'}:
+                    self._json(core.withdraw(token,body['confirm']))
+                else:
+                    raise ApiError(400,'Unsupported identity operation or fields; account scope comes from the session')
+            else:
+                raise ApiError(404,'Unknown identity operation')
+        elif path.startswith('/api/v1/privacy/'):
             from xblago.integrations.privacy import PrivacyService
             privacy = PrivacyService(app)
             if path=='/api/v1/privacy/export' and method=='POST':
@@ -1376,7 +1406,7 @@ class BlagoWebHandler(TelegramWebhookHandler):
             message = data.get("text")
             if not isinstance(message, str) or not 1 <= len(message.strip()) <= 4000:
                 raise ApiError(400, "Message must contain 1-4000 characters")
-            self._json({"reply": app.chat(uid, message.strip())})
+            self._json({"reply": app.chat(uid, message.strip(),token=token)})
         elif path == "/api/v1/memory" and method == "GET":
             self._json({
                 "facts": app.store.all_memory(uid),

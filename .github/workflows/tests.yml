@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4", "feat/foundation-07-identity-architecture"]
   workflow_dispatch:
 
 jobs:
@@ -212,4 +212,58 @@ jobs:
               assert not app.rows('resources',uid)
               assert WebApp(SQLiteBlagoStore(store.path)).history(uid) == app.history(uid)
               print('Natural conversation, single text repair, atomic history and no economic actions smoke OK')
+          PY
+      - name: Docker Sovereign Identity Core isolated recovery smoke
+        run: |
+          docker run --rm -i --entrypoint python \
+            -e XBLAGO_WEB_INVITE_CODE=sovereign-synthetic-invite \
+            -e XBLAGO_PUBLIC_ORIGIN=https://blago.test \
+            -e XBLAGO_WEBAUTHN_RP_ID=blago.test \
+            xblago-space:${{ github.sha }} - <<'PY'
+          import os, tempfile
+          from pathlib import Path
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.integrations.web import WebApp
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.core.privacy_schema import migrate_privacy
+          from xblago.core.pilot_schema import migrate_pilot
+          from xblago.core.security_journal import SecurityJournal
+          from xblago.core.journal_witness import initialize
+          from xblago.core.privacy_maintenance import restore
+          from xblago.core.sovereign_schema import migrate_sovereign
+          from xblago.core.sovereign import SovereignIdentity, POLICY, b64, decode
+          with tempfile.TemporaryDirectory() as root:
+              root = Path(root)
+              path, journal, witness = root/'app.sqlite3', root/'journal', root/'witness'
+              app = WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              migrate_identity_runtime(path)
+              SecurityJournal.initialize(journal)
+              migrate_privacy(path,journal)
+              os.environ['XBLAGO_SECURITY_JOURNAL_DIR'] = str(journal)
+              migrate_pilot(path)
+              initialize(SecurityJournal(journal),witness)
+              os.environ['XBLAGO_JOURNAL_WITNESS_DIR'] = str(witness)
+              assert migrate_sovereign(path)
+              assert not migrate_sovereign(path)
+              os.environ.update(XBLAGO_IDENTITY_CORE_ENABLED='true',XBLAGO_IDENTITY_CORE_MODE='isolated_test',XBLAGO_PILOT_MODE='true')
+              token,_ = app.register('sovereign_ci','synthetic-long-password','sovereign-synthetic-invite')
+              core = SovereignIdentity(app)
+              identity = core.create(token,'CREATE_TEST_IDENTITY',POLICY)['identity_id']
+              key = Ed25519PrivateKey.generate()  # ephemeral CI test key; never persisted/printed
+              q = core.challenge(token,'bootstrap',new_public_key=b64(key.public_key().public_bytes_raw()))
+              result = core.complete(token,q['challenge'],new_key_signature=b64(key.sign(decode(q['message']))),confirmation='CONFIRM_BOOTSTRAP')
+              cid = result['controller_id']
+              backup = app.store.backup_database(root/'offsite')
+              q = core.challenge(token,'revoke',authorizer=cid,target=cid)
+              core.complete(token,q['challenge'],signature=b64(key.sign(decode(q['message']))),confirmation='CONFIRM_REVOKE')
+              recovered = WebApp(restore(backup,journal))
+              token,_ = recovered.login('sovereign_ci','synthetic-long-password')
+              state = SovereignIdentity(recovered).inspect(token)
+              assert state['identity_id'] == identity
+              assert state['controllers'][0]['status'] == 'revoked'
+              assert not SovereignIdentity(recovered).capabilities(token)['key_control_configured']
+              print('Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network')
           PY
