@@ -1,0 +1,28 @@
+Foundation 07.1 source CI evidence
+Source SHA: 72e6bb9cae53ac41c1137839f7fe749f7ad1a0da
+Run: https://github.com/xBLAGO/space/actions/runs/40567957551
+Tests #61: tests and docker both SUCCESS. Excerpts fetched after completion.
+
+Tests job 122414173860
+2026-10-27T19:19:18.0266353Z   "python": "3.12.15",
+2026-10-27T19:19:18.0266630Z   "sqlite_version": "3.54.1",
+2026-10-27T19:19:18.0267120Z   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-27T19:19:40.4212767Z Ran 344 tests in 21.963s
+2026-10-27T19:19:40.4212916Z OK
+2026-10-27T19:19:40.4718654Z ##[group]Run python -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'
+2026-10-27T19:19:40.4719025Z python -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'
+2026-10-27T19:19:56.1090992Z {"browser": "155.0.8059.39", "checks": {"real_browser_registration": true, "registration_rotates_cookie": true, "old_cookie_denied": true, "real_browser_discoverable_login": true, "session_revoke_ui": true, "other_session_denied": true, "export_ui": true, "no_page_errors": true}, "page_errors": []}
+2026-10-27T19:19:57.4436784Z Artifact download URL: https://github.com/xBLAGO/space/actions/runs/40567957551/artifacts/12763343175
+
+Docker job 122414173179
+2026-10-27T19:19:35.4778472Z #16 0.187   "python": "3.12.16",
+2026-10-27T19:19:35.4779020Z #16 0.187   "sqlite_version": "3.54.1",
+2026-10-27T19:19:35.4780103Z #16 0.187   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-27T19:19:41.5637609Z   "python": "3.12.16",
+2026-10-27T19:19:41.5638039Z   "sqlite_version": "3.54.1",
+2026-10-27T19:19:41.5638548Z   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-27T19:19:53.6332863Z Identity runtime, restart and backup smoke OK
+2026-10-27T19:19:54.4711164Z Privacy journal, export, delete, TTL and restore smoke OK
+2026-10-27T19:19:55.0417596Z Strict pilot SQLite, lineage baseline and independent witness gate OK
+2026-10-27T19:19:55.7426273Z Natural conversation, single text repair, atomic history and no economic actions smoke OK
+2026-10-27T19:19:56.6382661Z Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network

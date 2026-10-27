@@ -75,7 +75,7 @@ flowchart LR
     J --> W[Independent retained witness]
     S --> V[Minimal read-only capability API]
     V --> G[Personal agent integration surface]
-    U[(Existing users / semantic memory / history)] --> D
+    U[(Existing users / semantic memory / history)] -->|private account FK, no memory copy| D
     H --> P[Independent L1 proof verification]
 ```
 
@@ -346,6 +346,17 @@ python -m pip check
 CI выполняет полный набор, прежний Chrome/WebAuthn acceptance и все Docker
 health/identity/privacy/strict-pilot/conversation smoke, плюс новый isolated Core
 create/PoP/revoke/backup-recovery smoke. Точный final SHA/CI — в draft PR.
+
+[Source CI Tests #61](https://github.com/xBLAGO/space/actions/runs/40567957551)
+на `72e6bb9cae53ac41c1137839f7fe749f7ad1a0da`: **tests и docker SUCCESS**,
+344/344 теста за 21.963 s, Python 3.12.15 в tests и 3.12.16 внутри Docker;
+в обоих фактическая SQLite 3.54.1 с ожидаемым source ID. Chrome 155.0.8059.39 —
+8/8 checks, прежние Docker smoke и новый Core/revoke/recovery smoke PASS.
+[Выдержки логов](validation07_1/ci-source-evidence.txt),
+[browser artifact](https://github.com/xBLAGO/space/actions/runs/40567957551/artifacts/12763343175).
+Последующий коммит добавляет только эти документы/evidence; окончательный head
+SHA и его CI приведены в draft PR #12. Никаких production readiness выводов
+из зелёного CI не следует.
 
 ## Foundation 07.2 и пределы GO
 

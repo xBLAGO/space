@@ -18,7 +18,7 @@
   },
   "scope": "Synthetic offline/test accounts only; no production changes, chain/RPC, private signing-key storage or real biometric data",
   "decisions": {
-    "further_isolated_tests": "GO_PENDING_FINAL_CI",
+    "further_isolated_tests": "GO",
     "pilot": "NO_GO",
     "mainnet": "NOT_IMPLEMENTED"
   },
@@ -37,5 +37,13 @@
     "new": 43,
     "seconds": 161.797
   },
-  "observed_at": "2026-10-26T18:15:57.140036+00:00"
+  "observed_at": "2026-10-26T18:15:57.140036+00:00",
+  "source_ci": {
+    "sha": "72e6bb9cae53ac41c1137839f7fe749f7ad1a0da",
+    "url": "https://github.com/xBLAGO/space/actions/runs/40567957551",
+    "result": "success",
+    "tests": 344,
+    "seconds": 21.963,
+    "docker_core_recovery_smoke": "success"
+  }
 }
