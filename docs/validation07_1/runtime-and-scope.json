@@ -1,0 +1,49 @@
+{
+  "base_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+  "feature_default_enabled_in_test_host": false,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  },
+  "pynacl_version": "1.6.2",
+  "migration": {
+    "version": "foundation07_identity_core_001",
+    "checksum": "f4797ba6c59faa574646a7623ece331e2d1c894abd6d8b22dd885b8ad0e2d1c1",
+    "tables": 9,
+    "triggers": 30
+  },
+  "scope": "Synthetic offline/test accounts only; no production changes, chain/RPC, private signing-key storage or real biometric data",
+  "decisions": {
+    "further_isolated_tests": "GO",
+    "pilot": "NO_GO",
+    "mainnet": "NOT_IMPLEMENTED"
+  },
+  "limitations": [
+    "No L2/L3 personhood assertion",
+    "No admin/password-only lost-key recovery",
+    "Missing grants after backup require hold/reviewed original state",
+    "Core-involved merges refused",
+    "Mind vault encryption is not added",
+    "Existing 05.4 and 06.1 blockers remain"
+  ],
+  "review": "Implementer protocol review and automated negative/integration tests; not an independent external security audit",
+  "local_test_result": {
+    "passed": 344,
+    "baseline": 301,
+    "new": 43,
+    "seconds": 161.797
+  },
+  "observed_at": "2026-10-26T18:15:57.140036+00:00",
+  "source_ci": {
+    "sha": "72e6bb9cae53ac41c1137839f7fe749f7ad1a0da",
+    "url": "https://github.com/xBLAGO/space/actions/runs/40567957551",
+    "result": "success",
+    "tests": 344,
+    "seconds": 21.963,
+    "docker_core_recovery_smoke": "success"
+  }
+}

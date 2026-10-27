@@ -20,6 +20,9 @@ def cleanup(store, *, now=None):
             raise ValueError('Foundation 05.3 is required for verified cleanup')
         for table in ('auth_challenges','telegram_exchanges','telegram_proofs','privacy_delete_challenges'):
             counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<?',(now,)).rowcount
+        from xblago.core.sovereign_recovery import present
+        if present(db):
+            counts['sovereign_challenges']=db.execute('DELETE FROM sovereign_challenges WHERE expires_at<?',(now,)).rowcount
         for table in ('activity_events','security_signals'):
             counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<=?',(now,)).rowcount
         counts['account_link_codes'] = db.execute("DELETE FROM account_link_codes WHERE CAST(strftime('%s',expires_at) AS INTEGER)<=?",(now,)).rowcount
@@ -50,6 +53,9 @@ def restore(path: Path, journal_directory: Path):
             pass
         # Use the guarded writer so restore revocations are durable as well.
         with store._locked_transaction() as db:
+            from xblago.core.sovereign_recovery import present
+            if present(db):
+                db.execute('DELETE FROM sovereign_challenges')
             for table in ('web_sessions','auth_challenges','telegram_exchanges','privacy_delete_challenges','account_link_codes'):
                 db.execute(f'DELETE FROM {table}')
             db.execute('UPDATE identity_recovery_state SET telegram_resume_at=? WHERE singleton=1',(int(time.time())+3661,))

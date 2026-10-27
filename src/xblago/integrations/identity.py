@@ -348,6 +348,10 @@ class IdentityRuntime:
         """Called inside the existing account merge transaction, before legacy writes."""
         self.active(db, source)
         self.active(db, target)
+        from xblago.core.sovereign_recovery import present
+        if present(db) and (db.execute('SELECT 1 FROM sovereign_identities WHERE blago_user_id IN (?,?)',(source,target)).fetchone()
+                or db.execute('SELECT 1 FROM sovereign_recovery_holds WHERE blago_user_id IN (?,?)',(source,target)).fetchone()):
+            raise ApiError(409,'Merging a cryptographic identity requires a separate multi-controller protocol; no changes applied')
         known_tables = {'profiles','channel_links','memory_facts','semantic_memory','dialogue_turns','events',
             'web_credentials','web_sessions','account_link_codes','blago_needs','blago_resources','blago_assets',
             'blago_resource_offers','blago_payment_requests','blago_payment_request_offers',
