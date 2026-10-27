@@ -1,0 +1,52 @@
+Source commit: 9b09bbedd893b1ef45f21f0e73bf70ba89a5e8eb
+{"id":40584040558,"status":"completed","conclusion":"success","event":"pull_request","head_sha":"9b09bbedd893b1ef45f21f0e73bf70ba89a5e8eb","html_url":"https://github.com/xBLAGO/space/actions/runs/40584040558"}
+
+TESTS JOB
+2026-10-27T21:07:19.3110724Z   python-version: 3.12
+2026-10-27T21:07:19.4552641Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:07:22.9632170Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:07:49.3869521Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:07:49.4195749Z   "python": "3.12.15",
+2026-10-27T21:07:49.4196093Z   "sqlite_version": "3.54.1",
+2026-10-27T21:07:49.4197351Z   "python_extension": "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-27T21:07:49.4281082Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:08:26.1511128Z Ran 380 tests in 36.288s
+2026-10-27T21:08:26.1511521Z OK
+2026-10-27T21:08:26.2102835Z ##[group]Run python -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'
+2026-10-27T21:08:26.2103528Z [36;1mpython -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'[0m
+2026-10-27T21:08:26.2122538Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:08:26.2277797Z SQLite runtime: 3.54.1
+2026-10-27T21:08:26.2348870Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:08:26.2746642Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:08:26.7198838Z Requirement already satisfied: typing-extensions in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (from pyee<15,>=13->playwright==1.64.1) (4.16.0)
+2026-10-27T21:08:27.9891182Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T21:08:34.9189235Z {"browser": "156.0.8078.47", "checks": {"real_browser_registration": true, "registration_rotates_cookie": true, "old_cookie_denied": true, "real_browser_discoverable_login": true, "session_revoke_ui": true, "other_session_denied": true, "export_ui": true, "no_page_errors": true}, "page_errors": []}
+2026-10-27T21:08:34.9684233Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+
+DOCKER JOB
+2026-10-27T21:07:19.0055074Z #3 [internal] load metadata for docker.io/library/python:3.12-slim
+2026-10-27T21:07:19.3920732Z #6 [sqlite-build 1/4] FROM docker.io/library/python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
+2026-10-27T21:07:19.3922231Z #6 resolve docker.io/library/python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f 0.0s done
+2026-10-27T21:07:20.2886825Z #6 [sqlite-build 1/4] FROM docker.io/library/python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
+2026-10-27T21:07:20.4394091Z #6 [sqlite-build 1/4] FROM docker.io/library/python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
+2026-10-27T21:07:20.7797590Z #6 [sqlite-build 1/4] FROM docker.io/library/python:3.12-slim@sha256:12316debbfb86890f6b2d825820612741ba527ad5a44e3902759141d572bfe8f
+2026-10-27T21:08:03.8424775Z #16 [stage-1 8/8] RUN python -m xblago.core.sqlite_safety --require-safe
+2026-10-27T21:08:03.8947114Z #16 0.203   "python": "3.12.16",
+2026-10-27T21:08:03.8948150Z #16 0.203   "sqlite_version": "3.54.1",
+2026-10-27T21:08:03.8950467Z #16 0.203   "python_extension": "/usr/local/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-27T21:08:10.0071363Z   "python": "3.12.16",
+2026-10-27T21:08:10.0071910Z   "sqlite_version": "3.54.1",
+2026-10-27T21:08:10.0074415Z   "python_extension": "/usr/local/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-27T21:08:21.4940802Z [36;1m    print('Identity runtime, restart and backup smoke OK')[0m
+2026-10-27T21:08:22.0949964Z Identity runtime, restart and backup smoke OK
+2026-10-27T21:08:22.2119852Z [36;1m    print('SQLite runtime:', sqlite3.sqlite_version)[0m
+2026-10-27T21:08:22.2120306Z [36;1m    print('Privacy journal, export, delete, TTL and restore smoke OK')[0m
+2026-10-27T21:08:22.9154525Z SQLite runtime: 3.54.1
+2026-10-27T21:08:22.9155375Z Privacy journal, export, delete, TTL and restore smoke OK
+2026-10-27T21:08:23.6307492Z [36;1m    print('Natural conversation, single text repair, atomic history and no economic actions smoke OK')[0m
+2026-10-27T21:08:24.2141648Z Natural conversation, single text repair, atomic history and no economic actions smoke OK
+2026-10-27T21:08:24.3307353Z [36;1m    print('Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network')[0m
+2026-10-27T21:08:25.1172244Z Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network
+2026-10-27T21:08:27.8033767Z Ran 36 tests in 2.069s
+2026-10-27T21:08:27.8034027Z OK
+

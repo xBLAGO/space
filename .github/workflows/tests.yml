@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**"]
   pull_request:
-    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4", "feat/foundation-07-identity-architecture"]
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4", "feat/foundation-07-identity-architecture", "feat/foundation-07-identity-core"]
   workflow_dispatch:
 
 jobs:
@@ -267,3 +267,10 @@ jobs:
               assert not SovereignIdentity(recovered).capabilities(token)['key_control_configured']
               print('Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network')
           PY
+
+      - name: Docker isolated recovery evidence and fail-closed activation
+        run: |
+          docker run --rm --entrypoint python \
+            -v "$PWD/tests:/checks:ro" -v "$PWD/tools:/fixture/tools:ro" \
+            -e PYTHONPATH=/checks:/fixture \
+            xblago-space:${{ github.sha }} -m unittest discover -s /checks -p test_identity_recovery.py -v

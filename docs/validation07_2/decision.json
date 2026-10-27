@@ -1,0 +1,27 @@
+{
+  "base_sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+  "scope": "synthetic threshold ceremony evidence only",
+  "identity_authority_activation": "unconditionally blocked",
+  "feature_flag_default": false,
+  "application_schema_changes": false,
+  "independent_remote_authority_implemented": false,
+  "real_notifications_tested": false,
+  "full_server_compromise_resistance_proven": false,
+  "guardians_and_witnesses": "synthetic model keys; distinct keys do not prove participant independence",
+  "go": "isolated protocol exercises only",
+  "no_go": [
+    "live recovery",
+    "MVP",
+    "pilot",
+    "production"
+  ],
+  "remaining_infrastructure": [
+    "independent enrollment and pinned client",
+    "durable external inboxes and trusted clocks",
+    "quorum single-successor commit and partition recovery",
+    "atomic authority epoch handover with deletion/revocation precedence",
+    "independent custody and physical DR audit"
+  ],
+  "hf_new_run": false,
+  "production_changes": false
+}
