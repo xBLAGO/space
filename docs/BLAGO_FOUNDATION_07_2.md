@@ -270,7 +270,13 @@ runtime activation даже с включённым flag, privacy revoke/delete 
 344 теста и 36 новых. Compileall, pip check, diff check и actual SQLite safety
 gate PASS. [Полный локальный log](validation07_2/local-tests.txt),
 [runtime](validation07_2/runtime.json), [решение и scope](validation07_2/decision.json).
-CI evidence добавляется после проверки commit. Docker job теперь дополнительно запускает весь новый
+[Source CI Tests #65](https://github.com/xBLAGO/space/actions/runs/40584040558)
+на `9b09bbedd893b1ef45f21f0e73bf70ba89a5e8eb`: **SUCCESS**, tests и docker.
+Linux Python 3.12.15: 380/380 за 36.288 s. Docker Python 3.12.16:
+SQLite 3.54.1, все прежние smoke/gate steps и 36 recovery tests за 2.069 s.
+Chrome 156.0.8078.47 + virtual CTAP2: 8/8 checks; это не real-device acceptance.
+[Выдержки CI logs](validation07_2/ci-source-evidence.txt). Последующий коммит
+обновляет только documentation/evidence; его статус также проверяется в PR. Docker job теперь дополнительно запускает весь новый
 recovery test module внутри собранного image с read-only synthetic tests/tools
 mounts; production mounts, secrets и сеть провайдера не требуются.
 Локального Docker executable нет, поэтому Docker подтверждается только Actions.
