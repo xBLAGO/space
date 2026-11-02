@@ -314,6 +314,14 @@ class GenesisTests(unittest.TestCase):
         self.proposal('новый текст')
         with self.assertRaises(ApiError): self.service.converse(self.uid,'Публикуй: подменённый текст')
 
+    def test_новый_частный_черновик_не_отменяет_отзыв_публикации(self):
+        sid=self.publish()
+        self.say('Сними с публикации '+sid)
+        self.say(f'Измени предложение {sid}: новая частная редакция')
+        with self.assertRaises(ApiError): self.service.public(sid)
+        self.say('Да, публикуй этот текст')
+        self.assertEqual(self.service.public(sid)['current']['text'],'новая частная редакция')
+
     def test_http_public_readonly_csrf_idor_xss(self):
         sid=self.publish('<script>alert(1)</script> общественная идея')
         server=ThreadingHTTPServer(('127.0.0.1',0),BlagoWebHandler);server.blago_web_app=self.app

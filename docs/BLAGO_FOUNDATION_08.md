@@ -210,9 +210,13 @@ HTML/JSON без внутренних IDs и прежние WebAuthn/session/exp
 Тесты включают все прежние unit/integration/security и новые сценарии деклараций,
 согласия/версий/аргументов, delayed consent, double submit, Telegram/Web shared
 history, API compatibility, rollback миграции, backup/restore/delete, schema/hash
-corruption, lost witness, crashes и TTL. Итоговый локальный набор: **374/374 PASS, 311.220 s** (344 прежних + 30 новых),
+corruption, lost witness, crashes и TTL. Итоговый локальный набор: **374/374 PASS, 311.220 s** (344 прежних + 30 новых на первом source commit),
 [полный log](validation08/local-tests.txt). Chrome 150.0.7871.125: **15/15 checks**,
 включая мобильную ширину public page; [browser evidence](validation08/browser-results.json).
+После последнего review исправлено повторное открытие старой публикации при создании
+частной редакции после withdrawal. Добавлен negative test; **31/31 Genesis tests
+PASS, 28.371 s**: [regression log](validation08/withdrawal-regression.txt).
+Видимость определяется последним published/withdrawn событием, не draft.
 Compileall, pip check и diff check PASS. После восстановления временного venv
 браузерные проверки повторены, dependencies не меняли production. CI/Docker evidence
 добавляется после проверки source commit. Локального Docker executable нет.

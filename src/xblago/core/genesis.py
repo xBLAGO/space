@@ -218,7 +218,7 @@ class Deliberation:
                 reply='Снял с публикации. Уже сделанные другими людьми копии могут сохраниться.'
             else:
                 db.execute('DELETE FROM genesis_previews WHERE blago_user_id=?',(uid,))
-                reply='Не публикую. Текст остаётся в личном диалоге.'
+                reply='Черновики без твоего утверждения не публикую.'
             now=datetime.now(timezone.utc).isoformat()
             for role,body in (('user',text),('assistant',reply)):
                 cursor=db.execute('INSERT INTO dialogue_turns (blago_user_id,channel,chat_id,role,text,created_at) VALUES (?,?,?,?,?,?)',(uid,channel,str(chat_id) if chat_id is not None else None,role,body,now))
@@ -243,7 +243,7 @@ class Deliberation:
         # Ordinary removal is indistinguishable from an unknown public identifier.
         if not db.execute("SELECT 1 FROM users WHERE blago_user_id=? AND status='active'",(row['blago_user_id'],)).fetchone(): raise error(404,'Publication not found')
         guard(db,row['blago_user_id'])
-        latest=db.execute('SELECT event_type FROM genesis_events WHERE stream_id=? ORDER BY sequence DESC LIMIT 1',(identifier,)).fetchone()
+        latest=db.execute("SELECT event_type FROM genesis_events WHERE stream_id=? AND event_type IN ('proposal.published','argument.published','proposal.withdrawn','argument.withdrawn') ORDER BY sequence DESC LIMIT 1",(identifier,)).fetchone()
         if latest is None or latest[0].endswith('.withdrawn'): raise error(404,'Publication not found')
         versions=[{'revision':r['revision'],'previous_hash':r['previous_hash'],'public_hash':r['public_hash'],'publication':json.loads(r['payload'])} for r in db.execute('SELECT * FROM genesis_publications WHERE stream_id=? ORDER BY revision',(identifier,))]
         if not versions: raise error(404,'Publication not found')
