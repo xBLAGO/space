@@ -23,6 +23,9 @@ def cleanup(store, *, now=None):
         from xblago.core.sovereign_recovery import present
         if present(db):
             counts['sovereign_challenges']=db.execute('DELETE FROM sovereign_challenges WHERE expires_at<?',(now,)).rowcount
+        from xblago.core.genesis_schema import validate as validate_genesis
+        if validate_genesis(db):
+            counts['genesis_previews']=db.execute('DELETE FROM genesis_previews WHERE expires_at<?',(now,)).rowcount
         for table in ('activity_events','security_signals'):
             counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<=?',(now,)).rowcount
         counts['account_link_codes'] = db.execute("DELETE FROM account_link_codes WHERE CAST(strftime('%s',expires_at) AS INTEGER)<=?",(now,)).rowcount
@@ -56,6 +59,8 @@ def restore(path: Path, journal_directory: Path):
             from xblago.core.sovereign_recovery import present
             if present(db):
                 db.execute('DELETE FROM sovereign_challenges')
+            from xblago.core.genesis_schema import validate as validate_genesis
+            if validate_genesis(db): db.execute('DELETE FROM genesis_previews')
             for table in ('web_sessions','auth_challenges','telegram_exchanges','privacy_delete_challenges','account_link_codes'):
                 db.execute(f'DELETE FROM {table}')
             db.execute('UPDATE identity_recovery_state SET telegram_resume_at=? WHERE singleton=1',(int(time.time())+3661,))

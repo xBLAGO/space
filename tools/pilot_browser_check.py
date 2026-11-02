@@ -17,11 +17,16 @@ from xblago.integrations.web import BlagoWebHandler,ApiError
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--chrome',default=os.getenv('BLAGO_CHROME_EXECUTABLE') or shutil.which('google-chrome') or '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome')
+    parser.add_argument('--genesis',action='store_true',help='Synthetic Foundation 08 conversation and public page checks')
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
     from playwright.sync_api import sync_playwright,expect
     args.output.mkdir(parents=True,exist_ok=True)
-    with fixture() as f:
+    with fixture() as f, patch.dict(os.environ,{'XBLAGO_GENESIS_ENABLED':'false'}):
+        if args.genesis:
+            from xblago.core.genesis_schema import migrate_genesis
+            migrate_genesis(f['path'])
+            os.environ['XBLAGO_GENESIS_ENABLED']='true'
         app=f['app']
         setup_token,_=app.register('browser_user','synthetic-browser-password','synthetic-pilot-invite')
         server=ThreadingHTTPServer(('127.0.0.1',0),BlagoWebHandler)
@@ -45,6 +50,35 @@ def main():
                     page.locator('#password').fill('synthetic-browser-password')
                     page.locator('#auth-submit').click()
                     expect(page.locator('#shell')).to_be_visible()
+                    if args.genesis:
+                        def say(text):
+                            page.locator('#chat-input').fill(text)
+                            with page.expect_response(lambda r:r.url.endswith('/chat/messages') and r.request.method=='POST') as response:
+                                page.locator('#send-btn').click()
+                            expect(page.locator('#send-btn')).to_be_enabled()
+                            assert response.value.status==200
+                            return response.value.json()['reply']
+                        checks['genesis_claim_ui']='5000 RUB' in say('У меня есть 5000 рублей')
+                        draft=say('Предлагаю: открыть общую мастерскую')
+                        checks['genesis_private_preview']='Черновик предложения' in draft and 'Опубликовать именно этот текст?' in draft
+                        checks['genesis_no_public_link_before_consent']=page.locator('#chat-stream a').count()==0
+                        approved=say('Да, публикуй этот текст')
+                        expect(page.locator('#chat-stream a').last).to_have_text('Открыть предложение')
+                        href=page.locator('#chat-stream a').last.get_attribute('href')
+                        page.screenshot(path=str(args.output/'genesis-dialogue.png'),full_page=True)
+                        public=context.new_page()
+                        public.goto(url+href)
+                        expect(public.get_by_text('открыть общую мастерскую',exact=True)).to_be_visible()
+                        checks['genesis_public_page']=public.locator('h1').inner_text()=='Открытое обсуждение'
+                        export=public.locator('a').get_attribute('href')
+                        payload=context.request.get(url+export).json()
+                        checks['genesis_public_json']=payload['current']['text']=='открыть общую мастерскую'
+                        checks['genesis_no_internal_id']='blago_user_id' not in json.dumps(payload)
+                        public.screenshot(path=str(args.output/'genesis-public.png'),full_page=True)
+                        public.set_viewport_size({'width':390,'height':844})
+                        checks['genesis_public_mobile_wrap']=public.evaluate('document.documentElement.scrollWidth <= innerWidth && getComputedStyle(document.querySelector("pre")).whiteSpace === "pre-wrap"')
+                        public.screenshot(path=str(args.output/'genesis-public-mobile.png'),full_page=True)
+                        public.close()
                     def profile():
                         # Foundation 06 keeps tools in a deliberately closed drawer.
                         page.locator('#tools-toggle').click()

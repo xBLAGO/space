@@ -547,7 +547,7 @@ class WebApp:
     def history(self, uid: str) -> list[dict[str, str]]:
         return [{"role": t.role, "text": t.text} for t in self.store.recent_history(uid, 100)]
 
-    def chat(self, uid: str, text: str, *, token: str | None = None) -> str:
+    def chat(self, uid: str, text: str, *, token: str | None = None, request_id: str | None = None, preview_ref: str | None = None) -> str:
         with self.store.conversation_lock:
             reader=None
             if token is not None:
@@ -557,6 +557,9 @@ class WebApp:
                 if enabled():
                     from xblago.core.sovereign import SovereignIdentity
                     reader=lambda:SovereignIdentity(self).capabilities(token)
+            from xblago.core.genesis import Deliberation
+            reply=Deliberation(self.store).converse(uid,text,request_id=request_id,preview_ref=preview_ref)
+            if reply is not None: return reply
             agent = PersonalAssistantAgent(
                 memory=self.store.memory_for_user(uid),
                 chat_provider=build_chat_provider(load_llm_config()),
@@ -602,6 +605,9 @@ class WebApp:
                     f"INSERT INTO {table} (id, blago_user_id, title, description, visibility, created_at) VALUES (?, ?, ?, ?, ?, ?)",
                     (identifier, uid, title.strip(), description.strip(), visibility, now),
                 )
+            if kind=="needs":
+                from xblago.core.genesis import record_existing
+                record_existing(db,uid,identifier,"need",{"title":title.strip(),"description":description,"visibility":visibility})
         return {"id": identifier, "title": title.strip(), "description": description.strip(), "visibility": visibility, "created_at": now, **({"status": "open"} if kind == "needs" else {})}
 
     @staticmethod
@@ -654,6 +660,8 @@ class WebApp:
                 """,
                 (identifier, uid, title, description, asset_type, ownership_claim, use_permission, management_status, visibility, now, now),
             )
+            from xblago.core.genesis import record_existing
+            record_existing(db,uid,identifier,"asset",{"title":title,"description":description,"asset_type":asset_type,"verification":"self_declared_unverified","visibility":visibility})
         return self.asset(uid, identifier)
 
     def assets(self, uid: str) -> list[dict[str, Any]]:
@@ -1160,6 +1168,34 @@ class BlagoWebHandler(TelegramWebhookHandler):
             self.end_headers()
             self.wfile.write(body)
             return
+        if path.startswith('/proposals/'):
+            from xblago.core.genesis import Deliberation
+            from xblago.core.security_journal import JournalUnavailable
+            from html import escape
+            try:
+                data=Deliberation(getattr(self.server,'blago_web_app').store).public(path.removeprefix('/proposals/'))
+            except (ApiError,JournalUnavailable) as exc:
+                self._json({'error':'Publication unavailable'},status=exc.status if isinstance(exc,ApiError) else 503)
+                return
+            sections=[]
+            for doc in [data]+data['arguments']:
+                sections.append('<section><h2>'+('Предложение' if doc['current']['kind']=='proposal' else 'Аргумент')+'</h2>')
+                for version in doc['versions']:
+                    item=version['publication']
+                    sections.append('<article><h3>Версия '+str(version['revision'])+'</h3><p>'+escape(item['author'])+' · псевдоним аккаунта</p><pre>'+escape(item['text'])+'</pre><p>SHA-256: '+version['public_hash']+'</p></article>')
+                sections.append('</section>')
+            style='body{background:#0e1818;color:#e8efec;font:17px/1.65 system-ui,sans-serif;margin:0}main{max-width:820px;margin:auto;padding:32px 24px}h1{font-size:30px}h2{font-size:24px}article{border-top:1px solid #38504a;padding:16px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}p{overflow-wrap:anywhere}a{color:#a9d6c0}'
+            import base64
+            style_hash=base64.b64encode(hashlib.sha256(style.encode()).digest()).decode()
+            body=('<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Обсуждение BLAGO</title><style>'+style+'</style><main><h1>Открытое обсуждение</h1>'+''.join(sections)+'<a href="/api/v1/public/proposals/'+data['id']+'">Машинно-читаемый экспорт JSON</a></main></html>').encode()
+            self.send_response(200)
+            self.send_header('Content-Type','text/html; charset=utf-8')
+            self.send_header('Cache-Control','no-store')
+            self.send_header('Content-Security-Policy',"default-src 'none'; frame-ancestors 'none'; base-uri 'none'; style-src 'sha256-"+style_hash+"'")
+            self.send_header('X-Content-Type-Options','nosniff')
+            self.send_header('Content-Length',str(len(body)))
+            self.end_headers(); self.wfile.write(body)
+            return
         assets = {
             "/app/manifest.webmanifest": ("manifest.webmanifest", "application/manifest+json"),
             "/app/icon.svg": ("icon.svg", "image/svg+xml"),
@@ -1271,6 +1307,10 @@ class BlagoWebHandler(TelegramWebhookHandler):
         app: WebApp = getattr(self.server, "blago_web_app")
         if method != "GET":
             self._check_origin()
+        if method=='GET' and path.startswith('/api/v1/public/proposals/'):
+            from xblago.core.genesis import Deliberation
+            self._json(Deliberation(app.store).public(path.removeprefix('/api/v1/public/proposals/')))
+            return
         if method == 'GET' and path == '/api/v1/auth/capabilities':
             configured = False
             try:
@@ -1320,7 +1360,10 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path.startswith('/api/v1/identity-core/'):
+        if path=='/api/v1/genesis/records' and method=='GET':
+            from xblago.core.genesis import Deliberation
+            self._json(Deliberation(app.store).own(uid))
+        elif path.startswith('/api/v1/identity-core/'):
             from xblago.core.sovereign import SovereignIdentity
             core=SovereignIdentity(app)
             if method=='GET' and path=='/api/v1/identity-core/capabilities':
@@ -1400,13 +1443,16 @@ class BlagoWebHandler(TelegramWebhookHandler):
         elif path == "/api/v1/me" and method == "PATCH":
             self._json({"profile": app.update_me(uid, self._body())})
         elif path == "/api/v1/chat/messages" and method == "GET":
-            self._json({"messages": app.history(uid)})
+            from xblago.core.genesis import Deliberation
+            self._json({"messages": app.history(uid),"publication_preview":Deliberation(app.store).pending(uid)})
         elif path == "/api/v1/chat/messages" and method == "POST":
             data = self._body()
             message = data.get("text")
             if not isinstance(message, str) or not 1 <= len(message.strip()) <= 4000:
                 raise ApiError(400, "Message must contain 1-4000 characters")
-            self._json({"reply": app.chat(uid, message.strip(),token=token)})
+            reply=app.chat(uid, message.strip(),token=token,request_id=data.get("request_id"),preview_ref=data.get("preview_ref"))
+            from xblago.core.genesis import Deliberation
+            self._json({"reply":reply,"publication_preview":Deliberation(app.store).pending(uid)})
         elif path == "/api/v1/memory" and method == "GET":
             self._json({
                 "facts": app.store.all_memory(uid),

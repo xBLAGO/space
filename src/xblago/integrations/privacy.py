@@ -123,6 +123,9 @@ class PrivacyService:
                     'identity_events':'event_id,identity_id,blago_user_id,action,version,recorded_at',
                     'identity_consents':'consent_id,identity_id,blago_user_id,purpose,policy_version,decision,recorded_at',
                 })
+            from xblago.core.genesis_schema import validate as validate_genesis, TABLES as GENESIS_TABLES
+            if validate_genesis(db):
+                fields.update({table:'*' for table in GENESIS_TABLES})
             for table,columns in fields.items():
                 tables[table] = collect(f'SELECT {columns} FROM {table} WHERE blago_user_id IN ({marks})',family)
             requests = []

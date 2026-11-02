@@ -1,0 +1,65 @@
+{
+  "synthetic": true,
+  "network_calls": 0,
+  "llm_provider": "local deterministic fixture",
+  "identity_core_enabled": false,
+  "dialogue": [
+    {
+      "human": "У меня есть 5000 рублей",
+      "agent": "Учёл как твой заявленный актив: 5000 RUB. Это не подтверждение наличия денег и не разрешение ими распоряжаться."
+    },
+    {
+      "human": "Мне хочется, чтобы у людей рядом было место для совместного ремонта вещей.",
+      "agent": "Я прочитал твоё сообщение."
+    },
+    {
+      "human": "Предлагаю открыть общую мастерскую, где участники смогут добровольно помогать друг другу.",
+      "agent": "Черновик предложения:\n\nоткрыть общую мастерскую, где участники смогут добровольно помогать друг другу.\n\nАвторство: Участник 0096a0060f8f (псевдоним аккаунта, без подтверждения личности). После публикации текст доступен всем, внешние копии нельзя отозвать.\nОпубликовать именно этот текст? Можно ответить «Да, публикуй этот текст» в Web/Mini App либо «Публикуй: [полный текст]» в Telegram, или изменить его."
+    },
+    {
+      "human": "Да, публикуй этот текст",
+      "agent": "Опубликован утверждённый тобой текст: /proposals/fec7505904c085cde56f9dae4d19ff76"
+    }
+  ],
+  "public_export": {
+    "protocol": "BLAGO-deliberation-export-v1",
+    "id": "fec7505904c085cde56f9dae4d19ff76",
+    "versions": [
+      {
+        "revision": 1,
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "public_hash": "f7ecb9615c052f0bf0dc3a4b34a63a31cf84f23ca412137e4b9f543e30f7a46d",
+        "publication": {
+          "author": "Участник 0096a0060f8f",
+          "authorship": "authenticated_account_pseudonym",
+          "id": "fec7505904c085cde56f9dae4d19ff76",
+          "kind": "proposal",
+          "published_at": 1793389929,
+          "target": null,
+          "text": "открыть общую мастерскую, где участники смогут добровольно помогать друг другу."
+        }
+      }
+    ],
+    "current": {
+      "author": "Участник 0096a0060f8f",
+      "authorship": "authenticated_account_pseudonym",
+      "id": "fec7505904c085cde56f9dae4d19ff76",
+      "kind": "proposal",
+      "published_at": 1793389929,
+      "target": null,
+      "text": "открыть общую мастерскую, где участники смогут добровольно помогать друг другу."
+    },
+    "hash_scope": "public approved versions only; not a blockchain timestamp or proof of personhood",
+    "arguments": []
+  },
+  "asset_count": 1,
+  "payment_operations": 0,
+  "sqlite": {
+    "python": "3.12.10",
+    "sqlite_version": "3.54.1",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "wal_reset_fix_verified": true,
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted"
+  }
+}
