@@ -1,0 +1,29 @@
+Source SHA: d8e9fbdb0db56188038ded90090eac4362b29502
+CI Tests #71: SUCCESS
+https://github.com/xBLAGO/space/actions/runs/41519610136
+
+TESTS
+2026-11-02T20:29:53.9940528Z   "python": "3.12.15",
+2026-11-02T20:29:53.9941013Z   "sqlite_version": "3.54.1",
+2026-11-02T20:30:40.0528469Z Ran 375 tests in 45.219s
+2026-11-02T20:30:40.0528860Z OK
+2026-11-02T20:31:09.8110318Z {"browser": "156.0.8078.47", "checks": {"genesis_claim_ui": true, "genesis_private_preview": true, "genesis_no_public_link_before_consent": true, "genesis_public_page": true, "genesis_public_json": true, "genesis_no_internal_id": true, "genesis_public_mobile_wrap": true, "real_browser_registration": true, "registration_rotates_cookie": true, "old_cookie_denied": true, "real_browser_discoverable_login": true, "session_revoke_ui": true, "other_session_denied": true, "export_ui": true, "no_page_errors": true}, "page_errors": []}
+
+DOCKER
+2026-11-02T20:29:47.8795225Z #16 0.137   "python": "3.12.16",
+2026-11-02T20:29:47.8795448Z #16 0.137   "sqlite_version": "3.54.1",
+2026-11-02T20:29:52.8644490Z   "python": "3.12.16",
+2026-11-02T20:29:52.8644728Z   "sqlite_version": "3.54.1",
+2026-11-02T20:30:04.2201250Z [36;1m    print('Identity runtime, restart and backup smoke OK')[0m
+2026-11-02T20:30:04.6318587Z Identity runtime, restart and backup smoke OK
+2026-11-02T20:30:04.7244510Z [36;1m    print('Privacy journal, export, delete, TTL and restore smoke OK')[0m
+2026-11-02T20:30:05.2085113Z Privacy journal, export, delete, TTL and restore smoke OK
+2026-11-02T20:30:05.3139659Z [36;1m    print('Strict pilot SQLite, lineage baseline and independent witness gate OK')[0m
+2026-11-02T20:30:05.6615484Z Strict pilot SQLite, lineage baseline and independent witness gate OK
+2026-11-02T20:30:05.7639691Z [36;1m    print('Natural conversation, single text repair, atomic history and no economic actions smoke OK')[0m
+2026-11-02T20:30:06.1609886Z Natural conversation, single text repair, atomic history and no economic actions smoke OK
+2026-11-02T20:30:06.2752332Z [36;1m    print('Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network')[0m
+2026-11-02T20:30:06.8404284Z Sovereign identity, human key proof, revoke and backup recovery smoke OK; no wallets or network
+2026-11-02T20:30:13.0138666Z Ran 31 tests in 5.738s
+2026-11-02T20:30:13.0138860Z OK
+

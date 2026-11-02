@@ -218,8 +218,13 @@ corruption, lost witness, crashes и TTL. Итоговый локальный н
 PASS, 28.371 s**: [regression log](validation08/withdrawal-regression.txt).
 Видимость определяется последним published/withdrawn событием, не draft.
 Compileall, pip check и diff check PASS. После восстановления временного venv
-браузерные проверки повторены, dependencies не меняли production. CI/Docker evidence
-добавляется после проверки source commit. Локального Docker executable нет.
+браузерные проверки повторены, dependencies не меняли production. [CI Tests #71](https://github.com/xBLAGO/space/actions/runs/41519610136)
+на source SHA `d8e9fbdb0db56188038ded90090eac4362b29502`: **SUCCESS**,
+375/375 тестов за 45.219 s на Linux/Python 3.12.15; Chrome 156.0.8078.47 — 15/15.
+Docker Python 3.12.16 / SQLite 3.54.1: все inherited smoke/gate и 31 Genesis test
+за 5.738 s PASS. [Выдержки CI logs](validation08/ci-source-evidence.txt).
+Локального Docker executable нет. Последующий documentation/evidence-only commit
+не меняет код; его CI проверяется отдельно в draft PR.
 
 ## GO / NO-GO и следующий этап
 
