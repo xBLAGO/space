@@ -1,0 +1,36 @@
+test_backup_до_08_нельзя_автоматически_признать_совместимым (test_genesis.GenesisTests.test_backup_до_08_нельзя_автоматически_признать_совместимым) ... ok
+test_http_public_readonly_csrf_idor_xss (test_genesis.GenesisTests.test_http_public_readonly_csrf_idor_xss) ... ok
+test_telegram_web_miniapp_общая_история_и_повтор_update (test_genesis.GenesisTests.test_telegram_web_miniapp_общая_история_и_повтор_update) ... ok
+test_аргумент_другого_участника_только_после_его_согласия (test_genesis.GenesisTests.test_аргумент_другого_участника_только_после_его_согласия) ... ok
+test_задержанное_подтверждение_не_утверждает_другой_текст (test_genesis.GenesisTests.test_задержанное_подтверждение_не_утверждает_другой_текст) ... ok
+test_заявленный_актив_без_платежа_или_доказательств (test_genesis.GenesisTests.test_заявленный_актив_без_платежа_или_доказательств) ... ok
+test_контекст_изменился_подтверждение_не_публикует (test_genesis.GenesisTests.test_контекст_изменился_подтверждение_не_публикует) ... ok
+test_миграция_rollback_при_ошибке (test_genesis.GenesisTests.test_миграция_rollback_при_ошибке) ... ok
+test_новая_версия_не_публикуется_до_согласия (test_genesis.GenesisTests.test_новая_версия_не_публикуется_до_согласия) ... ok
+test_новый_частный_черновик_не_отменяет_отзыв_публикации (test_genesis.GenesisTests.test_новый_частный_черновик_не_отменяет_отзыв_публикации) ... ok
+test_отмена_и_истечение_согласия (test_genesis.GenesisTests.test_отмена_и_истечение_согласия) ... ok
+test_отрицание_цитата_гипотеза_чужие_деньги_и_запрет (test_genesis.GenesisTests.test_отрицание_цитата_гипотеза_чужие_деньги_и_запрет) ... ok
+test_очистка_ttl_не_удаляет_историю_версий (test_genesis.GenesisTests.test_очистка_ttl_не_удаляет_историю_версий) ... ok
+test_очистка_истории_не_возвращает_preview_из_кэша (test_genesis.GenesisTests.test_очистка_истории_не_возвращает_preview_из_кэша) ... ok
+test_ошибка_до_commit_не_оставляет_актив_и_половину_истории (test_genesis.GenesisTests.test_ошибка_до_commit_не_оставляет_актив_и_половину_истории) ... ok
+test_параллельные_повторы_не_дублируют_события_или_историю (test_genesis.GenesisTests.test_параллельные_повторы_не_дублируют_события_или_историю) ... ok
+test_параллельные_подтверждения_публикуют_одну_версию (test_genesis.GenesisTests.test_параллельные_подтверждения_публикуют_одну_версию) ... ok
+test_перенос_авторства_через_merge_без_согласия_запрещён (test_genesis.GenesisTests.test_перенос_авторства_через_merge_без_согласия_запрещён) ... ok
+test_повтор_реплики_и_идемпотентного_запроса (test_genesis.GenesisTests.test_повтор_реплики_и_идемпотентного_запроса) ... ok
+test_потерянный_witness_блокирует_публикацию_и_просмотр (test_genesis.GenesisTests.test_потерянный_witness_блокирует_публикацию_и_просмотр) ... ok
+test_размышление_не_создаёт_потребность (test_genesis.GenesisTests.test_размышление_не_создаёт_потребность) ... ok
+test_сбой_после_journal_append_до_commit_блокирует_старое_состояние (test_genesis.GenesisTests.test_сбой_после_journal_append_до_commit_блокирует_старое_состояние) ... ok
+test_свежий_backup_перезапуск_и_аннулирование_preview (test_genesis.GenesisTests.test_свежий_backup_перезапуск_и_аннулирование_preview) ... ok
+test_секреты_и_неположительные_суммы_не_сохраняются (test_genesis.GenesisTests.test_секреты_и_неположительные_суммы_не_сохраняются) ... ok
+test_снятие_публикации_и_старый_backup (test_genesis.GenesisTests.test_снятие_публикации_и_старый_backup) ... ok
+test_старыe_api_активов_и_потребностей_используют_тот_же_журнал (test_genesis.GenesisTests.test_старыe_api_активов_и_потребностей_используют_тот_же_журнал) ... ok
+test_схема_идемпотентна_и_неизменяемый_event (test_genesis.GenesisTests.test_схема_идемпотентна_и_неизменяемый_event) ... ok
+test_только_явное_утверждение_показанного_текста (test_genesis.GenesisTests.test_только_явное_утверждение_показанного_текста) ... ok
+test_удаление_аккаунта_экспорт_и_невоскрешение (test_genesis.GenesisTests.test_удаление_аккаунта_экспорт_и_невоскрешение) ... ok
+test_удалённая_публичная_версия_и_drift_обнаруживаются (test_genesis.GenesisTests.test_удалённая_публичная_версия_и_drift_обнаруживаются) ... ok
+test_флаг_off_и_никакого_consensus_или_mainnet (test_genesis.GenesisTests.test_флаг_off_и_никакого_consensus_или_mainnet) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 28.371s
+
+OK

@@ -159,7 +159,7 @@ class TelegramBot:
                 return self.store.cached_update_replies("telegram", update_id) or []
 
             try:
-                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type)
+                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type, update_id)
             except Exception as exc:
                 self.store.mark_update_failed("telegram", update_id, str(exc))
                 raise
@@ -170,7 +170,7 @@ class TelegramBot:
     _handle_update = handle_update
 
     def _replies_for_message(
-        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None,
+        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None, update_id: str | None = None,
     ) -> list[dict[str, str | int]]:
         if text.strip().startswith("/link"):
             if chat_type != "private":
@@ -192,6 +192,12 @@ class TelegramBot:
             welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")
             return _telegram_message_replies(chat_id, welcome_text)
 
+        # Private declarations and previews never originate in group chats.
+        if chat_type=='private':
+            from xblago.core.genesis import Deliberation
+            reply=Deliberation(self.store).converse(blago_user_id,text,channel='telegram',chat_id=chat_id,
+                request_id=('telegram:'+str(update_id)) if update_id is not None else None)
+            if reply is not None: return _telegram_message_replies(chat_id,reply)
         response = self._agent_for_user(blago_user_id, chat_id).respond(UserMessage(text=text.strip()))
         return _telegram_message_replies(chat_id, response.text)
 

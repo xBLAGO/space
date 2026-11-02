@@ -398,6 +398,8 @@ class SQLiteBlagoStore:
 
     def clear_history(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
+            from xblago.core.genesis_schema import clear_transient
+            clear_transient(connection,blago_user_id)
             connection.execute("DELETE FROM dialogue_turns WHERE blago_user_id = ?", (blago_user_id,))
             connection.execute('UPDATE events SET response_json=NULL,error=NULL WHERE blago_user_id=?',(blago_user_id,))
 

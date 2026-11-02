@@ -35,12 +35,15 @@ def deletion_blockers(db, uid):
                                 ('blago_payment_request_offers','resource_offer_id','blago_resource_offers')):
         if db.execute(f'SELECT 1 FROM {table} WHERE {column} IN (SELECT id FROM {parent} WHERE blago_user_id=?) LIMIT 1',(uid,)).fetchone():
             blockers.append(table)
+    from xblago.core.genesis_schema import validate as validate_genesis, TABLES as GENESIS_TABLES
+    genesis_present=validate_genesis(db)
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
     from xblago.core.sovereign_recovery import present
     if present(db):
         from xblago.core.sovereign_schema import validate,TABLES
         validate(db,required=True)
         known.update(TABLES)
+    if genesis_present: known.update(GENESIS_TABLES)
     for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall():
         name = row[0]
         if name in known:
@@ -57,6 +60,8 @@ def deletion_blockers(db, uid):
 def purge_user(db, uid):
     if deletion_blockers(db,uid):
         raise DeletionBlocked('Economic/unknown ownership retention requires review before account deletion')
+    from xblago.core.genesis_schema import purge as purge_genesis
+    purge_genesis(db,uid)
     from xblago.core.sovereign_recovery import purge
     purge(db,uid)
     for table in OWNED:
@@ -104,6 +109,8 @@ class PrivacyControl:
         validate(db,required=pilot_enabled())
         from xblago.core.sovereign_schema import validate as validate_sovereign,enabled
         validate_sovereign(db,required=enabled())
+        from xblago.core.genesis_schema import validate as validate_genesis
+        validate_genesis(db)
         if db.execute('SELECT 1 FROM privacy_outbox LIMIT 1').fetchone():
             raise JournalUnavailable('Uncommitted privacy protocol requires offline review')
 
@@ -157,7 +164,10 @@ class PrivacyControl:
         db = self.db
         kind, owner, target, state = (event[k] for k in ('kind','owner','target','state'))
         uid = self._uid(owner)
-        if kind.startswith('sovereign_'):
+        if kind=='genesis_event':
+            from xblago.core.genesis_schema import replay
+            replay(db,event,uid)
+        elif kind.startswith('sovereign_'):
             from xblago.core.sovereign_recovery import replay
             replay(db,event,uid)
         elif kind == 'user_status' and uid:
@@ -194,6 +204,9 @@ class PrivacyControl:
                 UNION SELECT s.id,s.blago_user_id FROM semantic_memory s JOIN removed r ON s.supersedes_id=r.id AND s.blago_user_id=r.uid)
                 DELETE FROM semantic_memory WHERE id IN (SELECT id FROM removed)""",(target,))
         elif kind=='history':
+            if uid:
+                from xblago.core.genesis_schema import clear_transient
+                clear_transient(db,uid)
             for previous in self._lineage_targets('history_lineage',target):
                 db.execute("DELETE FROM dialogue_turns WHERE blago_tag('history',id,blago_user_id,created_at,role,text)=?",(previous,))
             if uid:
