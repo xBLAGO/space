@@ -1,0 +1,35 @@
+{
+  "revision": "bop-0.1-lab.1-receipts-08.2.1",
+  "source_commit": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+  "source": "docs/protocol_0_1/EXPERIMENT_AB.md section 4",
+  "canonical": "bop-0.1-lab.1 ASCII canonical JSON",
+  "algorithm": "Ed25519",
+  "delivery-receipt": {
+    "domain": "BOP/0.1-lab.1/DELIVERY-RECEIPT",
+    "fields": ["kind","profile","network","policy_ref","node","issuer_key","receipt_id","event_id","event_ref","mandate_ref","status_nonce","authority_epoch","sequence","head","inbox_commit_index","inbox_state_ref","decision"],
+    "decision": "committed"
+  },
+  "revocation-receipt": {
+    "domain": "BOP/0.1-lab.1/REVOCATION-RECEIPT",
+    "fields": ["kind","profile","network","policy_ref","node","issuer_key","receipt_id","identity","authority_epoch","revoke_ref","sequence","head","request_nonce","inbox_commit_index","inbox_state_ref","decision"],
+    "decision": "revocation-recorded"
+  },
+  "types": {
+    "receipt_id": "rc: plus 64 lowercase hex digits",
+    "hash_reference": "sha256: plus 64 lowercase hex digits",
+    "nonce": "canonical base64url of 32 bytes without padding",
+    "authority_epoch": "integer 1 in this profile",
+    "sequence": "safe unsigned integer at least 1",
+    "inbox_commit_index": "safe unsigned integer at least 1",
+    "inbox_state_ref": "sha256 of LAB/08.2/STATE NUL plus canonical immutable transaction record",
+    "other_fields": "same exact bounded handles, pins and semantics as Foundation 08.1"
+  },
+  "constraints": [
+    "exact field sets; reject unknown or missing fields",
+    "node and key are pinned out of band, never trusted from packet",
+    "signing only after immutable state record fsync and retained CAS commit",
+    "receipt is historical node evidence, never a Human mandate",
+    "duplicate exact receipt is historical replay, not a new effect",
+    "late ACK never lowers a retained authority frontier"
+  ]
+}

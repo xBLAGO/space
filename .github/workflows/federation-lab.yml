@@ -1,0 +1,40 @@
+name: Federation synthetic stateful lab
+on:
+  push:
+    branches: [feat/foundation-08-2-durable-lab]
+  pull_request:
+    branches: [docs/foundation-08-1-protocol-conformance]
+permissions:
+  contents: read
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install cryptography==48.0.1 PyNaCl==1.6.2
+      - name: Preserve all offline golden decisions
+        run: |
+          python docs/protocol_0_1/conformance/generate_vectors.py
+          python docs/protocol_0_1/conformance/run_conformance.py
+          python docs/protocol_0_1/conformance/check_design.py
+          git diff --exit-code -- docs/protocol_0_1/conformance
+      - name: Stateful fault tests (synthetic, no application imports)
+        run: python experiments/federation_08_2/run_lab.py /tmp/federation-lab-evidence.json
+      - name: Two local Node processes, fresh Human and Agent signers
+        run: python experiments/federation_08_2/demo.py --new-directory /tmp/blago082-demo
+      - name: Syntax and dependency checks
+        run: |
+          python -m compileall -q experiments/federation_08_2
+          python -m pip check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: synthetic-lab-public-evidence
+          path: |
+            /tmp/federation-lab-evidence.json
+            /tmp/blago082-demo/public-evidence.json
+          if-no-files-found: error

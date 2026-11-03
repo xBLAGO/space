@@ -1,0 +1,18 @@
+Local offline conformance: 73/73 each reference, parity PASS, no golden drift.
+Local schema hash: 64667aa8fb6abd535e4a2f93d17d6ed56c46d31ab548c84eb56f4cc80a86b85a
+Initial sandbox HTTP tests failed EPERM binding loopback; rerun with socket permission passed.
+Final stateful evidence: evidence.json, 35/35 PASS (19.405 seconds).
+Two-process local demo: PASS; public transcript local-demo-evidence.json.
+Source commit: 3aba843334a07dfebfcfb7fbb066e507b066bd3b
+GitHub Actions PR run: https://github.com/xBLAGO/space/actions/runs/41714627627
+Job: 126191292145 / lab / SUCCESS
+Ubuntu runner, Python 3.12.15; 35 tests in 8.713s: OK.
+73 vectors per reference, parity true, failures [], fixture diff clean.
+Two Node processes: PASS; both directions; fresh distinct Human/Agent/Node keys.
+compileall / pip check: PASS. Public artifact upload: SUCCESS.
+Artifact: https://github.com/xBLAGO/space/actions/runs/41714627627/artifacts/13269316554
+Only federation-lab-evidence.json and demo public-evidence.json were uploaded.
+This following evidence-only commit does not change tested source; its head CI
+is checked separately in the Draft PR. No production/application/Docker/HF test
+claim is made by this isolated synthetic workflow.
+Independent operators/security audit: NOT EXECUTED. Production: NO-GO.
