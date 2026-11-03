@@ -1,0 +1,532 @@
+{
+  "scope_sha": {
+    "M": "3c218dc5757879c26b3aec520af3636b2d702715",
+    "C": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+    "G": "483475fd237ba3400881699c407be5b91d53dcdd",
+    "R": "d96ade9375f3499ad93095b2307abd750f0a8578"
+  },
+  "new_database_migrations_executed": false,
+  "production_code_changed": false,
+  "network_provider_calls": 0,
+  "independent_nodes_exercised": 0,
+  "sources": {
+    "M-store": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/core/storage.py",
+      "line": 28,
+      "file_sha256": "19a86217917b7e8fcfef12d7dfbd2e42ceeae1c6bbd0241c0d63a5f74bf250a7"
+    },
+    "M-msg": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/core/messages.py",
+      "line": 7,
+      "file_sha256": "d36c3c7204a82dc6aefcfc6c8160115722aa497fd148ccfdab904f5311a81720"
+    },
+    "M-llm": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/core/llm.py",
+      "line": 66,
+      "file_sha256": "1fc874b7e20046a4b81a1c94525d4e28f1663e45b1b75e8d73fa22329629b845"
+    },
+    "M-config": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/core/config.py",
+      "line": 20,
+      "file_sha256": "260a10f882801752a4ec06f5403dd9bd17cca21b5e99b4956f042702992db66f"
+    },
+    "M-deploy": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": ".github/workflows/huggingface-space.yml",
+      "line": 3,
+      "file_sha256": "ebcd3a5a8a8d66327923b15f42242f182ed1ff1a7e4d7da217036e59bff1e8d4"
+    },
+    "M-docker": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "Dockerfile",
+      "line": 1,
+      "file_sha256": "d60450aadd65cdb0929c6fc7c5902ca2ce80a013aab31ad538d987ce7b7ff11e"
+    },
+    "M-cli": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/cli.py",
+      "line": 1,
+      "file_sha256": "ec89fa778cfdacdfea074ff24cef3db32af479f09c237b0ce18e9fd8082cd7cc"
+    },
+    "M-tg": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "src/xblago/integrations/telegram.py",
+      "line": 1,
+      "file_sha256": "9a45800ef18ea2e6a429b27e29a1bc7ff1462421a07eef2414115cc23118967c"
+    },
+    "C-store": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/storage.py",
+      "line": 363,
+      "file_sha256": "7ba75267e8c8ddc85b2ea2397a4e1d12be0262f4c65084d37dcabfe73a736404"
+    },
+    "C-memory": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/storage.py",
+      "line": 602,
+      "file_sha256": "7ba75267e8c8ddc85b2ea2397a4e1d12be0262f4c65084d37dcabfe73a736404"
+    },
+    "C-prov": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/semantic_memory.py",
+      "line": 15,
+      "file_sha256": "b42a2a2b7967745b1123ed0605264a489c288b8f4c02f90269913fdb8a5cc8a3"
+    },
+    "C-memclass": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/memory.py",
+      "line": 22,
+      "file_sha256": "4d99c8ac70b030b4c25fcb2e9c25e49fc21bf33a3b19c3573dcfb87b5c26565b"
+    },
+    "C-llm": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/llm.py",
+      "line": 121,
+      "file_sha256": "013110ee6cfdad84cd5445c065a4c69168d774d1485debf0d94e27ba1e0a3287"
+    },
+    "C-prompt": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/llm.py",
+      "line": 163,
+      "file_sha256": "013110ee6cfdad84cd5445c065a4c69168d774d1485debf0d94e27ba1e0a3287"
+    },
+    "C-config": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/config.py",
+      "line": 22,
+      "file_sha256": "a5621b186774d73336c460389ceebeb2c6af11e85caa6fe579e7cec3b7c93f3e"
+    },
+    "C-sov": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sovereign.py",
+      "line": 111,
+      "file_sha256": "268d2199fada17ad7734541ca662e2839f85339b9f7587b7e8d4662eafa0702c"
+    },
+    "C-proof": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sovereign.py",
+      "line": 61,
+      "file_sha256": "268d2199fada17ad7734541ca662e2839f85339b9f7587b7e8d4662eafa0702c"
+    },
+    "C-keys": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sovereign.py",
+      "line": 203,
+      "file_sha256": "268d2199fada17ad7734541ca662e2839f85339b9f7587b7e8d4662eafa0702c"
+    },
+    "C-agent": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/agents/personal_assistant.py",
+      "line": 211,
+      "file_sha256": "6162e12bb237115e445a7793044e6098ebc29bc1c2e862e4e1591a1ddf4a65cf"
+    },
+    "C-schema": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sovereign_schema.py",
+      "line": 21,
+      "file_sha256": "9a224a6cf37bf477bccab5d8ccc885729f20d37229bd6f612bcdbf7e0a690116"
+    },
+    "C-sovrestore": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sovereign_recovery.py",
+      "line": 15,
+      "file_sha256": "60fa6cded664678f4f84a28dda223a897aa2b328f75499b010af28bad611adc6"
+    },
+    "C-session": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/identity.py",
+      "line": 78,
+      "file_sha256": "54a0e89b4d28bc19d8d7f76d1bcd09598f0bbeaf08da0fa208c0a53fe6baf8f8"
+    },
+    "C-passkey": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/identity.py",
+      "line": 1,
+      "file_sha256": "54a0e89b4d28bc19d8d7f76d1bcd09598f0bbeaf08da0fa208c0a53fe6baf8f8"
+    },
+    "C-export": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/privacy.py",
+      "line": 80,
+      "file_sha256": "19502e0b9717c76275c4a02900c9ab713aaece0c690ef2fc220504dfde326e9f"
+    },
+    "C-delete": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/privacy_control.py",
+      "line": 18,
+      "file_sha256": "1a40e4b5bad0e0563dcf8855a613c66f1ece53db78bc48e07492b2acb5a495f3"
+    },
+    "C-journal": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/security_journal.py",
+      "line": 32,
+      "file_sha256": "1b3cfba149809f6601e75ccdbef0ded54ee4de46bb60f1cb7f39b6c55afd1c2c"
+    },
+    "C-witness": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/journal_witness.py",
+      "line": 36,
+      "file_sha256": "95c5fd641be551d6f2468c22f9cb20b5d3a993a0bb0dabe6a1f8a5759476e782"
+    },
+    "C-custody": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/journal_custody.py",
+      "line": 36,
+      "file_sha256": "38227ef7ef75ff821e7b3d0ca112b4f7aca496b79e10934cfcb86484241ce0e8"
+    },
+    "C-restore": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/privacy_maintenance.py",
+      "line": 39,
+      "file_sha256": "4eea4aecd7c653a5834a37f3cd1916351e42cfbf0958dbd02e81c2f26606021b"
+    },
+    "C-sqlite": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/core/sqlite_safety.py",
+      "line": 1,
+      "file_sha256": "f11ad6bb5f95cacdef7c91e9cc8035f0c47ed4ea6c8c3a7816d3a0bfbe8bd0b0"
+    },
+    "C-econ-schema": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 183,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-need": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 583,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-offer": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 673,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-match": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 827,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-risk": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 120,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-accept": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 903,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-fulfill": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 949,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-events": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 1083,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "C-http": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "src/xblago/integrations/web.py",
+      "line": 1270,
+      "file_sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659"
+    },
+    "G-event": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis.py",
+      "line": 20,
+      "file_sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280"
+    },
+    "G-chain": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis.py",
+      "line": 59,
+      "file_sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280"
+    },
+    "G-consent": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis.py",
+      "line": 131,
+      "file_sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280"
+    },
+    "G-publish": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis.py",
+      "line": 189,
+      "file_sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280"
+    },
+    "G-public": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis.py",
+      "line": 240,
+      "file_sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280"
+    },
+    "G-interface": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis_interfaces.py",
+      "line": 6,
+      "file_sha256": "000584614a814af0a6ff3e315400a6d3fb49347e22b189a5c66e2f69135c5cbc"
+    },
+    "G-purge": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "src/xblago/core/genesis_schema.py",
+      "line": 102,
+      "file_sha256": "6cc6e8fceaa6d685d7f515691bc4a08a00f0e59d516fefa3ac53a0510fc5ef93"
+    },
+    "G-draft": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "docs/BLAGO_PROTOCOL_v0.1.md",
+      "line": 1,
+      "file_sha256": "7f71c4118cad32f957177aafdad6a50f8451326363610246cdecf362b542a6ce"
+    },
+    "R-model": {
+      "sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "path": "src/xblago/core/identity_recovery.py",
+      "line": 102,
+      "file_sha256": "df396cb0e388fee7b93906d683662b0def1b19e37b05435e02574b0bb4fff0f2"
+    },
+    "R-stop": {
+      "sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "path": "src/xblago/core/identity_recovery.py",
+      "line": 319,
+      "file_sha256": "df396cb0e388fee7b93906d683662b0def1b19e37b05435e02574b0bb4fff0f2"
+    },
+    "TM-local": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "tests/test_llm.py",
+      "line": 12,
+      "file_sha256": "ec0c1c885f096b86c4f58e8329fe41e2da8f6ca204903e0134d2ede18bf3d44c"
+    },
+    "TM-agent": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "tests/test_personal_assistant.py",
+      "line": 42,
+      "file_sha256": "1d9c17abccdf3414ef61353eaeb233f5764c50092d73eaf06c4a165403761c59"
+    },
+    "TM-tg": {
+      "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "path": "tests/test_telegram.py",
+      "line": 57,
+      "file_sha256": "a87fae93e73a77fd52e836418ca7f0adaa91d44e82be2d8b59c5419816896dde"
+    },
+    "TC-core": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_sovereign_identity.py",
+      "line": 1,
+      "file_sha256": "947d5051bf02c7d5cba99f2211c4cf1737ec9201bb096ce8eb105252ccba76e1"
+    },
+    "TC-privacy": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_privacy.py",
+      "line": 181,
+      "file_sha256": "1a0a27faf7b8e9a30a237277fc4f4f6c096317354ba36023d207b640301cfc4f"
+    },
+    "TC-pilot": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_pilot_safety.py",
+      "line": 157,
+      "file_sha256": "ed2bcd4564420ecd8551fa1cae6ee94c75778f6c12ab5b42377ebce74a782ab6"
+    },
+    "TC-identity": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_identity_runtime.py",
+      "line": 1,
+      "file_sha256": "65b8b53ff2052f0f7dc1890f064a8d0e2ac01654db36c6888fa02db7407eed61"
+    },
+    "TC-memory": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_semantic_memory.py",
+      "line": 1,
+      "file_sha256": "9e2dcd81af9e8b78a94e7bc52c9816ff52e4ab2d70e7910daf4d37f006a374e3"
+    },
+    "TC-econ": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_economy.py",
+      "line": 29,
+      "file_sha256": "8fe39c5ff11881004a92373255addb7625316c107414aceb9da1fa5b6c4953c9"
+    },
+    "TC-llm": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_generation_reliability.py",
+      "line": 1,
+      "file_sha256": "dc3faa3291ee5f4597335b65baaa90767deb4cf296da214d2af4f73aa17419af"
+    },
+    "TC-natural": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "tests/test_natural_conversation.py",
+      "line": 1,
+      "file_sha256": "b22f85cbf58f35c55c93e08434b82ddc91d45ff82d599ea24dfa377d343f2e24"
+    },
+    "TG-genesis": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "tests/test_genesis.py",
+      "line": 54,
+      "file_sha256": "b9886c7fde43c1a9b660ed96e3b9a50bc1d25977e18d6e1882047890656529df"
+    },
+    "TG-revision": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "tests/test_genesis.py",
+      "line": 117,
+      "file_sha256": "b9886c7fde43c1a9b660ed96e3b9a50bc1d25977e18d6e1882047890656529df"
+    },
+    "TG-withdraw": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "tests/test_genesis.py",
+      "line": 317,
+      "file_sha256": "b9886c7fde43c1a9b660ed96e3b9a50bc1d25977e18d6e1882047890656529df"
+    },
+    "TG-consent": {
+      "sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "path": "tests/test_genesis.py",
+      "line": 308,
+      "file_sha256": "b9886c7fde43c1a9b660ed96e3b9a50bc1d25977e18d6e1882047890656529df"
+    },
+    "TR-recovery": {
+      "sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "path": "tests/test_identity_recovery.py",
+      "line": 1,
+      "file_sha256": "bae76ee8b617c87a1e22822fb3c1724d3bcf74c267108a030324c3c07ed1d335"
+    },
+    "D54": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "docs/BLAGO_FOUNDATION_05_4.md",
+      "line": 1,
+      "file_sha256": "ae4a652799ce932d887c80e643015e8dd4a8bbfac6e8e096b8f79123673f67eb"
+    },
+    "D61": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "docs/BLAGO_FOUNDATION_06_1.md",
+      "line": 1,
+      "file_sha256": "bc8d3d1990c621b5f81b3c37253681f4636a7390a7da1c007b631eafcc44edde"
+    },
+    "D7": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "path": "docs/BLAGO_FOUNDATION_07_ARCHITECTURE.md",
+      "line": 1,
+      "file_sha256": "23627c0a0d9db80364613790dc8ee9965f7a728d489c3026d1117a68a770e040"
+    }
+  },
+  "python_test_inventory": {
+    "M": 27,
+    "C": 304,
+    "G": 335,
+    "R": 340
+  },
+  "fresh_checks": {
+    "main_local_provider_tests": 4,
+    "main_in_memory_agent_tests": 12,
+    "result": "PASS",
+    "ed25519_l1_proof": {
+      "key_possession": true,
+      "membership_attested": false,
+      "person_uniqueness_attested": false,
+      "replay_http_status": 409
+    },
+    "economic_risk_probe": {
+      "Tent": "low",
+      "Camping tent": "rejected",
+      "Пинцет": "rejected"
+    }
+  },
+  "document_validation": {
+    "audit_cards": 25,
+    "pinned_sources": 68,
+    "unique_requirement_ids": 21,
+    "source_paths_and_line_anchors": "PASS",
+    "local_links": "PASS",
+    "new_database_migrations_executed": false,
+    "new_network_provider_calls": 0
+  },
+  "historical_ci_rechecked": {
+    "jobs": [
+      {
+        "run": 40568551246,
+        "id": 122416238372,
+        "name": "tests",
+        "conclusion": "success"
+      },
+      {
+        "run": 40568551246,
+        "id": 122416239004,
+        "name": "docker",
+        "conclusion": "success"
+      },
+      {
+        "run": 40584412666,
+        "id": 122471972343,
+        "name": "docker",
+        "conclusion": "success"
+      },
+      {
+        "run": 40584412666,
+        "id": 122471973060,
+        "name": "tests",
+        "conclusion": "success"
+      },
+      {
+        "run": 41520088632,
+        "id": 125533556526,
+        "name": "tests",
+        "conclusion": "success"
+      },
+      {
+        "run": 41520088632,
+        "id": 125533556834,
+        "name": "docker",
+        "conclusion": "success"
+      }
+    ],
+    "test_logs": [
+      {
+        "run": 40568551246,
+        "id": 122416238372,
+        "name": "tests",
+        "conclusion": "success",
+        "excerpts": [
+          "2026-10-27T19:23:58.4248434Z Ran 344 tests in 30.789s",
+          "2026-10-27T19:23:58.4248976Z OK",
+          "2026-10-27T19:24:14.5184309Z {\"browser\": \"155.0.8059.39\", \"checks\": {\"real_browser_registration\": true, \"registration_rotates_cookie\": true, \"old_cookie_denied\": true, \"real_browser_discoverable_login\": true, \"session_revoke_ui\": true, \"other_session_denied\": true, \"export_ui\": true, \"no_page_errors\": true}, \"page_errors\": []}"
+        ]
+      },
+      {
+        "run": 40584412666,
+        "id": 122471973060,
+        "name": "tests",
+        "conclusion": "success",
+        "excerpts": [
+          "2026-10-27T21:11:09.7370668Z Ran 380 tests in 38.966s",
+          "2026-10-27T21:11:09.7371085Z OK",
+          "2026-10-27T21:11:17.1518448Z {\"browser\": \"156.0.8078.47\", \"checks\": {\"real_browser_registration\": true, \"registration_rotates_cookie\": true, \"old_cookie_denied\": true, \"real_browser_discoverable_login\": true, \"session_revoke_ui\": true, \"other_session_denied\": true, \"export_ui\": true, \"no_page_errors\": true}, \"page_errors\": []}"
+        ]
+      },
+      {
+        "run": 41520088632,
+        "id": 125533556526,
+        "name": "tests",
+        "conclusion": "success",
+        "excerpts": [
+          "2026-11-02T20:33:43.2790139Z Ran 375 tests in 45.645s",
+          "2026-11-02T20:33:43.2790549Z OK",
+          "2026-11-02T20:33:56.6305495Z {\"browser\": \"156.0.8078.47\", \"checks\": {\"genesis_claim_ui\": true, \"genesis_private_preview\": true, \"genesis_no_public_link_before_consent\": true, \"genesis_public_page\": true, \"genesis_public_json\": true, \"genesis_no_internal_id\": true, \"genesis_public_mobile_wrap\": true, \"real_browser_registration\": true, \"registration_rotates_cookie\": true, \"old_cookie_denied\": true, \"real_browser_discoverable_login\": true, \"session_revoke_ui\": true, \"other_session_denied\": true, \"export_ui\": true, \"no_page_errors\": true}, \"page_errors\": []}"
+        ]
+      }
+    ]
+  },
+  "fresh_check_logs": {
+    "main_llm": "test_builds_local_provider_by_default (test_llm.LocalPlanningProviderTest.test_builds_local_provider_by_default) ... ok\ntest_generates_actionable_fallback_with_memory (test_llm.LocalPlanningProviderTest.test_generates_actionable_fallback_with_memory) ... ok\ntest_generates_compact_fallback_with_session_history (test_llm.LocalPlanningProviderTest.test_generates_compact_fallback_with_session_history) ... ok\ntest_generates_english_fallback_for_english_user_text (test_llm.LocalPlanningProviderTest.test_generates_english_fallback_for_english_user_text) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+    "main_agent": "test_agent_can_forget_one_memory_fact (test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact) ... ok\ntest_agent_can_forget_one_memory_fact_in_russian (test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact_in_russian) ... ok\ntest_agent_can_show_and_clear_session_history (test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_and_clear_session_history) ... ok\ntest_agent_can_show_memory (test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_memory) ... ok\ntest_agent_exit_ends_session (test_personal_assistant.PersonalAssistantAgentTest.test_agent_exit_ends_session) ... ok\ntest_agent_passes_session_history_to_provider (test_personal_assistant.PersonalAssistantAgentTest.test_agent_passes_session_history_to_provider) ... ok\ntest_agent_remembers_user_fact (test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact) ... ok\ntest_agent_remembers_user_fact_in_russian (test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact_in_russian) ... ok\ntest_agent_reports_missing_memory_fact_when_forgetting (test_personal_assistant.PersonalAssistantAgentTest.test_agent_reports_missing_memory_fact_when_forgetting) ... ok\ntest_agent_trims_session_history (test_personal_assistant.PersonalAssistantAgentTest.test_agent_trims_session_history) ... ok\ntest_profile_shows_user_memory (test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory) ... ok\ntest_profile_shows_user_memory_in_russian (test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory_in_russian) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.004s\n\nOK\n"
+  }
+}
