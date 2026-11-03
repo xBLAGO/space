@@ -1,0 +1,16 @@
+Source SHA: c7beb229d2dbf34b5663538132d0ddf16eb703dd
+Workflow: Protocol conformance (offline design fixtures)
+https://github.com/xBLAGO/space/actions/runs/41695239389
+Conclusion: SUCCESS; all steps passed, no app/database/provider/deploy execution.
+Scope: same-author offline reference validators, not independent operators or durable IO.
+
+2026-11-03T18:35:27.4664313Z {"count": 73, "vectors_sha256": "fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36"}
+2026-11-03T18:35:27.7946792Z   "vectors_sha256": "fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36",
+2026-11-03T18:35:27.7947564Z   "cases": 73,
+2026-11-03T18:35:27.7947907Z   "accept_vectors": 9,
+2026-11-03T18:35:27.7948281Z   "reject_vectors": 57,
+2026-11-03T18:35:27.7948658Z   "unknown_vectors": 7,
+2026-11-03T18:35:27.7951346Z   "parity": true,
+2026-11-03T18:35:27.7951604Z   "failures": []
+2026-11-03T18:35:27.8640447Z {"spec_pages": 8, "local_links": 17, "requirement_ids_traced": 21, "vectors": 73, "separate_validator_imports": true, "status": "PASS"}
+

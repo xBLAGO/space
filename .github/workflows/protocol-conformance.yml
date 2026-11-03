@@ -1,0 +1,38 @@
+name: Protocol conformance (offline design fixtures)
+
+on:
+  push:
+    branches: ["docs/foundation-08-1-protocol-conformance"]
+  pull_request:
+    branches: ["docs/foundation-08-federation-audit", "main"]
+    paths:
+      - "docs/protocol_0_1/**"
+      - "docs/BLAGO_FOUNDATION_08_1.md"
+      - ".github/workflows/protocol-conformance.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  offline-vectors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test-only cryptographic libraries
+        run: python -m pip install cryptography==48.0.1 PyNaCl==1.6.2
+      - name: Regenerate public synthetic keys and vectors deterministically
+        run: |
+          python docs/protocol_0_1/conformance/generate_vectors.py
+          git diff --exit-code -- docs/protocol_0_1/conformance/vectors.jsonl docs/protocol_0_1/conformance/golden.json docs/protocol_0_1/conformance/manifest.json
+      - name: Run separate reference code paths (no application, database or provider)
+        run: |
+          python docs/protocol_0_1/conformance/run_conformance.py
+          git diff --exit-code -- docs/protocol_0_1/conformance/results.json
+      - name: Check specification and corpus consistency
+        run: python docs/protocol_0_1/conformance/check_design.py
+      - name: Syntax check of documentation helpers
+        run: python -m compileall -q docs/protocol_0_1/conformance

@@ -1,0 +1,9 @@
+{
+  "actions": ["note.deliver"],
+  "effects": "private-inbox-only",
+  "max_mandate_uses": 1,
+  "max_payload_bytes": 2048,
+  "profile": "bop-0.1-lab.1",
+  "public_disclosure": false,
+  "redelegation": false
+}
