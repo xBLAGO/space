@@ -70,7 +70,11 @@ Stateful: **35/35 tests PASS**; source hashes are in `evidence.json`.
 both directions, pins, grants, statuses and receipts. CI repeats tests,
 regeneration, design consistency, compileall, pip check and two-process demo.
 CI has read-only permissions; artifact upload allowlists only public evidence.
-CI results/URLs are recorded separately in [CI evidence](lab_08_2/ci-evidence.txt).
+[Source CI](https://github.com/xBLAGO/space/actions/runs/41714627627): **SUCCESS**
+on `3aba843334a07dfebfcfb7fbb066e507b066bd3b` (35 tests in 8.713s on Ubuntu,
+73 vectors per reference and two-process demo PASS). Details and public artifact
+are recorded in [CI evidence](lab_08_2/ci-evidence.txt).
+Draft PR: [#17](https://github.com/xBLAGO/space/pull/17).
 No whole application/Docker or real-HF readiness is inferred from this isolated job.
 
 ## Limits and decision
