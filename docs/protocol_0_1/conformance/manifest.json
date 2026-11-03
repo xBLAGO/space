@@ -1,0 +1,373 @@
+{
+  "profile": "bop-0.1-lab.1",
+  "policy_ref": "sha256:f91b393e4fdce04cf9e13622d444f3f3a191129a36551ea72c38fa59ed3e0b95",
+  "vectors_sha256": "fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36",
+  "count": 73,
+  "cases": [
+    {
+      "id": "G01-note-ru",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G02-reverse-direction",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G03-utf8-nfc",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G04-utf8-nfd-distinct-bytes",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G05-newline-tab",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G06-max-payload",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G07-quoted-untrusted-content",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G08-clock-uncertainty-five",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "G09-frontier-advance-with-proof",
+      "decision": "ACCEPT",
+      "code": "OK"
+    },
+    {
+      "id": "N01-signature",
+      "decision": "REJECT",
+      "code": "ENCODING"
+    },
+    {
+      "id": "N02-wrong-signature",
+      "decision": "REJECT",
+      "code": "SIGNATURE"
+    },
+    {
+      "id": "N03-grant-signature",
+      "decision": "REJECT",
+      "code": "SIGNATURE"
+    },
+    {
+      "id": "N04-status-signature",
+      "decision": "REJECT",
+      "code": "SIGNATURE"
+    },
+    {
+      "id": "N05-profile",
+      "decision": "REJECT",
+      "code": "PROFILE"
+    },
+    {
+      "id": "N06-network",
+      "decision": "REJECT",
+      "code": "DOMAIN"
+    },
+    {
+      "id": "N07-policy",
+      "decision": "REJECT",
+      "code": "DOMAIN"
+    },
+    {
+      "id": "N08-recipient-node",
+      "decision": "REJECT",
+      "code": "RECIPIENT"
+    },
+    {
+      "id": "N09-recipient-agent",
+      "decision": "REJECT",
+      "code": "RECIPIENT"
+    },
+    {
+      "id": "N10-agent-id",
+      "decision": "REJECT",
+      "code": "AUTHORITY"
+    },
+    {
+      "id": "N11-owner-session-substitution",
+      "decision": "REJECT",
+      "code": "SCHEMA"
+    },
+    {
+      "id": "N12-scope",
+      "decision": "REJECT",
+      "code": "SCOPE"
+    },
+    {
+      "id": "N13-action",
+      "decision": "REJECT",
+      "code": "SCOPE"
+    },
+    {
+      "id": "N14-object",
+      "decision": "REJECT",
+      "code": "SCOPE"
+    },
+    {
+      "id": "N15-grant-ref",
+      "decision": "REJECT",
+      "code": "MANDATE_REF"
+    },
+    {
+      "id": "N16-redelegation",
+      "decision": "REJECT",
+      "code": "DELEGATION"
+    },
+    {
+      "id": "N17-parent-delegation",
+      "decision": "REJECT",
+      "code": "DELEGATION"
+    },
+    {
+      "id": "N18-max-uses",
+      "decision": "REJECT",
+      "code": "LIMIT"
+    },
+    {
+      "id": "N19-use-consumed",
+      "decision": "REJECT",
+      "code": "LIMIT"
+    },
+    {
+      "id": "N20-event-replay",
+      "decision": "REJECT",
+      "code": "REPLAY"
+    },
+    {
+      "id": "N21-payload-too-long",
+      "decision": "REJECT",
+      "code": "LIMIT"
+    },
+    {
+      "id": "N22-payload-hash",
+      "decision": "REJECT",
+      "code": "PAYLOAD"
+    },
+    {
+      "id": "N23-payload-not-utf8",
+      "decision": "REJECT",
+      "code": "PAYLOAD"
+    },
+    {
+      "id": "N24-payload-nul",
+      "decision": "REJECT",
+      "code": "PAYLOAD"
+    },
+    {
+      "id": "N25-unknown-schema",
+      "decision": "REJECT",
+      "code": "SCHEMA"
+    },
+    {
+      "id": "N26-empty-payload",
+      "decision": "REJECT",
+      "code": "ENCODING"
+    },
+    {
+      "id": "N27-padding-base64",
+      "decision": "REJECT",
+      "code": "ENCODING"
+    },
+    {
+      "id": "N28-expired-envelope",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N29-future-envelope",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N30-ttl-envelope",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N31-expired-grant",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N32-ttl-grant",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N33-expired-status",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N34-status-long-ttl",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N35-status-wrong-nonce",
+      "decision": "REJECT",
+      "code": "STATUS_BINDING"
+    },
+    {
+      "id": "N36-status-another-event",
+      "decision": "REJECT",
+      "code": "STATUS_BINDING"
+    },
+    {
+      "id": "N37-confirmed-revocation",
+      "decision": "REJECT",
+      "code": "REVOKED"
+    },
+    {
+      "id": "N38-unknown-mandate",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_MANDATE"
+    },
+    {
+      "id": "N39-old-snapshot-with-retained-floor",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_STALE"
+    },
+    {
+      "id": "N40-history-fork",
+      "decision": "REJECT",
+      "code": "FORK"
+    },
+    {
+      "id": "N41-no-retained-control",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_RECOVERY"
+    },
+    {
+      "id": "N42-clock-unavailable",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_CLOCK"
+    },
+    {
+      "id": "N43-clock-uncertainty",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_CLOCK"
+    },
+    {
+      "id": "N44-key-rotation-not-in-this-profile",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_KEY_HISTORY"
+    },
+    {
+      "id": "N45-unknown-link",
+      "decision": "UNKNOWN",
+      "code": "UNKNOWN_LINK"
+    },
+    {
+      "id": "N46-duplicate-links",
+      "decision": "REJECT",
+      "code": "LINKS"
+    },
+    {
+      "id": "N47-weak-agent-key",
+      "decision": "REJECT",
+      "code": "KEY"
+    },
+    {
+      "id": "N48-unknown-field",
+      "decision": "REJECT",
+      "code": "SCHEMA"
+    },
+    {
+      "id": "N49-trailing-whitespace",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N50-duplicate-json-key",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N51-float",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N52-negative-zero",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N53-overflow-int",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N54-bom",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N55-noncanonical-escape",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N56-oversize-wire",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N57-non-ascii-header",
+      "decision": "REJECT",
+      "code": "WIRE"
+    },
+    {
+      "id": "N58-algorithm-confusion",
+      "decision": "REJECT",
+      "code": "SCHEMA"
+    },
+    {
+      "id": "N59-missing-history-prefix",
+      "decision": "REJECT",
+      "code": "HISTORY"
+    },
+    {
+      "id": "N60-authority-predecessor",
+      "decision": "REJECT",
+      "code": "HISTORY"
+    },
+    {
+      "id": "N61-boolean-timestamp",
+      "decision": "REJECT",
+      "code": "TIME"
+    },
+    {
+      "id": "N62-boolean-counter",
+      "decision": "REJECT",
+      "code": "LIMIT"
+    },
+    {
+      "id": "N63-no-scope-inference",
+      "decision": "REJECT",
+      "code": "SCOPE"
+    },
+    {
+      "id": "N64-fresh-cert-contradicts-history",
+      "decision": "REJECT",
+      "code": "HISTORY"
+    }
+  ]
+}

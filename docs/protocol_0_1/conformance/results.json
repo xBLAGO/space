@@ -1,0 +1,19 @@
+{
+  "profile": "bop-0.1-lab.1",
+  "vectors_sha256": "fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36",
+  "cases": 73,
+  "accept_vectors": 9,
+  "reject_vectors": 57,
+  "unknown_vectors": 7,
+  "validators": [
+    "manual encoder + cryptography/OpenSSL",
+    "stdlib encoder + PyNaCl/libsodium"
+  ],
+  "same_author": true,
+  "independent_operator_experiment_executed": false,
+  "production_imports": false,
+  "network_calls": 0,
+  "database_opened": false,
+  "parity": true,
+  "failures": []
+}
