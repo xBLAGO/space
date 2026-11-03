@@ -1,0 +1,7 @@
+Local offline conformance: 73/73 each reference, parity PASS, no golden drift.
+Local schema hash: 64667aa8fb6abd535e4a2f93d17d6ed56c46d31ab548c84eb56f4cc80a86b85a
+Initial sandbox HTTP tests failed EPERM binding loopback; rerun with socket permission passed.
+Final stateful evidence: evidence.json, 35/35 PASS (19.405 seconds).
+Two-process local demo: PASS; public transcript local-demo-evidence.json.
+GitHub Actions: pending first push; updated after actual run, never assumed from local results.
+Independent operators/security audit: NOT EXECUTED. Production: NO-GO.

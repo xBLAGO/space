@@ -1,0 +1,484 @@
+{
+  "S12": "NOT EXECUTED",
+  "base": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+  "classification": {
+    "independent_operators": "NO-GO",
+    "local_assertions": "PASS",
+    "offline": "run separately, 73 vectors per reference",
+    "production": "NO-GO"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "python": "3.12.10",
+    "storage": "POSIX fsync/flock; same-host separate directories"
+  },
+  "passed": 35,
+  "profile": "bop-0.1-lab.1",
+  "receipt_schema_sha256": "64667aa8fb6abd535e4a2f93d17d6ed56c46d31ab548c84eb56f4cc80a86b85a",
+  "source_sha256": {
+    "actors.py": "5237b06d44b1ad80200b2428d8b974bc2ef1ec14bb443e7b643b7afca5702888",
+    "demo.py": "154ea6e4d4c39f99e9892fd4b779cef714a34e0a017cfbf4fd8aecd6d2d9b648",
+    "run_lab.py": "4f875984b371c940e8b263e9da12c8a124b58722d14ef540c43310d6aca53c00",
+    "runtime.py": "44ac5f4ee2b547df66eea9645da4256e45f2fe56ff02cfd8a3f9f0cf16bf2c73",
+    "test_runtime.py": "19076d48d56feafcde291e2b9731277a98b0631437be81a673993b2193f657fa",
+    "transport.py": "7957a364f3e4971853074ad0b6f60f563ea751f9015a6de50fab06991821dca0"
+  },
+  "tests": [
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:418011da4d2ab5ed64c4c6ae44f8f0087181c8106490e1a32c86f4c8a84c2cf8",
+        "authority_sequence": 0,
+        "commit_index": 1,
+        "config_ref": "sha256:a00e2a03e7e90bdac951f9c7ddd77494396e28ab4f4d28ea81c678769a17a87f",
+        "consumed_count": 0,
+        "inbox_count": 0,
+        "state_ref": "sha256:500bee83eeba9dd452083641d0607f17137f3c6620cb7507db9ccf083d3a42a8"
+      },
+      "test": "test_S01_receiver_nonce"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:e1a02f7568fc5aa7c9eb0481bc22fc08bf675291d0fa9cdda5eb605977ffa954",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:3d548f2da470094d40692d2d36c338f6fe2fc3d32a64ebacb95ed2dc199059c0",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:1eca6744d2c978975b27ef7492b72f55dcde73baa1cfdb7d1e6ccf096179b895"
+      },
+      "test": "test_S02_commit_receipt"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:e30cb7806a31d1a1e712f9ed2f3975b70f72264883c88e7202229dcdbee5de68",
+        "authority_sequence": 1,
+        "commit_index": 3,
+        "config_ref": "sha256:17e3da91d7bf1c4e4cb9e9bbed3a0e86deeb4287a57325e1fbaf5b74fda12c9d",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:bd943c82fcb556fbfde22a0d2ca1b7cefa5ad1516e32a0348dbc06e4db22ea88"
+      },
+      "test": "test_S03_concurrent_duplicates_and_conflict"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:4a5c807761d95c7a11a1f5029aafb90d2b43dcbd11abf5718b9d3d5bf23d9b79",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:4f78cbcc20aeee35ba3692732dcb3ef1ac51093664ac70ed9b0ceaa839a9f503",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:7be3344d8c37fb93ae6364f4f17a36328d586693de8677061143a16e74b650fb"
+      },
+      "test": "test_S03_multiprocess_duplicates"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:3508c2f28502cf11231c00b1e16f1fdd14622c71c64042c5a53a4d79f20cbfb3",
+        "authority_sequence": 2,
+        "commit_index": 4,
+        "config_ref": "sha256:330001212e6628a2088906ce79584833a145891ce62272759f5a509a86e86e42",
+        "consumed_count": 2,
+        "inbox_count": 1,
+        "state_ref": "sha256:75c36bb04a3d1e8c461b8af19bdfbcfeb1e5e2400e44a448b762d529268a821f"
+      },
+      "test": "test_S04_concurrent_revoke_delivery"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:ea9d6fa6bf8fffeaead80102754c2f871a58d19a845afdd7bec4448393cb8deb",
+        "authority_sequence": 2,
+        "commit_index": 5,
+        "config_ref": "sha256:4c66b4c8c5d42f36ee4e079f872d77373e2c94e23a70863edef3dc7910b2b277",
+        "consumed_count": 2,
+        "inbox_count": 1,
+        "state_ref": "sha256:b4e7366d282a82ac3d1c3c528f2f80a1bba4c04039685c20ae86546e3fc9d51e"
+      },
+      "test": "test_S04_delivery_then_revoke_late_ack"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:d7b0b59fb74c96b78e97259f66725d3e2217877e193a10f4c4e9d6508d33b697",
+        "authority_sequence": 2,
+        "commit_index": 3,
+        "config_ref": "sha256:796e8c40b472782620a27a83f220bc50f66d00eae253a4007f1234d816c39e7d",
+        "consumed_count": 1,
+        "inbox_count": 0,
+        "state_ref": "sha256:43924f697a6c64fdb8da4f8eb9a0d322f606c5697e052e3db54014b73c431239"
+      },
+      "test": "test_S04_revoke_then_delivery"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:8562c16f55a1f784398657ed2e210631c10e16761180cf81e7b7548f83934804",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:edfea801032276eafd6812d41e66e2ed8c9bc42f9d48f216ef6ea3402d505f95",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:c9520e3ba144f9e96f2930c1836ac0fc5ac14f6306e604067b0399e43a872fa5"
+      },
+      "test": "test_S05_crash_after_commit"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:6cdbb3f1fe20067b678d2e6b6964dcc47482496011f0a45e5afbedd112845dc9",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:44db1ada242d7d9d3ddee6fba058dad3e73eae5d5191e4fc83071c6c6c6335b1",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:99209cff7110f42b676e8dcd67842bbe9d8d991cb1e758cde7d88fbdb76f0ee8"
+      },
+      "test": "test_S05_crash_after_return"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:56110c9c3f473098e69f74df2b2900685f070d28aa1cec24362754e6b46d5ccb",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:bf56c5325e2197ea8e06f8af9a321417b24c452aa73e068d66c548b4bfe7efac",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:6ed2c755eb71fa1ee859623d923794ecabd6e0a9314c48299e9f2fcf9c0a7932"
+      },
+      "test": "test_S05_crash_before_commit"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:0200705e435d163722a53b6b45094bfb569845a1ee42317a1b5217b6cf73292e",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:4f758e4ff4200363992c0ed7ce455fe884e1798b4278d9e77e91642104ca4b5a",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:e75dd38c4157801554e34e9198fcf0b9dd6300d40b2b76fe8f8734ec53e2a2ee"
+      },
+      "test": "test_S05_real_http_process_crash_after_ack"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:25f5ac573c81ff72bc0337bdc9cbb809c69b32071e6e8dd2138fca93289875d9",
+        "authority_sequence": 2,
+        "commit_index": 3,
+        "config_ref": "sha256:a4345c892aa3c866a59cf25d36a5b44c70202b2a834180644323df24db1fb444",
+        "consumed_count": 1,
+        "inbox_count": 0,
+        "state_ref": "sha256:36ca1204ed91cae889eb9d091ba1ee2d8695010a1f7c02007ba76d70e1af5e05"
+      },
+      "test": "test_S06_backup_preserves_revocation"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:71163712412eeb0501413ba7f518d718e5948ec06b328199b62d23a0f784f405",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:1791ada3f04317004ed2600c127ecb28004942cbab2b1f5bc96f68de3e7e80c9",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:01b85186f1ba169e107d85bc171782835c502182a1b9b11a994bce35cb37c158"
+      },
+      "test": "test_S06_backup_rollback_and_restore"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:975607d1a721a698d8deb7801e04417a809089e7dfc566340b5a0c10cbe5039b",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:21915d9d4bd65c202db6cc363c6c83f6951105815f2b9d003afa647b9f6eb912",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:9490b91ba0c9f2a7174de6c10545291d09572bab231c70ecd0129100cdcf2935"
+      },
+      "test": "test_S07_checkpoint_mismatch_no_ack"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:1cba8799d335d07fae41930b4fc3a18424faa744060a10f122a23d9f7474b030",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_corrupt_record"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:9460a431c99baa9d6f1421f8d0681d624644a9e7f3b63f6ad27ba45703f8dc54",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_crash_between_checkpoints"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:7bb022a186aeb68745b4278bb107484940b92df7e12b0209b78f8c526d25668e",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_individual_checkpoint_rollback"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:45e37d86d84d84f53562ea6c204291a96c618eec715273e0c2a66554428af8a9",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_retained_loss"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:f5b2cc461d0f7597e5ef3242a08cd16e8da2bcbb5a20946b36927bf79431c02f",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_witness_loss"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:319f26e7148a36eb36b7acd2e6a6feb8e123a0ce9c6769e9185bab3d690b685e",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_S07_witness_rollback"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:84d93d2252f8624c40b4aba2029b0a1060d1a4f4c7be30a262cfc432c514206e",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:411b44ba1eb4c951617772d840a20a97e7fe6e25e88c89f11d0e3a5af4896eb4",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:c172c8f3214d0c27a041cce516b1b671d59e4b0d5a8ecf74d388c3db4f515f05"
+      },
+      "test": "test_S08_http_lost_ack_partition"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:d42cbd26f747b9a8c4a0a5eb03967cf93fb4c011f2ca9f4218bdbc39936340aa",
+        "authority_sequence": 1,
+        "commit_index": 3,
+        "config_ref": "sha256:1e0aae08ff2593d5dc444a40dfe76fad661e4ae7a54225700f026282644c5a7b",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:6b895f0be6b286f2cbd8f80cf0ea65012aae2bdcd26a57c9968db54d358c2678"
+      },
+      "test": "test_S08_lost_ack_and_delayed_status"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:267d04c91733ebc687f626dfb5757aed4a8998cd2aec4846a85c1f3625162ff8",
+        "authority_sequence": 2,
+        "commit_index": 3,
+        "config_ref": "sha256:23e3c4e867a414cef2dbd5ab6f4b4b11674ae96a8c2033261806223d8c62cabf",
+        "consumed_count": 1,
+        "inbox_count": 0,
+        "state_ref": "sha256:3773160d6c055f1e35f1c94dc74a9b8e14a19ad31950084fc7713125db94094e"
+      },
+      "test": "test_S08_lost_revoke_ack"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:17b5d53391a1ad2bb1321184a9473f6b19e81d548334adcefca7385d974241d9",
+        "authority_sequence": 0,
+        "commit_index": 1,
+        "config_ref": "sha256:6e36589f95256c3a7cb0e9f4d8dde9129b388b7c6d2383ca6514d7b7c16cd0c0",
+        "consumed_count": 0,
+        "inbox_count": 0,
+        "state_ref": "sha256:91453b46c9f7b7bf8a2a9cf2a69baf1440342f0ee841c0769af27a4c42df7345"
+      },
+      "test": "test_S08_partition"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:1e7acea7df38d6599b3ff0e4461068f442721af8c2750f3b1ce699b8fe1586cd",
+        "authority_sequence": 2,
+        "commit_index": 4,
+        "config_ref": "sha256:d006f74830b24149c88e5e78e72f60d98aab335dbd7a8f61490a02f7a38d359a",
+        "consumed_count": 2,
+        "inbox_count": 1,
+        "state_ref": "sha256:8499580b3bf496a1539719199ed29d2a601d26b464319238f5c7de269814313c"
+      },
+      "test": "test_S09_receipt_replay_and_late_order"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:56d6e1e2f30114e09d2be9c6f93b94ac685efb77bcace3c7d5ea2dd95e8dfff9",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:c8b57d4fbd967d3db91668217321b2e13a23982c1fdc27d9ac9e6ba884c8da51",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:749fd65470bbac68870db54604066abc3cd4de8e7fcb0ef0836cc8286e15197c"
+      },
+      "test": "test_S09_receipt_substitution"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:bbf589d24081400bf1ce5fc56b46215f73153eb6ace0a655de8552ed64b61e63",
+        "authority_sequence": 2,
+        "commit_index": 3,
+        "config_ref": "sha256:b35805c222a413ac9515c87d0dfe650cd523540fe22f2fdb4e58cee972425657",
+        "consumed_count": 1,
+        "inbox_count": 0,
+        "state_ref": "sha256:0982921477ab287ecc7a1606ba8362a22f72d5ca59f141d407a70d7e9d2eeca6"
+      },
+      "test": "test_S09_revocation_receipt_verification"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:67a9471f34e1a748355bf791da58aa563792d54a23384cdc25c32d047fbb08a9",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:c8ef82c58ee641cfefb9ea82d2267fe9c99d08cbd96c519dce60586051685f9f",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:50f4e9ba0be0d98a322882f541a236a45b13d69bd6e13b49eb79ad308199cd5f"
+      },
+      "test": "test_S10_reverse_new_human"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:97ae4a4cc15fe7089f9be0babb95d5af5a61c23f55ec933bf8924c941b8580d0",
+        "authority_sequence": 2,
+        "commit_index": 3,
+        "config_ref": "sha256:ea50c39674f18e919b449f90a45ed16cfdf3ec0d24a38b2c07ecb31d276f9709",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:79f5beabba31e34d6c7ab3b9915a42fc478e0642c9a0dcd727e450c0faadd02e"
+      },
+      "test": "test_S11_agent_has_no_owner_signing_interface"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:ee6fe6c3a1739ff9e8593883b7327c97006f4f7e9f83ad613ced1b81f50afcc1",
+        "authority_sequence": 0,
+        "commit_index": 1,
+        "config_ref": "sha256:d695770440eaca256073874bd89345c2f33c2e7f674794aa86649c8fe1bbbb06",
+        "consumed_count": 0,
+        "inbox_count": 0,
+        "state_ref": "sha256:b7a8096035ea88ae45f21386b0547377e0f4de265e7877bbb20c5462aef3ba04"
+      },
+      "test": "test_context_injection"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:29923f3bddcef653fd0654fbc799da1892e893b9eaed92ba87561973ccff9341",
+        "authority_sequence": 0,
+        "commit_index": 1,
+        "config_ref": "sha256:95db935780bda185a197e336b74d522319d1ad1fd6b85432921919d809aa08ad",
+        "consumed_count": 0,
+        "inbox_count": 0,
+        "state_ref": "sha256:4962e8d6017aca2c0c5b1b62a3f820dddfec5b2be7384341bb8dd9bdf1a82741"
+      },
+      "test": "test_contradictory_authority"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "config_ref": "sha256:3f39400c805f4f340df5509cc32f701f7e348b0d97f6259acc285f51ab0f0319",
+        "recovery": "UNKNOWN_RECOVERY"
+      },
+      "test": "test_control_disk_failure"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:cf19b3901920fb9723e8fe57ce35f416c7732af3c2bd50cfd377f8586db4991a",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:082737f34d44b44da2949a37950cab67745e3ee061dfdb67f033d369b22b9665",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:36f942d604e85d88e8397356e156d5176bf21018dea8fd71c1a4746584b67ec4"
+      },
+      "test": "test_signed_receipt_wrong_counter_type"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:cbaa7b18b48674a2c795cc0186ff65d97958340349a2bf920d3184d9e864bbc1",
+        "authority_sequence": 0,
+        "commit_index": 1,
+        "config_ref": "sha256:7114454b52d6aedf5365f5bc154adb0accaecfdf41058f6d6ee54f29b7663f45",
+        "consumed_count": 0,
+        "inbox_count": 0,
+        "state_ref": "sha256:385d2584eaff57ac911a240c41e43f774912bb4f6ea8ae497c39ab04166daa42"
+      },
+      "test": "test_unqualified_clock_fails_closed"
+    },
+    {
+      "actual": "PASS",
+      "expected": "all named scenario assertions hold",
+      "proof": {
+        "authority_head": "sha256:f8e18cc67188589379b5a2770993171dc51f1be275c1ba895f6fea68a36d1bd6",
+        "authority_sequence": 1,
+        "commit_index": 2,
+        "config_ref": "sha256:14c3da98101215efe27df931db3532d6da9566d8acea7641dfd93a78e4d6a5bc",
+        "consumed_count": 1,
+        "inbox_count": 1,
+        "state_ref": "sha256:5f620c1d199ccbe6e267ffceab947fd2cccc38f7eeb680ba3c6c2ee61924301e"
+      },
+      "test": "test_write_fsync_and_full_disk"
+    }
+  ],
+  "tests_run": 35
+}
