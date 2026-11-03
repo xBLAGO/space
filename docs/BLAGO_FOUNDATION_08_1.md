@@ -58,6 +58,16 @@ key epoch даёт UNKNOWN_KEY_HISTORY. Это предотвращает ими
 `pyproject.toml` и production dependencies не изменяются. Его CI — conformance
 fixtures, не GitHub/Docker/реальный A↔B acceptance всего приложения.
 
+## CI и воспроизведение
+
+[Source conformance CI](https://github.com/xBLAGO/space/actions/runs/41695239389)
+на `c7beb229d2dbf34b5663538132d0ddf16eb703dd`: SUCCESS. Проверены regeneration без
+fixture drift, обе реализации, все 73 verdicts, consistency и compileall.
+[Выдержки job logs](protocol_0_1/conformance/ci-evidence.txt).
+Корпус SHA-256: `fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36`.
+Команды воспроизведения — в CONFORMANCE. Последующий evidence-only commit не меняет
+wire/spec predicates; его CI также проверяется в Draft PR.
+
 ## Однозначное условие первого сообщения
 
 Первое сообщение может быть принято **как частная неисполняемая заметка**, только
