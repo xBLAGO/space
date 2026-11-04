@@ -6,13 +6,19 @@
   "gates": [
     {
       "id": "G00",
-      "status": "UNKNOWN",
-      "evidence": "Frozen source/schema/migration/dependency manifest; candidate SHA and Docker identity await actual CI"
+      "status": "PASS",
+      "evidence": "315 tests, immutable manifest check, ancestry/tree/installed-library attestation, browser and Docker jobs PASS",
+      "scope": "Synthetic candidate source/dependency/schema/migration provenance and CI image only",
+      "production_release_approval": "UNKNOWN",
+      "production_image_promotion": "UNKNOWN"
     },
     {
       "id": "G01",
       "status": "PASS",
-      "evidence": "Candidate code has no push/pull_request deployment trigger; explicit enabled main SHA + DEPLOY + environment boundary. Protection/reviewer configuration UNKNOWN; deployed main unchanged"
+      "evidence": "Candidate code has no push/pull_request deployment trigger; explicit enabled main SHA + DEPLOY + environment boundary. Protection/reviewer configuration UNKNOWN; deployed main unchanged",
+      "scope": "Candidate workflow code only; no main/deployment change",
+      "environment_protection_configuration": "UNKNOWN",
+      "current_main_deployment_policy": "UNCHANGED: unsafe auto-push workflow is not altered until a separately authorized merge"
     },
     {
       "id": "G02",
@@ -66,5 +72,7 @@
     }
   ],
   "deployment_executed": false,
-  "production_access": false
+  "production_access": false,
+  "source_candidate_sha": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/41783310506"
 }

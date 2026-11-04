@@ -130,13 +130,27 @@ errors. Physical authenticators/biometrics, Safari/Firefox и actual Telegram We
 фактического CI, не из предположения о build.
 
 [Machine-readable G00–G11](integration01/gates.json). G01 PASS означает кодовую
-границу candidate, не configuration audit production environment. G00 требует
-реального candidate CI/image evidence. G02–G06/G08–G11 содержат UNKNOWN для
+границу candidate, не configuration audit production environment. G00 PASS теперь
+подтверждён для synthetic candidate provenance/build; production approval и image
+promotion остаются UNKNOWN. G02–G06/G08–G11 содержат UNKNOWN для
 непроверенного operational scope. G07 FAIL: Help 01 ещё не реализован.
 Реальный pilot NO-GO даже при полном зелёном CI.
 
-CI и exact source/candidate SHA: дополняются проверенными ссылками в Draft PR;
-source commit и последующий evidence-only commit различаются явно.
+[Draft PR #19](https://github.com/xBLAGO/space/pull/19).
+Source candidate: `d7f619a1e6a7f15564facb5e8e84b184a3f24658`.
+[Source CI](https://github.com/xBLAGO/space/actions/runs/41783310506): **SUCCESS**,
+315 tests in 28.438s, manifest/ancestry/tree/installed-dependency check PASS,
+Docker build + guarded health + identity/privacy/recovery/text-repair smoke PASS,
+Chrome 156 virtual WebAuthn PASS. Image ID из actual docker inspect:
+`sha256:ff51e61ab22f50b1be4aa3825ef68a48ecb6d4e0398505da800f3eb071482f22`.
+Это ephemeral CI image, не опубликованный/promoted production artifact.
+[CI evidence](integration01/ci-evidence.json),
+[local candidate identity](integration01/candidate-identity.json),
+[public CI artifact](https://github.com/xBLAGO/space/actions/runs/41783310506/artifacts/13300096488).
+CI проверял virtual PR merge tree и явно сверил его с exact candidate tree.
+Следующий documentation/evidence-only commit не меняет tested source manifest;
+его final HEAD CI проверяется отдельно в PR. Никакого deployment workflow run
+для source candidate нет; основной main SHA не изменён.
 
 ## Безопасный rollback
 
