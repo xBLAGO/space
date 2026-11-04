@@ -1,0 +1,249 @@
+name: Tests
+
+on:
+  push:
+    branches: ["feat/**", "fix/**", "integration/**"]
+  pull_request:
+    branches: ["main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: |
+          python -m pip install -r requirements-integration.lock
+          python -m pip install --no-deps -e .
+      - name: Build verified patched SQLite (no system replacement)
+        run: |
+          python tools/build_sqlite.py --prefix "$RUNNER_TEMP/blago-sqlite"
+          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/blago-sqlite" >> "$GITHUB_ENV"
+          echo "LD_PRELOAD=$RUNNER_TEMP/blago-sqlite/libsqlite3.so.0" >> "$GITHUB_ENV"
+      - name: Block unverified pilot SQLite
+        run: python -m xblago.core.sqlite_safety --require-safe
+      - name: Run tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - name: Verify immutable integration manifests
+        run: PYTHONPATH=.:src python -m tools.freeze_integration
+      - name: Integration public evidence
+        env:
+          BLAGO_EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: PYTHONPATH=.:src python -m tools.integration_evidence --output "$RUNNER_TEMP/integration-evidence.json"
+      - name: Record SQLite runtime for security review
+        run: python -c 'import sqlite3; print("SQLite runtime:", sqlite3.sqlite_version)'
+      - name: Check Python syntax
+        run: python -m compileall -q src tests
+      - name: Install browser acceptance tool
+        run: python -m pip install playwright==1.64.1
+      - name: Real Chrome WebAuthn UI (virtual CTAP2, synthetic localhost)
+        run: python tools/pilot_browser_check.py --chrome "$(command -v google-chrome)" --output "$RUNNER_TEMP/browser-evidence" --integration
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pilot-browser-evidence
+          path: |
+            ${{ runner.temp }}/browser-evidence
+            ${{ runner.temp }}/integration-evidence.json
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t xblago-space:${{ github.sha }} .
+      - name: Record isolated image identity
+        run: docker image inspect xblago-space:${{ github.sha }} --format '{{.Id}}'
+      - name: Verify actual Docker Python SQLite
+        run: docker run --rm --entrypoint python xblago-space:${{ github.sha }} -m xblago.core.sqlite_safety --require-safe
+      - name: Run Docker health check
+        run: |
+          cleanup() {
+            docker logs xblago-space-smoke || true
+            docker stop xblago-space-smoke || true
+            docker volume rm xblago-integration-ci || true
+          }
+          trap cleanup EXIT
+
+          if docker run --rm xblago-space:${{ github.sha }}; then
+            echo 'Unconfigured integration image must fail closed'
+            exit 1
+          fi
+          docker volume create xblago-integration-ci
+          docker run --rm -v xblago-integration-ci:/lab -v "$PWD/tools:/synthetic-tools:ro" \
+            --entrypoint python xblago-space:${{ github.sha }} \
+            /synthetic-tools/integration_fixture.py --new-synthetic-root /lab/synthetic
+
+          docker run --rm -d \
+            -v xblago-integration-ci:/lab \
+            -e XBLAGO_DATA_DIR=/lab/synthetic/app \
+            -e XBLAGO_SECURITY_JOURNAL_DIR=/lab/synthetic/journal \
+            -e XBLAGO_JOURNAL_WITNESS_DIR=/lab/synthetic/witness \
+            -e XBLAGO_INTEGRATION_MODE=synthetic \
+            -e XBLAGO_LLM_PROVIDER=local \
+            -e XBLAGO_PILOT_MODE=true \
+            -e XBLAGO_REQUIRE_SECURE_IDENTITY=true \
+            -e XBLAGO_REQUIRE_PRIVACY_JOURNAL=true \
+            --name xblago-space-smoke \
+            -p 7860:7860 \
+            -e TELEGRAM_BOT_TOKEN=123:ci-smoke-token \
+            -e TELEGRAM_DELIVERY_MODE=webhook \
+            -e TELEGRAM_WEBHOOK_URL=http://127.0.0.1:7860/telegram/ci-smoke \
+            -e TELEGRAM_WEBHOOK_SECRET=ci-smoke \
+            -e TELEGRAM_SKIP_STARTUP_CHECK=true \
+            -e TELEGRAM_SKIP_WEBHOOK_REGISTRATION=true \
+            -e XBLAGO_WEB_INVITE_CODE=ci-release-smoke-invite \
+            -e XBLAGO_COOKIE_SECURE=false \
+            xblago-space:${{ github.sha }}
+
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:7860/healthz \
+              && curl -fsS http://127.0.0.1:7860/app >/dev/null \
+              && curl -fsS http://127.0.0.1:7860/app/manifest.webmanifest >/dev/null \
+              && curl -fsS http://127.0.0.1:7860/app/sw.js >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+
+          exit 1
+      - name: Docker Identity Runtime smoke (temporary SQLite only)
+        run: |
+          docker run --rm -i --entrypoint python \
+            -e XBLAGO_WEB_INVITE_CODE=ci-synthetic-identity-invite \
+            -e XBLAGO_REQUIRE_SECURE_IDENTITY=true \
+            xblago-space:${{ github.sha }} - <<'PY'
+          import tempfile
+          from pathlib import Path
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.integrations.web import WebApp
+          with tempfile.TemporaryDirectory() as root:
+              path = Path(root) / 'ci-only.sqlite3'
+              app = WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              assert migrate_identity_runtime(path)
+              assert not migrate_identity_runtime(path)
+              token, csrf = app.register('ci_identity', 'ci-only-long-password', 'ci-synthetic-identity-invite')
+              assert app.session(token)[1] == csrf
+              assert len(app.identity.sessions(token)) == 1
+              replacement, _ = app.login('ci_identity', 'ci-only-long-password', token)
+              assert WebApp(SQLiteBlagoStore(path)).session(replacement)
+              backup = app.store.backup_database()
+              assert WebApp(SQLiteBlagoStore(backup)).session(replacement)
+              print('Identity runtime, restart and backup smoke OK')
+          PY
+      - name: Docker Privacy Recovery smoke (temporary stores only)
+        run: |
+          docker run --rm -i --entrypoint python \
+            -e XBLAGO_WEB_INVITE_CODE=ci-privacy-only-invite \
+            xblago-space:${{ github.sha }} - <<'PY'
+          import os, sqlite3, tempfile
+          from pathlib import Path
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.core.privacy_schema import migrate_privacy
+          from xblago.core.security_journal import SecurityJournal
+          from xblago.core.privacy_maintenance import restore, cleanup
+          from xblago.integrations.web import WebApp
+          from xblago.integrations.privacy import PrivacyService
+          with tempfile.TemporaryDirectory() as root:
+              path = Path(root) / 'ci-app.sqlite3'
+              journal = Path(root) / 'independent-control'
+              app = WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              migrate_identity_runtime(path)
+              SecurityJournal.initialize(journal)
+              assert migrate_privacy(path, journal)
+              os.environ['XBLAGO_SECURITY_JOURNAL_DIR'] = str(journal)
+              os.environ['XBLAGO_REQUIRE_PRIVACY_JOURNAL'] = 'true'
+              token, _ = app.register('privacy_ci', 'ci-privacy-long-password', 'ci-privacy-only-invite')
+              uid = app.session(token)[0]
+              app.store.memory_for_user(uid).set('city', 'Kazan')
+              backup = app.store.backup_database()
+              app.store.delete_memory(uid, 'city')
+              recovered = restore(backup, journal)
+              assert recovered.all_memory(uid) == {}
+              replacement, _ = app.login('privacy_ci', 'ci-privacy-long-password')
+              privacy = PrivacyService(app)
+              assert privacy.export(replacement)['blago_user_id'] == uid
+              preview = privacy.preview(replacement)
+              assert privacy.delete(replacement, preview['challenge'], 'УДАЛИТЬ')['deleted']
+              cleanup(app.store)
+              assert WebApp(SQLiteBlagoStore(backup)).store.all_memory(uid) == {}
+              SecurityJournal(journal).read()
+              print('SQLite runtime:', sqlite3.sqlite_version)
+              print('Privacy journal, export, delete, TTL and restore smoke OK')
+          PY
+      - name: Docker strict pilot gate and independent checkpoint
+        run: |
+          docker run --rm -i --entrypoint python xblago-space:${{ github.sha }} - <<'PY'
+          import os, tempfile
+          from pathlib import Path
+          from xblago.core.storage import SQLiteBlagoStore
+          from xblago.integrations.web import WebApp
+          from xblago.core.identity_schema import migrate_identity_store
+          from xblago.core.identity_runtime_schema import migrate_identity_runtime
+          from xblago.core.privacy_schema import migrate_privacy
+          from xblago.core.pilot_schema import migrate_pilot
+          from xblago.core.security_journal import SecurityJournal
+          from xblago.core.journal_witness import initialize
+          from xblago.core.sqlite_safety import require_safe_sqlite
+          with tempfile.TemporaryDirectory() as root:
+              root = Path(root)
+              path, journal, witness = root/'app.sqlite3', root/'journal', root/'witness'
+              WebApp(SQLiteBlagoStore(path))
+              migrate_identity_store(path)
+              migrate_identity_runtime(path)
+              SecurityJournal.initialize(journal)
+              migrate_privacy(path, journal)
+              os.environ['XBLAGO_SECURITY_JOURNAL_DIR'] = str(journal)
+              migrate_pilot(path)
+              initialize(SecurityJournal(journal), witness)
+              os.environ['XBLAGO_JOURNAL_WITNESS_DIR'] = str(witness)
+              os.environ['XBLAGO_PILOT_MODE'] = 'true'
+              require_safe_sqlite()
+              WebApp(SQLiteBlagoStore(path))
+              SecurityJournal(journal).read()
+              print('Strict pilot SQLite, lineage baseline and independent witness gate OK')
+          PY
+      - name: Docker natural conversation and bounded text repair
+        run: |
+          docker run --rm -i --entrypoint python xblago-space:${{ github.sha }} - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          from unittest.mock import MagicMock, patch
+          from xblago.core.config import LlmConfig
+          from xblago.core.llm import OpenAICompatibleProvider
+          from xblago.core.storage import SQLiteBlagoStore, TelegramIdentity
+          from xblago.integrations.web import WebApp
+          def completion(text, reason):
+              response = MagicMock()
+              response.__enter__.return_value = response
+              response.read.return_value = json.dumps({'choices': [{'message': {'content': text}, 'finish_reason': reason}]}).encode()
+              return response
+          with tempfile.TemporaryDirectory() as root:
+              store = SQLiteBlagoStore(Path(root)/'conversation.sqlite3')
+              uid = store.resolve_telegram_user(TelegramIdentity(1000000001,1000000001,'private'))
+              app = WebApp(store)
+              provider = OpenAICompatibleProvider(LlmConfig('hf','synthetic','synthetic-key','https://example.invalid',7))
+              with patch('xblago.integrations.web.build_chat_provider',return_value=provider), patch('xblago.core.llm.urllib.request.urlopen',side_effect=[completion('Проверь изно','length'),completion('Проверь износ цепи.','stop')]) as calls:
+                  assert app.chat(uid,'Почему цепь перескакивает?') == 'Проверь износ цепи.'
+              assert calls.call_count == 2
+              assert len(store.recent_history(uid,100)) == 2
+              assert store.all_memory(uid) == {}
+              assert not app.rows('needs',uid)
+              assert not app.rows('resources',uid)
+              assert WebApp(SQLiteBlagoStore(store.path)).history(uid) == app.history(uid)
+              print('Natural conversation, single text repair, atomic history and no economic actions smoke OK')
+          PY

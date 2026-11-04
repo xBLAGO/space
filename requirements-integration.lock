@@ -1,0 +1,14 @@
+# Integration 01 runtime versions. No wallets, federation or LLM tools.
+cbor2==5.9.0
+certifi==2026.10.23
+cffi==2.1.1
+charset-normalizer==3.5.2
+cryptography==48.0.1
+idna==3.20
+pyasn1==0.6.5
+pycparser==3.12
+pyOpenSSL==26.2.0
+requests==2.34.2
+typing_extensions==4.16.0
+urllib3==2.8.0
+webauthn==2.7.1

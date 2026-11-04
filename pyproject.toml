@@ -11,11 +11,20 @@ requires-python = ">=3.11"
 dependencies = [
     "certifi>=2024.2.2",
     "requests>=2.32",
+    "webauthn==2.7.1",
+    "cbor2>=5.6.5,<6",
+    "cryptography>=44.0.2,<49",
+    "pyOpenSSL>=25,<26.3",
 ]
 
 [project.scripts]
 xblago = "xblago.cli:main"
 xblago-telegram = "xblago.integrations.telegram:main"
+xblago-integration = "xblago.core.integration:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"xblago.integrations" = ["static/*"]
+"xblago.core" = ["integration_schema.json"]

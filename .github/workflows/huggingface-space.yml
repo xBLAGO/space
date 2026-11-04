@@ -1,13 +1,28 @@
 name: Deploy Hugging Face Space
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
+    inputs:
+      confirm_deploy:
+        description: "Type DEPLOY to publish this commit to the configured Hugging Face Space."
+        required: true
+        type: string
+      release_sha:
+        description: "Exact reviewed main commit; this does not approve migrations."
+        required: true
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.confirm_deploy == 'DEPLOY' && inputs.release_sha == github.sha && vars.BLAGO_DEPLOYMENT_ENABLED == 'true' }}
+    environment: production-release
     runs-on: ubuntu-latest
+    concurrency:
+      group: huggingface-space-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,6 +31,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Verify explicit release authority before credentials
+        env:
+          BLAGO_RELEASE_SHA: ${{ inputs.release_sha }}
+          BLAGO_CONFIRM_DEPLOY: ${{ inputs.confirm_deploy }}
+          BLAGO_DEPLOYMENT_ENABLED: ${{ vars.BLAGO_DEPLOYMENT_ENABLED }}
+        run: python tools/release_guard.py
 
       - name: Install Hugging Face Hub
         run: python -m pip install --upgrade huggingface_hub
@@ -42,7 +64,9 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/space"
           cp -R src "$RUNNER_TEMP/space/src"
-          cp Dockerfile pyproject.toml "$RUNNER_TEMP/space/"
+          cp Dockerfile pyproject.toml requirements-integration.lock "$RUNNER_TEMP/space/"
+          mkdir -p "$RUNNER_TEMP/space/tools"
+          cp tools/build_sqlite.py "$RUNNER_TEMP/space/tools/build_sqlite.py"
           cp deploy/huggingface-space/README.md "$RUNNER_TEMP/space/README.md"
           find "$RUNNER_TEMP/space" -type d -name "__pycache__" -prune -exec rm -rf {} +
           find "$RUNNER_TEMP/space" -type f -name "*.pyc" -delete

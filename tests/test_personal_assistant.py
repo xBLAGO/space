@@ -57,6 +57,23 @@ class PersonalAssistantAgentTest(unittest.TestCase):
         self.assertEqual(response.text, "Запомнил: город = Москва.")
         self.assertEqual(memory.all(), {"город": "Москва"})
 
+    def test_agent_automatically_remembers_low_risk_personal_fact(self) -> None:
+        memory = InMemoryStore()
+        agent = PersonalAssistantAgent(memory)
+
+        agent.respond(UserMessage("Меня зовут Анна"))
+
+        self.assertEqual(memory.all(), {"name": "Анна"})
+
+    def test_agent_does_not_store_sensitive_fact(self) -> None:
+        memory = InMemoryStore()
+        agent = PersonalAssistantAgent(memory)
+
+        response = agent.respond(UserMessage("remember my password is hunter2"))
+
+        self.assertIn("won't save", response.text)
+        self.assertEqual(memory.all(), {})
+
     def test_agent_can_show_memory(self) -> None:
         memory = InMemoryStore()
         memory.set("timezone", "Europe/Moscow")

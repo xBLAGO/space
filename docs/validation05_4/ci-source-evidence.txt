@@ -1,0 +1,33 @@
+GitHub Actions Tests #45
+Source SHA: 8eefbc5a14c0d84ef641f1de6d824f3cf3377268
+Run: https://github.com/xBLAGO/space/actions/runs/40014837849
+Both jobs SUCCESS; excerpts downloaded through GitHub API after completion.
+
+Docker job 120624119186
+2026-10-23T19:53:17.3236322Z #16 0.185   "python": "3.12.15",
+2026-10-23T19:53:17.3236611Z #16 0.185   "sqlite_version": "3.54.1",
+2026-10-23T19:53:17.3237199Z #16 0.185   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-23T19:53:17.3237881Z #16 0.185   "python_extension": "/usr/local/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-23T19:53:17.3238340Z #16 0.185   "wal_reset_fix_verified": true,
+2026-10-23T19:53:22.5438763Z   "python": "3.12.15",
+2026-10-23T19:53:22.5439005Z   "sqlite_version": "3.54.1",
+2026-10-23T19:53:22.5439432Z   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-23T19:53:22.5440029Z   "python_extension": "/usr/local/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-23T19:53:22.5440444Z   "wal_reset_fix_verified": true,
+2026-10-23T19:53:33.9624840Z     print('Identity runtime, restart and backup smoke OK')
+2026-10-23T19:53:34.4058357Z Identity runtime, restart and backup smoke OK
+2026-10-23T19:53:34.5003088Z     print('Privacy journal, export, delete, TTL and restore smoke OK')
+2026-10-23T19:53:35.0298437Z Privacy journal, export, delete, TTL and restore smoke OK
+2026-10-23T19:53:35.1499494Z     print('Strict pilot SQLite, lineage baseline and independent witness gate OK')
+2026-10-23T19:53:35.4917753Z Strict pilot SQLite, lineage baseline and independent witness gate OK
+
+Tests job 120624119618
+2026-10-23T19:53:14.7973124Z   "python": "3.12.15",
+2026-10-23T19:53:14.7973510Z   "sqlite_version": "3.54.1",
+2026-10-23T19:53:14.7974165Z   "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+2026-10-23T19:53:14.7975125Z   "python_extension": "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+2026-10-23T19:53:14.7975821Z   "wal_reset_fix_verified": true,
+2026-10-23T19:53:35.2737143Z Ran 225 tests in 19.929s
+2026-10-23T19:53:35.2737563Z OK
+2026-10-23T19:53:48.4692134Z {"browser": "155.0.8059.39", "checks": {"real_browser_registration": true, "registration_rotates_cookie": true, "old_cookie_denied": true, "real_browser_discoverable_login": true, "session_revoke_ui": true, "other_session_denied": true, "export_ui": true, "no_page_errors": true}, "page_errors": []}
+2026-10-23T19:53:49.8862730Z Artifact download URL: https://github.com/xBLAGO/space/actions/runs/40014837849/artifacts/12527747457

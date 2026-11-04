@@ -12,14 +12,14 @@ class Intent:
 
 
 REMEMBER_PATTERNS = (
-    re.compile(r"^remember\s+(?:my\s+)?(?P<key>[\w\s-]+?)\s+(?:is|=)\s+(?P<value>.+)$", re.I),
-    re.compile(r"^запомни[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s-]+?)\s+(?:это|=|-)\s+(?P<value>.+)$", re.I),
+    re.compile(r"^remember\s+(?:my\s+)?(?P<key>[\w\s.:-]+?)\s+(?:is|=)\s+(?P<value>.+)$", re.I),
+    re.compile(r"^(?:запомни|исправь|обнови)[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s.:-]+?)\s+(?:это|=|-|на)\s+(?P<value>.+)$", re.I),
 )
 
 FORGET_PATTERNS = (
-    re.compile(r"^/(?:forget|delete-memory)\s+(?P<key>[\w\s-]+)$", re.I),
-    re.compile(r"^forget\s+(?:my\s+)?(?P<key>[\w\s-]+)$", re.I),
-    re.compile(r"^забудь[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s-]+)$", re.I),
+    re.compile(r"^/(?:forget|delete-memory)\s+(?P<key>[\w\s.:-]+)$", re.I),
+    re.compile(r"^forget\s+(?:my\s+)?(?P<key>[\w\s.:-]+)$", re.I),
+    re.compile(r"^забудь[:,]?\s+(?:мой|моя|мое|моё|мои)?\s*(?P<key>[\w\s.:-]+)$", re.I),
 )
 
 

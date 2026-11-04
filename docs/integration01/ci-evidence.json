@@ -1,0 +1,39 @@
+{
+  "format": "blago-integration-ci-01",
+  "source_candidate_sha": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+  "ci_checkout_sha": "770d2e8ce33d5ed7fa7f07df7577393f7d1287d4",
+  "ci_checkout_kind": "GitHub virtual PR merge; evidence tool verified tree equals reviewed source candidate",
+  "url": "https://github.com/xBLAGO/space/actions/runs/41783310506",
+  "conclusion": "success",
+  "tests_job": 126419621820,
+  "docker_job": 126419621590,
+  "tests": {
+    "passed": 315,
+    "seconds": 28.438
+  },
+  "docker_image_id": "sha256:ff51e61ab22f50b1be4aa3825ef68a48ecb6d4e0398505da800f3eb071482f22",
+  "docker_base": "python:3.12-slim@sha256:a0f57064cbdcd6285fa45f51237ab0b35ea8ebaed06a1f5973e89e19dfb86704",
+  "sqlite_version": "3.54.1",
+  "browser": "Chrome 156.0.8078.47, virtual CTAP2/UV",
+  "artifact": "https://github.com/xBLAGO/space/actions/runs/41783310506/artifacts/13300096488",
+  "checks": {
+    "unconfigured_image_denied": true,
+    "guarded_synthetic_volume_health_pwa": true,
+    "identity_backup_restart": true,
+    "privacy_delete_ttl_restore": true,
+    "strict_privacy_witness_gate": true,
+    "bounded_text_repair_no_economic_side_effects": true,
+    "source_manifest_drift_check": true,
+    "candidate_tree_and_installed_dependencies": true,
+    "browser_registration_cookie_rotation_revocation_export": true
+  },
+  "deployment_workflow_runs_for_source_candidate": 0,
+  "production_access": false,
+  "production_image_published": false,
+  "limits": [
+    "ephemeral CI image, not production artifact promotion",
+    "no physical device/Telegram WebView",
+    "no independent storage qualification",
+    "no real-user or live-provider acceptance"
+  ]
+}

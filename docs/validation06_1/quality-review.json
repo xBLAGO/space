@@ -1,0 +1,73 @@
+{
+  "method": "Implementer manual reading of synthetic outputs; no human participant study and no independent quality audit",
+  "base_sha": "37be0437578125503f0a851c6ce9a86222937cdc",
+  "scenario_count": 40,
+  "criteria": [
+    {
+      "criterion": "coherence",
+      "status": "PARTIAL",
+      "evidence": "Final HF continuation after restart answered the chain topic; 4 normal turns timed out."
+    },
+    {
+      "criterion": "naturalness",
+      "status": "OPEN",
+      "evidence": "Final greeting invites user to choose a topic; reflection is vague; third-person report receives ungrounded comforting prose."
+    },
+    {
+      "criterion": "no_repetition_or_unneeded_questions",
+      "status": "OPEN",
+      "evidence": "One intermediate thank-you was short; final thank-you again proposes continuing. No final successful completion exactly echoed the application outage status."
+    },
+    {
+      "criterion": "completion",
+      "status": "PASS_MOCKS_LIVE_REPAIR_UNVERIFIED",
+      "evidence": "Baseline live pressure returned a length-truncated fragment; final pressure timed out. Bounded repair is covered by negative/integration tests, not confirmed by this final live pressure."
+    },
+    {
+      "criterion": "intent_preservation",
+      "status": "PARTIAL",
+      "evidence": "Deterministic refusal/revision hints pass all scenarios; live refusal/resource/change cases have insufficient successful coverage."
+    },
+    {
+      "criterion": "no_unwanted_actions",
+      "status": "PASS_TESTED_SCOPE",
+      "evidence": "All synthetic database invariants pass; provider has no executor. Auth/CSRF and Foundation 05.4 tests retained."
+    }
+  ],
+  "decisions": {
+    "further_controlled_testing": "GO",
+    "natural_intelligence_acceptance": "NO_GO",
+    "closed_pilot": "NO_GO"
+  },
+  "live_before": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 5,
+    "extraction_calls": 0,
+    "length_finishes": 1,
+    "prompt_tokens": 4673,
+    "completion_tokens": 869,
+    "median_turn_ms": 2804.4449999999997,
+    "max_turn_ms": 28546.13
+  },
+  "live_after": {
+    "turns": 12,
+    "http_calls": 13,
+    "http_failures": 5,
+    "extraction_calls": 0,
+    "length_finishes": 0,
+    "prompt_tokens": 6719,
+    "completion_tokens": 402,
+    "median_turn_ms": 1426.885,
+    "max_turn_ms": 20840.93
+  },
+  "usage_scope": "Only received response usage is known. Timed-out requests may still be billed. No currency cost or statistically reliable latency improvement is claimed.",
+  "common_received_scenarios": [
+    "благодарность",
+    "после_restart",
+    "размышление",
+    "фактический_вопрос"
+  ],
+  "real_503_this_run": false,
+  "http_503_coverage": "Deterministic negative/integration tests; actual failures here were transport timeouts."
+}
