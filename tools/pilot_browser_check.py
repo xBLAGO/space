@@ -18,10 +18,15 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--chrome',default=os.getenv('BLAGO_CHROME_EXECUTABLE') or shutil.which('google-chrome') or '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome')
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--integration',action='store_true',help='Verify guarded nonfinancial synthetic surface')
     args=parser.parse_args()
     from playwright.sync_api import sync_playwright,expect
     args.output.mkdir(parents=True,exist_ok=True)
     with fixture() as f:
+        if args.integration:
+            os.environ['XBLAGO_INTEGRATION_MODE']='synthetic'
+            from xblago.core.integration import preflight
+            preflight(f['path'])
         app=f['app']
         setup_token,_=app.register('browser_user','synthetic-browser-password','synthetic-pilot-invite')
         server=ThreadingHTTPServer(('127.0.0.1',0),BlagoWebHandler)

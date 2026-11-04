@@ -20,9 +20,11 @@ dependencies = [
 [project.scripts]
 xblago = "xblago.cli:main"
 xblago-telegram = "xblago.integrations.telegram:main"
+xblago-integration = "xblago.core.integration:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 "xblago.integrations" = ["static/*"]
+"xblago.core" = ["integration_schema.json"]

@@ -27,6 +27,11 @@ class TelegramIdentity:
 
 class SQLiteBlagoStore:
     def __init__(self, path: Path, legacy_memory_dir: Path | None = None) -> None:
+        from xblago.core.integration import enabled, preflight
+        if enabled():
+            checked = preflight(path)
+            self.__dict__.update(checked.__dict__)
+            return
         from xblago.core.sqlite_safety import enforce_pilot_sqlite
         enforce_pilot_sqlite()
         self.path = path

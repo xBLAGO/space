@@ -139,7 +139,11 @@ class WebApp:
         self.store = store
         self._auth_lock = RLock()
         self._auth_attempts: dict[str, list[float]] = {}
-        self._ensure_schema()
+        from xblago.core.integration import enabled, preflight
+        if enabled():
+            preflight(store.path)
+        else:
+            self._ensure_schema()
         from xblago.integrations.identity import IdentityRuntime
         self.identity = IdentityRuntime(store)
 
@@ -1260,6 +1264,9 @@ class BlagoWebHandler(TelegramWebhookHandler):
 
     def _api_impl(self, method: str, path: str) -> None:
         app: WebApp = getattr(self.server, "blago_web_app")
+        from xblago.core.integration import enabled, route_allowed
+        if enabled() and not route_allowed(path):
+            raise ApiError(404, "Outside the nonfinancial integration scope")
         if method != "GET":
             self._check_origin()
         if method == 'GET' and path == '/api/v1/auth/capabilities':

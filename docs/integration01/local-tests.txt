@@ -1,0 +1,8 @@
+Source baseline: d11a2a555efe57e6818450d534655020bf47b9ca + Integration 01 code
+Python 3.12.10; verified SQLite 3.54.1/source-id.
+Full regression: 315 tests in 114.551s, OK.
+Includes exact-main upgrade, repeated migration, stale backup recovery, missing journal/witness, schema drift and release policy negatives.
+Installed headless Chrome 150.0.7871.125 + virtual CTAP2/UV: 8 checks PASS, no page errors.
+No physical authenticator/biometrics, actual Telegram WebView, live LLM or production resources tested.
+Local Docker CLI unavailable; Docker evidence must come from actual CI.
+Test log SHA256: f8a4a2fd48920f90092da8cc1a2ba7e9eec128d56dc41faa879bb1a05db4c5f6
