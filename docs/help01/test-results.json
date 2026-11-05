@@ -1,0 +1,147 @@
+{
+  "format": "help01-local-tests-1",
+  "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+  "scope": "synthetic local, no production/external LLM",
+  "full_suite": {
+    "tests": 340,
+    "passed": 340,
+    "seconds": 187.378,
+    "log_sha256": "c19e375c0487a6e55b471b35dd3ccad15cf6e3f9ae1cf894a6dc9cd1eb7cca0c"
+  },
+  "focused_final": {
+    "tests": 25,
+    "passed": 25,
+    "seconds": 68.783,
+    "log_sha256": "9073f882a97c0164b52e9f644e187132d27aad00fb9c250436cd30a7fdca851c",
+    "cases": [
+      {
+        "test": "test_accepted_audience_cannot_silently_change",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_audience_change_revokes_old_member_and_previews",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_concurrent_accepts_single_executor",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_crash_after_journal_before_sql_commit_is_closed",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_decline_and_reoffer_requires_new_confirmation",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_dispute_removes_completed_statistic",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_draft_private_and_exact_publication_preview",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_duplicate_draft_and_delivery",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_expired_confirmation_and_sensitive_text",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_export_after_audience_revocation_has_no_later_state",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_export_and_account_delete_scrub_other_party",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_helper_withdraw_pending_and_accepted",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_http_retries_csrf_idor_and_bad_llm",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_idor_and_impersonation",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_journal_failure_no_success",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_malformed_action_types_are_rejected_without_changes",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_migration_rollback_and_backup_before_help_with_retained_events",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_missing_witness_blocks_reads_and_writes",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_multiprocess_acceptance_and_atomic_event_rollback",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_no_memory_history_llm_contamination",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_old_backup_before_help_migration_requires_offline_migration",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_old_backup_never_republishes_withdrawal",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_restart_and_postcommit_lost_ack_idempotent",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_successful_two_party_cycle_and_statistics",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_withdraw_each_stage",
+        "expected": "scenario assertions hold",
+        "actual": "PASS"
+      }
+    ]
+  },
+  "browser": "browser-results.json",
+  "demo": "completed-demo.json",
+  "real_pilot": "NO-GO"
+}

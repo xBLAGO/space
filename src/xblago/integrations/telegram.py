@@ -193,7 +193,12 @@ class TelegramBot:
             return _telegram_message_replies(chat_id, welcome_text)
 
         response = self._agent_for_user(blago_user_id, chat_id).respond(UserMessage(text=text.strip()))
-        return _telegram_message_replies(chat_id, response.text)
+        from xblago.core.help_schema import enabled as help_enabled
+        from xblago.domain.help_service import suggest_draft
+        hint=''
+        if help_enabled() and suggest_draft(text.strip()):
+            hint='\nМожно подготовить черновик потребности в Mini App или Web. Публикация требует отдельного подтверждения.'
+        return _telegram_message_replies(chat_id, response.text+hint)
 
     def _agent_for_user(self, blago_user_id: str, chat_id: int) -> PersonalAssistantAgent:
         # Load current shared history for every update, including turns from the web.

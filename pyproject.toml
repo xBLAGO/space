@@ -27,4 +27,4 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "xblago.integrations" = ["static/*"]
-"xblago.core" = ["integration_schema.json"]
+"xblago.core" = ["integration_schema.json", "integration_help_schema.json"]

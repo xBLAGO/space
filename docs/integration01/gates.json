@@ -1,8 +1,8 @@
 {
   "format": "blago-integration-gates-01",
-  "mode": "synthetic-only",
+  "mode": "synthetic Help01 only",
   "real_pilot": "NO-GO",
-  "next_development": "GO only for isolated Foundation Help 01",
+  "next_development": "GO for further isolated Help/recovery/usability work",
   "gates": [
     {
       "id": "G00",
@@ -27,7 +27,8 @@
     {
       "id": "G04",
       "status": "UNKNOWN",
-      "evidence": "Historical baseline/legacy merges and economic retention/delete policy not approved"
+      "evidence": "Historical baseline/legacy merges and economic retention/delete policy not approved",
+      "help01_subscope": "Synthetic deletion/anonymization/old-backup denial PASS; approved real retention policy UNKNOWN"
     },
     {
       "id": "G05",
@@ -41,8 +42,9 @@
     },
     {
       "id": "G07",
-      "status": "FAIL",
-      "evidence": "Foundation Help 01 is interface only; no cross-person help implementation"
+      "status": "PASS",
+      "evidence": "Two fresh-auth actors: approved publication, offer/accept, mutual completion; dispute/withdraw/recovery negatives; independent real-user acceptance UNKNOWN",
+      "scope": "Synthetic Help01 only"
     },
     {
       "id": "G08",
@@ -66,5 +68,13 @@
     }
   ],
   "deployment_executed": false,
-  "production_access": false
+  "production_access": false,
+  "help01": {
+    "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+    "migration": "foundation_help_001",
+    "real_participants": false,
+    "actual_telegram_webview": "UNKNOWN",
+    "independent_security_review": "UNKNOWN",
+    "source_ci": "PENDING"
+  }
 }

@@ -6,12 +6,14 @@ from enum import Enum
 from typing import Protocol
 
 class HelpState(str,Enum):
-    DRAFT='draft'
-    PUBLISHED='published'
-    WITHDRAWN='withdrawn'
-    ACCEPTED='accepted'
-    COMPLETED='completed'
-    CANCELLED='cancelled'
+    DRAFT='DRAFT'
+    PUBLISHED='PUBLISHED'
+    OFFERED='OFFERED'
+    AWAITING_CONFIRMATION='AWAITING_CONFIRMATION'
+    DISPUTED='DISPUTED'
+    WITHDRAWN='WITHDRAWN'
+    ACCEPTED='ACCEPTED'
+    COMPLETED='COMPLETED'
 
 @dataclass(frozen=True)
 class ReviewedPublication:
@@ -23,12 +25,12 @@ class ReviewedPublication:
     confirmation_id: str
 
 class HelpService(Protocol):
-    """Future implementation MUST recheck principal, revision and atomic one-use
-    confirmation against exact text/audience; permission is not inferred from chat.
-    Private memory, bio/key material, money and ratings are outside this contract.
+    """Runtime boundary: session token authenticates; prepare binds exact server
+    revision/audience; commit requires the actor's explicit one-use confirmation.
+    No LLM may call mutation methods or receive challenge tokens.
     """
-    def publish(self, principal: str, approval: ReviewedPublication) -> str: ...
-    def withdraw(self, principal: str, object_id: str, expected_revision: int) -> None: ...
-    def offer(self, principal: str, need_id: str, expected_revision: int) -> str: ...
-    def accept(self, principal: str, offer_id: str, expected_revision: int) -> None: ...
-    def confirm_completion(self, principal: str, commitment_id: str, expected_revision: int) -> None: ...
+    def draft(self, token: str, text: str, audience: list[str], key: str) -> dict: ...
+    def prepare(self, token: str, rid: str, version: int, action: str, args: dict) -> dict: ...
+    def commit(self, token: str, challenge: str, confirmation: str) -> dict: ...
+    def get(self, token: str, rid: str) -> dict: ...
+    def feed(self, token: str) -> dict: ...

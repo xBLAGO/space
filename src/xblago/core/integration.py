@@ -67,7 +67,10 @@ def preflight(path: Path):
         objects=dict(db.execute("SELECT name,sql FROM sqlite_master WHERE sql IS NOT NULL"))
         if any(x.startswith(('sovereign_','genesis_')) or x in ('identity_controllers','identity_wallet_links','identity_credentials','identity_events','identity_consents') for x in objects):
             raise IntegrationBlocked('Experimental schema is not an Integration 01 baseline')
-        expected=json.loads(Path(__file__).with_name('integration_schema.json').read_text())
+        from xblago.core.help_schema import present,validate
+        has_help=present(db)
+        validate(db)
+        expected=json.loads(Path(__file__).with_name('integration_help_schema.json' if has_help else 'integration_schema.json').read_text())
         if schema_shape(db)!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
         for module,table in zip(MODULES,('identity_schema_migrations','identity_runtime_migrations','privacy_schema_migrations','pilot_schema_migrations')):
             if table not in objects or db.execute(f'SELECT version,checksum FROM {table}').fetchall()!=[(module.VERSION,module.CHECKSUM)]:

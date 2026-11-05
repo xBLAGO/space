@@ -1,0 +1,78 @@
+{
+  "scope": "synthetic local only",
+  "dialogue_origin": "Мне нужна помощь с ремонтом велосипеда",
+  "transitions": [
+    {
+      "state": "DRAFT",
+      "audience_verified": true
+    },
+    {
+      "action": "publish",
+      "state": "PUBLISHED",
+      "version": 2
+    },
+    {
+      "action": "offer",
+      "state": "OFFERED",
+      "version": 3
+    },
+    {
+      "action": "accept",
+      "state": "ACCEPTED",
+      "version": 4
+    },
+    {
+      "action": "confirm",
+      "state": "AWAITING_CONFIRMATION",
+      "version": 5
+    },
+    {
+      "action": "confirm",
+      "state": "COMPLETED",
+      "version": 6
+    }
+  ],
+  "events": [
+    {
+      "version": 1,
+      "action": "draft",
+      "role": "owner",
+      "state": "DRAFT"
+    },
+    {
+      "version": 2,
+      "action": "publish",
+      "role": "owner",
+      "state": "PUBLISHED"
+    },
+    {
+      "version": 3,
+      "action": "offer",
+      "role": "helper",
+      "state": "OFFERED"
+    },
+    {
+      "version": 4,
+      "action": "accept",
+      "role": "owner",
+      "state": "ACCEPTED"
+    },
+    {
+      "version": 5,
+      "action": "confirm",
+      "role": "owner",
+      "state": "AWAITING_CONFIRMATION"
+    },
+    {
+      "version": 6,
+      "action": "confirm",
+      "role": "helper",
+      "state": "COMPLETED"
+    }
+  ],
+  "mutually_confirmed_owned_count": 1,
+  "financial_operations": 0,
+  "integrity_check": "ok",
+  "foreign_key_check": [],
+  "real_pilot": "NO-GO"
+}

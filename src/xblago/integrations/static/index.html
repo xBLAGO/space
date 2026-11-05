@@ -131,6 +131,16 @@ body.tools-open #tools-scrim{display:block}
 </div>
 <form id="chat-form" class="chat-compose"><textarea id="chat-input" maxlength="4000" rows="1" aria-label="Сообщение" placeholder="О чём думаешь?" required></textarea><button id="send-btn" class="primary" type="submit">↑</button></form>
 </div></section>
+<details id="help-panel" hidden class="panel"><summary>Взаимопомощь</summary>
+<p>Здесь можно подготовить потребность и пригласить участников. Любое действие подтверждается отдельно.</p>
+<button id="help-refresh" type="button" class="secondary">Обновить</button>
+<p class="small">Мой код для приглашения: <code id="help-code" style="overflow-wrap:anywhere"></code></p>
+<label for="help-text">Черновик потребности</label><textarea id="help-text" maxlength="2000" rows="2" placeholder="Какая помощь нужна?"></textarea>
+<label for="help-audience">Коды приглашённых участников через запятую</label><input id="help-audience" maxlength="600" autocomplete="off">
+<button id="help-draft" type="button" class="secondary">Сохранить частный черновик</button>
+<div id="help-approval" hidden><h3>Проверь действие</h3><pre id="help-preview" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre><button id="help-confirm" type="button" class="primary">Подтверждаю это действие</button><button id="help-cancel" type="button" class="secondary">Отказаться</button></div>
+<p id="help-stats"></p><div id="help-items"></div>
+</details>
 <section id="needs-screen" class="screen"><div class="section-head"><div><h2>Мои потребности</h2><p>Здесь можно рассказать, какая помощь вам нужна.</p></div></div>
 <div class="two-col"><form id="needs-form" class="panel"><h2>Новая потребность</h2><label for="needs-title">Что необходимо?</label><input id="needs-title" required minlength="2" maxlength="160" placeholder="Например, помощь с ремонтом">
 <label for="needs-description">Описание</label><textarea id="needs-description" maxlength="2000" placeholder="Расскажите подробнее"></textarea>
@@ -167,8 +177,8 @@ async function api(path,method='GET',payload){
  if(!response.ok){if(response.status===401&& !path.startsWith('auth/'))showAuth();throw Error(data.error||'Ошибка сервера')}
  return data;
 }
-function showAuth(){state.csrf='';$('loading').style.display='none';$('shell').style.display='none';$('auth').style.display='grid'}
-function showApp(){ $('loading').style.display='none';$('auth').style.display='none';$('shell').style.display='block';const name=state.profile.display_name||'Участник';$('sidebar-user').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();openTab(state.tab)}
+function showAuth(){helpPending=null;$('help-items').replaceChildren();$('help-preview').textContent='';$('help-approval').hidden=true;$('help-text').value='';$('help-audience').value='';$('help-code').textContent='';state.csrf='';$('loading').style.display='none';$('shell').style.display='none';$('auth').style.display='grid'}
+function showApp(){ $('loading').style.display='none';$('auth').style.display='none';$('shell').style.display='block';const name=state.profile.display_name||'Участник';$('sidebar-user').textContent=name;$('avatar').textContent=name.charAt(0).toUpperCase();openTab(state.tab);api('auth/capabilities').then(c=>{if(c.help)loadHelp().catch(e=>note(e.message))}).catch(()=>{})}
 async function restore(){try{let data=await api('me');state.csrf=data.csrf;state.profile=data.profile;showApp();return}catch(e){if(!String(e).includes('sign in')&&!String(e).includes('Session')){}}
  const initData=window.Telegram?.WebApp?.initData;
  if(initData){try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();const capability=await api('auth/capabilities');const exchange=capability.secure_identity?await api('auth/telegram/challenge','POST'):{};const data=await api('auth/telegram','POST',{init_data:initData,challenge:exchange.challenge});state.csrf=data.csrf;const me=await api('me');state.profile=me.profile;showApp();return}catch(e){note(e.message)}}
@@ -183,7 +193,7 @@ async function loadTab(tab){try{
  }catch(e){note(e.message)}}
 function bubble(role,text,pending=false){const div=document.createElement('div');div.className='bubble'+(role==='user'?' user':'')+(pending?' pending':'');div.textContent=text;$('chat-stream').append(div);$('chat-stream').scrollTop=$('chat-stream').scrollHeight;return div}
 async function loadHistory(){const data=await api('chat/messages');$('chat-stream').replaceChildren();data.messages.forEach(m=>bubble(m.role,m.text))}
-$('chat-form').addEventListener('submit',async e=>{e.preventDefault();if(state.busy)return;const value=$('chat-input').value.trim();if(!value)return;state.busy=true;$('send-btn').disabled=true;$('chat-input').value='';bubble('user',value);const waiting=bubble('assistant','BLAGO думает…',true);try{const data=await api('chat/messages','POST',{text:value});waiting.textContent=data.reply;waiting.classList.remove('pending')}catch(error){waiting.textContent='Не удалось отправить: '+error.message;waiting.classList.remove('pending')}finally{state.busy=false;$('send-btn').disabled=false}});
+$('chat-form').addEventListener('submit',async e=>{e.preventDefault();if(state.busy)return;const value=$('chat-input').value.trim();if(!value)return;state.busy=true;$('send-btn').disabled=true;$('chat-input').value='';bubble('user',value);const waiting=bubble('assistant','BLAGO думает…',true);try{const data=await api('chat/messages','POST',{text:value});waiting.textContent=data.reply;waiting.classList.remove('pending');if(data.help_suggestion){bubble('assistant',data.help_suggestion.message);const suggest=document.createElement('button');suggest.type='button';suggest.className='secondary';suggest.textContent='Подготовить черновик';suggest.onclick=()=>{$('help-panel').open=true;$('help-text').value=data.help_suggestion.text;$('help-panel').scrollIntoView()};$('chat-stream').append(suggest)}}catch(error){waiting.textContent='Не удалось отправить: '+error.message;waiting.classList.remove('pending')}finally{state.busy=false;$('send-btn').disabled=false}});
 $('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('chat-form').requestSubmit()}});
 function textElement(tag,value,cls){const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=value;return el}
 async function loadItems(kind){const data=await api(kind);const container=$(kind+'-list');container.replaceChildren();if(!data.items.length){container.append(textElement('div','Пока нет записей','empty'));return}for(const item of data.items){const card=document.createElement('article');card.className='item';card.append(textElement('h3',item.title));if(item.description)card.append(textElement('p',item.description));const chips=document.createElement('div');chips.className='chips';chips.append(textElement('span',item.visibility==='private'?'Личное':'В общей статистике','chip'));if(item.status)chips.append(textElement('span',item.status==='open'?'Открыто':item.status,'chip'));chips.append(textElement('span',new Date(item.created_at).toLocaleDateString('ru'),'chip'));card.append(chips);container.append(card)}}
@@ -232,6 +242,24 @@ document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener(
 $('tools-toggle').addEventListener('click',()=>{const open=document.body.classList.toggle('tools-open');$('tools-toggle').setAttribute('aria-expanded',String(open))});
 $('tools-scrim').addEventListener('click',()=>{$('tools-toggle').click()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('tools-open'))$('tools-toggle').click()});
+
+let helpPending=null;
+function helpButton(container,label,action){const b=document.createElement('button');b.type='button';b.className='secondary';b.textContent=label;b.onclick=async()=>{try{await action()}catch(e){note(e.message)}};container.append(b);return b}
+async function helpPrepare(item,action,args={}){const preview=await api('help/prepare','POST',{rid:item.id,version:item.version,action,args});helpPending=preview;$('help-preview').textContent=JSON.stringify({действие:preview.action,текст:preview.request.text,версия:preview.request.version,аудитория:preview.request.audience,предложение:preview.selection||preview.args},null,2);$('help-approval').hidden=false;$('help-approval').scrollIntoView()}
+async function loadHelp(){helpPending=null;$('help-approval').hidden=true;$('help-preview').textContent='';$('help-items').replaceChildren();$('help-stats').textContent='';const data=await api('help/requests');$('help-code').textContent=(await api('help/code')).code;$('help-stats').textContent='Взаимно подтверждённых моих потребностей: '+data.completed_owned;$('help-items').replaceChildren();for(const item of data.items){const card=document.createElement('article');card.className='item';card.dataset.helpId=item.id;card.append(textElement('h3',item.text||'Публикация отозвана'));card.append(textElement('p','Статус: '+item.state+' · Версия '+item.version));const controls=document.createElement('div');
+if(item.owner&&item.state==='DRAFT')helpButton(controls,'Проверить публикацию',()=>helpPrepare(item,'publish'));
+if(item.owner&&['DRAFT','PUBLISHED','OFFERED'].includes(item.state))helpButton(controls,'Изменить текст и аудиторию',()=>helpPrepare(item,'revise',{text:$('help-text').value,audience:$('help-audience').value.split(',').map(x=>x.trim()).filter(Boolean)}));
+if(item.owner&&item.state!=='WITHDRAWN')helpButton(controls,'Отозвать обращение',()=>helpPrepare(item,'withdraw'));
+if(!item.owner&&['PUBLISHED','OFFERED'].includes(item.state)&&!item.offers.some(o=>o.mine&&['OFFERED','ACCEPTED'].includes(o.status)))helpButton(controls,'Предложить помощь',()=>helpPrepare(item,'offer',{note:'Могу добровольно помочь с этой потребностью.'}));
+for(const offer of item.offers){const info=textElement('p',offer.note+' · '+offer.status+(offer.participant?' · '+offer.participant.slice(0,8):''));controls.append(info);if(item.owner&&item.state==='OFFERED'&&offer.status==='OFFERED'){helpButton(controls,'Принять это предложение',()=>helpPrepare(item,'accept',{offer_id:offer.id}));helpButton(controls,'Отклонить предложение',()=>helpPrepare(item,'decline',{offer_id:offer.id}))}if(offer.mine&&['OFFERED','ACCEPTED'].includes(offer.status)&&!['COMPLETED','DISPUTED','WITHDRAWN'].includes(item.state))helpButton(controls,'Отозвать моё предложение',()=>helpPrepare(item,'withdraw_offer'))}
+const party=item.owner||item.offers.some(o=>o.mine&&o.status==='ACCEPTED');if(party&&['ACCEPTED','AWAITING_CONFIRMATION'].includes(item.state)&&!(item.owner?item.owner_confirmed:item.helper_confirmed))helpButton(controls,'Подтвердить результат',()=>helpPrepare(item,'confirm'));if(party&&['ACCEPTED','AWAITING_CONFIRMATION','COMPLETED'].includes(item.state))helpButton(controls,'Сообщить о споре',()=>helpPrepare(item,'dispute'));card.append(controls);const history=document.createElement('details');history.append(textElement('summary','История обращения'));history.append(textElement('p',item.events.map(e=>e.version+': '+e.action+' → '+e.state).join('\n')));card.append(history);$('help-items').append(card)}}
+$('help-panel').addEventListener('toggle',()=>{if($('help-panel').open&&state.csrf)loadHelp().catch(e=>note(e.message))});
+$('help-refresh').onclick=()=>loadHelp().catch(e=>note(e.message));
+$('help-draft').onclick=async()=>{try{await api('help/drafts','POST',{text:$('help-text').value,audience:$('help-audience').value.split(',').map(x=>x.trim()).filter(Boolean),key:crypto.randomUUID()});await loadHelp()}catch(e){note(e.message)}};
+$('help-confirm').onclick=async()=>{if(!helpPending)return;try{await api('help/commit','POST',{challenge:helpPending.challenge,confirmation:'ПОДТВЕРЖДАЮ'});helpPending=null;$('help-approval').hidden=true;await loadHelp()}catch(e){note(e.message)}};
+$('help-cancel').onclick=()=>{helpPending=null;$('help-approval').hidden=true};
+api('auth/capabilities').then(c=>{$('help-panel').hidden=!c.help;if(c.help&&state.csrf)loadHelp().catch(()=>{})}).catch(()=>{});
+
 restore();
 if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('/app/sw.js').catch(()=>{});}
 })();
