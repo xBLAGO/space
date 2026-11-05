@@ -1,0 +1,48 @@
+{
+  "format": "blago-interface-audit-01",
+  "date": "2026-11-05",
+  "base_head": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+  "runtime_source": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+  "main": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "site_source": "xBLAGO/web2@df8353742e39eb56e5be0527b10f1acace2f68ec",
+  "unit_http_tests": {
+    "passed": 11,
+    "failed": 0,
+    "seconds": 9.808,
+    "initial_sandbox_bind_errors": 4,
+    "repeat_with_localhost_permission": "PASS"
+  },
+  "synthetic_browser_checks": {
+    "passed": 12,
+    "failed": 0,
+    "telegram_sdk": "stubbed; Web-only"
+  },
+  "public_en_pages_browser_checked": 4,
+  "public_get_200": 8,
+  "public_app_get": 404,
+  "current_pr_ci": "NOT_TRIGGERED_BY_BASELINE_WORKFLOW",
+  "historical_base_ci": {
+    "url": "https://github.com/xBLAGO/space/actions/runs/41902654438",
+    "conclusion": "success"
+  },
+  "real_pilot": "NO-GO; existing gates unchanged",
+  "production_writes": false,
+  "unknown": [
+    "production runtime SHA/config",
+    "real Telegram WebView and bot operation",
+    "physical passkeys",
+    "live provider quality",
+    "independent recovery infrastructure"
+  ],
+  "sha256": {
+    "README.md": "fb95a5e502918bbb7f51896b34d532269a0f12b1b4e790b5ace6d2432b697eb6",
+    "local-browser.json": "8534d949297bee8a125db0298259ee8aaf6f4c7f4fa258170bbd070e49920404",
+    "local-mobile-chat.png": "a03f7fda1bddfbba4c585854518b4291afa6a2550b8b6879c27b5c88ca56280b",
+    "local_check.py": "94b188d475ecd11fbce175317c838ed60e0be7ea6bd03afbb89c60ea47827855",
+    "public-browser.json": "26fbf6c5b1649c015f9685850bbc9595f0236271bc99eb15e31fb2270cdfc4f5",
+    "public-fetch.json": "7f71daea58297a9879aa5252f03568d880466c856e096dc982ce9e031a484941",
+    "public-home-mobile.png": "9a61406779b0a88da01497dfac8e7fbcd63b9408bf13391bbd350f64c54744a4",
+    "public_check.py": "36f8491b3f607a7ecd34e169761c9a7baf26496871febe1aef1d72e386b8f451",
+    "ru-fetch.json": "48473808aa3bab6592bb084d515a52487e25f1297999dfa8bdc75edf4bb5b535"
+  }
+}
