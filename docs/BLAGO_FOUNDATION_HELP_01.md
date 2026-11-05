@@ -212,8 +212,27 @@ IDOR/actor substitution/CSRF; отказ/withdrawal на стадиях; concurr
 before SQL commit; lost ACK/restart; old backup/до migration; migration rollback;
 revoked audience/export; account delete/anonymization; missing witness;
 LLM unavailable/без automatic action; malformed types и sensitive input.
-Все прежние 315 tests остаются в полном suite. Actual CI/Docker результаты и SHA
-добавляются только после выполненных jobs; ни одно production испытание не заявлено.
+Все прежние 315 tests остаются в полном suite.
+[Draft PR #20](https://github.com/xBLAGO/space/pull/20) направлен в integration
+branch #19 для review только Help delta. В source-pinned CI checkout exact Help
+HEAD, а не автоматически смешанный runtime documentation base. Это не проверка
+произвольного будущего merged stack: изменение runtime базы потребует нового review.
+
+Runtime source: `30a9794b15ce7b61a7705f4815a61bc798ad1698`.
+CI/source recipe: `68c274022b3889ee91986c0ce6f63c560280f732`.
+[Source CI](https://github.com/xBLAGO/space/actions/runs/42083896833): **SUCCESS**,
+340 tests in 41.336s, tests job 127443770819 и Docker job 127443770191 PASS.
+Frozen manifests/installed dependency/source identity checks PASS; Chrome/WebAuthn,
+двухучастниковый Web Help cycle и completed demo PASS. Docker Help cycle также
+COMPLETED с financial_operations=0, integrity=ok, foreign_key_check=[].
+Actual ephemeral image ID:
+`sha256:8991419f1a8561c29b29a4498d3eb7751e7ad1bb4a02758df604ce5db5ec7f4a`.
+[Public artifact](https://github.com/xBLAGO/space/actions/runs/42083896833/artifacts/13441647911)
+и [CI evidence](help01/ci-evidence.json); image не публиковался в production.
+
+Следующий evidence-only commit согласует только gates metadata с documentation
+HEAD #19; ни runtime-base d7f619a, ни tested source files не заменяются на 837b2bf.
+Final HEAD CI проверяется отдельно в PR. Ни одно production испытание не заявлено.
 
 ## 8. Gates, новые риски и решение
 
