@@ -57,7 +57,7 @@
   "schema_sha256": "a0673f4c3f531961139633f5ce634d111ddc6fcdd5d695775b92d16184b2cf17",
   "source_files_sha256": {
     ".github/workflows/huggingface-space.yml": "e4e3fd36d331045c93e5c1d4b462e99f41a994e2881f3600c4bd9e60876b1faa",
-    ".github/workflows/tests.yml": "de7cc80709b10a03cd18ebb784cfadb3f0f6e45f147f33d15b70df72a7f167eb",
+    ".github/workflows/tests.yml": "4de1d5b314da680dbc032fc07cf3240a2942888f7306f4f2e203586bf44f3d2e",
     "Dockerfile": "277ab0717a8172723e47116d79fac59023eea974aaa7b7665135717d34accc01",
     "pyproject.toml": "dd6de982922a7655e667b77558337ca0754afb71eecd16da42ad4ed71f185a79",
     "requirements-integration.lock": "a07961af237437505e654d3f873924bf96f7ec0702d5a1b37c15a6becf4949f6",
