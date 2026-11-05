@@ -1,0 +1,278 @@
+{
+  "engine": "150.0.7871.125",
+  "tracking_requests": "blocked for read-only auditor privacy; not consent verification",
+  "checks": [
+    {
+      "url": "https://xblago.space/",
+      "status": 200,
+      "title": "BLAGO. Home",
+      "links": [
+        {
+          "text": "",
+          "href": "https://xblago.space/ru/ru_home/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/in/in_home/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        }
+      ],
+      "desktop": {
+        "width": 1360,
+        "scroll_width": 1360
+      },
+      "mobile_scroll_width": 390,
+      "forms": 0,
+      "errors": [],
+      "claims": {
+        "btc_peg": false,
+        "nft": false,
+        "investment": false
+      }
+    },
+    {
+      "url": "https://xblago.space/en/en_description/",
+      "status": 200,
+      "title": "BLAGO. Descriptions",
+      "links": [
+        {
+          "text": "",
+          "href": "https://xblago.space/ru/ru_description/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/in/in_description/"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        },
+        {
+          "text": "",
+          "href": "https://xblagobot.t.me/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.gitbook.io/en/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.medium.com/"
+        },
+        {
+          "text": "",
+          "href": "https://twitter.com/xBLAG0"
+        },
+        {
+          "text": "",
+          "href": "https://www.linkedin.com/company/xblago"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/xBLAGO"
+        },
+        {
+          "text": "",
+          "href": "https://www.youtube.com/@xblago"
+        },
+        {
+          "text": "",
+          "href": "https://dzen.ru/xblago"
+        },
+        {
+          "text": "",
+          "href": "https://vk.com/xblago"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        }
+      ],
+      "desktop": {
+        "width": 1360,
+        "scroll_width": 1360
+      },
+      "mobile_scroll_width": 390,
+      "forms": 0,
+      "errors": [],
+      "claims": {
+        "btc_peg": false,
+        "nft": true,
+        "investment": false
+      }
+    },
+    {
+      "url": "https://xblago.space/en/en_investors/",
+      "status": 200,
+      "title": "BLAGO. Invest",
+      "links": [
+        {
+          "text": "",
+          "href": "https://xblago.space/ru/ru_investors/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/in/in_investors/"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        },
+        {
+          "text": "@xBLAGObot",
+          "href": "https://xblagobot.t.me/"
+        },
+        {
+          "text": "@xBLAGObot",
+          "href": "https://xblagobot.t.me/"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "SIGN IN",
+          "href": "https://xblago.space/en/en_log/"
+        }
+      ],
+      "desktop": {
+        "width": 1360,
+        "scroll_width": 1360
+      },
+      "mobile_scroll_width": 390,
+      "forms": 0,
+      "errors": [],
+      "claims": {
+        "btc_peg": true,
+        "nft": false,
+        "investment": true
+      }
+    },
+    {
+      "url": "https://xblago.space/en/en_log/",
+      "status": 200,
+      "title": "BLAGO. Login",
+      "links": [
+        {
+          "text": "",
+          "href": "https://xblago.space/ru/ru_log/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "",
+          "href": "https://xblago.space/in/in_log/"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        },
+        {
+          "text": "@xBLAGObot",
+          "href": "https://xblagobot.t.me/"
+        },
+        {
+          "text": "@xBLAGObot",
+          "href": "https://xblagobot.t.me/"
+        },
+        {
+          "text": "BACK",
+          "href": "https://xblago.space/"
+        },
+        {
+          "text": "INFORMATION",
+          "href": "https://xblago.space/en/en_description/"
+        },
+        {
+          "text": "TOKEN",
+          "href": "https://xblago.space/en/en_investors/"
+        }
+      ],
+      "desktop": {
+        "width": 1360,
+        "scroll_width": 1360
+      },
+      "mobile_scroll_width": 390,
+      "forms": 0,
+      "errors": [],
+      "claims": {
+        "btc_peg": false,
+        "nft": false,
+        "investment": false
+      }
+    }
+  ]
+}

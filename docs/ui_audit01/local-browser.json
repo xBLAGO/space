@@ -1,0 +1,19 @@
+{
+  "scope": "localhost synthetic Web only; SDK stubbed, no Telegram authentication or physical devices",
+  "browser": "150.0.7871.125",
+  "checks": {
+    "web_login": true,
+    "chat_screen": true,
+    "needs_screen": true,
+    "resources_screen": true,
+    "analytics_screen": true,
+    "profile_screen": true,
+    "empty_history_no_greeting": true,
+    "cookie_session_reload": true,
+    "own_need_create": true,
+    "own_resource_create": true,
+    "mobile_no_horizontal_overflow": true,
+    "no_page_errors": true
+  },
+  "page_errors": []
+}
