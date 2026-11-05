@@ -1276,7 +1276,9 @@ class BlagoWebHandler(TelegramWebhookHandler):
                 configured = True
             except ApiError:
                 pass
+            from xblago.core.help_schema import enabled as help_enabled
             data = {'secure_identity': app.identity.enabled, 'passkeys': configured and app.identity.enabled}
+            if help_enabled():data['help']=True
             with app.store._connect() as db:
                 if db.execute("SELECT 1 FROM sqlite_master WHERE name='privacy_state'").fetchone():
                     data['privacy']=True
@@ -1318,7 +1320,27 @@ class BlagoWebHandler(TelegramWebhookHandler):
         if method != "GET" and not hmac.compare_digest(self.headers.get("X-CSRF-Token", ""), csrf):
             raise ApiError(403, "Invalid CSRF token")
 
-        if path.startswith('/api/v1/privacy/'):
+        if path.startswith('/api/v1/help/'):
+            from xblago.domain.help_service import HelpService
+            help_service=HelpService(app)
+            if method=='GET' and path=='/api/v1/help/code':self._json(help_service.code(token))
+            elif method=='GET' and path=='/api/v1/help/requests':self._json(help_service.feed(token))
+            elif method=='GET' and path.startswith('/api/v1/help/requests/'):
+                self._json(help_service.get(token,path.removeprefix('/api/v1/help/requests/')))
+            elif method=='POST' and path=='/api/v1/help/drafts':
+                body=self._body()
+                if set(body)!={'text','audience','key'}:raise ApiError(400,'Неверные поля черновика')
+                self._json(help_service.draft(token,**body),status=201)
+            elif method=='POST' and path=='/api/v1/help/prepare':
+                body=self._body()
+                if set(body)!={'rid','version','action','args'}:raise ApiError(400,'Неверные поля действия')
+                self._json(help_service.prepare(token,**body))
+            elif method=='POST' and path=='/api/v1/help/commit':
+                body=self._body()
+                if set(body)!={'challenge','confirmation'}:raise ApiError(400,'Неверные поля подтверждения')
+                self._json(help_service.commit(token,**body))
+            else:raise ApiError(404,'Help route unavailable')
+        elif path.startswith('/api/v1/privacy/'):
             from xblago.integrations.privacy import PrivacyService
             privacy = PrivacyService(app)
             if path=='/api/v1/privacy/export' and method=='POST':
@@ -1383,7 +1405,12 @@ class BlagoWebHandler(TelegramWebhookHandler):
             message = data.get("text")
             if not isinstance(message, str) or not 1 <= len(message.strip()) <= 4000:
                 raise ApiError(400, "Message must contain 1-4000 characters")
-            self._json({"reply": app.chat(uid, message.strip())})
+            reply=app.chat(uid,message.strip())
+            from xblago.domain.help_service import suggest_draft
+            from xblago.core.help_schema import enabled as help_enabled
+            payload={'reply':reply}
+            if help_enabled():payload['help_suggestion']=suggest_draft(message.strip())
+            self._json(payload)
         elif path == "/api/v1/memory" and method == "GET":
             self._json({
                 "facts": app.store.all_memory(uid),

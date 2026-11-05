@@ -1,0 +1,3245 @@
+{
+  "account_link_codes": {
+    "columns": [
+      [
+        "code_hash",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "expires_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "target_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "target_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "code_hash"
+      ]
+    ]
+  },
+  "activity_events": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "channel",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "event_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "event_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "occurred_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "event_id"
+      ]
+    ]
+  },
+  "auth_challenges": {
+    "columns": [
+      [
+        "binding_hash",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "challenge_hash",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "consumed_at",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "origin",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "purpose",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "rp_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "challenge_hash"
+      ]
+    ]
+  },
+  "blago_assets": {
+    "columns": [
+      [
+        "asset_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "management_status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "ownership_claim",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "title",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "use_permission",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "verification_status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "visibility",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_contribution_events": {
+    "columns": [
+      [
+        "amount_minor",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "contribution_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "contributor_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "currency",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "event_key",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "exchange_rate_at",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "exchange_rate_source",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "note",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "payment_request_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "recipient_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "xblago_estimate",
+        "REAL",
+        0,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "blago_payment_requests",
+        "payment_request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "contributor_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "recipient_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "event_key"
+      ],
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_fulfillment_events": {
+    "columns": [
+      [
+        "actor_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "event_key",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "event_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "evidence_digest",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "need_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "note",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "payment_request_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "status_after",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "blago_needs",
+        "need_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "blago_payment_requests",
+        "payment_request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "actor_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "event_key"
+      ],
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_needs": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        "'open'",
+        0
+      ],
+      [
+        "title",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "visibility",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_payment_request_offers": {
+    "columns": [
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "offered_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "payment_request_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "resource_offer_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "blago_payment_requests",
+        "payment_request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "blago_resource_offers",
+        "resource_offer_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "offered_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ],
+      [
+        "payment_request_id",
+        "offered_user_id"
+      ]
+    ]
+  },
+  "blago_payment_requests": {
+    "columns": [
+      [
+        "amount_minor",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "contribution_recorded",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "currency",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "executor_user_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "need_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "payment_purpose",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "payment_reference_digest",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "requester_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "risk_level",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "risk_reason",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "title",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "blago_needs",
+        "need_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "executor_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "requester_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_resource_offers": {
+    "columns": [
+      [
+        "availability_status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "constraints_json",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "currency",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "max_amount_minor",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "offer_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "title",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "visibility",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "blago_resources": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "title",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "visibility",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "channel_links": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "channel",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "channel_chat_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "channel_user_id",
+        "TEXT",
+        1,
+        null,
+        2
+      ],
+      [
+        "chat_type",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "first_name",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "last_name",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "username",
+        "TEXT",
+        0,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "channel",
+        "channel_user_id"
+      ]
+    ]
+  },
+  "consent_records": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "consent_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "decision",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "policy_version",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "purpose",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "recorded_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "consent_id"
+      ]
+    ]
+  },
+  "dialogue_turns": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "channel",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "chat_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "INTEGER",
+        0,
+        null,
+        1
+      ],
+      [
+        "role",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "text",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": []
+  },
+  "events": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "channel",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "error",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "external_update_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "INTEGER",
+        0,
+        null,
+        1
+      ],
+      [
+        "response_json",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "channel",
+        "external_update_id"
+      ]
+    ]
+  },
+  "help_audience": {
+    "columns": [
+      [
+        "member_id",
+        "TEXT",
+        1,
+        null,
+        2
+      ],
+      [
+        "request_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "help_requests",
+        "request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "member_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "request_id",
+        "member_id"
+      ]
+    ]
+  },
+  "help_challenges": {
+    "columns": [
+      [
+        "action",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "actor_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "args_json",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "receipt_json",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "request_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "token_hash",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "version",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "help_requests",
+        "request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "actor_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "token_hash"
+      ]
+    ]
+  },
+  "help_events": {
+    "columns": [
+      [
+        "action",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "actor_role",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "event_id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "occurred_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "request_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "state",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "help_requests",
+        "request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "event_id"
+      ],
+      [
+        "request_id",
+        "version"
+      ]
+    ]
+  },
+  "help_holds": {
+    "columns": [
+      [
+        "reason",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "target_tag",
+        "TEXT",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "target_tag"
+      ]
+    ]
+  },
+  "help_offers": {
+    "columns": [
+      [
+        "helper_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "note",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "request_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "help_requests",
+        "request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "helper_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ],
+      [
+        "request_id",
+        "helper_id"
+      ]
+    ]
+  },
+  "help_operations": {
+    "columns": [
+      [
+        "actor_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "body_hash",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "operation_key",
+        "TEXT",
+        1,
+        null,
+        2
+      ],
+      [
+        "request_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "help_requests",
+        "request_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "actor_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "actor_id",
+        "operation_key"
+      ]
+    ]
+  },
+  "help_requests": {
+    "columns": [
+      [
+        "author_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "head_tag",
+        "TEXT",
+        1,
+        "''",
+        0
+      ],
+      [
+        "helper_confirmed",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "owner_confirmed",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "selected_offer",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "state",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "text",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "author_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "help_schema_migrations": {
+    "columns": [
+      [
+        "checksum",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "TEXT",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "version"
+      ]
+    ]
+  },
+  "identity_recovery_state": {
+    "columns": [
+      [
+        "singleton",
+        "INTEGER",
+        0,
+        null,
+        1
+      ],
+      [
+        "telegram_resume_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": []
+  },
+  "identity_runtime_migrations": {
+    "columns": [
+      [
+        "checksum",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "version"
+      ]
+    ]
+  },
+  "identity_schema_migrations": {
+    "columns": [
+      [
+        "applied_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "checksum",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "version"
+      ]
+    ]
+  },
+  "idx_activity_user_time": {
+    "sql": "CREATE INDEX idx_activity_user_time ON activity_events(blago_user_id, occurred_at)",
+    "type": "index"
+  },
+  "idx_blago_assets_user": {
+    "sql": "CREATE INDEX idx_blago_assets_user ON blago_assets(blago_user_id)",
+    "type": "index"
+  },
+  "idx_blago_contribution_events_contributor": {
+    "sql": "CREATE INDEX idx_blago_contribution_events_contributor ON blago_contribution_events(contributor_user_id)",
+    "type": "index"
+  },
+  "idx_blago_fulfillment_events_request": {
+    "sql": "CREATE INDEX idx_blago_fulfillment_events_request ON blago_fulfillment_events(payment_request_id)",
+    "type": "index"
+  },
+  "idx_blago_needs_user": {
+    "sql": "CREATE INDEX idx_blago_needs_user ON blago_needs(blago_user_id)",
+    "type": "index"
+  },
+  "idx_blago_payment_request_offers_user": {
+    "sql": "CREATE INDEX idx_blago_payment_request_offers_user ON blago_payment_request_offers(offered_user_id)",
+    "type": "index"
+  },
+  "idx_blago_payment_requests_executor": {
+    "sql": "CREATE INDEX idx_blago_payment_requests_executor ON blago_payment_requests(executor_user_id)",
+    "type": "index"
+  },
+  "idx_blago_payment_requests_requester": {
+    "sql": "CREATE INDEX idx_blago_payment_requests_requester ON blago_payment_requests(requester_user_id)",
+    "type": "index"
+  },
+  "idx_blago_resource_offers_user": {
+    "sql": "CREATE INDEX idx_blago_resource_offers_user ON blago_resource_offers(blago_user_id)",
+    "type": "index"
+  },
+  "idx_blago_resources_user": {
+    "sql": "CREATE INDEX idx_blago_resources_user ON blago_resources(blago_user_id)",
+    "type": "index"
+  },
+  "idx_challenge_expiry": {
+    "sql": "CREATE INDEX idx_challenge_expiry ON auth_challenges(expires_at)",
+    "type": "index"
+  },
+  "idx_channel_links_user": {
+    "sql": "CREATE INDEX idx_channel_links_user\n                    ON channel_links(blago_user_id)",
+    "type": "index"
+  },
+  "idx_consent_user_time": {
+    "sql": "CREATE INDEX idx_consent_user_time ON consent_records(blago_user_id, recorded_at)",
+    "type": "index"
+  },
+  "idx_dialogue_turns_user_id": {
+    "sql": "CREATE INDEX idx_dialogue_turns_user_id\n                    ON dialogue_turns(blago_user_id, id)",
+    "type": "index"
+  },
+  "idx_passkey_user": {
+    "sql": "CREATE INDEX idx_passkey_user ON passkey_credentials(blago_user_id)",
+    "type": "index"
+  },
+  "idx_security_user_time": {
+    "sql": "CREATE INDEX idx_security_user_time ON security_signals(blago_user_id, occurred_at)",
+    "type": "index"
+  },
+  "idx_semantic_memory_user_key": {
+    "sql": "CREATE INDEX idx_semantic_memory_user_key\n                    ON semantic_memory(blago_user_id, memory_key, updated_at)",
+    "type": "index"
+  },
+  "idx_session_public_id": {
+    "sql": "CREATE UNIQUE INDEX idx_session_public_id ON web_sessions(public_id)",
+    "type": "index"
+  },
+  "idx_web_sessions_user": {
+    "sql": "CREATE INDEX idx_web_sessions_user ON web_sessions(blago_user_id)",
+    "type": "index"
+  },
+  "memory_facts": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "key",
+        "TEXT",
+        1,
+        null,
+        2
+      ],
+      [
+        "source_event_id",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "value_json",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "events",
+        "source_event_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "blago_user_id",
+        "key"
+      ]
+    ]
+  },
+  "migrations": {
+    "columns": [
+      [
+        "backup_path",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "migrated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "migration_key",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "source_path",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "migration_key"
+      ]
+    ]
+  },
+  "passkey_credentials": {
+    "columns": [
+      [
+        "backup_eligible",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "backup_state",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "credential_id",
+        "BLOB",
+        1,
+        null,
+        1
+      ],
+      [
+        "device_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "public_key_cose",
+        "BLOB",
+        1,
+        null,
+        0
+      ],
+      [
+        "revoked_at",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "sign_count",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "user_handle",
+        "BLOB",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "user_devices",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "user_devices",
+        "device_id",
+        "device_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "credential_id"
+      ]
+    ]
+  },
+  "pilot_cache_clear": {
+    "sql": "CREATE TRIGGER pilot_cache_clear BEFORE UPDATE OF response_json,error ON events\n        WHEN blago_replaying()=0 AND (OLD.response_json IS NOT NULL OR OLD.error IS NOT NULL)\n        AND NEW.response_json IS NULL AND NEW.error IS NULL BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),json_object(\n            'kind','response_cache','owner',blago_tag('user',OLD.blago_user_id),\n            'target',blago_tag('response_cache',OLD.channel,OLD.external_update_id),\n            'state','','recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "pilot_history_lineage": {
+    "sql": "CREATE TRIGGER pilot_history_lineage BEFORE UPDATE OF id,blago_user_id,created_at,role,text ON dialogue_turns\n        WHEN blago_replaying()=0 AND blago_tag('history',OLD.id,OLD.blago_user_id,OLD.created_at,OLD.role,OLD.text)<>blago_tag('history',NEW.id,NEW.blago_user_id,NEW.created_at,NEW.role,NEW.text) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),json_object(\n            'kind','history_lineage','owner',blago_tag('user',OLD.blago_user_id),\n            'target',blago_tag('history',OLD.id,OLD.blago_user_id,OLD.created_at,OLD.role,OLD.text),'state',blago_tag('history',NEW.id,NEW.blago_user_id,NEW.created_at,NEW.role,NEW.text),'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "pilot_memory_lineage": {
+    "sql": "CREATE TRIGGER pilot_memory_lineage BEFORE UPDATE OF blago_user_id,key,value_json,updated_at ON memory_facts\n        WHEN blago_replaying()=0 AND blago_tag('memory_legacy',OLD.blago_user_id,OLD.key,OLD.value_json,OLD.updated_at)<>blago_tag('memory_legacy',NEW.blago_user_id,NEW.key,NEW.value_json,NEW.updated_at) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),json_object(\n            'kind','memory_lineage','owner',blago_tag('user',OLD.blago_user_id),\n            'target',blago_tag('memory_legacy',OLD.blago_user_id,OLD.key,OLD.value_json,OLD.updated_at),'state',blago_tag('memory_legacy',NEW.blago_user_id,NEW.key,NEW.value_json,NEW.updated_at),'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "pilot_safety_state": {
+    "columns": [
+      [
+        "generation",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "lineage_start_seq",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "singleton",
+        "INTEGER",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": []
+  },
+  "pilot_schema_migrations": {
+    "columns": [
+      [
+        "checksum",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "version"
+      ]
+    ]
+  },
+  "privacy_alias_insert": {
+    "sql": "CREATE TRIGGER privacy_alias_insert AFTER INSERT ON privacy_aliases\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','alias','owner',blago_tag('user',NEW.source_uid),'target',blago_tag('user',NEW.target_uid),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_alias_move": {
+    "sql": "CREATE TRIGGER privacy_alias_move AFTER UPDATE OF target_uid ON privacy_aliases\n        WHEN blago_replaying()=0 AND (OLD.target_uid<>NEW.target_uid) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','alias','owner',blago_tag('user',NEW.source_uid),'target',blago_tag('user',NEW.target_uid),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_aliases": {
+    "columns": [
+      [
+        "source_uid",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "target_uid",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "source_uid",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "target_uid",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "source_uid"
+      ]
+    ]
+  },
+  "privacy_channel_delete": {
+    "sql": "CREATE TRIGGER privacy_channel_delete BEFORE DELETE ON channel_links\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','channel_revoke','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('channel',OLD.channel,OLD.channel_user_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_channel_insert": {
+    "sql": "CREATE TRIGGER privacy_channel_insert AFTER INSERT ON channel_links\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','channel_grant','owner',blago_tag('user',NEW.blago_user_id),'target',blago_tag('channel',NEW.channel,NEW.channel_user_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_channel_move": {
+    "sql": "CREATE TRIGGER privacy_channel_move BEFORE UPDATE OF blago_user_id ON channel_links\n        WHEN blago_replaying()=0 AND (OLD.blago_user_id<>NEW.blago_user_id) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','channel_revoke','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('channel',OLD.channel,OLD.channel_user_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_channel_moved": {
+    "sql": "CREATE TRIGGER privacy_channel_moved AFTER UPDATE OF blago_user_id ON channel_links\n        WHEN blago_replaying()=0 AND (OLD.blago_user_id<>NEW.blago_user_id) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','channel_grant','owner',blago_tag('user',NEW.blago_user_id),'target',blago_tag('channel',NEW.channel,NEW.channel_user_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_consent_change": {
+    "sql": "CREATE TRIGGER privacy_consent_change AFTER UPDATE OF decision ON consent_records\n        WHEN blago_replaying()=0 AND (OLD.decision<>NEW.decision AND NEW.decision='withdrawn') BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','consent_withdrawal','owner',blago_tag('user',NEW.blago_user_id),'target',blago_tag('consent',NEW.consent_id),'state',NEW.purpose,\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_consent_delete": {
+    "sql": "CREATE TRIGGER privacy_consent_delete BEFORE DELETE ON consent_records\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','consent_withdrawal','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('consent',OLD.consent_id),'state',OLD.purpose,\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_consent_withdrawal": {
+    "sql": "CREATE TRIGGER privacy_consent_withdrawal AFTER INSERT ON consent_records\n        WHEN blago_replaying()=0 AND (NEW.decision='withdrawn') BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','consent_withdrawal','owner',blago_tag('user',NEW.blago_user_id),'target',blago_tag('consent',NEW.consent_id),'state',NEW.purpose,\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_delete_challenges": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "challenge_hash",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "session_hash",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "challenge_hash"
+      ]
+    ]
+  },
+  "privacy_deleted_status": {
+    "sql": "CREATE TRIGGER privacy_deleted_status BEFORE UPDATE OF status ON users\n        WHEN blago_replaying()=0 AND OLD.status='deleted' AND NEW.status<>'deleted' BEGIN\n        SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_account_link_codes_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_account_link_codes_insert BEFORE INSERT ON account_link_codes\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.target_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_account_link_codes_update": {
+    "sql": "CREATE TRIGGER privacy_guard_account_link_codes_update BEFORE UPDATE ON account_link_codes\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.target_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_activity_events_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_activity_events_insert BEFORE INSERT ON activity_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_activity_events_update": {
+    "sql": "CREATE TRIGGER privacy_guard_activity_events_update BEFORE UPDATE ON activity_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_auth_challenges_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_auth_challenges_insert BEFORE INSERT ON auth_challenges\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_auth_challenges_update": {
+    "sql": "CREATE TRIGGER privacy_guard_auth_challenges_update BEFORE UPDATE ON auth_challenges\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_assets_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_assets_insert BEFORE INSERT ON blago_assets\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_assets_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_assets_update BEFORE UPDATE ON blago_assets\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_contribution_events_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_contribution_events_insert BEFORE INSERT ON blago_contribution_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.contributor_user_id AND status='deleted') OR EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.recipient_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_contribution_events_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_contribution_events_update BEFORE UPDATE ON blago_contribution_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.contributor_user_id AND status='deleted') OR EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.recipient_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_fulfillment_events_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_fulfillment_events_insert BEFORE INSERT ON blago_fulfillment_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.actor_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_fulfillment_events_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_fulfillment_events_update BEFORE UPDATE ON blago_fulfillment_events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.actor_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_needs_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_needs_insert BEFORE INSERT ON blago_needs\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_needs_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_needs_update BEFORE UPDATE ON blago_needs\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_payment_request_offers_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_payment_request_offers_insert BEFORE INSERT ON blago_payment_request_offers\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.offered_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_payment_request_offers_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_payment_request_offers_update BEFORE UPDATE ON blago_payment_request_offers\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.offered_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_payment_requests_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_payment_requests_insert BEFORE INSERT ON blago_payment_requests\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.requester_user_id AND status='deleted') OR EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.executor_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_payment_requests_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_payment_requests_update BEFORE UPDATE ON blago_payment_requests\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.requester_user_id AND status='deleted') OR EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.executor_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_resource_offers_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_resource_offers_insert BEFORE INSERT ON blago_resource_offers\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_resource_offers_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_resource_offers_update BEFORE UPDATE ON blago_resource_offers\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_resources_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_resources_insert BEFORE INSERT ON blago_resources\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_blago_resources_update": {
+    "sql": "CREATE TRIGGER privacy_guard_blago_resources_update BEFORE UPDATE ON blago_resources\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_channel_links_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_channel_links_insert BEFORE INSERT ON channel_links\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_channel_links_update": {
+    "sql": "CREATE TRIGGER privacy_guard_channel_links_update BEFORE UPDATE ON channel_links\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_consent_records_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_consent_records_insert BEFORE INSERT ON consent_records\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_consent_records_update": {
+    "sql": "CREATE TRIGGER privacy_guard_consent_records_update BEFORE UPDATE ON consent_records\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_dialogue_turns_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_dialogue_turns_insert BEFORE INSERT ON dialogue_turns\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_dialogue_turns_update": {
+    "sql": "CREATE TRIGGER privacy_guard_dialogue_turns_update BEFORE UPDATE ON dialogue_turns\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_events_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_events_insert BEFORE INSERT ON events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_events_update": {
+    "sql": "CREATE TRIGGER privacy_guard_events_update BEFORE UPDATE ON events\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_memory_facts_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_memory_facts_insert BEFORE INSERT ON memory_facts\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_memory_facts_update": {
+    "sql": "CREATE TRIGGER privacy_guard_memory_facts_update BEFORE UPDATE ON memory_facts\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_migrations_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_migrations_insert BEFORE INSERT ON migrations\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_migrations_update": {
+    "sql": "CREATE TRIGGER privacy_guard_migrations_update BEFORE UPDATE ON migrations\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_passkey_credentials_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_passkey_credentials_insert BEFORE INSERT ON passkey_credentials\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_passkey_credentials_update": {
+    "sql": "CREATE TRIGGER privacy_guard_passkey_credentials_update BEFORE UPDATE ON passkey_credentials\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_privacy_delete_challenges_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_privacy_delete_challenges_insert BEFORE INSERT ON privacy_delete_challenges\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_privacy_delete_challenges_update": {
+    "sql": "CREATE TRIGGER privacy_guard_privacy_delete_challenges_update BEFORE UPDATE ON privacy_delete_challenges\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_profiles_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_profiles_insert BEFORE INSERT ON profiles\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_profiles_update": {
+    "sql": "CREATE TRIGGER privacy_guard_profiles_update BEFORE UPDATE ON profiles\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_security_signals_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_security_signals_insert BEFORE INSERT ON security_signals\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_security_signals_update": {
+    "sql": "CREATE TRIGGER privacy_guard_security_signals_update BEFORE UPDATE ON security_signals\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_semantic_memory_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_semantic_memory_insert BEFORE INSERT ON semantic_memory\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_semantic_memory_update": {
+    "sql": "CREATE TRIGGER privacy_guard_semantic_memory_update BEFORE UPDATE ON semantic_memory\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_telegram_proofs_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_telegram_proofs_insert BEFORE INSERT ON telegram_proofs\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_telegram_proofs_update": {
+    "sql": "CREATE TRIGGER privacy_guard_telegram_proofs_update BEFORE UPDATE ON telegram_proofs\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_user_devices_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_user_devices_insert BEFORE INSERT ON user_devices\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_user_devices_update": {
+    "sql": "CREATE TRIGGER privacy_guard_user_devices_update BEFORE UPDATE ON user_devices\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_web_credentials_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_web_credentials_insert BEFORE INSERT ON web_credentials\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_web_credentials_update": {
+    "sql": "CREATE TRIGGER privacy_guard_web_credentials_update BEFORE UPDATE ON web_credentials\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_web_sessions_insert": {
+    "sql": "CREATE TRIGGER privacy_guard_web_sessions_insert BEFORE INSERT ON web_sessions\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_guard_web_sessions_update": {
+    "sql": "CREATE TRIGGER privacy_guard_web_sessions_update BEFORE UPDATE ON web_sessions\n            WHEN blago_replaying()=0 AND (EXISTS(SELECT 1 FROM users WHERE blago_user_id=NEW.blago_user_id AND status='deleted')) BEGIN\n            SELECT RAISE(ABORT,'Account deleted; stale write rejected'); END",
+    "type": "trigger"
+  },
+  "privacy_history_delete": {
+    "sql": "CREATE TRIGGER privacy_history_delete BEFORE DELETE ON dialogue_turns\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','history','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('history',OLD.id,OLD.blago_user_id,OLD.created_at,OLD.role,OLD.text),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_keep_tombstone": {
+    "sql": "CREATE TRIGGER privacy_keep_tombstone BEFORE DELETE ON users\n        WHEN blago_replaying()=0 AND OLD.status='deleted' BEGIN\n        SELECT RAISE(ABORT,'Deletion tombstone cannot be removed while backups may exist'); END",
+    "type": "trigger"
+  },
+  "privacy_memory_delete": {
+    "sql": "CREATE TRIGGER privacy_memory_delete BEFORE DELETE ON memory_facts\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','memory_legacy','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('memory_legacy',OLD.blago_user_id,OLD.key,OLD.value_json,OLD.updated_at),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_outbox": {
+    "columns": [
+      [
+        "event_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "event_id"
+      ]
+    ]
+  },
+  "privacy_passkey_delete": {
+    "sql": "CREATE TRIGGER privacy_passkey_delete BEFORE DELETE ON passkey_credentials\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','passkey','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('passkey',OLD.credential_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_passkey_revoke": {
+    "sql": "CREATE TRIGGER privacy_passkey_revoke AFTER UPDATE OF revoked_at ON passkey_credentials\n        WHEN blago_replaying()=0 AND (OLD.revoked_at IS NULL AND NEW.revoked_at IS NOT NULL) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','passkey','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('passkey',OLD.credential_id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_password_change": {
+    "sql": "CREATE TRIGGER privacy_password_change BEFORE UPDATE OF password_hash,salt ON web_credentials\n        WHEN blago_replaying()=0 AND (OLD.password_hash<>NEW.password_hash OR OLD.salt<>NEW.salt) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','password','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('password',OLD.blago_user_id,OLD.password_hash,OLD.salt),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_password_delete": {
+    "sql": "CREATE TRIGGER privacy_password_delete BEFORE DELETE ON web_credentials\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','password','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('password',OLD.blago_user_id,OLD.password_hash,OLD.salt),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_schema_migrations": {
+    "columns": [
+      [
+        "checksum",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "version",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "version"
+      ]
+    ]
+  },
+  "privacy_semantic_delete": {
+    "sql": "CREATE TRIGGER privacy_semantic_delete BEFORE DELETE ON semantic_memory\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','memory_semantic','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('memory_semantic',OLD.id),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_session_delete": {
+    "sql": "CREATE TRIGGER privacy_session_delete BEFORE DELETE ON web_sessions\n        WHEN blago_replaying()=0 AND (1) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','session','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('session',OLD.session_hash),'state','',\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "privacy_state": {
+    "columns": [
+      [
+        "applied_head",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "applied_seq",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "journal_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "singleton",
+        "INTEGER",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": []
+  },
+  "privacy_user_status": {
+    "sql": "CREATE TRIGGER privacy_user_status AFTER UPDATE OF status ON users\n        WHEN blago_replaying()=0 AND (OLD.status<>NEW.status AND NEW.status IN ('merged','blocked','deleted')) BEGIN\n        INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),\n            json_object('kind','user_status','owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('user',OLD.blago_user_id),'state',NEW.status,\n                        'recorded_at',CAST(strftime('%s','now') AS INTEGER))); END",
+    "type": "trigger"
+  },
+  "profiles": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "display_name",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "language",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "timezone",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "blago_user_id"
+      ]
+    ]
+  },
+  "security_signals": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "occurred_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "resolution",
+        "TEXT",
+        1,
+        "'pending'",
+        0
+      ],
+      [
+        "signal_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "signal_type",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "signal_id"
+      ]
+    ]
+  },
+  "semantic_memory": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "category",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "confidence",
+        "REAL",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "memory_key",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "source",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "supersedes_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "updated_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "value_json",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "semantic_memory",
+        "supersedes_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "id"
+      ]
+    ]
+  },
+  "telegram_exchanges": {
+    "columns": [
+      [
+        "binding_hash",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "challenge_hash",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "consumed_at",
+        "INTEGER",
+        0,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "challenge_hash"
+      ]
+    ]
+  },
+  "telegram_proofs": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "proof_hash",
+        "TEXT",
+        1,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "proof_hash"
+      ]
+    ]
+  },
+  "user_devices": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        "device_id",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "label",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "revoked_at",
+        "INTEGER",
+        0,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "blago_user_id",
+        "device_id"
+      ],
+      [
+        "device_id"
+      ]
+    ]
+  },
+  "users": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        0,
+        null,
+        1
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "status",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "blago_user_id"
+      ]
+    ]
+  },
+  "web_credentials": {
+    "columns": [
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "password_hash",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "salt",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "username",
+        "TEXT",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "blago_user_id"
+      ],
+      [
+        "username"
+      ]
+    ]
+  },
+  "web_sessions": {
+    "columns": [
+      [
+        "auth_method",
+        "TEXT",
+        1,
+        "'legacy'",
+        0
+      ],
+      [
+        "authenticated_at",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "blago_user_id",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "created_at",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "csrf",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "expires_at",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        "last_seen_at",
+        "INTEGER",
+        1,
+        "0",
+        0
+      ],
+      [
+        "public_id",
+        "TEXT",
+        0,
+        null,
+        0
+      ],
+      [
+        "session_hash",
+        "TEXT",
+        0,
+        null,
+        1
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "users",
+        "blago_user_id",
+        "blago_user_id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "public_id"
+      ],
+      [
+        "session_hash"
+      ]
+    ]
+  },
+  "webauthn_pending": {
+    "columns": [
+      [
+        "challenge_hash",
+        "TEXT",
+        1,
+        null,
+        1
+      ],
+      [
+        "user_handle",
+        "BLOB",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "auth_challenges",
+        "challenge_hash",
+        "challenge_hash",
+        "NO ACTION",
+        "CASCADE",
+        "NONE"
+      ]
+    ],
+    "type": "table",
+    "unique_indexes": [
+      [
+        "challenge_hash"
+      ]
+    ]
+  }
+}

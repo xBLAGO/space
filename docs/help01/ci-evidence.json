@@ -1,0 +1,31 @@
+{
+  "format": "help01-ci-evidence-1",
+  "base_runtime_sha": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+  "runtime_source_sha": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+  "source_recipe_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
+  "run_url": "https://github.com/xBLAGO/space/actions/runs/42083896833",
+  "conclusion": "success",
+  "event": "push",
+  "tests_job": 127443770819,
+  "docker_job": 127443770191,
+  "tests": {
+    "passed": 340,
+    "seconds": 41.336
+  },
+  "browser": "Web-only; two contexts; external Telegram SDK stubbed; no actual WebView claim",
+  "docker_image_id": "sha256:8991419f1a8561c29b29a4498d3eb7751e7ad1bb4a02758df604ce5db5ec7f4a",
+  "artifact": "https://github.com/xBLAGO/space/actions/runs/42083896833/artifacts/13441647911",
+  "checks": {
+    "prior_315_regression_tests": true,
+    "help_25_security_recovery_tests": true,
+    "source_migration_schema_dependency_manifests": true,
+    "chrome_virtual_webauthn": true,
+    "help_browser_mutual_completion_withdrawal_inert_text": true,
+    "docker_help_completed_cycle": true,
+    "zero_financial_operations": true,
+    "integrity_and_foreign_keys": true
+  },
+  "production_access": false,
+  "deployment_executed": false,
+  "real_pilot": "NO-GO"
+}

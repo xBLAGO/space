@@ -131,6 +131,9 @@ class PrivacyService:
                     for key in ('payment_reference_digest','evidence_digest'):
                         row.pop(key,None)
                 tables[table]=records
+            from xblago.domain.help_service import personal_export
+            from xblago.core.help_schema import present
+            if present(db):tables['help']=[take(row) for member in family for row in personal_export(db,member)]
             tags={control.journal.tag('user',member) for member in family}
             changes=[]
             for row in control.rows:
