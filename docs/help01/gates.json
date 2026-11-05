@@ -1,0 +1,96 @@
+{
+  "format": "blago-help01-gates-1",
+  "mode": "synthetic Help01 only",
+  "real_pilot": "NO-GO",
+  "next_development": "GO for further isolated Help/recovery/usability work",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "evidence": "PASS: frozen Help source/migration/schema/installed dependencies, 340 CI tests, Docker image/cycle; production approval UNKNOWN",
+      "scope": "Synthetic Help01 source/CI only; production approval UNKNOWN",
+      "production_release_approval": "UNKNOWN",
+      "production_image_promotion": "UNKNOWN"
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "evidence": "Candidate code has no push/pull_request deployment trigger; explicit enabled main SHA + DEPLOY + environment boundary. Protection/reviewer configuration UNKNOWN; deployed main unchanged",
+      "scope": "Candidate workflow code only; no main/deployment change",
+      "environment_protection_configuration": "UNKNOWN",
+      "current_main_deployment_policy": "UNCHANGED: unsafe auto-push workflow is not altered until a separately authorized merge"
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "evidence": "Local verified patched SQLite PASS; actual pilot host/fsync/WAL/storage not qualified"
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "evidence": "Synthetic journal/witness crash and recovery PASS; no independent operator/failure-domain qualification"
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "evidence": "Historical baseline/legacy merges and economic retention/delete policy not approved",
+      "help01_subscope": "Synthetic deletion/anonymization/old-backup denial PASS; approved real retention policy UNKNOWN"
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "evidence": "Regression + Chrome virtual WebAuthn PASS; actual Telegram/iOS/Android/physical device acceptance not executed"
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "evidence": "Provider failure/repair regression PASS; live provider disabled by this launcher"
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "evidence": "Two fresh-auth actors: approved publication, offer/accept, mutual completion; dispute/withdraw/recovery negatives; independent real-user acceptance UNKNOWN",
+      "scope": "Synthetic Help01 only"
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "evidence": "Tested isolation/CSRF/credentials negatives PASS; independent review of final real-user scope remains open"
+    },
+    {
+      "id": "G09",
+      "status": "UNKNOWN",
+      "evidence": "Current global process-local conversation lock retained; worker topology/load qualification open"
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "evidence": "Operational incident/support/stop/onboarding drill for real hosting not executed"
+    },
+    {
+      "id": "G11",
+      "status": "UNKNOWN",
+      "evidence": "Synthetic rehearsal only; no approved actual-user release manifest or operational sign-off"
+    }
+  ],
+  "deployment_executed": false,
+  "production_access": false,
+  "source_candidate_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/42083896833",
+  "help01": {
+    "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+    "migration": "foundation_help_001",
+    "real_participants": false,
+    "actual_telegram_webview": "UNKNOWN",
+    "independent_security_review": "UNKNOWN",
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42083896833",
+    "source_recipe_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
+    "runtime_source_sha": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+    "ci_status": "PASS",
+    "tests_passed": 340,
+    "docker_help_cycle": "PASS",
+    "real_user_release": "NO-GO"
+  },
+  "base_gate_document": "../integration01/gates.json",
+  "base_gate_sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737"
+}

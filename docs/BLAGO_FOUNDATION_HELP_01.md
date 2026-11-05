@@ -230,13 +230,16 @@ Actual ephemeral image ID:
 [Public artifact](https://github.com/xBLAGO/space/actions/runs/42083896833/artifacts/13441647911)
 и [CI evidence](help01/ci-evidence.json); image не публиковался в production.
 
-Следующий evidence-only commit согласует только gates metadata с documentation
-HEAD #19; ни runtime-base d7f619a, ни tested source files не заменяются на 837b2bf.
+Help gates оформлены отдельным versioned overlay поверх exact документа gates
+из #19: исходный Integration01 report сохраняется, новое G07 synthetic PASS
+зафиксировано в docs/help01/gates.json. Это устраняет пересечение документационных
+изменений без Git merge и без принятия другого runtime. Evidence-only commits
+согласуют только metadata с documentation HEAD #19; ни runtime-base d7f619a, ни tested source files не заменяются на 837b2bf.
 Final HEAD CI проверяется отдельно в PR. Ни одно production испытание не заявлено.
 
 ## 8. Gates, новые риски и решение
 
-[Machine-readable gates](integration01/gates.json) сохраняют NO-GO real pilot.
+[Machine-readable Help gates](help01/gates.json) сохраняют NO-GO real pilot.
 G07 подтверждается **только для synthetic Help scope**. G04 Help privacy/recovery
 проверены в tests; legacy economic retention/policy approval остаётся UNKNOWN.
 G05 Web-only checks не закрывают physical devices/WebView. G02/G03 external storage,

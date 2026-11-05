@@ -1,8 +1,8 @@
 {
   "format": "blago-integration-gates-01",
-  "mode": "synthetic Help01 only",
+  "mode": "synthetic-only",
   "real_pilot": "NO-GO",
-  "next_development": "GO for further isolated Help/recovery/usability work",
+  "next_development": "GO only for isolated Foundation Help 01",
   "gates": [
     {
       "id": "G00",
@@ -10,8 +10,7 @@
       "evidence": "315 tests, immutable manifest check, ancestry/tree/installed-library attestation, browser and Docker jobs PASS",
       "scope": "Synthetic candidate source/dependency/schema/migration provenance and CI image only",
       "production_release_approval": "UNKNOWN",
-      "production_image_promotion": "UNKNOWN",
-      "help01_subscope": "PASS: frozen Help source/migration/schema/installed dependencies, 340 CI tests, Docker image/cycle; production approval UNKNOWN"
+      "production_image_promotion": "UNKNOWN"
     },
     {
       "id": "G01",
@@ -34,8 +33,7 @@
     {
       "id": "G04",
       "status": "UNKNOWN",
-      "evidence": "Historical baseline/legacy merges and economic retention/delete policy not approved",
-      "help01_subscope": "Synthetic deletion/anonymization/old-backup denial PASS; approved real retention policy UNKNOWN"
+      "evidence": "Historical baseline/legacy merges and economic retention/delete policy not approved"
     },
     {
       "id": "G05",
@@ -49,9 +47,8 @@
     },
     {
       "id": "G07",
-      "status": "PASS",
-      "evidence": "Two fresh-auth actors: approved publication, offer/accept, mutual completion; dispute/withdraw/recovery negatives; independent real-user acceptance UNKNOWN",
-      "scope": "Synthetic Help01 only"
+      "status": "FAIL",
+      "evidence": "Foundation Help 01 is interface only; no cross-person help implementation"
     },
     {
       "id": "G08",
@@ -77,19 +74,5 @@
   "deployment_executed": false,
   "production_access": false,
   "source_candidate_sha": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
-  "source_ci": "https://github.com/xBLAGO/space/actions/runs/41783310506",
-  "help01": {
-    "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
-    "migration": "foundation_help_001",
-    "real_participants": false,
-    "actual_telegram_webview": "UNKNOWN",
-    "independent_security_review": "UNKNOWN",
-    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42083896833",
-    "source_recipe_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
-    "runtime_source_sha": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
-    "ci_status": "PASS",
-    "tests_passed": 340,
-    "docker_help_cycle": "PASS",
-    "real_user_release": "NO-GO"
-  }
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/41783310506"
 }
