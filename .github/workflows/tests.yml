@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -52,6 +52,10 @@ jobs:
         run: PYTHONPATH=.:src python -m tools.help_browser_check --chrome "$(command -v google-chrome)" --output "$RUNNER_TEMP/help-browser"
       - name: Help 01 completed synthetic demonstration
         run: PYTHONPATH=.:src python -m tools.help_demo --output "$RUNNER_TEMP/help-demo.json"
+      - name: Help 01.1 synthetic Mini App and mobile emulation (not physical devices)
+        run: PYTHONPATH=.:src python -m tools.help_mobile_check --chrome "$(command -v google-chrome)" --output "$RUNNER_TEMP/help-mobile"
+      - name: Record multiworker privacy blocker (audit result, not pilot approval)
+        run: PYTHONPATH=.:src python -m tools.help_worker_probe --output "$RUNNER_TEMP/help-worker-probe.json"
       - uses: actions/upload-artifact@v4
         with:
           name: pilot-browser-evidence
@@ -60,6 +64,8 @@ jobs:
             ${{ runner.temp }}/integration-evidence.json
             ${{ runner.temp }}/help-browser
             ${{ runner.temp }}/help-demo.json
+            ${{ runner.temp }}/help-mobile
+            ${{ runner.temp }}/help-worker-probe.json
 
   docker:
     runs-on: ubuntu-latest
@@ -260,3 +266,26 @@ jobs:
         run: |
           docker run --rm -v "$PWD/tools:/app/tools:ro" --entrypoint python \
             xblago-space:${{ github.sha }} -m tools.help_demo --output /tmp/help-demo.json
+      - name: Docker Help 01.1 disposable lab parity smoke (no network)
+        run: |
+          docker run --rm --network none -i -v "$PWD/tools:/app/tools:ro" \
+            --entrypoint python xblago-space:${{ github.sha }} - <<'PY'
+          import tempfile
+          from pathlib import Path
+          from unittest.mock import patch
+          import os
+          from tools.help_readiness_lab import initialize, configuration
+          from xblago.core.integration import preflight
+          from xblago.core.sqlite_safety import require_safe_sqlite
+          with tempfile.TemporaryDirectory() as directory:
+              root = Path(directory)/'synthetic'
+              initialize(root)
+              with patch.dict(os.environ, configuration(root)):
+                  require_safe_sqlite()
+                  with preflight(root/'app/blago.sqlite3')._connect() as db:
+                      assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+                      assert db.execute('PRAGMA foreign_key_check').fetchall() == []
+                      assert db.execute('PRAGMA journal_mode').fetchone()[0] == 'wal'
+                      assert db.execute('PRAGMA synchronous').fetchone()[0] == 2
+              print('Disposable nonfinancial Help lab: PASS; independent custody UNKNOWN')
+          PY

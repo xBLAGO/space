@@ -1,0 +1,8 @@
+{
+  "format": "blago-help-test-provider-1",
+  "status": "NOT EXECUTED",
+  "reason": "Explicit test token, model and synthetic-only approval not supplied",
+  "production_credentials_read": false,
+  "requests": 0,
+  "real_pilot": "NO-GO"
+}

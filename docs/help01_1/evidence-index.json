@@ -1,0 +1,19 @@
+{
+  "format": "help011-evidence-index-1",
+  "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+  "sha256": {
+    "README.md": "ad9e55f91688c80c1a425c41d8480ada0465715a5995320a62b1d5f402811cf0",
+    "RUNBOOK.md": "a5206f69eb00f4e3111b407528bcf1b96a449d43d51c8ba6dbabc70a1f47d599",
+    "browser-results.json": "c92df2a59f6d0b0a28eb718a049bd8708b010c6ae7cac7234eb471362122c942",
+    "candidate-identity.json": "bff80b8e2fddecae4d23be98ccdfdf4c440ba19413bc522d31b56a1233714077",
+    "ci-evidence.json": "804fae3150ebf975692f9d85a0a9e1d4242eaec25a0e414cf4a4a0891736141f",
+    "gates.json": "8d286bd4459e33462324f4016aef83f61f245c501bb325cdf3204017fa939a50",
+    "local-stand.json": "6ccda7b1bdaf7057cbbe105945726989e62681292e86455e0fc0d79eb9dafb3c",
+    "mobile-results.json": "cea114ce431adddebc5a92898fe6792b5eef69f5e2e86625c2c8a4ac073ee437",
+    "provider-results.json": "d8498074bf754e891a11c693e6ba6161668a174333c259996e512611204feb09",
+    "synthetic-mini-app-mobile.png": "a688b193fd9983ebb930ff77328d2cf3ab641f00fb48e70b38f001718a968cae",
+    "test-results.json": "704a94987d51669cb12dd0d44905b1301453e154e69fed4b6ed72b1af03d8673",
+    "worker-probe-ci.json": "a6ece13508ee68d49952927bd467a2d9cce41e739b8bca3f2276a2ced868b28c",
+    "worker-probe.json": "fd30d6b9b186199c5d653380566f1f7f74fc652b2875cfbb1a0020db112cac1b"
+  }
+}

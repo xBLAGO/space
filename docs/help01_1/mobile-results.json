@@ -1,0 +1,24 @@
+{
+  "format": "blago-help-mobile-1",
+  "scope": "Chrome touch/mobile emulation with synthetic SDK and HMAC; not Telegram",
+  "browser": "150.0.7871.125",
+  "checks": {
+    "synthetic_telegram_hmac_exchange": true,
+    "reopen_preserves_identity": true,
+    "consumed_exchange_replay_denied": true,
+    "conversation_does_not_create_request": true,
+    "mobile_private_draft": true,
+    "preview_is_not_publication": true,
+    "explicit_publication_to_audience": true,
+    "mobile_no_horizontal_overflow": true,
+    "offline_no_private_api_cache": true,
+    "invalid_initdata_no_session": true,
+    "no_page_errors": true
+  },
+  "page_errors": [],
+  "physical_ios_telegram": "NOT EXECUTED",
+  "physical_android_telegram": "NOT EXECUTED",
+  "physical_passkeys": "NOT EXECUTED",
+  "production_access": false,
+  "real_pilot": "NO-GO"
+}

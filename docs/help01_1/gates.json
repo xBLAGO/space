@@ -1,0 +1,120 @@
+{
+  "format": "blago-help011-gates-1",
+  "mode": "synthetic Help01.1 only",
+  "real_pilot": "NO-GO",
+  "next_development": "GO for isolated blocker remediation only",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "evidence": "356 CI tests + Docker build/library/cycle/lab PASS on pinned source; ci-evidence.json; no actual-user release approval",
+      "scope": "Synthetic Help01.1 source/CI only",
+      "production_release_approval": "UNKNOWN",
+      "production_image_promotion": "UNKNOWN",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "evidence": "Deployment workflow unchanged; tests-only workflow expanded; no production write/deploy/merge. Environment governance remains UNKNOWN",
+      "scope": "Candidate workflow code only; no main/deployment change",
+      "environment_protection_configuration": "UNKNOWN",
+      "current_main_deployment_policy": "UNCHANGED: unsafe auto-push workflow is not altered until a separately authorized merge",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "evidence": "local-stand.json and CI prove patched library, WAL/FULL/integrity in synthetic environments; actual HF/pilot storage/fsync UNKNOWN",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "evidence": "test-results.json: authenticated encrypted DR, retained witness-copy and old app backup negatives PASS; independent off-host/operator custody NOT EXECUTED",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "evidence": "Deletion/scrub/TTL negatives PASS; real retention policy/sign-off and metadata scope not approved; Help plaintext automatic TTL not implemented",
+      "help01_subscope": "Synthetic deletion/anonymization/old-backup denial PASS; approved real retention policy UNKNOWN",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "evidence": "browser-results.json 11/11, mobile-results.json 11/11 synthetic; physical Telegram iOS/Android/passkeys NOT EXECUTED",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "evidence": "provider-results.json: NOT EXECUTED, zero requests, no explicit approved test token/model; production credentials not read",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "evidence": "Synthetic desktop full Help lifecycle and 340 baseline regression retained; actual-user acceptance remains UNKNOWN",
+      "scope": "Synthetic Help01.1 only",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "evidence": "Same-author security review and IDOR/CSRF/replay/race/deletion/retention tests; no independent security reviewer. Aggregate differencing broader review pending",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G09",
+      "status": "FAIL",
+      "evidence": "worker-probe.json and worker-probe-ci.json: actual two-process stale LLM context written to history after memory delete; process-local conversation_lock insufficient",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "evidence": "Documented 3–5 volunteer admission/stop/rollback/deletion plan only; operational drill NOT EXECUTED",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    },
+    {
+      "id": "G11",
+      "status": "FAIL",
+      "evidence": "Integration preflight and HelpService still intentionally synthetic/local-only. No approved real-user runtime, release manifest or operational sign-off",
+      "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b"
+    }
+  ],
+  "deployment_executed": false,
+  "production_access": false,
+  "source_candidate_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/42172372930",
+  "help01": {
+    "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+    "migration": "foundation_help_001",
+    "real_participants": false,
+    "actual_telegram_webview": "UNKNOWN",
+    "independent_security_review": "UNKNOWN",
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42083896833",
+    "source_recipe_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
+    "runtime_source_sha": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+    "ci_status": "PASS",
+    "tests_passed": 340,
+    "docker_help_cycle": "PASS",
+    "real_user_release": "NO-GO"
+  },
+  "base_gate_document": "../help01/gates.json",
+  "base_gate_sha": "417e12be82e0b381d5251e12191a25d1c10921f4",
+  "help01_1": {
+    "runtime_source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+    "baseline_help_runtime": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+    "ci_status": "PASS",
+    "tests_passed": 356,
+    "docker": "PASS",
+    "mobile_synthetic": "PASS",
+    "physical_devices": "NOT EXECUTED",
+    "live_provider": "NOT EXECUTED",
+    "worker_privacy": "FAIL",
+    "actual_user_admission": "DENIED"
+  }
+}

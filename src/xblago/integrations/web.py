@@ -605,7 +605,28 @@ class WebApp:
             raise ApiError(404, "Not found")
         return f"blago_{kind}"
 
-    def analytics(self, uid: str, community: bool = False) -> dict[str, int]:
+    def analytics(self, uid: str, community: bool = False) -> dict[str, int | None]:
+        from xblago.core.integration import enabled as integration_enabled
+        if integration_enabled():
+            # The synthetic/nonfinancial surface must not expose legacy finance
+            # through an otherwise allowed analytics route. UI hiding is not ACL.
+            with self.store._locked_transaction() as db:
+                if community:
+                    cohort = db.execute("SELECT COUNT(*) FROM users WHERE status='active'").fetchone()[0]
+                    result = {"participants": cohort if cohort >= 5 else None}
+                    for kind in ('needs', 'resources'):
+                        count, contributors = db.execute(
+                            f"SELECT COUNT(*),COUNT(DISTINCT r.blago_user_id) FROM blago_{kind} r "
+                            "JOIN users u USING(blago_user_id) WHERE r.visibility='community' AND u.status='active'"
+                        ).fetchone()
+                        result['published_' + kind] = count if contributors >= 5 else None
+                    return result
+                return {
+                    "needs": db.execute("SELECT COUNT(*) FROM blago_needs WHERE blago_user_id=?", (uid,)).fetchone()[0],
+                    "open_needs": db.execute("SELECT COUNT(*) FROM blago_needs WHERE blago_user_id=? AND status='open'", (uid,)).fetchone()[0],
+                    "resources": db.execute("SELECT COUNT(*) FROM blago_resources WHERE blago_user_id=?", (uid,)).fetchone()[0],
+                    "memory_facts": db.execute("SELECT COUNT(*) FROM memory_facts WHERE blago_user_id=?", (uid,)).fetchone()[0],
+                }
         with self.store._connect() as db:
             if community:
                 return {
