@@ -1,0 +1,11 @@
+{
+  "format": "blago-help-worker-probe-1",
+  "scope": "two actual processes, synthetic provider and data",
+  "context_loaded": true,
+  "delete_completed_before_generation_release": true,
+  "stale_context_written_after_delete": true,
+  "status": "FAIL",
+  "finding": "Process-local conversation locks do not serialize memory deletion against another worker",
+  "real_pilot": "NO-GO",
+  "production_access": false
+}

@@ -1,0 +1,113 @@
+{
+  "format": "help011-tests-1",
+  "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+  "full_local": {
+    "passed": 355,
+    "tests": 355,
+    "seconds": 208.119,
+    "scope": "340 baseline + 15 first new tests; before final extra WAL case",
+    "log_sha256": "cb240a67a6450cfeb39aecf47c386e6ac40b7b7266b9781513f4c43bbf5b4bc1"
+  },
+  "focused_final": {
+    "passed": 16,
+    "tests": 16,
+    "seconds": 43.135,
+    "log_sha256": "2681a273e82cf1bcd4e98280d1ebc4745685bb0d14d1afbb1bdc6ef004818400",
+    "cases": [
+      {
+        "test": "test_DR_новый_экземпляр_повторяет_удаление_памяти_и_отзыв",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_witness_недоступен_нет_чтения_или_успешной_записи",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_авария_до_journal_откатывает_WAL",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_авария_после_SQL_commit_потерянный_ACK_не_повторяет_событие",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_аккаунт_удалён_до_commit_нет_публикации",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_аналитика_не_возвращает_финансы_и_малую_группу",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_истёкший_preview_очищается_без_удаления_истории",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_копия_без_живого_WAL_не_восстанавливает_публикацию",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_отозванная_сессия_не_исполняет_подтверждение",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_повтор_просроченной_квитанции_не_даёт_новых_прав",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_подмена_журнала_и_состояния_не_исправляется_автоматически",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_полный_диск_при_fsync_не_даёт_ACK",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_потеря_ключа_не_создаёт_новый_journal",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_пять_аккаунтов_не_раскрывают_единственного_автора",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_старый_DR_и_потерянный_witness_не_выдают_права",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_три_процесса_повторяют_одно_подтверждение",
+        "expected": "guarded scenario assertions; see report recovery/security matrix",
+        "actual": "PASS"
+      }
+    ]
+  },
+  "final_full_ci": {
+    "passed": 356,
+    "tests": 356,
+    "seconds": 47.824,
+    "evidence": "ci-evidence.json"
+  },
+  "desktop_browser_checks": 11,
+  "mobile_emulation_checks": 11,
+  "real_devices": "NOT EXECUTED",
+  "live_provider": "NOT EXECUTED",
+  "local_docker": "NOT EXECUTED: CLI unavailable",
+  "ci_docker": "PASS",
+  "multiworker_chat_delete": "FAIL, independently reproduced by two-process probe locally and in CI",
+  "real_pilot": "NO-GO"
+}
