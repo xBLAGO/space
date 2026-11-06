@@ -1,0 +1,22 @@
+# Local only. Three logical volumes are NOT independent hosts or IAM domains.
+services:
+  lab:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    entrypoint: ["python", "-m", "tools.help_readiness_lab"]
+    command: ["serve", "--root", "/lab/instance", "--bind", "0.0.0.0", "--port", "7860"]
+    ports: ["127.0.0.1:17860:7860"]
+    volumes:
+      - ../../tools:/app/tools:ro
+      - application:/lab
+      - control:/control
+      - witness:/witness
+    networks: [isolated]
+networks:
+  isolated:
+    internal: true
+volumes:
+  application:
+  control:
+  witness:
