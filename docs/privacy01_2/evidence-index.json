@@ -1,0 +1,21 @@
+{
+  "format": "privacy012-evidence-index-1",
+  "before_source": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+  "source": "47af53e0052a2f67efbef9108c3987b2439efc04",
+  "sha256": {
+    "README.md": "e592bf78146c74aca7e164c00092d99bebad814be18f1f207de2e9eacb13e782",
+    "RUNBOOK.md": "9bea0cac5e1bcfe70fd2dc1a693d30b27c98ed87ab305a4b854e50426ed84d51",
+    "THREAT_MODEL.md": "49827bb8063cd32fce4375083bd9a8bf8be63e4ff2236aaa33e5bf11834c84b9",
+    "after-probe-ci.json": "c661c1cfd9e1795a529c400dca49d0e42f0aeb053b0ed290122be77dd2e1bc3c",
+    "before-probe.json": "fd30d6b9b186199c5d653380566f1f7f74fc652b2875cfbb1a0020db112cac1b",
+    "browser-results.json": "c92df2a59f6d0b0a28eb718a049bd8708b010c6ae7cac7234eb471362122c942",
+    "candidate-identity.json": "8f9ba2d0e679b3366e3a102867104e9de2674c74864174c37059ef490d4b622a",
+    "ci-evidence.json": "824e0934b168bfdcef066eef05906f8648dbc9886b74e5d78e9885c3fda4245b",
+    "gates.json": "7955cff895cb52cf48e0a8808b630194f40ba74fd9b92b8574dde46bf7344605",
+    "mini-app-conflict.png": "bef3595a39174c225ac04bfbb6c76cd789edf3563ab497cfb34809b8a216aca3",
+    "mobile-results.json": "001b97594b39f4bab2379eb5f064b1618729e3b78d6199f87b5925ce13a59967",
+    "performance-ci.json": "7636f4d2eec14f6defe0eea0bb431d95ef1e3619b57170564e8877a2ce6fedfb",
+    "performance-local.json": "328151c129fca76c110e0f366d60f144884efe915dedb7e720ec870cbb4fec15",
+    "test-results.json": "7de990f0571f4613ce156dd357073554a74e75f389da4f1f151bbea2319500dd"
+  }
+}

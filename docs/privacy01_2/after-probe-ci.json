@@ -1,0 +1,15 @@
+{
+  "format": "blago-help-worker-probe-1",
+  "scope": "two actual processes, synthetic provider and data",
+  "context_loaded": true,
+  "delete_completed_before_generation_release": true,
+  "delete_latency_ms": 8.708,
+  "stale_context_written_after_delete": false,
+  "generation_rejected": true,
+  "status": "PASS",
+  "finding": "Durable context CAS rejects stale generation; no history pair or memory effects committed",
+  "real_pilot": "NO-GO",
+  "production_access": false,
+  "source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04",
+  "ci_run": 42412874566
+}

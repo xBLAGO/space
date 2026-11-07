@@ -1,0 +1,51 @@
+{
+  "format": "blago-context-fencing-check-1",
+  "legacy_local": {
+    "turns": 8,
+    "median_ms": 23.1635,
+    "max_ms": 33.268,
+    "turn_ms": [
+      33.268,
+      22.983,
+      23.101,
+      26.077,
+      22.693,
+      23.226,
+      23.231,
+      22.595
+    ],
+    "provider": "local, zero external LLM calls"
+  },
+  "fenced_local": {
+    "turns": 8,
+    "median_ms": 48.6395,
+    "max_ms": 54.177,
+    "turn_ms": [
+      41.979,
+      44.615,
+      45.453,
+      49.144,
+      48.135,
+      50.26,
+      54.177,
+      51.387
+    ],
+    "provider": "local, zero external LLM calls"
+  },
+  "median_delta_ms": 25.476,
+  "cross_worker": {
+    "format": "blago-help-worker-probe-1",
+    "scope": "two actual processes, synthetic provider and data",
+    "context_loaded": true,
+    "delete_completed_before_generation_release": true,
+    "delete_latency_ms": 26.819,
+    "stale_context_written_after_delete": false,
+    "generation_rejected": true,
+    "status": "PASS",
+    "finding": "Durable context CAS rejects stale generation; no history pair or memory effects committed",
+    "real_pilot": "NO-GO",
+    "production_access": false
+  },
+  "real_pilot": "NO-GO",
+  "limits": "Local synthetic wall-clock only, not live LLM/network or production capacity benchmark"
+}

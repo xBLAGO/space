@@ -1,0 +1,202 @@
+{
+  "format": "blago-privacy012-tests-1",
+  "source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04",
+  "full_local": {
+    "tests": 390,
+    "passed": 390,
+    "seconds": 255.595,
+    "log_sha256": "80eee43fc7c58f2e227ca869bb8b4977ca4df11cfb6370aae9a8df8d714a6ea0"
+  },
+  "full_ci": {
+    "tests": 390,
+    "passed": 390,
+    "seconds": 62.529,
+    "evidence": "ci-evidence.json"
+  },
+  "new_cases": [
+    {
+      "test": "test_CAS_и_пара_истории_сериализуются_до_удаления",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_Help_не_изменяет_семантику_подтверждений",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_crash_после_frontier_до_SQL_не_воскрешает_пару",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram_crash_после_commit_до_ACK_replay_без_новой_генерации",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram_link_сохраняет_данные_и_инвалидирует_обе_генерации",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram_rejected_update_не_перегенерируется",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram_повтор_без_LLM_и_без_дублирования_пары",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_буфер_памяти_не_записывается_при_конфликте",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_веб_HTTP_конфликт_409_без_истории_или_Help_suggestion",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_два_процесса_удаление_во_время_LLM",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_две_одновременные_генерации_одна_пара_истории",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_другая_копия_DB_меняет_frontier_во_время_final_commit",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_естественные_исправления_памяти_и_версии_сохранены",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_изменение_last_seen_не_инвалидирует",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_изменение_session_expiry_или_CSRF_инвалидирует",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_изменение_и_пустое_удаление_инвалидируют",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_миграция_повтор_rollback_и_старый_backup_до_DDL",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_несколько_store_instances_одного_процесса",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_нет_SQL_write_lock_на_время_LLM",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_отзыв_сессии_и_удаление_аккаунта",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_очистка_истории_сохраняет_только_атомарную_пару_команды",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_перезапуск_после_COMMITTED_не_фиксирует_ticket_повторно",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_подмена_версии_без_journal_не_принимается",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_простой_preflight_старого_backup_сверяет_retained_frontier",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_сбой_при_вставке_второй_реплики_откатывает_память_и_первую",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_сессия_другого_участника_не_авторизует_переданный_uid",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_смерть_worker_во_время_LLM_нет_записи_после_restart",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_согласие_и_блокировка_инвалидируют",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_старый_backup_до_миграции_требует_явного_DDL_и_reconcile",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_старый_backup_не_возвращает_версию_и_ticket",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_старый_worker_на_исходном_DB_отклоняется_после_restore_копии",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_три_независимых_процесса_оба_stale_ответа_отклонены",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_удаление_непосредственно_перед_commit_без_сиротской_реплики",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_чужой_участник_не_инвалидирует_контекст",
+      "expected": "Atomic context/version/recovery scenario assertions in tests/test_context_fencing.py",
+      "actual": "PASS"
+    }
+  ],
+  "before_g09": "FAIL, exact base runtime d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b; before-probe.json",
+  "after_g09": "PASS, 2–3 actual processes and multi-store cases",
+  "desktop_browser": {
+    "passed": 11,
+    "scope": "synthetic full Help lifecycle with fencing"
+  },
+  "mobile_browser": {
+    "passed": 14,
+    "scope": "Chrome emulation/synthetic SDK; not physical Telegram"
+  },
+  "physical_devices": "NOT EXECUTED",
+  "live_provider": "NOT EXECUTED; zero external calls",
+  "production_access": false,
+  "real_pilot": "NO-GO"
+}
