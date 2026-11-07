@@ -36,6 +36,8 @@ def deletion_blockers(db, uid):
         if db.execute(f'SELECT 1 FROM {table} WHERE {column} IN (SELECT id FROM {parent} WHERE blago_user_id=?) LIMIT 1',(uid,)).fetchone():
             blockers.append(table)
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
+    from xblago.core import context_schema
+    if context_schema.validate(db):known.update(context_schema.TABLES)
     from xblago.core.help_schema import present,validate,TABLES
     if present(db):
         validate(db,required=True);known.update(TABLES)
@@ -58,6 +60,8 @@ def purge_user(db, uid):
     from xblago.domain.help_service import purge_user as purge_help
     from xblago.core.help_schema import present
     if present(db):purge_help(db,uid,SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR'])))
+    from xblago.core import context_schema
+    if context_schema.present(db):db.execute('DELETE FROM context_generations WHERE blago_user_id=?',(uid,))
     for table in OWNED:
         column = 'target_user_id' if table=='account_link_codes' else 'blago_user_id'
         db.execute(f'DELETE FROM {table} WHERE {column}=?',(uid,))
@@ -93,6 +97,8 @@ class PrivacyControl:
         if any(actual.get(statement.split()[2])!=statement for statement in DDL):
             raise JournalUnavailable('Privacy schema/trigger drift detected')
         self.rows,self.chain = journal.read()
+        from xblago.core import context_schema
+        context_schema.validate(db,mandatory=context_schema.required() or any(json.loads(r[2])['kind']=='context_version' for r in self.rows))
         state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
         if (not state or state[0]!=journal.journal_id or type(state[1]) is not int or state[1]<0
                 or state[1]>=len(self.chain) or self.chain[state[1]]!=state[2]):
@@ -127,7 +133,11 @@ class PrivacyControl:
         if entries:
             if self.db.execute('PRAGMA foreign_key_check').fetchall():
                 raise sqlite3.IntegrityError('Privacy commit has invalid foreign keys')
-            seq,head = self.journal.append([tuple(row) for row in entries])
+            from xblago.core.context_schema import present as context_present
+            if context_present(self.db):
+                seq,head = self.journal.append([tuple(row) for row in entries],expected_head=self.chain[-1])
+            else:
+                seq,head = self.journal.append([tuple(row) for row in entries])
             self.db.execute('DELETE FROM privacy_outbox')
             self.db.execute('UPDATE privacy_state SET applied_seq=?,applied_head=? WHERE singleton=1',(seq,head))
 
@@ -156,7 +166,10 @@ class PrivacyControl:
         db = self.db
         kind, owner, target, state = (event[k] for k in ('kind','owner','target','state'))
         uid = self._uid(owner)
-        if kind=='help_state':
+        if kind=='context_version':
+            from xblago.core.context_schema import apply_checkpoint
+            apply_checkpoint(db,event,self.journal)
+        elif kind=='help_state':
             from xblago.domain.help_service import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
         elif kind == 'user_status' and uid:

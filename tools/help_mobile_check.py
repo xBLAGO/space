@@ -31,7 +31,7 @@ def main():
     from playwright.sync_api import sync_playwright, expect
     args.output.mkdir(parents=True,exist_ok=True);checks={};errors=[]
     with tempfile.TemporaryDirectory(prefix='blago-help-mobile-') as root:
-        cfg=create(Path(root)/'new',help_enabled=True)
+        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True)
         cfg.update(TELEGRAM_BOT_TOKEN='123:synthetic-help011-only',XBLAGO_WEB_INVITE_CODE='synthetic-mobile',XBLAGO_COOKIE_SECURE='false')
         with patch.dict(os.environ,cfg):
             app=WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'));help_service=HelpService(app)
@@ -73,6 +73,25 @@ def main():
                     page.locator('#help-confirm').click();expect(page.locator('#help-items')).to_contain_text('PUBLISHED')
                     checks['explicit_publication_to_audience']=len(help_service.feed(helper)['items'])==1
                     checks['mobile_no_horizontal_overflow']=page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                    # Same session and handler as Mini App: conflicting LLM reply must
+                    # return 409, restore the draft and leave no orphaned history turn.
+                    app.store.set_memory(uid,'city','Синтетический город')
+                    before_history=len(app.history(uid));prompt='Почему контекст может измениться?'
+                    class ConflictProvider:
+                        calls=0
+                        def generate(self,ctx):
+                            self.calls+=1
+                            WebApp(preflight(app.store.path)).delete_memory(uid,'city')
+                            return 'Устаревший ответ, который нельзя сохранять.'
+                    conflicting=ConflictProvider()
+                    with patch('xblago.integrations.web.build_chat_provider',return_value=conflicting):
+                        page.locator('#chat-input').fill(prompt)
+                        with page.expect_response(lambda r:r.url==url+'/api/v1/chat/messages' and r.request.method=='POST') as conflict:
+                            page.locator('#chat-form').evaluate('(f)=>f.requestSubmit()')
+                        expect(page.locator('#chat-input')).to_have_value(prompt)
+                    checks['mini_app_context_conflict_409']=conflict.value.status==409
+                    checks['conflict_restores_draft_without_history_pair']=len(app.history(uid))==before_history
+                    checks['conflict_no_automatic_llm_retry']=conflicting.calls==1
                     page.screenshot(path=str(args.output/'synthetic-mini-app-mobile.png'),full_page=True)
                     context.set_offline(True)
                     checks['offline_no_private_api_cache']=page.evaluate("fetch('/api/v1/help/requests').then(()=>false).catch(()=>true)")

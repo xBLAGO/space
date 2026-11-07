@@ -551,7 +551,13 @@ class WebApp:
     def history(self, uid: str) -> list[dict[str, str]]:
         return [{"role": t.role, "text": t.text} for t in self.store.recent_history(uid, 100)]
 
-    def chat(self, uid: str, text: str) -> str:
+    def chat(self, uid: str, text: str, token: str | None = None) -> str:
+        from xblago.core.context_fencing import enabled, respond
+        if enabled(self.store):
+            def authorize(db):
+                from xblago.core.context_fencing import ContextConflict
+                if self.identity.session_row(db,token)['blago_user_id']!=uid:raise ContextConflict()
+            return respond(self.store,uid,text,build_chat_provider(load_llm_config()),authorize=authorize if token else None).text
         with self.store.conversation_lock:
             agent = PersonalAssistantAgent(
                 memory=self.store.memory_for_user(uid),
@@ -563,6 +569,8 @@ class WebApp:
             return agent.respond(UserMessage(text=text)).text
 
     def delete_memory(self, uid: str, key: str) -> bool:
+        from xblago.core.context_fencing import enabled
+        if enabled(self.store):return self.store.memory_for_user(uid).delete(key)
         # A completed delete must not be undone by an already running chat turn.
         with self.store.conversation_lock:
             return self.store.memory_for_user(uid).delete(key)
@@ -1267,10 +1275,13 @@ class BlagoWebHandler(TelegramWebhookHandler):
 
     def _api(self, method: str, path: str) -> None:
         from xblago.core.security_journal import JournalUnavailable
+        from xblago.core.context_fencing import ContextConflict
         try:
             self._api_impl(method, path)
         except ApiError as exc:
             self._json({"error": str(exc)}, status=exc.status)
+        except ContextConflict:
+            self._json({"error":"Контекст изменился. Ответ не сохранён. Повтори сообщение, если хочешь.","status":"context_conflict"},status=409)
         except JournalUnavailable:
             self._json({'error':'Privacy journal unavailable or recovery pending. Access is closed until reconciliation.'},status=503)
         except sqlite3.IntegrityError as exc:
@@ -1426,7 +1437,7 @@ class BlagoWebHandler(TelegramWebhookHandler):
             message = data.get("text")
             if not isinstance(message, str) or not 1 <= len(message.strip()) <= 4000:
                 raise ApiError(400, "Message must contain 1-4000 characters")
-            reply=app.chat(uid,message.strip())
+            reply=app.chat(uid,message.strip(),token=token)
             from xblago.domain.help_service import suggest_draft
             from xblago.core.help_schema import enabled as help_enabled
             payload={'reply':reply}

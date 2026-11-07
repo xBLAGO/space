@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from threading import RLock
+from threading import RLock, local
 from typing import Any, Iterator
 from uuid import uuid4
 
@@ -38,6 +38,7 @@ class SQLiteBlagoStore:
         self.legacy_memory_dir = legacy_memory_dir
         self._lock = RLock()
         self.conversation_lock = RLock()
+        self._transaction_local = local()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._ensure_schema()
 
@@ -350,6 +351,8 @@ class SQLiteBlagoStore:
 
     def delete_memory(self, blago_user_id: str, key: str) -> bool:
         with self._locked_transaction() as connection:
+            from xblago.core.context_schema import present
+            if present(connection):connection.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id=?",(blago_user_id,))
             cursor = connection.execute(
                 "DELETE FROM memory_facts WHERE blago_user_id = ? AND key = ?",
                 (blago_user_id, key),
@@ -362,6 +365,8 @@ class SQLiteBlagoStore:
 
     def clear_memory(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
+            from xblago.core.context_schema import present
+            if present(connection):connection.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id=?",(blago_user_id,))
             connection.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (blago_user_id,))
             connection.execute("DELETE FROM semantic_memory WHERE blago_user_id = ?", (blago_user_id,))
 
@@ -403,6 +408,8 @@ class SQLiteBlagoStore:
 
     def clear_history(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
+            from xblago.core.context_schema import present
+            if present(connection):connection.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id=?",(blago_user_id,))
             connection.execute("DELETE FROM dialogue_turns WHERE blago_user_id = ?", (blago_user_id,))
             connection.execute('UPDATE events SET response_json=NULL,error=NULL WHERE blago_user_id=?',(blago_user_id,))
 
@@ -461,6 +468,8 @@ class SQLiteBlagoStore:
                 )
                 return True
 
+            from xblago.core.context_schema import present as fenced
+            if fenced(connection):return False
             if row["status"] == "failed":
                 connection.execute(
                     """
@@ -513,6 +522,16 @@ class SQLiteBlagoStore:
                 return None
             safe_replies.append({"chat_id": chat_id, "text": text})
 
+        from xblago.core.context_schema import present
+        with self._locked_transaction() as db:
+            if present(db):
+                binding=db.execute("""SELECT 1 FROM context_generations g JOIN context_versions v USING(blago_user_id)
+                    JOIN users u USING(blago_user_id) WHERE g.channel=? AND g.external_update_id=?
+                    AND g.state='COMMITTED' AND g.committed_revision=v.revision AND g.committed_epoch=v.epoch
+                    AND u.status='active'""",(channel,external_update_id)).fetchone()
+                if not binding:
+                    from xblago.core.context_fencing import SAFE_CONFLICT
+                    return [dict(reply,text=SAFE_CONFLICT) for reply in safe_replies]
         return safe_replies
 
     def mark_update_processed(
@@ -664,6 +683,10 @@ class SQLiteBlagoStore:
 
     @contextmanager
     def _locked_transaction(self) -> Iterator[sqlite3.Connection]:
+        active = getattr(self._transaction_local, "connection", None)
+        if active is not None:
+            yield active
+            return
         with self._lock:
             with self._connect() as connection:
                 try:
@@ -676,7 +699,14 @@ class SQLiteBlagoStore:
                         connection.commit()
                         connection.execute('BEGIN IMMEDIATE')
                         privacy = PrivacyControl.open(connection)
-                    yield connection
+                    if privacy:
+                        from xblago.core.context_schema import check_frontiers
+                        check_frontiers(connection, privacy)
+                    self._transaction_local.connection = connection
+                    try:
+                        yield connection
+                    finally:
+                        self._transaction_local.connection = None
                     if privacy:
                         privacy.flush()
                 except Exception:
@@ -687,6 +717,10 @@ class SQLiteBlagoStore:
 
     @contextmanager
     def _connect(self) -> Iterator[sqlite3.Connection]:
+        active = getattr(self._transaction_local, "connection", None)
+        if active is not None:
+            yield active
+            return
         connection = sqlite3.connect(self.path, timeout=30.0)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys = ON")

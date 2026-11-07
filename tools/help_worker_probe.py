@@ -1,10 +1,11 @@
-"""Synthetic two-process audit probe; reports a blocker, never a pilot approval."""
+"""Synthetic two-process fencing proof; never a pilot approval."""
 import argparse
 import json
 import multiprocessing
 import os
 from pathlib import Path
 import tempfile
+import time
 from unittest.mock import patch
 from tools.integration_fixture import create
 from xblago.core.integration import preflight
@@ -22,14 +23,18 @@ def conversation_worker(cfg,uid,pipe):
             if pipe.recv()!='release':raise RuntimeError('probe stopped')
             return 'Сохранённое место: '+str(context.memory.get('city','нет данных'))+'.'
     try:
-        with patch('xblago.integrations.web.build_chat_provider',return_value=HeldProvider()):app.chat(uid,'Где я живу?')
-        pipe.send({'completed':True})
+        from xblago.core.context_fencing import ContextConflict
+        try:
+            with patch('xblago.integrations.web.build_chat_provider',return_value=HeldProvider()):app.chat(uid,'Где я живу?')
+            rejected=False
+        except ContextConflict:rejected=True
+        pipe.send({'completed':True,'rejected':rejected})
     finally:pipe.close()
 
 
 def probe():
     with tempfile.TemporaryDirectory(prefix='blago-help-worker-probe-') as root:
-        cfg=create(Path(root)/'new',help_enabled=True);cfg['XBLAGO_WEB_INVITE_CODE']='synthetic-worker-invite'
+        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True);cfg['XBLAGO_WEB_INVITE_CODE']='synthetic-worker-invite'
         with patch.dict(os.environ,cfg):
             app=WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'))
             token=app.register('synthetic_worker','synthetic-password-only','synthetic-worker-invite')[0];uid=app.session(token)[0]
@@ -37,16 +42,16 @@ def probe():
             ctx=multiprocessing.get_context('spawn');parent,child=ctx.Pipe();proc=ctx.Process(target=conversation_worker,args=(cfg,uid,child));proc.start();child.close()
             try:
                 if not parent.poll(20):raise RuntimeError('worker did not load context')
-                loaded=parent.recv()['context_loaded'];deleted=app.delete_memory(uid,'city')
+                loaded=parent.recv()['context_loaded'];started=time.perf_counter();deleted=app.delete_memory(uid,'city');delete_ms=round(1000*(time.perf_counter()-started),3)
                 parent.send('release')
                 if not parent.poll(20):raise RuntimeError('worker did not finish')
-                parent.recv();proc.join(10)
+                outcome=parent.recv();proc.join(10)
                 if proc.exitcode!=0:raise RuntimeError('worker failed')
                 stale=any(MARKER in turn['text'] for turn in app.history(uid) if turn['role']=='assistant')
                 return {'format':'blago-help-worker-probe-1','scope':'two actual processes, synthetic provider and data',
-                        'context_loaded':loaded,'delete_completed_before_generation_release':deleted,
-                        'stale_context_written_after_delete':stale,'status':'FAIL' if stale else 'PASS',
-                        'finding':'Process-local conversation locks do not serialize memory deletion against another worker',
+                        'context_loaded':loaded,'delete_completed_before_generation_release':deleted,'delete_latency_ms':delete_ms,
+                        'stale_context_written_after_delete':stale,'generation_rejected':outcome['rejected'],'status':'PASS' if loaded and deleted and outcome['rejected'] and not stale else 'FAIL',
+                        'finding':'Durable context CAS rejects stale generation; no history pair or memory effects committed',
                         'real_pilot':'NO-GO','production_access':False}
             finally:
                 parent.close()
@@ -55,3 +60,4 @@ def probe():
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);args=p.parse_args()
     result=probe();args.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+    if result['status']!='PASS':raise SystemExit(1)
