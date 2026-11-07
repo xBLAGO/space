@@ -155,9 +155,11 @@ class SecurityJournal:
         with self._locked() as db:
             return self._verified(db)
 
-    def append(self, entries):
+    def append(self, entries, *, expected_head=None):
         with self._locked() as db:
             rows, chain = self._verified(db)
+            if expected_head is not None and not hmac.compare_digest(expected_head,chain[-1]):
+                raise JournalUnavailable('Context writer retained frontier changed')
             db.execute('BEGIN IMMEDIATE')
             head, seq = chain[-1], len(rows)
             for event_id, payload in entries:

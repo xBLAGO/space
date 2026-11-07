@@ -55,6 +55,10 @@ def restore(path: Path, journal_directory: Path):
         with store._locked_transaction() as db:
             from xblago.core.help_schema import present
             if present(db):db.execute('DELETE FROM help_challenges')
+            from xblago.core.context_schema import present as context_present
+            if context_present(db):
+                db.execute("UPDATE context_generations SET state='REJECTED' WHERE state='PREPARED'")
+                db.execute('UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16)))')
             for table in ('web_sessions','auth_challenges','telegram_exchanges','privacy_delete_challenges','account_link_codes'):
                 db.execute(f'DELETE FROM {table}')
             db.execute('UPDATE identity_recovery_state SET telegram_resume_at=? WHERE singleton=1',(int(time.time())+3661,))

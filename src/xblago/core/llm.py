@@ -32,6 +32,7 @@ class ChatContext:
     history: tuple[ConversationTurn, ...] = ()
     conversation: ConversationGuidance | None = None
     purpose: str = "conversation"
+    context_version: str | None = None
 
 
 class ChatProvider(ABC):

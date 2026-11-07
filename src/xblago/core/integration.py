@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 import sqlite3
 import sys
-from threading import RLock
+from threading import RLock, local
 from xblago.core import identity_schema, identity_runtime_schema, privacy_schema, pilot_schema
 from xblago.core.security_journal import JournalUnavailable
 from xblago.core.sqlite_safety import require_safe_sqlite
@@ -71,7 +71,10 @@ def preflight(path: Path):
         has_help=present(db)
         validate(db)
         expected=json.loads(Path(__file__).with_name('integration_help_schema.json' if has_help else 'integration_schema.json').read_text())
-        if schema_shape(db)!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
+        from xblago.core import context_schema
+        context_schema.validate(db,mandatory=context_schema.required())
+        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS}
+        if actual_shape!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
         for module,table in zip(MODULES,('identity_schema_migrations','identity_runtime_migrations','privacy_schema_migrations','pilot_schema_migrations')):
             if table not in objects or db.execute(f'SELECT version,checksum FROM {table}').fetchall()!=[(module.VERSION,module.CHECKSUM)]:
                 raise IntegrationBlocked('Migration manifest mismatch')
@@ -87,7 +90,7 @@ def preflight(path: Path):
     # Guarded writer reconciles previously durable denials before serving traffic.
     # Avoid legacy constructors which perform executescript on startup.
     store=SQLiteBlagoStore.__new__(SQLiteBlagoStore)
-    store.path=path;store.legacy_memory_dir=None;store._lock=RLock();store.conversation_lock=RLock()
+    store.path=path;store.legacy_memory_dir=None;store._lock=RLock();store.conversation_lock=RLock();store._transaction_local=local()
     with store._locked_transaction() as db:
         from xblago.core.privacy_control import PrivacyControl
         control=PrivacyControl.open(db)

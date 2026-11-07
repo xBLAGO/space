@@ -353,6 +353,11 @@ class IdentityRuntime:
             'blago_resource_offers','blago_payment_requests','blago_payment_request_offers',
             'blago_fulfillment_events','blago_contribution_events','user_devices','passkey_credentials',
             'auth_challenges','activity_events','security_signals','consent_records','telegram_proofs','privacy_aliases','privacy_delete_challenges'}
+        from xblago.core import context_schema
+        if context_schema.validate(db):
+            known_tables.update(context_schema.TABLES)
+            db.execute("UPDATE context_generations SET state='REJECTED' WHERE blago_user_id IN (?,?) AND state='PREPARED'",(source,target))
+            db.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id IN (?,?)",(source,target))
         for record in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall():
             name = record[0]
             if name in known_tables:

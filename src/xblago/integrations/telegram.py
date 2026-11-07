@@ -128,6 +128,7 @@ class TelegramBot:
             self.api.send_message(int(reply["chat_id"]), str(reply["text"]))
 
     def replies_for_update(self, update: dict[str, Any]) -> list[dict[str, str | int]]:
+        from xblago.core.context_fencing import ContextConflict
         with self._lock, self.store.conversation_lock:
             message = update.get("message")
             if not isinstance(message, dict):
@@ -156,21 +157,29 @@ class TelegramBot:
                 return _telegram_message_replies(chat_id, 'Для привязки нужен подтверждённый отправитель Telegram.')
             update_id = _external_update_id(update)
             if not self.store.begin_update("telegram", update_id, blago_user_id):
-                return self.store.cached_update_replies("telegram", update_id) or []
+                from xblago.core.context_fencing import enabled as fenced, SAFE_CONFLICT
+                return self.store.cached_update_replies("telegram", update_id) or (_telegram_message_replies(chat_id,SAFE_CONFLICT) if fenced(self.store) else [])
 
             try:
-                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type)
+                replies = self._replies_for_message(blago_user_id, chat_id, text, identity.chat_type, update_id, identity.telegram_user_id)
+            except ContextConflict:
+                from xblago.core.context_fencing import SAFE_CONFLICT
+                replies=_telegram_message_replies(chat_id,SAFE_CONFLICT)
+                self.store.mark_update_processed("telegram",update_id,replies)
+                return replies
             except Exception as exc:
                 self.store.mark_update_failed("telegram", update_id, str(exc))
                 raise
 
-            self.store.mark_update_processed("telegram", update_id, replies)
+            from xblago.core.context_fencing import enabled as fenced
+            if not fenced(self.store) or text.strip()=="/start" or text.strip().startswith("/link"):
+                self.store.mark_update_processed("telegram", update_id, replies)
             return replies
 
     _handle_update = handle_update
 
     def _replies_for_message(
-        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None,
+        self, blago_user_id: str, chat_id: int, text: str, chat_type: str | None = None, update_id: str | None = None, sender_id: int | None = None,
     ) -> list[dict[str, str | int]]:
         if text.strip().startswith("/link"):
             if chat_type != "private":
@@ -192,12 +201,19 @@ class TelegramBot:
             welcome_text = self._agent_for_user(blago_user_id, chat_id).welcome_message().removeprefix("xBLAGO: ")
             return _telegram_message_replies(chat_id, welcome_text)
 
-        response = self._agent_for_user(blago_user_id, chat_id).respond(UserMessage(text=text.strip()))
         from xblago.core.help_schema import enabled as help_enabled
         from xblago.domain.help_service import suggest_draft
         hint=''
         if help_enabled() and suggest_draft(text.strip()):
             hint='\nМожно подготовить черновик потребности в Mini App или Web. Публикация требует отдельного подтверждения.'
+        from xblago.core.context_fencing import enabled as fenced, respond
+        if fenced(self.store):
+            def authorize(db):
+                from xblago.core.context_fencing import ContextConflict
+                channel_id=str(sender_id) if sender_id is not None else 'chat:'+str(chat_id)
+                if not db.execute("SELECT 1 FROM channel_links WHERE channel='telegram' AND channel_user_id=? AND blago_user_id=?",(channel_id,blago_user_id)).fetchone():raise ContextConflict()
+            return respond(self.store,blago_user_id,text.strip(),build_chat_provider(load_llm_config()),channel="telegram",chat_id=chat_id,update_id=update_id,reply_builder=lambda answer:_telegram_message_replies(chat_id,answer+hint),authorize=authorize)
+        response = self._agent_for_user(blago_user_id, chat_id).respond(UserMessage(text=text.strip()))
         return _telegram_message_replies(chat_id, response.text+hint)
 
     def _agent_for_user(self, blago_user_id: str, chat_id: int) -> PersonalAssistantAgent:
