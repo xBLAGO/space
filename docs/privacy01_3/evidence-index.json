@@ -1,0 +1,21 @@
+{
+  "format": "blago-privacy013-evidence-index-1",
+  "runtime_source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "base_sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/42512292499",
+  "independent_attestation": false,
+  "files": {
+    "docs/BLAGO_FOUNDATION_PRIVACY_01_3.md": "d41fc684debea4e8b9901dd76518e57ca6854908db8b07935e530d636a3cbb18",
+    "docs/privacy01_3/DATA_LIFECYCLE_MATRIX.md": "e0ad10fe378936ba29c097683f02c4e59d1b18232691f5193851a03a88ef51e8",
+    "docs/privacy01_3/README.md": "19332c1ba61c63bc6d10c53e0c8c40a870bc6d501028950c0e847a21db82f9f6",
+    "docs/privacy01_3/RUNBOOK.md": "98b6e9993b88255bfbfb2f013198e4dc60309b188f1907c3efe930ed8d1a2268",
+    "docs/privacy01_3/THREAT_MODEL.md": "42664ad4a746a9e47e8b5ebc4d9a3e0b6a784419fd55e7457120a5689fbc6c74",
+    "docs/privacy01_3/ci-source.json": "337d295abd683d7eb9e82e07ed928f1dea4a14545202f2d7482b68556345e6f4",
+    "docs/privacy01_3/gates.json": "f787ffa4a07272bf397e744b63d7683faa4df8ccc248e3a32b1578c1edc94d58",
+    "docs/privacy01_3/inventory.json": "54bc9cf0f4f8450f03a0edfefb604b8ddbd82725afdf9d921e42dee1e6191eb3",
+    "docs/privacy01_3/reenrollment-replay.json": "82145ab6bb22f787ce1ad770d89509f5f8451e98d24fb73f0ccfab4f01a570d2",
+    "docs/privacy01_3/rehearsal-local.json": "621b9de3310745a3b9bee0ec9d165437d380a9c8866697fbb46385e16d4c0b72",
+    "docs/privacy01_3/source-identity.json": "14479b097247c1e47ef62b2fcacc0b6670a7de3cf00065089ad9c12e2fe1815b",
+    "docs/privacy01_3/test-results.json": "cd42d5decf6d129c2fdc13ddcb10df6676c4a2114c15b7bbd3b9135f083f9f04"
+  }
+}

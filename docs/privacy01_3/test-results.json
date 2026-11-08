@@ -1,0 +1,296 @@
+{
+  "format": "blago-privacy013-test-results-1",
+  "source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "ci_run": 42512292499,
+  "ci": {
+    "status": "PASS",
+    "tests": 432,
+    "seconds": 54.338
+  },
+  "focused_local": {
+    "status": "PASS",
+    "tests": 42,
+    "seconds": 112.703,
+    "scope": "Final lifecycle runtime functions; expanded Bot reenrollment test independently repeated: PASS 3.824s"
+  },
+  "scenarios": [
+    {
+      "scenario": "test_DDL_ошибка_откатывается",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_HTTP_consent_требует_CSRF_и_не_принимает_чужой_uid",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_Help_минимизация_без_текста_времени_участников",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_account_delete_Help_не_содержит_ссылок_на_людей",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_backup_retirement_и_физическое_удаление_только_учтённой_копии",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_backup_подмена_байтов_не_удаляется_вслепую",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_consent_withdrawal_инвалидирует_pending_generation",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_crash_после_journal_до_SQL_replay_удаления",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_export_не_возвращает_retired_Help_или_чужой_текст",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_future_clock_и_подмена_политики",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_missing_witness_ничего_не_удаляет",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_pending_WebAuthn_удаляется_каскадом_по_TTL",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_receipt_TTL_оставляет_dedupe",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_retention_во_время_LLM_сохраняет_G09",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_retention_на_границе_срока_удаляет_обе_реплики",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_retired_ID_нельзя_вставить_снова",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_symlink_backup_directory_не_перенаправляет_удаление",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_архив_памяти_не_стирает_действующего_потомка_после_restore",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_два_процесса_retention_не_дублируют_эффект",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_действующий_passkey_не_удаляется_автоматически",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_истёкшее_activity_не_возвращается_после_backup",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_не_удалять_актуальные_данные_и_чужие_новые_записи",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_незавершённый_Help_не_превращается_в_успех",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_неоднозначный_legacy_merge_блокирует_retention",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_неясные_границы_legacy_истории_не_угадываются",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_отзыв_device_label_не_удаляет_способ_входа",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_отзыв_согласия_стирает_activity_и_запрещает_возврат",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_пара_истории_и_receipt_plaintext_не_восстанавливаются",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_повтор_sweep_без_повторных_удалений",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_повторная_регистрация_не_возвращает_старую_память",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_после_удаления_и_новой_регистрации_update_не_исполняется_повторно",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_потеря_tombstone_вызывает_fail_closed",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_пустая_и_существующая_БД_повторная_миграция",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_сбой_journal_rollback_без_ложного_успеха",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_сертифицированный_backup_до_Help_context_восстанавливается_без_грантов",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_старые_needs_resources_удалены_и_не_возвращаются",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_старые_отозванные_credentials_и_devices_не_восстанавливаются",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_старый_backup_до_migration_требует_явной_миграции",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_старый_context_checksum_и_идемпотентность_сохранены",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_транзакционный_guard_не_даёт_вставить_удалённый_update",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_удаление_generation_ticket_инвалидирует_pending",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    },
+    {
+      "scenario": "test_экономические_зависимости_не_удаляются_по_догадке",
+      "expected": "Assertions and rejection/deletion invariant specified by this named source test",
+      "actual": "PASS",
+      "evidence": "CI source job 128827758592; tests/test_data_lifecycle.py"
+    }
+  ],
+  "full_local": {
+    "status": "NOT QUALIFIED FOR FINAL SOURCE",
+    "attempts": [
+      {
+        "status": "IMPORT ENVIRONMENT FAILURE",
+        "error": "Old /tmp venv lacked pyvenv.cfg; certifi not imported",
+        "remediation": "New isolated locked /tmp/blago-life013-venv"
+      },
+      {
+        "status": "SANDBOX SOCKET FAILURE",
+        "tests": 430,
+        "errors": 10,
+        "seconds": 336.855,
+        "error": "PermissionError binding localhost, no assertion failures"
+      },
+      {
+        "status": "PASS INTERMEDIATE ONLY; NOT FINAL SOURCE QUALIFICATION",
+        "reason": "Escalated full retry began before final replay fix; not used as final-source qualification",
+        "tests": 430,
+        "seconds": 420.549
+      }
+    ],
+    "final_source_full_regression": "CI 432/432 PASS"
+  },
+  "reenrollment_before": "reenrollment-replay.json baseline FAIL reproduced",
+  "production_access": false
+}

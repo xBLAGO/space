@@ -1,0 +1,41 @@
+{
+  "format": "blago-lifecycle-check-1",
+  "checks": {
+    "old_need_not_restored": true,
+    "recent_help_retained": true,
+    "no_financial_actions": true,
+    "integrity": true,
+    "foreign_keys": true
+  },
+  "counts": {
+    "history": 0,
+    "semantic_archives": 0,
+    "blago_needs": 1,
+    "blago_resources": 0,
+    "blago_assets": 0,
+    "blago_resource_offers": 0,
+    "receipt_bodies": 0,
+    "help_retired": 0,
+    "generations": 0,
+    "activity_unconsented": 0,
+    "labels_unconsented": 0,
+    "revoked_credentials": 0,
+    "revoked_devices": 0,
+    "technical": {
+      "auth_challenges": 0,
+      "telegram_exchanges": 0,
+      "telegram_proofs": 0,
+      "privacy_delete_challenges": 0,
+      "help_challenges": 0,
+      "activity_events": 0,
+      "security_signals": 0,
+      "account_link_codes": 0,
+      "web_sessions": 0
+    }
+  },
+  "policy_approval": "NOT APPROVED FOR REAL USERS",
+  "external_copies_erased": "UNKNOWN",
+  "provider_deletion": "NOT VERIFIED",
+  "G04": "UNKNOWN; local synthetic mechanisms only",
+  "real_pilot": "NO-GO"
+}

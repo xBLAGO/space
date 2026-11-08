@@ -1,0 +1,12 @@
+{
+  "format": "blago-privacy013-reenrollment-replay-1",
+  "baseline_runtime_sha": "ad87cfed434685296f6175b39141cb4585dbcf6b",
+  "baseline_test": "test_после_удаления_и_новой_регистрации_update_не_исполняется_повторно",
+  "baseline_actual": "FAIL: AssertionError: True is not false at assertFalse(begin_update(old_update,new_uid))",
+  "test_carrier": "tests/test_data_lifecycle.py in source 9abb7cc7b22346be0a9b095e7f13b1dc81928e28; first assertion reproduced before fix",
+  "fixed_runtime_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "fixed_actual": "PASS: consumed update HMAC hold blocks begin_update and SQL insertion; old backup replay preserves denial",
+  "bot_integration": "PASS: synthetic /start reenrollment receives new ID; replay old message causes zero extra provider calls/history; genuinely new update works",
+  "limits": "Only known update IDs retired since lifecycle installation; unknown historical IDs and reauth of real Telegram delivery are not retroactively proven",
+  "production_access": false
+}

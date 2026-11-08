@@ -1,0 +1,971 @@
+{
+  "format": "blago-lifecycle-inventory-1",
+  "scope": "schema only, new synthetic DB",
+  "tables": [
+    {
+      "table": "account_link_codes",
+      "category": "identity",
+      "columns": [
+        "code_hash",
+        "target_user_id",
+        "expires_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "target_user_id"
+        }
+      ]
+    },
+    {
+      "table": "activity_events",
+      "category": "optional_activity",
+      "columns": [
+        "event_id",
+        "blago_user_id",
+        "event_type",
+        "channel",
+        "occurred_at",
+        "expires_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "auth_challenges",
+      "category": "identity",
+      "columns": [
+        "challenge_hash",
+        "blago_user_id",
+        "purpose",
+        "binding_hash",
+        "rp_id",
+        "origin",
+        "created_at",
+        "expires_at",
+        "consumed_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_assets",
+      "category": "legacy_nonfinancial",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "title",
+        "description",
+        "asset_type",
+        "ownership_claim",
+        "use_permission",
+        "management_status",
+        "verification_status",
+        "visibility",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_contribution_events",
+      "category": "legacy_economy",
+      "columns": [
+        "id",
+        "payment_request_id",
+        "contributor_user_id",
+        "recipient_user_id",
+        "contribution_type",
+        "amount_minor",
+        "currency",
+        "xblago_estimate",
+        "exchange_rate_source",
+        "exchange_rate_at",
+        "note",
+        "event_key",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "recipient_user_id"
+        },
+        {
+          "parent": "users",
+          "column": "contributor_user_id"
+        },
+        {
+          "parent": "blago_payment_requests",
+          "column": "payment_request_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_fulfillment_events",
+      "category": "legacy_economy",
+      "columns": [
+        "id",
+        "payment_request_id",
+        "need_id",
+        "actor_user_id",
+        "event_type",
+        "status_after",
+        "note",
+        "evidence_digest",
+        "event_key",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "actor_user_id"
+        },
+        {
+          "parent": "blago_needs",
+          "column": "need_id"
+        },
+        {
+          "parent": "blago_payment_requests",
+          "column": "payment_request_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_needs",
+      "category": "legacy_nonfinancial",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "title",
+        "description",
+        "visibility",
+        "status",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_payment_request_offers",
+      "category": "legacy_economy",
+      "columns": [
+        "id",
+        "payment_request_id",
+        "resource_offer_id",
+        "offered_user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "offered_user_id"
+        },
+        {
+          "parent": "blago_resource_offers",
+          "column": "resource_offer_id"
+        },
+        {
+          "parent": "blago_payment_requests",
+          "column": "payment_request_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_payment_requests",
+      "category": "legacy_economy",
+      "columns": [
+        "id",
+        "need_id",
+        "requester_user_id",
+        "executor_user_id",
+        "title",
+        "description",
+        "amount_minor",
+        "currency",
+        "payment_purpose",
+        "payment_reference_digest",
+        "risk_level",
+        "risk_reason",
+        "status",
+        "contribution_recorded",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "executor_user_id"
+        },
+        {
+          "parent": "users",
+          "column": "requester_user_id"
+        },
+        {
+          "parent": "blago_needs",
+          "column": "need_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_resource_offers",
+      "category": "legacy_nonfinancial",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "title",
+        "description",
+        "offer_type",
+        "availability_status",
+        "visibility",
+        "max_amount_minor",
+        "currency",
+        "constraints_json",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "blago_resources",
+      "category": "legacy_nonfinancial",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "title",
+        "description",
+        "visibility",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "channel_links",
+      "category": "profile",
+      "columns": [
+        "channel",
+        "channel_user_id",
+        "channel_chat_id",
+        "chat_type",
+        "blago_user_id",
+        "username",
+        "first_name",
+        "last_name",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "consent_records",
+      "category": "optional_activity",
+      "columns": [
+        "consent_id",
+        "blago_user_id",
+        "purpose",
+        "policy_version",
+        "decision",
+        "recorded_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "context_generations",
+      "category": "privacy_controls",
+      "columns": [
+        "generation_id",
+        "blago_user_id",
+        "revision",
+        "epoch",
+        "state",
+        "channel",
+        "external_update_id",
+        "committed_revision",
+        "committed_epoch"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "context_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "context_versions",
+      "category": "privacy_controls",
+      "columns": [
+        "blago_user_id",
+        "revision",
+        "epoch"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "dialogue_turns",
+      "category": "conversation",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "channel",
+        "chat_id",
+        "role",
+        "text",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "events",
+      "category": "conversation",
+      "columns": [
+        "id",
+        "channel",
+        "external_update_id",
+        "blago_user_id",
+        "status",
+        "error",
+        "response_json",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "help_audience",
+      "category": "help",
+      "columns": [
+        "request_id",
+        "member_id"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "member_id"
+        },
+        {
+          "parent": "help_requests",
+          "column": "request_id"
+        }
+      ]
+    },
+    {
+      "table": "help_challenges",
+      "category": "help",
+      "columns": [
+        "token_hash",
+        "actor_id",
+        "request_id",
+        "version",
+        "action",
+        "args_json",
+        "expires_at",
+        "receipt_json"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "help_requests",
+          "column": "request_id"
+        },
+        {
+          "parent": "users",
+          "column": "actor_id"
+        }
+      ]
+    },
+    {
+      "table": "help_events",
+      "category": "help",
+      "columns": [
+        "event_id",
+        "request_id",
+        "version",
+        "action",
+        "actor_role",
+        "state",
+        "occurred_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "help_requests",
+          "column": "request_id"
+        }
+      ]
+    },
+    {
+      "table": "help_holds",
+      "category": "help",
+      "columns": [
+        "target_tag",
+        "reason"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "help_offers",
+      "category": "help",
+      "columns": [
+        "id",
+        "request_id",
+        "helper_id",
+        "note",
+        "status"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "helper_id"
+        },
+        {
+          "parent": "help_requests",
+          "column": "request_id"
+        }
+      ]
+    },
+    {
+      "table": "help_operations",
+      "category": "help",
+      "columns": [
+        "actor_id",
+        "operation_key",
+        "body_hash",
+        "request_id"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "help_requests",
+          "column": "request_id"
+        },
+        {
+          "parent": "users",
+          "column": "actor_id"
+        }
+      ]
+    },
+    {
+      "table": "help_requests",
+      "category": "help",
+      "columns": [
+        "id",
+        "author_id",
+        "text",
+        "state",
+        "version",
+        "selected_offer",
+        "owner_confirmed",
+        "helper_confirmed",
+        "head_tag",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "author_id"
+        }
+      ]
+    },
+    {
+      "table": "help_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "identity_recovery_state",
+      "category": "identity",
+      "columns": [
+        "singleton",
+        "telegram_resume_at"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "identity_runtime_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "identity_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum",
+        "applied_at"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "lifecycle_backups",
+      "category": "privacy_controls",
+      "columns": [
+        "backup_id",
+        "filename",
+        "content_hash",
+        "expires_at",
+        "state"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "lifecycle_generation_times",
+      "category": "privacy_controls",
+      "columns": [
+        "generation_id",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "context_generations",
+          "column": "generation_id"
+        }
+      ]
+    },
+    {
+      "table": "lifecycle_help_evidence",
+      "category": "privacy_controls",
+      "columns": [
+        "target_tag",
+        "outcome",
+        "event_count",
+        "protocol"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "lifecycle_history_pairs",
+      "category": "privacy_controls",
+      "columns": [
+        "user_turn",
+        "assistant_turn"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "dialogue_turns",
+          "column": "assistant_turn"
+        },
+        {
+          "parent": "dialogue_turns",
+          "column": "user_turn"
+        }
+      ]
+    },
+    {
+      "table": "lifecycle_holds",
+      "category": "privacy_controls",
+      "columns": [
+        "target_tag",
+        "kind"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "lifecycle_policy",
+      "category": "privacy_controls",
+      "columns": [
+        "singleton",
+        "policy_json"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "lifecycle_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "memory_facts",
+      "category": "personal_memory",
+      "columns": [
+        "blago_user_id",
+        "key",
+        "value_json",
+        "source_event_id",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "events",
+          "column": "source_event_id"
+        },
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "migration_key",
+        "source_path",
+        "backup_path",
+        "blago_user_id",
+        "migrated_at"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "passkey_credentials",
+      "category": "identity",
+      "columns": [
+        "credential_id",
+        "blago_user_id",
+        "device_id",
+        "public_key_cose",
+        "user_handle",
+        "sign_count",
+        "backup_eligible",
+        "backup_state",
+        "created_at",
+        "revoked_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "user_devices",
+          "column": "blago_user_id"
+        },
+        {
+          "parent": "user_devices",
+          "column": "device_id"
+        },
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "pilot_safety_state",
+      "category": "privacy_controls",
+      "columns": [
+        "singleton",
+        "generation",
+        "lineage_start_seq"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "pilot_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "privacy_aliases",
+      "category": "privacy_controls",
+      "columns": [
+        "source_uid",
+        "target_uid"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "target_uid"
+        },
+        {
+          "parent": "users",
+          "column": "source_uid"
+        }
+      ]
+    },
+    {
+      "table": "privacy_delete_challenges",
+      "category": "privacy_controls",
+      "columns": [
+        "challenge_hash",
+        "blago_user_id",
+        "session_hash",
+        "expires_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "privacy_outbox",
+      "category": "privacy_controls",
+      "columns": [
+        "event_id",
+        "payload"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "privacy_schema_migrations",
+      "category": "migration_metadata",
+      "columns": [
+        "version",
+        "checksum"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "privacy_state",
+      "category": "privacy_controls",
+      "columns": [
+        "singleton",
+        "journal_id",
+        "applied_seq",
+        "applied_head"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "profiles",
+      "category": "profile",
+      "columns": [
+        "blago_user_id",
+        "display_name",
+        "language",
+        "timezone",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "security_signals",
+      "category": "optional_activity",
+      "columns": [
+        "signal_id",
+        "blago_user_id",
+        "signal_type",
+        "resolution",
+        "occurred_at",
+        "expires_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "semantic_memory",
+      "category": "personal_memory",
+      "columns": [
+        "id",
+        "blago_user_id",
+        "memory_key",
+        "value_json",
+        "category",
+        "source",
+        "status",
+        "confidence",
+        "created_at",
+        "updated_at",
+        "supersedes_id"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "semantic_memory",
+          "column": "supersedes_id"
+        },
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "telegram_exchanges",
+      "category": "identity",
+      "columns": [
+        "challenge_hash",
+        "binding_hash",
+        "created_at",
+        "expires_at",
+        "consumed_at"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "telegram_proofs",
+      "category": "identity",
+      "columns": [
+        "proof_hash",
+        "blago_user_id",
+        "expires_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "user_devices",
+      "category": "identity",
+      "columns": [
+        "device_id",
+        "blago_user_id",
+        "label",
+        "created_at",
+        "revoked_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "category": "profile",
+      "columns": [
+        "blago_user_id",
+        "created_at",
+        "status"
+      ],
+      "foreign_keys": []
+    },
+    {
+      "table": "web_credentials",
+      "category": "identity",
+      "columns": [
+        "username",
+        "blago_user_id",
+        "password_hash",
+        "salt",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "web_sessions",
+      "category": "identity",
+      "columns": [
+        "session_hash",
+        "blago_user_id",
+        "csrf",
+        "expires_at",
+        "public_id",
+        "created_at",
+        "last_seen_at",
+        "authenticated_at",
+        "auth_method"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "users",
+          "column": "blago_user_id"
+        }
+      ]
+    },
+    {
+      "table": "webauthn_pending",
+      "category": "identity",
+      "columns": [
+        "challenge_hash",
+        "user_handle"
+      ],
+      "foreign_keys": [
+        {
+          "parent": "auth_challenges",
+          "column": "challenge_hash"
+        }
+      ]
+    }
+  ],
+  "external": [
+    "LLM provider request/response processing and metadata",
+    "Telegram server/client copies",
+    "browser RAM/DOM/downloads",
+    "application backups/WAL/filesystem snapshots",
+    "journal/witness/custody copies",
+    "host/CI/proxy logs",
+    "legacy JSON files"
+  ],
+  "real_pilot": "NO-GO"
+}

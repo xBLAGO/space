@@ -1,0 +1,90 @@
+{
+  "candidate_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "ci_checkout_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "context_migration": {
+    "activation": "explicit offline only",
+    "checksum": "79aed28a7444a8a4758d8133033dd636dee6a3a214c877faba338da315434aa0",
+    "version": "foundation_privacy_context_001"
+  },
+  "dependencies": {
+    "cbor2": "5.9.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cryptography": "48.0.1",
+    "idna": "3.20",
+    "pyOpenSSL": "26.2.0",
+    "pyasn1": "0.6.5",
+    "pycparser": "3.12",
+    "requests": "2.34.2",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "webauthn": "2.7.1"
+  },
+  "deployment_executed": false,
+  "format": "blago-integration-evidence-01",
+  "help_migration": {
+    "activation": "explicit offline only",
+    "checksum": "134dda0be6d63c09c16c464646ac46d3d90fb96615d87dbb5b0f0ae01b8fa689",
+    "module": "xblago.core.help_schema",
+    "version": "foundation_help_001"
+  },
+  "independent_storage_qualified": false,
+  "lifecycle_migration": {
+    "activation": "explicit offline synthetic only",
+    "checksum": "1549c5875e15571f35ae93c1f2535c42fcc690df65f04be29629ce3c2c89e02a",
+    "real_user_policy_approval": "NOT APPROVED",
+    "version": "foundation_privacy_lifecycle_001"
+  },
+  "manifest_sha256": "b61231b2ae16c19ee08a65ad10218e3319adae26bbdabb286f631a510e6f6de4",
+  "migration_manifest": [
+    {
+      "checksum": "0c037906348404d2e2b1dc5c17f59f8f88261d0bf1ca48b0399a935a250492c4",
+      "module": "xblago.core.identity_schema",
+      "version": "foundation05_identity_001"
+    },
+    {
+      "checksum": "faa85972c539a03042c49a08a1caa8e7b5a88396b012d0d261ca6b6fcb86af12",
+      "module": "xblago.core.identity_runtime_schema",
+      "version": "foundation05_runtime_002"
+    },
+    {
+      "checksum": "e48d094d2c6a4701f17a94d49a18d4c91e4bdae6db157be5051128e0bf395161",
+      "module": "xblago.core.privacy_schema",
+      "version": "foundation05_privacy_003"
+    },
+    {
+      "checksum": "1dd618cdd1f35f7952aabdbb8dfac62cb59048f3ab06a0c258b68e72fb63da76",
+      "module": "xblago.core.pilot_schema",
+      "version": "foundation05_pilot_004"
+    }
+  ],
+  "mode": "synthetic only",
+  "production_access": false,
+  "python": "3.12.10",
+  "real_pilot": "NO-GO",
+  "source_pins": {
+    "audit18": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428",
+    "foundation02": "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a",
+    "foundation03": "8e086ec24bc9f3fe0d11e6dd12473f867ede3b44",
+    "foundation04": "25dcb0fae420b27916629b1686f07f6f96e5c446",
+    "foundation04_2": "af94ac93dde649747b1a89104000f92f75ecb7fc",
+    "foundation05_1": "8820d7852f0db6c4fc5101f9e281211ba7b6b074",
+    "foundation05_2": "8b63b8795490a11ad2b5a709b9a258033b7d6381",
+    "foundation05_3": "224ad9d2a1775a8372354af35d542f433cb8bdde",
+    "foundation05_4": "8634e94a6dddd2b8cfff415b112f6b895eb0f4ae",
+    "foundation06": "37be0437578125503f0a851c6ce9a86222937cdc",
+    "foundation06_1": "d11a2a555efe57e6818450d534655020bf47b9ca",
+    "integration01": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+    "main": "3c218dc5757879c26b3aec520af3636b2d702715"
+  },
+  "sqlite": {
+    "policy": "pinned upstream version/source-id; no environment assertion of vendor backport is trusted",
+    "python": "3.12.10",
+    "python_extension": "/tmp/blago-sqlite-driver-3541/_sqlite3.cpython-312-darwin.so",
+    "sqlite_source_id": "2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76",
+    "sqlite_version": "3.54.1",
+    "wal_reset_fix_verified": true
+  },
+  "tree": "275c1df9e4f9d4dc801cea85fcf611242699ff59"
+}
