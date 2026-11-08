@@ -49,6 +49,14 @@ DDL.extend([
 DDL.append("""CREATE TRIGGER lifecycle_activity_update BEFORE UPDATE ON activity_events WHEN blago_replaying()=0 AND
  COALESCE((SELECT decision FROM consent_records WHERE blago_user_id=NEW.blago_user_id AND purpose='optional_activity' ORDER BY recorded_at DESC,CASE decision WHEN 'withdrawn' THEN 1 ELSE 0 END DESC LIMIT 1),'withdrawn')<>'granted'
  BEGIN SELECT RAISE(ABORT,'Optional activity consent required'); END""")
+DDL.append("""CREATE TRIGGER lifecycle_update_retire BEFORE DELETE ON events WHEN blago_replaying()=0 BEGIN
+ INSERT OR IGNORE INTO lifecycle_holds VALUES (blago_tag('lifecycle-update',OLD.channel,OLD.external_update_id),'consumed-update');
+ INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),json_object('kind','lifecycle_update','owner','',
+ 'target',blago_tag('lifecycle-update',OLD.channel,OLD.external_update_id),'state','consumed','recorded_at',0)); END""")
+for op in ('INSERT','UPDATE'):
+    DDL.append(f"""CREATE TRIGGER lifecycle_update_guard_{op.lower()} BEFORE {op} ON events WHEN blago_replaying()=0 AND
+ EXISTS(SELECT 1 FROM lifecycle_holds WHERE target_tag=blago_tag('lifecycle-update',NEW.channel,NEW.external_update_id) AND kind='consumed-update')
+ BEGIN SELECT RAISE(ABORT,'Retired update; replay rejected'); END""")
 DDL=tuple(DDL);OBJECTS={s.split()[2] for s in DDL};TABLES={s.split()[2] for s in DDL if s.startswith('CREATE TABLE')}
 CHECKSUM=hashlib.sha256(('\n'.join(DDL)+canonical(POLICY)).encode()).hexdigest()
 def required():return os.getenv('XBLAGO_LIFECYCLE_REQUIRED','').lower() in ('true','1','yes')
@@ -127,3 +135,6 @@ def check_denials(db,control):
             if not actual or dict(actual)!=expected or not db.execute('SELECT 1 FROM help_holds WHERE target_tag=?',(target,)).fetchone():raise JournalUnavailable('Minimal Help evidence mismatch')
         elif kind=='lifecycle_backup':
             if not db.execute("SELECT 1 FROM lifecycle_holds WHERE target_tag=? AND kind='backup'",(target,)).fetchone():raise JournalUnavailable('Backup retirement missing')
+        elif kind=='lifecycle_update':
+            if not db.execute("SELECT 1 FROM lifecycle_holds WHERE target_tag=? AND kind='consumed-update'",(target,)).fetchone():raise JournalUnavailable('Consumed update retirement missing')
+            if db.execute("SELECT 1 FROM events WHERE blago_tag('lifecycle-update',channel,external_update_id)=?",(target,)).fetchone():raise JournalUnavailable('Retired update reappeared')

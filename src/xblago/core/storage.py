@@ -453,6 +453,9 @@ class SQLiteBlagoStore:
 
         now = _utc_now()
         with self._locked_transaction() as connection:
+            from xblago.core.lifecycle_schema import present as lifecycle_present
+            if lifecycle_present(connection) and connection.execute("SELECT 1 FROM lifecycle_holds WHERE target_tag=blago_tag('lifecycle-update',?,?) AND kind='consumed-update'",(channel,external_update_id)).fetchone():
+                return False
             row = connection.execute(
                 """
                 SELECT status

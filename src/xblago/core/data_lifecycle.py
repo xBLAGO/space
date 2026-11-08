@@ -72,6 +72,10 @@ def apply_event(db,event,journal):
         if state!='retired':raise ValueError('Unknown backup state')
         db.execute('INSERT OR IGNORE INTO lifecycle_holds VALUES (?,?)',(target,'backup'))
         db.execute("UPDATE lifecycle_backups SET state='RETIRED' WHERE blago_tag('lifecycle-backup',content_hash)=?",(target,))
+    elif kind=='lifecycle_update':
+        if state!='consumed':raise ValueError('Invalid consumed update state')
+        db.execute("INSERT OR IGNORE INTO lifecycle_holds VALUES (?,'consumed-update')",(target,))
+        db.execute("DELETE FROM events WHERE blago_tag('lifecycle-update',channel,external_update_id)=?",(target,))
     else:raise ValueError('Unknown lifecycle event')
 
 

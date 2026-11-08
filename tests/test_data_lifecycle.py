@@ -325,3 +325,42 @@ class DataLifecycleTests(unittest.TestCase):
         with self.store._locked_transaction() as db:db.execute("INSERT INTO passkey_credentials VALUES (?,?,NULL,?,?,0,0,0,1,NULL)",(b'active-synthetic',self.uid,b'synthetic-cose',b'synthetic-handle'))
         self.assertEqual(sweep(self.store)['revoked_credentials'],0)
         with self.store._connect() as db:self.assertEqual(db.execute('SELECT count(*) FROM passkey_credentials').fetchone()[0],1)
+
+    def test_после_удаления_и_новой_регистрации_update_не_исполняется_повторно(self):
+        self.assertTrue(self.store.begin_update('telegram','synthetic-old-update',self.uid))
+        self.store.mark_update_processed('telegram','synthetic-old-update',[{'chat_id':1,'text':'Синтетический удалённый ответ'}])
+        backup=self.backup();p=PrivacyService(self.app).preview(self.a)
+        PrivacyService(self.app).delete(self.a,p['challenge'],'УДАЛИТЬ')
+        token=self.app.register('synthetic_life_a','synthetic-password-only','synthetic-life')[0];uid=self.app.session(token)[0]
+        self.assertFalse(self.store.begin_update('telegram','synthetic-old-update',uid))
+        self.assertIsNone(self.store.cached_update_replies('telegram','synthetic-old-update'))
+        self.assertTrue(self.store.begin_update('telegram','synthetic-new-update',uid))
+        peer=self.app.session(self.b)[0]
+        recovered=restore(backup,Path(self.cfg['XBLAGO_SECURITY_JOURNAL_DIR']))
+        self.assertFalse(recovered.begin_update('telegram','synthetic-old-update',peer))
+
+    def test_транзакционный_guard_не_даёт_вставить_удалённый_update(self):
+        self.store.begin_update('telegram','synthetic-guard-update',self.uid)
+        with self.store._locked_transaction() as db:db.execute("DELETE FROM events WHERE external_update_id='synthetic-guard-update'")
+        with self.assertRaises(sqlite3.IntegrityError):
+            with self.store._locked_transaction() as db:
+                db.execute("INSERT INTO events(channel,external_update_id,blago_user_id,status,created_at,updated_at) VALUES ('telegram','synthetic-guard-update',?,'processing','2000','2000')",(self.uid,))
+        from xblago.integrations.telegram import TelegramBot
+        from xblago.core.storage import TelegramIdentity
+        from xblago.core.privacy_control import purge_user
+        class Provider:
+            calls=0
+            def generate(self,context):self.calls+=1;return 'Синтетический ответ.'
+        provider=Provider();identity=TelegramIdentity(80000001,80000001,'private')
+        bot=TelegramBot(None,Path(self.tmp.name)/'unused',self.store)
+        def update(n,text):return {'update_id':n,'message':{'message_id':n,'from':{'id':80000001},'chat':{'id':80000001,'type':'private'},'text':text}}
+        with patch('xblago.integrations.telegram.build_chat_provider',return_value=provider):
+            bot.replies_for_update(update(9001,'Как починить велосипед?'))
+            old=self.store.resolve_telegram_user(identity)
+            with self.store._locked_transaction() as db:purge_user(db,old)
+            bot.replies_for_update(update(9002,'/start'));new=self.store.resolve_telegram_user(identity)
+            self.assertNotEqual(new,old)
+            bot.replies_for_update(update(9001,'Как починить велосипед?'))
+            self.assertEqual(provider.calls,1);self.assertEqual(self.app.history(new),[])
+            bot.replies_for_update(update(9003,'Как проверить тормоза?'))
+            self.assertEqual(provider.calls,2);self.assertEqual(len(self.app.history(new)),2)
