@@ -15,7 +15,7 @@ import secrets
 import sqlite3
 import time
 
-from xblago.core.data_lifecycle import managed_backup, retire_backup, sweep, RetentionBlocked
+from xblago.core.data_lifecycle import managed_backup, retire_backup, backup_root, sweep, RetentionBlocked
 from xblago.core.security_journal import JournalUnavailable, SecurityJournal, canonical
 from xblago.core.sqlite_safety import require_safe_sqlite
 
@@ -94,6 +94,34 @@ def _safe_counts(value):
     if 'technical' in value and not valid(value['technical'],technical):
         raise ValueError('Only aggregate technical counters allowed')
     return value
+
+
+def _backup_inventory(store, receipt=None):
+    """Refuse orphan/missing/changed managed files; never unlink unknown copies."""
+    root = backup_root(store)
+    with store._locked_transaction() as db:
+        records = [dict(r) for r in db.execute('SELECT * FROM lifecycle_backups')]
+    names = {r['filename'] for r in records}
+    if len(names) != len(records) or any(Path(n).name != n or n in ('.','..') or not n.endswith('.sqlite3') for n in names):
+        raise RetentionBlocked('Backup catalogue requires review')
+    actual = list(root.iterdir()) if root.exists() else []
+    if any(p.name not in names or p.is_symlink() or not p.is_file() for p in actual):
+        raise RetentionBlocked('Uncatalogued managed backup requires review')
+    for r in records:
+        path = root/r['filename']
+        if not path.exists():
+            if r['state'] == 'ACTIVE':
+                raise RetentionBlocked('Active backup missing')
+            continue
+        digest = hashlib.sha256()
+        with path.open('rb') as stream:
+            for chunk in iter(lambda:stream.read(1024*1024), b''):
+                digest.update(chunk)
+        if digest.hexdigest() != r['content_hash']:
+            raise RetentionBlocked('Backup integrity requires review')
+    if receipt is not None and (not isinstance(receipt,dict) or not any(
+            r['backup_id']==receipt.get('backup_id') and r['state']=='ACTIVE' and r['expires_at']>int(time.time()) for r in records)):
+        raise RetentionBlocked('Fresh registered backup required')
 
 
 def initialize(root, schedule=None, *, clock=time.time):
@@ -249,7 +277,11 @@ class Runner:
             counts = {}
             try:
                 store = preflight(self.root/'app'/'blago.sqlite3')
-                self.backup(store)  # failure blocks cleanup, never claims a backup exists
+                _backup_inventory(store)
+                receipt = self.backup(store)  # failure blocks cleanup, never claims a backup exists
+                if not isinstance(receipt,dict):
+                    raise RetentionBlocked('Fresh registered backup required')
+                _backup_inventory(store, receipt)
                 counts = _safe_counts(self.cleanup(store))
                 if self.after_cleanup:
                     self.after_cleanup()
@@ -257,6 +289,7 @@ class Runner:
                     retired = [r[0] for r in app.execute("SELECT backup_id FROM lifecycle_backups WHERE state='RETIRED'")]
                 for bid in retired:
                     retire_backup(store, bid, unlink=True)
+                _backup_inventory(store)
                 # No SUCCESS without post-commit original journal/witness verification.
                 _, rows, chain = _controls(self.cfg)
                 with self._db() as (db, binding, policy):

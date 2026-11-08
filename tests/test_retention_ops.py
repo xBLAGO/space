@@ -103,14 +103,14 @@ class RetentionOpsTests(unittest.TestCase):
         self.now=max(self.now+10,int(time.time())+10);self.assertEqual(self.r.tick()['status'],'SUCCESS')
         self.assertEqual(self.ops("SELECT count(*) FROM ops_runs WHERE status='INTERRUPTED'")[0][0],1)
     def test_crash_после_app_commit_не_откатывает_удаление(self):
-        self.aged();backup=self.store.backup_database();p,pipe=self.spawn('die');p.join(30);self.assertEqual(p.exitcode,84)
+        self.aged();backup=self.store.backup_database(self.root/'offline-recovery');p,pipe=self.spawn('die');p.join(30);self.assertEqual(p.exitcode,84)
         self.now=max(self.now,int(time.time())+1)
         self.assertEqual(self.count(),0);self.assertEqual(self.r.inspect()['status'],'INTERRUPTED')
         recovered=restore(backup,Path(self.cfg['XBLAGO_SECURITY_JOURNAL_DIR']))
         with recovered._locked_transaction() as db:self.assertEqual(db.execute('SELECT count(*) FROM blago_needs').fetchone()[0],0)
         self.now=max(self.now+10,int(time.time())+10);self.assertEqual(self.r.tick()['status'],'SUCCESS')
     def test_старый_app_backup_и_сохранённый_ops_не_возвращают_данные(self):
-        self.aged();backup=self.store.backup_database();self.assertEqual(self.r.tick()['status'],'SUCCESS')
+        self.aged();backup=self.store.backup_database(self.root/'offline-recovery');self.assertEqual(self.r.tick()['status'],'SUCCESS')
         recovered=restore(backup,Path(self.cfg['XBLAGO_SECURITY_JOURNAL_DIR']))
         with recovered._locked_transaction() as db:
             self.assertEqual(db.execute('SELECT count(*) FROM blago_needs').fetchone()[0],0)
@@ -211,6 +211,27 @@ class RetentionOpsTests(unittest.TestCase):
         with sqlite3.connect(other/'retention-ops/operations.sqlite3') as db:
             self.assertEqual(db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall(),[])
         with self.assertRaises(FileExistsError):initialize(other)
+
+    def test_осиротевший_backup_после_ошибки_не_теряется_из_контроля(self):
+        self.aged()
+        def orphan(store):
+            store.backup_database()
+            raise OSError('Synthetic exit before catalogue commit')
+        r=Runner(self.root,enabled=True,clock=self.clock,backup=orphan)
+        self.assertEqual(r.tick()['status'],'FAILED');self.now+=3
+        self.assertEqual(self.r.tick()['reason'],'RETENTION_REVIEW_REQUIRED');self.assertEqual(self.count(),1)
+        self.assertEqual(len(list((self.root/'app/backups/sqlite').glob('*.sqlite3'))),1)
+
+    def test_потерянный_или_подменённый_active_backup_блокирует_cleanup(self):
+        from xblago.core.data_lifecycle import managed_backup
+        self.aged();b=managed_backup(self.store);path=Path(b['path']);original=path.read_bytes();path.write_bytes(b'synthetic corrupt bytes')
+        self.assertEqual(self.r.tick()['reason'],'RETENTION_REVIEW_REQUIRED');self.assertEqual(self.count(),1)
+        path.write_bytes(original);path.unlink();self.now+=3
+        self.assertEqual(self.r.tick()['reason'],'RETENTION_REVIEW_REQUIRED');self.assertEqual(self.count(),1)
+
+    def test_пустая_backup_квитанция_не_считается_успехом(self):
+        self.aged();r=Runner(self.root,enabled=True,clock=self.clock,backup=lambda store:None)
+        self.assertEqual(r.tick()['reason'],'RETENTION_REVIEW_REQUIRED');self.assertEqual(self.count(),1)
 
 
 class HelpReidentificationTests(unittest.TestCase):

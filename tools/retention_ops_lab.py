@@ -85,7 +85,7 @@ def run():
                 with (store or app.store)._locked_transaction() as db:return db.execute('SELECT count(*) FROM blago_needs').fetchone()[0]
             now=[int(time.time())];clock=lambda:now[0]
             initialize(root,Schedule(interval=10,retry_seconds=1,max_attempts=2,overdue_seconds=20),clock=clock)
-            r=Runner(root,enabled=True,clock=clock);aged();old=app.store.backup_database()
+            r=Runner(root,enabled=True,clock=clock);aged();old=app.store.backup_database(root/'offline-recovery')
             record('disabled','no cleanup',Runner(root,enabled=False).tick()['status']=='DISABLED' and count()==1)
             now[0]+=21
             delayed=r.inspect();normal=r.tick()
