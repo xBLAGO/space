@@ -31,7 +31,7 @@ def main():
     from playwright.sync_api import sync_playwright, expect
     args.output.mkdir(parents=True,exist_ok=True);checks={};errors=[]
     with tempfile.TemporaryDirectory(prefix='blago-help-mobile-') as root:
-        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True)
+        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True,lifecycle=True)
         cfg.update(TELEGRAM_BOT_TOKEN='123:synthetic-help011-only',XBLAGO_WEB_INVITE_CODE='synthetic-mobile',XBLAGO_COOKIE_SECURE='false')
         with patch.dict(os.environ,cfg):
             app=WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'));help_service=HelpService(app)

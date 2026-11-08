@@ -1379,6 +1379,10 @@ class BlagoWebHandler(TelegramWebhookHandler):
                 if self._body():
                     raise ApiError(400,'Export scope is determined by your authenticated account')
                 self._json(privacy.export(token))
+            elif path=='/api/v1/privacy/consent/withdraw' and method=='POST':
+                data=self._body()
+                if set(data)!={'purpose'} or type(data['purpose']) is not str:raise ApiError(400,'Only consent purpose is accepted')
+                self._json(privacy.withdraw_consent(token,data['purpose']))
             elif path=='/api/v1/privacy/delete-preview' and method=='POST':
                 if self._body():
                     raise ApiError(400,'Deletion scope is determined by your authenticated account')

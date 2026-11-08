@@ -421,16 +421,19 @@ class SQLiteBlagoStore:
         if len(exchange) != 2 or tuple(t.role for t in exchange) != ("user", "assistant"):
             raise ValueError("A complete user/assistant exchange is required")
         with self._locked_transaction() as connection:
-            connection.executemany(
-                "INSERT INTO dialogue_turns (blago_user_id,channel,chat_id,role,text,created_at) VALUES (?,?,?,?,?,?)",
-                [(blago_user_id, channel, str(chat_id) if chat_id is not None else None, turn.role, turn.text, _utc_now())
-                 for turn in exchange],
-            )
+            ids=[]
+            for turn in exchange:
+                cursor=connection.execute(
+                    "INSERT INTO dialogue_turns (blago_user_id,channel,chat_id,role,text,created_at) VALUES (?,?,?,?,?,?)",
+                    (blago_user_id,channel,str(chat_id) if chat_id is not None else None,turn.role,turn.text,_utc_now()))
+                ids.append(cursor.lastrowid)
+            from xblago.core.lifecycle_schema import present
+            if present(connection):connection.execute('INSERT INTO lifecycle_history_pairs VALUES (?,?)',ids)
 
     def backup_database(self, destination_dir: Path | None = None) -> Path:
         target_dir = destination_dir or (self.path.parent / "backups" / "sqlite")
         target_dir.mkdir(parents=True, exist_ok=True)
-        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
         backup_path = target_dir / f"{self.path.stem}-{timestamp}.sqlite3"
         with self._lock:
             source = sqlite3.connect(self.path, timeout=30.0)
@@ -568,7 +571,7 @@ class SQLiteBlagoStore:
             )
 
     def _backup_legacy_file(self, legacy_path: Path) -> Path:
-        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
         backup_dir = legacy_path.parent / "backups" / timestamp
         backup_dir.mkdir(parents=True, exist_ok=True)
         backup_path = backup_dir / legacy_path.name
@@ -702,6 +705,8 @@ class SQLiteBlagoStore:
                     if privacy:
                         from xblago.core.context_schema import check_frontiers
                         check_frontiers(connection, privacy)
+                        from xblago.core.lifecycle_schema import check_denials
+                        check_denials(connection,privacy)
                     self._transaction_local.connection = connection
                     try:
                         yield connection

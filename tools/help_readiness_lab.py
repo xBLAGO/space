@@ -25,7 +25,7 @@ def initialize(root, journal=None, witness=None):
     for destination in (journal, witness):
         if destination is not None and Path(destination).exists():
             raise ValueError('Control destination must be new')
-    cfg = create(root, help_enabled=True,context_fencing=True)
+    cfg = create(root, help_enabled=True,context_fencing=True,lifecycle=True)
     for name, destination in (('XBLAGO_SECURITY_JOURNAL_DIR',journal),('XBLAGO_JOURNAL_WITNESS_DIR',witness)):
         if destination is not None:
             destination = Path(destination).resolve()

@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -58,6 +58,10 @@ jobs:
         run: PYTHONPATH=.:src python -m tools.help_worker_probe --output "$RUNNER_TEMP/help-worker-probe.json"
       - name: Context fencing synthetic latency and multiprocess proof
         run: PYTHONPATH=.:src python -m tools.context_fencing_check --output "$RUNNER_TEMP/context-fencing-check.json"
+      - name: Privacy 01.3 lifecycle inventory and restore rehearsal
+        run: |
+          PYTHONPATH=.:src python -m tools.lifecycle_inventory --output "$RUNNER_TEMP/lifecycle-inventory.json"
+          PYTHONPATH=.:src python -m tools.lifecycle_check --output "$RUNNER_TEMP/lifecycle-check.json"
       - uses: actions/upload-artifact@v4
         with:
           name: pilot-browser-evidence
@@ -69,6 +73,8 @@ jobs:
             ${{ runner.temp }}/help-mobile
             ${{ runner.temp }}/help-worker-probe.json
             ${{ runner.temp }}/context-fencing-check.json
+            ${{ runner.temp }}/lifecycle-inventory.json
+            ${{ runner.temp }}/lifecycle-check.json
 
   docker:
     runs-on: ubuntu-latest
@@ -292,3 +298,7 @@ jobs:
                       assert db.execute('PRAGMA synchronous').fetchone()[0] == 2
               print('Disposable nonfinancial Help lab: PASS; independent custody UNKNOWN')
           PY
+      - name: Docker lifecycle replay smoke (synthetic, no network)
+        run: |
+          docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python \
+            xblago-space:${{ github.sha }} -m tools.lifecycle_check --output /tmp/lifecycle-check.json

@@ -77,6 +77,8 @@ class PrivacyService:
             control = self.require(db)
             uid = self.app.identity.session_row(db,token,fresh=True)['blago_user_id']
             family = self.family(db,uid)
+            from xblago.core import lifecycle_schema
+            if lifecycle_schema.present(db) and self._plan(db,uid)[1]:raise ApiError(409,'Legacy/economic export requires ownership and retention review')
             marks = ','.join('?' for _ in family)
             tables = {}
             count,size = 0,0
@@ -146,6 +148,18 @@ class PrivacyService:
                     'scope':'canonical_and_recorded_aliases','legacy_ownership_review_required':legacy_review,
                     'tables':tables,'security_changes':changes,
                     'excluded':['authentication_secrets','other_participant_identifiers','filesystem_paths','provider_diagnostics','journal_key_mac_and_target_tags','external_legacy_files']}
+
+    def withdraw_consent(self,token,purpose):
+        if purpose not in ('optional_activity','device_label'):raise ApiError(400,'Unknown optional consent')
+        from xblago.core.data_lifecycle import require
+        with self.store._locked_transaction() as db:
+            require(db);uid=self.app.identity.session_row(db,token,fresh=True)['blago_user_id']
+            for member in self.family(db,uid):
+                previous=db.execute('SELECT COALESCE(max(recorded_at),0) FROM consent_records WHERE blago_user_id=? AND purpose=?',(member,purpose)).fetchone()[0]
+                db.execute("INSERT INTO consent_records VALUES (?,?,?,'synthetic-lifecycle-1','withdrawn',?)",(secrets.token_hex(16),member,purpose,max(int(time.time()),previous+1)))
+                if purpose=='optional_activity':db.execute('DELETE FROM activity_events WHERE blago_user_id=?',(member,))
+                else:db.execute('UPDATE user_devices SET label=NULL WHERE blago_user_id=?',(member,))
+        return {'withdrawn':True,'purpose':purpose,'scope':'canonical_and_recorded_aliases'}
 
     def analytics(self, token):
         with self.store._locked_transaction() as db:
