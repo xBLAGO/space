@@ -73,7 +73,9 @@ def preflight(path: Path):
         expected=json.loads(Path(__file__).with_name('integration_help_schema.json' if has_help else 'integration_schema.json').read_text())
         from xblago.core import context_schema
         context_schema.validate(db,mandatory=context_schema.required())
-        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS}
+        from xblago.core import lifecycle_schema
+        lifecycle_schema.validate(db,mandatory=lifecycle_schema.required())
+        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS|lifecycle_schema.OBJECTS}
         if actual_shape!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
         for module,table in zip(MODULES,('identity_schema_migrations','identity_runtime_migrations','privacy_schema_migrations','pilot_schema_migrations')):
             if table not in objects or db.execute(f'SELECT version,checksum FROM {table}').fetchall()!=[(module.VERSION,module.CHECKSUM)]:

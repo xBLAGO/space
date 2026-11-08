@@ -36,8 +36,9 @@ def deletion_blockers(db, uid):
         if db.execute(f'SELECT 1 FROM {table} WHERE {column} IN (SELECT id FROM {parent} WHERE blago_user_id=?) LIMIT 1',(uid,)).fetchone():
             blockers.append(table)
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
-    from xblago.core import context_schema
+    from xblago.core import context_schema,lifecycle_schema
     if context_schema.validate(db):known.update(context_schema.TABLES)
+    if lifecycle_schema.validate(db):known.update(lifecycle_schema.TABLES)
     from xblago.core.help_schema import present,validate,TABLES
     if present(db):
         validate(db,required=True);known.update(TABLES)
@@ -59,7 +60,11 @@ def purge_user(db, uid):
         raise DeletionBlocked('Economic/unknown ownership retention requires review before account deletion')
     from xblago.domain.help_service import purge_user as purge_help
     from xblago.core.help_schema import present
-    if present(db):purge_help(db,uid,SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR'])))
+    from xblago.core import lifecycle_schema
+    if present(db) and lifecycle_schema.present(db) and not db.execute('SELECT blago_replaying()').fetchone()[0]:
+        from xblago.core.data_lifecycle import retire_user_help
+        retire_user_help(db,uid,SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR'])))
+    elif present(db):purge_help(db,uid,SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR'])))
     from xblago.core import context_schema
     if context_schema.present(db):db.execute('DELETE FROM context_generations WHERE blago_user_id=?',(uid,))
     for table in OWNED:
@@ -97,6 +102,8 @@ class PrivacyControl:
         if any(actual.get(statement.split()[2])!=statement for statement in DDL):
             raise JournalUnavailable('Privacy schema/trigger drift detected')
         self.rows,self.chain = journal.read()
+        from xblago.core import lifecycle_schema
+        lifecycle_schema.validate(db,mandatory=lifecycle_schema.required() or any(json.loads(r[2])['kind'].startswith('lifecycle_') for r in self.rows))
         from xblago.core import context_schema
         context_schema.validate(db,mandatory=context_schema.required() or any(json.loads(r[2])['kind']=='context_version' for r in self.rows))
         state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
@@ -119,6 +126,18 @@ class PrivacyControl:
                 self.replay_seq=seq
                 self._apply(json.loads(payload))
             changed = self.applied != len(self.rows)
+            if changed:
+                from xblago.core import context_schema
+                if context_schema.present(self.db):
+                    # Replay side effects can invalidate versions after the last
+                    # recorded context event (e.g. deletion/consent AFTER triggers).
+                    # The authenticated frontier, not replay-trigger increments,
+                    # is authoritative; all replayed tickets remain rejected.
+                    latest={}
+                    for row in self.rows:
+                        event=json.loads(row[2])
+                        if event['kind']=='context_version':latest[event['owner']]=event
+                    for event in latest.values():context_schema.apply_checkpoint(self.db,event,self.journal)
             if changed:
                 self.db.execute('UPDATE privacy_state SET applied_seq=?,applied_head=? WHERE singleton=1',
                                 (len(self.rows),self.chain[-1]))
@@ -166,7 +185,10 @@ class PrivacyControl:
         db = self.db
         kind, owner, target, state = (event[k] for k in ('kind','owner','target','state'))
         uid = self._uid(owner)
-        if kind=='context_version':
+        if kind.startswith('lifecycle_'):
+            from xblago.core.data_lifecycle import apply_event
+            apply_event(db,event,self.journal)
+        elif kind=='context_version':
             from xblago.core.context_schema import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
         elif kind=='help_state':
@@ -226,6 +248,8 @@ class PrivacyControl:
                 stamp=max(event['recorded_at'],(previous or 0)+1)
                 db.execute("INSERT OR IGNORE INTO consent_records VALUES (?,?,?,'recovery-tombstone','withdrawn',?)",
                            (recovery_id,uid,state,stamp))
+                if state=='optional_activity':db.execute('DELETE FROM activity_events WHERE blago_user_id=?',(uid,))
+                if state=='device_label':db.execute('UPDATE user_devices SET label=NULL WHERE blago_user_id=?',(uid,))
         elif kind not in ('user_status','alias','channel_grant'):
             raise ValueError('Unknown critical intent')
 

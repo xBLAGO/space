@@ -15,7 +15,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--chrome',default='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');args=parser.parse_args()
     from playwright.sync_api import sync_playwright,expect
     with tempfile.TemporaryDirectory() as root:
-        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True);cfg.update(XBLAGO_WEB_INVITE_CODE='synthetic-help-browser',XBLAGO_COOKIE_SECURE='false')
+        cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True,lifecycle=True);cfg.update(XBLAGO_WEB_INVITE_CODE='synthetic-help-browser',XBLAGO_COOKIE_SECURE='false')
         with patch.dict(os.environ,cfg):
             app=WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'))
             for username in ('help_author','help_helper'):app.register(username,'synthetic-password-only','synthetic-help-browser')

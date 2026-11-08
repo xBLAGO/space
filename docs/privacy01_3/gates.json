@@ -1,0 +1,351 @@
+{
+  "format": "blago-privacy013-gates-1",
+  "mode": "strict synthetic runtime, installed context and lifecycle migrations",
+  "real_pilot": "NO-GO",
+  "next_development": "GO only for isolated remediation of remaining release gates",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G00"
+      },
+      "prior_evidence": {
+        "id": "G00",
+        "status": "PASS",
+        "evidence": "Exact source identity + unchanged old migration checksums + explicit context checksum; 390 CI tests and Docker PASS; no production approval",
+        "scope": "Synthetic Privacy01.2 source/CI only",
+        "production_release_approval": "UNKNOWN",
+        "production_image_promotion": "UNKNOWN",
+        "source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04"
+      },
+      "evidence": "ci-source.json: 432 tests, Chrome browser checks, synthetic mobile, Docker PASS; inherited scope preserved",
+      "source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+      "scope": "Synthetic source CI only; activated context/lifecycle with original journal and witness"
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G01"
+      },
+      "prior_evidence": {
+        "id": "G01",
+        "status": "PASS",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "scope": "Candidate workflow code only; no main/deployment change",
+        "environment_protection_configuration": "UNKNOWN",
+        "current_main_deployment_policy": "UNCHANGED: unsafe auto-push workflow is not altered until a separately authorized merge",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G01"
+        },
+        "prior_evidence": "Deployment workflow unchanged; tests-only workflow expanded; no production write/deploy/merge. Environment governance remains UNKNOWN"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G02"
+      },
+      "prior_evidence": {
+        "id": "G02",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G02"
+        },
+        "prior_evidence": "local-stand.json and CI prove patched library, WAL/FULL/integrity in synthetic environments; actual HF/pilot storage/fsync UNKNOWN"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G03"
+      },
+      "prior_evidence": {
+        "id": "G03",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G03"
+        },
+        "prior_evidence": "test-results.json: authenticated encrypted DR, retained witness-copy and old app backup negatives PASS; independent off-host/operator custody NOT EXECUTED"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G04"
+      },
+      "prior_evidence": {
+        "id": "G04",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "help01_subscope": "Synthetic deletion/anonymization/old-backup denial PASS; approved real retention policy UNKNOWN",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G04"
+        },
+        "prior_evidence": "Deletion/scrub/TTL negatives PASS; real retention policy/sign-off and metadata scope not approved; Help plaintext automatic TTL not implemented"
+      },
+      "evidence": "test-results.json, inventory.json, rehearsal-local.json, ci-source.json; local mechanisms PASS, complete lifecycle approval/operations unverified",
+      "source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+      "synthetic_mechanisms": "PASS",
+      "mandatory_unclosed": [
+        "approved real-user policy and controller/processor responsibility",
+        "deployed and monitored retention deadline/SLA",
+        "all backups/client/log/provider copies inventory and deletion obligations",
+        "independent custody/physical recovery evidence",
+        "legacy economic/merge/unpaired history disposition",
+        "reidentification review for retained metadata"
+      ],
+      "not_claimed": [
+        "physical secure erasure",
+        "provider deletion",
+        "independent audit",
+        "real-user readiness"
+      ]
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G05"
+      },
+      "prior_evidence": {
+        "id": "G05",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G05"
+        },
+        "prior_evidence": "browser-results.json 11/11, mobile-results.json 11/11 synthetic; physical Telegram iOS/Android/passkeys NOT EXECUTED"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G06"
+      },
+      "prior_evidence": {
+        "id": "G06",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G06"
+        },
+        "prior_evidence": "provider-results.json: NOT EXECUTED, zero requests, no explicit approved test token/model; production credentials not read"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G07"
+      },
+      "prior_evidence": {
+        "id": "G07",
+        "status": "PASS",
+        "evidence": "Full fenced synthetic Help browser cycle 11 checks PASS; Help consent unchanged; real-user acceptance UNKNOWN",
+        "scope": "Synthetic Help01.1 only",
+        "source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04"
+      },
+      "evidence": "ci-source.json: 432 tests, Chrome browser checks, synthetic mobile, Docker PASS; inherited scope preserved",
+      "source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+      "scope": "Synthetic source CI only; activated context/lifecycle with original journal and witness"
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G08"
+      },
+      "prior_evidence": {
+        "id": "G08",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G08"
+        },
+        "prior_evidence": "Same-author security review and IDOR/CSRF/replay/race/deletion/retention tests; no independent security reviewer. Aggregate differencing broader review pending"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G09",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G09"
+      },
+      "prior_evidence": {
+        "id": "G09",
+        "status": "PASS",
+        "evidence": "before-probe.json FAIL vs after-probe-ci.json PASS; 34 context tests / 390 full CI PASS; compare+effects serialized against delete, crash/replay/restore, Web/Bot/synthetic Mini App",
+        "source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04",
+        "scope": "Only activated foundation_privacy_context_001 + existing strict synthetic preflight + canonical SQLite/original journal/witness",
+        "capacity_qualification": "UNKNOWN",
+        "physical_device_qualification": "NOT EXECUTED",
+        "legacy_without_migration": "NOT QUALIFIED; no G09 PASS"
+      },
+      "evidence": "ci-source.json: 432 tests, Chrome browser checks, synthetic mobile, Docker PASS; inherited scope preserved",
+      "source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+      "scope": "Synthetic source CI only; activated context/lifecycle with original journal and witness"
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G10"
+      },
+      "prior_evidence": {
+        "id": "G10",
+        "status": "UNKNOWN",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G10"
+        },
+        "prior_evidence": "Documented 3–5 volunteer admission/stop/rollback/deletion plan only; operational drill NOT EXECUTED"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    },
+    {
+      "id": "G11",
+      "status": "FAIL",
+      "inherited_from": {
+        "document": "../privacy01_2/gates.json",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+        "gate": "G11"
+      },
+      "prior_evidence": {
+        "id": "G11",
+        "status": "FAIL",
+        "evidence": "Inherited exact #22 gate; Privacy01.2 does not qualify this release condition. See inherited_from and prior_evidence.",
+        "source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+        "inherited_from": {
+          "document": "../help01_1/gates.json",
+          "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+          "gate": "G11"
+        },
+        "prior_evidence": "Integration preflight and HelpService still intentionally synthetic/local-only. No approved real-user runtime, release manifest or operational sign-off"
+      },
+      "evidence": "Inherited scope only; Privacy01.3 does not promote this gate or authorize real users."
+    }
+  ],
+  "deployment_executed": false,
+  "production_access": false,
+  "source_candidate_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/42512292499",
+  "help01": {
+    "source_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+    "migration": "foundation_help_001",
+    "real_participants": false,
+    "actual_telegram_webview": "UNKNOWN",
+    "independent_security_review": "UNKNOWN",
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42083896833",
+    "source_recipe_sha": "68c274022b3889ee91986c0ce6f63c560280f732",
+    "runtime_source_sha": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+    "ci_status": "PASS",
+    "tests_passed": 340,
+    "docker_help_cycle": "PASS",
+    "real_user_release": "NO-GO"
+  },
+  "base_gate_document": "../privacy01_2/gates.json",
+  "base_gate_sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+  "help01_1": {
+    "runtime_source_sha": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+    "baseline_help_runtime": "30a9794b15ce7b61a7705f4815a61bc798ad1698",
+    "ci_status": "PASS",
+    "tests_passed": 356,
+    "docker": "PASS",
+    "mobile_synthetic": "PASS",
+    "physical_devices": "NOT EXECUTED",
+    "live_provider": "NOT EXECUTED",
+    "worker_privacy": "FAIL",
+    "actual_user_admission": "DENIED"
+  },
+  "privacy01_2": {
+    "runtime_source_sha": "47af53e0052a2f67efbef9108c3987b2439efc04",
+    "migration": "foundation_privacy_context_001",
+    "checksum": "79aed28a7444a8a4758d8133033dd636dee6a3a214c877faba338da315434aa0",
+    "fencing_required": true,
+    "base_runtime": "d2294c1b1c7b082c6dfcfe1eb788bb6e8d12285b",
+    "tests_passed": 390,
+    "ci": "PASS",
+    "Docker": "PASS",
+    "new_llm_calls_for_fencing": 0,
+    "G09": "PASS scoped",
+    "actual_user_admission": "DENIED"
+  },
+  "privacy01_3": {
+    "runtime_source_sha": "9abb7cc7b22346be0a9b095e7f13b1dc81928e28",
+    "migration": "foundation_privacy_lifecycle_001",
+    "checksum": "1549c5875e15571f35ae93c1f2535c42fcc690df65f04be29629ce3c2c89e02a",
+    "tables_inventoried": 56,
+    "new_tests": 42,
+    "tests_passed_ci": 432,
+    "Docker": "PASS",
+    "old_migration_checksums": "UNCHANGED",
+    "extra_llm_calls": 0,
+    "policy_real_user_approval": "NOT APPROVED",
+    "G04": "UNKNOWN",
+    "G09": "PASS only within installed G09 scope; regression preserved",
+    "physical_devices": "NOT EXECUTED",
+    "live_provider": "NOT EXECUTED",
+    "independent_security_review": "NOT EXECUTED",
+    "actual_user_admission": "DENIED"
+  }
+}

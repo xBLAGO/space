@@ -14,25 +14,29 @@ def cleanup(store, *, now=None):
     now = int(time.time()) if now is None else now
     if not isinstance(now,int) or now>int(time.time())+1:
         raise ValueError('Cleanup cannot expire future-valid records')
-    counts = {}
     with store._locked_transaction() as db:
         if PrivacyControl.open(db) is None:
             raise ValueError('Foundation 05.3 is required for verified cleanup')
-        for table in ('auth_challenges','telegram_exchanges','telegram_proofs','privacy_delete_challenges'):
-            counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<?',(now,)).rowcount
-        from xblago.core.help_schema import present
-        if present(db):
-            counts['help_challenges']=db.execute('DELETE FROM help_challenges WHERE expires_at<?',(now,)).rowcount
-        for table in ('activity_events','security_signals'):
-            counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<=?',(now,)).rowcount
-        counts['account_link_codes'] = db.execute("DELETE FROM account_link_codes WHERE CAST(strftime('%s',expires_at) AS INTEGER)<=?",(now,)).rowcount
-        counts['web_sessions'] = db.execute("""DELETE FROM web_sessions WHERE last_seen_at<=? OR created_at<=?
-            OR CAST(strftime('%s',expires_at) AS INTEGER)<=?
-            OR blago_user_id IN (SELECT blago_user_id FROM users WHERE status<>'active')""",(now-1800,now-604800,now)).rowcount
-        # Telegram update dedupe, dialogue, financial records, consents and the
-        # independent journal are deliberately outside technical-event TTL.
-        if db.execute('PRAGMA foreign_key_check').fetchall():
-            raise ValueError('Cleanup foreign key check failed')
+        return cleanup_rows(db,now)
+
+
+def cleanup_rows(db,now):
+    counts={}
+    for table in ('auth_challenges','telegram_exchanges','telegram_proofs','privacy_delete_challenges'):
+        counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<?',(now,)).rowcount
+    from xblago.core.help_schema import present
+    if present(db):
+        counts['help_challenges']=db.execute('DELETE FROM help_challenges WHERE expires_at<?',(now,)).rowcount
+    for table in ('activity_events','security_signals'):
+        counts[table] = db.execute(f'DELETE FROM {table} WHERE expires_at<=?',(now,)).rowcount
+    counts['account_link_codes'] = db.execute("DELETE FROM account_link_codes WHERE CAST(strftime('%s',expires_at) AS INTEGER)<=?",(now,)).rowcount
+    counts['web_sessions'] = db.execute("""DELETE FROM web_sessions WHERE last_seen_at<=? OR created_at<=?
+        OR CAST(strftime('%s',expires_at) AS INTEGER)<=?
+        OR blago_user_id IN (SELECT blago_user_id FROM users WHERE status<>'active')""",(now-1800,now-604800,now)).rowcount
+    # Telegram update dedupe, dialogue, financial records, consents and the
+    # independent journal are deliberately outside technical-event TTL.
+    if db.execute('PRAGMA foreign_key_check').fetchall():
+        raise ValueError('Cleanup foreign key check failed')
     return counts
 
 
@@ -40,6 +44,8 @@ def restore(path: Path, journal_directory: Path):
     """Offline restore: bind the original journal, replay denials, invalidate tokens."""
     if not path.is_file():
         raise ValueError('Restore requires an existing offline database copy')
+    from xblago.core.data_lifecycle import assert_backup_not_retired
+    assert_backup_not_retired(path,SecurityJournal(journal_directory))
     configured = os.getenv('XBLAGO_SECURITY_JOURNAL_DIR','')
     if configured and Path(configured).resolve()!=journal_directory.resolve():
         raise ValueError('Configured journal differs from restore journal')
