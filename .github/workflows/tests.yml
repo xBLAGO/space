@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -64,6 +64,8 @@ jobs:
           PYTHONPATH=.:src python -m tools.lifecycle_check --output "$RUNNER_TEMP/lifecycle-check.json"
       - name: Privacy 01.4 operational retention and linkage attacks (synthetic only)
         run: PYTHONPATH=.:src python -m tools.retention_ops_lab --output "$RUNNER_TEMP/retention-ops-lab.json"
+      - name: Durable assets on guarded identity privacy and recovery
+        run: PYTHONPATH=.:src python -m tools.durable_asset_lab --output "$RUNNER_TEMP/durable-asset-lab.json"
       - name: Collective Calculator offline accounting demonstration
         run: PYTHONPATH=.:src python -m tools.collective_calculator_lab --output "$RUNNER_TEMP/calculator-lab.json"
       - name: Integration 02 one-database cross-channel user journey
@@ -84,6 +86,7 @@ jobs:
             ${{ runner.temp }}/retention-ops-lab.json
             ${{ runner.temp }}/unified-mvp-check.json
             ${{ runner.temp }}/calculator-lab.json
+            ${{ runner.temp }}/durable-asset-lab.json
 
   docker:
     runs-on: ubuntu-latest
@@ -323,3 +326,7 @@ jobs:
         run: |
           docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python \
             xblago-space:${{ github.sha }} -m tools.collective_calculator_lab --output /tmp/calculator-lab.json
+      - name: Docker durable asset registry (synthetic, no network)
+        run: |
+          docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python \
+            xblago-space:${{ github.sha }} -m tools.durable_asset_lab --output /tmp/durable-asset-lab.json

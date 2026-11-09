@@ -1,0 +1,153 @@
+{
+  "format": "blago-asset091-gates-1",
+  "base_sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+  "source_sha": "34fb475455678dc024cf39f8fa27d2cd0c5af7dd",
+  "next_development": "GO isolated synthetic only",
+  "real_pilot": "NO-GO",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G00"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G01"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G02"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G03"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G04"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G05"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G06"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G07"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G08"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G09",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G09"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G10"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    },
+    {
+      "id": "G11",
+      "status": "FAIL",
+      "inherited_from": {
+        "document": "../calculator01/gates.json",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+        "gate": "G11"
+      },
+      "scope": "Inherited scope unchanged; no actual pilot qualification"
+    }
+  ],
+  "new_synthetic_evidence": {
+    "migration": "explicit additive; prior checksums unchanged",
+    "durability": "one application SQLite + existing journal/witness",
+    "demo_checks": 23,
+    "new_tests": 49,
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42697562923",
+    "G09": "owner revision/epoch invalidation; separate actual worker tested; no shared asset LLM context",
+    "feature_default": "OFF",
+    "external_calls": 0,
+    "new_routes": 0,
+    "full_tests": 565,
+    "supplemental_channels_local": 6
+  },
+  "unclosed": [
+    "real retention/audience/custody approval",
+    "target-host and independent DR qualification",
+    "independent review",
+    "physical clients and action bridge",
+    "legacy mapping and claim-aware merge",
+    "shared recipient LLM fencing before future context inclusion",
+    "durable valuation provenance binding",
+    "cross-node federation"
+  ],
+  "independent_attestation": false
+}

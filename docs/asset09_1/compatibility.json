@@ -1,0 +1,81 @@
+{
+  "format": "blago-asset091-compatibility-1",
+  "base_sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+  "source_sha": "34fb475455678dc024cf39f8fa27d2cd0c5af7dd",
+  "new_app_migration": "foundation09_asset_registry_001",
+  "automatic_legacy_imports": 0,
+  "new_http_routes": 0,
+  "new_dependencies": 0,
+  "unchanged": [
+    {
+      "path": "src/xblago/core/identity_schema.py",
+      "sha256": "3a67ddb05d838bd34bd95393a94dd1ae6ae2fb412ef7652a369ef147fc024090"
+    },
+    {
+      "path": "src/xblago/core/identity_runtime_schema.py",
+      "sha256": "409cba221bff470b4260a88e7931b264bcd17da29959b1a68ff6183cf564164a"
+    },
+    {
+      "path": "src/xblago/core/privacy_schema.py",
+      "sha256": "3769291d99a20bb66d0dd8cd42b757a7d6a073e003f0f119ada08d6800bb9c2e"
+    },
+    {
+      "path": "src/xblago/core/pilot_schema.py",
+      "sha256": "9169fa0117ef0104478ddb585fecb7d4980782fd8124632f248b402bc8e13695"
+    },
+    {
+      "path": "src/xblago/core/help_schema.py",
+      "sha256": "bf7084d9ba41bef2a75de1b5a678823e698115057bc054cbe96ad4aa356a9bbc"
+    },
+    {
+      "path": "src/xblago/core/context_schema.py",
+      "sha256": "7be28f8e7eb6ddc04ddedf43b70716d50a2230180e5a30696f38ca2bf49937cf"
+    },
+    {
+      "path": "src/xblago/core/lifecycle_schema.py",
+      "sha256": "a61bbf725c0080355e695b6d6e9f56a7988fcdd9b112cf7e5aad180b41c5b46c"
+    },
+    {
+      "path": "src/xblago/core/integration_schema.json",
+      "sha256": "a0673f4c3f531961139633f5ce634d111ddc6fcdd5d695775b92d16184b2cf17"
+    },
+    {
+      "path": "src/xblago/core/integration_help_schema.json",
+      "sha256": "5fb911f4bd488a0502c10472edd8a0e642304c92abc55d5fd0eb2179bcac5ba5"
+    },
+    {
+      "path": "requirements-integration.lock",
+      "sha256": "a07961af237437505e654d3f873924bf96f7ec0702d5a1b37c15a6becf4949f6"
+    },
+    {
+      "path": ".github/workflows/huggingface-space.yml",
+      "sha256": "e4e3fd36d331045c93e5c1d4b462e99f41a994e2881f3600c4bd9e60876b1faa"
+    },
+    {
+      "path": "src/xblago/integrations/web.py",
+      "sha256": "8b564af00a67ed5256d01585cae9355177e3fdea479784b4d0341a7b51a175fd"
+    },
+    {
+      "path": "src/xblago/integrations/telegram.py",
+      "sha256": "2e94e93ffdf009932baab78cb6102c4df3538ec289470ec6f87f9793090e26cf"
+    },
+    {
+      "path": "src/xblago/agents/personal_assistant.py",
+      "sha256": "01f816afae2c439f59002d68567b983baa4c4a6cc417fd7d9cbc1dc4b814b8ec"
+    },
+    {
+      "path": "src/xblago/domain/collective_calculator.py",
+      "sha256": "35f8f12714016c1f79052d2cd7d84d840213588b3952db46bcec2d1d432d5a65"
+    }
+  ],
+  "verified_unchanged_manifest_fields": [
+    "help_migration",
+    "context_migration",
+    "lifecycle_migration",
+    "migration_order",
+    "schema_sha256",
+    "help_schema_sha256",
+    "dependencies"
+  ],
+  "privacy_owned_economic_declarations": "UNCHANGED"
+}

@@ -36,7 +36,8 @@ def deletion_blockers(db, uid):
         if db.execute(f'SELECT 1 FROM {table} WHERE {column} IN (SELECT id FROM {parent} WHERE blago_user_id=?) LIMIT 1',(uid,)).fetchone():
             blockers.append(table)
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
-    from xblago.core import context_schema,lifecycle_schema
+    from xblago.core import context_schema,lifecycle_schema,asset_registry_schema
+    if asset_registry_schema.validate(db):known.update(asset_registry_schema.TABLES)
     if context_schema.validate(db):known.update(context_schema.TABLES)
     if lifecycle_schema.validate(db):known.update(lifecycle_schema.TABLES)
     from xblago.core.help_schema import present,validate,TABLES
@@ -106,6 +107,8 @@ class PrivacyControl:
         lifecycle_schema.validate(db,mandatory=lifecycle_schema.required() or any(json.loads(r[2])['kind'].startswith('lifecycle_') for r in self.rows))
         from xblago.core import context_schema
         context_schema.validate(db,mandatory=context_schema.required() or any(json.loads(r[2])['kind']=='context_version' for r in self.rows))
+        from xblago.core import asset_registry_schema
+        asset_registry_schema.validate(db,mandatory=asset_registry_schema.enabled() or any(json.loads(r[2])['kind']=='asset_state' for r in self.rows))
         state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
         if (not state or state[0]!=journal.journal_id or type(state[1]) is not int or state[1]<0
                 or state[1]>=len(self.chain) or self.chain[state[1]]!=state[2]):
@@ -190,6 +193,9 @@ class PrivacyControl:
             apply_event(db,event,self.journal)
         elif kind=='context_version':
             from xblago.core.context_schema import apply_checkpoint
+            apply_checkpoint(db,event,self.journal)
+        elif kind=='asset_state':
+            from xblago.domain.asset_registry import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
         elif kind=='help_state':
             from xblago.domain.help_service import apply_checkpoint
