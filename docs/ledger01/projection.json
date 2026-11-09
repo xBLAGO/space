@@ -1,0 +1,1125 @@
+[
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P01-stock-resource-one-object",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P02-identical-delivery-duplicate",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P03-arrival-order-invariant",
+    "input": {
+      "snapshots": [
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        },
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "0"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P04-ownership-not-availability",
+    "input": {
+      "snapshots": [
+        {
+          "available": "0",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": false,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "0"
+      },
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "0"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 1,
+      "unvalued_objects": 1,
+      "valued_objects": 0
+    },
+    "id": "P05-unknown-not-valued-zero",
+    "input": {
+      "snapshots": [
+        {
+          "available": null,
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": null,
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": null,
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 1,
+      "valued_objects": 0
+    },
+    "id": "P06-missing-rate-not-zero-total",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": null,
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "3"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 1,
+      "valued_objects": 0
+    },
+    "id": "P07-lot-change-invalidates-value",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "3",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 1,
+      "disputed": 0,
+      "flow_satoshis_known": "500",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P08-source-confirmed-completion",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 1,
+      "disputed": 0,
+      "flow_satoshis_known": "500",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P09-confirmed-completion-duplicate",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P10-completion-not-self-certification",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 1,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P11-dispute-corrects-not-adds",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event7",
+          "state": "DISPUTED",
+          "version": 7
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 0,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P12-withdrawal-removes-private-occurrence",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event7",
+          "state": "DISPUTED",
+          "version": 7
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": "500",
+          "kind": "HELP",
+          "source_event": "help01:event8",
+          "state": "WITHDRAWN",
+          "version": 8
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": false,
+      "completed_confirmed": 1,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 1,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "1000000",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 1
+    },
+    "id": "P13-unknown-flow-quantity",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "COUNTERPARTY_CONFIRMED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event6",
+          "state": "COMPLETED",
+          "version": 6
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {},
+      "complete": true,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {},
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 0
+    },
+    "id": "P14-new-withdrawal-dominates-old-grant",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event3",
+          "state": "REVOKED",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 3
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {},
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {},
+      "needs_visible": 1,
+      "quarantined_objects": 1,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 0,
+      "valued_objects": 0
+    },
+    "id": "P15-same-version-equivocation-quarantined",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "available": "2",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:fork",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected_error": "EVENT_CONFLICT",
+    "id": "P16-event-id-substitution",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "3",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected_error": "AVAILABILITY",
+    "id": "P17-consent-bypass",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": false,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected_error": "DECIMAL",
+    "id": "P18-quantity-float",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": 2.0,
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "computer:item": "1"
+      },
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "computer:item": "2"
+      },
+      "needs_visible": 1,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 1,
+      "valued_objects": 0
+    },
+    "id": "P19-historical-cut-before-valuation",
+    "input": {
+      "snapshots": [
+        {
+          "available": "1",
+          "canonical_object": "asset:cohort-1",
+          "category": "computer",
+          "kind": "ASSET",
+          "quantity": "2",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "item",
+          "valuation": {
+            "assessed_at": 1000,
+            "basis_quantity": "2",
+            "effective_at": 1000,
+            "satoshis": "1000000"
+          },
+          "version": 2
+        },
+        {
+          "canonical_object": "help:cohort-1",
+          "evidence": "SELF_DECLARED",
+          "flow_satoshis": null,
+          "kind": "HELP",
+          "source_event": "help01:event2",
+          "state": "PUBLISHED",
+          "version": 2
+        }
+      ],
+      "valuation_at": 999
+    }
+  },
+  {
+    "expected": {
+      "available_self_declared": {
+        "food:kg": "0.3"
+      },
+      "complete": false,
+      "completed_confirmed": 0,
+      "disputed": 0,
+      "flow_satoshis_known": "0",
+      "flow_unknown_occurrences": 0,
+      "known_stock": {
+        "food:kg": "0.3"
+      },
+      "needs_visible": 0,
+      "quarantined_objects": 0,
+      "stock_satoshis_known": "0",
+      "total_wealth": null,
+      "unknown_stock_objects": 0,
+      "unvalued_objects": 2,
+      "valued_objects": 0
+    },
+    "id": "P20-decimal-quantity-no-float-error",
+    "input": {
+      "snapshots": [
+        {
+          "available": "0.1",
+          "canonical_object": "asset:cohort-1",
+          "category": "food",
+          "kind": "ASSET",
+          "quantity": "0.1",
+          "share_consent": true,
+          "source_event": "asset09:event2",
+          "state": "ACTIVE",
+          "unit": "kg",
+          "valuation": null,
+          "version": 2
+        },
+        {
+          "available": "0.2",
+          "canonical_object": "asset:cohort-2",
+          "category": "food",
+          "kind": "ASSET",
+          "quantity": "0.2",
+          "share_consent": true,
+          "source_event": "asset09:other",
+          "state": "ACTIVE",
+          "unit": "kg",
+          "valuation": null,
+          "version": 2
+        }
+      ],
+      "valuation_at": 1000
+    }
+  }
+]

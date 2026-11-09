@@ -1,0 +1,169 @@
+{
+  "format": "blago-uel-event-catalog-design-1",
+  "status": "Draft design, not activated event handlers",
+  "wire_example": "source.observation only; domain topic/payload semantic validation NOT IMPLEMENTED",
+  "resource_rule": "RESOURCE availability is a view of the same ASSET, not another stock event",
+  "help_rule": "OBLIGATION/FULFILLMENT are views of existing Help source facts; no second lifecycle",
+  "events": [
+    {
+      "topic": "conversation.exchange.committed",
+      "canonical_source": "conversation",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Existing atomic exchange IDs + context revision; content stays in source/vault",
+      "authority_contract": "Node observation; not Human portable signature",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "memory.fact.changed",
+      "canonical_source": "memory",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Existing memory version/correction; no biography/hash export",
+      "authority_contract": "Owner-session control, privacy-aware source observation",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "memory.fact.erased",
+      "canonical_source": "memory",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Existing forget/retirement denial; no payload reconstruction",
+      "authority_contract": "Original privacy controls, not arbitrary peer delete",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "asset.statement.observed",
+      "canonical_source": "assetreg09.1",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "One canonical blago_assets ID/version/action incl availability; no second RESOURCE stock",
+      "authority_contract": "SELF_DECLARED + source observation; no physical title proof",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "help.transition.observed",
+      "canonical_source": "help01",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Exactly one committed help_event/source revision; no remote Help command",
+      "authority_contract": "Existing actor consent/roles; two-account confirmations labeled service-observed",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "fulfillment.measurement.attested",
+      "canonical_source": "help01-future",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Exact existing fulfillment occurrence; mutually confirmed qty/unit; not new lifecycle",
+      "authority_contract": "Counterparties endorse same measurement; current Help has no qty",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "valuation.assessed",
+      "canonical_source": "calculator01-future",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Original price/rates/time/lot basis; revaluation is separate linked assessment",
+      "authority_contract": "Reviewed quote provenance; source independence is not number of names",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "identity.authority.observed",
+      "canonical_source": "foundation07",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Mirror existing identity/key/recovery evidence; do not create a new identity",
+      "authority_contract": "Verified current controller lineage; session is not portable authority",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "mandate.status.observed",
+      "canonical_source": "foundation08",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Mirror issue/revoke/status/frontier; do not replace owner log",
+      "authority_contract": "Pinned owner and fresh nonce-bound status; old ref terminal on revoke",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "agent.proposal",
+      "canonical_source": "agent",
+      "default_disclosure": "EPHEMERAL",
+      "semantic_contract": "Tentative idea, no side effect or compulsory durable record",
+      "authority_contract": "No execute/publish permission",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "action.authorization.recorded",
+      "canonical_source": "consent",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Exact action/content/version/audience/limits; grant and withdrawal references distinct",
+      "authority_contract": "Fresh local confirmation or independently verified Human endorsement; label provenance",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "action.result.observed",
+      "canonical_source": "executor",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Actual adapter outcome/receipt/uncertainty; not generated success text",
+      "authority_contract": "Node/executor observation not owner permission",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "statement.endorsed",
+      "canonical_source": "human-controller-future",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Endorse exact assertion; disclosure/execution consent separate",
+      "authority_contract": "Independently verified current controller signature",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "attestation.issued",
+      "canonical_source": "evidence-future",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Predicate/version/occurrence/attester/independence basis",
+      "authority_contract": "Role-specific signatures; no automatic independent truth",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "attestation.withdrawn",
+      "canonical_source": "evidence-future",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Terminal withdrawal for exact prior reference",
+      "authority_contract": "Same attester/current authorized successor with verified lineage",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "disclosure.withdrawal.notice",
+      "canonical_source": "privacy-future",
+      "default_disclosure": "FEDERATED_OPT_IN",
+      "semantic_contract": "Minimized target refs/purpose/receiver; pending vs acknowledged",
+      "authority_contract": "Verified original author/controller authority, current frontier",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "privacy.erasure.applied",
+      "canonical_source": "privacy",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Delete content/derivatives; retain minimal denials, not full plaintext history",
+      "authority_contract": "Existing privacy authority; external wipe not guaranteed",
+      "may_affect_projection": true
+    },
+    {
+      "topic": "projection.checkpoint",
+      "canonical_source": "projector",
+      "default_disclosure": "LOCAL",
+      "semantic_contract": "Commit agreed cut/policy/schema/consent/authority/valuation coverage",
+      "authority_contract": "Node observation; never Human mandate or public-private root",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "public.aggregate.approved",
+      "canonical_source": "public-release-future",
+      "default_disclosure": "PUBLIC_REVIEW_ONLY",
+      "semantic_contract": "Separate minimization/reidentification/differencing policy; no personal/source IDs",
+      "authority_contract": "Independent release policy/explicit public-disclosure authority",
+      "may_affect_projection": false
+    },
+    {
+      "topic": "public.anchor.receipt",
+      "canonical_source": "anchor-future",
+      "default_disclosure": "PUBLIC_REVIEW_ONLY",
+      "semantic_contract": "Finalized inclusion of approved release root only",
+      "authority_contract": "Publisher/chain evidence, not truth/current consent",
+      "may_affect_projection": false
+    }
+  ]
+}
