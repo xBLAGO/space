@@ -1,6 +1,6 @@
 # BLAGO Universal Event Ledger 0.1
 
-**Draft for discussion.** Proposal revision `uel-design-0.1-draft.1`; executable **offline wire example** profile `uel-0.1-lab.1`. GO for specification review and new isolated experiments only. NO-GO for activation, real users, independent federation, public anchors or production. No runtime/SQLite/API/identity/deployment changes in this PR.
+**Draft for discussion.** Proposal revision `uel-design-0.1-draft.1`; executable **offline wire example** profile `uel-0.1-lab.1`. GO for specification review and new isolated experiments only. NO-GO for activation, real users, independent federation, public anchors or production. No runtime/SQLite/API/identity/deployment changes in this PR. [Draft PR30](https://github.com/xBLAGO/space/pull/30); spec source `60dfe5de37f70611caae5c3c957697afa78f966f`, [source CI SUCCESS](https://github.com/xBLAGO/space/actions/runs/42707209533). Final documentation HEAD is recorded separately in PR.
 
 Universal means common event vocabulary, provenance and verification boundaries. It does **not** mean a public log of everyone's life, a single global database, total ordering of humanity, a second economic executor or proof of truth from a signature.
 

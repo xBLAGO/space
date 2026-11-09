@@ -263,7 +263,14 @@
       "draft": true,
       "state": "open",
       "ancestor_of_design_base": false,
-      "inspected_sources": []
+      "inspected_sources": [
+        {
+          "path": "docs/BLAGO_ROADMAP.md",
+          "url": "https://github.com/xBLAGO/space/blob/e049b62860a8170d17e879ce94766fc371f1decb/docs/BLAGO_ROADMAP.md",
+          "retrieved_utf8_text_sha256": "6227f0f6061cfa02aa302396c95b1db2d97ad14d1e7dbb2cd2401a627d1f3bdd",
+          "method": "Connected GitHub raw text fetch; strategic document not runtime"
+        }
+      ]
     },
     {
       "pr": 27,

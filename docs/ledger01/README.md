@@ -1,6 +1,6 @@
 # UEL0.1 design artifacts
 
-Base exact #29 `c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5`; source boundaries and pinned #27/07/08/Help code: baseline.json. No production implementation/migration is included.
+Base exact #29 `c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5`; source boundaries and pinned #27/07/08/Help code: baseline.json. No production implementation/migration is included. [Draft PR30](https://github.com/xBLAGO/space/pull/30), spec source `60dfe5de37f70611caae5c3c957697afa78f966f`; [source CI72/72 PASS](https://github.com/xBLAGO/space/actions/runs/42707209533).
 
 - [Main Draft](../BLAGO_UNIVERSAL_EVENT_LEDGER_0_1.md), [authority/event contracts](AUTHORITY_AND_EVENTS.md), [catalogue](event-catalog.json), [inert wire schema](event-envelope.schema.json).
 - [Projection](PROJECTION.md), [privacy/anchors](PRIVACY_AND_ANCHORS.md), [threat model](THREAT_MODEL.md), [migration plan](MIGRATION.md).

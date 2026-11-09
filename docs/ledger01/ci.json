@@ -1,7 +1,74 @@
 {
   "format": "uel-design-ci-1",
-  "status": "PENDING",
-  "scope": "new documentation-only workflow; no UEL runtime or real operator testing",
-  "baseline_565_Docker": "https://github.com/xBLAGO/space/actions/runs/42699549276",
+  "spec_source_sha": "60dfe5de37f70611caae5c3c957697afa78f966f",
+  "base_sha": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5",
+  "run": 42707209533,
+  "url": "https://github.com/xBLAGO/space/actions/runs/42707209533",
+  "status": "SUCCESS",
+  "executed": 72,
+  "passed": 72,
+  "scope": "offline design checks only; no UEL authority/durable/runtime/federation/chain tests",
+  "job": [
+    {
+      "id": 129467042465,
+      "name": "offline-design",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install existing locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assert runtime and previous CI unchanged from exact base",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check frozen vector bytes and design consistency",
+          "conclusion": "success"
+        },
+        {
+          "name": "Offline wire arithmetic and Merkle examples only",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13714770036,
+      "name": "uel-offline-design-evidence",
+      "digest": "sha256:d4d8a5799a94c4916c4f7a9a0f2c8a5c1faf59922c3401179a51fd520b63fe2c",
+      "expires_at": "2027-02-07T21:56:26Z"
+    }
+  ],
+  "baseline_runtime_565_Docker": "https://github.com/xBLAGO/space/actions/runs/42699549276",
   "production": "NO-GO"
 }
