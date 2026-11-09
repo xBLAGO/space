@@ -1,0 +1,15 @@
+{
+  "format": "blago-asset091-channel-check-1",
+  "status": "PASS",
+  "checks": {
+    "old_session_rotated": true,
+    "canonical_identity_preserved": true,
+    "private_asset_visible_same_identity": true,
+    "bot_link_replay_safe_no_repeat": true,
+    "canonical_asset_not_duplicated": true,
+    "cross_session_challenge_substitution_denied": true
+  },
+  "scope": "domain API + real Bot update handler + synthetic signed initData; not physical Telegram",
+  "external_calls": 0,
+  "real_pilot": "NO-GO"
+}

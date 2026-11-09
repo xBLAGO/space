@@ -1,0 +1,60 @@
+{
+  "format": "blago-asset091-evidence-index-1",
+  "base_sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+  "source_sha": "34fb475455678dc024cf39f8fa27d2cd0c5af7dd",
+  "independent_attestation": false,
+  "files": [
+    {
+      "path": "docs/BLAGO_FOUNDATION_09_1.md",
+      "sha256": "af8b5231bcf0cedfa5ebb7ffb0a0e4e94b21e1d9c57df0d375df97601e221d2e"
+    },
+    {
+      "path": "docs/asset09_1/READINESS_MATRIX.md",
+      "sha256": "fc49bb22ab260b846c154924b6f79a55b0b8c23beb7f9448f431a3506f01f070"
+    },
+    {
+      "path": "docs/asset09_1/README.md",
+      "sha256": "3a5ead0f980a6338b1fcd8052a183098fd08a31a10f62066660dd584d41866d4"
+    },
+    {
+      "path": "docs/asset09_1/RUNBOOK.md",
+      "sha256": "00b46cb726cb1705cafced17250c157db1c71d456be200169d2f55d59749ce20"
+    },
+    {
+      "path": "docs/asset09_1/THREAT_MODEL.md",
+      "sha256": "f91aa015e50f2ed953dd4f6a393c283a1ef3657803ae391800e55ad9968f39f2"
+    },
+    {
+      "path": "docs/asset09_1/channel-evidence.json",
+      "sha256": "b4668943d0352befb1baf1a2ff620b571fb6c22e56f789f35a43b3235f8d3c2b"
+    },
+    {
+      "path": "docs/asset09_1/channel_check.py",
+      "sha256": "6de06285304eb99946f73c6018d933a9347a6719ba1afc546836089a4c23a8cd"
+    },
+    {
+      "path": "docs/asset09_1/ci-source.json",
+      "sha256": "93329e8ecb6648e1a61bd6c17f7186869f136e384ece27b4b07603deb206adc4"
+    },
+    {
+      "path": "docs/asset09_1/compatibility.json",
+      "sha256": "4c49800f226161b891d367dc53aba59d221749a37331630d5776ab558e34f1c9"
+    },
+    {
+      "path": "docs/asset09_1/gates.json",
+      "sha256": "506a88302e2d9ef9167c0d4b0f0c825078316896d6d7d62cc3f1244921f5b354"
+    },
+    {
+      "path": "docs/asset09_1/lab-evidence.json",
+      "sha256": "a082ef5058ca8e59e90c48b6651d5b030bbc2de398d205a0146c26001c4adf11"
+    },
+    {
+      "path": "docs/asset09_1/source-identity.json",
+      "sha256": "640c7fd9a48b0234a35af3d9122e8c98050803e314d4a877c6f0ffba1d51183e"
+    },
+    {
+      "path": "docs/asset09_1/test-results.json",
+      "sha256": "ad37291cc3ebf5c26749ab5853b6209f1ea57812dc2d2eb1eb2e765b887bbe81"
+    }
+  ]
+}

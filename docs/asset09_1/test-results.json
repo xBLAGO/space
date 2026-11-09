@@ -1,0 +1,343 @@
+{
+  "format": "blago-asset091-tests-1",
+  "base_sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+  "source_sha": "34fb475455678dc024cf39f8fa27d2cd0c5af7dd",
+  "prior_tests": 516,
+  "new_tests": 49,
+  "full_source_ci": {
+    "run": 42697562923,
+    "status": "PASS",
+    "tests": 565,
+    "seconds": 158.211
+  },
+  "local_full": {
+    "status": "PASS",
+    "tests": 565,
+    "seconds": 524.124,
+    "log": "/tmp/blago-asset091-full.log",
+    "scope": "exact source content34fb475, synthetic fixtures only"
+  },
+  "earlier_focused": {
+    "tests": 47,
+    "status": "PASS",
+    "seconds": 86.532,
+    "scope": "Before final two process-race cases; final source covered by CI565"
+  },
+  "cases": [
+    {
+      "test": "RegistryTests.test_повтор_миграции_ничего_не_импортирует",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_владение_связано_с_действительной_сессией",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_черновик_приватен_и_не_означает_готовность_делиться",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_повтор_черновика_не_создаёт_дубли",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_legacy_не_импортируется_и_не_удваивает_баланс",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_явное_подтверждение_и_SELF_DECLARED",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_просроченное_подтверждение_и_откат_часов",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_ротация_сессии_закрывает_старое_подтверждение",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_отзыв_и_изменение_аудитории_без_старых_публичных_версий",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удаление_всех_версий_и_запрет_восстановления_по_ключу",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_экспорт_не_содержит_подтверждений_и_чужих_версий",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удаление_аккаунта_очищает_каноническую_запись_и_сайдкары",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_неизвестное_количество_не_становится_нулём",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_предположение_не_становится_заявлением_или_согласием",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_два_подтверждения_одной_версии_не_перезаписывают_друг_друга",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_повреждение_истории_обнаруживается_до_чтения",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_подмена_полей_challenge_обнаруживается",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_подложная_квитанция_не_имитирует_сохранение",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_прямое_legacy_изменение_управляемого_актива_откатывается",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_потеря_witness_не_даёт_ответа_или_нового_согласия",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_сбой_записи_до_journal_откатывает_операцию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_старый_backup_не_возвращает_отозванное_согласие",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_старый_backup_до_миграции_требует_явной_установки",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_просроченные_challenges_очищаются_без_истории",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_миграция_не_применяется_к_пустой_или_неизвестной_базе",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_ошибка_DDL_откатывает_всю_миграцию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_неверный_checksum_и_удалённый_trigger_блокируют_запуск",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_несколько_процессов_повторяют_один_commit",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_процессы_конкурируют_за_одну_версию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_crash_до_journal_не_сохраняет_публикацию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_crash_после_journal_до_SQL_commit_закрывает_запись",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_crash_после_commit_повтор_возвращает_ту_же_квитанцию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_G09_изменение_заявления_отклоняет_старую_генерацию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_account_merge_с_заявлениями_безопасно_отказывает",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_срок_хранения_удаляет_все_версии_и_старый_backup",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удаление_аккаунта_из_старой_копии_не_восстанавливает_версии",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_два_store_instances_видят_одинаковую_версию_после_restart",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_G09_другой_процесс_после_отзыва_не_записывает_ответ",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_повтор_старой_квитанции_не_меняет_новую_приватность",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_выключенный_flag_не_отключает_защиту_установленных_данных",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_ошибка_источника_не_создаёт_оценку_или_платёж",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_количество_актива_не_удваивается_при_расширении_доступности",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_нельзя_повысить_достоверность_полем_клиента",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удалённый_защитный_trigger_блокирует_запуск",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удаление_актива_инвалидирует_подготовленную_генерацию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_удаление_версии_не_скрывает_историю_без_отказа",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_старый_backup_не_возвращает_прежнюю_аудиторию",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_конкурентные_черновики_имеют_один_канонический_ID",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    },
+    {
+      "test": "RegistryTests.test_гонка_отзыва_с_подтверждением_не_возвращает_доступность",
+      "expected": "PASS (scenario assertion in source)",
+      "actual": "PASS",
+      "evidence": "CI42697562923 / job129433362408"
+    }
+  ],
+  "lab": {
+    "status": "PASS",
+    "checks": 23,
+    "local_and_Docker_network_none": true
+  },
+  "not_executed": [
+    "independent operator security review",
+    "real target-host power/fsync/DR",
+    "physical Telegram/WebView registry actions",
+    "production users",
+    "live LLM/provider",
+    "federation"
+  ],
+  "real_pilot": "NO-GO",
+  "supplemental_channels": {
+    "status": "PASS",
+    "checks": 6,
+    "scope": "local docs harness, not a CI or physical-device test",
+    "evidence": "channel-evidence.json",
+    "observation": "Repeated link returns existing G09 SAFE_CONFLICT, not byte-identical original command reply; one processed event and no repeat grant"
+  }
+}

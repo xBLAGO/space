@@ -1,0 +1,78 @@
+{
+  "format": "blago-foundation09-1-lab-1",
+  "base_sha": "00c665b369acb6465f9afa795a6046c43f4107ce",
+  "status": "PASS",
+  "checks": {
+    "explicit_additive_migration": true,
+    "migration_repeat_noop": true,
+    "same_identity_memory_history": true,
+    "no_automatic_legacy_import": true,
+    "natural_suggestion_no_authority": true,
+    "draft_private": true,
+    "draft_idempotent": true,
+    "preview_is_not_grant": true,
+    "commit_replay_same_receipt": true,
+    "durable_restart": true,
+    "no_asset_resource_double_count": true,
+    "self_declared_not_verified": true,
+    "own_version_export": true,
+    "foreign_export_isolated": true,
+    "existing_help_only_lifecycle": true,
+    "g09_context_invalidated": true,
+    "revoked_not_available": true,
+    "restore_invalidates_sessions": true,
+    "old_snapshot_no_consent_resurrection": true,
+    "old_key_replay_denied": true,
+    "sqlite_integrity": true,
+    "sqlite_foreign_keys": true,
+    "no_financial_actions": true
+  },
+  "before_revocation_balance": {
+    "scope": "authorized current synthetic community view",
+    "registered_objects": 1,
+    "unknown_stock_objects": 0,
+    "categories": {
+      "computer:item": {
+        "known_stock": "2",
+        "available_self_declared": "1",
+        "unknown_stock_objects": 0,
+        "unknown_availability_objects": 0,
+        "total_stock": "2",
+        "total_available": "1"
+      }
+    },
+    "unmapped_owned_assets": 0,
+    "coverage": "PARTIAL: mapped statements only; unmapped legacy excluded",
+    "btc": null,
+    "confirmed_available": null,
+    "flow_btc": null,
+    "wealth_score": null,
+    "evidence": "SELF_DECLARED"
+  },
+  "migration": {
+    "version": "foundation09_asset_registry_001",
+    "checksum": "cda14dd85a07bcc1917650af8a0aa62021e3255f38d52578ac98d50c1c7a078d",
+    "ddl": [
+      "CREATE TABLE assetreg_migrations (version TEXT PRIMARY KEY,checksum TEXT NOT NULL)",
+      "CREATE TABLE assetreg_records (asset_id TEXT PRIMARY KEY REFERENCES blago_assets(id) ON DELETE CASCADE,owner_id TEXT NOT NULL REFERENCES users(blago_user_id),version INTEGER NOT NULL CHECK(version>0),status TEXT NOT NULL CHECK(status IN ('DRAFT','ACTIVE','REVOKED')),head_tag TEXT NOT NULL,created_at INTEGER NOT NULL,updated_at INTEGER NOT NULL)",
+      "CREATE TABLE assetreg_versions (asset_id TEXT NOT NULL REFERENCES assetreg_records(asset_id) ON DELETE CASCADE,version INTEGER NOT NULL CHECK(version>0),event_id TEXT NOT NULL UNIQUE,body TEXT NOT NULL CHECK(json_valid(body)),action TEXT NOT NULL CHECK(action IN ('DRAFT','DECLARE','REVISE','REVOKE')),recorded_at INTEGER NOT NULL,PRIMARY KEY(asset_id,version))",
+      "CREATE TABLE assetreg_operations (owner_id TEXT NOT NULL REFERENCES users(blago_user_id),operation_key TEXT NOT NULL,body_hash TEXT NOT NULL,asset_id TEXT NOT NULL UNIQUE REFERENCES assetreg_records(asset_id) ON DELETE CASCADE,PRIMARY KEY(owner_id,operation_key))",
+      "CREATE TABLE assetreg_challenges (token_hash TEXT PRIMARY KEY,owner_id TEXT NOT NULL REFERENCES users(blago_user_id),asset_id TEXT NOT NULL REFERENCES assetreg_records(asset_id) ON DELETE CASCADE,version INTEGER NOT NULL,session_hash TEXT NOT NULL,body TEXT NOT NULL CHECK(json_valid(body)),expires_at INTEGER NOT NULL,seal TEXT NOT NULL,receipt TEXT)",
+      "CREATE TABLE assetreg_holds (target_tag TEXT PRIMARY KEY,reason TEXT NOT NULL)",
+      "CREATE TRIGGER assetreg_erase BEFORE DELETE ON blago_assets\n WHEN blago_replaying()=0 AND EXISTS(SELECT 1 FROM assetreg_records WHERE asset_id=OLD.id) BEGIN\n INSERT OR IGNORE INTO assetreg_holds VALUES (blago_tag('asset-record',OLD.id),'erased');\n INSERT INTO privacy_outbox VALUES (lower(hex(randomblob(16))),json_object('kind','asset_state',\n 'owner',blago_tag('user',OLD.blago_user_id),'target',blago_tag('asset-record',OLD.id),'state','ERASED','recorded_at',0)); END",
+      "CREATE TRIGGER assetreg_no_resurrection BEFORE INSERT ON blago_assets WHEN blago_replaying()=0 AND\n EXISTS(SELECT 1 FROM assetreg_holds WHERE target_tag=blago_tag('asset-record',NEW.id))\n BEGIN SELECT RAISE(ABORT,'Retired asset'); END",
+      "CREATE TRIGGER assetreg_context_insert AFTER INSERT ON assetreg_records BEGIN UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id IN (NEW.owner_id); END",
+      "CREATE TRIGGER assetreg_context_update AFTER UPDATE ON assetreg_records BEGIN UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id IN (OLD.owner_id,NEW.owner_id); END",
+      "CREATE TRIGGER assetreg_context_delete AFTER DELETE ON assetreg_records BEGIN UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id IN (OLD.owner_id); END"
+    ]
+  },
+  "app_database_count": 1,
+  "external_llm_calls": 0,
+  "financial_operations": 0,
+  "automatic_legacy_imports": 0,
+  "same_identity": true,
+  "physical_ownership_verification": "NOT EXECUTED",
+  "federation": "NOT IMPLEMENTED",
+  "independent_operator_review": "NOT EXECUTED",
+  "real_pilot": "NO-GO"
+}
