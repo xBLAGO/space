@@ -73,6 +73,7 @@ class ValueTests(unittest.TestCase):
 
 class RegistryTests(unittest.TestCase):
     def setUp(self):
+        clock=patch('xblago.domain.collective_calculator.time.time',return_value=1000);clock.start();self.addCleanup(clock.stop)
         self.r=LabRegistry(synthetic=True);self.addCleanup(self.r.close)
         self.a=self.r.participant();self.b=self.r.participant()
     def active(self,**kw):
@@ -183,6 +184,19 @@ class RegistryTests(unittest.TestCase):
         for _ in range(2):self.r.record_valuation(self.a,rid,engine(),'100','RUB',effective_at=1000,now=1000)
         self.assertEqual(self.r.db.execute('SELECT count(*) FROM valuations').fetchone()[0],1)
         self.assertEqual(self.r.balance(self.a,at=1000)['stock_btc_known'],'0.00001000')
+
+    def test_откат_часов_не_обновляет_согласие(self):
+        rid=self.active()
+        with self.assertRaises(AccountingError):self.r.prepare(self.a,rid,2,body(),now=999)
+        with patch('xblago.domain.collective_calculator.time.time',return_value=999):
+            with self.assertRaises(AccountingError):self.r.revoke(self.a,rid)
+        self.r.revoke(self.a,rid)
+        row=self.r.export_own(self.a)['goods'][0]
+        self.assertGreaterEqual(row['updated_at'],row['created_at'])
+    def test_неверные_типы_не_записываются(self):
+        for kw in ({'unit':[]},{'available':1.2},{'audience':{}},{'quantity':True}):
+            with self.assertRaises(AccountingError):self.r.draft(self.a,body(**kw))
+        self.assertEqual(self.r.db.execute('SELECT count(*) FROM goods').fetchone()[0],0)
 
 
 class HelpProjectionTests(unittest.TestCase):

@@ -196,6 +196,8 @@ class LabRegistry:
             raise AccountingError('Exact reviewed fields required')
         if type(body['category']) is not str or not re.fullmatch('[a-z][a-z0-9_-]{0,39}', body['category']):
             raise AccountingError('Bounded category code required; no free personal text')
+        if any(type(body[k]) is not str for k in ('quantity','unit','available','right','audience','conditions')):
+            raise AccountingError('Typed accounting fields required')
         if body['unit'] not in UNITS or body['right'] not in {'OWNER', 'USE', 'DISPOSAL'} or body['audience'] not in {'PRIVATE', 'LAB_COMMUNITY'}:
             raise AccountingError('Unknown unit, right or audience')
         quantity, available = number(body['quantity'], positive=True), number(body['available'])
@@ -228,8 +230,8 @@ class LabRegistry:
 
     def prepare(self, actor, target, version, body, *, now):
         row = self._row(actor, target); body = self._body(body)
-        if type(version) is not int or row['version'] != version or row['status'] == 'REVOKED' or type(now) is not int:
-            raise AccountingError('Stale record')
+        if type(version) is not int or row['version'] != version or row['status'] == 'REVOKED' or type(now) is not int or now < row['updated_at']:
+            raise AccountingError('Stale record or clock rollback')
         self.db.execute('DELETE FROM challenges WHERE expires<=? AND receipt IS NULL', (now,))
         if self.db.execute('SELECT count(*) FROM challenges WHERE actor=?', (actor,)).fetchone()[0] >= 128:
             raise AccountingError('Synthetic challenge limit')
@@ -251,7 +253,7 @@ class LabRegistry:
             r = self._row(actor, c['target'])
             if c['receipt']:
                 self.db.commit(); return json.loads(c['receipt'])
-            if not c['expires']-120 <= now < c['expires'] or r['version'] != c['version'] or r['status'] == 'REVOKED':
+            if not c['expires']-120 <= now < c['expires'] or now < r['updated_at'] or r['version'] != c['version'] or r['status'] == 'REVOKED':
                 raise AccountingError('Expired or stale confirmation')
             receipt = {'id': str(uuid4()), 'target': r['id'], 'version': r['version']+1, 'at': now,
                        'level': 'SELF_DECLARED'}
@@ -270,11 +272,14 @@ class LabRegistry:
         r = self._row(actor, target)
         if r['status'] == 'REVOKED':
             return
+        now = int(time.time())
+        if now < r['updated_at']:
+            raise AccountingError('Clock rollback')
         with self.db:
             self.db.execute('BEGIN IMMEDIATE')
             body = json.loads(r['body']); body['available'] = '0'; body['share_consent'] = False
-            self.db.execute("UPDATE goods SET status='REVOKED',version=version+1,body=? WHERE id=?", (canonical(body), target))
-            event = {'id': str(uuid4()), 'target': target, 'version': r['version']+1, 'level': 'REVOKED', 'record': body, 'at': int(time.time())}
+            self.db.execute("UPDATE goods SET status='REVOKED',version=version+1,body=?,updated_at=? WHERE id=?", (canonical(body), now, target))
+            event = {'id': str(uuid4()), 'target': target, 'version': r['version']+1, 'level': 'REVOKED', 'record': body, 'at': now}
             self.db.execute('INSERT INTO events VALUES (?,?,?,?)', (event['id'], target, event['version'], canonical(event)))
             self.db.execute('DELETE FROM challenges WHERE target=?', (target,))
 
