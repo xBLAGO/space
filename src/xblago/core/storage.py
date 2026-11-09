@@ -710,12 +710,15 @@ class SQLiteBlagoStore:
                         check_frontiers(connection, privacy)
                         from xblago.core.lifecycle_schema import check_denials
                         check_denials(connection,privacy)
+                        from xblago.domain.asset_registry import check_frontiers as check_assets
+                        check_assets(connection,privacy)
                     self._transaction_local.connection = connection
                     try:
                         yield connection
                     finally:
                         self._transaction_local.connection = None
                     if privacy:
+                        check_assets(connection,privacy)
                         privacy.flush()
                 except Exception:
                     connection.rollback()

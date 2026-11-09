@@ -33,6 +33,10 @@ def cleanup_rows(db,now):
     counts['web_sessions'] = db.execute("""DELETE FROM web_sessions WHERE last_seen_at<=? OR created_at<=?
         OR CAST(strftime('%s',expires_at) AS INTEGER)<=?
         OR blago_user_id IN (SELECT blago_user_id FROM users WHERE status<>'active')""",(now-1800,now-604800,now)).rowcount
+    from xblago.core import asset_registry_schema
+    if asset_registry_schema.validate(db):
+        # Preserve existing public cleanup counters; no new activity collection.
+        db.execute('DELETE FROM assetreg_challenges WHERE expires_at<=?',(now,))
     # Telegram update dedupe, dialogue, financial records, consents and the
     # independent journal are deliberately outside technical-event TTL.
     if db.execute('PRAGMA foreign_key_check').fetchall():
@@ -61,6 +65,8 @@ def restore(path: Path, journal_directory: Path):
         with store._locked_transaction() as db:
             from xblago.core.help_schema import present
             if present(db):db.execute('DELETE FROM help_challenges')
+            from xblago.core import asset_registry_schema
+            if asset_registry_schema.validate(db):db.execute('DELETE FROM assetreg_challenges')
             from xblago.core.context_schema import present as context_present
             if context_present(db):
                 db.execute("UPDATE context_generations SET state='REJECTED' WHERE state='PREPARED'")
