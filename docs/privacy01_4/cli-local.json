@@ -1,0 +1,19 @@
+{
+  "format": "blago-privacy014-cli-check-1",
+  "runtime_source_sha": "0fb65db601de9f75806fbf51a0dfdafb130554ee",
+  "expected": [
+    "INITIALIZED_DISABLED",
+    "DISABLED",
+    "SUCCESS",
+    "WAITING"
+  ],
+  "actual": [
+    "INITIALIZED_DISABLED",
+    "DISABLED",
+    "SUCCESS",
+    "WAITING"
+  ],
+  "status": "PASS",
+  "production_access": false,
+  "G04": "UNKNOWN"
+}

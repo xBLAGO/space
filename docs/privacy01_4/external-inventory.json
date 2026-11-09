@@ -1,0 +1,218 @@
+{
+  "format": "blago-privacy014-external-inventory-1",
+  "review_session_date": "2026-11-09 Europe/Moscow",
+  "production_inspected": false,
+  "provider_requests": 0,
+  "observed_synthetic_artifact": [
+    {
+      "id": 13629597698,
+      "name": "pilot-browser-evidence",
+      "digest": "sha256:50a551601709e7c4690215cccfe50639d2068499b0992e288ecbfddabba850ef",
+      "created_at": "2026-11-08T18:55:48Z",
+      "expires_at": "2027-02-06T18:54:09Z",
+      "expired": false
+    }
+  ],
+  "entries": [
+    {
+      "id": "hf-runtime-storage",
+      "evidence": "DOCUMENTED",
+      "actual_blago": "UNKNOWN",
+      "content": "App files/WAL and possible volume copies",
+      "controls": [
+        "Operator volume inventory",
+        "Mount semantics qualification",
+        "Backup/retirement"
+      ],
+      "unknown": [
+        "Actual mounts/replicas/regions",
+        "POSIX flock/fsync/WAL semantics",
+        "Physical erase"
+      ],
+      "sources": [
+        "https://huggingface.co/docs/hub/spaces-storage"
+      ]
+    },
+    {
+      "id": "hf-buckets-repositories",
+      "evidence": "DOCUMENTED",
+      "actual_blago": "UNKNOWN",
+      "controls": [
+        "IAM and inventory",
+        "Version/replica deletion review"
+      ],
+      "unknown": [
+        "Presence of actual copies",
+        "Snapshots/retention/erase"
+      ],
+      "sources": [
+        "https://huggingface.co/docs/hub/spaces-storage"
+      ]
+    },
+    {
+      "id": "github-artifacts-and-logs",
+      "evidence": "OBSERVED_METADATA only, not deletion",
+      "actual_blago": "Synthetic artifact metadata observed",
+      "controls": [
+        "retention-days",
+        "Repo/organization retention settings",
+        "Explicit artifact/run deletion"
+      ],
+      "unknown": [
+        "Downloaded copies",
+        "Physical erasure",
+        "Current settings not administered"
+      ],
+      "sources": [
+        "https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization",
+        "https://docs.github.com/en/actions/concepts/workflows-and-actions/workflow-artifacts"
+      ]
+    },
+    {
+      "id": "application-container-proxy-logs",
+      "evidence": "LOCAL_CODE only",
+      "actual_blago": "UNKNOWN",
+      "controls": [
+        "Enum/count logging in new operator",
+        "Canary/redaction tests required",
+        "Host log TTL/access policy"
+      ],
+      "unknown": [
+        "Actual captured contents",
+        "Host/ingress policy",
+        "Legacy Telegram str(exc) leakage"
+      ],
+      "sources": [
+        "src/xblago/core/retention_ops.py",
+        "src/xblago/core/llm.py",
+        "src/xblago/integrations/telegram.py"
+      ]
+    },
+    {
+      "id": "telegram-and-notifications",
+      "evidence": "LOCAL_TESTED synthetic only",
+      "actual_blago": "UNKNOWN remote copies",
+      "controls": [
+        "Minimization",
+        "Participant deletion tools and disclosure"
+      ],
+      "unknown": [
+        "Remote retention",
+        "Forwarded/screenshots",
+        "Physical client propagation"
+      ],
+      "sources": []
+    },
+    {
+      "id": "browser-webview-downloads",
+      "evidence": "LOCAL_TESTED synthetic only",
+      "actual_blago": "UNKNOWN client copies",
+      "controls": [
+        "Public-shell-only service worker",
+        "Session revoke",
+        "User-managed downloads"
+      ],
+      "unknown": [
+        "Open tab RAM",
+        "Physical iOS/Android",
+        "Export/screenshots"
+      ],
+      "sources": [
+        "src/xblago/integrations/static/sw.js"
+      ]
+    },
+    {
+      "id": "backups-snapshots-and-custody",
+      "evidence": "LOCAL_TESTED managed scope",
+      "actual_blago": "UNKNOWN other copies",
+      "controls": [
+        "Managed inventory/hash",
+        "Durable retirement then unlink",
+        "Original journal/witness replay"
+      ],
+      "unknown": [
+        "Offsite copies",
+        "Physical erasure",
+        "Independent rollback domains",
+        "Historical catalog completeness"
+      ],
+      "sources": [
+        "src/xblago/core/data_lifecycle.py",
+        "src/xblago/core/retention_ops.py"
+      ]
+    },
+    {
+      "id": "hf-router",
+      "evidence": "DOCUMENTED public statement",
+      "actual_blago": "UNKNOWN route/settings/deletion",
+      "documented_claim": "Router states no routed request/response body storage and debug logs up to30d; downstream policies separate",
+      "controls": [
+        "Pin provider/model",
+        "Processor-specific review"
+      ],
+      "unknown": [
+        "Historic cheapest/fastest selection",
+        "Processor contract/region",
+        "Actual deletion"
+      ],
+      "sources": [
+        "https://huggingface.co/docs/inference-providers/security",
+        "https://huggingface.co/docs/inference-providers/index"
+      ]
+    },
+    {
+      "id": "together-example-downstream",
+      "evidence": "DOCUMENTED; NOT established as BLAGO processor",
+      "actual_blago": "UNKNOWN",
+      "documented_claim": "Prompt storage default on, training separate opt-in; org ZDR prospective, usage metadata remains; passthrough scopes separate",
+      "controls": [
+        "Processor-specific organization settings",
+        "Historical deletion request"
+      ],
+      "unknown": [
+        "Whether HF route uses this processor",
+        "Settings scope/contract applicability"
+      ],
+      "sources": [
+        "https://docs.together.ai/docs/privacy-and-security",
+        "https://docs.together.ai/docs/zero-data-retention"
+      ]
+    },
+    {
+      "id": "openai-or-custom-direct-route",
+      "evidence": "DOCUMENTED OpenAI terms, configurable route in code",
+      "actual_blago": "UNKNOWN",
+      "documented_claim": "OpenAI distinguishes abuse logs and application state; default abuse retention up to30d with exceptions; approved ZDR has limitations",
+      "controls": [
+        "Actual endpoint/project review",
+        "Feature-specific retention approval"
+      ],
+      "unknown": [
+        "Processor identity for custom API",
+        "Organization/project approval",
+        "Remote deletion"
+      ],
+      "sources": [
+        "https://developers.openai.com/api/docs/guides/your-data",
+        "src/xblago/core/config.py"
+      ]
+    },
+    {
+      "id": "other-downstream-processors",
+      "evidence": "UNKNOWN",
+      "actual_blago": "UNKNOWN",
+      "controls": [
+        "Choose processor first",
+        "Then review official terms and settings"
+      ],
+      "unknown": [
+        "All historic processors",
+        "Unavailable attempted Fireworks security-page",
+        "Actual retention"
+      ],
+      "sources": []
+    }
+  ],
+  "G04": "UNKNOWN",
+  "real_pilot": "NO-GO"
+}

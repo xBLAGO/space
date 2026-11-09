@@ -1,0 +1,11 @@
+{
+  "format": "blago-privacy014-local-clock-observations-1",
+  "second_attempt_started_after_recheck_utc": "2026-11-08T22:22:03.742252+00:00",
+  "second_attempt_finished_log_utc": "2026-11-09T06:12:02.272985+00:00",
+  "interval_seconds": 28198.531,
+  "reported_active_seconds": 383.242,
+  "authentication_idle_seconds": 1800,
+  "interpretation": "Long local wall-clock gap consistent with host suspension; exact rejected session ages were not captured. No auth guard was weakened.",
+  "final_retry": "Temporary caffeinate -i for test process only; no power settings changed",
+  "production_access": false
+}
