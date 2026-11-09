@@ -1,0 +1,125 @@
+{
+  "format": "blago-integration02-unified-journey-1",
+  "scope": "one synthetic SQLite, real localhost HTTP, simulated Bot delivery and signed synthetic Mini App exchange",
+  "checks": {
+    "invalid_invitation_denied": true,
+    "invited_password_identity": true,
+    "csrf_enforced": true,
+    "link_rotates_old_web_session": true,
+    "canonical_id_survives_link": true,
+    "web_mini_app_one_identity": true,
+    "mini_exchange_replay_denied": true,
+    "bot_duplicate_delivery_no_generation": true,
+    "memory_shared_and_corrected": true,
+    "other_user_memory_isolated": true,
+    "history_shared_across_channels": true,
+    "restart_preserves_history": true,
+    "do_not_remember_does_not_end_dialogue": true,
+    "natural_need_suggestion_without_publication": true,
+    "plain_chat_is_not_action_authority": true,
+    "private_draft_hidden": true,
+    "exact_text_version_audience_preview": true,
+    "preview_not_publication": true,
+    "other_actor_cannot_confirm": true,
+    "explicit_publication": true,
+    "duplicate_confirmation_no_event": true,
+    "outsider_audience_denied": true,
+    "explicit_offer_and_accept": true,
+    "single_confirmation_not_complete": true,
+    "crash_after_help_commit": true,
+    "replay_after_crash_no_duplicate": true,
+    "mutual_completion": true,
+    "personal_completed_statistic": true,
+    "help_event_history_separate_from_chat": true,
+    "community_has_no_private_help_text": true,
+    "dispute_after_completion": true,
+    "llm_claim_not_committed": true,
+    "provider_failure_no_help_mutation": true,
+    "restore_does_not_republish": true,
+    "restore_invalidates_sessions": true,
+    "no_financial_events": true,
+    "integrity": true,
+    "restore_does_not_restore_memory": true
+  },
+  "passed": 38,
+  "total": 38,
+  "turns": [
+    {
+      "user": "Я живу в Москве",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Я предпочитаю чай",
+      "reply": "Буду учитывать новое предпочтение: чай.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Я умею писать на Python",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Я интересуюсь темой книги",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Я больше не живу в Москве, теперь живу в Казани",
+      "reply": "Теперь буду учитывать новое место жительства.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Не запоминай это, но расскажи, как починить велосипед",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Мне нужна помощь с ремонтом синтетического велосипеда",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Да, публикуй",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Опубликуй ещё одно обращение",
+      "reply": "Не могу подтвердить выполнение этого действия.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Почему цепь может проскальзывать?",
+      "reply": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+      "provider_calls": 1
+    },
+    {
+      "user": "Продолжим: что проверить в тормозах?",
+      "reply": "Я прочитал твоё сообщение.",
+      "provider_calls": 1
+    }
+  ],
+  "local_provider_calls": 12,
+  "extra_external_llm_calls": 0,
+  "median_chat_http_ms": 130.589,
+  "agent_quality": {
+    "provider": "deterministic offline; not real HF quality",
+    "generic_acknowledgements": 7,
+    "skill_auto_saved_offline": false,
+    "interest_auto_saved_offline": false,
+    "human_perceived_naturalness": "NOT QUALIFIED",
+    "model_extraction_contract": "separately mocked in tests.test_unified_mvp; not live inference"
+  },
+  "gaps": {
+    "invitation": "shared deployment code, not individual invitation lifecycle",
+    "identity": "authenticated account, not unique physical human",
+    "conversational_publication": "PARTIAL; explicit Help panel/API required",
+    "verified_help_status_in_agent": "MISSING; no scoped Help read projection into agent context",
+    "collective_fulfillment_statistics": "MISSING; existing completed counter is personal",
+    "real_llm_quality": "NOT EXECUTED by this check",
+    "physical_telegram": "NOT EXECUTED"
+  },
+  "production_access": false,
+  "real_pilot": "NO-GO"
+}

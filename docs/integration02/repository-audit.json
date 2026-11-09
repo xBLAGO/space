@@ -1,0 +1,1222 @@
+{
+  "format": "blago-integration02-repository-audit-1",
+  "observed_main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "candidate_base_sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+  "main_files": 25,
+  "candidate_files": 206,
+  "components": [
+    {
+      "component": "telegram_sqlite",
+      "path": "src/xblago/core/storage.py",
+      "in_main": true,
+      "in_candidate": true
+    },
+    {
+      "component": "personal_agent",
+      "path": "src/xblago/agents/personal_assistant.py",
+      "in_main": true,
+      "in_candidate": true
+    },
+    {
+      "component": "web_mini_app",
+      "path": "src/xblago/integrations/web.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "semantic_memory",
+      "path": "src/xblago/core/semantic_memory.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "identity_runtime",
+      "path": "src/xblago/integrations/identity.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "privacy_recovery",
+      "path": "src/xblago/core/privacy_control.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "natural_conversation",
+      "path": "src/xblago/core/conversation.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "help_cycle",
+      "path": "src/xblago/domain/help_service.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "context_fencing",
+      "path": "src/xblago/core/context_fencing.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "lifecycle",
+      "path": "src/xblago/core/lifecycle_schema.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "retention_scheduler",
+      "path": "src/xblago/core/retention_ops.py",
+      "in_main": false,
+      "in_candidate": true
+    },
+    {
+      "component": "sovereign_identity",
+      "path": "src/xblago/core/sovereign.py",
+      "in_main": false,
+      "in_candidate": false
+    },
+    {
+      "component": "genesis",
+      "path": "src/xblago/core/genesis.py",
+      "in_main": false,
+      "in_candidate": false
+    },
+    {
+      "component": "federation_lab",
+      "path": "experiments/federation_08_2/runtime.py",
+      "in_main": false,
+      "in_candidate": false
+    }
+  ],
+  "main_to_candidate_files": [
+    {
+      "path": ".env.example",
+      "additions": "9",
+      "deletions": "0"
+    },
+    {
+      "path": ".github/workflows/huggingface-space.yml",
+      "additions": "27",
+      "deletions": "3"
+    },
+    {
+      "path": ".github/workflows/tests.yml",
+      "additions": "311",
+      "deletions": "0"
+    },
+    {
+      "path": "Dockerfile",
+      "additions": "15",
+      "deletions": "5"
+    },
+    {
+      "path": "README.md",
+      "additions": "63",
+      "deletions": "1"
+    },
+    {
+      "path": "deploy/huggingface-space/README.md",
+      "additions": "35",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_ECONOMY_01.md",
+      "additions": "232",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_04_2.md",
+      "additions": "119",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_04_MEMORY_AUDIT.md",
+      "additions": "113",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05.md",
+      "additions": "274",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05_2.md",
+      "additions": "246",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05_3.md",
+      "additions": "296",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05_4.md",
+      "additions": "244",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05_4_MIGRATION.md",
+      "additions": "161",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_05_4_RETENTION.md",
+      "additions": "84",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_06_1.md",
+      "additions": "317",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_HELP_01.md",
+      "additions": "264",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_HELP_01_1.md",
+      "additions": "131",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_INTEGRATION_01.md",
+      "additions": "159",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_PRIVACY_01_2.md",
+      "additions": "106",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_PRIVACY_01_3.md",
+      "additions": "88",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_FOUNDATION_PRIVACY_01_4.md",
+      "additions": "96",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/BLAGO_RELEASE_01.md",
+      "additions": "196",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/browser-results.json",
+      "additions": "21",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/candidate-identity.json",
+      "additions": "79",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/ci-evidence.json",
+      "additions": "31",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/completed-demo.json",
+      "additions": "78",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/gates.json",
+      "additions": "96",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01/test-results.json",
+      "additions": "147",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/README.md",
+      "additions": "20",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/RUNBOOK.md",
+      "additions": "60",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/browser-results.json",
+      "additions": "21",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/candidate-identity.json",
+      "additions": "79",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/ci-evidence.json",
+      "additions": "181",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/evidence-index.json",
+      "additions": "19",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/gates.json",
+      "additions": "120",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/local-stand.json",
+      "additions": "17",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/mobile-results.json",
+      "additions": "24",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/provider-results.json",
+      "additions": "8",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/synthetic-mini-app-mobile.png",
+      "additions": "-",
+      "deletions": "-"
+    },
+    {
+      "path": "docs/help01_1/test-results.json",
+      "additions": "113",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/worker-probe-ci.json",
+      "additions": "13",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/help01_1/worker-probe.json",
+      "additions": "11",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/integration01/browser-results.json",
+      "additions": "34",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/integration01/gates.json",
+      "additions": "78",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/integration01/local-tests.txt",
+      "additions": "8",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/README.md",
+      "additions": "20",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/RUNBOOK.md",
+      "additions": "57",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/THREAT_MODEL.md",
+      "additions": "49",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/after-probe-ci.json",
+      "additions": "15",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/before-probe.json",
+      "additions": "11",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/browser-results.json",
+      "additions": "21",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/candidate-identity.json",
+      "additions": "84",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/ci-evidence.json",
+      "additions": "197",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/evidence-index.json",
+      "additions": "21",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/gates.json",
+      "additions": "191",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/mini-app-conflict.png",
+      "additions": "-",
+      "deletions": "-"
+    },
+    {
+      "path": "docs/privacy01_2/mobile-results.json",
+      "additions": "27",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/performance-ci.json",
+      "additions": "53",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/performance-local.json",
+      "additions": "51",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_2/test-results.json",
+      "additions": "202",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/DATA_LIFECYCLE_MATRIX.md",
+      "additions": "59",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/README.md",
+      "additions": "35",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/RUNBOOK.md",
+      "additions": "72",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/THREAT_MODEL.md",
+      "additions": "34",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/ci-source.json",
+      "additions": "356",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/evidence-index.json",
+      "additions": "21",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/gates.json",
+      "additions": "351",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/inventory.json",
+      "additions": "971",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/reenrollment-replay.json",
+      "additions": "12",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/rehearsal-local.json",
+      "additions": "41",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/source-identity.json",
+      "additions": "90",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_3/test-results.json",
+      "additions": "296",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/EXTERNAL_DATA_INVENTORY.md",
+      "additions": "33",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/README.md",
+      "additions": "28",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/RETENTION_POLICY_DRAFT.md",
+      "additions": "29",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/RUNBOOK.md",
+      "additions": "72",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/THREAT_MODEL.md",
+      "additions": "34",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/ci-source.json",
+      "additions": "547",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/cli-local.json",
+      "additions": "19",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/clock-observations.json",
+      "additions": "11",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/evidence-index.json",
+      "additions": "24",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/external-inventory.json",
+      "additions": "218",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/gates.json",
+      "additions": "529",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/operations-local.json",
+      "additions": "91",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/operator-schema.json",
+      "additions": "20",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/source-identity.json",
+      "additions": "90",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/privacy01_4/test-results.json",
+      "additions": "263",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/browser-results.json",
+      "additions": "34",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/chrome-desktop.png",
+      "additions": "-",
+      "deletions": "-"
+    },
+    {
+      "path": "docs/validation05_4/chrome-mobile-viewport.png",
+      "additions": "-",
+      "deletions": "-"
+    },
+    {
+      "path": "docs/validation05_4/ci-source-evidence.txt",
+      "additions": "33",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/hf-integration.json",
+      "additions": "297",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/independent-baseline-review.md",
+      "additions": "103",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/independent-recheck.md",
+      "additions": "113",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/local-tests.txt",
+      "additions": "248",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/pilot-decision.json",
+      "additions": "55",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/pr-chain.json",
+      "additions": "27",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation05_4/runtime-inventory.json",
+      "additions": "56",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/browser-results.json",
+      "additions": "34",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/ci-source-evidence.txt",
+      "additions": "28",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/hf-after-before-status-projection.json",
+      "additions": "261",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/hf-after-local-ca-failure.json",
+      "additions": "243",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/hf-after.json",
+      "additions": "287",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/hf-before-local-ca-failure.json",
+      "additions": "243",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/hf-before.json",
+      "additions": "263",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/local-tests.txt",
+      "additions": "330",
+      "deletions": "0"
+    },
+    {
+      "path": "docs/validation06_1/quality-review.json",
+      "additions": "73",
+      "deletions": "0"
+    },
+    {
+      "path": "integration/candidate.json",
+      "additions": "182",
+      "deletions": "0"
+    },
+    {
+      "path": "lab/help01_1/compose.yaml",
+      "additions": "22",
+      "deletions": "0"
+    },
+    {
+      "path": "pyproject.toml",
+      "additions": "9",
+      "deletions": "0"
+    },
+    {
+      "path": "requirements-integration.lock",
+      "additions": "14",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/agents/personal_assistant.py",
+      "additions": "254",
+      "deletions": "27"
+    },
+    {
+      "path": "src/xblago/core/config.py",
+      "additions": "34",
+      "deletions": "2"
+    },
+    {
+      "path": "src/xblago/core/context_fencing.py",
+      "additions": "126",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/context_schema.py",
+      "additions": "114",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/conversation.py",
+      "additions": "106",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/data_lifecycle.py",
+      "additions": "185",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/help_schema.py",
+      "additions": "67",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/identity_runtime_schema.py",
+      "additions": "142",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/identity_schema.py",
+      "additions": "154",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/integration.py",
+      "additions": "114",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/integration_help_schema.json",
+      "additions": "3245",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/integration_schema.json",
+      "additions": "2781",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/journal_custody.py",
+      "additions": "131",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/journal_witness.py",
+      "additions": "98",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/lifecycle_schema.py",
+      "additions": "140",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/llm.py",
+      "additions": "294",
+      "deletions": "52"
+    },
+    {
+      "path": "src/xblago/core/memory.py",
+      "additions": "163",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/memory_commands.py",
+      "additions": "210",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/memory_policy.py",
+      "additions": "72",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/pilot_schema.py",
+      "additions": "88",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/privacy_control.py",
+      "additions": "268",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/privacy_maintenance.py",
+      "additions": "106",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/privacy_schema.py",
+      "additions": "141",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/retention_ops.py",
+      "additions": "339",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/routing.py",
+      "additions": "5",
+      "deletions": "5"
+    },
+    {
+      "path": "src/xblago/core/security_journal.py",
+      "additions": "179",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/semantic_memory.py",
+      "additions": "145",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/sqlite_safety.py",
+      "additions": "49",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/core/storage.py",
+      "additions": "453",
+      "deletions": "64"
+    },
+    {
+      "path": "src/xblago/domain/__init__.py",
+      "additions": "1",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/domain/help_contracts.py",
+      "additions": "36",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/domain/help_service.py",
+      "additions": "229",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/identity.py",
+      "additions": "384",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/privacy.py",
+      "additions": "190",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/static/icon.svg",
+      "additions": "1",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/static/index.html",
+      "additions": "267",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/static/manifest.webmanifest",
+      "additions": "18",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/static/sw.js",
+      "additions": "5",
+      "deletions": "0"
+    },
+    {
+      "path": "src/xblago/integrations/telegram.py",
+      "additions": "78",
+      "deletions": "21"
+    },
+    {
+      "path": "src/xblago/integrations/web.py",
+      "additions": "1524",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/fixtures/natural_dialogues.json",
+      "additions": "414",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_browser_e2e.py",
+      "additions": "143",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_context_fencing.py",
+      "additions": "353",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_data_lifecycle.py",
+      "additions": "366",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_economy.py",
+      "additions": "192",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_foundation042.py",
+      "additions": "348",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_foundation_stack.py",
+      "additions": "165",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_generation_reliability.py",
+      "additions": "211",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_help01.py",
+      "additions": "269",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_help_readiness.py",
+      "additions": "227",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_identity_runtime.py",
+      "additions": "563",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_identity_schema.py",
+      "additions": "228",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_integration_candidate.py",
+      "additions": "153",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_llm.py",
+      "additions": "239",
+      "deletions": "9"
+    },
+    {
+      "path": "tests/test_memory_pilot.py",
+      "additions": "273",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_natural_conversation.py",
+      "additions": "198",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_personal_assistant.py",
+      "additions": "17",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_pilot_safety.py",
+      "additions": "255",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_privacy.py",
+      "additions": "580",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_retention_ops.py",
+      "additions": "246",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_semantic_memory.py",
+      "additions": "140",
+      "deletions": "0"
+    },
+    {
+      "path": "tests/test_telegram.py",
+      "additions": "148",
+      "deletions": "3"
+    },
+    {
+      "path": "tests/test_web.py",
+      "additions": "235",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/build_macos_sqlite_driver.py",
+      "additions": "51",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/build_sqlite.py",
+      "additions": "58",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/context_fencing_check.py",
+      "additions": "36",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/freeze_integration.py",
+      "additions": "48",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_browser_check.py",
+      "additions": "68",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_demo.py",
+      "additions": "41",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_mobile_check.py",
+      "additions": "107",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_readiness_lab.py",
+      "additions": "82",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_test_provider.py",
+      "additions": "61",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/help_worker_probe.py",
+      "additions": "63",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/integration_evidence.py",
+      "additions": "38",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/integration_fixture.py",
+      "additions": "54",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/lifecycle_check.py",
+      "additions": "42",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/lifecycle_inventory.py",
+      "additions": "37",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/lifecycle_maintenance.py",
+      "additions": "20",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/natural_hf_check.py",
+      "additions": "140",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/pilot_browser_check.py",
+      "additions": "118",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/pilot_fixture.py",
+      "additions": "41",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/pilot_hf_check.py",
+      "additions": "139",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/release_guard.py",
+      "additions": "13",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/retention_ops_lab.py",
+      "additions": "148",
+      "deletions": "0"
+    },
+    {
+      "path": "tools/retention_scheduler.py",
+      "additions": "41",
+      "deletions": "0"
+    }
+  ],
+  "pull_requests": [
+    {
+      "pr": 10,
+      "head_sha": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "ancestor_of_candidate": true,
+      "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 11,
+      "head_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "ancestor_of_candidate": false,
+      "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 12,
+      "head_sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "ancestor_of_candidate": false,
+      "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "textual_conflict_markers": 11,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 13,
+      "head_sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "ancestor_of_candidate": false,
+      "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "textual_conflict_markers": 11,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 14,
+      "head_sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "ancestor_of_candidate": false,
+      "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "textual_conflict_markers": 18,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 15,
+      "head_sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "ancestor_of_candidate": false,
+      "merge_base": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 16,
+      "head_sha": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+      "ancestor_of_candidate": false,
+      "merge_base": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 17,
+      "head_sha": "44a5d52a4ac8022478a247f4e1bbd2eaea551142",
+      "ancestor_of_candidate": false,
+      "merge_base": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 18,
+      "head_sha": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428",
+      "ancestor_of_candidate": false,
+      "merge_base": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 19,
+      "head_sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+      "ancestor_of_candidate": false,
+      "merge_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 20,
+      "head_sha": "417e12be82e0b381d5251e12191a25d1c10921f4",
+      "ancestor_of_candidate": true,
+      "merge_base": "417e12be82e0b381d5251e12191a25d1c10921f4",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 21,
+      "head_sha": "e65a696cacc76df3a4b7f0d1b6edf3bf25e66691",
+      "ancestor_of_candidate": false,
+      "merge_base": "d7f619a1e6a7f15564facb5e8e84b184a3f24658",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 22,
+      "head_sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+      "ancestor_of_candidate": true,
+      "merge_base": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 23,
+      "head_sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+      "ancestor_of_candidate": true,
+      "merge_base": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 24,
+      "head_sha": "80e60b4792067b9e4832a3db88e8ea3a0f031f37",
+      "ancestor_of_candidate": true,
+      "merge_base": "80e60b4792067b9e4832a3db88e8ea3a0f031f37",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    },
+    {
+      "pr": 25,
+      "head_sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+      "ancestor_of_candidate": true,
+      "merge_base": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+      "textual_conflict_markers": 0,
+      "runtime_compatibility": "NOT implied by text merge or individual CI"
+    }
+  ],
+  "pr19_post_runtime_changes": [
+    "docs/BLAGO_FOUNDATION_INTEGRATION_01.md",
+    "docs/integration01/candidate-identity.json",
+    "docs/integration01/ci-evidence.json",
+    "docs/integration01/gates.json"
+  ],
+  "main_auto_deploy_on_push": true,
+  "limitations": [
+    "Captured PR HEAD snapshot; re-read GitHub before any approved integration",
+    "Text conflict count is not semantic compatibility",
+    "No merges, migrations, index changes or deployment executed"
+  ]
+}

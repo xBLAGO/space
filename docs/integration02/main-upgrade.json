@@ -1,0 +1,23 @@
+{
+  "format": "blago-integration02-main-upgrade-1",
+  "main_source_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "runtime_source_sha": "395ecf10f9187663fddb64795597e7efe0f014fa",
+  "scope": "Synthetic DB actually seeded by archived main code; newly reviewed synthetic control lineage only",
+  "checks": {
+    "old_identity_preserved": true,
+    "memory_preserved": true,
+    "history_preserved": true,
+    "supported_repeat_migrations_no_change": true,
+    "legacy_help_reapply_safely_refused": true,
+    "integrity": true,
+    "old_certified_backup_does_not_restore_deleted_fact": true
+  },
+  "production_database_used": false,
+  "limits": [
+    "No real legacy JSON inventory or production upgrade",
+    "Legacy Help migrator is not stack-idempotent after Context/Lifecycle; requires reviewed ledger-aware dispatch, no checksum weakening",
+    "Legacy unpaired dialogue TTL still requires review",
+    "Off-host storage/DR not qualified"
+  ],
+  "real_pilot": "NO-GO"
+}

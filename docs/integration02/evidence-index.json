@@ -1,0 +1,80 @@
+{
+  "format": "blago-integration02-evidence-index-1",
+  "source_sha": "395ecf10f9187663fddb64795597e7efe0f014fa",
+  "base_sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+  "independent_attestation": false,
+  "files": [
+    {
+      "path": "docs/BLAGO_FOUNDATION_INTEGRATION_02.md",
+      "sha256": "c5584cd3f9cbca5ff7ff67bdaa80ac2d1c5aab175d4380581c18fcd906dc3c4b"
+    },
+    {
+      "path": "docs/integration02/INTEGRATION_PLAN.md",
+      "sha256": "84b32ea1ecb59d4712631541b117feba7f60b758b2e6739f0d7a4b772fc156eb"
+    },
+    {
+      "path": "docs/integration02/READINESS_MATRIX.md",
+      "sha256": "473331a54bc8066f42dd077cac4f60d1ec1427390a58eae0b9aaf895b0a641d9"
+    },
+    {
+      "path": "docs/integration02/README.md",
+      "sha256": "57467acb7bcb190f8e614709f44c32cd0ca24bc0c3cf536880498c5500fced29"
+    },
+    {
+      "path": "docs/integration02/RUNBOOK.md",
+      "sha256": "c017a67392df86bcdfecdd6c4e49066e87375dc9fc489fe05308bfe5fa2d61ef"
+    },
+    {
+      "path": "docs/integration02/browser-local.json",
+      "sha256": "f83e52fd612b5a71c6c740b33f3ae4fe7a1b9f5abb5863adff692b48c38df091"
+    },
+    {
+      "path": "docs/integration02/ci-source.json",
+      "sha256": "22cc39ecebe6840a46f91abb5d13441b63bc238ece6501313efc9c08a63cb1eb"
+    },
+    {
+      "path": "docs/integration02/gates.json",
+      "sha256": "4d250368e502e1f32d5578fca426fd0cd0f89e7bc184dc1c5d5fc402face9ab7"
+    },
+    {
+      "path": "docs/integration02/journey-local.json",
+      "sha256": "ce0e83a0800f05dc9164164f94ce60ae203f4a315439caea2a0eb00a914df9e4"
+    },
+    {
+      "path": "docs/integration02/main-upgrade.json",
+      "sha256": "12f82a3150be923ddf8ca975a0d6e99c62c4c52b12db873845a599e86de32ea0"
+    },
+    {
+      "path": "docs/integration02/main_upgrade_check.py",
+      "sha256": "3594c9648ae0a27e25a889d51328adf499f32f24ecd3310c0a272204d68f6662"
+    },
+    {
+      "path": "docs/integration02/mobile-local.json",
+      "sha256": "001b97594b39f4bab2379eb5f064b1618729e3b78d6199f87b5925ce13a59967"
+    },
+    {
+      "path": "docs/integration02/pr-inventory.json",
+      "sha256": "bd1ab0afef22140317521a71b0341a56e567650b74810499bc875372c2b29d6e"
+    },
+    {
+      "path": "docs/integration02/provider-status.json",
+      "sha256": "a5fbb9b335a13b1330532e4874bf3137c8c0f0b32b3c8695317e18b072cebea7"
+    },
+    {
+      "path": "docs/integration02/public-site.json",
+      "sha256": "a1b21d6cb9e46ecb576e51103e56797103f8a7b1ad5277cb754b796d5def5b2a"
+    },
+    {
+      "path": "docs/integration02/repository-audit.json",
+      "sha256": "970cd4ed8a993a6e7fe0ab47f767888ee3be412cced273ae653652e9770d4ca4"
+    },
+    {
+      "path": "docs/integration02/source-identity.json",
+      "sha256": "2266e471b0335a75dd87dfb10c0fed6a68cb0e004c7eeba369cb32e14e71df89"
+    },
+    {
+      "path": "docs/integration02/test-results.json",
+      "sha256": "d3bb957cb513c5309eb37ee896a83195c26d6e57f90859e2bf102803afe1cd91"
+    }
+  ]
+}
