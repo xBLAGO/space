@@ -1,0 +1,263 @@
+{
+  "format": "blago-privacy014-test-results-1",
+  "runtime_source_sha": "0fb65db601de9f75806fbf51a0dfdafb130554ee",
+  "base": "80e60b4792067b9e4832a3db88e8ea3a0f031f37",
+  "ci": {
+    "run": 42525416875,
+    "passed": 464,
+    "seconds": 61.746
+  },
+  "focused_local": {
+    "passed": 32,
+    "seconds": 40.102
+  },
+  "full_local": {
+    "status": "PASS",
+    "passed": 464,
+    "seconds": 536.167,
+    "command": "PYTHONPATH=/tmp/blago-sqlite-driver-3541:.:src caffeinate -i /tmp/blago-life013-venv/bin/python -m unittest discover -s tests -v",
+    "scope": "synthetic stores and localhost, approved bind and temporary idle-sleep inhibition; no production access"
+  },
+  "scenarios": [
+    {
+      "test": "test_старый_backup_и_ключ_связывают_псевдонимный_target",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_OFF_по_умолчанию_не_пишет_ничего",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_crash_до_очистки_после_durable_RUNNING",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_crash_после_app_commit_не_откатывает_удаление",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_legacy_blocker_не_превращается_в_SUCCESS",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ops_миграция_не_меняет_app_DDL_и_прежние_checksums",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ops_старый_backup_не_восстанавливает_полномочия",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_scheduler_во_время_LLM_не_обходит_G09",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_symlink_ops_не_открывает_чужой_файл",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_активная_память_и_Help_не_меняются",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_два_процесса_не_исполняют_очистку_одновременно",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_задержка_создаёт_overdue_и_не_переименовывает_G04",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_истёкший_managed_backup_удаляется_после_durable_retirement",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_неверная_схема_оператора_не_ремонтируется",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_нет_реального_провайдера_и_нет_произвольного_корня",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_нормальный_запуск_backup_очистка_и_интервал",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ограниченные_retry_backoff_и_manual_reschedule",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_операторский_TTL_не_удаляет_privacy_holds",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_осиротевший_backup_после_ошибки_не_теряется_из_контроля",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_откат_часов_блокирует_операцию",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ошибка_backup_не_запускает_очистку",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ошибка_новой_ops_миграции_откатывает_DDL",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_ошибка_фиксации_результата_не_даёт_ложного_SUCCESS",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_персональные_строки_из_ошибочного_adapter_не_логируются",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_подмена_периодичности_требует_нового_подтверждения",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_потеря_ops_не_переинициализируется_молча",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_потеря_witness_до_запуска_fail_closed",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_потеря_witness_после_commit_не_даёт_SUCCESS",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_потерянный_или_подменённый_active_backup_блокирует_cleanup",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_пустая_backup_квитанция_не_считается_успехом",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_старый_app_backup_и_сохранённый_ops_не_возвращают_данные",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    },
+    {
+      "test": "test_чужой_ops_journal_не_принимается",
+      "expected": "Invariant and rejection/deletion assertions in this named source test",
+      "actual": "PASS",
+      "proof": "CI job 128867859323; tests/test_retention_ops.py"
+    }
+  ],
+  "operations": {
+    "expected": 11,
+    "actual": 11,
+    "status": "PASS",
+    "evidence": "operations-local.json and ci-source.json"
+  },
+  "reidentification": "Positive linkage attack reproduced; pseudonymous, not anonymous",
+  "development_findings": [
+    {
+      "finding": "Frozen parent clock vs real child time",
+      "initial": "CLOCK_ROLLBACK instead of INTERRUPTED",
+      "fix": "Corrected test clock; production clock check retained"
+    },
+    {
+      "finding": "Orphan backup between file write and catalog commit",
+      "initial": "Review identified unregistered file persistence",
+      "fix": "Before/after managed inventory hash/existence check; negative tests PASS"
+    }
+  ],
+  "production_access": false,
+  "local_attempts": [
+    {
+      "source_sha": "0fb65db601de9f75806fbf51a0dfdafb130554ee",
+      "tests": 464,
+      "seconds": 398.943,
+      "errors": 1,
+      "test": "test_help01.Help01Tests.test_duplicate_draft_and_delivery",
+      "observed": "ApiError401 Session expired",
+      "cause": "UNKNOWN; no auth changes made"
+    },
+    {
+      "isolated_recheck": "PASS",
+      "tests": 1,
+      "seconds": 2.013,
+      "code_changed": false
+    },
+    {
+      "source_sha": "0fb65db601de9f75806fbf51a0dfdafb130554ee",
+      "tests": 464,
+      "seconds": 383.242,
+      "errors": 2,
+      "tests_with_error": [
+        "test_help_readiness.HelpReadinessTests.test_аналитика_не_возвращает_финансы_и_малую_группу",
+        "test_help_readiness.HelpReadinessTests.test_отозванная_сессия_не_исполняет_подтверждение"
+      ],
+      "observed": "ApiError401 in legacy Help setup; source unchanged"
+    }
+  ]
+}

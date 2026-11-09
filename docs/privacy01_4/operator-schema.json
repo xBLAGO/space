@@ -1,0 +1,20 @@
+{
+  "version": "retention_operations_001",
+  "checksum": "87e9155adac22acbfc8f7b795fa4437f9a06957759697b63ddb43a4fa446e131",
+  "database": "separate synthetic operations.sqlite3; no app migration",
+  "ddl": [
+    "CREATE TABLE ops_schema (version TEXT PRIMARY KEY, checksum TEXT NOT NULL)",
+    "CREATE TABLE ops_binding (singleton INTEGER PRIMARY KEY CHECK(singleton=1), journal_id TEXT NOT NULL, policy TEXT NOT NULL, policy_tag TEXT NOT NULL)",
+    "CREATE TABLE ops_state (singleton INTEGER PRIMARY KEY CHECK(singleton=1),\n        first_due INTEGER NOT NULL, next_due INTEGER NOT NULL, last_success INTEGER, last_seen INTEGER NOT NULL,\n        attempts INTEGER NOT NULL CHECK(attempts>=0), anchor_seq INTEGER NOT NULL,\n        anchor_head TEXT NOT NULL)",
+    "CREATE TABLE ops_runs (run_id TEXT PRIMARY KEY, started INTEGER NOT NULL, finished INTEGER,\n        status TEXT NOT NULL CHECK(status IN ('RUNNING','SUCCESS','FAILED','INTERRUPTED','RESCHEDULED','BLOCKED')),\n        reason TEXT NOT NULL, counts TEXT NOT NULL)"
+  ],
+  "default_schedule": {
+    "interval": 3600,
+    "retry_seconds": 60,
+    "max_attempts": 3,
+    "overdue_seconds": 7200,
+    "result_ttl": 604800
+  },
+  "feature_flag": "XBLAGO_RETENTION_SCHEDULER_ENABLED=true",
+  "default_enabled": false
+}

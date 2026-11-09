@@ -69,7 +69,7 @@
   "schema_sha256": "a0673f4c3f531961139633f5ce634d111ddc6fcdd5d695775b92d16184b2cf17",
   "source_files_sha256": {
     ".github/workflows/huggingface-space.yml": "e4e3fd36d331045c93e5c1d4b462e99f41a994e2881f3600c4bd9e60876b1faa",
-    ".github/workflows/tests.yml": "5da28ea2c170d04141a80301fafc97359f2b353d1e3ab98fc45220d73571f9e5",
+    ".github/workflows/tests.yml": "8bb1ef52974496adf2c5f8cefcc20c8b94de63a2986f9aa443cd5050dc6158d6",
     "Dockerfile": "277ab0717a8172723e47116d79fac59023eea974aaa7b7665135717d34accc01",
     "pyproject.toml": "dd6de982922a7655e667b77558337ca0754afb71eecd16da42ad4ed71f185a79",
     "requirements-integration.lock": "a07961af237437505e654d3f873924bf96f7ec0702d5a1b37c15a6becf4949f6",
@@ -101,6 +101,7 @@
     "src/xblago/core/privacy_maintenance.py": "2aaf10428ad4528ef67ec5b045ec80c30b3583b89f77c2b884b69cd018d159f0",
     "src/xblago/core/privacy_schema.py": "3769291d99a20bb66d0dd8cd42b757a7d6a073e003f0f119ada08d6800bb9c2e",
     "src/xblago/core/profile.py": "879255cae3089f02094ef96869b68a929b2e733f0e1011a282c4f4f3e967dcd6",
+    "src/xblago/core/retention_ops.py": "5d624e8f0313a4cf998616d20538ce3fb2456577a156d96152da6c5292d3713c",
     "src/xblago/core/routing.py": "f36366305bc14982a509efb24a74dc88845f0dd2deb119bcf6e7fe52fbda7083",
     "src/xblago/core/security_journal.py": "fa353bbf53a182934c56b0f8c5e99ca65df40dd9802e0592442eb322d41a8b58",
     "src/xblago/core/semantic_memory.py": "b42a2a2b7967745b1123ed0605264a489c288b8f4c02f90269913fdb8a5cc8a3",
@@ -136,6 +137,7 @@
     "tests/test_personal_assistant.py": "c8b7a8ec35e102ac4e0cd7b3ac4abd4784f466e5b19816139c08aab8dca8c9e1",
     "tests/test_pilot_safety.py": "ed2bcd4564420ecd8551fa1cae6ee94c75778f6c12ab5b42377ebce74a782ab6",
     "tests/test_privacy.py": "1a0a27faf7b8e9a30a237277fc4f4f6c096317354ba36023d207b640301cfc4f",
+    "tests/test_retention_ops.py": "460fd15ef335a08410df703d52de35c40c6961ad7a65d92412541f2afd789a47",
     "tests/test_semantic_memory.py": "9e2dcd81af9e8b78a94e7bc52c9816ff52e4ab2d70e7910daf4d37f006a374e3",
     "tests/test_telegram.py": "c59af54115d2c75a6b85794b8c2b23e28ab51b3caa7ce52b708cd2f7f14eb4ee",
     "tests/test_web.py": "1a549328fbaef45a08f01db7aaae094113bcc169eb6b66e8962dead77cf3ce03",
@@ -158,7 +160,9 @@
     "tools/pilot_browser_check.py": "33e1185df18542f8acf6a730d9bdd29547e90826724be4da34ee76665d6dbc5c",
     "tools/pilot_fixture.py": "4786506a16f1c78dca96833cb4d30e6d5833e703e95b83399896580493bd9836",
     "tools/pilot_hf_check.py": "6c5017cb848eea094bc6dc61a2c59fb1d762932fff81629ce49181bcf58eafe2",
-    "tools/release_guard.py": "3bd79773887ee6da0ba194677149a76a1e9dcc9bae447841a734647ab5463d62"
+    "tools/release_guard.py": "3bd79773887ee6da0ba194677149a76a1e9dcc9bae447841a734647ab5463d62",
+    "tools/retention_ops_lab.py": "57cea5bc4615c57bd7f3f5c7f8fc9615ed4781bad108e3f23bab2283502d6519",
+    "tools/retention_scheduler.py": "f19b0eb5365fabe67b5f68f2f50877a30fe7eec1cf8b75abc62232775cb296a6"
   },
   "source_pins": {
     "audit18": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428",

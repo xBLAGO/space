@@ -1,0 +1,91 @@
+{
+  "format": "blago-privacy014-operations-lab-1",
+  "scope": "local synthetic integration, same-author; no independent infrastructure claim",
+  "scenarios": [
+    {
+      "scenario": "disabled",
+      "expected": "no cleanup",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "overdue",
+      "expected": "alert before delayed cleanup",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "normal",
+      "expected": "durable SUCCESS + old record removed",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "periodicity",
+      "expected": "no second run before due",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "old_application_backup",
+      "expected": "deleted record never returns",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "backup_failure_full_disk",
+      "expected": "FAILED and no cleanup",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "bounded_retry",
+      "expected": "retry after backoff succeeds",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "external_confirmation_lost",
+      "expected": "UNKNOWN_RECOVERY; no false success",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "two_executors",
+      "expected": "one OS lock / one durable operation",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "process_crash",
+      "expected": "exit85 and result INTERRUPTED, never SUCCESS",
+      "actual": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "integrity",
+      "expected": "SQLite integrity/FK intact",
+      "actual": "PASS",
+      "details": {}
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "reidentification": {
+    "format": "blago-help-linkage-probe-1",
+    "synthetic_requests": 3,
+    "key_and_old_backup_linkable": true,
+    "side_information_singles_out_without_key": true,
+    "ambiguous_metadata_not_unique": true,
+    "anonymous": false,
+    "no_personal_fields_in_summary": true,
+    "personal_export_excludes_summary": true,
+    "conclusion": "PSEUDONYMOUS, NOT ANONYMOUS; backup/key and behavioral side information can reidentify",
+    "real_participants": false,
+    "production_access": false
+  },
+  "extra_llm_calls": 0,
+  "G04": "UNKNOWN",
+  "real_pilot": "NO-GO",
+  "production_access": false
+}
