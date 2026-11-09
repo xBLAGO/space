@@ -1,0 +1,51 @@
+{
+  "format": "blago-calculator01-compatibility-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "source_sha": "cae6337157fa55d6a5cb4bb9e25fce9712f1975e",
+  "app_schema_changed": false,
+  "app_migrations": 0,
+  "new_routes": 0,
+  "new_dependencies": 0,
+  "unchanged": [
+    {
+      "path": "src/xblago/core/help_schema.py",
+      "sha256": "bf7084d9ba41bef2a75de1b5a678823e698115057bc054cbe96ad4aa356a9bbc"
+    },
+    {
+      "path": "src/xblago/core/context_schema.py",
+      "sha256": "7be28f8e7eb6ddc04ddedf43b70716d50a2230180e5a30696f38ca2bf49937cf"
+    },
+    {
+      "path": "src/xblago/core/lifecycle_schema.py",
+      "sha256": "a61bbf725c0080355e695b6d6e9f56a7988fcdd9b112cf7e5aad180b41c5b46c"
+    },
+    {
+      "path": "src/xblago/core/integration_schema.json",
+      "sha256": "a0673f4c3f531961139633f5ce634d111ddc6fcdd5d695775b92d16184b2cf17"
+    },
+    {
+      "path": "src/xblago/core/integration_help_schema.json",
+      "sha256": "5fb911f4bd488a0502c10472edd8a0e642304c92abc55d5fd0eb2179bcac5ba5"
+    },
+    {
+      "path": "src/xblago/core/privacy_control.py",
+      "sha256": "463ce07610b8d515023c3d296bd9bbdd254f9610b5f234044246f487ad3ea424"
+    },
+    {
+      "path": "src/xblago/core/context_fencing.py",
+      "sha256": "cbe6ec4d6346b9b102f9a1225796c27018913b58924fe6105e6171e06610ab12"
+    },
+    {
+      "path": "src/xblago/integrations/web.py",
+      "sha256": "8b564af00a67ed5256d01585cae9355177e3fdea479784b4d0341a7b51a175fd"
+    },
+    {
+      "path": "requirements-integration.lock",
+      "sha256": "a07961af237437505e654d3f873924bf96f7ec0702d5a1b37c15a6becf4949f6"
+    },
+    {
+      "path": ".github/workflows/huggingface-space.yml",
+      "sha256": "e4e3fd36d331045c93e5c1d4b462e99f41a994e2881f3600c4bd9e60876b1faa"
+    }
+  ]
+}

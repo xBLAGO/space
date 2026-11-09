@@ -1,0 +1,148 @@
+{
+  "format": "blago-calculator01-gates-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "source_sha": "cae6337157fa55d6a5cb4bb9e25fce9712f1975e",
+  "next_development": "GO isolated synthetic core only",
+  "real_pilot": "NO-GO",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G00"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G01"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G02"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G03"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G04"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G05"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G06"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G07"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G08"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G09",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G09"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G10"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    },
+    {
+      "id": "G11",
+      "status": "FAIL",
+      "inherited_from": {
+        "document": "../integration02/gates.json",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+        "gate": "G11"
+      },
+      "scope": "Unchanged inherited scope; calculator lab does not close this gate"
+    }
+  ],
+  "calculator": {
+    "offline_value_engine": "PASS",
+    "synthetic_registry": "PASS memory-only",
+    "help_read_projection": "PASS synthetic integration",
+    "durable_registry": "NOT IMPLEMENTED",
+    "shared_worker_stock": "NOT EXECUTED",
+    "live_sources": "NOT EXECUTED",
+    "real_source_independence": "UNKNOWN",
+    "confirmed_help_quantities": "NOT IMPLEMENTED",
+    "global_census": "NO-GO",
+    "app_migrations": 0,
+    "external_calls": 0,
+    "new_http_routes": 0,
+    "old_migration_checksums": "UNCHANGED",
+    "new_tests": 44,
+    "full_ci_tests": 516,
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42691231619"
+  },
+  "independent_attestation": false
+}

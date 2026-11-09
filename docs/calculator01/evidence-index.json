@@ -1,0 +1,56 @@
+{
+  "format": "blago-calculator01-evidence-index-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "source_sha": "cae6337157fa55d6a5cb4bb9e25fce9712f1975e",
+  "independent_attestation": false,
+  "files": [
+    {
+      "path": "docs/BLAGO_COLLECTIVE_CALCULATOR_01.md",
+      "sha256": "f2e47ead2a8ae156cab6f3f3e8a2baaa033ed088625a6ee57472d6d4f8ba1461"
+    },
+    {
+      "path": "docs/calculator01/READINESS_MATRIX.md",
+      "sha256": "6dba5ca039f578409106f9e1c37a9148516fa03a1df98593793ed705c4e8302f"
+    },
+    {
+      "path": "docs/calculator01/README.md",
+      "sha256": "25d0c4709fcd5189da0e70bacc42cb5f8f193a48075c086f5f56b4edfa03f19f"
+    },
+    {
+      "path": "docs/calculator01/RUNBOOK.md",
+      "sha256": "8c5b6d2ba8eb1eac7cd79a380b2a24ed8a8e298782c0de2ed5522c58a132b92a"
+    },
+    {
+      "path": "docs/calculator01/THREAT_MODEL.md",
+      "sha256": "99aec6dd006b538bd4fb50262f37a076790f0f2090d03babdef0156d55444e5a"
+    },
+    {
+      "path": "docs/calculator01/ci-initial.json",
+      "sha256": "7f1c14e1119afa7838422e37636b4d66613caff219ef978506e6eb61b44c726c"
+    },
+    {
+      "path": "docs/calculator01/ci-source.json",
+      "sha256": "c02db19c04e720b737c56bb197853d1b14774eab477984a4f62e270645ab2faa"
+    },
+    {
+      "path": "docs/calculator01/compatibility.json",
+      "sha256": "11b7f2adff6cc98df452e09efe4df01fc49d1c6a65ea515c3b8d832a051ae318"
+    },
+    {
+      "path": "docs/calculator01/gates.json",
+      "sha256": "ec582794afa97fe447f69b25a51c510666f9bdf5d19b5660d919acd7bb056d7b"
+    },
+    {
+      "path": "docs/calculator01/lab-evidence.json",
+      "sha256": "7351f9ccaa4f27d90e71cde4b3abab45aec18ac4f1c41774485830ea0debfee2"
+    },
+    {
+      "path": "docs/calculator01/source-identity.json",
+      "sha256": "7ac498f1848da290c23e20798ffb45a8d9e2f41d49640017c991d44d2a62cec1"
+    },
+    {
+      "path": "docs/calculator01/test-results.json",
+      "sha256": "83ac6b12d0758846002c93f28e314650ea179e9f2b0da526faa0682664f079ce"
+    }
+  ]
+}

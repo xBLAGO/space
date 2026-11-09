@@ -1,0 +1,126 @@
+{
+  "format": "blago-calculator01-lab-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "status": "PASS",
+  "checks": {
+    "canonical_asset_resource_count": true,
+    "stock_btc_exact": true,
+    "asset_not_available_by_default": true,
+    "consent_revocation": true,
+    "publication_not_obligation": true,
+    "mutual_completion": true,
+    "repeated_projection_idempotent": true,
+    "audience_isolation": true,
+    "dispute_corrects_projection": true,
+    "withdraw_hides_projection": true,
+    "no_invented_quantity_or_value": true
+  },
+  "stock": {
+    "scope": "authorized synthetic lab view, not whole-community census",
+    "valuation_as_of": 1000,
+    "stock_scope": "CURRENT visibility and availability; not historical stock reconstruction",
+    "deduplication": "Canonical object IDs only; physical duplicates and ownership unverified",
+    "registered_objects": 2,
+    "by_category_unit": {
+      "computer:item": {
+        "stock": "2",
+        "available_self_declared": "1"
+      },
+      "bicycle:item": {
+        "stock": "1",
+        "available_self_declared": "0"
+      }
+    },
+    "stock_btc_known": "0.01100000",
+    "valued_objects": 2,
+    "unvalued_objects": 0,
+    "confirmed_available": "UNKNOWN: self declarations are not verification",
+    "flow_btc": null,
+    "need_deficit": null,
+    "wellbeing_score": null,
+    "completeness": "PARTIAL; missing values are not zero",
+    "unit": "BTC accounting only; no backing or transfer"
+  },
+  "valuation_example": {
+    "id": "92b929e4fb729ff4be814da6b15849685a17740c20a1b2aa360cb1858c7992c1",
+    "original_price": "100000",
+    "currency": "RUB",
+    "effective_at": 1000,
+    "assessed_at": 1000,
+    "btc": "0.01000000",
+    "quotes": [
+      {
+        "currency": "RUB",
+        "local_per_btc": "10000000",
+        "observed_at": 1000,
+        "source": "synthetic-a",
+        "provenance": "fixture-a-v1"
+      },
+      {
+        "currency": "RUB",
+        "local_per_btc": "10000000",
+        "observed_at": 1000,
+        "source": "synthetic-b",
+        "provenance": "fixture-b-v1"
+      }
+    ],
+    "algorithm": "blago-value-1-half-even-satoshi",
+    "rounding": "ROUND_HALF_EVEN; total to 8 BTC decimal places",
+    "purpose": "HISTORICAL",
+    "supersedes": null
+  },
+  "measurement_example": {
+    "required": "4",
+    "fulfilled": "1",
+    "remaining": "3",
+    "unit": "hour",
+    "share": "0.25000000",
+    "proof": "MEASUREMENT_ONLY_NOT_CONFIRMATION"
+  },
+  "help_counts": {
+    "published": 1,
+    "completed": 1,
+    "after_dispute": 0,
+    "after_withdraw": 0
+  },
+  "schema": {
+    "version": "calculator_lab_001",
+    "checksum": "21c316257d5907e09d7f148cf491fca2b7837ce6d4b9d52f7d38369cc5d6baf3",
+    "tables": [
+      {
+        "name": "challenges",
+        "sql": "CREATE TABLE challenges(id TEXT PRIMARY KEY, actor TEXT NOT NULL REFERENCES principals(id),\n          target TEXT NOT NULL, version INTEGER NOT NULL, body TEXT NOT NULL, expires INTEGER NOT NULL,\n          receipt TEXT)"
+      },
+      {
+        "name": "denials",
+        "sql": "CREATE TABLE denials(target TEXT PRIMARY KEY)"
+      },
+      {
+        "name": "events",
+        "sql": "CREATE TABLE events(id TEXT PRIMARY KEY, target TEXT NOT NULL, version INTEGER NOT NULL,\n          body TEXT NOT NULL, UNIQUE(target,version))"
+      },
+      {
+        "name": "goods",
+        "sql": "CREATE TABLE goods(id TEXT PRIMARY KEY, owner TEXT NOT NULL REFERENCES principals(id),\n          version INTEGER NOT NULL, body TEXT NOT NULL, status TEXT NOT NULL,\n          created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL)"
+      },
+      {
+        "name": "metadata",
+        "sql": "CREATE TABLE metadata(version TEXT PRIMARY KEY)"
+      },
+      {
+        "name": "principals",
+        "sql": "CREATE TABLE principals(id TEXT PRIMARY KEY)"
+      },
+      {
+        "name": "valuations",
+        "sql": "CREATE TABLE valuations(id TEXT PRIMARY KEY, target TEXT NOT NULL REFERENCES goods(id), quantity TEXT NOT NULL, body TEXT NOT NULL)"
+      }
+    ]
+  },
+  "external_calls": 0,
+  "financial_operations": 0,
+  "new_app_migrations": 0,
+  "durable_registry": "NOT IMPLEMENTED; in-memory lab only; restore rejected",
+  "independent_source_verification": "NOT EXECUTED; pinned synthetic fixtures only",
+  "real_pilot": "NO-GO"
+}
