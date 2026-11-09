@@ -18,7 +18,6 @@ def main():
         cfg=create(Path(root)/'new',help_enabled=True,context_fencing=True,lifecycle=True);cfg.update(XBLAGO_WEB_INVITE_CODE='synthetic-help-browser',XBLAGO_COOKIE_SECURE='false')
         with patch.dict(os.environ,cfg):
             app=WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'))
-            for username in ('help_author','help_helper'):app.register(username,'synthetic-password-only','synthetic-help-browser')
             server=ThreadingHTTPServer(('127.0.0.1',0),BlagoWebHandler);server.blago_web_app=app
             thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
             try:
@@ -37,9 +36,20 @@ def main():
                     for page,user in zip(pages,('help_author','help_helper')):
                         page.on('pageerror',lambda e:errors.append(str(e)))
                         page.goto('http://localhost:'+str(server.server_port)+'/app')
-                        page.locator('#username').fill(user);page.locator('#password').fill('synthetic-password-only');page.locator('#auth-submit').click();expect(page.locator('#shell')).to_be_visible()
+                        page.locator('#auth-toggle').click()
+                        page.locator('#username').fill(user);page.locator('#password').fill('synthetic-password-only');page.locator('#invite').fill('synthetic-help-browser');page.locator('#auth-submit').click();expect(page.locator('#shell')).to_be_visible()
+                        expect(page.locator('#chat-screen')).to_be_visible()
                         page.locator('#help-panel summary').first.click();page.locator('#help-refresh').click();expect(page.locator('#help-code')).not_to_be_empty()
                     a,b=pages;bc=b.locator('#help-code').inner_text()
+                    for text in ('Я предпочитаю чай','Я не люблю чай, предпочитаю кофе'):
+                        a.locator('#chat-input').fill(text)
+                        with a.expect_response(lambda r:r.url.endswith('/api/v1/chat/messages') and r.request.method=='POST'):
+                            a.locator('#chat-form').evaluate('(f)=>f.requestSubmit()')
+                    assert a.evaluate("fetch('/api/v1/memory').then(r=>r.json())")['facts']['preference:drink']=='кофе'
+                    history=a.evaluate("fetch('/api/v1/chat/messages').then(r=>r.json())")
+                    a.reload();expect(a.locator('#shell')).to_be_visible()
+                    expect(a.locator('#chat-stream')).to_contain_text('Я не люблю чай, предпочитаю кофе')
+                    assert a.evaluate("fetch('/api/v1/chat/messages').then(r=>r.json())")==history
                     # Natural conversation proposes only; no draft or publication yet.
                     a.locator('#chat-input').fill('Мне нужна помощь с ремонтом велосипеда <script>window.helpInjected=1</script>');a.locator('#chat-form').evaluate('(f)=>f.requestSubmit()')
                     expect(a.get_by_role('button',name='Подготовить черновик',exact=True)).to_be_visible();a.get_by_role('button',name='Подготовить черновик',exact=True).click()
@@ -57,11 +67,15 @@ def main():
                     b.locator('#help-refresh').click();action(b,'Подтвердить результат');expect(b.locator('#help-items')).to_contain_text('COMPLETED')
                     a.locator('#help-refresh').click();expect(a.locator('#help-stats')).to_contain_text('1')
                     args.output.mkdir(parents=True,exist_ok=True);a.screenshot(path=str(args.output/'help-completed.png'),full_page=True)
+                    server.blago_web_app=WebApp(preflight(app.store.path))
+                    a.reload();expect(a.locator('#shell')).to_be_visible();a.locator('#help-panel summary').first.click();a.locator('#help-refresh').click();expect(a.locator('#help-items')).to_contain_text('COMPLETED')
+                    action(b,'Сообщить о споре');expect(b.locator('#help-items')).to_contain_text('DISPUTED')
+                    a.locator('#help-refresh').click();expect(a.locator('#help-items')).to_contain_text('DISPUTED');expect(a.locator('#help-stats')).to_contain_text('0')
                     action(a,'Отозвать обращение');b.locator('#help-refresh').click();expect(b.locator('#help-items')).not_to_contain_text('велосипеда');expect(b.locator('#help-items')).to_contain_text('WITHDRAWN')
                     assert not a.evaluate('window.helpInjected') and not b.evaluate('window.helpInjected')
                     assert not errors,errors
                     args.output.mkdir(parents=True,exist_ok=True)
-                    result={'scope':'two synthetic participants, two isolated Chrome contexts','browser':browser.version,'checks':{'natural_suggestion_no_publish':True,'private_draft':True,'exact_preview_and_confirmation':True,'authorized_helper_feed':True,'voluntary_offer':True,'owner_accept':True,'mutual_completion':True,'completed_statistic':True,'withdrawal_scrubs_refreshed_view':True,'untrusted_text_is_inert':True,'no_page_errors':True},'page_errors':errors,'external_resources':'blocked; Telegram SDK stubbed for Web-only test','production_access':False,'real_pilot':'NO-GO'}
+                    result={'scope':'two synthetic participants, two isolated Chrome contexts, one SQLite','browser':browser.version,'checks':{'invitation_registration_ui':True,'starts_in_chat':True,'memory_corrected_in_chat':True,'reopen_preserves_history':True,'natural_suggestion_no_publish':True,'private_draft':True,'exact_preview_and_confirmation':True,'authorized_helper_feed':True,'voluntary_offer':True,'owner_accept':True,'mutual_completion':True,'completed_statistic':True,'app_restart_preserves_help':True,'dispute_removes_completed_count':True,'withdrawal_scrubs_refreshed_view':True,'untrusted_text_is_inert':True,'no_page_errors':True},'page_errors':errors,'external_resources':'blocked; Telegram SDK stubbed for Web-only test','production_access':False,'real_pilot':'NO-GO'}
                     (args.output/'help-browser-results.json').write_text(json.dumps(result,indent=2)+'\n');a.screenshot(path=str(args.output/'help-completed-withdrawn.png'),full_page=True)
                     print(json.dumps(result));browser.close()
             finally:server.shutdown();server.server_close();thread.join(5)
