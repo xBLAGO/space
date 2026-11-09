@@ -1,0 +1,6 @@
+{
+  "format": "uel-offline-fixture-policy-1",
+  "network": "fd:abababababababababababababababab",
+  "production": false,
+  "scope": "synthetic bytes/arithmetic only"
+}

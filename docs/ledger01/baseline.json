@@ -1,0 +1,779 @@
+{
+  "format": "blago-uel-baseline-1",
+  "design_base_sha": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5",
+  "runtime_source_sha": "34fb475455678dc024cf39f8fa27d2cd0c5af7dd",
+  "base_runtime_ci": {
+    "url": "https://github.com/xBLAGO/space/actions/runs/42699549276",
+    "sha": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5",
+    "status": "SUCCESS verified in prior task and rechecked",
+    "tests": 565,
+    "Docker": "PASS",
+    "scope": "Existing09.1 baseline, not new UEL runtime"
+  },
+  "pull_requests": [
+    {
+      "pr": 29,
+      "title": "Foundation 09.1: durable asset claims with consent and privacy recovery",
+      "head": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5",
+      "head_branch": "feat/foundation-09-1-durable-registry",
+      "base": "00c665b369acb6465f9afa795a6046c43f4107ce",
+      "base_branch": "feat/collective-calculator-01",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": true,
+      "inspected_sources": [
+        {
+          "path": "src/xblago/core/storage.py",
+          "sha256": "62592ebcff55930b80036e625ee59a51dea4b0735d6401de8aee0d74ab40176c",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/core/storage.py",
+          "anchors": [
+            {
+              "line": 19,
+              "declaration": "class TelegramIdentity:"
+            },
+            {
+              "line": 28,
+              "declaration": "class SQLiteBlagoStore:"
+            },
+            {
+              "line": 691,
+              "declaration": "def _locked_transaction(self) -> Iterator[sqlite3.Connection]:"
+            },
+            {
+              "line": 746,
+              "declaration": "class SQLiteUserMemoryStore(MemoryStore):"
+            },
+            {
+              "line": 784,
+              "declaration": "def _utc_now() -> str:"
+            },
+            {
+              "line": 788,
+              "declaration": "def _semantic_record_from_row(row: sqlite3.Row, key: str | None = None) -> SemanticMemoryRecord:"
+            },
+            {
+              "line": 802,
+              "declaration": "def _ensure_column(connection: sqlite3.Connection, table: str, column: str, definition: str) -> None:"
+            },
+            {
+              "line": 808,
+              "declaration": "def _display_name(identity: TelegramIdentity) -> str | None:"
+            },
+            {
+              "line": 816,
+              "declaration": "def _validate_semantic_input(key: str, value: Any, category: str, status: str, confidence: float) -> None:"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/privacy_control.py",
+          "sha256": "4b17939c8845f25e88c85d5c18929b07db6863f97ff74b7093f4fe92516ce5b7",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/core/privacy_control.py",
+          "anchors": [
+            {
+              "line": 13,
+              "declaration": "class DeletionBlocked(ValueError):"
+            },
+            {
+              "line": 27,
+              "declaration": "def deletion_blockers(db, uid):"
+            },
+            {
+              "line": 59,
+              "declaration": "def purge_user(db, uid):"
+            },
+            {
+              "line": 78,
+              "declaration": "class PrivacyControl:"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/context_schema.py",
+          "sha256": "7be28f8e7eb6ddc04ddedf43b70716d50a2230180e5a30696f38ca2bf49937cf",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/core/context_schema.py",
+          "anchors": [
+            {
+              "line": 43,
+              "declaration": "def required():return os.getenv('XBLAGO_CONTEXT_FENCING_REQUIRED','').lower() in ('true','1','yes')"
+            },
+            {
+              "line": 44,
+              "declaration": "def present(db):return db.execute(\"SELECT 1 FROM sqlite_master WHERE name='context_schema_migrations'\").fetchone() is not None"
+            },
+            {
+              "line": 46,
+              "declaration": "def validate(db, *, mandatory=False):"
+            },
+            {
+              "line": 55,
+              "declaration": "def apply_checkpoint(db,event,journal):"
+            },
+            {
+              "line": 65,
+              "declaration": "def check_frontiers(db,control):"
+            },
+            {
+              "line": 76,
+              "declaration": "def migrate_context(path):"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/lifecycle_schema.py",
+          "sha256": "a61bbf725c0080355e695b6d6e9f56a7988fcdd9b112cf7e5aad180b41c5b46c",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/core/lifecycle_schema.py",
+          "anchors": [
+            {
+              "line": 62,
+              "declaration": "def required():return os.getenv('XBLAGO_LIFECYCLE_REQUIRED','').lower() in ('true','1','yes')"
+            },
+            {
+              "line": 63,
+              "declaration": "def present(db):return db.execute(\"SELECT 1 FROM sqlite_master WHERE name='lifecycle_schema_migrations'\").fetchone() is not None"
+            },
+            {
+              "line": 65,
+              "declaration": "def validate(db,mandatory=False):"
+            },
+            {
+              "line": 76,
+              "declaration": "def migrate_lifecycle(path):"
+            },
+            {
+              "line": 125,
+              "declaration": "def check_denials(db,control):"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/asset_registry_schema.py",
+          "sha256": "9337f76251bc950164e0cf8895e7305f846a86ec7479910bbcd6f9b5eae0459b",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/core/asset_registry_schema.py",
+          "anchors": [
+            {
+              "line": 35,
+              "declaration": "def enabled():"
+            },
+            {
+              "line": 39,
+              "declaration": "def validate(db, *, mandatory=False):"
+            },
+            {
+              "line": 52,
+              "declaration": "def migrate_registry(path):"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/domain/asset_registry.py",
+          "sha256": "73834da1122da7591a021ebda792f78294f2e0cea0bf501d67face5e402f7ce2",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/domain/asset_registry.py",
+          "anchors": [
+            {
+              "line": 18,
+              "declaration": "def fingerprint(db, aid, journal):"
+            },
+            {
+              "line": 31,
+              "declaration": "def apply_checkpoint(db,event,journal):"
+            },
+            {
+              "line": 44,
+              "declaration": "def check_frontiers(db,control):"
+            },
+            {
+              "line": 73,
+              "declaration": "def personal_export(db,uid):"
+            },
+            {
+              "line": 80,
+              "declaration": "def suggest_claim(text):"
+            },
+            {
+              "line": 90,
+              "declaration": "class AssetRegistry:"
+            },
+            {
+              "line": 130,
+              "declaration": "def emit(self,db,c,aid,action,body):"
+            },
+            {
+              "line": 175,
+              "declaration": "def commit(self,token,challenge,confirmation):"
+            },
+            {
+              "line": 202,
+              "declaration": "def revoke(self,token,aid):"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/domain/help_service.py",
+          "sha256": "c473819d1a831c0d764f58279acfb18a5b75c1aff9875b809676e515a1af26f2",
+          "url": "https://github.com/xBLAGO/space/blob/c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5/src/xblago/domain/help_service.py",
+          "anchors": [
+            {
+              "line": 17,
+              "declaration": "def fingerprint(db,rid,journal):"
+            },
+            {
+              "line": 26,
+              "declaration": "def scrub(db,rid):"
+            },
+            {
+              "line": 32,
+              "declaration": "def apply_checkpoint(db,event,journal):"
+            },
+            {
+              "line": 41,
+              "declaration": "def purge_user(db,uid,journal):"
+            },
+            {
+              "line": 51,
+              "declaration": "def suggest_draft(text):"
+            },
+            {
+              "line": 57,
+              "declaration": "class HelpService:"
+            },
+            {
+              "line": 126,
+              "declaration": "def emit(self,db,c,rid,action,role):"
+            },
+            {
+              "line": 185,
+              "declaration": "def commit(self,token,challenge,confirmation):"
+            },
+            {
+              "line": 225,
+              "declaration": "def personal_export(db,uid):"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pr": 28,
+      "title": "docs: BLAGO roadmap — collective accounting, identity graph, ISTINA and federation",
+      "head": "e049b62860a8170d17e879ce94766fc371f1decb",
+      "head_branch": "docs/blago-roadmap-2026",
+      "base": "00c665b369acb6465f9afa795a6046c43f4107ce",
+      "base_branch": "feat/collective-calculator-01",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": []
+    },
+    {
+      "pr": 27,
+      "title": "Collective Calculator 01: offline valuation core and authorized Help accounting",
+      "head": "00c665b369acb6465f9afa795a6046c43f4107ce",
+      "head_branch": "feat/collective-calculator-01",
+      "base": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+      "base_branch": "integration/foundation-02-unified-mvp",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": true,
+      "inspected_sources": [
+        {
+          "path": "src/xblago/domain/collective_calculator.py",
+          "sha256": "35f8f12714016c1f79052d2cd7d84d840213588b3952db46bcec2d1d432d5a65",
+          "url": "https://github.com/xBLAGO/space/blob/00c665b369acb6465f9afa795a6046c43f4107ce/src/xblago/domain/collective_calculator.py",
+          "anchors": [
+            {
+              "line": 29,
+              "declaration": "class AccountingError(ValueError):"
+            },
+            {
+              "line": 33,
+              "declaration": "def number(value, *, positive=False):"
+            },
+            {
+              "line": 45,
+              "declaration": "def canonical(value):"
+            },
+            {
+              "line": 49,
+              "declaration": "def digest(value):"
+            },
+            {
+              "line": 53,
+              "declaration": "def exact_arithmetic(method):"
+            },
+            {
+              "line": 63,
+              "declaration": "class Quote:"
+            },
+            {
+              "line": 72,
+              "declaration": "class Valuation:"
+            },
+            {
+              "line": 86,
+              "declaration": "class OfflineRateProvider:"
+            },
+            {
+              "line": 97,
+              "declaration": "class ValueEngine:"
+            },
+            {
+              "line": 142,
+              "declaration": "class LabRegistry:"
+            },
+            {
+              "line": 244,
+              "declaration": "def commit(self, actor, challenge, confirmation, *, now, fail_before_commit=False):"
+            },
+            {
+              "line": 270,
+              "declaration": "def revoke(self, actor, target):"
+            },
+            {
+              "line": 368,
+              "declaration": "class HelpAccountingView:"
+            },
+            {
+              "line": 412,
+              "declaration": "def quantity_coverage(required, fulfilled, unit):"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pr": 20,
+      "title": "Foundation Help 01: consented human help cycle with privacy-safe recovery",
+      "head": "417e12be82e0b381d5251e12191a25d1c10921f4",
+      "head_branch": "feat/foundation-help-01",
+      "base": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+      "base_branch": "integration/foundation-01-06-1",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": true,
+      "inspected_sources": []
+    },
+    {
+      "pr": 17,
+      "title": "Foundation 08.2: durable federation lab, receipts and fault injection",
+      "head": "44a5d52a4ac8022478a247f4e1bbd2eaea551142",
+      "head_branch": "feat/foundation-08-2-durable-lab",
+      "base": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+      "base_branch": "docs/foundation-08-1-protocol-conformance",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "experiments/federation_08_2/runtime.py",
+          "sha256": "44ac5f4ee2b547df66eea9645da4256e45f2fe56ff02cfd8a3f9f0cf16bf2c73",
+          "url": "https://github.com/xBLAGO/space/blob/44a5d52a4ac8022478a247f4e1bbd2eaea551142/experiments/federation_08_2/runtime.py",
+          "anchors": [
+            {
+              "line": 24,
+              "declaration": "def encode(x): return json.dumps(x, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False).encode()"
+            },
+            {
+              "line": 25,
+              "declaration": "def digest(x): return 'sha256:' + hashlib.sha256(x).hexdigest()"
+            },
+            {
+              "line": 26,
+              "declaration": "def b64(x): return base64.urlsafe_b64encode(x).decode().rstrip('=')"
+            },
+            {
+              "line": 27,
+              "declaration": "def nonce(): return b64(secrets.token_bytes(32))"
+            },
+            {
+              "line": 28,
+              "declaration": "def handle(prefix, size=16): return prefix + secrets.token_hex(size)"
+            },
+            {
+              "line": 29,
+              "declaration": "def sign(body, key):"
+            },
+            {
+              "line": 31,
+              "declaration": "def wire(obj): return a.canonical(obj).hex()"
+            },
+            {
+              "line": 33,
+              "declaration": "class Failure(Exception): pass"
+            },
+            {
+              "line": 34,
+              "declaration": "class Unknown(Failure): pass"
+            },
+            {
+              "line": 35,
+              "declaration": "class Fault:"
+            },
+            {
+              "line": 44,
+              "declaration": "def lock(path):"
+            },
+            {
+              "line": 51,
+              "declaration": "def write(path, data, fault=None):"
+            },
+            {
+              "line": 66,
+              "declaration": "def load(path):"
+            },
+            {
+              "line": 73,
+              "declaration": "class Retained:"
+            },
+            {
+              "line": 111,
+              "declaration": "class Receiver:"
+            },
+            {
+              "line": 166,
+              "declaration": "def deliver(self, packet):"
+            },
+            {
+              "line": 190,
+              "declaration": "def revoke(self, history_hex, request_nonce):"
+            },
+            {
+              "line": 222,
+              "declaration": "def verify_receipt(receipt_hex, public, expected, retained):"
+            },
+            {
+              "line": 239,
+              "declaration": "def render_inbox(state):"
+            },
+            {
+              "line": 243,
+              "declaration": "class ReceiptTracker:"
+            }
+          ]
+        },
+        {
+          "path": "experiments/federation_08_2/test_runtime.py",
+          "sha256": "19076d48d56feafcde291e2b9731277a98b0631437be81a673993b2193f657fa",
+          "url": "https://github.com/xBLAGO/space/blob/44a5d52a4ac8022478a247f4e1bbd2eaea551142/experiments/federation_08_2/test_runtime.py",
+          "anchors": [
+            {
+              "line": 15,
+              "declaration": "def crash_delivery(path, retained_path, config, private, packet, now, stage):"
+            },
+            {
+              "line": 21,
+              "declaration": "def node_worker(path, retained_path, config, private, now, stage, connection):"
+            },
+            {
+              "line": 26,
+              "declaration": "def parallel_delivery(path, retained, config, private, now, packet, connection):"
+            },
+            {
+              "line": 32,
+              "declaration": "class Lab(unittest.TestCase):"
+            },
+            {
+              "line": 67,
+              "declaration": "def revoke(self):"
+            }
+          ]
+        },
+        {
+          "path": "docs/lab_08_2/MATRIX.md",
+          "sha256": "8ec26513ee3ab7d450c84159f47b9a74bcd695e467d5f5e4b93b2389d9b1e6b2",
+          "url": "https://github.com/xBLAGO/space/blob/44a5d52a4ac8022478a247f4e1bbd2eaea551142/docs/lab_08_2/MATRIX.md",
+          "anchors": []
+        }
+      ]
+    },
+    {
+      "pr": 16,
+      "title": "Foundation 08.1: protocol baseline, scoped authority and conformance design",
+      "head": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+      "head_branch": "docs/foundation-08-1-protocol-conformance",
+      "base": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "base_branch": "docs/foundation-08-federation-audit",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "docs/protocol_0_1/ENVELOPE.md",
+          "sha256": "47a9a5a6f39f56f8dc9fc9e161a837543aac77c26b53dd3c9aa1669ae4e00c2a",
+          "url": "https://github.com/xBLAGO/space/blob/0a6acd9178de8c1aaac8f3af729d896efd4eb98a/docs/protocol_0_1/ENVELOPE.md",
+          "anchors": []
+        },
+        {
+          "path": "docs/protocol_0_1/MANDATE_AND_AUTHORITY.md",
+          "sha256": "2eb08573d88bf667aa44d7ae6600b6325a08a34e452dc411d014e607d6b3ca85",
+          "url": "https://github.com/xBLAGO/space/blob/0a6acd9178de8c1aaac8f3af729d896efd4eb98a/docs/protocol_0_1/MANDATE_AND_AUTHORITY.md",
+          "anchors": []
+        },
+        {
+          "path": "docs/protocol_0_1/conformance/vectors.jsonl",
+          "sha256": "fed4d35558c2a94c4ea070dac7b972ac2e9884adc7775b2807bc84da55ef3c36",
+          "url": "https://github.com/xBLAGO/space/blob/0a6acd9178de8c1aaac8f3af729d896efd4eb98a/docs/protocol_0_1/conformance/vectors.jsonl",
+          "anchors": [],
+          "lines": 73
+        }
+      ]
+    },
+    {
+      "pr": 15,
+      "title": "Foundation 08: federation architecture audit and Open Protocol 0.1 requirements",
+      "head": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "head_branch": "docs/foundation-08-federation-audit",
+      "base": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "base_branch": "main",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": []
+    },
+    {
+      "pr": 14,
+      "title": "Foundation 08: Genesis declarations and consented public deliberation (Draft)",
+      "head": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "head_branch": "feat/foundation-08-genesis-protocol",
+      "base": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "base_branch": "feat/foundation-07-identity-core",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "src/xblago/core/genesis.py",
+          "sha256": "a04aae9099193ecd2929d2087cd96ebee2be63fc0d6a7e67f78781a786f38280",
+          "url": "https://github.com/xBLAGO/space/blob/483475fd237ba3400881699c407be5b91d53dcdd/src/xblago/core/genesis.py",
+          "anchors": [
+            {
+              "line": 20,
+              "declaration": "class EventType(str, Enum):"
+            },
+            {
+              "line": 32,
+              "declaration": "class Event:"
+            },
+            {
+              "line": 46,
+              "declaration": "def error(status, message):"
+            },
+            {
+              "line": 51,
+              "declaration": "def clean_text(text):"
+            },
+            {
+              "line": 59,
+              "declaration": "def guard(db,uid):"
+            },
+            {
+              "line": 100,
+              "declaration": "def stream(db,uid,kind,identifier=None):"
+            },
+            {
+              "line": 106,
+              "declaration": "def emit(db,uid,identifier,event_type,payload):"
+            },
+            {
+              "line": 116,
+              "declaration": "def record_existing(db,uid,identifier,kind,payload):"
+            },
+            {
+              "line": 125,
+              "declaration": "class Deliberation:"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/genesis_schema.py",
+          "sha256": "6cc6e8fceaa6d685d7f515691bc4a08a00f0e59d516fefa3ac53a0510fc5ef93",
+          "url": "https://github.com/xBLAGO/space/blob/483475fd237ba3400881699c407be5b91d53dcdd/src/xblago/core/genesis_schema.py",
+          "anchors": [
+            {
+              "line": 61,
+              "declaration": "def enabled():"
+            },
+            {
+              "line": 65,
+              "declaration": "def validate(db, required=False):"
+            },
+            {
+              "line": 77,
+              "declaration": "def migrate_genesis(path: Path):"
+            },
+            {
+              "line": 101,
+              "declaration": "def replay(db, event, uid):"
+            },
+            {
+              "line": 108,
+              "declaration": "def purge(db, uid):"
+            },
+            {
+              "line": 115,
+              "declaration": "def clear_transient(db, uid):"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pr": 13,
+      "title": "Foundation 07.2: isolated recovery protocol; live authority fail-closed",
+      "head": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "head_branch": "feat/foundation-07-identity-recovery",
+      "base": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "base_branch": "feat/foundation-07-identity-core",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "src/xblago/core/identity_recovery.py",
+          "sha256": "df396cb0e388fee7b93906d683662b0def1b19e37b05435e02574b0bb4fff0f2",
+          "url": "https://github.com/xBLAGO/space/blob/d96ade9375f3499ad93095b2307abd750f0a8578/src/xblago/core/identity_recovery.py",
+          "anchors": [
+            {
+              "line": 26,
+              "declaration": "def fingerprint(value):"
+            },
+            {
+              "line": 30,
+              "declaration": "def enabled():"
+            },
+            {
+              "line": 34,
+              "declaration": "class RecoveryBlocked(JournalUnavailable):"
+            },
+            {
+              "line": 38,
+              "declaration": "def _integer(value, low, high):"
+            },
+            {
+              "line": 43,
+              "declaration": "def _keys(values, low, high):"
+            },
+            {
+              "line": 57,
+              "declaration": "class RecoveryPolicy:"
+            },
+            {
+              "line": 88,
+              "declaration": "def _signatures(message, signatures, permitted, threshold):"
+            },
+            {
+              "line": 102,
+              "declaration": "def fresh_checkpoint(policy, head, nonce, receipts):"
+            },
+            {
+              "line": 136,
+              "declaration": "class RecoveryCeremony:"
+            },
+            {
+              "line": 323,
+              "declaration": "def require_runtime_recovery():"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pr": 12,
+      "title": "Foundation 07.1: Sovereign Identity Core (isolated tests, flag OFF)",
+      "head": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "head_branch": "feat/foundation-07-identity-core",
+      "base": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "base_branch": "feat/foundation-07-identity-architecture",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "src/xblago/core/sovereign.py",
+          "sha256": "268d2199fada17ad7734541ca662e2839f85339b9f7587b7e8d4662eafa0702c",
+          "url": "https://github.com/xBLAGO/space/blob/b79cb603a58adbab1e8a5313a06393a2feb5532f/src/xblago/core/sovereign.py",
+          "anchors": [
+            {
+              "line": 35,
+              "declaration": "def b64(data):"
+            },
+            {
+              "line": 39,
+              "declaration": "def decode(value,length=None):"
+            },
+            {
+              "line": 51,
+              "declaration": "def verify_signature(public_key,signature,message):"
+            },
+            {
+              "line": 60,
+              "declaration": "def verify_independent_proof(public_key,signature,message,*,audience,expected_nonce,consume_nonce,now=None):"
+            },
+            {
+              "line": 89,
+              "declaration": "class WalletDescriptor:"
+            },
+            {
+              "line": 96,
+              "declaration": "class WalletOwnershipAdapter(Protocol):"
+            },
+            {
+              "line": 103,
+              "declaration": "class SolanaWalletInterface:"
+            },
+            {
+              "line": 111,
+              "declaration": "class SovereignIdentity:"
+            }
+          ]
+        },
+        {
+          "path": "src/xblago/core/sovereign_schema.py",
+          "sha256": "9a224a6cf37bf477bccab5d8ccc885729f20d37229bd6f612bcdbf7e0a690116",
+          "url": "https://github.com/xBLAGO/space/blob/b79cb603a58adbab1e8a5313a06393a2feb5532f/src/xblago/core/sovereign_schema.py",
+          "anchors": [
+            {
+              "line": 15,
+              "declaration": "def enabled():"
+            },
+            {
+              "line": 104,
+              "declaration": "def intent(name,table,operation,kind,owner,target,state=\"''\",condition='1'):"
+            },
+            {
+              "line": 141,
+              "declaration": "def validate(db,required=False):"
+            },
+            {
+              "line": 155,
+              "declaration": "def migrate_sovereign(path: Path, *, rollback_empty=False):"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pr": 11,
+      "title": "Foundation 07: Sovereign Human Identity — architecture and safety gates",
+      "head": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "head_branch": "feat/foundation-07-identity-architecture",
+      "base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "base_branch": "feat/foundation-06-natural-intelligence",
+      "draft": true,
+      "state": "open",
+      "ancestor_of_design_base": false,
+      "inspected_sources": [
+        {
+          "path": "docs/BLAGO_FOUNDATION_07_ARCHITECTURE.md",
+          "sha256": "23627c0a0d9db80364613790dc8ee9965f7a728d489c3026d1117a68a770e040",
+          "url": "https://github.com/xBLAGO/space/blob/2d6d65913d9091e7d42966532162a0d1de9d0c76/docs/BLAGO_FOUNDATION_07_ARCHITECTURE.md",
+          "anchors": []
+        }
+      ]
+    }
+  ],
+  "design_change_scope": "docs plus new documentation-only CI; no runtime/schema/manifests/old fixtures changes",
+  "foundation08_s12": "NOT EXECUTED; independent operators not established",
+  "runtime_changes": false,
+  "pilot": "NO-GO"
+}

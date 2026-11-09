@@ -1,0 +1,138 @@
+{
+  "format": "uel-design-scenarios-1",
+  "status": "NOT EXECUTED: future authority/durable/privacy contracts",
+  "cases": [
+    {
+      "id": "A01",
+      "scenario": "Valid signature but no current owner disclosure proof",
+      "expected": "UNKNOWN_AUTHORITY; no dispatch/accounting promotion",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A02",
+      "scenario": "Only local Web/Mini session confirmation, no portable endorsement",
+      "expected": "SERVICE_OBSERVED only; no Human signature substitution",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A03",
+      "scenario": "Agent signs owner mandate with agent key",
+      "expected": "REJECT_ROLE/AUTHORITY",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A04",
+      "scenario": "Node receipt presented as fresh Human authorization",
+      "expected": "REJECT_ROLE/AUTHORITY",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A05",
+      "scenario": "Receiver_nonce belongs to another event/node",
+      "expected": "REJECT_STATUS_BINDING",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A06",
+      "scenario": "Owner status active but verified log has revoke",
+      "expected": "REJECT_INCONSISTENT_AUTHORITY",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A07",
+      "scenario": "Partition: cannot obtain event-bound fresh status",
+      "expected": "UNKNOWN_STALE; no new delivery/action",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A08",
+      "scenario": "Delivery commits before revoke",
+      "expected": "One original delivery; later revoke ACK prevents all new uses",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A09",
+      "scenario": "Revoke commits before pending delivery",
+      "expected": "Delivery rejected; no late ACK can rewind",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "A10",
+      "scenario": "Lost ACK after durable receiver commit",
+      "expected": "Retry exact ID/bytes; original receipt only, no repeated effect",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "R01",
+      "scenario": "App backup older than current replay/use/denial checkpoint",
+      "expected": "UNKNOWN_RECOVERY or verified conservative reconciliation, never reset consumption",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "R02",
+      "scenario": "All checkpoint files share rollback domain and revert together",
+      "expected": "Independent recovery unproved; no GO from matching local files",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "R03",
+      "scenario": "Source SQL rolled back after original privacy journal write",
+      "expected": "09.1 erase/hold; no reconstructed positive claim",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "R04",
+      "scenario": "Old snapshot contains private claim after content erased",
+      "expected": "No source/vault/context/export resurrection; prior signature/anchor cannot grant access",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "R05",
+      "scenario": "Missing key/authority transition after recovery epoch change",
+      "expected": "UNKNOWN_KEY_HISTORY; no admin/session/biography fallback",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "H01",
+      "scenario": "Imported Help completion observation tries to mutate local request",
+      "expected": "Reject action; observer only, existing Help lifecycle sole executor",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "H02",
+      "scenario": "Two signatures/receipts for the same Help occurrence",
+      "expected": "One fulfillment; signatures are evidence, not two flows",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "H03",
+      "scenario": "Partial quantity supplied without both-party exact measurement approval",
+      "expected": "UNKNOWN quantity/value, no invented partial Help state",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "P01",
+      "scenario": "Public anchor request contains private journal or memory root",
+      "expected": "REJECT_RELEASE; never anchor",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "P02",
+      "scenario": "Valid public-root inclusion but assertion later withdrawn",
+      "expected": "Historical inclusion only; no current authority or private payload retrieval",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "P03",
+      "scenario": "Aggregate passes threshold but repeated releases isolate one person",
+      "expected": "NO-GO release pending differencing/privacy review",
+      "actual": "NOT EXECUTED"
+    },
+    {
+      "id": "F01",
+      "scenario": "Two independent operators not available",
+      "expected": "S12 NOT EXECUTED; no independent federation GO",
+      "actual": "NOT EXECUTED"
+    }
+  ]
+}

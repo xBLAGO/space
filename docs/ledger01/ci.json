@@ -1,0 +1,7 @@
+{
+  "format": "uel-design-ci-1",
+  "status": "PENDING",
+  "scope": "new documentation-only workflow; no UEL runtime or real operator testing",
+  "baseline_565_Docker": "https://github.com/xBLAGO/space/actions/runs/42699549276",
+  "production": "NO-GO"
+}

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "golden.json": "509ff7052a76a9f1cd08ecc4be29cae9021567427fd637e58b27228414b2bfe9",
+    "merkle.json": "405387df6e4add521f608b573271cb5d2eff9a8db14f4615867488c12bce46d5",
+    "policy.json": "290a919657a1396b3e12ae72beff56f37b703ced4136f50d30aad6cd58c94fd5",
+    "projection.json": "76a8a0b83dbdf931f94b6d989921d8de2638ce9617f6eae178f67146c4155915",
+    "test_keys.json": "bfe31dcd899f4f644362fefaa127f35809195536d1ab0c4eb7363991d64033bc",
+    "valuation.json": "e407fd906d306eac88d38eff10dacc7d1285863d4a114857e0116b869383d5bd",
+    "wire.json": "d324ad682f8463c0d168af5f1c6125f117798714672e1349a5ab85ca06a8591b"
+  },
+  "format": "uel-fixture-manifest-1",
+  "profile": "uel-0.1-lab.1",
+  "public_test_keys_only": true
+}

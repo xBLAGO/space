@@ -1,0 +1,37 @@
+name: Universal Ledger specification
+on:
+  push:
+    branches: ["docs/universal-event-ledger-01"]
+  pull_request:
+    branches: ["feat/foundation-09-1-durable-registry"]
+    paths: ["docs/ledger01/**", "docs/BLAGO_UNIVERSAL_EVENT_LEDGER_0_1.md", ".github/workflows/universal-ledger-spec.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing locked dependencies
+        run: python -m pip install -r requirements-integration.lock
+      - name: Assert runtime and previous CI unchanged from exact base
+        run: |
+          git merge-base --is-ancestor c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5 HEAD
+          git diff --exit-code c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5 HEAD -- src tools tests integration Dockerfile pyproject.toml requirements-integration.lock .github/workflows/tests.yml .github/workflows/huggingface-space.yml
+      - name: Check frozen vector bytes and design consistency
+        run: |
+          PYTHONPATH=src python docs/ledger01/generate_vectors.py --check
+          PYTHONPATH=src python docs/ledger01/check_design.py
+      - name: Offline wire arithmetic and Merkle examples only
+        run: PYTHONPATH=src python docs/ledger01/check_vectors.py --output "$RUNNER_TEMP/uel-design-results.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uel-offline-design-evidence
+          path: ${{ runner.temp }}/uel-design-results.json

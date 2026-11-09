@@ -1,0 +1,98 @@
+[
+  {
+    "currency": "RUB",
+    "effective_at": 1000,
+    "expected": "0.01000000",
+    "id": "V01-rub",
+    "price": "100000",
+    "quote_at": 1000,
+    "rates": [
+      "10000000",
+      "10000000"
+    ]
+  },
+  {
+    "currency": "USD",
+    "effective_at": 1000,
+    "expected": "0.00100000",
+    "id": "V02-usd",
+    "price": "100",
+    "quote_at": 1000,
+    "rates": [
+      "100000",
+      "100000"
+    ]
+  },
+  {
+    "currency": "JPY",
+    "effective_at": 1000,
+    "expected": "ERROR",
+    "id": "V03-jpy-minor",
+    "price": "1.1",
+    "quote_at": 1000,
+    "rates": [
+      "100",
+      "100"
+    ]
+  },
+  {
+    "currency": "RUB",
+    "effective_at": 1000,
+    "expected": "0.00000000",
+    "id": "V04-half-even-zero",
+    "price": "0.05",
+    "quote_at": 1000,
+    "rates": [
+      "10000000",
+      "10000000"
+    ]
+  },
+  {
+    "currency": "RUB",
+    "effective_at": 1000,
+    "expected": "0.00000002",
+    "id": "V05-half-even-two",
+    "price": "0.15",
+    "quote_at": 1000,
+    "rates": [
+      "10000000",
+      "10000000"
+    ]
+  },
+  {
+    "currency": "RUB",
+    "effective_at": 1301,
+    "expected": "ERROR",
+    "id": "V06-stale",
+    "price": "1",
+    "quote_at": 1000,
+    "rates": [
+      "100",
+      "100"
+    ]
+  },
+  {
+    "currency": "RUB",
+    "effective_at": 1000,
+    "expected": "ERROR",
+    "id": "V07-conflict",
+    "price": "1",
+    "quote_at": 1000,
+    "rates": [
+      "100",
+      "110"
+    ]
+  },
+  {
+    "currency": "RUB",
+    "effective_at": 1000,
+    "expected": "ERROR",
+    "id": "V08-float",
+    "price": 1.0,
+    "quote_at": 1000,
+    "rates": [
+      "100",
+      "100"
+    ]
+  }
+]

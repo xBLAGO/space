@@ -1,0 +1,1089 @@
+{
+  "format": "blago-uel-design-evidence-1",
+  "profile": "uel-0.1-lab.1",
+  "status": "PASS",
+  "executed": 72,
+  "passed": 72,
+  "records": [
+    {
+      "id": "W01-golden",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W02-russian",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W03-nfc",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W04-nfd",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W05-inert-injection",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W06-revision-links",
+      "expected": "WIRE_OK_NOT_AUTHORIZED",
+      "actual": "WIRE_OK_NOT_AUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "W07-trailing-space",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W08-newline",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W09-bom",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W10-duplicate-root",
+      "expected": "DUPLICATE_KEY",
+      "actual": "DUPLICATE_KEY",
+      "pass": true
+    },
+    {
+      "id": "W11-duplicate-nested",
+      "expected": "DUPLICATE_KEY",
+      "actual": "DUPLICATE_KEY",
+      "pass": true
+    },
+    {
+      "id": "W12-float",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W13-negative-zero",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W14-overflow",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W15-escaped-key",
+      "expected": "WIRE",
+      "actual": "WIRE",
+      "pass": true
+    },
+    {
+      "id": "W16-oversized",
+      "expected": "BOUNDS",
+      "actual": "BOUNDS",
+      "pass": true
+    },
+    {
+      "id": "W17-profile",
+      "expected": "PROFILE",
+      "actual": "PROFILE",
+      "pass": true
+    },
+    {
+      "id": "W18-network",
+      "expected": "DOMAIN",
+      "actual": "DOMAIN",
+      "pass": true
+    },
+    {
+      "id": "W19-policy",
+      "expected": "DOMAIN",
+      "actual": "DOMAIN",
+      "pass": true
+    },
+    {
+      "id": "W20-human-impersonation",
+      "expected": "ROLE",
+      "actual": "ROLE",
+      "pass": true
+    },
+    {
+      "id": "W21-session-substitution",
+      "expected": "SCHEMA",
+      "actual": "SCHEMA",
+      "pass": true
+    },
+    {
+      "id": "W22-unknown-field",
+      "expected": "SCHEMA",
+      "actual": "SCHEMA",
+      "pass": true
+    },
+    {
+      "id": "W23-new-command",
+      "expected": "SCHEMA",
+      "actual": "SCHEMA",
+      "pass": true
+    },
+    {
+      "id": "W24-public-private-anchor",
+      "expected": "DISCLOSURE",
+      "actual": "DISCLOSURE",
+      "pass": true
+    },
+    {
+      "id": "W25-bool-version",
+      "expected": "SCHEMA",
+      "actual": "SCHEMA",
+      "pass": true
+    },
+    {
+      "id": "W26-missing-predecessor",
+      "expected": "LINKS",
+      "actual": "LINKS",
+      "pass": true
+    },
+    {
+      "id": "W27-genesis-predecessor",
+      "expected": "LINKS",
+      "actual": "LINKS",
+      "pass": true
+    },
+    {
+      "id": "W28-duplicate-parent",
+      "expected": "LINKS",
+      "actual": "LINKS",
+      "pass": true
+    },
+    {
+      "id": "W29-key-substitution",
+      "expected": "KEY",
+      "actual": "KEY",
+      "pass": true
+    },
+    {
+      "id": "W30-payload-hash",
+      "expected": "PAYLOAD",
+      "actual": "PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "W31-payload-invalid-utf8",
+      "expected": "PAYLOAD",
+      "actual": "PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "W32-payload-control",
+      "expected": "PAYLOAD",
+      "actual": "PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "W33-payload-padding",
+      "expected": "ENCODING",
+      "actual": "ENCODING",
+      "pass": true
+    },
+    {
+      "id": "W34-bad-signature",
+      "expected": "SIGNATURE",
+      "actual": "SIGNATURE",
+      "pass": true
+    },
+    {
+      "id": "W35-domain-substitution",
+      "expected": "SIGNATURE",
+      "actual": "SIGNATURE",
+      "pass": true
+    },
+    {
+      "id": "W36-algorithm-substitution",
+      "expected": "SCHEMA",
+      "actual": "SCHEMA",
+      "pass": true
+    },
+    {
+      "id": "W37-signature-length",
+      "expected": "ENCODING",
+      "actual": "ENCODING",
+      "pass": true
+    },
+    {
+      "id": "W38-post-signature-mutation",
+      "expected": "SIGNATURE",
+      "actual": "SIGNATURE",
+      "pass": true
+    },
+    {
+      "id": "P01-stock-resource-one-object",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P02-identical-delivery-duplicate",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P03-arrival-order-invariant",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P04-ownership-not-availability",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "0"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "0"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P05-unknown-not-valued-zero",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "0"
+        },
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "0"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 1,
+        "unvalued_objects": 1,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "0"
+        },
+        "available_self_declared": {
+          "computer:item": "0"
+        },
+        "unknown_stock_objects": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 1,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P06-missing-rate-not-zero-total",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 1,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 1,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P07-lot-change-invalidates-value",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "3"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 1,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "3"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 1,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P08-source-confirmed-completion",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "500",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "500",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P09-confirmed-completion-duplicate",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "500",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "500",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P10-completion-not-self-certification",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P11-dispute-corrects-not-adds",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 1,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 1,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P12-withdrawal-removes-private-occurrence",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 0,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P13-unknown-flow-quantity",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": false,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 1,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 1
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "1000000",
+        "valued_objects": 1,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 1,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 1,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P14-new-withdrawal-dominates-old-grant",
+      "expected": {
+        "available_self_declared": {},
+        "complete": true,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {},
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {},
+        "available_self_declared": {},
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": true
+      },
+      "pass": true
+    },
+    {
+      "id": "P15-same-version-equivocation-quarantined",
+      "expected": {
+        "available_self_declared": {},
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {},
+        "needs_visible": 1,
+        "quarantined_objects": 1,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 0,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {},
+        "available_self_declared": {},
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 1,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 0,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P16-event-id-substitution",
+      "expected": {
+        "error": "EVENT_CONFLICT"
+      },
+      "actual": {
+        "error": "EVENT_CONFLICT"
+      },
+      "pass": true
+    },
+    {
+      "id": "P17-consent-bypass",
+      "expected": {
+        "error": "AVAILABILITY"
+      },
+      "actual": {
+        "error": "AVAILABILITY"
+      },
+      "pass": true
+    },
+    {
+      "id": "P18-quantity-float",
+      "expected": {
+        "error": "DECIMAL"
+      },
+      "actual": {
+        "error": "DECIMAL"
+      },
+      "pass": true
+    },
+    {
+      "id": "P19-historical-cut-before-valuation",
+      "expected": {
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "needs_visible": 1,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 1,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {
+          "computer:item": "2"
+        },
+        "available_self_declared": {
+          "computer:item": "1"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 1,
+        "needs_visible": 1,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "P20-decimal-quantity-no-float-error",
+      "expected": {
+        "available_self_declared": {
+          "food:kg": "0.3"
+        },
+        "complete": false,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "known_stock": {
+          "food:kg": "0.3"
+        },
+        "needs_visible": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "total_wealth": null,
+        "unknown_stock_objects": 0,
+        "unvalued_objects": 2,
+        "valued_objects": 0
+      },
+      "actual": {
+        "known_stock": {
+          "food:kg": "0.3"
+        },
+        "available_self_declared": {
+          "food:kg": "0.3"
+        },
+        "unknown_stock_objects": 0,
+        "quarantined_objects": 0,
+        "stock_satoshis_known": "0",
+        "valued_objects": 0,
+        "unvalued_objects": 2,
+        "needs_visible": 0,
+        "completed_confirmed": 0,
+        "disputed": 0,
+        "flow_satoshis_known": "0",
+        "flow_unknown_occurrences": 0,
+        "total_wealth": null,
+        "complete": false
+      },
+      "pass": true
+    },
+    {
+      "id": "V01-rub",
+      "expected": "0.01000000",
+      "actual": "0.01000000",
+      "pass": true
+    },
+    {
+      "id": "V02-usd",
+      "expected": "0.00100000",
+      "actual": "0.00100000",
+      "pass": true
+    },
+    {
+      "id": "V03-jpy-minor",
+      "expected": "ERROR",
+      "actual": "ERROR",
+      "pass": true
+    },
+    {
+      "id": "V04-half-even-zero",
+      "expected": "0.00000000",
+      "actual": "0.00000000",
+      "pass": true
+    },
+    {
+      "id": "V05-half-even-two",
+      "expected": "0.00000002",
+      "actual": "0.00000002",
+      "pass": true
+    },
+    {
+      "id": "V06-stale",
+      "expected": "ERROR",
+      "actual": "ERROR",
+      "pass": true
+    },
+    {
+      "id": "V07-conflict",
+      "expected": "ERROR",
+      "actual": "ERROR",
+      "pass": true
+    },
+    {
+      "id": "V08-float",
+      "expected": "ERROR",
+      "actual": "ERROR",
+      "pass": true
+    },
+    {
+      "id": "M01-tree-0",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "pass": true
+    },
+    {
+      "id": "M02-tree-1",
+      "expected": "483491b8470fa6cc7d80b45f9a18f1693c0c5503fb13da1819a1e5ec1c6cf7af",
+      "actual": "483491b8470fa6cc7d80b45f9a18f1693c0c5503fb13da1819a1e5ec1c6cf7af",
+      "pass": true
+    },
+    {
+      "id": "M03-tree-2",
+      "expected": "717d806dcb6e1756a2b321e278f86a8d978583562d809eeb1c7e4f89b533020b",
+      "actual": "717d806dcb6e1756a2b321e278f86a8d978583562d809eeb1c7e4f89b533020b",
+      "pass": true
+    },
+    {
+      "id": "M04-tree-3",
+      "expected": "b3f886492cc3096e9c21a69379be22c0c146c28fcdb641f8fb8f81c2b5de6da4",
+      "actual": "b3f886492cc3096e9c21a69379be22c0c146c28fcdb641f8fb8f81c2b5de6da4",
+      "pass": true
+    },
+    {
+      "id": "M05-private-leaf-not-public",
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "id": "M06-personal-field-forbidden",
+      "expected": true,
+      "actual": true,
+      "pass": true
+    }
+  ],
+  "scope": "single same-author offline byte/signature inspector and eligible-snapshot arithmetic; not full semantic/authority verifier",
+  "authority_protocol": "NOT IMPLEMENTED",
+  "durable_ledger": "NOT IMPLEMENTED",
+  "independent_operators": "NOT EXECUTED",
+  "blockchain": "NOT EXECUTED",
+  "production": "NO-GO"
+}
