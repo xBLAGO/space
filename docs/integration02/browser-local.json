@@ -1,0 +1,27 @@
+{
+  "scope": "two synthetic participants, two isolated Chrome contexts, one SQLite",
+  "browser": "150.0.7871.125",
+  "checks": {
+    "invitation_registration_ui": true,
+    "starts_in_chat": true,
+    "memory_corrected_in_chat": true,
+    "reopen_preserves_history": true,
+    "natural_suggestion_no_publish": true,
+    "private_draft": true,
+    "exact_preview_and_confirmation": true,
+    "authorized_helper_feed": true,
+    "voluntary_offer": true,
+    "owner_accept": true,
+    "mutual_completion": true,
+    "completed_statistic": true,
+    "app_restart_preserves_help": true,
+    "dispute_removes_completed_count": true,
+    "withdrawal_scrubs_refreshed_view": true,
+    "untrusted_text_is_inert": true,
+    "no_page_errors": true
+  },
+  "page_errors": [],
+  "external_resources": "blocked; Telegram SDK stubbed for Web-only test",
+  "production_access": false,
+  "real_pilot": "NO-GO"
+}

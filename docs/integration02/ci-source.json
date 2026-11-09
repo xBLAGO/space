@@ -1,0 +1,736 @@
+{
+  "format": "blago-integration02-ci-evidence-1",
+  "source_sha": "395ecf10f9187663fddb64795597e7efe0f014fa",
+  "run": 42680305703,
+  "url": "https://github.com/xBLAGO/space/actions/runs/42680305703",
+  "conclusion": "success",
+  "tests": {
+    "passed": 472,
+    "previous": 464,
+    "new": 8,
+    "seconds": 129.799
+  },
+  "jobs": [
+    {
+      "id": 129372724288,
+      "name": "tests",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install package",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build verified patched SQLite (no system replacement)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Block unverified pilot SQLite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify immutable integration manifests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Integration public evidence",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record SQLite runtime for security review",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Python syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser acceptance tool",
+          "conclusion": "success"
+        },
+        {
+          "name": "Real Chrome WebAuthn UI (virtual CTAP2, synthetic localhost)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01 two-person browser cycle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01 completed synthetic demonstration",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01.1 synthetic Mini App and mobile emulation (not physical devices)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify G09 cross-worker context fencing (synthetic only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Context fencing synthetic latency and multiprocess proof",
+          "conclusion": "success"
+        },
+        {
+          "name": "Privacy 01.3 lifecycle inventory and restore rehearsal",
+          "conclusion": "success"
+        },
+        {
+          "name": "Privacy 01.4 operational retention and linkage attacks (synthetic only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Integration 02 one-database cross-channel user journey",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 129372724455,
+      "name": "docker",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build Docker image",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record isolated image identity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify actual Docker Python SQLite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Docker health check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Identity Runtime smoke (temporary SQLite only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Privacy Recovery smoke (temporary stores only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker strict pilot gate and independent checkpoint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker natural conversation and bounded text repair",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Help 01 nonfinancial cycle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Help 01.1 disposable lab parity smoke (no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker lifecycle replay smoke (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker operational retention and reidentification (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Integration 02 unified localhost journey (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "docker": {
+    "image_id": "sha256:d12bf3bc03c5263e7000965430ed79fe4a5f5c80c9423d803543504336026f89",
+    "checks": [
+      {
+        "format": "blago-lifecycle-check-1",
+        "checks": {
+          "old_need_not_restored": true,
+          "recent_help_retained": true,
+          "no_financial_actions": true,
+          "integrity": true,
+          "foreign_keys": true
+        },
+        "counts": {
+          "history": 0,
+          "semantic_archives": 0,
+          "blago_needs": 1,
+          "blago_resources": 0,
+          "blago_assets": 0,
+          "blago_resource_offers": 0,
+          "receipt_bodies": 0,
+          "help_retired": 0,
+          "generations": 0,
+          "activity_unconsented": 0,
+          "labels_unconsented": 0,
+          "revoked_credentials": 0,
+          "revoked_devices": 0,
+          "technical": {
+            "auth_challenges": 0,
+            "telegram_exchanges": 0,
+            "telegram_proofs": 0,
+            "privacy_delete_challenges": 0,
+            "help_challenges": 0,
+            "activity_events": 0,
+            "security_signals": 0,
+            "account_link_codes": 0,
+            "web_sessions": 0
+          }
+        },
+        "policy_approval": "NOT APPROVED FOR REAL USERS",
+        "external_copies_erased": "UNKNOWN",
+        "provider_deletion": "NOT VERIFIED",
+        "G04": "UNKNOWN; local synthetic mechanisms only",
+        "real_pilot": "NO-GO"
+      },
+      {
+        "format": "blago-privacy014-operations-lab-1",
+        "scope": "local synthetic integration, same-author; no independent infrastructure claim",
+        "scenarios": [
+          {
+            "scenario": "disabled",
+            "expected": "no cleanup",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "overdue",
+            "expected": "alert before delayed cleanup",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "normal",
+            "expected": "durable SUCCESS + old record removed",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "periodicity",
+            "expected": "no second run before due",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "old_application_backup",
+            "expected": "deleted record never returns",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "backup_failure_full_disk",
+            "expected": "FAILED and no cleanup",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "bounded_retry",
+            "expected": "retry after backoff succeeds",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "external_confirmation_lost",
+            "expected": "UNKNOWN_RECOVERY; no false success",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "two_executors",
+            "expected": "one OS lock / one durable operation",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "process_crash",
+            "expected": "exit85 and result INTERRUPTED, never SUCCESS",
+            "actual": "PASS",
+            "details": {}
+          },
+          {
+            "scenario": "integrity",
+            "expected": "SQLite integrity/FK intact",
+            "actual": "PASS",
+            "details": {}
+          }
+        ],
+        "passed": 11,
+        "total": 11,
+        "reidentification": {
+          "format": "blago-help-linkage-probe-1",
+          "synthetic_requests": 3,
+          "key_and_old_backup_linkable": true,
+          "side_information_singles_out_without_key": true,
+          "ambiguous_metadata_not_unique": true,
+          "anonymous": false,
+          "no_personal_fields_in_summary": true,
+          "personal_export_excludes_summary": true,
+          "conclusion": "PSEUDONYMOUS, NOT ANONYMOUS; backup/key and behavioral side information can reidentify",
+          "real_participants": false,
+          "production_access": false
+        },
+        "extra_llm_calls": 0,
+        "G04": "UNKNOWN",
+        "real_pilot": "NO-GO",
+        "production_access": false
+      },
+      {
+        "format": "blago-integration02-unified-journey-1",
+        "scope": "one synthetic SQLite, real localhost HTTP, simulated Bot delivery and signed synthetic Mini App exchange",
+        "checks": {
+          "invalid_invitation_denied": true,
+          "invited_password_identity": true,
+          "csrf_enforced": true,
+          "link_rotates_old_web_session": true,
+          "canonical_id_survives_link": true,
+          "web_mini_app_one_identity": true,
+          "mini_exchange_replay_denied": true,
+          "bot_duplicate_delivery_no_generation": true,
+          "memory_shared_and_corrected": true,
+          "other_user_memory_isolated": true,
+          "history_shared_across_channels": true,
+          "restart_preserves_history": true,
+          "do_not_remember_does_not_end_dialogue": true,
+          "natural_need_suggestion_without_publication": true,
+          "plain_chat_is_not_action_authority": true,
+          "private_draft_hidden": true,
+          "exact_text_version_audience_preview": true,
+          "preview_not_publication": true,
+          "other_actor_cannot_confirm": true,
+          "explicit_publication": true,
+          "duplicate_confirmation_no_event": true,
+          "outsider_audience_denied": true,
+          "explicit_offer_and_accept": true,
+          "single_confirmation_not_complete": true,
+          "crash_after_help_commit": true,
+          "replay_after_crash_no_duplicate": true,
+          "mutual_completion": true,
+          "personal_completed_statistic": true,
+          "help_event_history_separate_from_chat": true,
+          "community_has_no_private_help_text": true,
+          "dispute_after_completion": true,
+          "llm_claim_not_committed": true,
+          "provider_failure_no_help_mutation": true,
+          "restore_does_not_republish": true,
+          "restore_invalidates_sessions": true,
+          "no_financial_events": true,
+          "integrity": true,
+          "restore_does_not_restore_memory": true
+        },
+        "passed": 38,
+        "total": 38,
+        "local_provider_calls": 12,
+        "extra_external_llm_calls": 0,
+        "median_chat_http_ms": 42.388,
+        "agent_quality": {
+          "provider": "deterministic offline; not real HF quality",
+          "generic_acknowledgements": 7,
+          "skill_auto_saved_offline": false,
+          "interest_auto_saved_offline": false,
+          "human_perceived_naturalness": "NOT QUALIFIED",
+          "model_extraction_contract": "separately mocked in tests.test_unified_mvp; not live inference"
+        },
+        "gaps": {
+          "invitation": "shared deployment code, not individual invitation lifecycle",
+          "identity": "authenticated account, not unique physical human",
+          "conversational_publication": "PARTIAL; explicit Help panel/API required",
+          "verified_help_status_in_agent": "MISSING; no scoped Help read projection into agent context",
+          "collective_fulfillment_statistics": "MISSING; existing completed counter is personal",
+          "real_llm_quality": "NOT EXECUTED by this check",
+          "physical_telegram": "NOT EXECUTED"
+        },
+        "production_access": false,
+        "real_pilot": "NO-GO"
+      }
+    ],
+    "network": "none for unified and operational labs"
+  },
+  "checks": [
+    {
+      "browser": "156.0.8078.79",
+      "checks": {
+        "real_browser_registration": true,
+        "registration_rotates_cookie": true,
+        "old_cookie_denied": true,
+        "real_browser_discoverable_login": true,
+        "session_revoke_ui": true,
+        "other_session_denied": true,
+        "export_ui": true,
+        "no_page_errors": true
+      },
+      "page_errors": []
+    },
+    {
+      "scope": "two synthetic participants, two isolated Chrome contexts, one SQLite",
+      "browser": "156.0.8078.79",
+      "checks": {
+        "invitation_registration_ui": true,
+        "starts_in_chat": true,
+        "memory_corrected_in_chat": true,
+        "reopen_preserves_history": true,
+        "natural_suggestion_no_publish": true,
+        "private_draft": true,
+        "exact_preview_and_confirmation": true,
+        "authorized_helper_feed": true,
+        "voluntary_offer": true,
+        "owner_accept": true,
+        "mutual_completion": true,
+        "completed_statistic": true,
+        "app_restart_preserves_help": true,
+        "dispute_removes_completed_count": true,
+        "withdrawal_scrubs_refreshed_view": true,
+        "untrusted_text_is_inert": true,
+        "no_page_errors": true
+      },
+      "page_errors": [],
+      "external_resources": "blocked; Telegram SDK stubbed for Web-only test",
+      "production_access": false,
+      "real_pilot": "NO-GO"
+    },
+    {
+      "format": "blago-help-mobile-1",
+      "scope": "Chrome touch/mobile emulation with synthetic SDK and HMAC; not Telegram",
+      "browser": "156.0.8078.79",
+      "checks": {
+        "synthetic_telegram_hmac_exchange": true,
+        "reopen_preserves_identity": true,
+        "consumed_exchange_replay_denied": true,
+        "conversation_does_not_create_request": true,
+        "mobile_private_draft": true,
+        "preview_is_not_publication": true,
+        "explicit_publication_to_audience": true,
+        "mobile_no_horizontal_overflow": true,
+        "mini_app_context_conflict_409": true,
+        "conflict_restores_draft_without_history_pair": true,
+        "conflict_no_automatic_llm_retry": true,
+        "offline_no_private_api_cache": true,
+        "invalid_initdata_no_session": true,
+        "no_page_errors": true
+      },
+      "page_errors": [],
+      "physical_ios_telegram": "NOT EXECUTED",
+      "physical_android_telegram": "NOT EXECUTED",
+      "physical_passkeys": "NOT EXECUTED",
+      "production_access": false,
+      "real_pilot": "NO-GO"
+    },
+    {
+      "format": "blago-context-fencing-check-1",
+      "legacy_local": {
+        "turns": 8,
+        "median_ms": 8.9165,
+        "max_ms": 33.396,
+        "turn_ms": [
+          13.984,
+          33.396,
+          8.673,
+          8.375,
+          8.538,
+          9.16,
+          9.928,
+          8.515
+        ],
+        "provider": "local, zero external LLM calls"
+      },
+      "fenced_local": {
+        "turns": 8,
+        "median_ms": 15.359,
+        "max_ms": 18.383,
+        "turn_ms": [
+          13.509,
+          14.568,
+          18.383,
+          15.371,
+          14.822,
+          15.66,
+          15.347,
+          16.108
+        ],
+        "provider": "local, zero external LLM calls"
+      },
+      "median_delta_ms": 6.443,
+      "cross_worker": {
+        "format": "blago-help-worker-probe-1",
+        "scope": "two actual processes, synthetic provider and data",
+        "context_loaded": true,
+        "delete_completed_before_generation_release": true,
+        "delete_latency_ms": 8.045,
+        "stale_context_written_after_delete": false,
+        "generation_rejected": true,
+        "status": "PASS",
+        "finding": "Durable context CAS rejects stale generation; no history pair or memory effects committed",
+        "real_pilot": "NO-GO",
+        "production_access": false
+      },
+      "real_pilot": "NO-GO",
+      "limits": "Local synthetic wall-clock only, not live LLM/network or production capacity benchmark"
+    },
+    {
+      "format": "blago-lifecycle-check-1",
+      "checks": {
+        "old_need_not_restored": true,
+        "recent_help_retained": true,
+        "no_financial_actions": true,
+        "integrity": true,
+        "foreign_keys": true
+      },
+      "counts": {
+        "history": 0,
+        "semantic_archives": 0,
+        "blago_needs": 1,
+        "blago_resources": 0,
+        "blago_assets": 0,
+        "blago_resource_offers": 0,
+        "receipt_bodies": 0,
+        "help_retired": 0,
+        "generations": 0,
+        "activity_unconsented": 0,
+        "labels_unconsented": 0,
+        "revoked_credentials": 0,
+        "revoked_devices": 0,
+        "technical": {
+          "auth_challenges": 0,
+          "telegram_exchanges": 0,
+          "telegram_proofs": 0,
+          "privacy_delete_challenges": 0,
+          "help_challenges": 0,
+          "activity_events": 0,
+          "security_signals": 0,
+          "account_link_codes": 0,
+          "web_sessions": 0
+        }
+      },
+      "policy_approval": "NOT APPROVED FOR REAL USERS",
+      "external_copies_erased": "UNKNOWN",
+      "provider_deletion": "NOT VERIFIED",
+      "G04": "UNKNOWN; local synthetic mechanisms only",
+      "real_pilot": "NO-GO"
+    },
+    {
+      "format": "blago-privacy014-operations-lab-1",
+      "scope": "local synthetic integration, same-author; no independent infrastructure claim",
+      "scenarios": [
+        {
+          "scenario": "disabled",
+          "expected": "no cleanup",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "overdue",
+          "expected": "alert before delayed cleanup",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "normal",
+          "expected": "durable SUCCESS + old record removed",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "periodicity",
+          "expected": "no second run before due",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "old_application_backup",
+          "expected": "deleted record never returns",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "backup_failure_full_disk",
+          "expected": "FAILED and no cleanup",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "bounded_retry",
+          "expected": "retry after backoff succeeds",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "external_confirmation_lost",
+          "expected": "UNKNOWN_RECOVERY; no false success",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "two_executors",
+          "expected": "one OS lock / one durable operation",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "process_crash",
+          "expected": "exit85 and result INTERRUPTED, never SUCCESS",
+          "actual": "PASS",
+          "details": {}
+        },
+        {
+          "scenario": "integrity",
+          "expected": "SQLite integrity/FK intact",
+          "actual": "PASS",
+          "details": {}
+        }
+      ],
+      "passed": 11,
+      "total": 11,
+      "reidentification": {
+        "format": "blago-help-linkage-probe-1",
+        "synthetic_requests": 3,
+        "key_and_old_backup_linkable": true,
+        "side_information_singles_out_without_key": true,
+        "ambiguous_metadata_not_unique": true,
+        "anonymous": false,
+        "no_personal_fields_in_summary": true,
+        "personal_export_excludes_summary": true,
+        "conclusion": "PSEUDONYMOUS, NOT ANONYMOUS; backup/key and behavioral side information can reidentify",
+        "real_participants": false,
+        "production_access": false
+      },
+      "extra_llm_calls": 0,
+      "G04": "UNKNOWN",
+      "real_pilot": "NO-GO",
+      "production_access": false
+    },
+    {
+      "format": "blago-integration02-unified-journey-1",
+      "scope": "one synthetic SQLite, real localhost HTTP, simulated Bot delivery and signed synthetic Mini App exchange",
+      "checks": {
+        "invalid_invitation_denied": true,
+        "invited_password_identity": true,
+        "csrf_enforced": true,
+        "link_rotates_old_web_session": true,
+        "canonical_id_survives_link": true,
+        "web_mini_app_one_identity": true,
+        "mini_exchange_replay_denied": true,
+        "bot_duplicate_delivery_no_generation": true,
+        "memory_shared_and_corrected": true,
+        "other_user_memory_isolated": true,
+        "history_shared_across_channels": true,
+        "restart_preserves_history": true,
+        "do_not_remember_does_not_end_dialogue": true,
+        "natural_need_suggestion_without_publication": true,
+        "plain_chat_is_not_action_authority": true,
+        "private_draft_hidden": true,
+        "exact_text_version_audience_preview": true,
+        "preview_not_publication": true,
+        "other_actor_cannot_confirm": true,
+        "explicit_publication": true,
+        "duplicate_confirmation_no_event": true,
+        "outsider_audience_denied": true,
+        "explicit_offer_and_accept": true,
+        "single_confirmation_not_complete": true,
+        "crash_after_help_commit": true,
+        "replay_after_crash_no_duplicate": true,
+        "mutual_completion": true,
+        "personal_completed_statistic": true,
+        "help_event_history_separate_from_chat": true,
+        "community_has_no_private_help_text": true,
+        "dispute_after_completion": true,
+        "llm_claim_not_committed": true,
+        "provider_failure_no_help_mutation": true,
+        "restore_does_not_republish": true,
+        "restore_invalidates_sessions": true,
+        "no_financial_events": true,
+        "integrity": true,
+        "restore_does_not_restore_memory": true
+      },
+      "passed": 38,
+      "total": 38,
+      "local_provider_calls": 12,
+      "extra_external_llm_calls": 0,
+      "median_chat_http_ms": 35.125,
+      "agent_quality": {
+        "provider": "deterministic offline; not real HF quality",
+        "generic_acknowledgements": 7,
+        "skill_auto_saved_offline": false,
+        "interest_auto_saved_offline": false,
+        "human_perceived_naturalness": "NOT QUALIFIED",
+        "model_extraction_contract": "separately mocked in tests.test_unified_mvp; not live inference"
+      },
+      "gaps": {
+        "invitation": "shared deployment code, not individual invitation lifecycle",
+        "identity": "authenticated account, not unique physical human",
+        "conversational_publication": "PARTIAL; explicit Help panel/API required",
+        "verified_help_status_in_agent": "MISSING; no scoped Help read projection into agent context",
+        "collective_fulfillment_statistics": "MISSING; existing completed counter is personal",
+        "real_llm_quality": "NOT EXECUTED by this check",
+        "physical_telegram": "NOT EXECUTED"
+      },
+      "production_access": false,
+      "real_pilot": "NO-GO"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13702596677,
+      "name": "pilot-browser-evidence",
+      "digest": "sha256:2b6384eba0edfd1489dd1e379ec6e2694de9ef288fd52633b20d8f45a156ab5b",
+      "expires_at": "2027-02-07T19:07:27Z"
+    }
+  ],
+  "production_access": false,
+  "physical_devices": "NOT EXECUTED",
+  "external_llm_calls": 0,
+  "real_pilot": "NO-GO"
+}

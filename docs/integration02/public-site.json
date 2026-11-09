@@ -1,0 +1,129 @@
+{
+  "format": "blago-integration02-public-site-1",
+  "observed_utc": "2026-11-09T18:49:01.037149+00:00",
+  "method": "unauthenticated GET only; no scripts/trackers executed; no forms submitted",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "final_url": "https://xblago.space/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 12318,
+      "sha256": "ec1178353d855a2f4dcde9fc1c97aee80eb684e42ed9bb3a56de96ecc50e6d95",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": true,
+        "tracking_yandex": true,
+        "tracking_google": true
+      }
+    },
+    {
+      "path": "/en/en_description/",
+      "status": 200,
+      "final_url": "https://xblago.space/en/en_description/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 12965,
+      "sha256": "8e43f21065f95ec2a2aeb2614ae37d8676d95d9ab84c14f35449ff5f74012e8d",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": true,
+        "wp_generator": false,
+        "telegram_link": true,
+        "tracking_yandex": true,
+        "tracking_google": true
+      }
+    },
+    {
+      "path": "/en/en_investors/",
+      "status": 200,
+      "final_url": "https://xblago.space/en/en_investors/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 11326,
+      "sha256": "1f0d5369213860223eff6d8f7604a361d6d2839f165d1a902aa8216f55096b0a",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": true,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": true,
+        "tracking_yandex": true,
+        "tracking_google": true
+      }
+    },
+    {
+      "path": "/en/en_log/",
+      "status": 200,
+      "final_url": "https://xblago.space/en/en_log/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 11158,
+      "sha256": "aca16decb322bd1158da9f6b64d5d573e42525e17c63e378bf93ffb5ffa1c0c0",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": true,
+        "tracking_yandex": true,
+        "tracking_google": true
+      }
+    },
+    {
+      "path": "/app",
+      "status": 404,
+      "final_url": "https://xblago.space/app",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": false,
+        "tracking_yandex": false,
+        "tracking_google": false
+      }
+    },
+    {
+      "path": "/healthz",
+      "status": 404,
+      "final_url": "https://xblago.space/healthz",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": false,
+        "tracking_yandex": false,
+        "tracking_google": false
+      }
+    },
+    {
+      "path": "/api/v1/auth/capabilities",
+      "status": 404,
+      "final_url": "https://xblago.space/api/v1/auth/capabilities",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "signals": {
+        "candidate_chat_form": false,
+        "token_parity_claim": false,
+        "nft_need_claim": false,
+        "wp_generator": false,
+        "telegram_link": false,
+        "tracking_yandex": false,
+        "tracking_google": false
+      }
+    }
+  ],
+  "source_code_in_repository": false,
+  "source_owner_provenance": "UNKNOWN; no source repository identified",
+  "production_mutations": false
+}

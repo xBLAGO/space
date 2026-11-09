@@ -1,0 +1,8 @@
+{
+  "format": "blago-integration02-provider-availability-1",
+  "explicit_test_authorization_present": false,
+  "production_credentials_read": false,
+  "requests": 0,
+  "status": "NOT EXECUTED",
+  "real_llm_quality": "UNKNOWN"
+}

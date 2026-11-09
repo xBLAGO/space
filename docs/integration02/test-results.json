@@ -1,0 +1,100 @@
+{
+  "format": "blago-integration02-test-results-1",
+  "source_sha": "395ecf10f9187663fddb64795597e7efe0f014fa",
+  "full_local": {
+    "passed": 472,
+    "seconds": 397.247,
+    "mode": "new synthetic stores / localhost / temporary caffeinate; no auth weakening"
+  },
+  "source_ci": {
+    "passed": 472,
+    "seconds": 129.799,
+    "run": 42680305703
+  },
+  "new_unit_tests": 8,
+  "dialogue_scenarios": 40,
+  "dialogue_turns": 50,
+  "focused_local": {
+    "passed": 8,
+    "seconds": 32.121,
+    "scope": "Before added crash replay step; final crash journey covered by full local and CI"
+  },
+  "unified_journey": {
+    "passed": 38,
+    "total": 38,
+    "same_sqlite": true,
+    "proof": "journey-local.json and ci-source.json",
+    "local_provider_calls": 12,
+    "external_provider_calls": 0
+  },
+  "browser_local": {
+    "passed": 17,
+    "total": 17,
+    "proof": "browser-local.json"
+  },
+  "mini_app_local": {
+    "passed": 14,
+    "total": 14,
+    "physical_devices": false,
+    "proof": "mobile-local.json"
+  },
+  "new_test_results": [
+    {
+      "test": "test_личные_факты_не_попадают_другому_агенту",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_модельное_извлечение_навыка_через_тот_же_fenced_контекст",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_ограниченное_продолжение_не_дублирует_историю",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_память_предпочтения_исправление_и_отказ_в_едином_runtime",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_пустой_и_испорченный_ответ_не_создают_память_или_действие",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_сбой_HF_и_восстановление_с_тем_же_пользователем",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_сорок_диалогов_с_активными_privacy_и_fencing",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    },
+    {
+      "test": "test_одна_база_Web_Bot_Mini_App_Help_и_recovery",
+      "actual": "PASS (complete source suite OK)",
+      "expected": "Named source assertions/invariants",
+      "proof": "CI job129372724288; tests/test_unified_mvp.py"
+    }
+  ],
+  "main_upgrade": {
+    "proof": "main-upgrade.json",
+    "scope": "local ordered synthetic upgrade; legacy Help reapply limitation recorded"
+  },
+  "real_llm": {
+    "status": "NOT EXECUTED",
+    "proof": "provider-status.json"
+  },
+  "real_pilot": "NO-GO"
+}

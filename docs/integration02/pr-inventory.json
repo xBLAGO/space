@@ -1,0 +1,3353 @@
+{
+  "format": "blago-integration02-pr-inventory-1",
+  "repository": "xBLAGO/space",
+  "observed_main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "exact_candidate_base": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+  "method": "GitHub API PR details, paginated files and HEAD check-runs; public metadata only",
+  "pull_requests": [
+    {
+      "number": 25,
+      "title": "Privacy 01.4: operational retention scheduler and G04 readiness evidence",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/privacy-01-3-data-lifecycle",
+      "base_sha": "80e60b4792067b9e4832a3db88e8ea3a0f031f37",
+      "head": "feat/privacy-01-4-operational-retention",
+      "head_sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+      "changed_files": 22,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 1,
+          "sha": "a7c9f131f86f846b271b5dea21868fe082417c24"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_PRIVACY_01_4.md",
+          "status": "added",
+          "additions": 96,
+          "deletions": 0,
+          "sha": "c63b1459600915eb71cf0823299a16a36ad603d5"
+        },
+        {
+          "filename": "docs/privacy01_4/EXTERNAL_DATA_INVENTORY.md",
+          "status": "added",
+          "additions": 33,
+          "deletions": 0,
+          "sha": "a68e11903e010be019e263bb50d35f75bc8768ff"
+        },
+        {
+          "filename": "docs/privacy01_4/README.md",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0,
+          "sha": "899567883b51b49adbc7c2b9d24ba95d4f086b1d"
+        },
+        {
+          "filename": "docs/privacy01_4/RETENTION_POLICY_DRAFT.md",
+          "status": "added",
+          "additions": 29,
+          "deletions": 0,
+          "sha": "bc3b2ade43dc53381aed0478f2c983245ca98650"
+        },
+        {
+          "filename": "docs/privacy01_4/RUNBOOK.md",
+          "status": "added",
+          "additions": 72,
+          "deletions": 0,
+          "sha": "3a24968f25837b013acd7b3ddec9d011f4f04da7"
+        },
+        {
+          "filename": "docs/privacy01_4/THREAT_MODEL.md",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "a68a704f1533f788f0b275b2a19f4a674ef48950"
+        },
+        {
+          "filename": "docs/privacy01_4/ci-source.json",
+          "status": "added",
+          "additions": 547,
+          "deletions": 0,
+          "sha": "8c25d08ac07b42f8133247293b1c7e4a6c580872"
+        },
+        {
+          "filename": "docs/privacy01_4/cli-local.json",
+          "status": "added",
+          "additions": 19,
+          "deletions": 0,
+          "sha": "e21cabc26f4b224d823bb7321d944c1445b35486"
+        },
+        {
+          "filename": "docs/privacy01_4/clock-observations.json",
+          "status": "added",
+          "additions": 11,
+          "deletions": 0,
+          "sha": "e01998c0627ab6a914beb1110154cf69336b092f"
+        },
+        {
+          "filename": "docs/privacy01_4/evidence-index.json",
+          "status": "added",
+          "additions": 24,
+          "deletions": 0,
+          "sha": "11951b2a727818bffac5bf439703b22bc106960a"
+        },
+        {
+          "filename": "docs/privacy01_4/external-inventory.json",
+          "status": "added",
+          "additions": 218,
+          "deletions": 0,
+          "sha": "3ed77b06ec0f9fc74a94be6ee102fd66c444a176"
+        },
+        {
+          "filename": "docs/privacy01_4/gates.json",
+          "status": "added",
+          "additions": 529,
+          "deletions": 0,
+          "sha": "225a4e3514e59aebc1c4034afff0a66a108329ca"
+        },
+        {
+          "filename": "docs/privacy01_4/operations-local.json",
+          "status": "added",
+          "additions": 91,
+          "deletions": 0,
+          "sha": "8f2e86a7d5ae5ad6c06e69c52e4351a31b4c828e"
+        },
+        {
+          "filename": "docs/privacy01_4/operator-schema.json",
+          "status": "added",
+          "additions": 20,
+          "deletions": 0,
+          "sha": "e80fc54331807d0343ac5ff5f4c1a1cb7cbbee1f"
+        },
+        {
+          "filename": "docs/privacy01_4/source-identity.json",
+          "status": "added",
+          "additions": 90,
+          "deletions": 0,
+          "sha": "4fecdc4b73ad153dd274e6ca419ea279348d1f9a"
+        },
+        {
+          "filename": "docs/privacy01_4/test-results.json",
+          "status": "added",
+          "additions": 263,
+          "deletions": 0,
+          "sha": "30af9f24b676736f4a51a0dc2a1dec64e50852ba"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 2,
+          "sha": "2b71f0174540f97e1c9d1bf705d64a3e1f23bc72"
+        },
+        {
+          "filename": "src/xblago/core/retention_ops.py",
+          "status": "added",
+          "additions": 339,
+          "deletions": 0,
+          "sha": "7717f793dca7a318d02b98afbec9cac421d7ce89"
+        },
+        {
+          "filename": "tests/test_retention_ops.py",
+          "status": "added",
+          "additions": 246,
+          "deletions": 0,
+          "sha": "bbe445a3ca1bfb4655c2266a6bcf9047ad4c3daa"
+        },
+        {
+          "filename": "tools/retention_ops_lab.py",
+          "status": "added",
+          "additions": 148,
+          "deletions": 0,
+          "sha": "c7de55dfb0ae85916fcc8f83bce2215f48bc5f0d"
+        },
+        {
+          "filename": "tools/retention_scheduler.py",
+          "status": "added",
+          "additions": 41,
+          "deletions": 0,
+          "sha": "e094bd3adc9e474760aa7fc0707e1d5d1a0385a7"
+        }
+      ],
+      "checks": [
+        {
+          "id": 129352391523,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42674576765/job/129352391523"
+        },
+        {
+          "id": 129352390861,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42674576765/job/129352390861"
+        },
+        {
+          "id": 129352382296,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42674566284/job/129352382296"
+        },
+        {
+          "id": 129352313629,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42674566284/job/129352313629"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "title": "Privacy 01.3: synthetic data lifecycle, retained erasures and G04 evidence",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "fix/privacy-01-2-context-fencing",
+      "base_sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+      "head": "feat/privacy-01-3-data-lifecycle",
+      "head_sha": "80e60b4792067b9e4832a3db88e8ea3a0f031f37",
+      "changed_files": 35,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 11,
+          "deletions": 1,
+          "sha": "3953d607ad1c2ed00e33335f475cb848d895b4ea"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_PRIVACY_01_3.md",
+          "status": "added",
+          "additions": 88,
+          "deletions": 0,
+          "sha": "0df08ac2d20176a5763a83ff510dc8c9de4ec78c"
+        },
+        {
+          "filename": "docs/privacy01_3/DATA_LIFECYCLE_MATRIX.md",
+          "status": "added",
+          "additions": 59,
+          "deletions": 0,
+          "sha": "530b0574375af17af20abfb13b0c67b9fc105299"
+        },
+        {
+          "filename": "docs/privacy01_3/README.md",
+          "status": "added",
+          "additions": 35,
+          "deletions": 0,
+          "sha": "d46063dcc50b536199b9ae5a045fcdf9c0e8593f"
+        },
+        {
+          "filename": "docs/privacy01_3/RUNBOOK.md",
+          "status": "added",
+          "additions": 72,
+          "deletions": 0,
+          "sha": "420e691fe0f123fc83fe560894dd94923a1064ac"
+        },
+        {
+          "filename": "docs/privacy01_3/THREAT_MODEL.md",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "345d6ec7ce1f3463cc0107222595508c8ed9886e"
+        },
+        {
+          "filename": "docs/privacy01_3/ci-source.json",
+          "status": "added",
+          "additions": 356,
+          "deletions": 0,
+          "sha": "8ed2b27eba5262cd1b4ec83eac4396b6d6a99183"
+        },
+        {
+          "filename": "docs/privacy01_3/evidence-index.json",
+          "status": "added",
+          "additions": 21,
+          "deletions": 0,
+          "sha": "2210e3d2304e70e2c3b2539ecd324cdac73f716c"
+        },
+        {
+          "filename": "docs/privacy01_3/gates.json",
+          "status": "added",
+          "additions": 351,
+          "deletions": 0,
+          "sha": "a61e9384432762ce723e656648d301e583f680a0"
+        },
+        {
+          "filename": "docs/privacy01_3/inventory.json",
+          "status": "added",
+          "additions": 971,
+          "deletions": 0,
+          "sha": "9d87795d5e89d145da762bb5d336c55185efa3c9"
+        },
+        {
+          "filename": "docs/privacy01_3/reenrollment-replay.json",
+          "status": "added",
+          "additions": 12,
+          "deletions": 0,
+          "sha": "e890ee9bac81be96c75a368cd9cab0327dbbb648"
+        },
+        {
+          "filename": "docs/privacy01_3/rehearsal-local.json",
+          "status": "added",
+          "additions": 41,
+          "deletions": 0,
+          "sha": "c7aeaff76c992a88b597258c3246e3493846cedc"
+        },
+        {
+          "filename": "docs/privacy01_3/source-identity.json",
+          "status": "added",
+          "additions": 90,
+          "deletions": 0,
+          "sha": "92e5ec102d653666f71354f0da937f0f4b1e2076"
+        },
+        {
+          "filename": "docs/privacy01_3/test-results.json",
+          "status": "added",
+          "additions": 296,
+          "deletions": 0,
+          "sha": "ea5e072b6712b2aa8d658602c3e3f312cfd0a97e"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "modified",
+          "additions": 27,
+          "deletions": 15,
+          "sha": "aeffe45c6accff35ef457c0ee3f59be88050fabe"
+        },
+        {
+          "filename": "src/xblago/core/context_schema.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "sha": "53ffaee0333ec8213c68dd60f66b84f4bbee71d8"
+        },
+        {
+          "filename": "src/xblago/core/data_lifecycle.py",
+          "status": "added",
+          "additions": 185,
+          "deletions": 0,
+          "sha": "ff0a17364680014d191760d13cddf7127fafbf39"
+        },
+        {
+          "filename": "src/xblago/core/integration.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "sha": "919d0fe97e001075eaabe50f25744cb79cc70e01"
+        },
+        {
+          "filename": "src/xblago/core/lifecycle_schema.py",
+          "status": "added",
+          "additions": 140,
+          "deletions": 0,
+          "sha": "79b7a742ce48fbda857cebcb3009d3e4325b2995"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "modified",
+          "additions": 27,
+          "deletions": 3,
+          "sha": "53988b6e408dc327f2b1653fcab8c4986e3788c9"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "modified",
+          "additions": 22,
+          "deletions": 16,
+          "sha": "538c39d5c7c11799051a6f7d375207a9e896f459"
+        },
+        {
+          "filename": "src/xblago/core/storage.py",
+          "status": "modified",
+          "additions": 15,
+          "deletions": 7,
+          "sha": "1026cdaa7d62094197dcbdb69761a863e0b4ff9b"
+        },
+        {
+          "filename": "src/xblago/integrations/identity.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "a8301108eef56e192bbef327bb770831692f2b31"
+        },
+        {
+          "filename": "src/xblago/integrations/privacy.py",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 0,
+          "sha": "93f345040198548689f52d98fad433b6dd036215"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0,
+          "sha": "581bf9a5910acbd86f3a303beaaef376e12a71b0"
+        },
+        {
+          "filename": "tests/test_data_lifecycle.py",
+          "status": "added",
+          "additions": 366,
+          "deletions": 0,
+          "sha": "54f89fef8bffe2fcf4f06264092ca05ee2506201"
+        },
+        {
+          "filename": "tools/freeze_integration.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "beb66c5df869db30adb231b2140407d030efbff7"
+        },
+        {
+          "filename": "tools/help_browser_check.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "9382879b54bbad6628b3542aee69425d542a2c1b"
+        },
+        {
+          "filename": "tools/help_mobile_check.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "af8d6b3cefc29acf02410da65894a75c387efdcc"
+        },
+        {
+          "filename": "tools/help_readiness_lab.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "1281d139110beaf4df79c742dd0da54653fe4dfc"
+        },
+        {
+          "filename": "tools/integration_evidence.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "f5f214ef228d717eb3d26dc24ccd546cc06b8021"
+        },
+        {
+          "filename": "tools/integration_fixture.py",
+          "status": "modified",
+          "additions": 11,
+          "deletions": 5,
+          "sha": "259ee5d75a07afb508471c31388ed05f81eb636e"
+        },
+        {
+          "filename": "tools/lifecycle_check.py",
+          "status": "added",
+          "additions": 42,
+          "deletions": 0,
+          "sha": "5fd526f502c4187182fb9e7b320e3ffffa54c9f7"
+        },
+        {
+          "filename": "tools/lifecycle_inventory.py",
+          "status": "added",
+          "additions": 37,
+          "deletions": 0,
+          "sha": "ccbe7d7e1aff0835b4fc9d6eeaa8e542cbd506bc"
+        },
+        {
+          "filename": "tools/lifecycle_maintenance.py",
+          "status": "added",
+          "additions": 20,
+          "deletions": 0,
+          "sha": "5467bacc27cf046226cdd23ae65fda276f133321"
+        }
+      ],
+      "checks": [
+        {
+          "id": 128828724848,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42512606444/job/128828724848"
+        },
+        {
+          "id": 128828724739,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42512606444/job/128828724739"
+        },
+        {
+          "id": 128828710307,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42512601764/job/128828710307"
+        },
+        {
+          "id": 128828710124,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42512601764/job/128828710124"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "title": "Privacy 01.2: durable cross-worker context fencing",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-help-01-1",
+      "base_sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+      "head": "fix/privacy-01-2-context-fencing",
+      "head_sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3",
+      "changed_files": 39,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 2,
+          "sha": "816bba7f43186b1f7e879acc41185f8ef14bfd55"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_PRIVACY_01_2.md",
+          "status": "added",
+          "additions": 106,
+          "deletions": 0,
+          "sha": "72309199a84c298b1a6130d5f4db8e4e80eacdfd"
+        },
+        {
+          "filename": "docs/privacy01_2/README.md",
+          "status": "added",
+          "additions": 20,
+          "deletions": 0,
+          "sha": "a0f07b191f52bb432fe3e6ae4c0467007eafff5f"
+        },
+        {
+          "filename": "docs/privacy01_2/RUNBOOK.md",
+          "status": "added",
+          "additions": 57,
+          "deletions": 0,
+          "sha": "7a274b7fbe74ce760f31e599d3689aa60971823f"
+        },
+        {
+          "filename": "docs/privacy01_2/THREAT_MODEL.md",
+          "status": "added",
+          "additions": 49,
+          "deletions": 0,
+          "sha": "742c9b5a7e55f160937e150641bc18141b69572b"
+        },
+        {
+          "filename": "docs/privacy01_2/after-probe-ci.json",
+          "status": "added",
+          "additions": 15,
+          "deletions": 0,
+          "sha": "ffc8a12700a37678710b05ea3bfb7c2187faa57a"
+        },
+        {
+          "filename": "docs/privacy01_2/before-probe.json",
+          "status": "added",
+          "additions": 11,
+          "deletions": 0,
+          "sha": "844b8eb0f97a0859691312f4be7354286dd1ebc7"
+        },
+        {
+          "filename": "docs/privacy01_2/browser-results.json",
+          "status": "added",
+          "additions": 21,
+          "deletions": 0,
+          "sha": "a4472d0cd4125c3a9f05fa282bc83eeb609da1de"
+        },
+        {
+          "filename": "docs/privacy01_2/candidate-identity.json",
+          "status": "added",
+          "additions": 84,
+          "deletions": 0,
+          "sha": "244c53282182f16f2feee51b5b09c6775ec49568"
+        },
+        {
+          "filename": "docs/privacy01_2/ci-evidence.json",
+          "status": "added",
+          "additions": 197,
+          "deletions": 0,
+          "sha": "5705044bdf1d5eeb5e44f040b750118f693f387d"
+        },
+        {
+          "filename": "docs/privacy01_2/evidence-index.json",
+          "status": "added",
+          "additions": 21,
+          "deletions": 0,
+          "sha": "598c7e04d534504547d51d318c007d627ea49e95"
+        },
+        {
+          "filename": "docs/privacy01_2/gates.json",
+          "status": "added",
+          "additions": 191,
+          "deletions": 0,
+          "sha": "8b007723305e7d26268bf1b859de867d571b4c40"
+        },
+        {
+          "filename": "docs/privacy01_2/mini-app-conflict.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "4f40b768ef91a84af2b10557a0c94b4dee981e9f"
+        },
+        {
+          "filename": "docs/privacy01_2/mobile-results.json",
+          "status": "added",
+          "additions": 27,
+          "deletions": 0,
+          "sha": "53c8c9088592e301446ef5ed57b304c8af23fbc9"
+        },
+        {
+          "filename": "docs/privacy01_2/performance-ci.json",
+          "status": "added",
+          "additions": 53,
+          "deletions": 0,
+          "sha": "6bb7486d6d80958c62696ebca9f8160590eb8e7c"
+        },
+        {
+          "filename": "docs/privacy01_2/performance-local.json",
+          "status": "added",
+          "additions": 51,
+          "deletions": 0,
+          "sha": "ad440eba22544abb4824955d61bacfb0521d0d2b"
+        },
+        {
+          "filename": "docs/privacy01_2/test-results.json",
+          "status": "added",
+          "additions": 202,
+          "deletions": 0,
+          "sha": "d27640cd14a508a83a94b3465fdcc114b11c080f"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "modified",
+          "additions": 28,
+          "deletions": 18,
+          "sha": "171e480cc32fde8dba4af1d5d4205b81e6947514"
+        },
+        {
+          "filename": "src/xblago/core/context_fencing.py",
+          "status": "added",
+          "additions": 126,
+          "deletions": 0,
+          "sha": "24533c6ff51224d169c8c9b9eb19a6257ff3ca37"
+        },
+        {
+          "filename": "src/xblago/core/context_schema.py",
+          "status": "added",
+          "additions": 112,
+          "deletions": 0,
+          "sha": "85388a7a58671cb209605501828878007a443104"
+        },
+        {
+          "filename": "src/xblago/core/integration.py",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 3,
+          "sha": "d74f671bb111f2b253bbda4b12ae7098b020424c"
+        },
+        {
+          "filename": "src/xblago/core/llm.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "e2c6d62ee26c00ab1537b687028f25aa894827ad"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "modified",
+          "additions": 15,
+          "deletions": 2,
+          "sha": "a671af9c355b29460e7bd719420a048b0ac16165"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0,
+          "sha": "3527468ee50285a5ac10cff4df3e144aa2d91c3b"
+        },
+        {
+          "filename": "src/xblago/core/security_journal.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "sha": "77232ff40b9676ac3a88f9b4173c0c6372659b45"
+        },
+        {
+          "filename": "src/xblago/core/storage.py",
+          "status": "modified",
+          "additions": 36,
+          "deletions": 2,
+          "sha": "ec40a2c08e1378b2d3be9420176fb06592d71199"
+        },
+        {
+          "filename": "src/xblago/integrations/identity.py",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0,
+          "sha": "30ee9393569f1ac4fa6cc6a89bb23ba2ef253934"
+        },
+        {
+          "filename": "src/xblago/integrations/static/index.html",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "sha": "9b4b1f155449b48dbd3207bff68c061afd39e084"
+        },
+        {
+          "filename": "src/xblago/integrations/telegram.py",
+          "status": "modified",
+          "additions": 21,
+          "deletions": 5,
+          "sha": "e8cd4bce9be1ad2354025bf1334e73184c693f30"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 13,
+          "deletions": 2,
+          "sha": "0b72faf13e680f0cacffabda311f908aa9d89b48"
+        },
+        {
+          "filename": "tests/test_context_fencing.py",
+          "status": "added",
+          "additions": 353,
+          "deletions": 0,
+          "sha": "88e21be7f6a4f73d1f0d7405dbc4413617338c56"
+        },
+        {
+          "filename": "tools/context_fencing_check.py",
+          "status": "added",
+          "additions": 36,
+          "deletions": 0,
+          "sha": "785194e9e2f4a647dd171f3f385c5eabb0e0c412"
+        },
+        {
+          "filename": "tools/freeze_integration.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "60cab1afbb3933b346671b6a8c97e86eddfc4729"
+        },
+        {
+          "filename": "tools/help_browser_check.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "2f714a3f4c883577e0f01cd24e80f85094eb05df"
+        },
+        {
+          "filename": "tools/help_mobile_check.py",
+          "status": "modified",
+          "additions": 20,
+          "deletions": 1,
+          "sha": "8d352956c90a786bc7c23a3f7028e01839bab5d4"
+        },
+        {
+          "filename": "tools/help_readiness_lab.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "a9bc7ba777007d844ff726be85813d83ed473e3e"
+        },
+        {
+          "filename": "tools/help_worker_probe.py",
+          "status": "modified",
+          "additions": 15,
+          "deletions": 9,
+          "sha": "09294b712222f02a94890828656bc731267de5a3"
+        },
+        {
+          "filename": "tools/integration_evidence.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "238daf26d5d8cd2038b24319cb89fa3c4ebead24"
+        },
+        {
+          "filename": "tools/integration_fixture.py",
+          "status": "modified",
+          "additions": 10,
+          "deletions": 5,
+          "sha": "891cb6ded28b5d5823a47bc2f9c80af0ad9e7986"
+        }
+      ],
+      "checks": [
+        {
+          "id": 128533751576,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42415883355/job/128533751576"
+        },
+        {
+          "id": 128533751493,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42415883355/job/128533751493"
+        },
+        {
+          "id": 128533738540,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42415879098/job/128533738540"
+        },
+        {
+          "id": 128533738395,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42415879098/job/128533738395"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "title": "Help 01.1: pilot readiness lab, recovery evidence and NO-GO gates",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-help-01",
+      "base_sha": "417e12be82e0b381d5251e12191a25d1c10921f4",
+      "head": "feat/foundation-help-01-1",
+      "head_sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129",
+      "changed_files": 25,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 30,
+          "deletions": 1,
+          "sha": "e9fcdb7d451da8ce3929297aa36dcf86f4ee0542"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_HELP_01_1.md",
+          "status": "added",
+          "additions": 131,
+          "deletions": 0,
+          "sha": "d6473c3350412b2f40e7af3cabf8b82a562ccc67"
+        },
+        {
+          "filename": "docs/help01_1/README.md",
+          "status": "added",
+          "additions": 20,
+          "deletions": 0,
+          "sha": "1e781438ee919b2414a878ea71e19ae20f11c056"
+        },
+        {
+          "filename": "docs/help01_1/RUNBOOK.md",
+          "status": "added",
+          "additions": 60,
+          "deletions": 0,
+          "sha": "bfa523a5891cda09d71c3fc1ba7c033c1c65b671"
+        },
+        {
+          "filename": "docs/help01_1/browser-results.json",
+          "status": "added",
+          "additions": 21,
+          "deletions": 0,
+          "sha": "a4472d0cd4125c3a9f05fa282bc83eeb609da1de"
+        },
+        {
+          "filename": "docs/help01_1/candidate-identity.json",
+          "status": "added",
+          "additions": 79,
+          "deletions": 0,
+          "sha": "584bd5f784fd3d466da12fd1ac48e0680d6d605d"
+        },
+        {
+          "filename": "docs/help01_1/ci-evidence.json",
+          "status": "added",
+          "additions": 181,
+          "deletions": 0,
+          "sha": "1551d1a3d7a23ead583326e1d85066e6ae5aac43"
+        },
+        {
+          "filename": "docs/help01_1/evidence-index.json",
+          "status": "added",
+          "additions": 19,
+          "deletions": 0,
+          "sha": "ef011404ca32f880a5e03cbbc354235de3a5c1c2"
+        },
+        {
+          "filename": "docs/help01_1/gates.json",
+          "status": "added",
+          "additions": 120,
+          "deletions": 0,
+          "sha": "89ca97b5ac9d8a44e593973ef63a54b7fc3b13d8"
+        },
+        {
+          "filename": "docs/help01_1/local-stand.json",
+          "status": "added",
+          "additions": 17,
+          "deletions": 0,
+          "sha": "906c3c5caf918be51be2881f2646973a2d4c3daa"
+        },
+        {
+          "filename": "docs/help01_1/mobile-results.json",
+          "status": "added",
+          "additions": 24,
+          "deletions": 0,
+          "sha": "8f39ae4b286d8e2682a2216450c2a7c764f5683e"
+        },
+        {
+          "filename": "docs/help01_1/provider-results.json",
+          "status": "added",
+          "additions": 8,
+          "deletions": 0,
+          "sha": "f1c4caefe8e03bbdddf7af670cf17f2554840951"
+        },
+        {
+          "filename": "docs/help01_1/synthetic-mini-app-mobile.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "8013a3d8cf40258d5b3c9963313988696b7a3c64"
+        },
+        {
+          "filename": "docs/help01_1/test-results.json",
+          "status": "added",
+          "additions": 113,
+          "deletions": 0,
+          "sha": "a40fb6cd71e3a7e0461499e90aea84309e1a0744"
+        },
+        {
+          "filename": "docs/help01_1/worker-probe-ci.json",
+          "status": "added",
+          "additions": 13,
+          "deletions": 0,
+          "sha": "58f7a6b86ee525c01c0cf8c7425bf656e85cb959"
+        },
+        {
+          "filename": "docs/help01_1/worker-probe.json",
+          "status": "added",
+          "additions": 11,
+          "deletions": 0,
+          "sha": "844b8eb0f97a0859691312f4be7354286dd1ebc7"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 3,
+          "sha": "cb6eb9c8177cd49b9e209554abd6604f55b329e1"
+        },
+        {
+          "filename": "lab/help01_1/compose.yaml",
+          "status": "added",
+          "additions": 22,
+          "deletions": 0,
+          "sha": "63b1ff998caa231920954b3393bae25141e1a5a9"
+        },
+        {
+          "filename": "src/xblago/integrations/static/index.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "b4e5ae4d4ffb124a4ef149f923c18ebf1d845c50"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 22,
+          "deletions": 1,
+          "sha": "146c1accd0cce70a623beda7b9940b913015fdc8"
+        },
+        {
+          "filename": "tests/test_help_readiness.py",
+          "status": "added",
+          "additions": 227,
+          "deletions": 0,
+          "sha": "ce64bf7d117fd48148f3bf055fb7d69fb2f1b599"
+        },
+        {
+          "filename": "tools/help_mobile_check.py",
+          "status": "added",
+          "additions": 88,
+          "deletions": 0,
+          "sha": "94df75d19d5c5b2d4b7c0d1bb176154251c69884"
+        },
+        {
+          "filename": "tools/help_readiness_lab.py",
+          "status": "added",
+          "additions": 82,
+          "deletions": 0,
+          "sha": "6bd1e34d4bb59499c3aa2c5f167ac60c2128c01f"
+        },
+        {
+          "filename": "tools/help_test_provider.py",
+          "status": "added",
+          "additions": 61,
+          "deletions": 0,
+          "sha": "783df32bf7f24e7f4f4de2b27f15145736b96efe"
+        },
+        {
+          "filename": "tools/help_worker_probe.py",
+          "status": "added",
+          "additions": 57,
+          "deletions": 0,
+          "sha": "2709497e5801821bfe94057c7c409c0a66bda9ce"
+        }
+      ],
+      "checks": [
+        {
+          "id": 128067903294,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42268869991/job/128067903294"
+        },
+        {
+          "id": 128067902769,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42268869991/job/128067902769"
+        },
+        {
+          "id": 128067867210,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42268859547/job/128067867210"
+        },
+        {
+          "id": 128067866785,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42268859547/job/128067866785"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "title": "docs: Web, Mini App and public-site audit against Integration 01",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "integration/foundation-01-06-1",
+      "base_sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+      "head": "docs/interface-audit-01",
+      "head_sha": "e65a696cacc76df3a4b7f0d1b6edf3bf25e66691",
+      "changed_files": 14,
+      "files": [
+        {
+          "filename": "docs/BLAGO_INTERFACE_AUDIT_01.md",
+          "status": "added",
+          "additions": 120,
+          "deletions": 0,
+          "sha": "d00fea44e147ae10e9c8844bca316b0d8fd3878e"
+        },
+        {
+          "filename": "docs/BLAGO_INTERFACE_DEVELOPMENT_PLAN.md",
+          "status": "added",
+          "additions": 58,
+          "deletions": 0,
+          "sha": "07ac8209b0337b52431d80692a6cff58198ae255"
+        },
+        {
+          "filename": "docs/BLAGO_PUBLIC_SITE_AUDIT.md",
+          "status": "added",
+          "additions": 62,
+          "deletions": 0,
+          "sha": "caee077fca4653ba952a6f7044f89a51b4f36fb7"
+        },
+        {
+          "filename": "docs/BLAGO_UNIFIED_INTERFACE_CONCEPT.md",
+          "status": "added",
+          "additions": 94,
+          "deletions": 0,
+          "sha": "426e2ca1d4a1276e9af3d54ca54b466bea577305"
+        },
+        {
+          "filename": "docs/ui_audit01/README.md",
+          "status": "added",
+          "additions": 32,
+          "deletions": 0,
+          "sha": "2dc387e72db443b8f1415d06f3307e72658da7ff"
+        },
+        {
+          "filename": "docs/ui_audit01/local-browser.json",
+          "status": "added",
+          "additions": 19,
+          "deletions": 0,
+          "sha": "6d863c331c1c4687a6bef394da2c1ca029c81bcf"
+        },
+        {
+          "filename": "docs/ui_audit01/local-mobile-chat.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "f035222080b0c731f31e570b690dfe36ebc0a003"
+        },
+        {
+          "filename": "docs/ui_audit01/local_check.py",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "dee8b0a912c61491950befeabfac170ad69949a8"
+        },
+        {
+          "filename": "docs/ui_audit01/public-browser.json",
+          "status": "added",
+          "additions": 278,
+          "deletions": 0,
+          "sha": "1f0f072de72927fafccd53c92dd490b2711b2c1c"
+        },
+        {
+          "filename": "docs/ui_audit01/public-fetch.json",
+          "status": "added",
+          "additions": 30,
+          "deletions": 0,
+          "sha": "72209c1b07ec65053d32eedec691ba13d0ad2671"
+        },
+        {
+          "filename": "docs/ui_audit01/public-home-mobile.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "4f209326789625a1e572b28fd74243e7afc56d0e"
+        },
+        {
+          "filename": "docs/ui_audit01/public_check.py",
+          "status": "added",
+          "additions": 22,
+          "deletions": 0,
+          "sha": "708f1f007ea5957ab4548aa073306536de0b0913"
+        },
+        {
+          "filename": "docs/ui_audit01/ru-fetch.json",
+          "status": "added",
+          "additions": 30,
+          "deletions": 0,
+          "sha": "6c2c11b13df23f4775c85deeea888b56579a16db"
+        },
+        {
+          "filename": "docs/ui_audit01/summary.json",
+          "status": "added",
+          "additions": 48,
+          "deletions": 0,
+          "sha": "bd431307ce6ff3069fb47e9b24bfbd7de74bc02a"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "number": 20,
+      "title": "Foundation Help 01: consented human help cycle with privacy-safe recovery",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "integration/foundation-01-06-1",
+      "base_sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+      "head": "feat/foundation-help-01",
+      "head_sha": "417e12be82e0b381d5251e12191a25d1c10921f4",
+      "changed_files": 28,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 1,
+          "sha": "8dd09af44950dbb7781bbe1f1b13474463ec9586"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_HELP_01.md",
+          "status": "added",
+          "additions": 264,
+          "deletions": 0,
+          "sha": "0feab119598e169ff2f633c47a51f528cf4182a7"
+        },
+        {
+          "filename": "docs/help01/browser-results.json",
+          "status": "added",
+          "additions": 21,
+          "deletions": 0,
+          "sha": "a4472d0cd4125c3a9f05fa282bc83eeb609da1de"
+        },
+        {
+          "filename": "docs/help01/candidate-identity.json",
+          "status": "added",
+          "additions": 79,
+          "deletions": 0,
+          "sha": "5d41b78b2d41a4dbf46c7d6dab07c999b292c87b"
+        },
+        {
+          "filename": "docs/help01/ci-evidence.json",
+          "status": "added",
+          "additions": 31,
+          "deletions": 0,
+          "sha": "4f47116862f6114071d4eee60da77ca1d6ee9a74"
+        },
+        {
+          "filename": "docs/help01/completed-demo.json",
+          "status": "added",
+          "additions": 78,
+          "deletions": 0,
+          "sha": "8c48f93dad110bc2c936b93a8555fc88d42dd231"
+        },
+        {
+          "filename": "docs/help01/gates.json",
+          "status": "added",
+          "additions": 96,
+          "deletions": 0,
+          "sha": "a096bcc86562b0830cfbac78fc0be4f509bfb470"
+        },
+        {
+          "filename": "docs/help01/test-results.json",
+          "status": "added",
+          "additions": 147,
+          "deletions": 0,
+          "sha": "fe598e465e8b22628df73db3b9c84c7908066c83"
+        },
+        {
+          "filename": "docs/integration01/gates.json",
+          "status": "modified",
+          "additions": 12,
+          "deletions": 4,
+          "sha": "43d9f1546b56656b25b1009af74e350de4a91867"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "modified",
+          "additions": 29,
+          "deletions": 12,
+          "sha": "55e302ece16687edd2ee09cf18d4cce66761f065"
+        },
+        {
+          "filename": "pyproject.toml",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "sha": "9c8fe9a5a8696337be4eda5afa2bcdefa5dcdfaf"
+        },
+        {
+          "filename": "src/xblago/core/help_schema.py",
+          "status": "added",
+          "additions": 67,
+          "deletions": 0,
+          "sha": "7a5a1a3d566c4eb599ba9f6f54ca36a1a44f7c7e"
+        },
+        {
+          "filename": "src/xblago/core/integration.py",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 1,
+          "sha": "22e1cd608eb7725a37e9631f1fde61c9512ae5ae"
+        },
+        {
+          "filename": "src/xblago/core/integration_help_schema.json",
+          "status": "added",
+          "additions": 3245,
+          "deletions": 0,
+          "sha": "6cc4aeccdb1079a461f1752b8a0d368b1133e801"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "modified",
+          "additions": 12,
+          "deletions": 1,
+          "sha": "34e98b25e31d28ae7a45a1bfe45af9a88255528d"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0,
+          "sha": "aa4e2b635d0985bd89fbae6e6e49892417638347"
+        },
+        {
+          "filename": "src/xblago/domain/help_contracts.py",
+          "status": "modified",
+          "additions": 16,
+          "deletions": 14,
+          "sha": "533e5ae6b8c76be83968b7b2a7d640264770c6df"
+        },
+        {
+          "filename": "src/xblago/domain/help_service.py",
+          "status": "added",
+          "additions": 229,
+          "deletions": 0,
+          "sha": "34f8ddbcc79ea94054291808e5517133935bea46"
+        },
+        {
+          "filename": "src/xblago/integrations/privacy.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "sha": "aab56c66b94fc81d87fac1cc7a9009fcc51cb024"
+        },
+        {
+          "filename": "src/xblago/integrations/static/index.html",
+          "status": "modified",
+          "additions": 31,
+          "deletions": 3,
+          "sha": "351614f03e502e03cbd87966bd36efcca04de66b"
+        },
+        {
+          "filename": "src/xblago/integrations/telegram.py",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 1,
+          "sha": "81311477bdf098828ce63aac09d571d7761394a9"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 29,
+          "deletions": 2,
+          "sha": "119f5db011ece9f9d673909de6e429f74cd55dab"
+        },
+        {
+          "filename": "tests/test_help01.py",
+          "status": "added",
+          "additions": 269,
+          "deletions": 0,
+          "sha": "a10f874825f90af11125e3fdfbb6cab9ee0cf962"
+        },
+        {
+          "filename": "tools/freeze_integration.py",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 4,
+          "sha": "f3bbcd61ec594c85e38a853234efd58dd6d17c81"
+        },
+        {
+          "filename": "tools/help_browser_check.py",
+          "status": "added",
+          "additions": 68,
+          "deletions": 0,
+          "sha": "fce6f07b0232bdab086f73a51b24ea8895f391ff"
+        },
+        {
+          "filename": "tools/help_demo.py",
+          "status": "added",
+          "additions": 41,
+          "deletions": 0,
+          "sha": "f4eb149d5d8d68116ff848795bc92417e83a7a38"
+        },
+        {
+          "filename": "tools/integration_evidence.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 1,
+          "sha": "3e0c4934b3a78f55894970f7666818b5f6c7935b"
+        },
+        {
+          "filename": "tools/integration_fixture.py",
+          "status": "modified",
+          "additions": 10,
+          "deletions": 5,
+          "sha": "ed5160ba7bfea3db45297ed473f0f9779bcc94fd"
+        }
+      ],
+      "checks": [
+        {
+          "id": 127454689726,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42086997631/job/127454689726"
+        },
+        {
+          "id": 127454689530,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42086997631/job/127454689530"
+        },
+        {
+          "id": 127454653308,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42086987777/job/127454653308"
+        },
+        {
+          "id": 127454652963,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/42086987777/job/127454652963"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "title": "Foundation Integration 01: guarded nonfinancial 01–06.1 candidate",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "main",
+      "base_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "head": "integration/foundation-01-06-1",
+      "head_sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737",
+      "changed_files": 106,
+      "files": [
+        {
+          "filename": ".env.example",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 0,
+          "sha": "fd09a8ff69e374630b134b76a6a442f18e3673f9"
+        },
+        {
+          "filename": ".github/workflows/huggingface-space.yml",
+          "status": "modified",
+          "additions": 27,
+          "deletions": 3,
+          "sha": "2117fa9642724e70fb2eb41b3198a0fdacad6499"
+        },
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "added",
+          "additions": 249,
+          "deletions": 0,
+          "sha": "d9e9968af2853d897edd79c26a37203d08a27ce8"
+        },
+        {
+          "filename": "Dockerfile",
+          "status": "modified",
+          "additions": 15,
+          "deletions": 5,
+          "sha": "a6046c49ef1fee211c9194209c835ab8a8fccec5"
+        },
+        {
+          "filename": "README.md",
+          "status": "modified",
+          "additions": 63,
+          "deletions": 1,
+          "sha": "fef48b212e1a88caebe884f8e18fb3fc3be05daf"
+        },
+        {
+          "filename": "deploy/huggingface-space/README.md",
+          "status": "modified",
+          "additions": 35,
+          "deletions": 0,
+          "sha": "f49fe4188afbbd63fdde62decf31f336976fe10b"
+        },
+        {
+          "filename": "docs/BLAGO_ECONOMY_01.md",
+          "status": "added",
+          "additions": 232,
+          "deletions": 0,
+          "sha": "3426002f4af1a0c65aec6a855a803e0a77184638"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_04_2.md",
+          "status": "added",
+          "additions": 119,
+          "deletions": 0,
+          "sha": "b66cb4bb4440a075ba075c27f5df3b83f941f87a"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_04_MEMORY_AUDIT.md",
+          "status": "added",
+          "additions": 113,
+          "deletions": 0,
+          "sha": "cb4c5ee24ed82f822aeef52ee2232532886bcdea"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05.md",
+          "status": "added",
+          "additions": 274,
+          "deletions": 0,
+          "sha": "5eaff577d56f58045fbaea714058ce6005a8d874"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05_2.md",
+          "status": "added",
+          "additions": 246,
+          "deletions": 0,
+          "sha": "6bac5477b888e911eb773e7d325afa47d76a57d0"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05_3.md",
+          "status": "added",
+          "additions": 296,
+          "deletions": 0,
+          "sha": "6221aae5c9c00b28938a110e6e295d1404fb6938"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05_4.md",
+          "status": "added",
+          "additions": 244,
+          "deletions": 0,
+          "sha": "a9a105325661ea12eb772ca14b322f67e9ad5f72"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05_4_MIGRATION.md",
+          "status": "added",
+          "additions": 161,
+          "deletions": 0,
+          "sha": "b7cca406cb85a22beb578ec382d2aa2c3db09d0b"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_05_4_RETENTION.md",
+          "status": "added",
+          "additions": 84,
+          "deletions": 0,
+          "sha": "870eee169183d95039650c5d81a13e3116a68118"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_06_1.md",
+          "status": "added",
+          "additions": 317,
+          "deletions": 0,
+          "sha": "483bbdea011b841dc70be23c3c0e82ee903d4cb6"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_INTEGRATION_01.md",
+          "status": "added",
+          "additions": 173,
+          "deletions": 0,
+          "sha": "9ed94c66d7b005af332d9b41c6a73946d16d4c56"
+        },
+        {
+          "filename": "docs/BLAGO_RELEASE_01.md",
+          "status": "added",
+          "additions": 196,
+          "deletions": 0,
+          "sha": "86eaa8feecfe3d170d98fc29e0756c0f829ae647"
+        },
+        {
+          "filename": "docs/integration01/browser-results.json",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "11659c1e14911a618b2b48c6356698bad7105199"
+        },
+        {
+          "filename": "docs/integration01/candidate-identity.json",
+          "status": "added",
+          "additions": 72,
+          "deletions": 0,
+          "sha": "5fb973a5c220b0cbdc2068676f83e40df141c5d4"
+        },
+        {
+          "filename": "docs/integration01/ci-evidence.json",
+          "status": "added",
+          "additions": 39,
+          "deletions": 0,
+          "sha": "814f65db32c83b085d37b6c551ed2014a9143281"
+        },
+        {
+          "filename": "docs/integration01/gates.json",
+          "status": "added",
+          "additions": 78,
+          "deletions": 0,
+          "sha": "43d9f1546b56656b25b1009af74e350de4a91867"
+        },
+        {
+          "filename": "docs/integration01/local-tests.txt",
+          "status": "added",
+          "additions": 8,
+          "deletions": 0,
+          "sha": "f577fda2db484150d161ed2dde5bc1946c3255a0"
+        },
+        {
+          "filename": "docs/validation05_4/browser-results.json",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "f0c94030800a1a4055ee3f9dcd87842c4a756e2b"
+        },
+        {
+          "filename": "docs/validation05_4/chrome-desktop.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "d661bfc4f08494d0c435a7e29143d4598d04c5d7"
+        },
+        {
+          "filename": "docs/validation05_4/chrome-mobile-viewport.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "1affad55f0c06109b72bf383d660f783868a2f5a"
+        },
+        {
+          "filename": "docs/validation05_4/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 33,
+          "deletions": 0,
+          "sha": "f59fded6ea1b128e4fefa686b24f462066459ca4"
+        },
+        {
+          "filename": "docs/validation05_4/hf-integration.json",
+          "status": "added",
+          "additions": 297,
+          "deletions": 0,
+          "sha": "cff635310232b56f133be03e25af19392ad695e4"
+        },
+        {
+          "filename": "docs/validation05_4/independent-baseline-review.md",
+          "status": "added",
+          "additions": 103,
+          "deletions": 0,
+          "sha": "f54b6b5c89aecc7e7cb35d2ea5334ce909881568"
+        },
+        {
+          "filename": "docs/validation05_4/independent-recheck.md",
+          "status": "added",
+          "additions": 113,
+          "deletions": 0,
+          "sha": "a6ef7f8781b23b546cd7b5892da63119e51019e5"
+        },
+        {
+          "filename": "docs/validation05_4/local-tests.txt",
+          "status": "added",
+          "additions": 248,
+          "deletions": 0,
+          "sha": "f2a748d403990f14d39b4cba56a5e61739527cae"
+        },
+        {
+          "filename": "docs/validation05_4/pilot-decision.json",
+          "status": "added",
+          "additions": 55,
+          "deletions": 0,
+          "sha": "8bb3d77b509a47388f6faf6a3beb7196410e2b2b"
+        },
+        {
+          "filename": "docs/validation05_4/pr-chain.json",
+          "status": "added",
+          "additions": 27,
+          "deletions": 0,
+          "sha": "1a1064c152b0a7c8aa2ee4f5d45c4a06dad9241f"
+        },
+        {
+          "filename": "docs/validation05_4/runtime-inventory.json",
+          "status": "added",
+          "additions": 56,
+          "deletions": 0,
+          "sha": "f44411ca5486dc4aba54558cab9bda11166e967d"
+        },
+        {
+          "filename": "docs/validation06_1/browser-results.json",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "aaec9f061a9cb40298ceaea418c8b846591d922a"
+        },
+        {
+          "filename": "docs/validation06_1/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0,
+          "sha": "7ac70c41a4071c8ccd92f30295e9f0d9bb7a9c4c"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after-before-status-projection.json",
+          "status": "added",
+          "additions": 261,
+          "deletions": 0,
+          "sha": "7ca072899d1ac9dd94b67052264da71ccbb98dbf"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after-local-ca-failure.json",
+          "status": "added",
+          "additions": 243,
+          "deletions": 0,
+          "sha": "ca4494964561e9ba2c7663522c63592a9ed15fd7"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after.json",
+          "status": "added",
+          "additions": 287,
+          "deletions": 0,
+          "sha": "c4cd58d60333e760e46f7f01341ab613abf8e340"
+        },
+        {
+          "filename": "docs/validation06_1/hf-before-local-ca-failure.json",
+          "status": "added",
+          "additions": 243,
+          "deletions": 0,
+          "sha": "967446044b615fc86a9238ee271817f5394f9af8"
+        },
+        {
+          "filename": "docs/validation06_1/hf-before.json",
+          "status": "added",
+          "additions": 263,
+          "deletions": 0,
+          "sha": "aad6880129b48977b30af32d42113d7623680c8b"
+        },
+        {
+          "filename": "docs/validation06_1/local-tests.txt",
+          "status": "added",
+          "additions": 330,
+          "deletions": 0,
+          "sha": "9b6a1f6945bf946846805cb6dff972df4f62d564"
+        },
+        {
+          "filename": "docs/validation06_1/quality-review.json",
+          "status": "added",
+          "additions": 73,
+          "deletions": 0,
+          "sha": "30a2fe96fb48412199d04dae9db327057f1f391e"
+        },
+        {
+          "filename": "integration/candidate.json",
+          "status": "added",
+          "additions": 134,
+          "deletions": 0,
+          "sha": "b47599db9ed31de4d0ec8fcb47d52d5dd50b2eb2"
+        },
+        {
+          "filename": "pyproject.toml",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 0,
+          "sha": "1c9829ea898dc43eb58fb51d6a3b3dbf493313be"
+        },
+        {
+          "filename": "requirements-integration.lock",
+          "status": "added",
+          "additions": 14,
+          "deletions": 0,
+          "sha": "d4041e54834bcb4f56fe9b2dee2c7340fc46524c"
+        },
+        {
+          "filename": "src/xblago/agents/personal_assistant.py",
+          "status": "modified",
+          "additions": 254,
+          "deletions": 27,
+          "sha": "3d71286c822a14208ecbf44316ef19c6c747f853"
+        },
+        {
+          "filename": "src/xblago/core/config.py",
+          "status": "modified",
+          "additions": 34,
+          "deletions": 2,
+          "sha": "e25041fb14f30937387b90324431d72fc2820f0a"
+        },
+        {
+          "filename": "src/xblago/core/conversation.py",
+          "status": "added",
+          "additions": 106,
+          "deletions": 0,
+          "sha": "d8906a97f16c02266c45fa33834f3bc262e43ef9"
+        },
+        {
+          "filename": "src/xblago/core/identity_runtime_schema.py",
+          "status": "added",
+          "additions": 142,
+          "deletions": 0,
+          "sha": "a0d64ee27992e8943c6f0dceb840d6d4ddd7e170"
+        },
+        {
+          "filename": "src/xblago/core/identity_schema.py",
+          "status": "added",
+          "additions": 154,
+          "deletions": 0,
+          "sha": "a442b40f84729b6a985271e787b9692e10e2ddc1"
+        },
+        {
+          "filename": "src/xblago/core/integration.py",
+          "status": "added",
+          "additions": 106,
+          "deletions": 0,
+          "sha": "7b0ad20b35aa1f4adb610064eadae6f2b9430923"
+        },
+        {
+          "filename": "src/xblago/core/integration_schema.json",
+          "status": "added",
+          "additions": 2781,
+          "deletions": 0,
+          "sha": "227f446c1b56311d762e893cd8cb4b6737c158d3"
+        },
+        {
+          "filename": "src/xblago/core/journal_custody.py",
+          "status": "added",
+          "additions": 131,
+          "deletions": 0,
+          "sha": "a6c8c34af16c56459c399aa2e5f2af220752d1e7"
+        },
+        {
+          "filename": "src/xblago/core/journal_witness.py",
+          "status": "added",
+          "additions": 98,
+          "deletions": 0,
+          "sha": "dc1d12242c17158b5b9f5f42a64b262777c4acb4"
+        },
+        {
+          "filename": "src/xblago/core/llm.py",
+          "status": "modified",
+          "additions": 293,
+          "deletions": 52,
+          "sha": "dc9f62e717de01deb509fe1ab826ddfea7dc049f"
+        },
+        {
+          "filename": "src/xblago/core/memory.py",
+          "status": "modified",
+          "additions": 163,
+          "deletions": 0,
+          "sha": "27bad97346455bccacfb1b472b1f5345226fbf1a"
+        },
+        {
+          "filename": "src/xblago/core/memory_commands.py",
+          "status": "added",
+          "additions": 210,
+          "deletions": 0,
+          "sha": "c2f196899769f6553ffb3806b15d5353b6b8ba48"
+        },
+        {
+          "filename": "src/xblago/core/memory_policy.py",
+          "status": "added",
+          "additions": 72,
+          "deletions": 0,
+          "sha": "341bd7db19987ff2a60327bca230d0f7e88e3131"
+        },
+        {
+          "filename": "src/xblago/core/pilot_schema.py",
+          "status": "added",
+          "additions": 88,
+          "deletions": 0,
+          "sha": "239b25665a868e2fdbde5a29a6f668afcff86967"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "added",
+          "additions": 220,
+          "deletions": 0,
+          "sha": "281c12b4a45b0531d52cbdcd1d58288aef8de0f3"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "added",
+          "additions": 91,
+          "deletions": 0,
+          "sha": "8efb544a8a2c896f6de4cb98492d56c13fd60d6b"
+        },
+        {
+          "filename": "src/xblago/core/privacy_schema.py",
+          "status": "added",
+          "additions": 141,
+          "deletions": 0,
+          "sha": "e12c8861e9db21464dd8b5383ec7a55f6a08ac24"
+        },
+        {
+          "filename": "src/xblago/core/routing.py",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 5,
+          "sha": "e6f570a326e39af667fdba6b30344301ef9bbdda"
+        },
+        {
+          "filename": "src/xblago/core/security_journal.py",
+          "status": "added",
+          "additions": 177,
+          "deletions": 0,
+          "sha": "98496a8d91fd4f7689e4f5633465c9cc6be92f9c"
+        },
+        {
+          "filename": "src/xblago/core/semantic_memory.py",
+          "status": "added",
+          "additions": 145,
+          "deletions": 0,
+          "sha": "ccb2718c1a3c2cce9eeab49ec9b5a2e9b7572515"
+        },
+        {
+          "filename": "src/xblago/core/sqlite_safety.py",
+          "status": "added",
+          "additions": 49,
+          "deletions": 0,
+          "sha": "ef5bae0793edc8f936e84107bcb5c7e6b3674c1e"
+        },
+        {
+          "filename": "src/xblago/core/storage.py",
+          "status": "modified",
+          "additions": 408,
+          "deletions": 61,
+          "sha": "6323c2014bb72d065dc2740728522859e5d8b644"
+        },
+        {
+          "filename": "src/xblago/domain/__init__.py",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "83a3e21ffc3e017864a1c7ba454b24210d5e1094"
+        },
+        {
+          "filename": "src/xblago/domain/help_contracts.py",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "7491cd10cb9440618379401866b6a668000a5a70"
+        },
+        {
+          "filename": "src/xblago/integrations/identity.py",
+          "status": "added",
+          "additions": 378,
+          "deletions": 0,
+          "sha": "8d24bf998337dc04b523ed228bfb0b62a9dba58a"
+        },
+        {
+          "filename": "src/xblago/integrations/privacy.py",
+          "status": "added",
+          "additions": 173,
+          "deletions": 0,
+          "sha": "149e040de38c3a16cd381a6ee10307ce04b2d8a8"
+        },
+        {
+          "filename": "src/xblago/integrations/static/icon.svg",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "2bde1d13b09e706f88e728978a0778e83339571d"
+        },
+        {
+          "filename": "src/xblago/integrations/static/index.html",
+          "status": "added",
+          "additions": 239,
+          "deletions": 0,
+          "sha": "7c0c1be5243d02011578578a2ed3edc04b3087c4"
+        },
+        {
+          "filename": "src/xblago/integrations/static/manifest.webmanifest",
+          "status": "added",
+          "additions": 18,
+          "deletions": 0,
+          "sha": "10aa349525800724d50507f98612c55371bde331"
+        },
+        {
+          "filename": "src/xblago/integrations/static/sw.js",
+          "status": "added",
+          "additions": 5,
+          "deletions": 0,
+          "sha": "1e69b6d94a539188a8fecf21aca4dfc616294236"
+        },
+        {
+          "filename": "src/xblago/integrations/telegram.py",
+          "status": "modified",
+          "additions": 56,
+          "deletions": 20,
+          "sha": "1ade11df0f4718e7f3ad14badbee28aa0e1eb406"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "added",
+          "additions": 1461,
+          "deletions": 0,
+          "sha": "56476f1b18ecf7485d3ef863df89e096471f13c2"
+        },
+        {
+          "filename": "tests/fixtures/natural_dialogues.json",
+          "status": "added",
+          "additions": 414,
+          "deletions": 0,
+          "sha": "e9114b6b7a0c0fc7511f7cca4a8730832c925ae7"
+        },
+        {
+          "filename": "tests/test_browser_e2e.py",
+          "status": "added",
+          "additions": 143,
+          "deletions": 0,
+          "sha": "0ba8bdf797ab345732aa0aaf511f2972b166a2be"
+        },
+        {
+          "filename": "tests/test_economy.py",
+          "status": "added",
+          "additions": 192,
+          "deletions": 0,
+          "sha": "678284a367473a699775783a560918623bb240a3"
+        },
+        {
+          "filename": "tests/test_foundation042.py",
+          "status": "added",
+          "additions": 348,
+          "deletions": 0,
+          "sha": "4ac5d61b50f5929b75115b62cada071a70ca9ecf"
+        },
+        {
+          "filename": "tests/test_foundation_stack.py",
+          "status": "added",
+          "additions": 165,
+          "deletions": 0,
+          "sha": "4d2b53bf92db96936016a0a69716c6b858a575d8"
+        },
+        {
+          "filename": "tests/test_generation_reliability.py",
+          "status": "added",
+          "additions": 211,
+          "deletions": 0,
+          "sha": "a054fcb2ef7307694e9467bbdd22e3af3f54cdc1"
+        },
+        {
+          "filename": "tests/test_identity_runtime.py",
+          "status": "added",
+          "additions": 563,
+          "deletions": 0,
+          "sha": "30e89d167f14b4bf2db24baf2ea34dd3737fb59c"
+        },
+        {
+          "filename": "tests/test_identity_schema.py",
+          "status": "added",
+          "additions": 228,
+          "deletions": 0,
+          "sha": "049dade878a147b046c04887322b6d5fa14bed9e"
+        },
+        {
+          "filename": "tests/test_integration_candidate.py",
+          "status": "added",
+          "additions": 153,
+          "deletions": 0,
+          "sha": "b156ee88afd422a55ab136b6543d651115e45bc7"
+        },
+        {
+          "filename": "tests/test_llm.py",
+          "status": "modified",
+          "additions": 239,
+          "deletions": 9,
+          "sha": "5a690c6a46daaa437e4176d843b2c3330e9b9dec"
+        },
+        {
+          "filename": "tests/test_memory_pilot.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "829152879e6d7441ed46a78da224563723bcb571"
+        },
+        {
+          "filename": "tests/test_natural_conversation.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "6b9e0f049597d39a11732f4f78f94396065fed24"
+        },
+        {
+          "filename": "tests/test_personal_assistant.py",
+          "status": "modified",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "e19e935a10c437dd7f44e774a8e58c3b1e873e52"
+        },
+        {
+          "filename": "tests/test_pilot_safety.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "499af0a76b4168128d2748eff8fc8acdc2b425f4"
+        },
+        {
+          "filename": "tests/test_privacy.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "bbcd3201551b127022479f55748bf155994d5ee4"
+        },
+        {
+          "filename": "tests/test_semantic_memory.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "1aa24f82c94940263683d176efd2a43c65718a98"
+        },
+        {
+          "filename": "tests/test_telegram.py",
+          "status": "modified",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "2f8578f9522e92ab76305177bf84b1e10ae9ddac"
+        },
+        {
+          "filename": "tests/test_web.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "fb4c9641fb0c4cbb0c2b657a799604e05f92f4d3"
+        },
+        {
+          "filename": "tools/build_macos_sqlite_driver.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "cb6a19afacc74940953a662920056681b1dc46f7"
+        },
+        {
+          "filename": "tools/build_sqlite.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "6472b82ca5835a96c8e365d1c90e42e2366cca77"
+        },
+        {
+          "filename": "tools/freeze_integration.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "5c91b9445138d9ccfae1b8e59d285213d2d14808"
+        },
+        {
+          "filename": "tools/integration_evidence.py",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "bb509c0d5aa51e7c728f44298e6774a7cc6d6cf6"
+        },
+        {
+          "filename": "tools/integration_fixture.py",
+          "status": "added",
+          "additions": 38,
+          "deletions": 0,
+          "sha": "471c821cf57a9aa21331839b419da4e5608c4769"
+        },
+        {
+          "filename": "tools/natural_hf_check.py",
+          "status": "added",
+          "additions": 140,
+          "deletions": 0,
+          "sha": "ea8fcac631b3af36b190416f673d1fff94c719ac"
+        },
+        {
+          "filename": "tools/pilot_browser_check.py",
+          "status": "added",
+          "additions": 118,
+          "deletions": 0,
+          "sha": "957e84b7e4bca36db122117caa1183f9e73f10b0"
+        },
+        {
+          "filename": "tools/pilot_fixture.py",
+          "status": "added",
+          "additions": 41,
+          "deletions": 0,
+          "sha": "2e8079414d5ec8b743bfb1c7faa72b92e1ce28f7"
+        },
+        {
+          "filename": "tools/pilot_hf_check.py",
+          "status": "added",
+          "additions": 139,
+          "deletions": 0,
+          "sha": "638e42ba09f365626503d78c09691b8e60578664"
+        },
+        {
+          "filename": "tools/release_guard.py",
+          "status": "added",
+          "additions": 13,
+          "deletions": 0,
+          "sha": "14fb514ca3abdb6213516dc0d79638b18da163dd"
+        }
+      ],
+      "checks": [
+        {
+          "id": 126828886142,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41902654438/job/126828886142"
+        },
+        {
+          "id": 126828885772,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41902654438/job/126828885772"
+        },
+        {
+          "id": 126828838213,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41902640211/job/126828838213"
+        },
+        {
+          "id": 126828837869,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41902640211/job/126828837869"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "title": "Integration Audit 01: Foundation dependency graph and safe MVP release gates",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "main",
+      "base_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "head": "docs/integration-audit-01",
+      "head_sha": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428",
+      "changed_files": 4,
+      "files": [
+        {
+          "filename": "docs/BLAGO_FOUNDATION_DEPENDENCY_MAP.md",
+          "status": "added",
+          "additions": 474,
+          "deletions": 0,
+          "sha": "88894f4eaa74477c7d1c863b6e08d9d8f5b59d19"
+        },
+        {
+          "filename": "docs/BLAGO_INTEGRATION_AUDIT_01.md",
+          "status": "added",
+          "additions": 324,
+          "deletions": 0,
+          "sha": "622d4a112bd06c3356fcd61a5e0eb54067873735"
+        },
+        {
+          "filename": "docs/BLAGO_INTEGRATION_PLAN.md",
+          "status": "added",
+          "additions": 106,
+          "deletions": 0,
+          "sha": "62f1cea839cbcb4e1567c24717c15fbcff1b3c7d"
+        },
+        {
+          "filename": "docs/BLAGO_MVP_RELEASE_GATES.md",
+          "status": "added",
+          "additions": 93,
+          "deletions": 0,
+          "sha": "da899592ca6501c2cb40e7f3937e42f4b0b49ab5"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "number": 17,
+      "title": "Foundation 08.2: durable federation lab, receipts and fault injection",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "docs/foundation-08-1-protocol-conformance",
+      "base_sha": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+      "head": "feat/foundation-08-2-durable-lab",
+      "head_sha": "44a5d52a4ac8022478a247f4e1bbd2eaea551142",
+      "changed_files": 17,
+      "files": [
+        {
+          "filename": ".github/workflows/federation-lab.yml",
+          "status": "added",
+          "additions": 40,
+          "deletions": 0,
+          "sha": "f6d19148f563a941a885cd94e2fab7d74c4d12c7"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_08_2.md",
+          "status": "added",
+          "additions": 102,
+          "deletions": 0,
+          "sha": "f317f76b224b0d86478324d01ba8dd816266dd5d"
+        },
+        {
+          "filename": "docs/lab_08_2/INDEPENDENT_RUN.md",
+          "status": "added",
+          "additions": 63,
+          "deletions": 0,
+          "sha": "22c823a1408ffb3ff9e63e93a370d981a2cc34fb"
+        },
+        {
+          "filename": "docs/lab_08_2/MATRIX.md",
+          "status": "added",
+          "additions": 32,
+          "deletions": 0,
+          "sha": "f7ae27c359ab378676cd44a8255955dd1adc5725"
+        },
+        {
+          "filename": "docs/lab_08_2/RECOVERY.md",
+          "status": "added",
+          "additions": 51,
+          "deletions": 0,
+          "sha": "6032673295d8353aeebc626e7a2d8267a8ccb56f"
+        },
+        {
+          "filename": "docs/lab_08_2/THREAT_MODEL_DELTA.md",
+          "status": "added",
+          "additions": 35,
+          "deletions": 0,
+          "sha": "3d2a0efd580dc618c2a952be8267ea49dbfb8ed1"
+        },
+        {
+          "filename": "docs/lab_08_2/ci-evidence.txt",
+          "status": "added",
+          "additions": 18,
+          "deletions": 0,
+          "sha": "09e2feecd561609237382d25b2d96c7338b0cdc6"
+        },
+        {
+          "filename": "docs/lab_08_2/evidence.json",
+          "status": "added",
+          "additions": 484,
+          "deletions": 0,
+          "sha": "92106457c8d521a415cc8abc901d0ff296afed5b"
+        },
+        {
+          "filename": "docs/lab_08_2/local-demo-evidence.json",
+          "status": "added",
+          "additions": 167,
+          "deletions": 0,
+          "sha": "4f3d6fad6bdc8e6f583f5b1814875ed0db323eae"
+        },
+        {
+          "filename": "docs/lab_08_2/receipt-schema.json",
+          "status": "added",
+          "additions": 35,
+          "deletions": 0,
+          "sha": "c938b580613cba700dfe3d702f13f2f552f9daeb"
+        },
+        {
+          "filename": "docs/lab_08_2/receipt-schema.sha256",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "9ac9e987d9030f6abc4ff7bab6176d5ed35befd0"
+        },
+        {
+          "filename": "experiments/federation_08_2/actors.py",
+          "status": "added",
+          "additions": 61,
+          "deletions": 0,
+          "sha": "5f25c660d52f3ca0c7d8b8ff5464146dd8ec9ba2"
+        },
+        {
+          "filename": "experiments/federation_08_2/demo.py",
+          "status": "added",
+          "additions": 53,
+          "deletions": 0,
+          "sha": "04414387e4a32430aabc63be60cace1d8b3a47c9"
+        },
+        {
+          "filename": "experiments/federation_08_2/run_lab.py",
+          "status": "added",
+          "additions": 27,
+          "deletions": 0,
+          "sha": "dda2df3bc0f8db3da003835205029073890559a4"
+        },
+        {
+          "filename": "experiments/federation_08_2/runtime.py",
+          "status": "added",
+          "additions": 256,
+          "deletions": 0,
+          "sha": "91b61f9a67a2eecf213d584dbf6ac86b30a7d03a"
+        },
+        {
+          "filename": "experiments/federation_08_2/test_runtime.py",
+          "status": "added",
+          "additions": 265,
+          "deletions": 0,
+          "sha": "66aa8a125a8bbe09707e99bd35f48f520028da69"
+        },
+        {
+          "filename": "experiments/federation_08_2/transport.py",
+          "status": "added",
+          "additions": 59,
+          "deletions": 0,
+          "sha": "55657ddd49b06532c2b59a6378a24a85279fad3c"
+        }
+      ],
+      "checks": [
+        {
+          "id": 126192485813,
+          "name": "lab",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41714974472/job/126192485813"
+        },
+        {
+          "id": 126192451987,
+          "name": "lab",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41714964310/job/126192451987"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "title": "Foundation 08.1: protocol baseline, scoped authority and conformance design",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "docs/foundation-08-federation-audit",
+      "base_sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "head": "docs/foundation-08-1-protocol-conformance",
+      "head_sha": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a",
+      "changed_files": 20,
+      "files": [
+        {
+          "filename": ".github/workflows/protocol-conformance.yml",
+          "status": "added",
+          "additions": 38,
+          "deletions": 0,
+          "sha": "46cccd3a6e63984bf31707216f1d57d8d95a5880"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_08_1.md",
+          "status": "added",
+          "additions": 101,
+          "deletions": 0,
+          "sha": "b2569ea6c2c18be6db98513569064fa2aeecedbc"
+        },
+        {
+          "filename": "docs/protocol_0_1/BASELINE_AND_ENTITIES.md",
+          "status": "added",
+          "additions": 78,
+          "deletions": 0,
+          "sha": "ef322078f4497864c0e1e4cb100416c45ed3107d"
+        },
+        {
+          "filename": "docs/protocol_0_1/CONFORMANCE.md",
+          "status": "added",
+          "additions": 161,
+          "deletions": 0,
+          "sha": "7483bc4a2654d5fb850e889232eae6d84f1f6de1"
+        },
+        {
+          "filename": "docs/protocol_0_1/ENVELOPE.md",
+          "status": "added",
+          "additions": 149,
+          "deletions": 0,
+          "sha": "e7e5fad8a6f96c00696a66b9faed3f97ef8c5281"
+        },
+        {
+          "filename": "docs/protocol_0_1/EXPERIMENT_AB.md",
+          "status": "added",
+          "additions": 135,
+          "deletions": 0,
+          "sha": "d6d1e82ddee2e1f3a9ffb553d18f359559a9554c"
+        },
+        {
+          "filename": "docs/protocol_0_1/MANDATE_AND_AUTHORITY.md",
+          "status": "added",
+          "additions": 147,
+          "deletions": 0,
+          "sha": "2afb4810fab270566da9fb7dd90d52492626923c"
+        },
+        {
+          "filename": "docs/protocol_0_1/PORTABILITY.md",
+          "status": "added",
+          "additions": 187,
+          "deletions": 0,
+          "sha": "b5d77945d5e122cc5e8acc908cc8df9c0cab82e2"
+        },
+        {
+          "filename": "docs/protocol_0_1/THREAT_MODEL.md",
+          "status": "added",
+          "additions": 70,
+          "deletions": 0,
+          "sha": "1cdab3d7c7cf77c998f7a376adb6616b511aa86d"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/check_design.py",
+          "status": "added",
+          "additions": 45,
+          "deletions": 0,
+          "sha": "6775f557401be9dd2a5d14a2fb1fd0b3b87949cb"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/ci-evidence.txt",
+          "status": "added",
+          "additions": 16,
+          "deletions": 0,
+          "sha": "0f54b2829fca23eed12358b4e4b4c3aa412c3097"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/generate_vectors.py",
+          "status": "added",
+          "additions": 149,
+          "deletions": 0,
+          "sha": "4c2b6c97f90925d422e850481ee95ba1d9ae4fbb"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/golden.json",
+          "status": "added",
+          "additions": 109,
+          "deletions": 0,
+          "sha": "f37b5301cacf1b9cd4f9b9dd276f9633d68b433a"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/lab-policy.json",
+          "status": "added",
+          "additions": 9,
+          "deletions": 0,
+          "sha": "83a90c6559c6b8f0d96a29b109a9175ada601fc2"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/manifest.json",
+          "status": "added",
+          "additions": 373,
+          "deletions": 0,
+          "sha": "02b89ff132bcfabc46da89aebf5dbfb5f629f25c"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/results.json",
+          "status": "added",
+          "additions": 19,
+          "deletions": 0,
+          "sha": "64cf540f785e695475281029dae94395ea71aac8"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/run_conformance.py",
+          "status": "added",
+          "additions": 44,
+          "deletions": 0,
+          "sha": "4fb154929eaac6266ef12fba4a134190c31deebe"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/validator_a.py",
+          "status": "added",
+          "additions": 177,
+          "deletions": 0,
+          "sha": "9ddbc9f92e4da4222fcb08aea474625a783c5238"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/validator_b.py",
+          "status": "added",
+          "additions": 167,
+          "deletions": 0,
+          "sha": "911691b674fe4f8312e84edfc1ef51c1354024e0"
+        },
+        {
+          "filename": "docs/protocol_0_1/conformance/vectors.jsonl",
+          "status": "added",
+          "additions": 73,
+          "deletions": 0,
+          "sha": "db6a84a88a2218412e0f9abeb29bb5daab21bfc6"
+        }
+      ],
+      "checks": [
+        {
+          "id": 126157719122,
+          "name": "offline-vectors",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41704965826/job/126157719122"
+        },
+        {
+          "id": 126157693996,
+          "name": "offline-vectors",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41704957443/job/126157693996"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "title": "Foundation 08: federation architecture audit and Open Protocol 0.1 requirements",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "main",
+      "base_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+      "head": "docs/foundation-08-federation-audit",
+      "head_sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "changed_files": 3,
+      "files": [
+        {
+          "filename": "docs/BLAGO_FEDERATION_AUDIT.md",
+          "status": "added",
+          "additions": 717,
+          "deletions": 0,
+          "sha": "378094ae82262a3dacb18e72a0c83e76ec4b0a7f"
+        },
+        {
+          "filename": "docs/BLAGO_FEDERATION_AUDIT_EVIDENCE.json",
+          "status": "added",
+          "additions": 532,
+          "deletions": 0,
+          "sha": "c15c80bc4a780c567bd75bb3bfc1edaa304de515"
+        },
+        {
+          "filename": "docs/BLAGO_PROTOCOL_0_1_REQUIREMENTS.md",
+          "status": "added",
+          "additions": 278,
+          "deletions": 0,
+          "sha": "dca95d11948798f8b9ceee79ceb8195bcf915d82"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "number": 14,
+      "title": "Foundation 08: Genesis declarations and consented public deliberation (Draft)",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-07-identity-core",
+      "base_sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "head": "feat/foundation-08-genesis-protocol",
+      "head_sha": "483475fd237ba3400881699c407be5b91d53dcdd",
+      "changed_files": 25,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 2,
+          "sha": "cb676adf89d326c4a34246910083009e5ff9808a"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_08.md",
+          "status": "added",
+          "additions": 243,
+          "deletions": 0,
+          "sha": "a641832f7381692753cf8fdaca2da0f647ddeb2e"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_08_SOLANA.md",
+          "status": "added",
+          "additions": 60,
+          "deletions": 0,
+          "sha": "b0942ab4c085cb000dc862d28d476bbef0b1c0a6"
+        },
+        {
+          "filename": "docs/BLAGO_PROTOCOL_v0.1.md",
+          "status": "added",
+          "additions": 144,
+          "deletions": 0,
+          "sha": "3dd4a661a28274ead38476c4fa8247e20c380e7f"
+        },
+        {
+          "filename": "docs/validation08/browser-results.json",
+          "status": "added",
+          "additions": 41,
+          "deletions": 0,
+          "sha": "6e457efb12c95b789e64554d086e1a76b0f5a708"
+        },
+        {
+          "filename": "docs/validation08/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 29,
+          "deletions": 0,
+          "sha": "0aa88888d0351264c99b53d330a802c2d3809d29"
+        },
+        {
+          "filename": "docs/validation08/genesis-dialogue.json",
+          "status": "added",
+          "additions": 65,
+          "deletions": 0,
+          "sha": "da20c5d7339d898d483d19659bfe2a093553fb82"
+        },
+        {
+          "filename": "docs/validation08/genesis-dialogue.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "55f3b0388c657be1c13da0c16417fe5df7d56044"
+        },
+        {
+          "filename": "docs/validation08/genesis-public-mobile.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "593b33535a8c6d5381c380e3d053c5d94b60147f"
+        },
+        {
+          "filename": "docs/validation08/genesis-public.png",
+          "status": "added",
+          "additions": 0,
+          "deletions": 0,
+          "sha": "27547d89b901c48a79f40e7ac86a0099d183e47a"
+        },
+        {
+          "filename": "docs/validation08/local-tests.txt",
+          "status": "added",
+          "additions": 393,
+          "deletions": 0,
+          "sha": "7253289a9b15579663f2ec60a4f707e9af2b66c1"
+        },
+        {
+          "filename": "docs/validation08/withdrawal-regression.txt",
+          "status": "added",
+          "additions": 36,
+          "deletions": 0,
+          "sha": "a334a46d2498ac790021e69ede80a692912c6a81"
+        },
+        {
+          "filename": "src/xblago/core/genesis.py",
+          "status": "added",
+          "additions": 273,
+          "deletions": 0,
+          "sha": "83040fa35c9b3f17b385c1d0b7de60d5a886f143"
+        },
+        {
+          "filename": "src/xblago/core/genesis_interfaces.py",
+          "status": "added",
+          "additions": 42,
+          "deletions": 0,
+          "sha": "7070089b7564d0cdedfa92a0d9a84be67f313b52"
+        },
+        {
+          "filename": "src/xblago/core/genesis_schema.py",
+          "status": "added",
+          "additions": 125,
+          "deletions": 0,
+          "sha": "007bdc404528fbea3c9905102c0e096fe200aff1"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 1,
+          "sha": "c9f5b82c4229b58cce14755ad04437a1930c214e"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0,
+          "sha": "a3578f63689a02448d48813f238af5af82cd1352"
+        },
+        {
+          "filename": "src/xblago/core/storage.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0,
+          "sha": "5013f3372c4534ee1ed7911bc4668d89c096bc4a"
+        },
+        {
+          "filename": "src/xblago/integrations/privacy.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "sha": "bde97c7886b53327d1a5efc6cb6a95bc85a90908"
+        },
+        {
+          "filename": "src/xblago/integrations/static/index.html",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "sha": "df942c6b41b1954ca134228edfcfdfafde60237e"
+        },
+        {
+          "filename": "src/xblago/integrations/telegram.py",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 2,
+          "sha": "7e3d06c2922ef190c7659569ed763bdb64fc6f71"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 50,
+          "deletions": 4,
+          "sha": "a44c3f2215cc9927fd0713bbfa9b05a66abf2bb0"
+        },
+        {
+          "filename": "tests/test_genesis.py",
+          "status": "added",
+          "additions": 346,
+          "deletions": 0,
+          "sha": "4fc0849d31a1005e16a6b4a9df5949ad4c127e25"
+        },
+        {
+          "filename": "tools/genesis_demo.py",
+          "status": "added",
+          "additions": 40,
+          "deletions": 0,
+          "sha": "ae185719d354803cfcd3df71f781e36def4daeab"
+        },
+        {
+          "filename": "tools/pilot_browser_check.py",
+          "status": "modified",
+          "additions": 35,
+          "deletions": 1,
+          "sha": "1574c844943f20163935d69920f13b93a4e5b3e5"
+        }
+      ],
+      "checks": [
+        {
+          "id": 125533556834,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41520088632/job/125533556834"
+        },
+        {
+          "id": 125533556526,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41520088632/job/125533556526"
+        },
+        {
+          "id": 125533524481,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41520078991/job/125533524481"
+        },
+        {
+          "id": 125533524375,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/41520078991/job/125533524375"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "title": "Foundation 07.2: isolated recovery protocol; live authority fail-closed",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-07-identity-core",
+      "base_sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "head": "feat/foundation-07-identity-recovery",
+      "head_sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+      "changed_files": 8,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 1,
+          "sha": "72ca52f1a3048ff21a99b3b2c0bf3c1857d5f210"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_07_2.md",
+          "status": "added",
+          "additions": 312,
+          "deletions": 0,
+          "sha": "6589bb330a3fa6155780345521d0dab95e329c3f"
+        },
+        {
+          "filename": "docs/validation07_2/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 52,
+          "deletions": 0,
+          "sha": "f3afbf59ce6d1f3d0f4015c9a44b8deaa64fc6dd"
+        },
+        {
+          "filename": "docs/validation07_2/decision.json",
+          "status": "added",
+          "additions": 27,
+          "deletions": 0,
+          "sha": "4ba302b8814cf81e1b48bd50a9bfd4906d5c7026"
+        },
+        {
+          "filename": "docs/validation07_2/local-tests.txt",
+          "status": "added",
+          "additions": 399,
+          "deletions": 0,
+          "sha": "c73636c00e21bede92da8de5fb264f1354d2ba16"
+        },
+        {
+          "filename": "docs/validation07_2/runtime.json",
+          "status": "added",
+          "additions": 8,
+          "deletions": 0,
+          "sha": "713e7fec6183f6ec815cd4f444ab43807d12fb00"
+        },
+        {
+          "filename": "src/xblago/core/identity_recovery.py",
+          "status": "added",
+          "additions": 326,
+          "deletions": 0,
+          "sha": "3fba355a5a7982b2bf236f4f2933f7922cdd6e06"
+        },
+        {
+          "filename": "tests/test_identity_recovery.py",
+          "status": "added",
+          "additions": 416,
+          "deletions": 0,
+          "sha": "62c6a872319cc180bbf187d600dd5ec79aab88c8"
+        }
+      ],
+      "checks": [
+        {
+          "id": 122471973060,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40584412666/job/122471973060"
+        },
+        {
+          "id": 122471972343,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40584412666/job/122471972343"
+        },
+        {
+          "id": 122471947117,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40584405236/job/122471947117"
+        },
+        {
+          "id": 122471946844,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40584405236/job/122471946844"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "title": "Foundation 07.1: Sovereign Identity Core (isolated tests, flag OFF)",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-07-identity-architecture",
+      "base_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "head": "feat/foundation-07-identity-core",
+      "head_sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "changed_files": 16,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 55,
+          "deletions": 1,
+          "sha": "8220d9c415b538aafd3d0bd44a3c4dccb7685f86"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_07_1.md",
+          "status": "added",
+          "additions": 378,
+          "deletions": 0,
+          "sha": "ed3ae40d3bbe71cdeb7b456e1c8c75ada2b93cee"
+        },
+        {
+          "filename": "docs/validation07_1/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0,
+          "sha": "28242ebcefb3a5918cbd0e309d55bf43a208a9c8"
+        },
+        {
+          "filename": "docs/validation07_1/local-tests.txt",
+          "status": "added",
+          "additions": 372,
+          "deletions": 0,
+          "sha": "7b0c6f6988637cff1c05a4232470894b5061e3b5"
+        },
+        {
+          "filename": "docs/validation07_1/runtime-and-scope.json",
+          "status": "added",
+          "additions": 49,
+          "deletions": 0,
+          "sha": "7a572496723f88e191be13905f178cccade2c960"
+        },
+        {
+          "filename": "pyproject.toml",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "430422b3cb2de52599e39bfa7edabc861202d1c4"
+        },
+        {
+          "filename": "src/xblago/agents/personal_assistant.py",
+          "status": "modified",
+          "additions": 13,
+          "deletions": 0,
+          "sha": "d56e5fc7691e736a7a2d76cd42456252d99c1ea4"
+        },
+        {
+          "filename": "src/xblago/core/privacy_control.py",
+          "status": "modified",
+          "additions": 13,
+          "deletions": 1,
+          "sha": "467785e72d819e1472e56fe2f221064ccb91a795"
+        },
+        {
+          "filename": "src/xblago/core/privacy_maintenance.py",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 0,
+          "sha": "758afdd4fd1735b62a4808f54c7021bd42e9e145"
+        },
+        {
+          "filename": "src/xblago/core/sovereign.py",
+          "status": "added",
+          "additions": 323,
+          "deletions": 0,
+          "sha": "af610fc628e5271f00b6d7ee9f8875f4ef394032"
+        },
+        {
+          "filename": "src/xblago/core/sovereign_recovery.py",
+          "status": "added",
+          "additions": 53,
+          "deletions": 0,
+          "sha": "a8fcd9566dd2e2d9a9da8394bc4e19d35d01b4ad"
+        },
+        {
+          "filename": "src/xblago/core/sovereign_schema.py",
+          "status": "added",
+          "additions": 201,
+          "deletions": 0,
+          "sha": "7abd6af5ea679bbcfbd6f26262a45312f6d02cef"
+        },
+        {
+          "filename": "src/xblago/integrations/identity.py",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0,
+          "sha": "16674259963aa61c5cdc521aafa8d9843cd4779f"
+        },
+        {
+          "filename": "src/xblago/integrations/privacy.py",
+          "status": "modified",
+          "additions": 11,
+          "deletions": 0,
+          "sha": "883992e25683d0988f26583c2fc12423bd5ac1fd"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 33,
+          "deletions": 3,
+          "sha": "d1b234754d7016d7673a20f10df1627d48d367db"
+        },
+        {
+          "filename": "tests/test_sovereign_identity.py",
+          "status": "added",
+          "additions": 541,
+          "deletions": 0,
+          "sha": "9af22ee17911b685485ae2658648189888ff07a5"
+        }
+      ],
+      "checks": [
+        {
+          "id": 122416239004,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40568551246/job/122416239004"
+        },
+        {
+          "id": 122416238372,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40568551246/job/122416238372"
+        },
+        {
+          "id": 122416196775,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40568539175/job/122416196775"
+        },
+        {
+          "id": 122416196396,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40568539175/job/122416196396"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "title": "Foundation 07: Sovereign Human Identity — architecture and safety gates",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-06-natural-intelligence",
+      "base_sha": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "head": "feat/foundation-07-identity-architecture",
+      "head_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "changed_files": 1,
+      "files": [
+        {
+          "filename": "docs/BLAGO_FOUNDATION_07_ARCHITECTURE.md",
+          "status": "added",
+          "additions": 79,
+          "deletions": 0,
+          "sha": "77fd5be602e491a61044637a33b36b35f11f955a"
+        }
+      ],
+      "checks": [
+        {
+          "id": 120819620171,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40076089703/job/120819620171"
+        },
+        {
+          "id": 120819619904,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40076089703/job/120819619904"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Foundation 06.1: conversational intent and reliable HF generation",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "base": "feat/foundation-06-human-interface-05-4",
+      "base_sha": "37be0437578125503f0a851c6ce9a86222937cdc",
+      "head": "feat/foundation-06-natural-intelligence",
+      "head_sha": "d11a2a555efe57e6818450d534655020bf47b9ca",
+      "changed_files": 26,
+      "files": [
+        {
+          "filename": ".github/workflows/tests.yml",
+          "status": "modified",
+          "additions": 31,
+          "deletions": 1,
+          "sha": "7876e3980d83f4017ad27f744dc394ab55de214b"
+        },
+        {
+          "filename": "docs/BLAGO_FOUNDATION_06_1.md",
+          "status": "added",
+          "additions": 317,
+          "deletions": 0,
+          "sha": "483bbdea011b841dc70be23c3c0e82ee903d4cb6"
+        },
+        {
+          "filename": "docs/validation06_1/browser-results.json",
+          "status": "added",
+          "additions": 34,
+          "deletions": 0,
+          "sha": "aaec9f061a9cb40298ceaea418c8b846591d922a"
+        },
+        {
+          "filename": "docs/validation06_1/ci-source-evidence.txt",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0,
+          "sha": "7ac70c41a4071c8ccd92f30295e9f0d9bb7a9c4c"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after-before-status-projection.json",
+          "status": "added",
+          "additions": 261,
+          "deletions": 0,
+          "sha": "7ca072899d1ac9dd94b67052264da71ccbb98dbf"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after-local-ca-failure.json",
+          "status": "added",
+          "additions": 243,
+          "deletions": 0,
+          "sha": "ca4494964561e9ba2c7663522c63592a9ed15fd7"
+        },
+        {
+          "filename": "docs/validation06_1/hf-after.json",
+          "status": "added",
+          "additions": 287,
+          "deletions": 0,
+          "sha": "c4cd58d60333e760e46f7f01341ab613abf8e340"
+        },
+        {
+          "filename": "docs/validation06_1/hf-before-local-ca-failure.json",
+          "status": "added",
+          "additions": 243,
+          "deletions": 0,
+          "sha": "967446044b615fc86a9238ee271817f5394f9af8"
+        },
+        {
+          "filename": "docs/validation06_1/hf-before.json",
+          "status": "added",
+          "additions": 263,
+          "deletions": 0,
+          "sha": "aad6880129b48977b30af32d42113d7623680c8b"
+        },
+        {
+          "filename": "docs/validation06_1/local-tests.txt",
+          "status": "added",
+          "additions": 330,
+          "deletions": 0,
+          "sha": "9b6a1f6945bf946846805cb6dff972df4f62d564"
+        },
+        {
+          "filename": "docs/validation06_1/quality-review.json",
+          "status": "added",
+          "additions": 73,
+          "deletions": 0,
+          "sha": "30a2fe96fb48412199d04dae9db327057f1f391e"
+        },
+        {
+          "filename": "src/xblago/agents/personal_assistant.py",
+          "status": "modified",
+          "additions": 57,
+          "deletions": 24,
+          "sha": "3d71286c822a14208ecbf44316ef19c6c747f853"
+        },
+        {
+          "filename": "src/xblago/core/config.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "sha": "e25041fb14f30937387b90324431d72fc2820f0a"
+        },
+        {
+          "filename": "src/xblago/core/conversation.py",
+          "status": "added",
+          "additions": 106,
+          "deletions": 0,
+          "sha": "d8906a97f16c02266c45fa33834f3bc262e43ef9"
+        },
+        {
+          "filename": "src/xblago/core/llm.py",
+          "status": "modified",
+          "additions": 168,
+          "deletions": 37,
+          "sha": "dc9f62e717de01deb509fe1ab826ddfea7dc049f"
+        },
+        {
+          "filename": "src/xblago/core/semantic_memory.py",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0,
+          "sha": "ccb2718c1a3c2cce9eeab49ec9b5a2e9b7572515"
+        },
+        {
+          "filename": "src/xblago/core/storage.py",
+          "status": "modified",
+          "additions": 14,
+          "deletions": 0,
+          "sha": "d7fc899af36effd3e6eeb53978dbb44001c354fd"
+        },
+        {
+          "filename": "src/xblago/integrations/telegram.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "sha": "1ade11df0f4718e7f3ad14badbee28aa0e1eb406"
+        },
+        {
+          "filename": "src/xblago/integrations/web.py",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "sha": "7d63e2afe8a12c57c5b0eac7463bba7fe23f734f"
+        },
+        {
+          "filename": "tests/fixtures/natural_dialogues.json",
+          "status": "added",
+          "additions": 414,
+          "deletions": 0,
+          "sha": "e9114b6b7a0c0fc7511f7cca4a8730832c925ae7"
+        },
+        {
+          "filename": "tests/test_generation_reliability.py",
+          "status": "added",
+          "additions": 211,
+          "deletions": 0,
+          "sha": "a054fcb2ef7307694e9467bbdd22e3af3f54cdc1"
+        },
+        {
+          "filename": "tests/test_llm.py",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 2,
+          "sha": "5a690c6a46daaa437e4176d843b2c3330e9b9dec"
+        },
+        {
+          "filename": "tests/test_natural_conversation.py",
+          "status": "added",
+          "additions": 198,
+          "deletions": 0,
+          "sha": "6b9e0f049597d39a11732f4f78f94396065fed24"
+        },
+        {
+          "filename": "tests/test_telegram.py",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "sha": "2f8578f9522e92ab76305177bf84b1e10ae9ddac"
+        },
+        {
+          "filename": "tools/natural_hf_check.py",
+          "status": "added",
+          "additions": 140,
+          "deletions": 0,
+          "sha": "ea8fcac631b3af36b190416f673d1fff94c719ac"
+        },
+        {
+          "filename": "tools/pilot_browser_check.py",
+          "status": "modified",
+          "additions": 7,
+          "deletions": 3,
+          "sha": "886c7e39290901528fc3d517d89fcd173c12dda6"
+        }
+      ],
+      "checks": [
+        {
+          "id": 120819434522,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40076029537/job/120819434522"
+        },
+        {
+          "id": 120819434381,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40076029537/job/120819434381"
+        },
+        {
+          "id": 120816478424,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40075042228/job/120816478424"
+        },
+        {
+          "id": 120816478070,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40075042228/job/120816478070"
+        },
+        {
+          "id": 120816469105,
+          "name": "tests",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40075039113/job/120816469105"
+        },
+        {
+          "id": 120816468911,
+          "name": "docker",
+          "status": "completed",
+          "conclusion": "success",
+          "details_url": "https://github.com/xBLAGO/space/actions/runs/40075039113/job/120816468911"
+        }
+      ]
+    }
+  ]
+}

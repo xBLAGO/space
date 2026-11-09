@@ -1,0 +1,214 @@
+{
+  "format": "blago-integration02-gates-1",
+  "base_sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+  "source_sha": "395ecf10f9187663fddb64795597e7efe0f014fa",
+  "real_pilot": "NO-GO",
+  "next_development": "GO isolated synthetic only",
+  "gates": [
+    {
+      "id": "G00",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G00"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G01"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G02",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G02"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G03",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G03"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G04",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G04"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G05",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G05"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G06",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G06"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G07",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G07"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G08",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G08"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G09",
+      "status": "PASS",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G09"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G10",
+      "status": "UNKNOWN",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G10"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    },
+    {
+      "id": "G11",
+      "status": "FAIL",
+      "inherited_from": {
+        "document": "../privacy01_4/gates.json",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792",
+        "gate": "G11"
+      },
+      "scope": "Inherited scope only; no real-user qualification",
+      "evidence": [
+        "ci-source.json",
+        "test-results.json",
+        "READINESS_MATRIX.md"
+      ]
+    }
+  ],
+  "new_evidence": {
+    "full_tests": 472,
+    "new_tests": 8,
+    "journey_checks": 38,
+    "browser_checks": 17,
+    "synthetic_mobile_checks": 14,
+    "docker": "PASS",
+    "app_migration": "NONE",
+    "old_migration_checksums": "UNCHANGED",
+    "source_ci": "https://github.com/xBLAGO/space/actions/runs/42680305703"
+  },
+  "remaining_gaps": {
+    "chat_only_help": "PARTIAL: explicit panel confirmation required; no verified Help status context projection",
+    "collective_fulfillment_statistics": "MISSING",
+    "individual_invitation_lifecycle": "PARTIAL: shared invitation only",
+    "migration_dispatch": "PARTIAL: out-of-order Help rerun refuses safely; ledger-aware dispatcher required",
+    "public_site": "Financial claims conflict with nonfinancial scope; deployed app provenance UNKNOWN"
+  },
+  "not_executed": [
+    "approved live HF quality",
+    "physical Telegram iOS/Android and passkeys",
+    "independent off-host custody and target-host recovery",
+    "real-user admission"
+  ],
+  "independent_attestation": false
+}
