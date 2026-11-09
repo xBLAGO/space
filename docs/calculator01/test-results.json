@@ -1,0 +1,316 @@
+{
+  "format": "blago-calculator01-test-results-1",
+  "source_sha": "cae6337157fa55d6a5cb4bb9e25fce9712f1975e",
+  "prior_tests": 472,
+  "new_tests": 44,
+  "focused_42_local": {
+    "status": "PASS",
+    "seconds": 19.481,
+    "scope": "Earlier development check before source freeze; final focused44 replaces this scope"
+  },
+  "full_local": {
+    "status": "PASS",
+    "tests": 514,
+    "seconds": 528.038,
+    "scope": "Initial source e4d445b (472 existing +42 new); final source separately covered by focused44 and full CI516",
+    "log": "/tmp/blago-calculator01-full.log"
+  },
+  "demo": {
+    "checks": 11,
+    "status": "PASS",
+    "evidence": "lab-evidence.json"
+  },
+  "cases": [
+    {
+      "test": "ValueTests.test_разные_валюты",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_точность_и_округление_половин_до_сатоши",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_float_отрицательные_и_несуществующие_коды_запрещены",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_нет_курсов_и_единственный_источник",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_несогласованные_курсы",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_устаревшие_и_будущие_котировки",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_недостоверное_происхождение_и_повтор_источника",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_историческая_оценка_неизменна_переоценка_отдельна",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_нельзя_поменять_исходную_цену_при_переоценке",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_идентичность_результата_независима_от_порядка_котировок",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "ValueTests.test_частичное_удовлетворение_и_разные_единицы",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_выключен_по_умолчанию",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_черновик_не_в_балансе_и_нужна_точная_версия",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_нет_двойного_учёта_актива_и_ресурса",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_актив_не_является_общим_имуществом",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_нет_доступности_без_согласия",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_приватность_и_изоляция",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_подтверждение_привязано_к_автору_и_содержимому",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_повтор_квитанции_без_дублирования_события",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_конкурентные_подготовки_принимают_одну_версию",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_сбой_перед_commit_откатывает_событие",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_изменение_доступности_и_отзыв",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_оценки_на_дату_и_stock_не_смешан_с_flow",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_равные_цены_разных_объектов_не_сливаются",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_неизвестная_оценка_не_ноль",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_удаление_экспорт_и_запрет_импорта_backup",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_повторная_регистрация_не_возвращает_данные",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_целостность_и_отсутствие_новых_таблиц_пользователей",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_сырой_текст_и_предположения_не_подтверждаются",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_дубликат_черновика_по_ключу_и_удалённый_ключ",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_изменение_количества_не_сохраняет_старую_оценку_лота",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_единицы_не_суммируются_в_один_необоснованный_показатель",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_видимость_отзывается_с_новой_версией",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_потерянный_процесс_не_восстанавливает_старое_согласие",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_повторная_оценка_не_создаёт_двойной_стоимости",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_откат_часов_не_обновляет_согласие",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "RegistryTests.test_неверные_типы_не_записываются",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_публикация_не_обязательство_и_изоляция_аудитории",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_подтверждённое_исполнение_и_повтор_не_удваивают_flow",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_спор_и_отзыв_корректируют_живую_проекцию",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_сессия_потеряна_и_чужой_id_не_авторизуют_агрегат",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_не_создаётся_второй_реестр_и_память_не_читается",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_потеря_witness_закрывает_аналитику",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    },
+    {
+      "test": "HelpProjectionTests.test_старый_backup_не_возвращает_исполнение_в_проекции",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": "final source CI42691231619 / job129411171988; focused local44"
+    }
+  ],
+  "not_executed": [
+    "real users",
+    "live rate provider",
+    "physical clients",
+    "shared-worker stock backend",
+    "independent review"
+  ],
+  "real_pilot": "NO-GO",
+  "initial_source_ci": {
+    "status": "PASS",
+    "run": 42690196310,
+    "job": 129407609467,
+    "tests": 514,
+    "seconds": 105.479
+  },
+  "focused_final_local": {
+    "status": "PASS",
+    "tests": 44,
+    "seconds": 23.319
+  },
+  "source_ci": {
+    "status": "PASS",
+    "run": 42691231619,
+    "job": 129411171988,
+    "tests": 516,
+    "seconds": 82.164
+  }
+}

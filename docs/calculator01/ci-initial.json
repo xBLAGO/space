@@ -1,0 +1,215 @@
+{
+  "source_sha": "e4d445bd49e8978e7e7ec4725f4807b4c5ece60a",
+  "run": 42690196310,
+  "url": "https://github.com/xBLAGO/space/actions/runs/42690196310",
+  "conclusion": "success",
+  "tests": 514,
+  "test_seconds": 105.479,
+  "sqlite": "3.54.1",
+  "calculator_demo_checks": 11,
+  "docker": "PASS",
+  "image": "sha256:d52e58a4d7f3c05c6f09b48ee3b145577cfbe281d38b7623596f7db624f7b000",
+  "browser": 17,
+  "synthetic_mobile": 14,
+  "unified_journey": 38,
+  "artifact": [
+    {
+      "id": 13706966530,
+      "name": "pilot-browser-evidence",
+      "digest": "sha256:0c9b70258f458afd7f02f6dbf6445a601a5cbf54ebfdc1005f222f85b4751fc0",
+      "expires_at": "2027-02-07T20:09:20Z"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 129407609467,
+      "name": "tests",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install package",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build verified patched SQLite (no system replacement)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Block unverified pilot SQLite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify immutable integration manifests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Integration public evidence",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record SQLite runtime for security review",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Python syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser acceptance tool",
+          "conclusion": "success"
+        },
+        {
+          "name": "Real Chrome WebAuthn UI (virtual CTAP2, synthetic localhost)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01 two-person browser cycle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01 completed synthetic demonstration",
+          "conclusion": "success"
+        },
+        {
+          "name": "Help 01.1 synthetic Mini App and mobile emulation (not physical devices)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify G09 cross-worker context fencing (synthetic only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Context fencing synthetic latency and multiprocess proof",
+          "conclusion": "success"
+        },
+        {
+          "name": "Privacy 01.3 lifecycle inventory and restore rehearsal",
+          "conclusion": "success"
+        },
+        {
+          "name": "Privacy 01.4 operational retention and linkage attacks (synthetic only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collective Calculator offline accounting demonstration",
+          "conclusion": "success"
+        },
+        {
+          "name": "Integration 02 one-database cross-channel user journey",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 129407609812,
+      "name": "docker",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build Docker image",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record isolated image identity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify actual Docker Python SQLite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Docker health check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Identity Runtime smoke (temporary SQLite only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Privacy Recovery smoke (temporary stores only)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker strict pilot gate and independent checkpoint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker natural conversation and bounded text repair",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Help 01 nonfinancial cycle",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Help 01.1 disposable lab parity smoke (no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker lifecycle replay smoke (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker operational retention and reidentification (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Integration 02 unified localhost journey (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Docker Collective Calculator offline accounting (synthetic, no network)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
