@@ -698,20 +698,28 @@ class SQLiteBlagoStore:
                 try:
                     connection.execute("BEGIN IMMEDIATE")
                     from xblago.core.privacy_control import PrivacyControl
-                    privacy = PrivacyControl.open(connection)
-                    # Persist already-durable revocations before evaluating a request that
-                    # might be rejected (and therefore roll back its business transaction).
-                    while privacy and privacy.reconcile():
-                        connection.commit()
-                        connection.execute('BEGIN IMMEDIATE')
+                    from xblago.core import uel_local
+                    # Persist already-durable denials and their shadow retirement
+                    # before a nested domain reader opens PrivacyControl again.
+                    while True:
                         privacy = PrivacyControl.open(connection)
-                    if privacy:
-                        from xblago.core.context_schema import check_frontiers
-                        check_frontiers(connection, privacy)
-                        from xblago.core.lifecycle_schema import check_denials
-                        check_denials(connection,privacy)
-                        from xblago.domain.asset_registry import check_frontiers as check_assets
-                        check_assets(connection,privacy)
+                        if privacy and privacy.reconcile():
+                            connection.commit()
+                            connection.execute('BEGIN IMMEDIATE')
+                            continue
+                        if privacy:
+                            from xblago.core.context_schema import check_frontiers
+                            check_frontiers(connection, privacy)
+                            from xblago.core.lifecycle_schema import check_denials
+                            check_denials(connection,privacy)
+                            from xblago.domain.asset_registry import check_frontiers as check_assets
+                            check_assets(connection,privacy)
+                            if uel_local.synchronize(connection,privacy,at_start=True):
+                                privacy.flush()
+                                connection.commit()
+                                connection.execute('BEGIN IMMEDIATE')
+                                continue
+                        break
                     self._transaction_local.connection = connection
                     try:
                         yield connection
@@ -719,6 +727,7 @@ class SQLiteBlagoStore:
                         self._transaction_local.connection = None
                     if privacy:
                         check_assets(connection,privacy)
+                        uel_local.synchronize(connection,privacy)
                         privacy.flush()
                 except Exception:
                     connection.rollback()

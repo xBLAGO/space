@@ -109,6 +109,9 @@ class PrivacyControl:
         context_schema.validate(db,mandatory=context_schema.required() or any(json.loads(r[2])['kind']=='context_version' for r in self.rows))
         from xblago.core import asset_registry_schema
         asset_registry_schema.validate(db,mandatory=asset_registry_schema.enabled() or any(json.loads(r[2])['kind']=='asset_state' for r in self.rows))
+        from xblago.core import uel_schema
+        if uel_schema.validate(db,mandatory=uel_schema.enabled() or any(json.loads(r[2])['kind']=='uel_local' for r in self.rows)):
+            uel_schema.require_synthetic()
         state = db.execute('SELECT journal_id,applied_seq,applied_head FROM privacy_state WHERE singleton=1').fetchone()
         if (not state or state[0]!=journal.journal_id or type(state[1]) is not int or state[1]<0
                 or state[1]>=len(self.chain) or self.chain[state[1]]!=state[2]):
@@ -193,6 +196,9 @@ class PrivacyControl:
             apply_event(db,event,self.journal)
         elif kind=='context_version':
             from xblago.core.context_schema import apply_checkpoint
+            apply_checkpoint(db,event,self.journal)
+        elif kind=='uel_local':
+            from xblago.core.uel_local import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
         elif kind=='asset_state':
             from xblago.domain.asset_registry import apply_checkpoint
