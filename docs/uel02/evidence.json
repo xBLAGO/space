@@ -1,0 +1,232 @@
+{
+  "format": "uel-local-evidence-2",
+  "base_sha": "40167137904f0eeb2e04288c2256865740dbffa3",
+  "runtime_sha": "6e52b3c8961110e48a89329b5c48bfcb14d367e0",
+  "reviewed_head": "a75327d009ec342e5a0bd35fec8c86786dab8d1a",
+  "ci": {
+    "url": "https://github.com/xBLAGO/space/actions/runs/42923003762",
+    "status": "PASS",
+    "regression": {
+      "executed": 600,
+      "inherited": 565,
+      "new": 35,
+      "passed": 600
+    },
+    "docker_uel": {
+      "executed": 35,
+      "passed": 35
+    },
+    "frozen_offline": {
+      "executed": 72,
+      "passed": 72
+    },
+    "sqlite": "3.54.1"
+  },
+  "local_full": {
+    "executed": 600,
+    "passed": 598,
+    "errors": 2,
+    "error_category": "Session expired",
+    "affected_tests": [
+      "test_forged_help_hold_cannot_hide_unscrubbed_payload",
+      "test_g09_owner_generation_fenced_by_existing_source_change"
+    ],
+    "status": "FAIL",
+    "log_sha256": "deeac93f628aed128f391d5de658954325f8e248e2beaee6022a7602b5a9630d",
+    "cause": "UNKNOWN; fresh rerun passed without source changes"
+  },
+  "local_stateful_rerun": {
+    "executed": 35,
+    "passed": 35,
+    "seconds": 100.635,
+    "log_sha256": "5c635c5ec90b1493e34f9b2c63f1eaf5826ad8d50909e3a7309e4cfac5083d1d",
+    "cases": [
+      {
+        "test": "test_abort_rolls_back_asset_and_index",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_abort_rolls_back_help_and_index",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_account_deletion_and_restore_remove_access",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_append_only_including_replace",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_asset_resource_and_help_occurrence_no_double_count",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_causal_links_and_global_sequence",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_competing_revisions_from_two_workers",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_crash_after_commit_retry_keeps_original_receipt",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_crash_after_journal_recovers_header_without_grant",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_crash_before_journal_rolls_back_both",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_draft_and_commit_retries_keep_one_observation",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_duplicate_commit_from_three_workers",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_explicit_current_baseline_and_legacy_exclusion",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_flag_off_hides_api_but_preserves_installed_capture",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_forged_help_hold_cannot_hide_unscrubbed_payload",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_g09_owner_generation_fenced_by_existing_source_change",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_help_completion_receipt_replay_has_one_effect",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_installed_ledger_refuses_non_synthetic_mode",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_migration_ddl_failure_rolls_back",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_missing_help_source_without_hold_is_not_retirement",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_missing_retained_index_frontier_blocks_projection",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_no_plaintext_or_control_references_in_user_view",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_old_backup_after_asset_erase_keeps_no_payload",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_positive_write_outside_shadow_is_not_backfilled",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_pre_migration_backup_requires_install_and_replays_only_headers",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_prepare_and_read_do_not_append",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_private_audience_and_fresh_session",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_repeat_migration_and_integrity",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_requires_exact_complete_baseline",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_restart_determinism",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_retention_cascades_without_copying_old_payload",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_source_rows_and_every_indexed_revision_match",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_sql_drift_blocks_all_guarded_writes",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_unknown_amount_remains_unknown",
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "test": "test_witness_loss_returns_unknown_without_numbers",
+        "expected": "PASS",
+        "actual": "PASS"
+      }
+    ]
+  },
+  "offline": {
+    "status": "PASS",
+    "executed": 72,
+    "passed": 72
+  },
+  "readiness": {
+    "isolated_local": "GO",
+    "production": "NO-GO",
+    "independent_federation": "NOT EXECUTED",
+    "gates_promoted": []
+  }
+}
