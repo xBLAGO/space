@@ -1,0 +1,45 @@
+{
+  "format": "blago-research-publication-1",
+  "source_commit": "06b3889afa906f1ac3af8eca6130f0e6fce6cec9",
+  "runtime_commit": "8ed6131e4617e0b47b157e9625ceb8845de22306",
+  "github": {
+    "url": "https://github.com/xBLAGO/space/releases/tag/research-2026-11-uel03",
+    "tag": "research-2026-11-uel03",
+    "tag_commit": "06b3889afa906f1ac3af8eca6130f0e6fce6cec9",
+    "prerelease": true,
+    "draft": false
+  },
+  "hugging_face": {
+    "url": "https://huggingface.co/datasets/xBLAGO/research-evidence",
+    "commit": "e81faf4264db3dba6bbd9de6c4a2307f7cd8c755",
+    "tag": "research-2026-11-uel03",
+    "type": "dataset",
+    "purpose": "Public engineering archive and synthetic evidence"
+  },
+  "archive": {
+    "sha256": "35a6d11dbb49ed91bb2d74b58f6d50d714f000fc3363f27e8013d4386dff568e",
+    "bytes": 26084,
+    "repeat_builds_equal": true,
+    "github_download_verified": true,
+    "hugging_face_download_verified": true
+  },
+  "website": {
+    "repo": "xBLAGO/web2",
+    "base": "df8353742e39eb56e5be0527b10f1acace2f68ec",
+    "draft_pr": "https://github.com/xBLAGO/web2/pull/1",
+    "head": "6c45176a8f9bb1a84f3184687f1733cfafc02579",
+    "changed_files": 3,
+    "changes": "One research archive link per home page",
+    "validation": "HTMLParser count and original bytes after removal",
+    "deployed": false
+  },
+  "readiness": {
+    "isolated_synthetic": "GO",
+    "real_users": "NO-GO",
+    "independent_operators": "NOT EXECUTED",
+    "independent_audit": "NOT EXECUTED",
+    "gates_promoted": []
+  },
+  "production_updates": false,
+  "merges_performed": false
+}
