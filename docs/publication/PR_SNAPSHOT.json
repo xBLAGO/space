@@ -1,0 +1,505 @@
+{
+  "format": "blago-public-pr-snapshot-1",
+  "observed_utc": "2026-11-13 18:57:52 UTC",
+  "repository": "xBLAGO/space",
+  "main_observed_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "source_sha": "06b3889afa906f1ac3af8eca6130f0e6fce6cec9",
+  "items": [
+    {
+      "number": 32,
+      "title": "UEL 0.3 — signed checkpoint custody and audited recovery",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/32",
+      "base": {
+        "branch": "feat/uel-02-local-durable-ledger",
+        "sha": "aa92d96bca0ae8a07e27f8efa724131afb32ad57"
+      },
+      "head": {
+        "branch": "feat/uel-03-checkpoint-recovery",
+        "sha": "06b3889afa906f1ac3af8eca6130f0e6fce6cec9"
+      }
+    },
+    {
+      "number": 31,
+      "title": "UEL 0.2 — isolated durable local event ledger",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/31",
+      "base": {
+        "branch": "docs/universal-event-ledger-01",
+        "sha": "40167137904f0eeb2e04288c2256865740dbffa3"
+      },
+      "head": {
+        "branch": "feat/uel-02-local-durable-ledger",
+        "sha": "aa92d96bca0ae8a07e27f8efa724131afb32ad57"
+      }
+    },
+    {
+      "number": 30,
+      "title": "Draft: BLAGO Universal Event Ledger 0.1 architecture and conformance design",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/30",
+      "base": {
+        "branch": "feat/foundation-09-1-durable-registry",
+        "sha": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5"
+      },
+      "head": {
+        "branch": "docs/universal-event-ledger-01",
+        "sha": "40167137904f0eeb2e04288c2256865740dbffa3"
+      }
+    },
+    {
+      "number": 29,
+      "title": "Foundation 09.1: durable asset claims with consent and privacy recovery",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/29",
+      "base": {
+        "branch": "feat/collective-calculator-01",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce"
+      },
+      "head": {
+        "branch": "feat/foundation-09-1-durable-registry",
+        "sha": "c3b4c5b4fd37a5e16e09b19cdbcf494183963bf5"
+      }
+    },
+    {
+      "number": 28,
+      "title": "docs: BLAGO roadmap — collective accounting, identity graph, ISTINA and federation",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/28",
+      "base": {
+        "branch": "feat/collective-calculator-01",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce"
+      },
+      "head": {
+        "branch": "docs/blago-roadmap-2026",
+        "sha": "e049b62860a8170d17e879ce94766fc371f1decb"
+      }
+    },
+    {
+      "number": 27,
+      "title": "Collective Calculator 01: offline valuation core and authorized Help accounting",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/27",
+      "base": {
+        "branch": "integration/foundation-02-unified-mvp",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8"
+      },
+      "head": {
+        "branch": "feat/collective-calculator-01",
+        "sha": "00c665b369acb6465f9afa795a6046c43f4107ce"
+      }
+    },
+    {
+      "number": 26,
+      "title": "Integration 02: unified MVP audit and reproducible nonfinancial candidate",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/26",
+      "base": {
+        "branch": "feat/privacy-01-4-operational-retention",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792"
+      },
+      "head": {
+        "branch": "integration/foundation-02-unified-mvp",
+        "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8"
+      }
+    },
+    {
+      "number": 25,
+      "title": "Privacy 01.4: operational retention scheduler and G04 readiness evidence",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/25",
+      "base": {
+        "branch": "feat/privacy-01-3-data-lifecycle",
+        "sha": "80e60b4792067b9e4832a3db88e8ea3a0f031f37"
+      },
+      "head": {
+        "branch": "feat/privacy-01-4-operational-retention",
+        "sha": "0772e5bc5919aefac2c209f4e40fe5ea790d6792"
+      }
+    },
+    {
+      "number": 24,
+      "title": "Privacy 01.3: synthetic data lifecycle, retained erasures and G04 evidence",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/24",
+      "base": {
+        "branch": "fix/privacy-01-2-context-fencing",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3"
+      },
+      "head": {
+        "branch": "feat/privacy-01-3-data-lifecycle",
+        "sha": "80e60b4792067b9e4832a3db88e8ea3a0f031f37"
+      }
+    },
+    {
+      "number": 23,
+      "title": "Privacy 01.2: durable cross-worker context fencing",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/23",
+      "base": {
+        "branch": "feat/foundation-help-01-1",
+        "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129"
+      },
+      "head": {
+        "branch": "fix/privacy-01-2-context-fencing",
+        "sha": "7807f5aa1c2d1818427057c6ce072ffb6166e3d3"
+      }
+    },
+    {
+      "number": 22,
+      "title": "Help 01.1: pilot readiness lab, recovery evidence and NO-GO gates",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/22",
+      "base": {
+        "branch": "feat/foundation-help-01",
+        "sha": "417e12be82e0b381d5251e12191a25d1c10921f4"
+      },
+      "head": {
+        "branch": "feat/foundation-help-01-1",
+        "sha": "77c7f7f0495a7bb383b1c75c63bf5c97cb984129"
+      }
+    },
+    {
+      "number": 21,
+      "title": "docs: Web, Mini App and public-site audit against Integration 01",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/21",
+      "base": {
+        "branch": "integration/foundation-01-06-1",
+        "sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737"
+      },
+      "head": {
+        "branch": "docs/interface-audit-01",
+        "sha": "e65a696cacc76df3a4b7f0d1b6edf3bf25e66691"
+      }
+    },
+    {
+      "number": 20,
+      "title": "Foundation Help 01: consented human help cycle with privacy-safe recovery",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/20",
+      "base": {
+        "branch": "integration/foundation-01-06-1",
+        "sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737"
+      },
+      "head": {
+        "branch": "feat/foundation-help-01",
+        "sha": "417e12be82e0b381d5251e12191a25d1c10921f4"
+      }
+    },
+    {
+      "number": 19,
+      "title": "Foundation Integration 01: guarded nonfinancial 01–06.1 candidate",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/19",
+      "base": {
+        "branch": "main",
+        "sha": "3c218dc5757879c26b3aec520af3636b2d702715"
+      },
+      "head": {
+        "branch": "integration/foundation-01-06-1",
+        "sha": "837b2bfd5d3db4842530d30ccf0f417bfe718737"
+      }
+    },
+    {
+      "number": 18,
+      "title": "Integration Audit 01: Foundation dependency graph and safe MVP release gates",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/18",
+      "base": {
+        "branch": "main",
+        "sha": "3c218dc5757879c26b3aec520af3636b2d702715"
+      },
+      "head": {
+        "branch": "docs/integration-audit-01",
+        "sha": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428"
+      }
+    },
+    {
+      "number": 17,
+      "title": "Foundation 08.2: durable federation lab, receipts and fault injection",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/17",
+      "base": {
+        "branch": "docs/foundation-08-1-protocol-conformance",
+        "sha": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a"
+      },
+      "head": {
+        "branch": "feat/foundation-08-2-durable-lab",
+        "sha": "44a5d52a4ac8022478a247f4e1bbd2eaea551142"
+      }
+    },
+    {
+      "number": 16,
+      "title": "Foundation 08.1: protocol baseline, scoped authority and conformance design",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/16",
+      "base": {
+        "branch": "docs/foundation-08-federation-audit",
+        "sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f"
+      },
+      "head": {
+        "branch": "docs/foundation-08-1-protocol-conformance",
+        "sha": "0a6acd9178de8c1aaac8f3af729d896efd4eb98a"
+      }
+    },
+    {
+      "number": 15,
+      "title": "Foundation 08: federation architecture audit and Open Protocol 0.1 requirements",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/15",
+      "base": {
+        "branch": "main",
+        "sha": "3c218dc5757879c26b3aec520af3636b2d702715"
+      },
+      "head": {
+        "branch": "docs/foundation-08-federation-audit",
+        "sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f"
+      }
+    },
+    {
+      "number": 14,
+      "title": "Foundation 08: Genesis declarations and consented public deliberation (Draft)",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/14",
+      "base": {
+        "branch": "feat/foundation-07-identity-core",
+        "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f"
+      },
+      "head": {
+        "branch": "feat/foundation-08-genesis-protocol",
+        "sha": "483475fd237ba3400881699c407be5b91d53dcdd"
+      }
+    },
+    {
+      "number": 13,
+      "title": "Foundation 07.2: isolated recovery protocol; live authority fail-closed",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/13",
+      "base": {
+        "branch": "feat/foundation-07-identity-core",
+        "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f"
+      },
+      "head": {
+        "branch": "feat/foundation-07-identity-recovery",
+        "sha": "d96ade9375f3499ad93095b2307abd750f0a8578"
+      }
+    },
+    {
+      "number": 12,
+      "title": "Foundation 07.1: Sovereign Identity Core (isolated tests, flag OFF)",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/12",
+      "base": {
+        "branch": "feat/foundation-07-identity-architecture",
+        "sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76"
+      },
+      "head": {
+        "branch": "feat/foundation-07-identity-core",
+        "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f"
+      }
+    },
+    {
+      "number": 11,
+      "title": "Foundation 07: Sovereign Human Identity — architecture and safety gates",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/11",
+      "base": {
+        "branch": "feat/foundation-06-natural-intelligence",
+        "sha": "d11a2a555efe57e6818450d534655020bf47b9ca"
+      },
+      "head": {
+        "branch": "feat/foundation-07-identity-architecture",
+        "sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76"
+      }
+    },
+    {
+      "number": 10,
+      "title": "Foundation 06.1: conversational intent and reliable HF generation",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/10",
+      "base": {
+        "branch": "feat/foundation-06-human-interface-05-4",
+        "sha": "37be0437578125503f0a851c6ce9a86222937cdc"
+      },
+      "head": {
+        "branch": "feat/foundation-06-natural-intelligence",
+        "sha": "d11a2a555efe57e6818450d534655020bf47b9ca"
+      }
+    },
+    {
+      "number": 9,
+      "title": "Foundation 06: human-first UI on Foundation 05.4",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/9",
+      "base": {
+        "branch": "feat/foundation-05-pilot-safety-gate",
+        "sha": "8634e94a6dddd2b8cfff415b112f6b895eb0f4ae"
+      },
+      "head": {
+        "branch": "feat/foundation-06-human-interface-05-4",
+        "sha": "37be0437578125503f0a851c6ce9a86222937cdc"
+      }
+    },
+    {
+      "number": 8,
+      "title": "Foundation 06: human-first conversation interface",
+      "state": "closed",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/8",
+      "base": {
+        "branch": "feat/foundation-05-privacy-recovery",
+        "sha": "224ad9d2a1775a8372354af35d542f433cb8bdde"
+      },
+      "head": {
+        "branch": "feat/foundation-06-human-interface",
+        "sha": "183d85e6083fb0806127e569036d2bb7012dfaf7"
+      }
+    },
+    {
+      "number": 7,
+      "title": "Foundation 05.4: Pilot Safety Gate and privacy recovery hardening",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/7",
+      "base": {
+        "branch": "feat/foundation-05-privacy-recovery",
+        "sha": "224ad9d2a1775a8372354af35d542f433cb8bdde"
+      },
+      "head": {
+        "branch": "feat/foundation-05-pilot-safety-gate",
+        "sha": "8634e94a6dddd2b8cfff415b112f6b895eb0f4ae"
+      }
+    },
+    {
+      "number": 6,
+      "title": "Foundation 05.3: backup-safe revocations, privacy and minimal analytics",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/6",
+      "base": {
+        "branch": "feat/foundation-05-secure-identity-runtime",
+        "sha": "8b63b8795490a11ad2b5a709b9a258033b7d6381"
+      },
+      "head": {
+        "branch": "feat/foundation-05-privacy-recovery",
+        "sha": "224ad9d2a1775a8372354af35d542f433cb8bdde"
+      }
+    },
+    {
+      "number": 5,
+      "title": "Foundation 05.2: secure identity, WebAuthn and session runtime",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/5",
+      "base": {
+        "branch": "feat/foundation-05-identity-store",
+        "sha": "8820d7852f0db6c4fc5101f9e281211ba7b6b074"
+      },
+      "head": {
+        "branch": "feat/foundation-05-secure-identity-runtime",
+        "sha": "8b63b8795490a11ad2b5a709b9a258033b7d6381"
+      }
+    },
+    {
+      "number": 4,
+      "title": "Foundation 05.1: Identity Store audit and compatible offline migration",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/4",
+      "base": {
+        "branch": "fix/foundation-04-memory-pilot",
+        "sha": "af94ac93dde649747b1a89104000f92f75ecb7fc"
+      },
+      "head": {
+        "branch": "feat/foundation-05-identity-store",
+        "sha": "8820d7852f0db6c4fc5101f9e281211ba7b6b074"
+      }
+    },
+    {
+      "number": 3,
+      "title": "Foundation 04.2: безопасное обновление и удаление персональной памяти",
+      "state": "open",
+      "draft": false,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/3",
+      "base": {
+        "branch": "feat/foundation-04-semantic-memory",
+        "sha": "25dcb0fae420b27916629b1686f07f6f96e5c446"
+      },
+      "head": {
+        "branch": "fix/foundation-04-memory-pilot",
+        "sha": "af94ac93dde649747b1a89104000f92f75ecb7fc"
+      }
+    },
+    {
+      "number": 2,
+      "title": "Foundation 02: Unified BLAGO Web/PWA + Telegram Mini App",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "url": "https://github.com/xBLAGO/space/pull/2",
+      "base": {
+        "branch": "main",
+        "sha": "3c218dc5757879c26b3aec520af3636b2d702715"
+      },
+      "head": {
+        "branch": "feat/foundation-02-unified-app",
+        "sha": "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a"
+      }
+    }
+  ]
+}
