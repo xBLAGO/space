@@ -1,0 +1,318 @@
+{
+  "format": "uel03-final-evidence-1",
+  "base_sha": "aa92d96bca0ae8a07e27f8efa724131afb32ad57",
+  "runtime_source_sha": "8ed6131e4617e0b47b157e9625ceb8845de22306",
+  "profile": "uel-checkpoint-0.3-lab.1",
+  "custody_schema_sha256": "26baa4671a3195a7618a786dfedb4ee47b16f3fde6cbfe44f6a9698f90c031db",
+  "original_migration_manifests_and_checksums_unchanged": true,
+  "local_full": {
+    "runtime_sha": "7b3e229c43f68671ac1087bd093fb484543c4366",
+    "status": "PASS",
+    "attempts": [
+      {
+        "attempt": 1,
+        "executed": 635,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "wall_seconds": 689.657,
+        "elapsed_seconds": 689.646,
+        "status": "PASS"
+      },
+      {
+        "attempt": 2,
+        "executed": 635,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "wall_seconds": 736.875,
+        "elapsed_seconds": 736.93,
+        "status": "PASS"
+      }
+    ],
+    "log_sha256": "434d53505a53b2141cf04cd77dc8e5617599ba0279a3348e753fd20a76cddd49"
+  },
+  "local_final": {
+    "format": "uel03-local-lab-evidence-1",
+    "base": "aa92d96bca0ae8a07e27f8efa724131afb32ad57",
+    "checkout_sha": "8ed6131e4617e0b47b157e9625ceb8845de22306",
+    "mode": "SYNTHETIC_LOCAL_ONLY",
+    "status": "PASS",
+    "scope": "checkpoint and offline verifier",
+    "attempts": [
+      {
+        "attempt": 1,
+        "executed": 38,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "wall_seconds": 116.464,
+        "elapsed_seconds": 116.468,
+        "status": "PASS",
+        "records": [
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_application_backup_only_replays_denials",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_bounded_and_strict_serialization",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_checkpoint_chain_corruption_blocks",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_concurrent_duplicate_commit_and_restart",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_concurrent_repair_and_commit",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_contradictory_prefix_does_not_overwrite_checkpoint",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_crash_after_custody_commit_before_head",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_crash_source_after_journal_remains_non_grant",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_custodian_requires_verified_sqlite_before_storage_access",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_custody_concurrent_conflicting_extensions",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_custody_two_processes_same_request",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_fresh_nonce_and_request_binding",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_full_coordinated_local_rollback_is_detected",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_full_disk_open_emits_no_receipt",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_lost_ack_keeps_same_committed_checkpoint",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_lost_config_does_not_disable_installed_policy",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_lost_local_witness_cannot_be_repaired_from_checkpoint_alone",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_missing_custodian_cannot_ack_or_project",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_missing_custody_store_is_never_recreated",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_missing_retainer_head_is_not_recreated",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_missing_signing_key_is_not_regenerated",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_repair_crash_after_retained_audit_and_replay",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_repair_requires_live_evidence",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_repair_rollback_on_source_corruption",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_repair_state_and_headers_then_authorized_account_deletion",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_session_freshness_still_expires_at_original_boundary",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_signed_prefix_and_source_headers",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_sql_generation_corruption_is_rejected_before_advance",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_sql_write_failure_emits_no_receipt",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_truncated_custody_database_rejected_by_retained_head",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_unknown_source_key_cannot_advance",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_wall_clock_suspension_reproduces_both_original_errors",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint.CheckpointTests.test_wrong_key_domain_stream_and_changed_signature",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint_vectors.VectorTests.test_frozen_checkpoint_vectors_and_both_validators",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint_vectors.VectorTests.test_genesis_does_not_consume_checkpoint_limit",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint_vectors.VectorTests.test_offline_current_tip_is_mandatory",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint_vectors.VectorTests.test_public_key_substitution_fails_both",
+            "expected": "PASS",
+            "actual": "PASS"
+          },
+          {
+            "test": "tests.test_uel_checkpoint_vectors.VectorTests.test_standalone_process_without_application_imports",
+            "expected": "PASS",
+            "actual": "PASS"
+          }
+        ]
+      }
+    ],
+    "independent_operator_test": "NOT EXECUTED",
+    "source_truth_or_human_signature_proven": false,
+    "real_users": "NO-GO",
+    "production_changed": false
+  },
+  "ci": {
+    "runtime_source_sha": "8ed6131e4617e0b47b157e9625ceb8845de22306",
+    "run": "https://github.com/xBLAGO/space/actions/runs/43376632499",
+    "status": "PASS",
+    "full_attempts": [
+      {
+        "executed": 638,
+        "passed": 638,
+        "seconds": 178.149
+      },
+      {
+        "executed": 638,
+        "passed": 638,
+        "seconds": 178.267
+      }
+    ],
+    "inherited": 600,
+    "new_tests": 38,
+    "frozen_uel01": {
+      "executed": 72,
+      "passed": 72,
+      "expected_results_changed": false
+    },
+    "docker": {
+      "status": "PASS",
+      "existing_uel02_tests": 35,
+      "uel03_tests": 38,
+      "network": "none"
+    },
+    "chrome_virtual_webauthn": "PASS",
+    "synthetic_mini_app": "PASS",
+    "sqlite": "3.54.1",
+    "artifact": {
+      "id": 14014189250,
+      "name": "pilot-browser-evidence",
+      "sha256": "ad3d9fc7896564b987990e3506db94f1981aa1af1e116642d15540c246e61d85"
+    }
+  },
+  "old_session_failures": {
+    "diagnosed": "Uncontrolled wall-clock suspension expired idle session during fixtures",
+    "deterministic_reproduction": "PASS: both source operations return 401 after +1801s; resume fixture clock restores success",
+    "freshness_boundary": "PASS: 403 after +301s",
+    "production_ttl_relaxed": false,
+    "clamshell_suspension_observed_in_private_host_log": true,
+    "host_logs_published": false,
+    "old_log_sha256": "deeac93f628aed128f391d5de658954325f8e248e2beaee6022a7602b5a9630d"
+  },
+  "offline_vectors": {
+    "C01": "OFFLINE_INTEGRITY_ONLY",
+    "C02": "REJECT_CHANGED_SIGNATURE",
+    "C03": "REJECT_STALE_PINNED_TIP",
+    "C04": "REJECT_MISSING_CHAIN_LINK",
+    "C05": "REJECT_REORDERED_CHAIN",
+    "stale_prefix_note": "Runtime internal chain validity alone does not assert current freshness",
+    "same_author_validators": true
+  },
+  "readiness": {
+    "isolated_synthetic_local": "GO",
+    "independent_operator": "NOT EXECUTED",
+    "independent_security_audit": "NOT EXECUTED",
+    "co_rollback_of_all_custody_controls": "OUTSIDE_PROVEN_MODEL",
+    "real_users": "NO-GO",
+    "gates_promoted": [],
+    "production_changed": false,
+    "deployment_executed": false,
+    "merge_executed": false
+  }
+}
