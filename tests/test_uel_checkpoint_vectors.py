@@ -7,6 +7,7 @@ import unittest
 import subprocess
 import sys
 import tempfile
+from unittest.mock import patch
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.exceptions import InvalidSignature
@@ -84,3 +85,21 @@ class VectorTests(unittest.TestCase):
                  '--key', fixture['synthetic_public_key'], '--stream', fixture['stream'],
                  '--tip', fixture['pinned_tip']], check=True, capture_output=True, text=True)
             self.assertEqual(json.loads(result.stdout)['status'], 'OFFLINE_INTEGRITY_ONLY')
+
+    def test_genesis_does_not_consume_checkpoint_limit(self):
+        key = Ed25519PrivateKey.generate()
+        stream = '1' * 64
+        chain = []
+        previous = runtime.ZERO
+        with patch.object(runtime, 'LIMIT', 2):
+            for generation in range(3):
+                body = {'profile': runtime.PROFILE, 'stream': stream, 'generation': generation,
+                        'previous': previous, 'journal_seq': generation,
+                        'journal_root': runtime.root(['1' * 64] * generation),
+                        'uel_seq': generation, 'uel_root': runtime.root(['2' * 64] * generation)}
+                receipt = runtime.signed(body, key, 'checkpoint')
+                chain.append(receipt)
+                previous = runtime.digest(runtime.encode(receipt))
+            result = runtime.verify_chain(chain, runtime.public(key), stream)
+        self.assertEqual(result['generation'], 2)
+        self.assertEqual(offline.verify(chain, runtime.public(key), stream, previous)['checkpoints'], 3)

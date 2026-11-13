@@ -33,7 +33,7 @@ jobs:
       - name: Block unverified pilot SQLite
         run: python -m xblago.core.sqlite_safety --require-safe
       - name: Run tests
-        run: PYTHONPATH=src python -m unittest discover -s tests -v
+        run: PYTHONPATH=.:src python -m tools.uel03_lab_check --full --repeat 2 --output "$RUNNER_TEMP/uel03-full-regression.json"
       - name: Verify immutable integration manifests
         run: PYTHONPATH=.:src python -m tools.freeze_integration
       - name: Integration public evidence
@@ -96,6 +96,7 @@ jobs:
             ${{ runner.temp }}/durable-asset-lab.json
             ${{ runner.temp }}/uel-offline-results.json
             ${{ runner.temp }}/uel03-lab-evidence.json
+            ${{ runner.temp }}/uel03-full-regression.json
 
   docker:
     runs-on: ubuntu-latest

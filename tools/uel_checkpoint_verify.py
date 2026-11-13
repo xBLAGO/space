@@ -18,7 +18,7 @@ def wire(value):
 
 
 def verify(receipts, pinned_key, stream, expected_tip):
-    if type(receipts) is not list or not 1 <= len(receipts) <= 65536:
+    if type(receipts) is not list or not 1 <= len(receipts) <= 65537:
         raise ValueError('Invalid proof size')
     if len(pinned_key) != 64 or len(stream) != 64 or len(expected_tip) != 64:
         raise ValueError('Pinned evidence required')

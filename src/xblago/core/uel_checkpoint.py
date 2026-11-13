@@ -20,6 +20,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey,
 from cryptography.hazmat.primitives.serialization import Encoding, PrivateFormat, PublicFormat, NoEncryption
 
 from xblago.core.security_journal import JournalUnavailable, canonical
+from xblago.core.sqlite_safety import require_safe_sqlite, UnsafeSQLite
 
 PROFILE = 'uel-checkpoint-0.3-lab.1'
 ZERO = '0' * 64
@@ -128,7 +129,7 @@ def verify_checkpoint(receipt, pinned_key, stream):
 
 def verify_chain(receipts, pinned_key, stream):
     """Offline integrity only. Current freshness requires a nonce-bound reply."""
-    if type(receipts) is not list or not receipts or len(receipts) > LIMIT:
+    if type(receipts) is not list or not receipts or len(receipts) > LIMIT + 1:
         fail()
     previous = ZERO
     prior = None
@@ -146,6 +147,16 @@ def verify_chain(receipts, pinned_key, stream):
         prior = body
     return prior
 
+
+
+
+def _receipts(db):
+    result = []
+    for expected, (generation, encoded) in enumerate(db.execute('SELECT generation,receipt FROM checkpoints ORDER BY generation')):
+        if generation != expected or expected > LIMIT:
+            fail()
+        result.append(decode(encoded.encode()))
+    return result
 
 
 def _publish_head(directory, receipt):
@@ -175,6 +186,7 @@ def initialize(directory, stream, source_key):
     from xblago.core.uel_schema import require_synthetic
     from xblago.core.journal_witness import _sync_dir
     require_synthetic()
+    require_safe_sqlite()
     if not hex64(stream) or not hex64(source_key):
         fail()
     directory = Path(directory)
@@ -212,6 +224,9 @@ def _locked(directory):
 
 
 def accept(directory, request):
+    from xblago.core.uel_schema import require_synthetic
+    require_synthetic()
+    require_safe_sqlite()
     # Serialize commit and publication of the retained head across processes.
     with _locked(directory):
         return _accept(directory, request)
@@ -221,6 +236,7 @@ def _accept(directory, request):
     """Serialize prefix verification, durable checkpoint commit and signed reply."""
     from xblago.core.uel_schema import require_synthetic
     require_synthetic()
+    require_safe_sqlite()
     directory = Path(directory)
     path = directory / 'custody.sqlite3'
     if directory.is_symlink() or directory.stat().st_mode & 0o077 or path.is_symlink() or path.stat().st_mode & 0o077:
@@ -242,7 +258,7 @@ def _accept(directory, request):
         if body['profile'] != PROFILE or body['stream'] != stream or not hex64(body['nonce']):
             fail()
         journal_root, uel_root = root(body['journal']), root(body['uel'])
-        receipts = [decode(row[0].encode()) for row in db.execute('SELECT receipt FROM checkpoints ORDER BY generation')]
+        receipts = _receipts(db)
         prior = verify_chain(receipts, public(key), stream)
         _verify_head(directory, receipts, public(key), stream)
         if len(body['journal']) < prior['journal_seq'] or len(body['uel']) < prior['uel_seq']:
@@ -301,6 +317,7 @@ def exchange(endpoint, request):
 def serve(directory, endpoint):
     from xblago.core.uel_schema import require_synthetic
     require_synthetic()
+    require_safe_sqlite()
 
     class Handler(socketserver.BaseRequestHandler):
         def handle(self):
@@ -308,7 +325,7 @@ def serve(directory, endpoint):
             try:
                 response = accept(directory, decode(_receive(self.request)))
                 _send(self.request, encode(response))
-            except (JournalUnavailable, OSError, sqlite3.Error, ValueError, TypeError):
+            except (JournalUnavailable, UnsafeSQLite, OSError, sqlite3.Error, ValueError, TypeError):
                 _send(self.request, encode({'error': 'UNKNOWN_RECOVERY'}))
 
     with socketserver.UnixStreamServer(str(endpoint), Handler) as server:
@@ -380,6 +397,7 @@ def guard(journal, rows):
             return
         from xblago.core.uel_schema import require_synthetic
         require_synthetic()
+        require_safe_sqlite()
         expected = policy(config)
         for marker in markers:
             if marker != {'kind': 'uel_checkpoint_policy', 'owner': '', 'target': config['stream'],
@@ -397,6 +415,7 @@ def guard(journal, rows):
 def enroll(journal):
     from xblago.core.uel_schema import require_synthetic
     require_synthetic()
+    require_safe_sqlite()
     config = configuration()
     if config is None:
         fail()
@@ -419,6 +438,7 @@ def main():
     args = parser.parse_args()
     from xblago.core.uel_schema import require_synthetic
     require_synthetic()
+    require_safe_sqlite()
     if args.operation == 'initialize':
         if args.directory is None or args.stream is None or args.source_key is None:
             parser.error('directory, stream and source public key required')
@@ -439,9 +459,8 @@ def main():
         path = args.directory / 'custody.sqlite3'
         with _locked(args.directory), sqlite3.connect(path.resolve().as_uri() + '?mode=rw', uri=True) as db:
             db.execute('BEGIN IMMEDIATE')
-            rows = db.execute('SELECT receipt FROM checkpoints ORDER BY generation').fetchall()
             metadata = db.execute('SELECT stream FROM metadata WHERE singleton=1').fetchone()
-            receipts = [decode(row[0].encode()) for row in rows]
+            receipts = _receipts(db)
             key = public(load_key(args.directory / 'signing.key'))
             verify_chain(receipts, key, metadata[0])
             _verify_head(args.directory, receipts, key, metadata[0])

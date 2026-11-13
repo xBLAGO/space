@@ -497,3 +497,21 @@ class CheckpointTests(unittest.TestCase):
         results = self.custody_parallel(requests)
         self.assertEqual(sum('accepted' in item for item in results), 1)
         self.assertEqual(sum('rejected' in item for item in results), 1)
+
+    def test_sql_generation_corruption_is_rejected_before_advance(self):
+        request = self.request()
+        with sqlite3.connect(self.directory / 'custody.sqlite3') as db:
+            db.execute('UPDATE checkpoints SET generation=60000 WHERE generation=(SELECT max(generation) FROM checkpoints)')
+        with self.assertRaises(JournalUnavailable):
+            cp.accept(self.directory, request)
+
+    def test_custodian_requires_verified_sqlite_before_storage_access(self):
+        request = self.request()
+        before = self.receipts()
+        with patch.object(cp, 'require_safe_sqlite', side_effect=cp.UnsafeSQLite('synthetic rejected SQLite')):
+            with self.assertRaises(cp.UnsafeSQLite):
+                cp.accept(self.directory, request)
+            with self.assertRaises(cp.UnsafeSQLite):
+                cp.initialize(self.root / 'unsafe-copy', self.stream, cp.public(cp.load_key(self.source_key)))
+        self.assertEqual(self.receipts(), before)
+        self.assertFalse((self.root / 'unsafe-copy').exists())
