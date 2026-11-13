@@ -36,7 +36,12 @@ def body(**kwargs):
                  'audience':'PRIVATE','conditions':'ON_REQUEST'}, **kwargs)
 
 
-def worker(cfg, token, challenge, phase, pipe=None):
+def worker(cfg, token, challenge, phase, pipe=None, frozen_at=None):
+    with patch('time.time', return_value=frozen_at):
+        _worker(cfg, token, challenge, phase, pipe)
+
+
+def _worker(cfg, token, challenge, phase, pipe):
     os.environ.update(cfg)
     service = AssetRegistry(WebApp(preflight(Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3')))
     original = PrivacyControl.flush
@@ -71,6 +76,12 @@ def worker(cfg, token, challenge, phase, pipe=None):
 
 class LocalLedgerTests(unittest.TestCase):
     def setUp(self):
+        # Wall-clock suspension must not expire test credentials mid-scenario.
+        # The same explicit clock is passed to every spawned test worker.
+        self.frozen_at = time.time()
+        clock = patch('time.time', return_value=self.frozen_at)
+        clock.start()
+        self.addCleanup(clock.stop)
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)/'new'
@@ -136,7 +147,7 @@ class LocalLedgerTests(unittest.TestCase):
 
     def spawn(self, challenge, phase, expected):
         ctx = multiprocessing.get_context('spawn')
-        proc = ctx.Process(target=worker,args=(self.cfg,self.a,challenge,phase))
+        proc = ctx.Process(target=worker,args=(self.cfg,self.a,challenge,phase,None,self.frozen_at))
         proc.start()
         try:
             proc.join(30)
@@ -152,7 +163,7 @@ class LocalLedgerTests(unittest.TestCase):
         try:
             for challenge in challenges:
                 parent, child = ctx.Pipe()
-                proc = ctx.Process(target=worker,args=(self.cfg,self.a,challenge,'normal',child))
+                proc = ctx.Process(target=worker,args=(self.cfg,self.a,challenge,'normal',child,self.frozen_at))
                 proc.start()
                 child.close()
                 jobs.append((proc,parent))

@@ -197,6 +197,12 @@ class PrivacyControl:
         elif kind=='context_version':
             from xblago.core.context_schema import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
+        elif kind=='uel_index_repair':
+            # Audit of a derivative-index rebuild confers no source authority.
+            pass
+        elif kind=='uel_checkpoint_policy':
+            # SecurityJournal already verified the live pinned custodian and policy.
+            pass
         elif kind=='uel_local':
             from xblago.core.uel_local import apply_checkpoint
             apply_checkpoint(db,event,self.journal)

@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
       - name: Block unverified pilot SQLite
         run: python -m xblago.core.sqlite_safety --require-safe
       - name: Run tests
-        run: PYTHONPATH=src python -m unittest discover -s tests -v
+        run: PYTHONPATH=.:src python -m tools.uel03_lab_check --full --repeat 2 --output "$RUNNER_TEMP/uel03-full-regression.json"
       - name: Verify immutable integration manifests
         run: PYTHONPATH=.:src python -m tools.freeze_integration
       - name: Integration public evidence
@@ -69,6 +69,8 @@ jobs:
           git diff --exit-code 40167137904f0eeb2e04288c2256865740dbffa3 HEAD -- docs/ledger01 src/xblago/domain/help_service.py src/xblago/core/help_schema.py src/xblago/domain/asset_registry.py src/xblago/core/asset_registry_schema.py .github/workflows/huggingface-space.yml
           PYTHONPATH=src python docs/ledger01/generate_vectors.py --check
           PYTHONPATH=src python docs/ledger01/check_vectors.py --output "$RUNNER_TEMP/uel-offline-results.json"
+      - name: UEL 0.3 checkpoint custody and repair evidence
+        run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
       - name: Durable assets on guarded identity privacy and recovery
         run: PYTHONPATH=.:src python -m tools.durable_asset_lab --output "$RUNNER_TEMP/durable-asset-lab.json"
       - name: Collective Calculator offline accounting demonstration
@@ -93,6 +95,8 @@ jobs:
             ${{ runner.temp }}/calculator-lab.json
             ${{ runner.temp }}/durable-asset-lab.json
             ${{ runner.temp }}/uel-offline-results.json
+            ${{ runner.temp }}/uel03-lab-evidence.json
+            ${{ runner.temp }}/uel03-full-regression.json
 
   docker:
     runs-on: ubuntu-latest
@@ -340,3 +344,8 @@ jobs:
         run: |
           docker run --rm --network none -v "$PWD/tools:/app/tools:ro" -v "$PWD/tests:/app/tests:ro" --entrypoint python \
             xblago-space:${{ github.sha }} -m unittest tests.test_uel_local -v
+
+      - name: Docker UEL 0.3 checkpoint and repair checks (synthetic, no network)
+        run: |
+          docker run --rm --network none -v "$PWD/tools:/app/tools:ro" -v "$PWD/tests:/app/tests:ro" -v "$PWD/docs/uel03:/app/docs/uel03:ro" --entrypoint python \
+            xblago-space:${{ github.sha }} -m unittest tests.test_uel_checkpoint tests.test_uel_checkpoint_vectors -v

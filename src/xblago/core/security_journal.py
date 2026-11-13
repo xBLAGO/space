@@ -144,6 +144,8 @@ class SecurityJournal:
         if anchor['seq'] != len(rows):
             self._write_anchor(len(rows),head)  # recover append committed before anchor fsync
         self._sync_witness(chain)
+        from xblago.core.uel_checkpoint import guard
+        guard(self, rows)
         return rows, chain
 
     def _sync_witness(self,chain):
@@ -176,4 +178,6 @@ class SecurityJournal:
             db.commit()
             self._write_anchor(seq,head)
             self._sync_witness(chain)
+            # The separate custodian must commit before append can report success.
+            self._verified(db)
             return seq, head

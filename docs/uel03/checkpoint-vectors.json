@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "expected": "OFFLINE_INTEGRITY_ONLY",
+      "id": "C01",
+      "receipts": [
+        {
+          "body": {
+            "generation": 0,
+            "journal_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "journal_seq": 0,
+            "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "uel_seq": 0
+          },
+          "signature": "8b2e9aa126fa0949f40466d1f46acdaf751caaf01c6dc8db85fc08faeb8aaafbfc6c4ffa6b17c574baf2a0f9c6037cef4c9cf919b67b0cfab93cea511865df05"
+        },
+        {
+          "body": {
+            "generation": 1,
+            "journal_root": "fea74c57f7b8c571be7f0e8b54eb8f754ed3a521481558e8e9fa057f65e9b4c0",
+            "journal_seq": 1,
+            "previous": "be824c257bca98a8de9aed6337ad2ac0a94b32ec81e4253cb5042f1799daf4ef",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "326a3d94ca7aea4178fc311c5bf81c24a6b7df3e7ce1690575dadfaa2069f31aa49e81794655c9bfcc8a23ded2d602ec6bd52e02c96414e222ce536571155409"
+        },
+        {
+          "body": {
+            "generation": 2,
+            "journal_root": "bd0fca02be1f66f5d6cebcbe6da25df50d9c54c09943e4879907c48a3bc133dd",
+            "journal_seq": 3,
+            "previous": "f0513325758eafa7424c45442af3419c12ab3f5e5867a3649bd77b1e77031bc0",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "805d9ae3a9cf1a557492bbe1953b4a78fed6c07357bc1fa1597a5ae6f91334c743ac451601f2c01a9968202a3413976b33d552bfc0a53e8cba127b38a3fc5405"
+        }
+      ]
+    },
+    {
+      "expected": "REJECT",
+      "id": "C02",
+      "receipts": [
+        {
+          "body": {
+            "generation": 0,
+            "journal_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "journal_seq": 0,
+            "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "uel_seq": 0
+          },
+          "signature": "8b2e9aa126fa0949f40466d1f46acdaf751caaf01c6dc8db85fc08faeb8aaafbfc6c4ffa6b17c574baf2a0f9c6037cef4c9cf919b67b0cfab93cea511865df05"
+        },
+        {
+          "body": {
+            "generation": 1,
+            "journal_root": "fea74c57f7b8c571be7f0e8b54eb8f754ed3a521481558e8e9fa057f65e9b4c0",
+            "journal_seq": 1,
+            "previous": "be824c257bca98a8de9aed6337ad2ac0a94b32ec81e4253cb5042f1799daf4ef",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "326a3d94ca7aea4178fc311c5bf81c24a6b7df3e7ce1690575dadfaa2069f31aa49e81794655c9bfcc8a23ded2d602ec6bd52e02c96414e222ce536571155409"
+        },
+        {
+          "body": {
+            "generation": 2,
+            "journal_root": "3333333333333333333333333333333333333333333333333333333333333333",
+            "journal_seq": 3,
+            "previous": "f0513325758eafa7424c45442af3419c12ab3f5e5867a3649bd77b1e77031bc0",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "805d9ae3a9cf1a557492bbe1953b4a78fed6c07357bc1fa1597a5ae6f91334c743ac451601f2c01a9968202a3413976b33d552bfc0a53e8cba127b38a3fc5405"
+        }
+      ]
+    },
+    {
+      "expected": "REJECT",
+      "id": "C03",
+      "receipts": [
+        {
+          "body": {
+            "generation": 0,
+            "journal_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "journal_seq": 0,
+            "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "uel_seq": 0
+          },
+          "signature": "8b2e9aa126fa0949f40466d1f46acdaf751caaf01c6dc8db85fc08faeb8aaafbfc6c4ffa6b17c574baf2a0f9c6037cef4c9cf919b67b0cfab93cea511865df05"
+        },
+        {
+          "body": {
+            "generation": 1,
+            "journal_root": "fea74c57f7b8c571be7f0e8b54eb8f754ed3a521481558e8e9fa057f65e9b4c0",
+            "journal_seq": 1,
+            "previous": "be824c257bca98a8de9aed6337ad2ac0a94b32ec81e4253cb5042f1799daf4ef",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "326a3d94ca7aea4178fc311c5bf81c24a6b7df3e7ce1690575dadfaa2069f31aa49e81794655c9bfcc8a23ded2d602ec6bd52e02c96414e222ce536571155409"
+        }
+      ]
+    },
+    {
+      "expected": "REJECT",
+      "id": "C04",
+      "receipts": [
+        {
+          "body": {
+            "generation": 0,
+            "journal_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "journal_seq": 0,
+            "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "uel_seq": 0
+          },
+          "signature": "8b2e9aa126fa0949f40466d1f46acdaf751caaf01c6dc8db85fc08faeb8aaafbfc6c4ffa6b17c574baf2a0f9c6037cef4c9cf919b67b0cfab93cea511865df05"
+        },
+        {
+          "body": {
+            "generation": 2,
+            "journal_root": "bd0fca02be1f66f5d6cebcbe6da25df50d9c54c09943e4879907c48a3bc133dd",
+            "journal_seq": 3,
+            "previous": "f0513325758eafa7424c45442af3419c12ab3f5e5867a3649bd77b1e77031bc0",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "805d9ae3a9cf1a557492bbe1953b4a78fed6c07357bc1fa1597a5ae6f91334c743ac451601f2c01a9968202a3413976b33d552bfc0a53e8cba127b38a3fc5405"
+        }
+      ]
+    },
+    {
+      "expected": "REJECT",
+      "id": "C05",
+      "receipts": [
+        {
+          "body": {
+            "generation": 2,
+            "journal_root": "bd0fca02be1f66f5d6cebcbe6da25df50d9c54c09943e4879907c48a3bc133dd",
+            "journal_seq": 3,
+            "previous": "f0513325758eafa7424c45442af3419c12ab3f5e5867a3649bd77b1e77031bc0",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "805d9ae3a9cf1a557492bbe1953b4a78fed6c07357bc1fa1597a5ae6f91334c743ac451601f2c01a9968202a3413976b33d552bfc0a53e8cba127b38a3fc5405"
+        },
+        {
+          "body": {
+            "generation": 1,
+            "journal_root": "fea74c57f7b8c571be7f0e8b54eb8f754ed3a521481558e8e9fa057f65e9b4c0",
+            "journal_seq": 1,
+            "previous": "be824c257bca98a8de9aed6337ad2ac0a94b32ec81e4253cb5042f1799daf4ef",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "f3de58aa40e8df2c73135d180e2b69a58b568e5e7a2dbe03309426a1686838a6",
+            "uel_seq": 1
+          },
+          "signature": "326a3d94ca7aea4178fc311c5bf81c24a6b7df3e7ce1690575dadfaa2069f31aa49e81794655c9bfcc8a23ded2d602ec6bd52e02c96414e222ce536571155409"
+        },
+        {
+          "body": {
+            "generation": 0,
+            "journal_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "journal_seq": 0,
+            "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+            "profile": "uel-checkpoint-0.3-lab.1",
+            "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+            "uel_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "uel_seq": 0
+          },
+          "signature": "8b2e9aa126fa0949f40466d1f46acdaf751caaf01c6dc8db85fc08faeb8aaafbfc6c4ffa6b17c574baf2a0f9c6037cef4c9cf919b67b0cfab93cea511865df05"
+        }
+      ]
+    }
+  ],
+  "pinned_tip": "0e3c1de764b1f517ab09e33348da0d462782b06651237f403da2a790b038945b",
+  "profile": "uel-checkpoint-0.3-lab.1",
+  "stream": "65be83935ac9c4dd64e6e09ab8d19b05dab088d6f1b6d700971b8c8e01066f9b",
+  "synthetic_public_key": "1be70c58b2ae6cb825c8af230e6b6a39547b1795413b95940bc38761ece88af7"
+}
