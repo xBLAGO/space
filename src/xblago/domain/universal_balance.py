@@ -5,7 +5,6 @@ persistence constructor and cannot execute a payment or transfer property.
 """
 from dataclasses import dataclass, field
 from decimal import Decimal, localcontext
-import hashlib
 import json
 import os
 import re
@@ -204,8 +203,9 @@ class _PlanningModel:
     def __init__(self, views, scenario, policy):
         self.policy = policy
         self.capital = kopecks(scenario.capital_rub)
+        self.capital_level = scenario.capital_level
         self.capital_verified = scenario.capital_level == 'INDEPENDENTLY_VERIFIED'
-        if scenario.capital_level not in {'SELF_DECLARED', 'INDEPENDENTLY_VERIFIED', 'UNKNOWN', 'DISPUTED', 'REVOKED'}:
+        if scenario.capital_level not in {'SELF_DECLARED', 'PARTICIPANT_CONFIRMED', 'INDEPENDENTLY_VERIFIED', 'CALCULATED', 'UNKNOWN', 'DISPUTED', 'REVOKED'}:
             raise AccountingError('Unknown capital evidence level')
         self.options = {}
         self.resources = {}
@@ -340,6 +340,24 @@ class _PlanningModel:
             prior['state'] = 'REVOKED' if step.action == 'REVOKE_APPROVAL' else 'CANCELLED'
 
     def _invariants(self):
+        expected_reserved = sum(row['cost'] for row in self.plans.values() if row['state'] == 'RESERVED')
+        spent_states = {'SPENT_SIMULATION', 'CONFIRMED_SIMULATION', 'FAILED_SIMULATION'}
+        expected_spent = sum(row['cost'] for row in self.plans.values() if row['state'] in spent_states)
+        if self.reserved != expected_reserved or self.spent != expected_spent:
+            raise AssertionError('Capital counters disagree with plan states')
+        expected_resources = {ref: [Decimal(0), Decimal(0)] for ref in self.resources}
+        for identifier, plan in self.plans.items():
+            for demand in self.options[identifier].demands:
+                if not plan['units']:
+                    continue
+                quantity = number(demand.quantity) * plan['units']
+                if plan['state'] == 'RESERVED':
+                    expected_resources[demand.observation][0] += quantity
+                elif plan['state'] == 'SPENT_SIMULATION' or (plan['state'] in spent_states and not demand.reusable):
+                    expected_resources[demand.observation][1] += quantity
+        for ref, resource in self.resources.items():
+            if [resource['reserved'], resource['used']] != expected_resources[ref]:
+                raise AssertionError('Resource counters disagree with plan states')
         available = self.capital - self.reserved - self.spent
         if min(available, self.reserved, self.spent) < 0:
             raise AssertionError('Capital conservation violated')
@@ -389,7 +407,7 @@ class _PlanningModel:
         ]
         return {
             'format': ALGORITHM, 'effect': 'DISPOSABLE_SYNTHETIC_FORECAST',
-            'capital': {'scope': 'SYNTHETIC_SCENARIO', 'level': 'INDEPENDENTLY_VERIFIED' if self.capital_verified else 'UNKNOWN',
+            'capital': {'scope': 'SYNTHETIC_SCENARIO', 'level': self.capital_level, 'provenance': 'SYNTHETIC_FIXTURE',
                         'real_funds_verified': False, 'initial_rub': rubles(self.capital),
                         'available_rub': rubles(self._invariants()) if self.capital_verified else None,
                         'reserved_rub': rubles(self.reserved), 'simulated_spent_rub': rubles(self.spent)},

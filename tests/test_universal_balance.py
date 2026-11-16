@@ -189,6 +189,25 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(before['capital'], run()['capital'])
 
 
+    def test_степени_достоверности_сохраняются_раздельно(self):
+        for level in ('SELF_DECLARED', 'PARTICIPANT_CONFIRMED', 'INDEPENDENTLY_VERIFIED',
+                      'CALCULATED', 'UNKNOWN', 'DISPUTED', 'REVOKED'):
+            result = run(level=level)
+            self.assertEqual(result['capital']['level'], level)
+            self.assertEqual(result['capital']['provenance'], 'SYNTHETIC_FIXTURE')
+            if level != 'INDEPENDENTLY_VERIFIED':
+                self.assertIsNone(result['capital']['available_rub'])
+
+
+    def test_инварианты_сверяют_счётчики_с_состояниями(self):
+        scenario = Scenario('r', '1000.00', 'INDEPENDENTLY_VERIFIED', (option(),), steps())
+        model = _PlanningModel(views(), scenario, policy())
+        model.run(lambda step: step.token)
+        model.spent += 1
+        with self.assertRaises(AssertionError):
+            model._invariants()
+
+
 import json
 import os
 from unittest.mock import patch

@@ -1,7 +1,6 @@
 """Disposable 100-participant, ten-million-RUB planning model on existing UEL."""
 import argparse
 from contextlib import ExitStack, contextmanager
-from dataclasses import replace
 import json
 import multiprocessing
 import os
