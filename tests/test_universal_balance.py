@@ -55,11 +55,11 @@ class ModelTests(unittest.TestCase):
 
     def test_частичное_обеспечение_по_капиталу(self):
         result = run(capital='350.00')
-        self.assertEqual(result['forecast_need_units'], 3)
+        self.assertEqual(result['forecast']['units_by_option']['repair'], 3)
         self.assertEqual(result['capital']['available_rub'], '50.00')
 
     def test_частичное_обеспечение_по_ресурсу(self):
-        self.assertEqual(run(source=views('2'))['forecast_need_units'], 2)
+        self.assertEqual(run(source=views('2'))['forecast']['units_by_option']['repair'], 2)
 
     def test_неизвестное_количество_не_становится_нулём(self):
         result = run(source=views(None))
@@ -80,7 +80,7 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(result['confirmed_help_fulfillments_created'], 0)
 
     def test_нет_согласия_нет_распределения(self):
-        self.assertEqual(run(source=views(consent=False))['forecast_need_units'], 0)
+        self.assertEqual(run(source=views(consent=False))['forecast']['confirmed_options'], 0)
 
     def test_разные_единицы_не_смешиваются(self):
         result = run(options=(option(demands=(Demand(ASSET, '1', 'hour'),)),))
@@ -95,7 +95,7 @@ class ModelTests(unittest.TestCase):
         first = run(actions=actions)
         second = run(actions=actions + actions)
         self.assertEqual(first['capital'], second['capital'])
-        self.assertEqual(first['forecast_need_units'], second['forecast_need_units'])
+        self.assertEqual(first['forecast'], second['forecast'])
 
     def test_коллизия_ключа_повтора_отклоняется(self):
         with self.assertRaises(AccountingError):
@@ -134,7 +134,7 @@ class ModelTests(unittest.TestCase):
 
     def test_неудача_проекта_сохраняет_расход(self):
         result = run(actions=steps(end='FAIL'))
-        self.assertEqual(result['forecast_need_units'], 0)
+        self.assertEqual(result['forecast']['confirmed_options'], 0)
         self.assertEqual(result['capital']['simulated_spent_rub'], '1000.00')
 
     def test_конкурирующие_альтернативы_не_дублируют_потребность(self):
@@ -148,7 +148,7 @@ class ModelTests(unittest.TestCase):
         self.assertIn('CONFLICTING_NEED_QUANTITY', [r['status'] for r in result['evaluations']])
 
     def test_подтверждённый_Help_не_планируется_повторно(self):
-        self.assertEqual(run(source=views(state='COMPLETED'))['forecast_need_units'], 0)
+        self.assertEqual(run(source=views(state='COMPLETED'))['forecast']['confirmed_options'], 0)
 
     def test_зависимости_требуют_результата(self):
         result = run(options=(option(dependencies=('infrastructure',)),))
@@ -168,7 +168,7 @@ class ModelTests(unittest.TestCase):
         source = views('1') + [{'kind': 'HELP', 'observation': second_need, 'claim': {'state': 'PUBLISHED'}}]
         result = run(options=(first, option(id='next', need=second_need, demands=first.demands)),
                      actions=steps() + steps('next'), source=source)
-        self.assertEqual(result['forecast_need_units'], 2)
+        self.assertEqual(result['forecast']['confirmed_options'], 2)
 
 
     def test_нулевая_цена_без_возможности_не_создаёт_благо(self):
@@ -206,6 +206,13 @@ class ModelTests(unittest.TestCase):
         model.spent += 1
         with self.assertRaises(AssertionError):
             model._invariants()
+
+
+    def test_разные_потребности_не_складываются_в_общие_единицы(self):
+        result = run()
+        self.assertNotIn('forecast_need_units', result)
+        self.assertIsNone(result['forecast']['cross_unit_total'])
+        self.assertEqual(result['forecast']['units_by_option']['repair'], 10)
 
 
 import json

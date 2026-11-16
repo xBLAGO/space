@@ -224,7 +224,7 @@ class _PlanningModel:
             self.options[option.id] = option
         self.steps = scenario.steps
         self.plans, self.receipts, self.need_units = {}, {}, {}
-        self.reserved = self.spent = self.forecast_units = 0
+        self.reserved = self.spent = 0
 
     def _validate_option(self, option):
         if type(option) is not Option:
@@ -320,9 +320,7 @@ class _PlanningModel:
             if prior is None or prior['state'] != 'SPENT_SIMULATION':
                 raise AccountingError('Simulated execution required')
             prior['state'] = 'CONFIRMED_SIMULATION' if step.action == 'CONFIRM_RESULT' else 'FAILED_SIMULATION'
-            if step.action == 'CONFIRM_RESULT':
-                self.forecast_units += prior['units']
-            else:
+            if step.action == 'FAIL':
                 self.need_units[option.need] -= prior['units']
             for demand in option.demands:
                 if demand.reusable:
@@ -411,7 +409,11 @@ class _PlanningModel:
                         'real_funds_verified': False, 'initial_rub': rubles(self.capital),
                         'available_rub': rubles(self._invariants()) if self.capital_verified else None,
                         'reserved_rub': rubles(self.reserved), 'simulated_spent_rub': rubles(self.spent)},
-            'forecast_need_units': self.forecast_units,
+            'forecast': {'basis': 'SCENARIO_ASSUMPTION',
+                         'units_by_option': {key: value['units'] for key, value in sorted(self.plans.items())
+                                             if value['state'] == 'CONFIRMED_SIMULATION'},
+                         'confirmed_options': sum(value['state'] == 'CONFIRMED_SIMULATION' for value in self.plans.values()),
+                         'cross_unit_total': None},
             'confirmed_help_fulfillments_created': 0,
             'evaluations': evaluations, 'recommendations': recommendations,
             'policy': self.policy.version, 'single_welfare_score': None,
