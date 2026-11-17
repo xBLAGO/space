@@ -1,0 +1,610 @@
+{
+  "format": "foundation09-synthetic-evidence-1",
+  "participants": 100,
+  "scenario_capital_rub": "10000000.00",
+  "status": "PASS",
+  "source_counts_unchanged_by_planning": true,
+  "actual_source_help_confirmations": 1,
+  "simulation": {
+    "format": "collective-plan-1",
+    "effect": "DISPOSABLE_SYNTHETIC_FORECAST",
+    "capital": {
+      "scope": "SYNTHETIC_SCENARIO",
+      "level": "INDEPENDENTLY_VERIFIED",
+      "provenance": "SYNTHETIC_FIXTURE",
+      "real_funds_verified": false,
+      "initial_rub": "10000000.00",
+      "available_rub": "2470000.00",
+      "reserved_rub": "500000.00",
+      "simulated_spent_rub": "7030000.00"
+    },
+    "forecast": {
+      "basis": "SCENARIO_ASSUMPTION",
+      "units_by_option": {
+        "infrastructure": 1,
+        "repair": 3,
+        "training": 8
+      },
+      "confirmed_options": 3,
+      "cross_unit_total": null
+    },
+    "confirmed_help_fulfillments_created": 0,
+    "evaluations": [
+      {
+        "key": "training-propose",
+        "action": "PROPOSE",
+        "option": "training",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "training-approve",
+        "action": "APPROVE",
+        "option": "training",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-propose",
+        "action": "PROPOSE",
+        "option": "infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-approve",
+        "action": "APPROVE",
+        "option": "infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-alternative-propose",
+        "action": "PROPOSE",
+        "option": "infrastructure-alternative",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-alternative-approve",
+        "action": "APPROVE",
+        "option": "infrastructure-alternative",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "repair-propose",
+        "action": "PROPOSE",
+        "option": "repair",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "repair-approve",
+        "action": "APPROVE",
+        "option": "repair",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "failed-project-propose",
+        "action": "PROPOSE",
+        "option": "failed-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "failed-project-approve",
+        "action": "APPROVE",
+        "option": "failed-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "cancelled-project-propose",
+        "action": "PROPOSE",
+        "option": "cancelled-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "cancelled-project-approve",
+        "action": "APPROVE",
+        "option": "cancelled-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "future-reserve-propose",
+        "action": "PROPOSE",
+        "option": "future-reserve",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "future-reserve-approve",
+        "action": "APPROVE",
+        "option": "future-reserve",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "unaffordable-propose",
+        "action": "PROPOSE",
+        "option": "unaffordable",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "unaffordable-approve",
+        "action": "APPROVE",
+        "option": "unaffordable",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "pending-infrastructure-propose",
+        "action": "PROPOSE",
+        "option": "pending-infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "pending-infrastructure-approve",
+        "action": "APPROVE",
+        "option": "pending-infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "training-reserve",
+        "action": "RESERVE",
+        "option": "training",
+        "status": "DEPENDENCY_UNCONFIRMED",
+        "available_kopecks": 1000000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-reserve",
+        "action": "RESERVE",
+        "option": "infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 700000000,
+        "reserved_kopecks": 300000000,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-alternative-reserve",
+        "action": "RESERVE",
+        "option": "infrastructure-alternative",
+        "status": "INSUFFICIENT_FUNDS_OR_RESOURCES",
+        "available_kopecks": 700000000,
+        "reserved_kopecks": 300000000,
+        "spent_kopecks": 0
+      },
+      {
+        "key": "infrastructure-execute",
+        "action": "EXECUTE",
+        "option": "infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 700000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 300000000
+      },
+      {
+        "key": "infrastructure-confirm_result",
+        "action": "CONFIRM_RESULT",
+        "option": "infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 700000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 300000000
+      },
+      {
+        "key": "repair-reserve-after-dependency",
+        "action": "RESERVE",
+        "option": "repair",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 3000000,
+        "spent_kopecks": 300000000
+      },
+      {
+        "key": "repair-execute",
+        "action": "EXECUTE",
+        "option": "repair",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "repair-confirm_result",
+        "action": "CONFIRM_RESULT",
+        "option": "repair",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "training-reserve-after-dependency",
+        "action": "RESERVE",
+        "option": "training",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "training-execute",
+        "action": "EXECUTE",
+        "option": "training",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "training-confirm_result",
+        "action": "CONFIRM_RESULT",
+        "option": "training",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 697000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "failed-project-reserve-after-dependency",
+        "action": "RESERVE",
+        "option": "failed-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 400000000,
+        "spent_kopecks": 303000000
+      },
+      {
+        "key": "failed-project-execute",
+        "action": "EXECUTE",
+        "option": "failed-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "failed-project-fail",
+        "action": "FAIL",
+        "option": "failed-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "cancelled-project-reserve",
+        "action": "RESERVE",
+        "option": "cancelled-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 97000000,
+        "reserved_kopecks": 200000000,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "cancelled-project-cancel",
+        "action": "CANCEL",
+        "option": "cancelled-project",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "future-reserve-reserve",
+        "action": "RESERVE",
+        "option": "future-reserve",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 197000000,
+        "reserved_kopecks": 100000000,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "future-reserve-revoke_approval",
+        "action": "REVOKE_APPROVAL",
+        "option": "future-reserve",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "future-reserve-execute",
+        "action": "EXECUTE",
+        "option": "future-reserve",
+        "status": "Current reserve required",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "unaffordable-reserve",
+        "action": "RESERVE",
+        "option": "unaffordable",
+        "status": "INSUFFICIENT_FUNDS_OR_RESOURCES",
+        "available_kopecks": 297000000,
+        "reserved_kopecks": 0,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "pending-infrastructure-reserve",
+        "action": "RESERVE",
+        "option": "pending-infrastructure",
+        "status": "APPLIED_IN_MODEL",
+        "available_kopecks": 247000000,
+        "reserved_kopecks": 50000000,
+        "spent_kopecks": 703000000
+      },
+      {
+        "key": "training-propose",
+        "action": "PROPOSE",
+        "option": "training",
+        "status": "REPLAY_NO_EFFECT"
+      },
+      {
+        "key": "wrong-executor",
+        "action": "EXECUTE",
+        "option": "repair",
+        "status": "AUTHORITY_DENIED",
+        "available_kopecks": 247000000,
+        "reserved_kopecks": 50000000,
+        "spent_kopecks": 703000000
+      }
+    ],
+    "recommendations": [
+      {
+        "option": "repair",
+        "urgency": 5,
+        "deadline": 2,
+        "duration_hours": "2",
+        "cost_per_unit_rub": "10000.00",
+        "horizon": "ONE_OFF",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "CONFIRMED_SIMULATION"
+      },
+      {
+        "option": "infrastructure",
+        "urgency": 4,
+        "deadline": 10,
+        "duration_hours": "100",
+        "cost_per_unit_rub": "3000000.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "CONFIRMED_SIMULATION"
+      },
+      {
+        "option": "infrastructure-alternative",
+        "urgency": 4,
+        "deadline": 10,
+        "duration_hours": "120",
+        "cost_per_unit_rub": "2500000.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "APPROVED"
+      },
+      {
+        "option": "future-reserve",
+        "urgency": 3,
+        "deadline": 15,
+        "duration_hours": "5",
+        "cost_per_unit_rub": "1000000.00",
+        "horizon": "ONE_OFF",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "REVOKED"
+      },
+      {
+        "option": "training",
+        "urgency": 3,
+        "deadline": 15,
+        "duration_hours": "1",
+        "cost_per_unit_rub": "0.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [
+          "infrastructure"
+        ],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "CONFIRMED_SIMULATION"
+      },
+      {
+        "option": "pending-infrastructure",
+        "urgency": 3,
+        "deadline": 20,
+        "duration_hours": "20",
+        "cost_per_unit_rub": "500000.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "RESERVED"
+      },
+      {
+        "option": "cancelled-project",
+        "urgency": 2,
+        "deadline": 20,
+        "duration_hours": "10",
+        "cost_per_unit_rub": "2000000.00",
+        "horizon": "ONE_OFF",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "CANCELLED"
+      },
+      {
+        "option": "failed-project",
+        "urgency": 2,
+        "deadline": 30,
+        "duration_hours": "100",
+        "cost_per_unit_rub": "4000000.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "FAILED_SIMULATION"
+      },
+      {
+        "option": "unaffordable",
+        "urgency": 1,
+        "deadline": 40,
+        "duration_hours": "20",
+        "cost_per_unit_rub": "12000000.00",
+        "horizon": "REUSABLE_CAPACITY",
+        "dependencies": [],
+        "basis": [
+          "explicit scenario urgency",
+          "deadline",
+          "deterministic code tie-break"
+        ],
+        "status": "APPROVED"
+      }
+    ],
+    "policy": "synthetic-discussion-v1",
+    "single_welfare_score": null,
+    "plan_states": {
+      "cancelled-project": {
+        "state": "CANCELLED",
+        "units": 1,
+        "cost_rub": "2000000.00"
+      },
+      "failed-project": {
+        "state": "FAILED_SIMULATION",
+        "units": 1,
+        "cost_rub": "4000000.00"
+      },
+      "future-reserve": {
+        "state": "REVOKED",
+        "units": 1,
+        "cost_rub": "1000000.00"
+      },
+      "infrastructure": {
+        "state": "CONFIRMED_SIMULATION",
+        "units": 1,
+        "cost_rub": "3000000.00"
+      },
+      "infrastructure-alternative": {
+        "state": "APPROVED",
+        "units": 0,
+        "cost_rub": "0.00"
+      },
+      "pending-infrastructure": {
+        "state": "RESERVED",
+        "units": 1,
+        "cost_rub": "500000.00"
+      },
+      "repair": {
+        "state": "CONFIRMED_SIMULATION",
+        "units": 3,
+        "cost_rub": "30000.00"
+      },
+      "training": {
+        "state": "CONFIRMED_SIMULATION",
+        "units": 8,
+        "cost_rub": "0.00"
+      },
+      "unaffordable": {
+        "state": "APPROVED",
+        "units": 0,
+        "cost_rub": "0.00"
+      }
+    },
+    "durable_capital_ledger": false,
+    "source_operations_performed": 0,
+    "scenario_assumptions": [
+      "units",
+      "cost",
+      "urgency",
+      "deadline",
+      "duration",
+      "benefit horizon"
+    ]
+  },
+  "exact_recompute": true,
+  "stale_source_denied": true,
+  "old_backup_plan_denied": true,
+  "valuation_example": {
+    "historical_btc": "0.01111111",
+    "affects_cash": false
+  },
+  "source_revision_exported": false,
+  "durable_capital_ledger": "NOT IMPLEMENTED",
+  "real_users": "NO-GO",
+  "independent_operator": "NOT EXECUTED"
+}

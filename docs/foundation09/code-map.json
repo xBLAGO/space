@@ -1,0 +1,1298 @@
+{
+  "src/xblago/domain/universal_balance.py": [
+    {
+      "name": "enabled",
+      "line": 24
+    },
+    {
+      "name": "kopecks",
+      "line": 28
+    },
+    {
+      "name": "rubles",
+      "line": 37
+    },
+    {
+      "name": "code",
+      "line": 41
+    },
+    {
+      "name": "RolePolicy",
+      "line": 47
+    },
+    {
+      "name": "Demand",
+      "line": 58
+    },
+    {
+      "name": "Option",
+      "line": 66
+    },
+    {
+      "name": "Step",
+      "line": 80
+    },
+    {
+      "name": "Scenario",
+      "line": 88
+    },
+    {
+      "name": "UniversalCollectiveBalance",
+      "line": 96
+    },
+    {
+      "name": "_PlanningModel",
+      "line": 201
+    },
+    {
+      "name": "require",
+      "line": 52
+    },
+    {
+      "name": "__init__",
+      "line": 97
+    },
+    {
+      "name": "_guard",
+      "line": 108
+    },
+    {
+      "name": "_snapshot",
+      "line": 115
+    },
+    {
+      "name": "inspect",
+      "line": 125
+    },
+    {
+      "name": "simulate",
+      "line": 163
+    },
+    {
+      "name": "__init__",
+      "line": 203
+    },
+    {
+      "name": "_validate_option",
+      "line": 229
+    },
+    {
+      "name": "_apply",
+      "line": 254
+    },
+    {
+      "name": "_invariants",
+      "line": 340
+    },
+    {
+      "name": "run",
+      "line": 369
+    },
+    {
+      "name": "actor",
+      "line": 181
+    }
+  ],
+  "src/xblago/domain/asset_registry.py": [
+    {
+      "name": "fingerprint",
+      "line": 18
+    },
+    {
+      "name": "apply_checkpoint",
+      "line": 31
+    },
+    {
+      "name": "check_frontiers",
+      "line": 44
+    },
+    {
+      "name": "personal_export",
+      "line": 73
+    },
+    {
+      "name": "suggest_claim",
+      "line": 80
+    },
+    {
+      "name": "AssetRegistry",
+      "line": 90
+    },
+    {
+      "name": "__init__",
+      "line": 91
+    },
+    {
+      "name": "tx",
+      "line": 95
+    },
+    {
+      "name": "body",
+      "line": 103
+    },
+    {
+      "name": "stamp",
+      "line": 120
+    },
+    {
+      "name": "owned",
+      "line": 122
+    },
+    {
+      "name": "current",
+      "line": 127
+    },
+    {
+      "name": "emit",
+      "line": 130
+    },
+    {
+      "name": "draft",
+      "line": 139
+    },
+    {
+      "name": "prepare",
+      "line": 161
+    },
+    {
+      "name": "commit",
+      "line": 175
+    },
+    {
+      "name": "revoke",
+      "line": 202
+    },
+    {
+      "name": "erase",
+      "line": 214
+    },
+    {
+      "name": "feed",
+      "line": 219
+    },
+    {
+      "name": "balance",
+      "line": 230
+    }
+  ],
+  "src/xblago/domain/help_service.py": [
+    {
+      "name": "fingerprint",
+      "line": 17
+    },
+    {
+      "name": "scrub",
+      "line": 26
+    },
+    {
+      "name": "apply_checkpoint",
+      "line": 32
+    },
+    {
+      "name": "purge_user",
+      "line": 41
+    },
+    {
+      "name": "suggest_draft",
+      "line": 51
+    },
+    {
+      "name": "HelpService",
+      "line": 57
+    },
+    {
+      "name": "personal_export",
+      "line": 225
+    },
+    {
+      "name": "__init__",
+      "line": 58
+    },
+    {
+      "name": "tx",
+      "line": 60
+    },
+    {
+      "name": "code",
+      "line": 89
+    },
+    {
+      "name": "_text",
+      "line": 92
+    },
+    {
+      "name": "audience",
+      "line": 96
+    },
+    {
+      "name": "_row",
+      "line": 104
+    },
+    {
+      "name": "_view",
+      "line": 112
+    },
+    {
+      "name": "get",
+      "line": 120
+    },
+    {
+      "name": "feed",
+      "line": 122
+    },
+    {
+      "name": "emit",
+      "line": 126
+    },
+    {
+      "name": "draft",
+      "line": 132
+    },
+    {
+      "name": "_check",
+      "line": 148
+    },
+    {
+      "name": "prepare",
+      "line": 165
+    },
+    {
+      "name": "commit",
+      "line": 185
+    }
+  ],
+  "src/xblago/domain/local_ledger.py": [
+    {
+      "name": "LocalLedger",
+      "line": 14
+    },
+    {
+      "name": "__init__",
+      "line": 15
+    },
+    {
+      "name": "tx",
+      "line": 18
+    },
+    {
+      "name": "_views",
+      "line": 26
+    },
+    {
+      "name": "observations",
+      "line": 50
+    },
+    {
+      "name": "balance",
+      "line": 55
+    },
+    {
+      "name": "_verified_balance",
+      "line": 61
+    }
+  ],
+  "src/xblago/core/uel_schema.py": [
+    {
+      "name": "enabled",
+      "line": 24
+    },
+    {
+      "name": "require_synthetic",
+      "line": 27
+    },
+    {
+      "name": "validate",
+      "line": 35
+    },
+    {
+      "name": "migrate_local",
+      "line": 45
+    }
+  ],
+  "src/xblago/core/uel_local.py": [
+    {
+      "name": "unavailable",
+      "line": 11
+    },
+    {
+      "name": "target",
+      "line": 14
+    },
+    {
+      "name": "seal",
+      "line": 17
+    },
+    {
+      "name": "heads",
+      "line": 20
+    },
+    {
+      "name": "insert_record",
+      "line": 26
+    },
+    {
+      "name": "apply_checkpoint",
+      "line": 49
+    },
+    {
+      "name": "retained",
+      "line": 55
+    },
+    {
+      "name": "check",
+      "line": 66
+    },
+    {
+      "name": "sources",
+      "line": 82
+    },
+    {
+      "name": "row_refs",
+      "line": 112
+    },
+    {
+      "name": "append",
+      "line": 116
+    },
+    {
+      "name": "synchronize",
+      "line": 129
+    }
+  ],
+  "src/xblago/core/uel_checkpoint.py": [
+    {
+      "name": "fail",
+      "line": 36
+    },
+    {
+      "name": "digest",
+      "line": 40
+    },
+    {
+      "name": "hex64",
+      "line": 44
+    },
+    {
+      "name": "encode",
+      "line": 48
+    },
+    {
+      "name": "decode",
+      "line": 52
+    },
+    {
+      "name": "public",
+      "line": 64
+    },
+    {
+      "name": "create_key",
+      "line": 68
+    },
+    {
+      "name": "load_key",
+      "line": 78
+    },
+    {
+      "name": "signed",
+      "line": 85
+    },
+    {
+      "name": "verify_signed",
+      "line": 89
+    },
+    {
+      "name": "root",
+      "line": 103
+    },
+    {
+      "name": "verify_checkpoint",
+      "line": 114
+    },
+    {
+      "name": "verify_chain",
+      "line": 130
+    },
+    {
+      "name": "_receipts",
+      "line": 153
+    },
+    {
+      "name": "_publish_head",
+      "line": 162
+    },
+    {
+      "name": "_verify_head",
+      "line": 174
+    },
+    {
+      "name": "initialize",
+      "line": 184
+    },
+    {
+      "name": "_locked",
+      "line": 214
+    },
+    {
+      "name": "accept",
+      "line": 226
+    },
+    {
+      "name": "_accept",
+      "line": 235
+    },
+    {
+      "name": "_read",
+      "line": 286
+    },
+    {
+      "name": "_receive",
+      "line": 296
+    },
+    {
+      "name": "_send",
+      "line": 303
+    },
+    {
+      "name": "exchange",
+      "line": 309
+    },
+    {
+      "name": "serve",
+      "line": 317
+    },
+    {
+      "name": "configuration",
+      "line": 336
+    },
+    {
+      "name": "policy",
+      "line": 354
+    },
+    {
+      "name": "proof",
+      "line": 359
+    },
+    {
+      "name": "verify_reply",
+      "line": 375
+    },
+    {
+      "name": "guard",
+      "line": 389
+    },
+    {
+      "name": "enroll",
+      "line": 415
+    },
+    {
+      "name": "main",
+      "line": 428
+    },
+    {
+      "name": "Handler",
+      "line": 322
+    },
+    {
+      "name": "handle",
+      "line": 323
+    }
+  ],
+  "src/xblago/core/context_fencing.py": [
+    {
+      "name": "ContextConflict",
+      "line": 13
+    },
+    {
+      "name": "BufferedMemory",
+      "line": 18
+    },
+    {
+      "name": "Generation",
+      "line": 55
+    },
+    {
+      "name": "enabled",
+      "line": 112
+    },
+    {
+      "name": "respond",
+      "line": 116
+    },
+    {
+      "name": "__init__",
+      "line": 15
+    },
+    {
+      "name": "__init__",
+      "line": 19
+    },
+    {
+      "name": "all",
+      "line": 21
+    },
+    {
+      "name": "semantic_records",
+      "line": 22
+    },
+    {
+      "name": "semantic_history",
+      "line": 23
+    },
+    {
+      "name": "set",
+      "line": 24
+    },
+    {
+      "name": "delete",
+      "line": 29
+    },
+    {
+      "name": "clear",
+      "line": 33
+    },
+    {
+      "name": "save_semantic",
+      "line": 35
+    },
+    {
+      "name": "replace_semantic",
+      "line": 42
+    },
+    {
+      "name": "apply",
+      "line": 51
+    },
+    {
+      "name": "__init__",
+      "line": 56
+    },
+    {
+      "name": "current",
+      "line": 70
+    },
+    {
+      "name": "check",
+      "line": 73
+    },
+    {
+      "name": "reject",
+      "line": 77
+    },
+    {
+      "name": "record",
+      "line": 80
+    },
+    {
+      "name": "clear_history",
+      "line": 81
+    },
+    {
+      "name": "agent",
+      "line": 82
+    },
+    {
+      "name": "commit",
+      "line": 93
+    },
+    {
+      "name": "BoundProvider",
+      "line": 85
+    },
+    {
+      "name": "generate",
+      "line": 86
+    }
+  ],
+  "src/xblago/core/privacy_control.py": [
+    {
+      "name": "DeletionBlocked",
+      "line": 13
+    },
+    {
+      "name": "deletion_blockers",
+      "line": 27
+    },
+    {
+      "name": "purge_user",
+      "line": 59
+    },
+    {
+      "name": "PrivacyControl",
+      "line": 78
+    },
+    {
+      "name": "open",
+      "line": 80
+    },
+    {
+      "name": "__init__",
+      "line": 93
+    },
+    {
+      "name": "reconcile",
+      "line": 128
+    },
+    {
+      "name": "flush",
+      "line": 156
+    },
+    {
+      "name": "_uid",
+      "line": 169
+    },
+    {
+      "name": "_lineage_targets",
+      "line": 173
+    },
+    {
+      "name": "_apply",
+      "line": 190
+    },
+    {
+      "name": "channel_owner",
+      "line": 274
+    }
+  ],
+  "src/xblago/core/data_lifecycle.py": [
+    {
+      "name": "RetentionBlocked",
+      "line": 11
+    },
+    {
+      "name": "require",
+      "line": 14
+    },
+    {
+      "name": "intent",
+      "line": 25
+    },
+    {
+      "name": "retire_help",
+      "line": 29
+    },
+    {
+      "name": "retire_user_help",
+      "line": 47
+    },
+    {
+      "name": "apply_event",
+      "line": 54
+    },
+    {
+      "name": "sweep",
+      "line": 82
+    },
+    {
+      "name": "backup_root",
+      "line": 145
+    },
+    {
+      "name": "managed_backup",
+      "line": 151
+    },
+    {
+      "name": "assert_backup_not_retired",
+      "line": 162
+    },
+    {
+      "name": "retire_backup",
+      "line": 170
+    }
+  ],
+  "src/xblago/integrations/identity.py": [
+    {
+      "name": "digest",
+      "line": 30
+    },
+    {
+      "name": "IdentityRuntime",
+      "line": 34
+    },
+    {
+      "name": "__init__",
+      "line": 35
+    },
+    {
+      "name": "enabled",
+      "line": 39
+    },
+    {
+      "name": "require_enabled",
+      "line": 51
+    },
+    {
+      "name": "active",
+      "line": 56
+    },
+    {
+      "name": "mint",
+      "line": 61
+    },
+    {
+      "name": "new_session",
+      "line": 74
+    },
+    {
+      "name": "session_row",
+      "line": 78
+    },
+    {
+      "name": "session",
+      "line": 91
+    },
+    {
+      "name": "require_fresh",
+      "line": 97
+    },
+    {
+      "name": "sessions",
+      "line": 105
+    },
+    {
+      "name": "revoke",
+      "line": 116
+    },
+    {
+      "name": "telegram_challenge",
+      "line": 129
+    },
+    {
+      "name": "telegram_login",
+      "line": 142
+    },
+    {
+      "name": "rp",
+      "line": 173
+    },
+    {
+      "name": "passkey_options",
+      "line": 184
+    },
+    {
+      "name": "passkey_verify",
+      "line": 217
+    },
+    {
+      "name": "methods",
+      "line": 276
+    },
+    {
+      "name": "remove_method",
+      "line": 288
+    },
+    {
+      "name": "set_password",
+      "line": 324
+    },
+    {
+      "name": "merge",
+      "line": 347
+    }
+  ],
+  "src/xblago/integrations/web.py": [
+    {
+      "name": "ApiError",
+      "line": 30
+    },
+    {
+      "name": "_now",
+      "line": 36
+    },
+    {
+      "name": "_iso",
+      "line": 40
+    },
+    {
+      "name": "verify_telegram_init_data",
+      "line": 44
+    },
+    {
+      "name": "_required_text",
+      "line": 67
+    },
+    {
+      "name": "_optional_text",
+      "line": 73
+    },
+    {
+      "name": "_choice",
+      "line": 81
+    },
+    {
+      "name": "_optional_amount",
+      "line": 87
+    },
+    {
+      "name": "_currency",
+      "line": 101
+    },
+    {
+      "name": "_decode_json_field",
+      "line": 110
+    },
+    {
+      "name": "_classify_payment_risk",
+      "line": 120
+    },
+    {
+      "name": "WebApp",
+      "line": 137
+    },
+    {
+      "name": "BlagoWebHandler",
+      "line": 1172
+    },
+    {
+      "name": "__init__",
+      "line": 31
+    },
+    {
+      "name": "__init__",
+      "line": 138
+    },
+    {
+      "name": "check_auth_rate",
+      "line": 150
+    },
+    {
+      "name": "_ensure_schema",
+      "line": 166
+    },
+    {
+      "name": "register",
+      "line": 292
+    },
+    {
+      "name": "login",
+      "line": 319
+    },
+    {
+      "name": "telegram_login",
+      "line": 347
+    },
+    {
+      "name": "new_link_code",
+      "line": 362
+    },
+    {
+      "name": "redeem_telegram_link",
+      "line": 386
+    },
+    {
+      "name": "_redeem_telegram_link",
+      "line": 392
+    },
+    {
+      "name": "new_session",
+      "line": 484
+    },
+    {
+      "name": "session",
+      "line": 496
+    },
+    {
+      "name": "logout",
+      "line": 510
+    },
+    {
+      "name": "me",
+      "line": 515
+    },
+    {
+      "name": "update_me",
+      "line": 524
+    },
+    {
+      "name": "history",
+      "line": 551
+    },
+    {
+      "name": "chat",
+      "line": 554
+    },
+    {
+      "name": "delete_memory",
+      "line": 571
+    },
+    {
+      "name": "rows",
+      "line": 578
+    },
+    {
+      "name": "create_item",
+      "line": 586
+    },
+    {
+      "name": "_table",
+      "line": 611
+    },
+    {
+      "name": "analytics",
+      "line": 616
+    },
+    {
+      "name": "create_asset",
+      "line": 661
+    },
+    {
+      "name": "assets",
+      "line": 683
+    },
+    {
+      "name": "asset",
+      "line": 691
+    },
+    {
+      "name": "create_resource_offer",
+      "line": 701
+    },
+    {
+      "name": "resource_offers",
+      "line": 736
+    },
+    {
+      "name": "resource_offer",
+      "line": 744
+    },
+    {
+      "name": "create_payment_request",
+      "line": 754
+    },
+    {
+      "name": "payment_requests",
+      "line": 814
+    },
+    {
+      "name": "payment_request",
+      "line": 827
+    },
+    {
+      "name": "offer_payment_request",
+      "line": 851
+    },
+    {
+      "name": "incoming_payment_offers",
+      "line": 912
+    },
+    {
+      "name": "accept_payment_offer",
+      "line": 927
+    },
+    {
+      "name": "simulate_payment",
+      "line": 973
+    },
+    {
+      "name": "confirm_fulfillment",
+      "line": 1001
+    },
+    {
+      "name": "economy_events",
+      "line": 1060
+    },
+    {
+      "name": "economy_analytics",
+      "line": 1082
+    },
+    {
+      "name": "_payment_request_in_tx",
+      "line": 1101
+    },
+    {
+      "name": "_record_fulfillment_event",
+      "line": 1107
+    },
+    {
+      "name": "_record_contribution_event",
+      "line": 1130
+    },
+    {
+      "name": "do_GET",
+      "line": 1175
+    },
+    {
+      "name": "do_POST",
+      "line": 1207
+    },
+    {
+      "name": "do_PATCH",
+      "line": 1214
+    },
+    {
+      "name": "do_DELETE",
+      "line": 1217
+    },
+    {
+      "name": "_cookie",
+      "line": 1220
+    },
+    {
+      "name": "_token",
+      "line": 1227
+    },
+    {
+      "name": "_json",
+      "line": 1237
+    },
+    {
+      "name": "_body",
+      "line": 1249
+    },
+    {
+      "name": "_check_origin",
+      "line": 1263
+    },
+    {
+      "name": "_api",
+      "line": 1276
+    },
+    {
+      "name": "_api_impl",
+      "line": 1297
+    },
+    {
+      "name": "authorize",
+      "line": 557
+    }
+  ],
+  "src/xblago/agents/personal_assistant.py": [
+    {
+      "name": "PersonalAssistantAgent",
+      "line": 22
+    },
+    {
+      "name": "_language_for_text",
+      "line": 372
+    },
+    {
+      "name": "_text",
+      "line": 376
+    },
+    {
+      "name": "_remembered_text",
+      "line": 418
+    },
+    {
+      "name": "_forgot_text",
+      "line": 425
+    },
+    {
+      "name": "_missing_memory_text",
+      "line": 432
+    },
+    {
+      "name": "_extract_personal_facts",
+      "line": 439
+    },
+    {
+      "name": "_safe_history_text",
+      "line": 458
+    },
+    {
+      "name": "_without_unconfirmed_claims",
+      "line": 465
+    },
+    {
+      "name": "__init__",
+      "line": 36
+    },
+    {
+      "name": "welcome_message",
+      "line": 64
+    },
+    {
+      "name": "respond",
+      "line": 72
+    },
+    {
+      "name": "history",
+      "line": 193
+    },
+    {
+      "name": "_help_text",
+      "line": 196
+    },
+    {
+      "name": "_user_profile_text",
+      "line": 227
+    },
+    {
+      "name": "_agent_profile_text",
+      "line": 236
+    },
+    {
+      "name": "_memory_text",
+      "line": 247
+    },
+    {
+      "name": "_history_text",
+      "line": 266
+    },
+    {
+      "name": "_generate_assistant_response",
+      "line": 276
+    },
+    {
+      "name": "_forget_denied_fact",
+      "line": 298
+    },
+    {
+      "name": "_remember_from_conversation",
+      "line": 305
+    },
+    {
+      "name": "_extract_semantic_memory",
+      "line": 318
+    },
+    {
+      "name": "_record_and_return",
+      "line": 349
+    },
+    {
+      "name": "_append_history",
+      "line": 363
+    }
+  ],
+  "src/xblago/domain/collective_calculator.py": [
+    {
+      "name": "AccountingError",
+      "line": 29
+    },
+    {
+      "name": "number",
+      "line": 33
+    },
+    {
+      "name": "canonical",
+      "line": 45
+    },
+    {
+      "name": "digest",
+      "line": 49
+    },
+    {
+      "name": "exact_arithmetic",
+      "line": 53
+    },
+    {
+      "name": "Quote",
+      "line": 63
+    },
+    {
+      "name": "Valuation",
+      "line": 72
+    },
+    {
+      "name": "OfflineRateProvider",
+      "line": 86
+    },
+    {
+      "name": "ValueEngine",
+      "line": 97
+    },
+    {
+      "name": "LabRegistry",
+      "line": 142
+    },
+    {
+      "name": "HelpAccountingView",
+      "line": 368
+    },
+    {
+      "name": "quantity_coverage",
+      "line": 412
+    },
+    {
+      "name": "wrapped",
+      "line": 55
+    },
+    {
+      "name": "__init__",
+      "line": 88
+    },
+    {
+      "name": "at",
+      "line": 93
+    },
+    {
+      "name": "__init__",
+      "line": 98
+    },
+    {
+      "name": "evaluate",
+      "line": 108
+    },
+    {
+      "name": "__init__",
+      "line": 148
+    },
+    {
+      "name": "close",
+      "line": 171
+    },
+    {
+      "name": "participant",
+      "line": 174
+    },
+    {
+      "name": "_actor",
+      "line": 181
+    },
+    {
+      "name": "_row",
+      "line": 185
+    },
+    {
+      "name": "_body",
+      "line": 193
+    },
+    {
+      "name": "draft",
+      "line": 211
+    },
+    {
+      "name": "prepare",
+      "line": 231
+    },
+    {
+      "name": "commit",
+      "line": 244
+    },
+    {
+      "name": "revoke",
+      "line": 270
+    },
+    {
+      "name": "erase",
+      "line": 286
+    },
+    {
+      "name": "delete_participant",
+      "line": 295
+    },
+    {
+      "name": "record_valuation",
+      "line": 301
+    },
+    {
+      "name": "export_own",
+      "line": 324
+    },
+    {
+      "name": "restore",
+      "line": 332
+    },
+    {
+      "name": "balance",
+      "line": 336
+    },
+    {
+      "name": "__init__",
+      "line": 374
+    },
+    {
+      "name": "read",
+      "line": 377
+    }
+  ]
+}

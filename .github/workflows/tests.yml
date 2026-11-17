@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -71,6 +71,8 @@ jobs:
           PYTHONPATH=src python docs/ledger01/check_vectors.py --output "$RUNNER_TEMP/uel-offline-results.json"
       - name: UEL 0.3 checkpoint custody and repair evidence
         run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
+      - name: Foundation 09 synthetic 100-participant collective planning
+        run: PYTHONPATH=.:src python -m tools.foundation09_lab --output "$RUNNER_TEMP/foundation09-lab.json"
       - name: Durable assets on guarded identity privacy and recovery
         run: PYTHONPATH=.:src python -m tools.durable_asset_lab --output "$RUNNER_TEMP/durable-asset-lab.json"
       - name: Collective Calculator offline accounting demonstration
@@ -97,6 +99,7 @@ jobs:
             ${{ runner.temp }}/uel-offline-results.json
             ${{ runner.temp }}/uel03-lab-evidence.json
             ${{ runner.temp }}/uel03-full-regression.json
+            ${{ runner.temp }}/foundation09-lab.json
 
   docker:
     runs-on: ubuntu-latest
@@ -349,3 +352,9 @@ jobs:
         run: |
           docker run --rm --network none -v "$PWD/tools:/app/tools:ro" -v "$PWD/tests:/app/tests:ro" -v "$PWD/docs/uel03:/app/docs/uel03:ro" --entrypoint python \
             xblago-space:${{ github.sha }} -m unittest tests.test_uel_checkpoint tests.test_uel_checkpoint_vectors -v
+
+
+      - name: Docker Foundation 09 synthetic collective planning (no network)
+        run: |
+          docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python \
+            xblago-space:${{ github.sha }} -m tools.foundation09_lab --output /tmp/foundation09-lab.json
