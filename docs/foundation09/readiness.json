@@ -1,0 +1,18 @@
+{
+  "format": "foundation09-readiness-1",
+  "runtime_source_sha": "429784d6dd6676c61998d17945319c4f66d57810",
+  "isolated_read_only_planning": "GO",
+  "durable_capital_accounting": "NO-GO",
+  "real_participants": "NO-GO",
+  "real_payments": "NO-GO",
+  "independent_federation": "NO-GO",
+  "existing_release_gates_changed": false,
+  "feature_default": "OFF",
+  "blocking_requirements": [
+    "Versioned UEL capital source contract and additive migration",
+    "Durable exact approvals, reservations and atomic event commit",
+    "Independent checkpoint recovery and concurrent double-spend tests for capital domain",
+    "Real-device, provider, operator and privacy release evidence",
+    "Independent security review and explicit admission decision"
+  ]
+}

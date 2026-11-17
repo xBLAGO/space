@@ -285,8 +285,10 @@ class IntegrationTests(unittest.TestCase):
     def test_удаление_памяти_сохраняет_G09(self):
         uid = self.lab.app.session(self.lab.a)[0]
         self.lab.app.store.set_memory(uid, 'city', 'Синтетический город')
+        scenario = self.make_scenario()
+        self.assertTrue(self.lab.app.store.delete_memory(uid, 'city'))
         with self.assertRaises(AccountingError):
-            self.model.simulate(self.lab.a, self.scenario)
+            self.model.simulate(self.lab.a, scenario)
 
     def test_ротация_сессии_отклоняет_старый_token(self):
         self.lab.app.login('uel_synthetic_owner', checkpoint_fixture.fixture.PASSWORD, old_token=self.lab.a)

@@ -1,0 +1,50 @@
+{
+  "format": "foundation09-verification-1",
+  "base_sha": "06b3889afa906f1ac3af8eca6130f0e6fce6cec9",
+  "runtime_source_sha": "429784d6dd6676c61998d17945319c4f66d57810",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/43937362466",
+  "full_regression": {
+    "status": "PASS",
+    "tests_per_run": 684,
+    "runs": 2,
+    "seconds": [
+      199.587,
+      200.97
+    ],
+    "inherited_tests": 638,
+    "new_tests": 46
+  },
+  "docker": "PASS",
+  "chrome_virtual_webauthn": "PASS",
+  "help_browser_cycle": "PASS",
+  "synthetic_mini_app": "PASS",
+  "frozen_uel_vectors": {
+    "executed": 72,
+    "passed": 72,
+    "expected_results_modified": false
+  },
+  "local_focused": {
+    "tests": 46,
+    "seconds": 54.922,
+    "status": "PASS"
+  },
+  "strengthened_memory_deletion_test": {
+    "status": "PASS",
+    "seconds": 3.731,
+    "note": "Test-only strengthening after runtime source commit; final HEAD CI must verify again."
+  },
+  "lab_evidence_sha256": "b12b4f5b111f7ef2296ae9dfff159e092d39a7953e3cf7f5cb7ec971c3a4eac8",
+  "application_schema_changed": false,
+  "previous_migration_manifest_unchanged": true,
+  "production_touched": false,
+  "independent_audit": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "real_llm_quality": "NOT EXECUTED",
+  "durable_capital": "NOT IMPLEMENTED",
+  "earlier_local_full_run": {
+    "tests": 681,
+    "status": "PASS",
+    "exact_source_attestation": false,
+    "reason": "Intermediate checkout changed during run; not final-source evidence."
+  }
+}

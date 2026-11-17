@@ -163,7 +163,7 @@
     "tests/test_uel_checkpoint_vectors.py": "e027337772b0b8b13f8f4ce3c91758405410538242b5334b0a662ddabe8589de",
     "tests/test_uel_local.py": "e52a0f33b5ac3f7428fce50432fa3ec519795c6c476294ac25b414668f4c3a4d",
     "tests/test_unified_mvp.py": "d8cb4a207075acd9accafd86148ea74faa328b117cc32a99ab63364a941dc7c5",
-    "tests/test_universal_balance.py": "928a91da0804c2f1cb27394531a2d93df8e30538f8e0d97da4b7cdd6664523f5",
+    "tests/test_universal_balance.py": "2026720deec5cd7e0a35093db8e64487cd6288a7f58a7a1422e0b905d34ace5b",
     "tests/test_web.py": "1a549328fbaef45a08f01db7aaae094113bcc169eb6b66e8962dead77cf3ce03",
     "tools/build_macos_sqlite_driver.py": "746eb20f74bef46a9036d981041b9da71b169addf4c3058095c00b07d28268ea",
     "tools/build_sqlite.py": "eedd970c2a7724905ea2dec0821be819731be8edee36299aee94d36d8ae7d8b0",
