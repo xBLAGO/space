@@ -43,7 +43,7 @@ def verify(key, signature, body, domain=DOMAIN):
     except (ValueError,TypeError,InvalidSignature) as exc:raise CapitalError('Invalid synthetic signature') from exc
 
 
-def validate_policy(policy):
+def _legacy_validate_policy(policy):
     if type(policy) is not dict or set(policy)!={'format','id','version','currency','members','evidence_key'}:raise CapitalError('Policy schema')
     if policy['format']!='capital-lab-policy-1' or policy['currency']!='RUB' or type(policy['version']) is not int or policy['version']!=1:raise CapitalError('Unsupported policy')
     ident(policy['id'])
@@ -62,9 +62,34 @@ def validate_policy(policy):
     if len(evidence)!=32 or evidence in keys:raise CapitalError('Independent fixture evidence key required')
 
 
-def empty(policy):
-    validate_policy(policy)
+def _legacy_empty(policy,validate=True):
+    if validate:_legacy_validate_policy(policy)
     return {'policy':copy.deepcopy(policy),'lots':{},'proposals':{},'approvals':{},'reservations':{},'evidence_used':[], 'revoked_keys':[]}
+
+
+def validate_policy(policy):
+    from xblago.domain import capital_governance as gov
+    return gov.validate_policy(policy) if gov.is_policy(policy) else _legacy_validate_policy(policy)
+
+
+def empty(policy):
+    from xblago.domain import capital_governance as gov
+    return gov.initial(policy) if gov.is_policy(policy) else _legacy_empty(policy)
+
+
+def policy_domain(policy):
+    from xblago.domain import capital_governance as gov
+    return gov.POLICY_DOMAIN if gov.is_policy(policy) else 'BLAGO-CAPITAL-POLICY-1\n'
+
+
+def command_domain(state):
+    from xblago.domain import capital_governance as gov
+    return gov.DOMAIN if gov.is_policy(state['policy']) else DOMAIN
+
+
+def transition(previous,command,signature,recorded_at):
+    from xblago.domain import capital_governance as gov
+    return gov.transition(previous,command,signature,recorded_at) if gov.is_policy(previous['policy']) else _legacy_transition(previous,command,signature,recorded_at)
 
 
 def balance(state):
@@ -101,7 +126,7 @@ def signed_evidence(state, command, kind, subject, value):
     state['evidence_used'].append(receipt)
 
 
-def transition(previous, command, signature, recorded_at):
+def _legacy_transition(previous, command, signature, recorded_at,domain=DOMAIN):
     """Pure reference transition, also used by a separate offline verifier process."""
     s=copy.deepcopy(previous);policy=s['policy']
     fields={'fund','version','policy_hash','operation_id','key_id','type','expires_at','data','evidence'}
@@ -112,7 +137,7 @@ def transition(previous, command, signature, recorded_at):
     member=policy['members'].get(command['key_id']);kind=command['type'];actor=command['key_id']
     if not member or actor in s['revoked_keys'] or ROLES.get(kind) not in member['roles']:raise CapitalError('Authority denied')
     if type(command['expires_at']) is not int or not recorded_at < command['expires_at'] <= recorded_at+86400 or recorded_at>=member['expires_at']:raise CapitalError('Authority expired')
-    verify(member['public_key'],signature,command)
+    verify(member['public_key'],signature,command,domain)
     d=command['data']
     if type(d) is not dict:raise CapitalError('Data object required')
     required={
@@ -215,7 +240,11 @@ def retire(db,fid,journal):
 
 def purge_member(db,uid,journal):
     if not schema.installed(db):return
-    for row in db.execute('SELECT fund_id FROM capital_members WHERE blago_user_id=?',(uid,)).fetchall():retire(db,row[0],journal)
+    for row in db.execute('SELECT fund_id FROM capital_members WHERE blago_user_id=?',(uid,)).fetchall():
+        from xblago.domain import capital_governance as gov
+        state=json.loads(db.execute('SELECT state FROM capital_funds WHERE id=?',(row[0],)).fetchone()[0])
+        if gov.is_policy(state['policy']):gov.purge(db,uid,journal,row[0])
+        else:retire(db,row[0],journal)
 
 
 def apply_checkpoint(db,event,journal):
@@ -224,7 +253,11 @@ def apply_checkpoint(db,event,journal):
     held=db.execute('SELECT 1 FROM capital_holds WHERE target_tag=?',(event['target'],)).fetchone()
     if not held and root and fingerprint(db,root[0],journal)==event['state']:return
     db.execute('INSERT OR IGNORE INTO capital_holds VALUES (?,?)',(event['target'],'unverified-restore'))
-    if root:retire(db,root[0],journal)
+    if root:
+        from xblago.domain import capital_governance as gov
+        state=json.loads(db.execute('SELECT state FROM capital_funds WHERE id=?',(root[0],)).fetchone()[0])
+        if gov.is_policy(state['policy']):gov.hold(db,root[0],journal)
+        else:retire(db,root[0],journal)
 
 
 def capital_sources(db,c):
@@ -239,6 +272,8 @@ def capital_sources(db,c):
     result={};seen=set()
     for root in db.execute('SELECT * FROM capital_funds'):
         fid=root['id'];tag=c.journal.tag('capital-record',fid);seen.add(tag)
+        from xblago.core import governance_schema
+        if governance_schema.installed(db) and db.execute('SELECT 1 FROM govcap_holds WHERE fund_id=?',(fid,)).fetchone():continue
         if db.execute('SELECT 1 FROM capital_holds WHERE target_tag=?',(tag,)).fetchone() or fingerprint(db,fid,c.journal)!=root['head_tag'] or latest.get(tag)!=root['head_tag']:raise JournalUnavailable('Capital frontier mismatch')
         result[('CAPITAL',tag)]={'id':fid,'root':dict(root),'state':root['head_tag'],'rows':[dict(r) for r in db.execute('SELECT * FROM capital_versions WHERE fund_id=? ORDER BY version',(fid,))]}
     for tag in latest:
@@ -263,10 +298,14 @@ class CapitalLedger:
         validate_policy(policy);fid=policy['id'];state=empty(policy)
         if set(members)!=set(policy['members']) or set(signatures)!=set(members):raise CapitalError('All member proofs required')
         with self.tx(token) as (db,uid,c):
+            from xblago.domain import capital_governance as gov
+            gov.guard(policy,db)
             mapping={key:self.app.identity.session_row(db,t,fresh=True)['blago_user_id'] for key,t in members.items()}
             if uid not in mapping.values() or len(set(mapping.values()))!=len(mapping):raise CapitalError('Distinct authenticated participants required')
             if any(int(time.time())>=r['expires_at'] for r in policy['members'].values()):raise CapitalError('Expired bootstrap key')
-            for key,sig in signatures.items():verify(policy['members'][key]['public_key'],sig,policy,'BLAGO-CAPITAL-POLICY-1\n')
+            for key,sig in signatures.items():
+                if gov.is_policy(policy):gov.canonical_signature(sig)
+                verify(policy['members'][key]['public_key'],sig,policy,policy_domain(policy))
             if db.execute('SELECT 1 FROM capital_holds WHERE target_tag=?',(c.journal.tag('capital-record',fid),)).fetchone():raise CapitalError('Retired fund')
             old=db.execute('SELECT * FROM capital_funds WHERE id=?',(fid,)).fetchone()
             if old:
@@ -303,9 +342,11 @@ class CapitalLedger:
             fid=ident(command['fund']);member=self._member(db,uid,fid)
             if command.get('key_id')!=member['key_id']:raise CapitalError('Session/key substitution')
             root=db.execute('SELECT * FROM capital_funds WHERE id=?',(fid,)).fetchone();state=json.loads(root['state'])
+            from xblago.domain import capital_governance as gov
+            gov.guard(state['policy'],db)
             key=state['policy']['members'][member['key_id']]
-            if member['key_id'] in state['revoked_keys'] or int(time.time())>=key['expires_at']:raise CapitalError('Key expired/revoked')
-            verify(key['public_key'],signature,command)
+            if member['key_id'] in state['revoked_keys'] or member['key_id'] in state.get('exited',[]) or int(time.time())>=key['expires_at']:raise CapitalError('Key expired/revoked')
+            verify(key['public_key'],signature,command,command_domain(state))
             for row in db.execute('SELECT body,version FROM capital_versions WHERE fund_id=? ORDER BY version',(fid,)):
                 event=json.loads(row['body'])
                 if event.get('command',{}).get('operation_id')==command.get('operation_id'):
@@ -318,6 +359,7 @@ class CapitalLedger:
             updated=transition(state,command,signature,now);version=root['version']+1
             changed=db.execute('UPDATE capital_funds SET version=?,state=? WHERE id=? AND version=?',(version,canonical(updated),fid,root['version'])).rowcount
             if changed!=1:raise CapitalError('CAS conflict')
+            if command['type']=='MemberExited':db.execute('DELETE FROM capital_members WHERE fund_id=? AND key_id=?',(fid,member['key_id']))
             event={'type':command['type'],'command':command,'signature':signature,'recorded_at':now,'state_hash':digest(updated)}
             self._emit(db,c,fid,version,event)
             return {'fund':fid,'version':version,'status':'COMMITTED'}
@@ -325,8 +367,10 @@ class CapitalLedger:
     def inspect(self,token,fid):
         with self.tx(token) as (db,uid,c):
             member=self._member(db,uid,fid);root=db.execute('SELECT * FROM capital_funds WHERE id=?',(fid,)).fetchone();state=json.loads(root['state'])
+            from xblago.domain import capital_governance as gov
+            gov.guard(state['policy'],db)
             row=state['policy']['members'][member['key_id']]
-            if 'VIEW' not in row['roles'] or member['key_id'] in state['revoked_keys'] or int(time.time())>=row['expires_at']:raise CapitalError('View denied')
+            if 'VIEW' not in row['roles'] or member['key_id'] in state['revoked_keys'] or member['key_id'] in state.get('exited',[]) or int(time.time())>=row['expires_at']:raise CapitalError('View denied')
             result,_=balance(state)
             return dict(result,fund=fid,version=root['version'],scope='SYNTHETIC_PINNED_MEMBERS_ONLY')
 
@@ -335,13 +379,17 @@ class CapitalLedger:
         with self.tx(token) as (db,uid,c):
             member=self._member(db,uid,fid)
             root=db.execute('SELECT state FROM capital_funds WHERE id=?',(fid,)).fetchone();state=json.loads(root[0]);row=state['policy']['members'][member['key_id']]
-            if 'VIEW' not in row['roles'] or member['key_id'] in state['revoked_keys'] or int(time.time())>=row['expires_at']:raise CapitalError('View denied')
+            from xblago.domain import capital_governance as gov
+            gov.guard(state['policy'],db)
+            if 'VIEW' not in row['roles'] or member['key_id'] in state['revoked_keys'] or member['key_id'] in state.get('exited',[]) or int(time.time())>=row['expires_at']:raise CapitalError('View denied')
             return {'format':'capital-private-audit-1','fund':fid,'events':[json.loads(r[0]) for r in db.execute('SELECT body FROM capital_versions WHERE fund_id=? ORDER BY version',(fid,))]}
 
     def erase(self,token,fid,confirmation):
         if confirmation!='УДАЛИТЬ СИНТЕТИЧЕСКИЙ ФОНД':raise CapitalError('Explicit destructive confirmation required')
         with self.tx(token) as (db,uid,c):
             self._member(db,uid,fid)
+            from xblago.domain import capital_governance as gov
+            if gov.is_policy(json.loads(db.execute('SELECT state FROM capital_funds WHERE id=?',(fid,)).fetchone()[0])['policy']):raise CapitalError('Governance members may exit, not erase others rights')
             retire(db,fid,c.journal)
             event={'kind':'capital_state','owner':'','target':c.journal.tag('capital-record',fid),'state':'ERASED','recorded_at':0}
             db.execute('INSERT INTO privacy_outbox VALUES (?,?)',('capital-erase:'+str(uuid4()),canonical(event)))
@@ -351,4 +399,12 @@ class CapitalLedger:
 def personal_export(db,uid):
     if not schema.installed(db):return []
     # Export only this participant's private binding, never other members or a shared history.
-    return [dict(r) for r in db.execute('SELECT fund_id,key_id,public_key,roles FROM capital_members WHERE blago_user_id=?',(uid,))]
+    result=[dict(r) for r in db.execute('SELECT fund_id,key_id,public_key,roles FROM capital_members WHERE blago_user_id=?',(uid,))]
+    from xblago.domain import capital_governance as gov
+    for item in result:
+        state=json.loads(db.execute('SELECT state FROM capital_funds WHERE id=?',(item['fund_id'],)).fetchone()[0])
+        if gov.is_policy(state['policy']):
+            item['roles']=canonical(state['policy']['members'][item['key_id']]['roles'])
+            item['policy_version']=state['policy']['version']
+            item['authority_revoked']=item['key_id'] in state['revoked_keys'] or item['key_id'] in state['exited']
+    return result

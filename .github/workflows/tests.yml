@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/foundation-09-1-durable-capital", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -71,6 +71,10 @@ jobs:
           PYTHONPATH=src python docs/ledger01/check_vectors.py --output "$RUNNER_TEMP/uel-offline-results.json"
       - name: UEL 0.3 checkpoint custody and repair evidence
         run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
+      - name: Collective governance and independent verifier (synthetic only)
+        run: |
+          PYTHONPATH=.:src python -m tools.governance_lab --output "$RUNNER_TEMP/governance092-lab.json" --proof-output "$RUNNER_TEMP/governance092-proof.json" --pins-output "$RUNNER_TEMP/governance092-producer-pins.json"
+          python tools/independent_capital_verifier.py "$RUNNER_TEMP/governance092-proof.json" --pins "$RUNNER_TEMP/governance092-producer-pins.json" > "$RUNNER_TEMP/governance092-independent-result.json"
       - name: Durable synthetic capital and signed approvals
         run: PYTHONPATH=.:src python -m tools.capital_lab --output "$RUNNER_TEMP/capital091-lab.json"
       - name: Foundation 09 synthetic 100-participant collective planning
@@ -103,6 +107,10 @@ jobs:
             ${{ runner.temp }}/uel03-full-regression.json
             ${{ runner.temp }}/foundation09-lab.json
             ${{ runner.temp }}/capital091-lab.json
+            ${{ runner.temp }}/governance092-lab.json
+            ${{ runner.temp }}/governance092-proof.json
+            ${{ runner.temp }}/governance092-producer-pins.json
+            ${{ runner.temp }}/governance092-independent-result.json
 
   docker:
     runs-on: ubuntu-latest
@@ -357,6 +365,8 @@ jobs:
             xblago-space:${{ github.sha }} -m unittest tests.test_uel_checkpoint tests.test_uel_checkpoint_vectors -v
 
 
+      - name: Docker collective governance and independent verifier (no network)
+        run: docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python xblago-space:${{ github.sha }} -m tools.governance_lab --output /tmp/governance092-lab.json
       - name: Docker durable synthetic capital (no network)
         run: docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python xblago-space:${{ github.sha }} -m tools.capital_lab --output /tmp/capital091-lab.json
       - name: Docker Foundation 09 synthetic collective planning (no network)

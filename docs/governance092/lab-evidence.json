@@ -1,0 +1,50 @@
+{
+  "format": "capital-governance-lab-2",
+  "status": "PASS",
+  "participants": 100,
+  "policy_version": 2,
+  "exited_members": 1,
+  "balance": {
+    "currency": "RUB",
+    "declared_minor": 1000000000,
+    "unverified_minor": 0,
+    "verified_minor": 1000000000,
+    "available_minor": 297000000,
+    "reserved_minor": 0,
+    "spent_minor": 703000000,
+    "refunded_minor": 0,
+    "net_spent_minor": 703000000,
+    "real_funds_verified": false,
+    "fund": "synthetic-governed-capital",
+    "version": 17,
+    "scope": "SYNTHETIC_PINNED_MEMBERS_ONLY"
+  },
+  "independent_implementation_verifier": {
+    "status": "PASS",
+    "events": 17,
+    "policy_version": 2,
+    "balance": {
+      "currency": "RUB",
+      "declared_minor": 1000000000,
+      "unverified_minor": 0,
+      "verified_minor": 1000000000,
+      "available_minor": 297000000,
+      "reserved_minor": 0,
+      "spent_minor": 703000000,
+      "refunded_minor": 0,
+      "net_spent_minor": 703000000,
+      "real_funds_verified": false
+    },
+    "uel_inclusion": "PINNED_SIGNED_CHECKPOINT",
+    "payload_binding": "TRUSTED_NODE_ATTESTATION",
+    "implementation": "INDEPENDENT_NO_RUNTIME_IMPORTS",
+    "independent_operator": "NOT EXECUTED",
+    "source_truth_proven": false
+  },
+  "proof_sha256": "aac125e350e86a1505b71aebf58cc08ad9ed1e27ece1804afbc8cd583a7866b6",
+  "producer_pins_sha256": "65e3d55f2e17187fffb98392d1411218a87979724ab7367e51e4eafdeb35f58e",
+  "pins_source": "SYNTHETIC_PRODUCER_NOT_INDEPENDENT_PINNING",
+  "independent_operator": "NOT EXECUTED",
+  "independent_audit": "NOT EXECUTED",
+  "real_users": "NO-GO"
+}

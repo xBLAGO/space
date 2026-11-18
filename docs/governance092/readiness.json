@@ -1,0 +1,19 @@
+{
+  "format": "capital-governance-readiness-2",
+  "initial_source_sha": "6c315c71c884715c6e8786bdd06d75288079a949",
+  "isolated_synthetic_governance": "GO_SUBJECT_TO_FINAL_HEAD_CI",
+  "real_users": "NO-GO",
+  "real_funds": "NO-GO",
+  "production": "NO-GO",
+  "independent_federation": "NO-GO",
+  "default_enabled": false,
+  "existing_release_gates_changed": false,
+  "residual_risks": [
+    "Full-quorum collusion and Sybil/key-custody independence",
+    "Trusted node assertion for private HMAC payload binding",
+    "Independent current-tip custody and independent operator test",
+    "Pseudonymous signed history retained after UID unlink; real retention policy required",
+    "No automatic v1 import or membership/key/electorate reconfiguration",
+    "Frozen source recovery does not recreate positive authority"
+  ]
+}

@@ -1,0 +1,405 @@
+{
+  "format": "capital-governance-evidence-2",
+  "exact_base_sha": "c3c6896076c9e24932ebdb0ee14e7c04065b91dd",
+  "initial_source_sha": "6c315c71c884715c6e8786bdd06d75288079a949",
+  "initial_source_ci": "https://github.com/xBLAGO/space/actions/runs/44308053656",
+  "initial_source_ci_full": {
+    "runs": 2,
+    "passed_per_run": 771,
+    "seconds": [
+      300.838,
+      313.016
+    ],
+    "inherited": 725,
+    "new": 46
+  },
+  "initial_source_ci_docker": "PASS",
+  "initial_source_ci_browser_virtual_webauthn": "PASS",
+  "initial_source_ci_synthetic_mini_app": "PASS",
+  "initial_source_local_full": {
+    "passed": 771,
+    "seconds": 1292.505
+  },
+  "late_review_fix": {
+    "issue": "Minority extra-vote flapping reset delay while quorum remained sufficient",
+    "resolution": "Continuous live quorum keeps its original activation time; reset only below quorum",
+    "additional_tests": 2,
+    "pure_tests_passed": 26,
+    "seconds": 0.369
+  },
+  "strengthened_fresh_restore_and_verifier": {
+    "passed": 3,
+    "seconds": 49.303
+  },
+  "final_new_test_count": 48,
+  "expected_final_full_count": 773,
+  "final_head_ci": "REQUIRED_AND_RECORDED_EXTERNALLY_IN_PR_AND_CI_ARTIFACT",
+  "frozen_vectors": {
+    "passed": 72,
+    "golden_results_changed": false
+  },
+  "previous_migration_manifest_unchanged": true,
+  "new_migration": {
+    "checksum": "efb89ce086b6f7b15a21473ca995297820996ef54a1da72281acd04513fdfc96",
+    "default_enabled": false,
+    "legacy_funds_unchanged": true,
+    "module": "xblago.core.governance_schema",
+    "optional": true,
+    "version": "capital_governance_002"
+  },
+  "proof_sha256": "aac125e350e86a1505b71aebf58cc08ad9ed1e27ece1804afbc8cd583a7866b6",
+  "producer_pins_sha256": "65e3d55f2e17187fffb98392d1411218a87979724ab7367e51e4eafdeb35f58e",
+  "pins_provenance": "GENERATED_BY_SAME_SYNTHETIC_OPERATOR_NOT_INDEPENDENT_TRUST",
+  "logs_sha256": {
+    "gov092-focused-final.log": "b6d22c79325dd4fd0fdf4afe56845b97dcda77e51d3d79be528f2e7512c9832d",
+    "gov092-signer-pin.log": "d9ca2b1785e2fc3dc806b57befc66fdc79430c3755608f4e9628314e246eede0",
+    "gov092-source-full.log": "00e6260f5fd40e02ce6aa0e3cdc0794f96d8ef0527b6d08702065dbc2f1c47ea",
+    "gov092-strengthened.log": "0eb41102b067982899b41f641e88abf20c46e5ce1236506ea40a50fae3b25629",
+    "gov092-liveness-final.log": "e3ff628bb058517068b7966783cc59555c05e1dcadff20703462c3f75b4bd859"
+  },
+  "independent_implementation": "NO_RUNTIME_IMPORTS_DIFFERENT_REPLAY",
+  "independent_authorship": false,
+  "independent_audit": "NOT EXECUTED",
+  "independent_operator": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "real_users": "NO-GO",
+  "production_changed": false,
+  "tests": [
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_одного_согласования_недостаточно",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 74
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_два_независимых_согласования_и_расход",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 79
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_повтор_голоса_не_увеличивает_кворум",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 82
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_нельзя_делегировать_голос_управления",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 86
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_делегирование_ограничено_предложением",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 90
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_один_подписант_не_заменяет_двух_участников",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 94
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_делегатор_не_голосует_повторно_после_представителя",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 100
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_нет_цепочки_делегирования",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 104
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_отзыв_делегирования_освобождает_резерв",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 108
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_истечение_делегирования_блокирует_расход",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 114
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_отзыв_одного_голоса_не_отменяет_прошлый_расход",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 118
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_отзыв_голоса_перед_расходом",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 121
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_выход_участника_сохраняет_капитал_остальных",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 125
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_выход_согласующего_отзывает_его_голос",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 128
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_выход_не_снижает_фиксированный_кворум",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 132
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_политика_требует_сверхкворума_и_задержки",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 138
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_отзыв_голоса_управления_сбрасывает_задержку",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 144
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_новая_политика_отзывает_старые_резервы",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 150
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_нельзя_ослабить_порог_или_сменить_электорат",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 156
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_одиночный_отзыв_ключа_управления_запрещён",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 161
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_серверная_подпись_не_становится_голосом",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 165
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_возврат_под_новой_политикой_не_создаёт_денег",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 169
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_сверхкворум_отзывает_ключ_без_новых_полномочий",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 173
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_подпись_не_меняет_формат_при_проверке",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 179
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_лишний_голос_не_откладывает_активацию_кворума",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 185
+    },
+    {
+      "class": "PureGovernanceTests",
+      "name": "test_отзыв_лишнего_голоса_не_даёт_миноритарного_вето",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 192
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_миграция_повтор_и_старый_capital_installer",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 237
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_безопасный_выход_не_удаляет_фонд",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 242
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_удаление_аккаунта_сохраняет_права_остальных",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 249
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_удаление_согласующего_освобождает_только_незавершённое",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 257
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_один_участник_не_стирает_общий_фонд",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 261
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_флаг_выключен_а_privacy_удаление_работает",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 264
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_отдельный_верификатор_без_импорта_runtime",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 271
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_инъекции_подмена_событий_и_UEL_отклоняются",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 283
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_чужая_сессия_не_голосует_чужим_ключом",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 291
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_повреждённый_капитал_закрывает_доступ",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 295
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_старый_backup_не_возвращает_выход_и_не_стирает_остальных",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 300
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_свежий_backup_после_выхода_сохраняет_подтверждённый_капитал",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 312
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_два_workers_повторяют_резерв_без_нового_расхода",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 345
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_конкурентный_отзыв_и_расход",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 348
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_crash_до_журнала_не_меняет_согласование",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 352
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_crash_после_journal_замораживает_но_не_стирает_фонд",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 355
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_crash_после_commit_возвращает_старую_квитанцию",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 360
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_два_резерва_одних_денег_требуют_CAS_и_остатка",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 363
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_конкурентные_голоса_не_теряются_и_не_удваиваются",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 371
+    },
+    {
+      "class": "GovernanceIntegrationTests",
+      "name": "test_неизвестный_privacy_signer_не_блокирует_будущее_удаление_молча",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 380
+    },
+    {
+      "class": "GovernanceMigrationTests",
+      "name": "test_новая_миграция_не_меняет_старые_checksums_или_записи",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 392
+    },
+    {
+      "class": "GovernanceMigrationTests",
+      "name": "test_ошибка_DDL_откатывает_только_новую_миграцию",
+      "status": "PASS_SOURCE_CI_OR_FOCUSED",
+      "file": "tests/test_governance.py",
+      "line": 399
+    }
+  ]
+}
