@@ -25,3 +25,7 @@
 | Regression | Прежние 684 теста, frozen 72 vectors и CI Docker/browser | Full CI |
 
 Независимый implementation/audit и отдельный независимый оператор не выполнены. Проверка нескольких процессов на одном компьютере относится к local integration. Нет evidence реального поступления или траты денег.
+
+## Фактические результаты
+
+Source `66bb337e212f1ab63eba6c31549028b2c4439e57`: 721/721 локально и дважды в CI, 72/72 frozen vectors, Docker/browser/synthetic Mini App и 100-participant lab PASS. Финальный набор усилен до 41 нового теста (725 всего). Отдельные исправленные restore проверки используют новый файл без WAL старого экземпляра; 3/3 PASS. Итоговый HEAD CI указан в PR #36. Полная перечень методов и hashes доказательств — evidence.json.

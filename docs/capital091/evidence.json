@@ -1,0 +1,230 @@
+{
+  "format": "capital091-evidence-1",
+  "exact_base_sha": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+  "runtime_source_sha": "66bb337e212f1ab63eba6c31549028b2c4439e57",
+  "source_ci": "https://github.com/xBLAGO/space/actions/runs/44267543310",
+  "source_ci_tests": {
+    "runs": 2,
+    "passed_per_run": 721,
+    "seconds": [
+      180.102,
+      186.302
+    ],
+    "inherited_tests": 684,
+    "new_tests_at_source": 37
+  },
+  "source_ci_docker": "PASS",
+  "source_ci_browser_virtual_webauthn": "PASS",
+  "source_ci_help_browser": "PASS",
+  "source_ci_synthetic_mini_app": "PASS",
+  "source_ci_100_participant_lab": "PASS",
+  "local_source_full": {
+    "passed": 721,
+    "seconds": 867.937
+  },
+  "frozen_vectors": {
+    "passed": 72,
+    "expected_results_changed": false
+  },
+  "added_strengthening": {
+    "new_tests": 4,
+    "actual_expiry_test_replaced": true,
+    "restore_on_separate_file_without_old_wal": true,
+    "corrected_restore_tests": 3,
+    "corrected_restore_seconds": 12.919,
+    "status": "PASS_IN_FOCUSED_RUNS",
+    "final_full_head_ci": "REQUIRED_SEPARATE_PR_EVIDENCE"
+  },
+  "current_new_tests": 41,
+  "expected_full_head_count": 725,
+  "prior_migration_manifest_preserved": true,
+  "new_migration": {
+    "checksum": "7536d75126b35a206205a5e7b983433169f78fdeed5953bc713caeb78f095ae5",
+    "default_enabled": false,
+    "module": "xblago.core.capital_schema",
+    "optional": true,
+    "uel_extension": "CAPITAL alongside unchanged ASSET/HELP headers",
+    "version": "capital_local_001"
+  },
+  "lab_sha256": "20cf72fe784a9cd58088bbbcf4abe5d43d63c496e268f95cdece593d7fa5f03c",
+  "logs_sha256": {
+    "capital091-full.log": "a37602312e73efcd163d331b4c0c02718ecc807d4f5c6fdf2aa5d4d1a112cf93",
+    "capital091-targeted.log": "e81dd80c66b329e5f5aa1f41eebf77ed51d864621ce7d2f9bebd750c6fed05f8",
+    "capital091-strengthened.log": "37242af296f28a28b760d21c66aace8646a7395d5097db03172c3bc784a2a39e",
+    "capital091-restored-independent.log": "962d570ba6e9324c514d402dc76c5ecef18450a212858649f43d3f6ab62997ca",
+    "capital091-source66.log": "cc051cfed89b831c8b28255a8db872e9432b830ca19566fe1bb69ff02f3bfdec"
+  },
+  "tests": [
+    {
+      "name": "test_неподтверждённое_поступление_недоступно",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_полный_цикл_возврат_и_точный_баланс",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_частичный_резерв_нескольких_источников",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_освобождение_не_возвращает_согласование",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_отзыв_согласования_освобождает_резерв",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_нельзя_отменой_создать_возврат",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_ложная_подпись_поступления",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_подмена_суммы_квитанции",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_самоподтверждение_поступления_запрещено",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_подмена_политики_и_подписи",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_истёкшее_полномочие",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_истечение_согласования_до_расхода",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_отозванный_ключ_не_исполняет",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_повтор_расхода_не_тратит_дважды",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_дубликат_источника_не_создаёт_капитал",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_подмена_участника_и_чужая_сессия",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_независимый_запуск_верификатора_и_подмена",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_перезапуск_и_сохранение_источников",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_повторная_миграция_и_integrity",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_ошибка_проекции_откатывает_операцию",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_повреждение_источника_закрывает_доступ",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_удаление_и_старый_backup_не_возвращают_данные",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_удаление_аккаунта_закрывает_связанный_фонд",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_потеря_внешнего_checkpoint_закрывает_капитал",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_два_процесса_не_резервируют_дважды",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_три_процесса_повторяют_один_резерв",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_crash_до_журнала_откатывает_резерв",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_crash_после_commit_возвращает_исходную_квитанцию",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_crash_после_журнала_не_восстанавливает_разрешение",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_ремонт_индекса_не_меняет_капитал",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_флаг_выключен_но_удаление_сохраняется",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_отзыв_и_расход_сериализованы",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_коллизия_ключа_повтора",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_экспорт_не_раскрывает_чужие_привязки",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_отозванный_автор_не_даёт_новых_полномочий",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_старый_backup_не_возвращает_отозванный_approval",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_удаление_аккаунта_не_возвращается_из_backup",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_миграция_сохраняет_старую_историю_и_checksums",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_ошибка_DDL_возвращает_старую_схему",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_самосогласование_запрещено_даже_с_ролью_APPROVE",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    },
+    {
+      "name": "test_согласующий_не_исполняет_собственное_разрешение",
+      "status": "PASS_IN_SOURCE_OR_FOCUSED_RUN"
+    }
+  ],
+  "independent_verifier_implementation": "NOT IMPLEMENTED",
+  "same_author_offline_verifier_process": "PASS",
+  "independent_audit": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "production_touched": false,
+  "old_runtime_downgrade": "INCOMPATIBLE_FAIL_CLOSED",
+  "earlier_restore_harness_failure": "Replaced original-path overwrite with fresh independent target without source WAL; corrected tests PASS."
+}

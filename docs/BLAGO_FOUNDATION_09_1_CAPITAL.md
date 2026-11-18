@@ -60,3 +60,13 @@ flowchart LR
 - Реальные устройства, пользователи, HF и независимый operator/security review не испытаны.
 
 GO возможно только для изолированного синтетического ядра после успешных проверок. Реальный пилот, деньги и независимая федерация остаются NO-GO. Прежние release gates не повышаются. До реального применения нужны независимый verifier implementation, review схемы доверия/удаления, ротация/quorum, эксплуатационные restore evidence и отдельное явное решение о допуске.
+
+## Результаты проверок
+
+Runtime source `66bb337e212f1ab63eba6c31549028b2c4439e57` прошёл [CI 44267543310](https://github.com/xBLAGO/space/actions/runs/44267543310): два полных прогона 721/721 за 180,102 и 186,302 секунды, Docker и 100-participant lab PASS. Локальный полный прогон этого source — 721/721 за 867,937 секунды. Сохранены 684 прежних теста, frozen UEL 72/72 без изменения ожидаемых результатов. Browser/virtual WebAuthn, Help cycle и synthetic Mini App прошли в CI.
+
+После этого добавлены четыре теста и усилены существующие expiry/restore проверки. Новые authority и restore проверки прошли отдельно. Итоговый набор содержит 41 новый тест и ожидаемые 725 общих. Финальный HEAD CI, его SHA и результат фиксируются в Draft PR #36 отдельно от source evidence, чтобы не создавать самоссылочный commit ID.
+
+При усилении restore выявлен недостаток раннего harness: перезапись старого SQLite по исходному пути не исключала сохранённый WAL. Эти проверки заменены восстановлением в новый отдельный файл без WAL исходного экземпляра. Три исправленных сценария удаления/отзыва прошли за 12,919 секунды. Ранний harness не используется как доказательство фактического отката.
+
+[Machine-readable evidence](capital091/evidence.json), [100-participant balance](capital091/lab-evidence.json), [readiness](capital091/readiness.json). Старые migration checksums и прежний отчёт Asset Registry 09.1 сохранены. Production, secrets, HF, webhook, main, merge и deployment не изменены.

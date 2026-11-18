@@ -148,7 +148,7 @@
     "src/xblago/integrations/web.py": "8b564af00a67ed5256d01585cae9355177e3fdea479784b4d0341a7b51a175fd",
     "tests/test_asset_registry.py": "df7db586725ed1c3d377a16201161e6a7987ca322466b9af1bf5ab29548cfb39",
     "tests/test_browser_e2e.py": "aa66e11d9287e1bb2f8ee2c2b8454b2f8859199b543667c2d470c9b83787dfbf",
-    "tests/test_capital.py": "8ec280915fb38083a0677c156863149d3a8ab479d8a6e4ccbd0263fb89c0ac79",
+    "tests/test_capital.py": "d80c3705e0173a7b167789b7d154fe85322ee911695c7e34c2f51b31731b3b80",
     "tests/test_collective_calculator.py": "464e16c35b5c7dc2605cd21137be9b5ad6e700e78b045395d181ddc1d74a56c6",
     "tests/test_context_fencing.py": "5be104222282a5912e2297030b3a7dee7144f516aafe49418712ea18cbdbce14",
     "tests/test_data_lifecycle.py": "5ab159a90e416f044d8bf35faacbc20426042c120ca987d54228d9beebef6104",

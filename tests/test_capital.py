@@ -65,8 +65,8 @@ class CapitalTests(unittest.TestCase):
         self.act(0,'CapitalReceived',{'lot':lid,'amount_minor':value,'source':'source-'+lid})
         if verified:self.act(1,'CapitalVerified',{'lot':lid},receipt(self.oracle,self.policy,'RECEIVED',lid,value,'receipt-'+lid))
 
-    def approved(self,pid='project',value=6000):
-        self.act(0,'ProposalCreated',{'proposal':pid,'amount_minor':value,'purpose':'shared-tools','destination':'fixture-provider','expires_at':int(time.time())+3000})
+    def approved(self,pid='project',value=6000,seconds=3000):
+        self.act(0,'ProposalCreated',{'proposal':pid,'amount_minor':value,'purpose':'shared-tools','destination':'fixture-provider','expires_at':int(time.time())+seconds})
         self.act(1,'ApprovalGranted',{'proposal':pid,'approval':'approval-'+pid})
 
     def reserve(self,pid='project',allocations=None):
@@ -130,8 +130,8 @@ class CapitalTests(unittest.TestCase):
         with self.assertRaises(CapitalError):self.service.execute(self.tokens[0],c,sign(self.keys[0],c))
 
     def test_истечение_согласования_до_расхода(self):
-        self.received();self.approved();self.reserve()
-        with patch('time.time',return_value=time.time()+3100):
+        self.received();self.approved(seconds=60);self.reserve()
+        with patch('time.time',return_value=time.time()+61):
             with self.assertRaises((CapitalError,ApiError)):self.spent()
         self.assertEqual(self.view()['spent_minor'],0)
 
@@ -194,9 +194,11 @@ class CapitalTests(unittest.TestCase):
         self.received();backup=self.lab.app.store.backup_database(self.fixture.root/'capital-backup')
         self.service.erase(self.tokens[0],self.policy['id'],'УДАЛИТЬ СИНТЕТИЧЕСКИЙ ФОНД')
         with self.assertRaises(ApiError):self.view()
-        with backup.open('rb') as source,self.lab.path.open('wb') as dest:dest.write(source.read())
-        restore(self.lab.path,self.lab.journal)
-        with sqlite3.connect(self.lab.path) as db:
+        target=self.fixture.root/'independent-restored-capital.sqlite3'
+        target.write_bytes(backup.read_bytes())
+        self.assertFalse(Path(str(target)+'-wal').exists())
+        restore(target,self.lab.journal)
+        with sqlite3.connect(target) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM capital_funds').fetchone()[0],0)
             self.assertEqual(db.execute('SELECT count(*) FROM capital_members').fetchone()[0],0)
             self.assertGreater(db.execute('SELECT count(*) FROM capital_holds').fetchone()[0],0)
@@ -288,6 +290,29 @@ class CapitalTests(unittest.TestCase):
         self.received();self.approved();self.act(1,'KeyRevoked',{'key_id':'actor0'})
         with self.assertRaises(CapitalError):self.reserve()
 
+    def test_старый_backup_не_возвращает_отозванный_approval(self):
+        self.received();self.approved();self.reserve()
+        backup=self.lab.app.store.backup_database(self.fixture.root/'approval-backup')
+        self.act(1,'ApprovalRevoked',{'approval':'approval-project'})
+        target=self.fixture.root/'independent-restored-capital.sqlite3'
+        target.write_bytes(backup.read_bytes())
+        self.assertFalse(Path(str(target)+'-wal').exists())
+        restore(target,self.lab.journal)
+        with sqlite3.connect(target) as db:
+            self.assertEqual(db.execute('SELECT count(*) FROM capital_funds').fetchone()[0],0)
+            self.assertGreater(db.execute('SELECT count(*) FROM capital_holds').fetchone()[0],0)
+
+    def test_удаление_аккаунта_не_возвращается_из_backup(self):
+        self.received();backup=self.lab.app.store.backup_database(self.fixture.root/'deleted-backup')
+        p=PrivacyService(self.lab.app);preview=p.preview(self.tokens[0]);p.delete(self.tokens[0],preview['challenge'],'УДАЛИТЬ')
+        target=self.fixture.root/'independent-restored-capital.sqlite3'
+        target.write_bytes(backup.read_bytes())
+        self.assertFalse(Path(str(target)+'-wal').exists())
+        restore(target,self.lab.journal)
+        with sqlite3.connect(target) as db:
+            self.assertEqual(db.execute('SELECT count(*) FROM capital_funds').fetchone()[0],0)
+            self.assertEqual(db.execute('SELECT count(*) FROM capital_members').fetchone()[0],0)
+
 
 class MigrationTests(unittest.TestCase):
     def setUp(self):
@@ -308,3 +333,29 @@ class MigrationTests(unittest.TestCase):
             with self.assertRaises(sqlite3.Error):capital_schema.migrate(self.lab.path)
         with sqlite3.connect(self.lab.path) as db:
             self.assertFalse(capital_schema.installed(db));self.assertTrue(uel_schema.validate(db,mandatory=True));self.assertEqual(db.execute('PRAGMA integrity_check').fetchone()[0],'ok')
+
+
+class PureAuthorityTests(unittest.TestCase):
+    def setUp(self):
+        from xblago.domain.capital import empty
+        self.keys=[Ed25519PrivateKey.generate() for _ in range(3)];self.oracle=Ed25519PrivateKey.generate();self.now=int(time.time());self.version=1
+        self.policy={'format':'capital-lab-policy-1','id':'separate-roles','version':1,'currency':'RUB','evidence_key':self.oracle.public_key().public_bytes_raw().hex(),
+            'members':{f'actor{i}':{'public_key':k.public_key().public_bytes_raw().hex(),'roles':['VIEW','DECLARE','VERIFY','PROPOSE','APPROVE','EXECUTE'],'expires_at':self.now+1000} for i,k in enumerate(self.keys)}}
+        self.state=empty(self.policy)
+
+    def act(self,actor,kind,data,evidence=None):
+        from xblago.domain.capital import transition
+        cmd={'fund':self.policy['id'],'version':self.version,'policy_hash':digest(self.policy),'operation_id':'pure-'+str(self.version),'key_id':f'actor{actor}','type':kind,'expires_at':self.now+100,'data':data,'evidence':evidence}
+        self.state=transition(self.state,cmd,sign(self.keys[actor],cmd),self.now);self.version+=1
+
+    def proposal(self):self.act(0,'ProposalCreated',{'proposal':'p','amount_minor':100,'purpose':'tools','destination':'fixture','expires_at':self.now+90})
+
+    def test_самосогласование_запрещено_даже_с_ролью_APPROVE(self):
+        self.proposal()
+        with self.assertRaises(CapitalError):self.act(0,'ApprovalGranted',{'proposal':'p','approval':'a'})
+
+    def test_согласующий_не_исполняет_собственное_разрешение(self):
+        self.act(0,'CapitalReceived',{'lot':'l','amount_minor':100,'source':'s'})
+        self.act(1,'CapitalVerified',{'lot':'l'},receipt(self.oracle,self.policy,'RECEIVED','l',100,'r'))
+        self.proposal();self.act(1,'ApprovalGranted',{'proposal':'p','approval':'a'})
+        with self.assertRaises(CapitalError):self.act(1,'BudgetReserved',{'approval':'a','reservation':'r','allocations':{'l':100}})
