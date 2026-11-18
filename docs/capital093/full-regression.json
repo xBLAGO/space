@@ -1,0 +1,4131 @@
+{
+  "format": "uel03-local-lab-evidence-1",
+  "base": "aa92d96bca0ae8a07e27f8efa724131afb32ad57",
+  "checkout_sha": "5f171ff12e60ba8a11266b57116b4d7b21a4a877",
+  "mode": "SYNTHETIC_LOCAL_ONLY",
+  "status": "PASS",
+  "scope": "full regression",
+  "attempts": [
+    {
+      "attempt": 1,
+      "executed": 821,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "wall_seconds": 2262.526,
+      "elapsed_seconds": 1519.037,
+      "status": "PASS",
+      "records": [
+        {
+          "test": "test_asset_registry.RegistryTests.test_G09_другой_процесс_после_отзыва_не_записывает_ответ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_G09_изменение_заявления_отклоняет_старую_генерацию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_account_merge_с_заявлениями_безопасно_отказывает",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_crash_до_journal_не_сохраняет_публикацию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_crash_после_commit_повтор_возвращает_ту_же_квитанцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_crash_после_journal_до_SQL_commit_закрывает_запись",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_legacy_не_импортируется_и_не_удваивает_баланс",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_владение_связано_с_действительной_сессией",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_выключенный_flag_не_отключает_защиту_установленных_данных",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_гонка_отзыва_с_подтверждением_не_возвращает_доступность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_два_store_instances_видят_одинаковую_версию_после_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_два_подтверждения_одной_версии_не_перезаписывают_друг_друга",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_количество_актива_не_удваивается_при_расширении_доступности",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_конкурентные_черновики_имеют_один_канонический_ID",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_миграция_не_применяется_к_пустой_или_неизвестной_базе",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_неверный_checksum_и_удалённый_trigger_блокируют_запуск",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_неизвестное_количество_не_становится_нулём",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_нельзя_повысить_достоверность_полем_клиента",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_несколько_процессов_повторяют_один_commit",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_отзыв_и_изменение_аудитории_без_старых_публичных_версий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_ошибка_DDL_откатывает_всю_миграцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_ошибка_источника_не_создаёт_оценку_или_платёж",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_повреждение_истории_обнаруживается_до_чтения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_повтор_миграции_ничего_не_импортирует",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_повтор_старой_квитанции_не_меняет_новую_приватность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_повтор_черновика_не_создаёт_дубли",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_подложная_квитанция_не_имитирует_сохранение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_подмена_полей_challenge_обнаруживается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_потеря_witness_не_даёт_ответа_или_нового_согласия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_предположение_не_становится_заявлением_или_согласием",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_просроченное_подтверждение_и_откат_часов",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_просроченные_challenges_очищаются_без_истории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_процессы_конкурируют_за_одну_версию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_прямое_legacy_изменение_управляемого_актива_откатывается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_ротация_сессии_закрывает_старое_подтверждение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_сбой_записи_до_journal_откатывает_операцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_срок_хранения_удаляет_все_версии_и_старый_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_старый_backup_до_миграции_требует_явной_установки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_старый_backup_не_возвращает_отозванное_согласие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_старый_backup_не_возвращает_прежнюю_аудиторию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удаление_аккаунта_из_старой_копии_не_восстанавливает_версии",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удаление_аккаунта_очищает_каноническую_запись_и_сайдкары",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удаление_актива_инвалидирует_подготовленную_генерацию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удаление_версии_не_скрывает_историю_без_отказа",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удаление_всех_версий_и_запрет_восстановления_по_ключу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_удалённый_защитный_trigger_блокирует_запуск",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_черновик_приватен_и_не_означает_готовность_делиться",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_экспорт_не_содержит_подтверждений_и_чужих_версий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_asset_registry.RegistryTests.test_явное_подтверждение_и_SELF_DECLARED",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_browser_e2e.BrowserE2ETest.test_registration_chat_profile_needs_resources_analytics_and_pwa_shell",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_browser_e2e.BrowserE2ETest.test_sqlite_backup_contains_user_data",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_crash_до_журнала_откатывает_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_crash_после_commit_возвращает_исходную_квитанцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_crash_после_журнала_не_восстанавливает_разрешение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_два_процесса_не_резервируют_дважды",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_дубликат_источника_не_создаёт_капитал",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_истечение_согласования_до_расхода",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_истёкшее_полномочие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_коллизия_ключа_повтора",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_ложная_подпись_поступления",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_независимый_запуск_верификатора_и_подмена",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_нельзя_отменой_создать_возврат",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_неподтверждённое_поступление_недоступно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_освобождение_не_возвращает_согласование",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_отзыв_и_расход_сериализованы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_отзыв_согласования_освобождает_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_отозванный_автор_не_даёт_новых_полномочий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_отозванный_ключ_не_исполняет",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_ошибка_проекции_откатывает_операцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_перезапуск_и_сохранение_источников",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_повреждение_источника_закрывает_доступ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_повтор_расхода_не_тратит_дважды",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_повторная_миграция_и_integrity",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_подмена_политики_и_подписи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_подмена_суммы_квитанции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_подмена_участника_и_чужая_сессия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_полный_цикл_возврат_и_точный_баланс",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_потеря_внешнего_checkpoint_закрывает_капитал",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_ремонт_индекса_не_меняет_капитал",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_самоподтверждение_поступления_запрещено",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_старый_backup_не_возвращает_отозванный_approval",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_три_процесса_повторяют_один_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_удаление_аккаунта_закрывает_связанный_фонд",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_удаление_аккаунта_не_возвращается_из_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_удаление_и_старый_backup_не_возвращают_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_флаг_выключен_но_удаление_сохраняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_частичный_резерв_нескольких_источников",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.CapitalTests.test_экспорт_не_раскрывает_чужие_привязки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.MigrationTests.test_миграция_сохраняет_старую_историю_и_checksums",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.MigrationTests.test_ошибка_DDL_возвращает_старую_схему",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.PureAuthorityTests.test_самосогласование_запрещено_даже_с_ролью_APPROVE",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital.PureAuthorityTests.test_согласующий_не_исполняет_собственное_разрешение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_100_участников_10_млн_и_три_копии",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_bool_не_заменяет_счетчик",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_crash_до_commit_не_подписывает",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_crash_после_commit_до_control_UNKNOWN",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_crash_после_control_replay_того_же_голоса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_восстановление_сети_завершает_тот_же_prepare",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_выключенный_flag_не_создает_БД",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_два_из_трех_не_обычный_кворум",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_другая_схема_или_профиль_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_задержка_восстановления_обязательна",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_истекшее_согласование_не_активируется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_истекший_статус",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_история_и_UEL_не_подменяются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_конфликтующий_prepare_отклонён",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_меньшинство_людей_не_меняет_ключи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_неверный_floor_config_не_проходит",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_незавершенная_доставка_не_скрывается_статусом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_неподтвержденный_архив_не_импортируется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_неправильный_genesis_pin",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_новый_верификатор_не_импортирует_runtime",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_один_ключ_человека_не_три_узла",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_один_оператор_не_меняет_ключи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_один_статус_не_доказывает_свежесть",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_одиночная_подпись_не_закрепляет",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_отказ_A_потеря_ключа_ротация_и_новая_копия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_откат_только_SQLite_обнаружен",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_ошибка_контрольного_файла_после_commit_hold",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_параллельный_prepare_между_процессами",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_повтор_доставки_тот_же_сертификат",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_подмена_nonce_статуса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_подмена_подписи_проверяется_независимо",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_подписанный_старый_статус_не_подходит",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_поздний_prepare_не_обходит_60_секунд",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_полный_диск_до_commit_без_голоса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_потеря_control_не_считается_пустой_историей",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_потеря_внешней_вершины_UNKNOWN",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_потерянный_commit_ACK_после_control_идемпотентен",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_прежние_проверенные_форматы_не_изменены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_разделение_сети_не_даёт_ACK",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_ротация_не_меняет_ключи_CapitalLedger",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_ротация_разрешена_после_позднего_durable_delay",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_ротация_с_неразрешенной_историей_запрещена",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_свежесть_без_исходного_сервера",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_сговор_двух_узлов_без_третьего_не_дает_checkpoint",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_согласованный_локальный_откат_обнаружен_другими",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_согласованный_откат_трех_копий_не_обходит_внешний_floor",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_старый_узел_после_ротации_не_текущий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_capital_custody.CustodyTests.test_усечение_ниже_внешней_вершины",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_не_создаётся_второй_реестр_и_память_не_читается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_подтверждённое_исполнение_и_повтор_не_удваивают_flow",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_потеря_witness_закрывает_аналитику",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_публикация_не_обязательство_и_изоляция_аудитории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_сессия_потеряна_и_чужой_id_не_авторизуют_агрегат",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_спор_и_отзыв_корректируют_живую_проекцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.HelpProjectionTests.test_старый_backup_не_возвращает_исполнение_в_проекции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_актив_не_является_общим_имуществом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_видимость_отзывается_с_новой_версией",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_выключен_по_умолчанию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_дубликат_черновика_по_ключу_и_удалённый_ключ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_единицы_не_суммируются_в_один_необоснованный_показатель",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_изменение_доступности_и_отзыв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_изменение_количества_не_сохраняет_старую_оценку_лота",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_конкурентные_подготовки_принимают_одну_версию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_неверные_типы_не_записываются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_неизвестная_оценка_не_ноль",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_нет_двойного_учёта_актива_и_ресурса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_нет_доступности_без_согласия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_откат_часов_не_обновляет_согласие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_оценки_на_дату_и_stock_не_смешан_с_flow",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_повтор_квитанции_без_дублирования_события",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_повторная_оценка_не_создаёт_двойной_стоимости",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_повторная_регистрация_не_возвращает_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_подтверждение_привязано_к_автору_и_содержимому",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_потерянный_процесс_не_восстанавливает_старое_согласие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_приватность_и_изоляция",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_равные_цены_разных_объектов_не_сливаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_сбой_перед_commit_откатывает_событие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_сырой_текст_и_предположения_не_подтверждаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_удаление_экспорт_и_запрет_импорта_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_целостность_и_отсутствие_новых_таблиц_пользователей",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.RegistryTests.test_черновик_не_в_балансе_и_нужна_точная_версия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_float_отрицательные_и_несуществующие_коды_запрещены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_идентичность_результата_независима_от_порядка_котировок",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_историческая_оценка_неизменна_переоценка_отдельна",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_недостоверное_происхождение_и_повтор_источника",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_нельзя_поменять_исходную_цену_при_переоценке",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_несогласованные_курсы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_нет_курсов_и_единственный_источник",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_разные_валюты",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_точность_и_округление_половин_до_сатоши",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_устаревшие_и_будущие_котировки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_collective_calculator.ValueTests.test_частичное_удовлетворение_и_разные_единицы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_CAS_и_пара_истории_сериализуются_до_удаления",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_Help_не_изменяет_семантику_подтверждений",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_crash_после_frontier_до_SQL_не_воскрешает_пару",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_telegram_crash_после_commit_до_ACK_replay_без_новой_генерации",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_telegram_link_сохраняет_данные_и_инвалидирует_обе_генерации",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_telegram_rejected_update_не_перегенерируется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_telegram_повтор_без_LLM_и_без_дублирования_пары",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_буфер_памяти_не_записывается_при_конфликте",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_веб_HTTP_конфликт_409_без_истории_или_Help_suggestion",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_два_процесса_удаление_во_время_LLM",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_две_одновременные_генерации_одна_пара_истории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_другая_копия_DB_меняет_frontier_во_время_final_commit",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_естественные_исправления_памяти_и_версии_сохранены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_изменение_last_seen_не_инвалидирует",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_изменение_session_expiry_или_CSRF_инвалидирует",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_изменение_и_пустое_удаление_инвалидируют",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_миграция_повтор_rollback_и_старый_backup_до_DDL",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_несколько_store_instances_одного_процесса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_нет_SQL_write_lock_на_время_LLM",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_отзыв_сессии_и_удаление_аккаунта",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_очистка_истории_сохраняет_только_атомарную_пару_команды",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_перезапуск_после_COMMITTED_не_фиксирует_ticket_повторно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_подмена_версии_без_journal_не_принимается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_простой_preflight_старого_backup_сверяет_retained_frontier",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_сбой_при_вставке_второй_реплики_откатывает_память_и_первую",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_сессия_другого_участника_не_авторизует_переданный_uid",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_смерть_worker_во_время_LLM_нет_записи_после_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_согласие_и_блокировка_инвалидируют",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_старый_backup_до_миграции_требует_явного_DDL_и_reconcile",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_старый_backup_не_возвращает_версию_и_ticket",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_старый_worker_на_исходном_DB_отклоняется_после_restore_копии",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_три_независимых_процесса_оба_stale_ответа_отклонены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_удаление_непосредственно_перед_commit_без_сиротской_реплики",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_context_fencing.ContextFencingTests.test_чужой_участник_не_инвалидирует_контекст",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_DDL_ошибка_откатывается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_HTTP_consent_требует_CSRF_и_не_принимает_чужой_uid",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_Help_минимизация_без_текста_времени_участников",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_account_delete_Help_не_содержит_ссылок_на_людей",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_backup_retirement_и_физическое_удаление_только_учтённой_копии",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_backup_подмена_байтов_не_удаляется_вслепую",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_consent_withdrawal_инвалидирует_pending_generation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_crash_после_journal_до_SQL_replay_удаления",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_export_не_возвращает_retired_Help_или_чужой_текст",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_future_clock_и_подмена_политики",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_missing_witness_ничего_не_удаляет",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_pending_WebAuthn_удаляется_каскадом_по_TTL",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_receipt_TTL_оставляет_dedupe",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_retention_во_время_LLM_сохраняет_G09",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_retention_на_границе_срока_удаляет_обе_реплики",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_retired_ID_нельзя_вставить_снова",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_symlink_backup_directory_не_перенаправляет_удаление",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_архив_памяти_не_стирает_действующего_потомка_после_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_два_процесса_retention_не_дублируют_эффект",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_действующий_passkey_не_удаляется_автоматически",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_истёкшее_activity_не_возвращается_после_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_не_удалять_актуальные_данные_и_чужие_новые_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_незавершённый_Help_не_превращается_в_успех",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_неоднозначный_legacy_merge_блокирует_retention",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_неясные_границы_legacy_истории_не_угадываются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_отзыв_device_label_не_удаляет_способ_входа",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_отзыв_согласия_стирает_activity_и_запрещает_возврат",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_пара_истории_и_receipt_plaintext_не_восстанавливаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_повтор_sweep_без_повторных_удалений",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_повторная_регистрация_не_возвращает_старую_память",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_после_удаления_и_новой_регистрации_update_не_исполняется_повторно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_потеря_tombstone_вызывает_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_пустая_и_существующая_БД_повторная_миграция",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_сбой_journal_rollback_без_ложного_успеха",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_сертифицированный_backup_до_Help_context_восстанавливается_без_грантов",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_старые_needs_resources_удалены_и_не_возвращаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_старые_отозванные_credentials_и_devices_не_восстанавливаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_старый_backup_до_migration_требует_явной_миграции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_старый_context_checksum_и_идемпотентность_сохранены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_транзакционный_guard_не_даёт_вставить_удалённый_update",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_удаление_generation_ticket_инвалидирует_pending",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_data_lifecycle.DataLifecycleTests.test_экономические_зависимости_не_удаляются_по_догадке",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_economy.EconomyProtocolTest.test_asset_registration_is_self_declared_and_private",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_economy.EconomyProtocolTest.test_competing_acceptance_allows_only_one_executor",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_economy.EconomyProtocolTest.test_duplicate_confirmation_does_not_create_second_contribution",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_economy.EconomyProtocolTest.test_full_external_payment_simulation_without_real_money",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_economy.EconomyProtocolTest.test_rejects_requests_asking_for_bank_secrets",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_гипотезы_цитаты_и_запрет_не_становятся_исправлением",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_единая_база_телеграм_веб_и_повторное_открытие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_естественное_удаление_навыка",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_естественные_варианты_удаления_города",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_запрет_блокирует_также_локальное_исправление",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_запрет_не_мешает_ответу_и_не_вызывает_экстрактор",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_значения_секретов_скрываются_также_в_json_и_коротких_полях",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_инструменты_и_объяснения_не_считаются_секретами",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_исправление_города_с_отрицанием",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_канонические_предпочтения_находятся_без_короткой_истории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_ключи_api_вложенные_секреты_и_неполный_pem_скрываются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_конкурентное_изменение_не_перезаписывается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_настоящие_секреты_по_прежнему_скрываются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_неизвестная_замена_спрашивает_уточнение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_неизвестный_заменяемый_факт_не_придумывается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_неоднозначное_удаление_просит_уточнение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_неподтвержденная_фраза_модели_не_выдается_за_запись",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_несколько_совпадений_старого_значения_не_угадываются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_откат_обновления_включает_архивирование_и_все_алиасы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_отрицательное_значение_не_подменяет_положительное",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_повтор_ручного_сохранения_не_выдается_за_изменение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_повтор_того_же_предпочтения_не_создает_версию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_сбой_провайдера_не_подтверждает_изменение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_синонимы_ключей_сводятся_к_одному_предпочтению",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_смена_предпочтения_не_затрагивает_другую_тему",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_старое_увлечение_можно_явно_заменить_предпочтением",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_стиль_ответов_обновляет_все_известные_ключи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_удаление_из_веб_не_отменяется_текущим_ответом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_удаление_ищет_также_устаревшие_значения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_удаление_кофе_удаляет_всю_цепочку_версий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_удаление_предпочтения_не_удаляет_цель_с_тем_же_словом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation042.Foundation042.test_чай_заменяется_кофе_с_историей_и_синонимами",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation_stack.FoundationStackIntegration.test_actual_pr2_database_upgrades_without_identity_or_data_loss",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_foundation_stack.FoundationStackIntegration.test_existing_economy_memory_cross_channel_identity_and_recovery",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_503_затем_восстановление_диалога_без_потери_вопроса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_503_является_временным_отказом_без_автоповтора",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_length_продолжается_один_раз_и_не_дублирует_префикс",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_missing_finish_reason_при_исчерпанном_бюджете_обнаруживается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_null_пустота_reasoning_only_и_неверный_тип_не_выдаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_overlap_продолжение_без_повтора",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_qwen_think_отделяется_от_видимого_ответа",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_tls_проверка_включена_и_использует_доверенный_ca",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_tool_calls_не_становятся_действиями_или_подтверждениями",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_бюджет_единственного_repair_ограничен",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_завершённые_короткие_ответы_не_требуют_пунктуации_или_repair",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_извлечение_памяти_не_использует_разговорный_prompt_или_repair",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_неизменённый_префикс_не_считается_успешным_завершением",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_неоднозначный_стык_слов_не_угадывается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_неоконченный_code_fence_обнаруживается_при_stop",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_нет_отдельного_классификатора_или_ненужного_вопроса_в_протоколе",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_остаток_общего_deadline_не_разрешает_новый_repair",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_ошибка_продолжения_не_меняет_память_и_не_пишет_частичный_ответ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_повторный_length_не_создаёт_retry_цикл",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_сбой_сети_и_невалидный_json_не_раскрывают_payload",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_успешный_repair_записывает_факт_и_историю_ровно_один_раз",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_generation_reliability.GenerationReliabilityTests.test_чрезмерный_ответ_и_служебные_токены_не_выдаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_crash_до_журнала_не_меняет_согласование",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_crash_после_commit_возвращает_старую_квитанцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_crash_после_journal_замораживает_но_не_стирает_фонд",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_безопасный_выход_не_удаляет_фонд",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_два_workers_повторяют_резерв_без_нового_расхода",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_два_резерва_одних_денег_требуют_CAS_и_остатка",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_инъекции_подмена_событий_и_UEL_отклоняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_конкурентные_голоса_не_теряются_и_не_удваиваются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_конкурентный_отзыв_и_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_миграция_повтор_и_старый_capital_installer",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_неизвестный_privacy_signer_не_блокирует_будущее_удаление_молча",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_один_участник_не_стирает_общий_фонд",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_отдельный_верификатор_без_импорта_runtime",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_повреждённый_капитал_закрывает_доступ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_свежий_backup_после_выхода_сохраняет_подтверждённый_капитал",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_старый_backup_не_возвращает_выход_и_не_стирает_остальных",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_удаление_аккаунта_сохраняет_права_остальных",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_удаление_согласующего_освобождает_только_незавершённое",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_флаг_выключен_а_privacy_удаление_работает",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceIntegrationTests.test_чужая_сессия_не_голосует_чужим_ключом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceMigrationTests.test_новая_миграция_не_меняет_старые_checksums_или_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.GovernanceMigrationTests.test_ошибка_DDL_откатывает_только_новую_миграцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_возврат_под_новой_политикой_не_создаёт_денег",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_выход_не_снижает_фиксированный_кворум",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_выход_согласующего_отзывает_его_голос",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_выход_участника_сохраняет_капитал_остальных",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_два_независимых_согласования_и_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_делегатор_не_голосует_повторно_после_представителя",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_делегирование_ограничено_предложением",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_истечение_делегирования_блокирует_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_лишний_голос_не_откладывает_активацию_кворума",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_нельзя_делегировать_голос_управления",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_нельзя_ослабить_порог_или_сменить_электорат",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_нет_цепочки_делегирования",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_новая_политика_отзывает_старые_резервы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_один_подписант_не_заменяет_двух_участников",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_одиночный_отзыв_ключа_управления_запрещён",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_одного_согласования_недостаточно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_отзыв_голоса_перед_расходом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_отзыв_голоса_управления_сбрасывает_задержку",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_отзыв_делегирования_освобождает_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_отзыв_лишнего_голоса_не_даёт_миноритарного_вето",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_отзыв_одного_голоса_не_отменяет_прошлый_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_повтор_голоса_не_увеличивает_кворум",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_подпись_не_меняет_формат_при_проверке",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_политика_требует_сверхкворума_и_задержки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_сверхкворум_отзывает_ключ_без_новых_полномочий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_governance.PureGovernanceTests.test_серверная_подпись_не_становится_голосом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_accepted_audience_cannot_silently_change",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_audience_change_revokes_old_member_and_previews",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_concurrent_accepts_single_executor",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_crash_after_journal_before_sql_commit_is_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_decline_and_reoffer_requires_new_confirmation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_dispute_removes_completed_statistic",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_draft_private_and_exact_publication_preview",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_duplicate_draft_and_delivery",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_expired_confirmation_and_sensitive_text",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_export_after_audience_revocation_has_no_later_state",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_export_and_account_delete_scrub_other_party",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_helper_withdraw_pending_and_accepted",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_http_retries_csrf_idor_and_bad_llm",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_idor_and_impersonation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_journal_failure_no_success",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_malformed_action_types_are_rejected_without_changes",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_migration_rollback_and_backup_before_help_with_retained_events",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_missing_witness_blocks_reads_and_writes",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_multiprocess_acceptance_and_atomic_event_rollback",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_no_memory_history_llm_contamination",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_old_backup_before_help_migration_requires_offline_migration",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_old_backup_never_republishes_withdrawal",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_restart_and_postcommit_lost_ack_idempotent",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_successful_two_party_cycle_and_statistics",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help01.Help01Tests.test_withdraw_each_stage",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_DR_новый_экземпляр_повторяет_удаление_памяти_и_отзыв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_witness_недоступен_нет_чтения_или_успешной_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_авария_до_journal_откатывает_WAL",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_авария_после_SQL_commit_потерянный_ACK_не_повторяет_событие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_аккаунт_удалён_до_commit_нет_публикации",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_аналитика_не_возвращает_финансы_и_малую_группу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_истёкший_preview_очищается_без_удаления_истории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_копия_без_живого_WAL_не_восстанавливает_публикацию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_отозванная_сессия_не_исполняет_подтверждение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_повтор_просроченной_квитанции_не_даёт_новых_прав",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_подмена_журнала_и_состояния_не_исправляется_автоматически",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_полный_диск_при_fsync_не_даёт_ACK",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_потеря_ключа_не_создаёт_новый_journal",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_пять_аккаунтов_не_раскрывают_единственного_автора",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_старый_DR_и_потерянный_witness_не_выдают_права",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_help_readiness.HelpReadinessTests.test_три_процесса_повторяют_одно_подтверждение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_account_merge_все_новые_fk_память_история_и_отзыв_сессий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_backup_и_перезапуск_сохраняют_защиту_от_replay",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_http_telegram_cookie_csrf_сессии_и_webauthn",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_idle_и_absolute_expiration",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_merge_экономический_конфликт_откатывает_всё",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_restore_сбрасывает_сессии_challenge_и_карантин_telegram",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_telegram_bot_после_перезапуска_и_блокировки_участника",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_telegram_replay_и_подмена_binding_без_частичных_записей",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_telegram_истёкший_challenge_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_telegram_конкурентный_challenge_в_разных_процессах",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_восстановление_забытого_пароля_через_ранее_привязанный_ключ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_истёкший_webauthn_challenge_и_подмена_binding",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_конкурентное_использование_webauthn_challenge",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_конфликт_имени_при_восстановлении_не_меняет_другой_аккаунт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_лимит_ключей_и_неправильный_clientdata_отклоняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_миграция_повтор_и_rollback",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_настоящая_регистрация_и_подпись_webauthn_ротация_и_replay",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_неверная_регистрация_и_cross_user_challenge",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_неверные_signature_origin_rp_uv_handle_и_cross_origin",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_неизвестная_fk_таблица_блокирует_merge_без_потерь",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_необязательная_активность_не_собирается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_отвязка_telegram_только_после_другого_подтверждения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_отзыв_одной_и_всех_других_сессий_и_idor",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_повторный_counter_отклоняется_без_автоматического_слияния",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_смена_пароля_не_продлевает_свежесть_подтверждения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_старый_аккаунт_и_сессия_не_получают_fresh_auth",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_статус_merged_проверяется_при_каждом_запросе",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_удаление_последнего_метода_запрещено_восстановление_через_passkey",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_удаление_чужого_passkey_не_меняет_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_runtime.IdentityRuntimeTests.test_экономические_события_после_успешного_merge_сохраняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_rollback_при_ошибке_после_создания_таблиц",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_web_telegram_mini_app_один_id_после_миграции_и_перезапуска",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_все_старые_данные_и_схема_сохраняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_запуск_приложения_не_применяет_новую_миграцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_коллизия_схемы_и_повреждение_журнала_отклоняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_конкурентная_привязка_одного_credential_не_меняет_владельца",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_конкурентные_telegram_привязки_и_миграции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_недопустимые_challenge_и_события_отклоняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_неинициализированная_и_несуществующая_базы_не_меняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_повтор_telegram_update_после_миграции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_подмена_checksum_или_индекса_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_пустая_инициализированная_база_и_повторный_запуск",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_резервная_копия_до_и_после_миграции_восстанавливается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_существующее_нарушение_fk_блокирует_миграцию_без_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_identity_schema.IdentitySchemaTests.test_чужое_устройство_и_неизвестный_участник_запрещены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_bad_manifest_no_repair",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_base_schema_loss_is_not_recreated",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_experimental_and_live_provider_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_http_finance_disabled_without_writes",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_manifest_and_nonfinancial_surface",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_missing_db_never_created",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_missing_flags_no_schema_write",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_missing_journal_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_missing_witness_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_no_auto_reinitialize",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_restart_backup_revocation_and_memory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.IntegrationCandidateTests.test_workflow_no_push_deployment",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.MainUpgradeIntegrationTests.test_exact_main_to_candidate_upgrade_and_repeat",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_integration_candidate.ReleasePolicyTests.test_all_unapproved_events_refs_shas_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_builds_hugging_face_provider_from_environment",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_builds_local_provider_by_default",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_empty_content_is_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_generates_compact_fallback_with_session_history",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_generates_english_fallback_for_english_user_text",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_generates_natural_fallback_without_template_labels",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_http_errors_log_only_status_and_category_without_retry",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_hugging_face_thinking_mode_is_configurable",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_missing_provider_token_builds_non_networking_fallback",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_null_content_is_rejected_without_stringifying_none",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_openai_compatible_request_matches_hf_chat_completion_shape",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_provider_errors_are_sanitized_and_never_retried",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_reasoning_only_response_with_length_finish_is_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_successful_completion_returns_only_content",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_thinking_auto_omits_provider_specific_parameter",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_llm.LocalPlanningProviderTest.test_timeout_is_sanitized_without_retry",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_база_foundation04_открывается_без_изменения_схемы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_галлюцинация_без_подтверждения_в_тексте_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_изоляция_памяти_истории_и_удаления",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_исправление_перекрывает_семантический_факт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_модель_не_превращает_упоминание_города_в_место_жительства",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_навыки_интересы_предпочтения_и_цели",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_невалидный_json_экстрактора_изолирован",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_отказ_от_запоминания_важнее_разметки_модели",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_отрицание_удаляет_точно_опровергнутый_город",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_отрицания_цитаты_предположения_и_другие_люди",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_очистка_удаляет_также_устаревшие_значения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_ошибка_sqlite_откатывает_изменение_памяти",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_ошибка_второго_вызова_не_меняет_ответ_и_память",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_ошибка_экстрактора_не_портит_полезный_ответ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_поврежденный_ответ_не_портит_историю",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_потребность_не_становится_реальной_заявкой",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_привязка_каналов_сохраняет_историю_и_коллизии_памяти",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_простые_факты_не_требуют_второго_вызова",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_противоречивые_кандидаты_отклоняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_сбой_провайдера_не_меняет_память",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_секреты_не_сохраняются_в_памяти_и_истории",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_memory_pilot.БезопаснаяПамять.test_удаление_всех_версий_с_двоеточием",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_telegram_start_продолжает_существующий_диалог_без_llm",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_telegram_и_web_используют_одинаковый_контекст_после_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_двое_участников_не_разделяют_память_и_историю",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_без_запоминания",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_благодарность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_вопрос_английский",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_гипотеза_не_факт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_гипотеза_о_городе",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_грусть",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_действие_внутри_чата",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_действие_платёж",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_действие_публикация",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_изменение_плана",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_многошаговое_изменение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_многошаговые_эмоции",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_многошаговый_контекст",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_многошаговый_отказ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_многошаговый_ресурс",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_неоднозначное_согласие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_несогласие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_нет_вывода_о_личности",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_неуверенная_мысль",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_обычные_слова_не_запрещены",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_отказ_краткий",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_отказ_публикация",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_отказ_советы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_потребность_инструмент",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_потребность_помолчать",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_потребность_ремонт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_радость",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_разговор_без_цели",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_размышление_о_работе",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_ресурс_вещь",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_ресурс_добровольность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_ресурс_знания",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_смена_мнения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_усталость",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_факт_астрономия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_факт_понятие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_факт_сравнение",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_факт_физика",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_цитата",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_диалог_чужая_потребность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_краткое_приветствие_без_обязательного_вопроса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_неподтверждённые_сохранения_и_внешние_действия_не_подтверждаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_обычные_слова_не_служат_запретом_ответа",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_ограничение_контекста_не_обрезает_хранимые_реплики",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_отказ_ложному_подтверждению_не_путает_платёж_с_памятью",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_пара_истории_атомарна_при_сбое_второй_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_повторное_открытие_и_перезапуск_не_добавляют_приветствие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_предпочтение_стиля_применяется_к_обычному_вопросу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_проекция_не_фильтрует_обычные_слова_или_слова_пользователя",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_скопированный_моделью_статус_сбоя_не_разрешает_обновление_памяти",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_natural_conversation.NaturalDialogueTests.test_служебные_сбои_не_выдаются_за_содержание_беседы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_automatically_remembers_low_risk_personal_fact",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact_in_russian",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_and_clear_session_history",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_memory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_does_not_store_sensitive_fact",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_exit_ends_session",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_passes_session_history_to_provider",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact_in_russian",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_reports_missing_memory_fact_when_forgetting",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_trims_session_history",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory_in_russian",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_actual_python_sqlite_is_verified",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_exact_merge_lineage_with_changed_occupied_keys",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_fsync_failure_leaves_durable_intent_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_history_cache_is_scrubbed_but_dedupe_survives_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_lineage_cycle_and_delete_sequence_boundary",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_lineage_does_not_match_another_participant_by_value",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_lock_open_failure_is_normalized",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_lost_server_recovery_in_separate_instance",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_migration_repeat_and_uncovered_pilot_backup_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_old_value_update_delete_does_not_resurrect",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_re_remember_after_delete_is_not_removed_by_old_intent",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_signed_negative_bool_and_float_anchor_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_stale_encrypted_package_wrong_key_and_tampering_rejected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_unavailable_witness_prevents_acknowledgement",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_unpatched_sqlite_prevents_pilot_before_database_creation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_visible_checkpoint_after_fsync_failure_is_resynced_before_retry_ack",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_pilot_safety.PilotSafetyTests.test_witness_detects_rollback_of_journal_and_local_head",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_export_лимит_не_выдаёт_неполный_экспорт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_http_csrf_idor_экспорт_удаление_и_отказ_без_журнала",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_merge_экспорт_и_удаление_исторических_профилей",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_restore_cli_повторяет_намерения_и_сбрасывает_все_сессии",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_restore_снимка_до_миграции_053",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_ttl_очищает_только_просроченные_технические_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_аналитика_крупных_когорт_без_fingerprinting",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_два_процесса_фиксируют_отзывы_без_потери_цепочки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_журнал_не_содержит_тексты_идентификаторы_и_секреты",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_забытые_факты_и_версии_не_восстанавливаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_запоздавшая_запись_после_удаления_не_возвращает_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_изменённая_подписанная_запись_обнаруживается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_истёкшее_подтверждение_не_удаляет_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_конкурентное_удаление_одна_успешная_фиксация",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_миграция_повтор_и_проверка_привязки",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_новая_неизвестная_fk_блокирует_удаление",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_отзыв_сессии_не_воскресает_из_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_откат_ddl_без_потери_старых_данных",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_отозванное_согласие_не_становится_granted_после_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_отозванный_passkey_не_принимается_после_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_очистка_из_будущего_запрещена",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_пересоздание_telegram_не_импортирует_удалённый_legacy_json",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_подмена_цепочки_и_rollback_журнала_обнаруживаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_подтверждение_удаления_привязано_к_сессии_и_участнику",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_полное_контролируемое_удаление_и_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_потеря_ключа_и_неверный_журнал_закрывают_доступ",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_реальный_обрыв_процесса_после_журнала_до_commit",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_ротация_и_logout_фиксируются_в_журнале",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_сбой_журнала_откатывает_основную_базу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_сбой_после_durable_intent_не_воскрешает_удаление",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_сменённый_пароль_не_возвращается_после_restore",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_старые_неопределённые_merge_не_объявляются_удалёнными",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_удаление_истории_не_воскресает",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_удалённый_trigger_закрывает_runtime",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_удалённый_trigger_и_checksum_обнаруживаются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_чужой_supersedes_fk_не_приводит_к_чужому_удалению",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_экономические_связи_блокируют_удаление_без_частичного_стирания",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_экспорт_и_удаление_требуют_fresh_auth",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_экспорт_скрывает_контрагентов_и_чужие_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_privacy.PrivacyTests.test_экспорт_только_своих_данных_без_секретов",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.HelpReidentificationTests.test_старый_backup_и_ключ_связывают_псевдонимный_target",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_OFF_по_умолчанию_не_пишет_ничего",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_crash_до_очистки_после_durable_RUNNING",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_crash_после_app_commit_не_откатывает_удаление",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_legacy_blocker_не_превращается_в_SUCCESS",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ops_миграция_не_меняет_app_DDL_и_прежние_checksums",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ops_старый_backup_не_восстанавливает_полномочия",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_scheduler_во_время_LLM_не_обходит_G09",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_symlink_ops_не_открывает_чужой_файл",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_активная_память_и_Help_не_меняются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_два_процесса_не_исполняют_очистку_одновременно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_задержка_создаёт_overdue_и_не_переименовывает_G04",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_истёкший_managed_backup_удаляется_после_durable_retirement",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_неверная_схема_оператора_не_ремонтируется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_нет_реального_провайдера_и_нет_произвольного_корня",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_нормальный_запуск_backup_очистка_и_интервал",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ограниченные_retry_backoff_и_manual_reschedule",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_операторский_TTL_не_удаляет_privacy_holds",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_осиротевший_backup_после_ошибки_не_теряется_из_контроля",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_откат_часов_блокирует_операцию",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ошибка_backup_не_запускает_очистку",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ошибка_новой_ops_миграции_откатывает_DDL",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_ошибка_фиксации_результата_не_даёт_ложного_SUCCESS",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_персональные_строки_из_ошибочного_adapter_не_логируются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_подмена_периодичности_требует_нового_подтверждения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_потеря_ops_не_переинициализируется_молча",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_потеря_witness_до_запуска_fail_closed",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_потеря_witness_после_commit_не_даёт_SUCCESS",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_потерянный_или_подменённый_active_backup_блокирует_cleanup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_пустая_backup_квитанция_не_считается_успехом",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_старый_app_backup_и_сохранённый_ops_не_возвращают_данные",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_retention_ops.RetentionOpsTests.test_чужой_ops_journal_не_принимается",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_semantic_memory.SemanticMemoryTest.test_extracts_only_direct_self_assertions",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_semantic_memory.SemanticMemoryTest.test_local_correction_avoids_extra_extraction",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_semantic_memory.SemanticMemoryTest.test_sensitive_and_invalid_extraction_does_not_reach_memory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_semantic_memory.SemanticMemoryTest.test_sqlite_semantic_memory_isolated_and_survives_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_auto_delivery_uses_webhook_on_spaces",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_automatic_memory_survives_bot_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_duplicate_update_reuses_cached_reply_without_repeating_operation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_existing_help_command_still_works",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_history_survives_bot_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_invalid_hf_token_returns_fallback_through_webhook_once",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_legacy_json_memory_is_migrated_with_backup",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_llm_fallback_does_not_mask_history_write_failure",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_missing_hf_token_returns_fallback_through_webhook",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_polling_delivery_overrides_space_detection",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_splits_long_telegram_messages",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_start_sends_welcome_message",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_startup_check_can_be_skipped_for_local_web_checks",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_telegram_link_command_merges_with_web_account",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_two_users_do_not_see_each_other_memory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_two_users_in_same_chat_are_still_isolated_by_from_id",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_telegram.TelegramBotTest.test_webhook_processing_error_returns_failure",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_application_backup_only_replays_denials",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_bounded_and_strict_serialization",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_checkpoint_chain_corruption_blocks",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_concurrent_duplicate_commit_and_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_concurrent_repair_and_commit",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_contradictory_prefix_does_not_overwrite_checkpoint",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_crash_after_custody_commit_before_head",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_crash_source_after_journal_remains_non_grant",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_custodian_requires_verified_sqlite_before_storage_access",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_custody_concurrent_conflicting_extensions",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_custody_two_processes_same_request",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_fresh_nonce_and_request_binding",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_full_coordinated_local_rollback_is_detected",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_full_disk_open_emits_no_receipt",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_lost_ack_keeps_same_committed_checkpoint",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_lost_config_does_not_disable_installed_policy",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_lost_local_witness_cannot_be_repaired_from_checkpoint_alone",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_missing_custodian_cannot_ack_or_project",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_missing_custody_store_is_never_recreated",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_missing_retainer_head_is_not_recreated",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_missing_signing_key_is_not_regenerated",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_repair_crash_after_retained_audit_and_replay",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_repair_requires_live_evidence",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_repair_rollback_on_source_corruption",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_repair_state_and_headers_then_authorized_account_deletion",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_session_freshness_still_expires_at_original_boundary",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_signed_prefix_and_source_headers",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_sql_generation_corruption_is_rejected_before_advance",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_sql_write_failure_emits_no_receipt",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_truncated_custody_database_rejected_by_retained_head",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_unknown_source_key_cannot_advance",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_wall_clock_suspension_reproduces_both_original_errors",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint.CheckpointTests.test_wrong_key_domain_stream_and_changed_signature",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint_vectors.VectorTests.test_frozen_checkpoint_vectors_and_both_validators",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint_vectors.VectorTests.test_genesis_does_not_consume_checkpoint_limit",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint_vectors.VectorTests.test_offline_current_tip_is_mandatory",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint_vectors.VectorTests.test_public_key_substitution_fails_both",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_checkpoint_vectors.VectorTests.test_standalone_process_without_application_imports",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_abort_rolls_back_asset_and_index",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_abort_rolls_back_help_and_index",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_account_deletion_and_restore_remove_access",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_append_only_including_replace",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_asset_resource_and_help_occurrence_no_double_count",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_causal_links_and_global_sequence",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_competing_revisions_from_two_workers",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_crash_after_commit_retry_keeps_original_receipt",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_crash_after_journal_recovers_header_without_grant",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_crash_before_journal_rolls_back_both",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_draft_and_commit_retries_keep_one_observation",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_duplicate_commit_from_three_workers",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_explicit_current_baseline_and_legacy_exclusion",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_flag_off_hides_api_but_preserves_installed_capture",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_forged_help_hold_cannot_hide_unscrubbed_payload",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_g09_owner_generation_fenced_by_existing_source_change",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_help_completion_receipt_replay_has_one_effect",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_installed_ledger_refuses_non_synthetic_mode",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_migration_ddl_failure_rolls_back",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_missing_help_source_without_hold_is_not_retirement",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_missing_retained_index_frontier_blocks_projection",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_no_plaintext_or_control_references_in_user_view",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_old_backup_after_asset_erase_keeps_no_payload",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_positive_write_outside_shadow_is_not_backfilled",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_pre_migration_backup_requires_install_and_replays_only_headers",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_prepare_and_read_do_not_append",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_private_audience_and_fresh_session",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_repeat_migration_and_integrity",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_requires_exact_complete_baseline",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_restart_determinism",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_retention_cascades_without_copying_old_payload",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_source_rows_and_every_indexed_revision_match",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_sql_drift_blocks_all_guarded_writes",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_unknown_amount_remains_unknown",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_uel_local.LocalLedgerTests.test_witness_loss_returns_unknown_without_numbers",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_личные_факты_не_попадают_другому_агенту",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_модельное_извлечение_навыка_через_тот_же_fenced_контекст",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_ограниченное_продолжение_не_дублирует_историю",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_память_предпочтения_исправление_и_отказ_в_едином_runtime",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_пустой_и_испорченный_ответ_не_создают_память_или_действие",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_сбой_HF_и_восстановление_с_тем_же_пользователем",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedAgentTests.test_сорок_диалогов_с_активными_privacy_и_fencing",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_unified_mvp.UnifiedJourneyTests.test_одна_база_Web_Bot_Mini_App_Help_и_recovery",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_аудитория_проверяется_для_каждого_согласующего",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_выдача_не_содержит_сессии_или_uid",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_два_процесса_строят_прогноз_без_двойной_записи",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_отзыв_ресурса_инвалидирует_план",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_план_не_меняет_источники_и_UEL",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_потеря_checkpoint_блокирует_план",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_пять_представлений_различают_неизвестность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_ротация_сессии_отклоняет_старый_token",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_смена_политики_требует_пересмотра",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_смерть_процесса_не_фиксирует_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_старый_backup_не_восстанавливает_полномочия_плана",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_удаление_аккаунта_не_возвращает_план",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_удаление_памяти_сохраняет_G09",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_флаг_по_умолчанию_выключен",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.IntegrationTests.test_чужой_id_не_служит_сессией",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_восстановление_модели_детерминировано",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_долговременная_мощность_сохраняет_физический_запас",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_доступность_не_превращается_в_собственность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_зависимости_требуют_результата",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_инварианты_сверяют_счётчики_с_состояниями",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_каждая_копейка_сохраняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_коллизия_ключа_повтора_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_конкурирующие_альтернативы_не_дублируют_потребность",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_неизвестное_количество_не_становится_нулём",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_неподтверждённый_капитал_закрыт",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_нет_согласия_нет_распределения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_неудача_проекта_сохраняет_расход",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_нулевая_цена_без_возможности_не_создаёт_благо",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_отдельные_права_исполнения",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_отзыв_согласования_освобождает_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_отмена_до_исполнения_возвращает_ресурс",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_отмена_после_расхода_не_создаёт_денег",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_переоценка_не_создаёт_денежный_остаток",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_повторная_доставка_ничего_не_расходует",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_подтверждённый_Help_не_планируется_повторно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_после_отзыва_исполнение_отклоняется",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_приоритеты_объяснимы_без_рейтинга_человека",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_разные_единицы_не_смешиваются",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_разные_потребности_не_складываются_в_общие_единицы",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_ресурс_не_удваивается_через_два_алиаса",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_самосогласование_не_создаёт_резерв",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_согласованная_единица_потребности",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_степени_достоверности_сохраняются_раздельно",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_точность_рублей_и_запрет_float",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_частичное_обеспечение_по_капиталу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_universal_balance.ModelTests.test_частичное_обеспечение_по_ресурсу",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_app_shell_contains_required_navigation_without_auth_data",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_chat_memory_and_records_are_isolated",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_existing_database_is_migrated_for_cached_telegram_replies",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_invitation_and_login_require_real_password",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_one_time_telegram_link_merges_history_without_memory_loss",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_profile_updates_and_rejects_unsupported_fields",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_telegram_hmac_and_expiration",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_web_data_survives_app_restart",
+          "expected": "PASS",
+          "actual": "PASS"
+        },
+        {
+          "test": "test_web.WebAppTest.test_web_http_api_and_csrf",
+          "expected": "PASS",
+          "actual": "PASS"
+        }
+      ]
+    }
+  ],
+  "independent_operator_test": "NOT EXECUTED",
+  "source_truth_or_human_signature_proven": false,
+  "real_users": "NO-GO",
+  "production_changed": false
+}

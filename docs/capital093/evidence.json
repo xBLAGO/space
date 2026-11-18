@@ -2,7 +2,18 @@
   "format": "capital-custody093-evidence-1",
   "base_sha": "4706a60e7ec675ed1ae16b9c9cd551cde291cfd3",
   "focused_tests": "48 PASS",
-  "full_regression": "RUNNING",
+  "full_regression": {
+    "attempt": 1,
+    "executed": 821,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "wall_seconds": 2262.526,
+    "elapsed_seconds": 1519.037,
+    "status": "PASS",
+    "checkout_sha": "5f171ff12e60ba8a11266b57116b4d7b21a4a877",
+    "artifact": "full-regression.json"
+  },
   "independent_operators": "NOT EXECUTED",
   "physical_storage_faults": "NOT EXECUTED",
   "public_endpoints_added": false,
@@ -11,10 +22,36 @@
   "fund_key_rotation": "DESIGN_ONLY / FAIL_CLOSED",
   "real_users": "NO-GO",
   "real_funds": "NO-GO",
-  "local_lab_go": "SUBJECT_TO_FINAL_HEAD_CI",
+  "local_lab_go": "GO_ISOLATED_SYNTHETIC_HISTORY_CUSTODY_ON_VERIFIED_SOURCE",
   "artifact_sha256": {
     "custody093-archive.json": "b2a75ac76090d5da62d83377ad6d21d53f935c33e4b21d3f2b3360e0bc4737d2",
     "custody093-pin.json": "bec488cad3430695a1466bb211fa7a7e7b58c6e081dafa2ac38041b2d9af8d48",
     "custody093-floor.json": "7d6868469ff011a3212b7fbacfcbb0ff9188a38150912fa4182804dbeb7f3ed0"
-  }
+  },
+  "source_sha": "5f171ff12e60ba8a11266b57116b4d7b21a4a877",
+  "ci": {
+    "run_id": 44337182123,
+    "url": "https://github.com/xBLAGO/space/actions/runs/44337182123",
+    "head_sha": "5f171ff12e60ba8a11266b57116b4d7b21a4a877",
+    "conclusion": "success",
+    "full_tests": [
+      {
+        "count": 821,
+        "seconds": 443.855
+      },
+      {
+        "count": 821,
+        "seconds": 440.782
+      }
+    ],
+    "docker": "PASS including new three-node no-network rehearsal",
+    "same_head_pr_run": 44338740380,
+    "artifact_id": 14443502657,
+    "artifact_digest": "sha256:019c48370e012bdf3b917ad4697a1ea2d9b6777de29bc6eab00eeece8fe01630",
+    "artifact_expires_at": "2027-02-16T15:34:22Z"
+  },
+  "full_fund_authority_failover": "NO-GO / NOT IMPLEMENTED",
+  "existing_release_gates_changed": false,
+  "original_application_sources_changed": false,
+  "full_log_sha256": "7150cf1daaedebe8cf8a7169a2beb7afee34d011d231f3f19ad426b2ddb38dfa"
 }

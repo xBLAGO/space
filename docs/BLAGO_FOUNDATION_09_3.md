@@ -89,7 +89,7 @@ rebinding, независимое подтверждение источника 
 
 ## Состав и доказательства
 
-- [Протокол](capital093/PROTOCOL.md), [threat model](capital093/THREAT_MODEL.md).
+- [Протокол](capital093/PROTOCOL.md), [threat model](capital093/THREAT_MODEL.md), [security review](capital093/SECURITY_REVIEW.md).
 - [Conformance matrix](capital093/CONFORMANCE.md), [recovery/operator runbook](capital093/RUNBOOK.md).
 - `tests/test_capital_custody.py`: signatures, nonce, replay, partition, fork,
   truncation, quorum, delayed rotation, multiprocess races, crash и restore.
@@ -110,3 +110,9 @@ cutover контракт, независимый review, затем отдель
 использовать порог custody как замену полномочий человека или доказательству
 реальности внешних средств. Независимая эксплуатация требует трёх операторов,
 отдельных hosts/volumes, authenticated OOB pinning и испытанной сохранности floor.
+
+## Подтверждённый source CI
+
+Source commit `5f171ff12e60ba8a11266b57116b4d7b21a4a877`: [Actions44337182123](https://github.com/xBLAGO/space/actions/runs/44337182123),821/821 дважды (443.855/440.782s), Docker и новый custody smoke PASS. Второй PR-triggered run44338740380 того же SHA также success. Локальные48/48 прошли за256.922s; стенд100 участников и отдельный verifier PASS. Эти результаты не доказывают независимость операторов.
+
+Полный локальный regression source SHA `5f171ff12e60ba8a11266b57116b4d7b21a4a877`: **821/821 PASS**, 1519.037s, errors0/failures0/skipped0. [Полный машинный протокол](capital093/full-regression.json) сохраняет expected/actual для каждого теста. Поле base внутри протокола унаследовано от инструмента UEL0.3; фактические база09.3 и checkout SHA указаны отдельно в evidence.json. Прежние773 теста и48 новых сохранены.
