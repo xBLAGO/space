@@ -1,0 +1,58 @@
+{
+  "format": "capital-custody-0.3-lab.1",
+  "status": "PASS",
+  "participants": 100,
+  "nodes": 3,
+  "independent_operators": "NOT EXECUTED",
+  "operator_hosts": "SAME_HOST_LOCAL_LAB",
+  "capital_minor": 1000000000,
+  "replicated_checkpoints": 3,
+  "after_origin_key_loss": {
+    "status": "PASS",
+    "tip": "dbeaa5c3e7aebfd07b6e5a0a003caeb6323fadcca6144127113921d6d102ad9d",
+    "index": 3,
+    "epoch": 1,
+    "balance": {
+      "currency": "RUB",
+      "declared_minor": 1000000000,
+      "unverified_minor": 0,
+      "verified_minor": 1000000000,
+      "available_minor": 1000000000,
+      "reserved_minor": 0,
+      "spent_minor": 0,
+      "refunded_minor": 0,
+      "net_spent_minor": 0,
+      "real_funds_verified": false
+    },
+    "spending_authority_restored": false,
+    "freshness": "TWO_PINNED_NODES_NONCE_BOUND",
+    "source_truth_proven": false
+  },
+  "after_custody_rotation": {
+    "status": "PASS",
+    "tip": "dbeaa5c3e7aebfd07b6e5a0a003caeb6323fadcca6144127113921d6d102ad9d",
+    "index": 3,
+    "epoch": 2,
+    "balance": {
+      "currency": "RUB",
+      "declared_minor": 1000000000,
+      "unverified_minor": 0,
+      "verified_minor": 1000000000,
+      "available_minor": 1000000000,
+      "reserved_minor": 0,
+      "spent_minor": 0,
+      "refunded_minor": 0,
+      "net_spent_minor": 0,
+      "real_funds_verified": false
+    },
+    "spending_authority_restored": false,
+    "freshness": "NOT_CHECKED",
+    "source_truth_proven": false
+  },
+  "rotation_hash": "5d5bfd989806539b94f18268ad5799d70062db7f363f4cfae6e880f407b555e8",
+  "fund_spending_restored": false,
+  "fund_owner_anchor_rotation": "NOT IMPLEMENTED / FAIL-CLOSED",
+  "real_users": "NO-GO",
+  "real_funds": "NO-GO",
+  "default_enabled": false
+}

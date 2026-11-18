@@ -1,0 +1,249 @@
+{
+  "source_base": "4706a60e7ec675ed1ae16b9c9cd551cde291cfd3",
+  "scope": "local synthetic focused tests",
+  "tests": 48,
+  "seconds": 256.922,
+  "status": "PASS",
+  "records": [
+    {
+      "scenario": "test_100_участников_10_млн_и_три_копии",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_bool_не_заменяет_счетчик",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_crash_до_commit_не_подписывает",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_crash_после_commit_до_control_UNKNOWN",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_crash_после_control_replay_того_же_голоса",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_восстановление_сети_завершает_тот_же_prepare",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_выключенный_flag_не_создает_БД",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_два_из_трех_не_обычный_кворум",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_другая_схема_или_профиль_отклоняется",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_задержка_восстановления_обязательна",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_истекшее_согласование_не_активируется",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_истекший_статус",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_история_и_UEL_не_подменяются",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_конфликтующий_prepare_отклонён",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_меньшинство_людей_не_меняет_ключи",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_неверный_floor_config_не_проходит",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_незавершенная_доставка_не_скрывается_статусом",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_неподтвержденный_архив_не_импортируется",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_неправильный_genesis_pin",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_новый_верификатор_не_импортирует_runtime",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_один_ключ_человека_не_три_узла",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_один_оператор_не_меняет_ключи",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_один_статус_не_доказывает_свежесть",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_одиночная_подпись_не_закрепляет",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_отказ_A_потеря_ключа_ротация_и_новая_копия",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_откат_только_SQLite_обнаружен",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_ошибка_контрольного_файла_после_commit_hold",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_параллельный_prepare_между_процессами",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_повтор_доставки_тот_же_сертификат",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_подмена_nonce_статуса",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_подмена_подписи_проверяется_независимо",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_подписанный_старый_статус_не_подходит",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_поздний_prepare_не_обходит_60_секунд",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_полный_диск_до_commit_без_голоса",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_потеря_control_не_считается_пустой_историей",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_потеря_внешней_вершины_UNKNOWN",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_потерянный_commit_ACK_после_control_идемпотентен",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_прежние_проверенные_форматы_не_изменены",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_разделение_сети_не_даёт_ACK",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_ротация_не_меняет_ключи_CapitalLedger",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_ротация_разрешена_после_позднего_durable_delay",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_ротация_с_неразрешенной_историей_запрещена",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_свежесть_без_исходного_сервера",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_сговор_двух_узлов_без_третьего_не_дает_checkpoint",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_согласованный_локальный_откат_обнаружен_другими",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_согласованный_откат_трех_копий_не_обходит_внешний_floor",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_старый_узел_после_ротации_не_текущий",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "scenario": "test_усечение_ниже_внешней_вершины",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ]
+}
