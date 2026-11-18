@@ -40,6 +40,8 @@ def validate(db):
         raise JournalUnavailable('Legacy UEL checksum mismatch')
     if [tuple(r) for r in db.execute('SELECT * FROM capital_migrations')] != [(VERSION,CHECKSUM)]:
         raise JournalUnavailable('Capital checksum mismatch')
+    from xblago.core import governance_schema
+    governance_schema.validate(db,required=bool(db.execute("SELECT 1 FROM capital_funds WHERE json_extract(state,'$.policy.format')='capital-governance-policy-2'").fetchone()))
     return True
 
 
