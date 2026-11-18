@@ -73,3 +73,13 @@ Future integration must explicitly review new workflow files and runtime payload
 types (e.g. static assets/schema JSON) before extending the current allowlist.
 The baseline tests intentionally reject unreviewed runtime drift or workflow
 addition; this is a review gate, not permission to rewrite old migration checksums.
+
+## Read-only artifact content check
+
+The recorded example is artifact14467457065 from source7d6c11b. Fetch metadata
+through GitHub API, pin its ZIP digest, resolve `/git/commits/<source>` to the tree
+SHA, fetch `/git/trees/<tree>?recursive=1`, then pass downloaded ZIP, source/config
+digests, tree JSON and source-pinned baseline/config bytes to
+`tools.release_guard.verify_package`. No `validate`/`reserve`/workflow dispatch is
+needed to inspect contents. This proves source bytes only; branch/actor/environment
+checks still reject this feature-branch artifact for release preparation.

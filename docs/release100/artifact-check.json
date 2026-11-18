@@ -1,0 +1,19 @@
+{
+  "scope": "READ_ONLY_ARTIFACT_CONTENT_VALIDATION_NOT_RELEASE_APPROVAL",
+  "status": "PASS",
+  "source_sha": "7d6c11b518f0665c87e55fad9df308e12cf901c7",
+  "tree_sha": "a0985b634f74786f9df357839b062656229f4a78",
+  "bundle_sha256": "8d7ab1354713f06ce5fca91ff6c659f18634f457317ad9cfcd7490464bfd7191",
+  "config_sha256": "88c804eb443f58e6a8b20e8d43833e871c55e201171af8fd2af9c2f504d84519",
+  "artifact_zip_digest": "sha256:9f57da93e1a0921adcb0a754a6d48b57d437246072663cc8b5def088ebfa9a15",
+  "artifact_id": 14467457065,
+  "ci_run_id": 44388740577,
+  "runtime_attestation": "UNKNOWN",
+  "release_eligibility": "REJECTED: CI is feature-branch push, not current-main push",
+  "production_authorized": false,
+  "release_context_check": {
+    "actual": "BLOCKED",
+    "reason": "Manual main preparation only",
+    "scope": "Actual source CI event/ref metadata; no privileged dispatch"
+  }
+}

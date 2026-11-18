@@ -94,3 +94,7 @@ workflow в другой ветке не сможет обратиться к с
 ## Локальный результат
 
 **76/76 PASS**:27 исходных тестов main и49 release tests, без пропусков. Source/package determinism, negative provenance, ref/role/CAS и storage import checks выполнены на синтетических fixtures. Проверка реальных environment restrictions и реального remote tag creation не выполнялась.
+
+## Проверка source CI и настоящего артефакта
+
+Source `7d6c11b518f0665c87e55fad9df308e12cf901c7`: [CI44388740577](https://github.com/xBLAGO/space/actions/runs/44388740577),76/76 PASS. Bundle SHA256 `8d7ab1354713f06ce5fca91ff6c659f18634f457317ad9cfcd7490464bfd7191` совпал с двумя локальными сборками. Скачанный GitHub artifact14467457065 проверен по API digest, config/baseline и настоящему GitHub Git tree; [artifact-check.json](release100/artifact-check.json). Для tree SHA выполнено явное commit→tree разрешение, не сравнение с commit alias. Артефакт feature-ветки не пригоден для подготовки выпуска: его push/ref context блокируется. Ни тег, ни ручной privileged run не создавались. Финальный docs HEAD и его CI указаны в PR отдельно.

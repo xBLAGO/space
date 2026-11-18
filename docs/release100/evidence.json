@@ -34,9 +34,23 @@
   "hf_metadata": "../../release/hf-observed.json",
   "runtime_attestation": "UNKNOWN",
   "publisher_present": false,
-  "source_build": "TO_BE_CONFIRMED_ON_COMMITTED_HEAD_AND_CI",
+  "source_build": "PASS: same committed source built twice with identical outputs",
   "merge": "NO-GO until owner bootstrap/checklist and separate permission",
   "deployment": "NO-GO; publisher absent",
   "next_isolated_integration": "CONDITIONAL_GO after guard adoption and explicit baseline review",
-  "ci": "PENDING"
+  "ci": {
+    "source_run": 44388740577,
+    "source_sha": "7d6c11b518f0665c87e55fad9df308e12cf901c7",
+    "conclusion": "success",
+    "tests": 76,
+    "seconds": 0.603,
+    "artifact_id": 14467457065,
+    "artifact_digest": "sha256:9f57da93e1a0921adcb0a754a6d48b57d437246072663cc8b5def088ebfa9a15",
+    "url": "https://github.com/xBLAGO/space/actions/runs/44388740577",
+    "artifact_expiry": "2026-12-02T20:13:41Z"
+  },
+  "source_head": "7d6c11b518f0665c87e55fad9df308e12cf901c7",
+  "bundle_sha256": "8d7ab1354713f06ce5fca91ff6c659f18634f457317ad9cfcd7490464bfd7191",
+  "config_sha256": "88c804eb443f58e6a8b20e8d43833e871c55e201171af8fd2af9c2f504d84519",
+  "actual_artifact_content_check": "PASS read-only against real GitHub commit/tree; does not authorize preparation or deployment"
 }
