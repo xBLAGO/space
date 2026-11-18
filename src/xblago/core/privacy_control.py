@@ -38,6 +38,8 @@ def deletion_blockers(db, uid):
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
     from xblago.core import context_schema,lifecycle_schema,asset_registry_schema
     if asset_registry_schema.validate(db):known.update(asset_registry_schema.TABLES)
+    from xblago.core import capital_schema
+    if capital_schema.installed(db):capital_schema.validate(db);known.update(capital_schema.TABLES)
     if context_schema.validate(db):known.update(context_schema.TABLES)
     if lifecycle_schema.validate(db):known.update(lifecycle_schema.TABLES)
     from xblago.core.help_schema import present,validate,TABLES
@@ -59,6 +61,10 @@ def deletion_blockers(db, uid):
 def purge_user(db, uid):
     if deletion_blockers(db,uid):
         raise DeletionBlocked('Economic/unknown ownership retention requires review before account deletion')
+    from xblago.core import capital_schema
+    if capital_schema.installed(db):
+        from xblago.domain.capital import purge_member
+        purge_member(db,uid,SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR'])))
     from xblago.domain.help_service import purge_user as purge_help
     from xblago.core.help_schema import present
     from xblago.core import lifecycle_schema
@@ -205,6 +211,9 @@ class PrivacyControl:
             pass
         elif kind=='uel_local':
             from xblago.core.uel_local import apply_checkpoint
+            apply_checkpoint(db,event,self.journal)
+        elif kind=='capital_state':
+            from xblago.domain.capital import apply_checkpoint
             apply_checkpoint(db,event,self.journal)
         elif kind=='asset_state':
             from xblago.domain.asset_registry import apply_checkpoint
