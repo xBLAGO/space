@@ -1,0 +1,14 @@
+{
+  "format": "blago-release-config-1",
+  "repository": "xBLAGO/space",
+  "source_ref": "refs/heads/main",
+  "environment": "production-release",
+  "ci_workflow": ".github/workflows/ci.yml",
+  "artifact_name": "blago-source-candidate",
+  "artifact_kind": "SOURCE_BUNDLE_NOT_RUNTIME_IMAGE",
+  "publication_enabled": false,
+  "migration_execution": "FORBIDDEN",
+  "owner_controls_status": "UNKNOWN",
+  "tag_prefix": "release-preparations/",
+  "runtime_attestation": "UNKNOWN"
+}

@@ -1,0 +1,56 @@
+{
+  "format": "blago-release100-readiness-1",
+  "base_main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "audit_pr": 38,
+  "audit_sha": "d62b6bb24dc5604ccfa6b3da453879c264040d6a",
+  "local_tests": {
+    "total": 76,
+    "baseline": 27,
+    "release_negative_and_contract": 49,
+    "status": "PASS",
+    "seconds": 5.589
+  },
+  "runtime_files_changed": false,
+  "production_migrations_executed": false,
+  "deployment_executed": false,
+  "real_tag_reservation_executed": false,
+  "manual_workflow_dispatched": false,
+  "real_environment_negative_drill": "NOT EXECUTED",
+  "actor_permissions_live_check": "NOT EXECUTED",
+  "git_ref_CAS": "SIMULATED_ONLY",
+  "github_owner_controls": "UNKNOWN",
+  "classic_main_protection": {
+    "status": "UNKNOWN",
+    "read_error": "403 Resource not accessible by integration"
+  },
+  "visible_rulesets": [],
+  "legacy_workflow": {
+    "id": 383106331,
+    "path": ".github/workflows/huggingface-space.yml",
+    "last_known_main_run": 38441506701,
+    "last_known_main_run_conclusion": "success",
+    "current_enabled_state": "UNKNOWN"
+  },
+  "hf_metadata": "../../release/hf-observed.json",
+  "runtime_attestation": "UNKNOWN",
+  "publisher_present": false,
+  "source_build": "PASS: same committed source built twice with identical outputs",
+  "merge": "NO-GO until owner bootstrap/checklist and separate permission",
+  "deployment": "NO-GO; publisher absent",
+  "next_isolated_integration": "CONDITIONAL_GO after guard adoption and explicit baseline review",
+  "ci": {
+    "source_run": 44388740577,
+    "source_sha": "7d6c11b518f0665c87e55fad9df308e12cf901c7",
+    "conclusion": "success",
+    "tests": 76,
+    "seconds": 0.603,
+    "artifact_id": 14467457065,
+    "artifact_digest": "sha256:9f57da93e1a0921adcb0a754a6d48b57d437246072663cc8b5def088ebfa9a15",
+    "url": "https://github.com/xBLAGO/space/actions/runs/44388740577",
+    "artifact_expiry": "2026-12-02T20:13:41Z"
+  },
+  "source_head": "7d6c11b518f0665c87e55fad9df308e12cf901c7",
+  "bundle_sha256": "8d7ab1354713f06ce5fca91ff6c659f18634f457317ad9cfcd7490464bfd7191",
+  "config_sha256": "88c804eb443f58e6a8b20e8d43833e871c55e201171af8fd2af9c2f504d84519",
+  "actual_artifact_content_check": "PASS read-only against real GitHub commit/tree; does not authorize preparation or deployment"
+}

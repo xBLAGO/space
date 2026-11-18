@@ -1,0 +1,403 @@
+{
+  "format": "blago-release100-test-evidence-1",
+  "base_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "scope": "LOCAL_SYNTHETIC_NETWORK_API_FIXTURES",
+  "status": "PASS",
+  "tests": 76,
+  "baseline_tests": 27,
+  "new_release_tests": 49,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 0,
+  "seconds": 5.589,
+  "code_sha256": {
+    "tools/release_guard.py": "ff84336ca0ea99fe34f55c641673d1dc113422ee61e08c771651ace31b6e8b5b",
+    "tests/test_release_guard.py": "9bc9e5f9ac17dec6876aed30c269e9e285b6d789da71115150602efdc70e63ef",
+    ".github/workflows/ci.yml": "45bda5d2614a750e8f52c771d32cdc710a2001108893eb67bc3800fd3609554f",
+    ".github/workflows/huggingface-space.yml": "576291a352e97ee0fbc675c8241fdcf2f6ca803fbf6d7f7779a59f9054d98b18",
+    "release/config.json": "88c804eb443f58e6a8b20e8d43833e871c55e201171af8fd2af9c2f504d84519",
+    "release/baseline.json": "e07af45786561d6d7ef6bc0484cded0adbae14c60d7e52c9d977e6a327a78571"
+  },
+  "records": [
+    {
+      "test": "test_llm.LocalPlanningProviderTest.test_builds_local_provider_by_default",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_llm.LocalPlanningProviderTest.test_generates_actionable_fallback_with_memory",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_llm.LocalPlanningProviderTest.test_generates_compact_fallback_with_session_history",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_llm.LocalPlanningProviderTest.test_generates_english_fallback_for_english_user_text",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_forget_one_memory_fact_in_russian",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_and_clear_session_history",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_can_show_memory",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_exit_ends_session",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_passes_session_history_to_provider",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_remembers_user_fact_in_russian",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_reports_missing_memory_fact_when_forgetting",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_agent_trims_session_history",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_personal_assistant.PersonalAssistantAgentTest.test_profile_shows_user_memory_in_russian",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_PR_or_fork_CI_cannot_release",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_application_imports_have_no_DB_side_effect",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_artifact_from_different_run_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_artifact_member_path_escape_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_bundle_corruption_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_commit_to_tree_resolution_is_checked",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_concurrent_CAS_only_one_receipt",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_config_digest_mismatch_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_config_substitution_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_conflicting_reservation_is_detected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_disabled_flag_is_closed",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_documentation_merge_push_is_not_preparation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_downloaded_bytes_must_match_digest",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_expired_artifact_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_false_runtime_attestation_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_git_tree_must_match_artifact",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_incomplete_or_failed_ci_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_insufficient_actor_permission",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_lost_reservation_response_does_not_double_release",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_main_moves_before_reservation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_manual_unreviewed_branch_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_missing_confirmation_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_missing_remote_artifact_digest_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_modified_workflow_branch_ref_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_no_artifact_id_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_old_main_sha_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_open_or_updated_PR_is_not_preparation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_other_repository_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_other_workflow_is_not_CI_provenance",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_prepare_does_not_import_app_or_connect_sqlite",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_push_main_is_not_manual_preparation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_redirect_never_forwards_token_to_artifact_host",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_repeat_is_detected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_rerun_is_not_silent_retry",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_runtime_drift_requires_explicit_baseline_review",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_runtime_matches_source_pinned_baseline",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_short_or_shell_sha_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_source_artifact_is_reproducible",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_startup_DDL_risk_is_reported_not_hidden",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_tag_named_main_cannot_bypass_branch_guard",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_truncated_source_tree_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_unconfirmed_baseline_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_unknown_actor_permission",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_unknown_artifact_digest_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_untracked_personal_files_are_not_bundled",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_untrusted_or_plaintext_redirect_is_blocked",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_valid_preparation_never_authorizes_production",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_workflows_have_no_automatic_publisher_or_prod_secret",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_release_guard.ReleaseGuardTests.test_wrong_checkout_is_rejected",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_auto_delivery_uses_webhook_on_spaces",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_duplicate_update_does_not_repeat_operation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_existing_help_command_still_works",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_history_survives_bot_restart",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_legacy_json_memory_is_migrated_with_backup",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_polling_delivery_overrides_space_detection",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_splits_long_telegram_messages",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_start_sends_welcome_message",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_two_users_do_not_see_each_other_memory",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_two_users_in_same_chat_are_still_isolated_by_from_id",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_telegram.TelegramBotTest.test_webhook_processing_error_returns_failure",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ]
+}
