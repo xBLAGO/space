@@ -1,0 +1,65 @@
+{
+  "format": "blago-source-baseline-1",
+  "git_main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "audit_pr": 38,
+  "audit_sha": "d62b6bb24dc5604ccfa6b3da453879c264040d6a",
+  "runtime_files_sha256": {
+    "Dockerfile": "d60450aadd65cdb0929c6fc7c5902ca2ce80a013aab31ad538d987ce7b7ff11e",
+    "README.md": "89f7e81d350671ae22def0f36181632772e4eac6d53dca9253bd9c045d031b22",
+    "deploy/huggingface-space/README.md": "43a4517f22f286db136e4ac739c38870aff86733a6447e169e0792cb81c1ae5f",
+    "pyproject.toml": "f48bebe9f5e74d3248ab1afa1eb1d982ff757dd8122bca20c6cd2b7689ca17cf",
+    "src/xblago/__init__.py": "3fd56037e115af89fbc8832dfb33b2b17816fbfd968b045277c79a2e6c927fb9",
+    "src/xblago/__main__.py": "9fd5d83e6995a269dd6e3dde6f0516eb867d99d86c9b9657dd30af2498a3db01",
+    "src/xblago/agents/__init__.py": "86e8aad046ba049833b4ade26d16bcc16510a73dda7d2aa33af25136dbaa9b04",
+    "src/xblago/agents/personal_assistant.py": "ac93d6fb20c452f987b677acb2598a3e44b33e315c230e379ffce5b093fffefa",
+    "src/xblago/cli.py": "ec89fa778cfdacdfea074ff24cef3db32af479f09c237b0ce18e9fd8082cd7cc",
+    "src/xblago/core/__init__.py": "aa45f3a18f967e1ed077e03a8f11f349a3a8584df7a506e3ee058fa6f9a1c1d1",
+    "src/xblago/core/config.py": "260a10f882801752a4ec06f5403dd9bd17cca21b5e99b4956f042702992db66f",
+    "src/xblago/core/llm.py": "1fc874b7e20046a4b81a1c94525d4e28f1663e45b1b75e8d73fa22329629b845",
+    "src/xblago/core/memory.py": "7e04c3f00cfdae96bcc47a4dcdd8abf78ab472901eba48038ca2a5a660cd4852",
+    "src/xblago/core/messages.py": "d36c3c7204a82dc6aefcfc6c8160115722aa497fd148ccfdab904f5311a81720",
+    "src/xblago/core/profile.py": "879255cae3089f02094ef96869b68a929b2e733f0e1011a282c4f4f3e967dcd6",
+    "src/xblago/core/routing.py": "4389f1c9c0acaf0071b0ed9cada75c00c52110de5acd5a5212c43812c94fc2da",
+    "src/xblago/core/storage.py": "19a86217917b7e8fcfef12d7dfbd2e42ceeae1c6bbd0241c0d63a5f74bf250a7",
+    "src/xblago/integrations/__init__.py": "4dc8a8071679e11e0ce0adb7aa5e8708720a4669923495fcab63fdcd04bb589c",
+    "src/xblago/integrations/telegram.py": "9a45800ef18ea2e6a429b27e29a1bc7ff1462421a07eef2414115cc23118967c"
+  },
+  "dependencies": {
+    "declared": [
+      "certifi>=2024.2.2",
+      "requests>=2.32"
+    ],
+    "runtime_lock": "MISSING",
+    "resolved_production": "UNKNOWN",
+    "python_requires": ">=3.11",
+    "container_base": "python:3.12-slim (mutable)",
+    "runtime_image_digest": "UNKNOWN"
+  },
+  "schema": {
+    "source": "src/xblago/core/storage.py",
+    "ddl_sha256": "7f47d968b5bf4f9a825ed70db2d9a674766e96ab78b5cf76ea497cd084d32c33",
+    "tables": [
+      "users",
+      "channel_links",
+      "profiles",
+      "memory_facts",
+      "dialogue_turns",
+      "events",
+      "migrations"
+    ],
+    "schema_version_ledger": "NONE",
+    "legacy_import_ledger": "migrations",
+    "startup_ddl": "PRESENT: SQLiteBlagoStore.__init__ calls _ensure_schema",
+    "import_side_effects": "NO_DATABASE_CONNECT_OBSERVED_IN_TESTED_MODULE_IMPORTS; constructor startup still writes DDL",
+    "production_sqlite_version": "UNKNOWN",
+    "production_schema": "UNKNOWN",
+    "fingerprint_scope": "SOURCE_SQL_TEXT_NOT_PRODUCTION_SCHEMA"
+  },
+  "migrations": {
+    "release_execution": "FORBIDDEN",
+    "startup_migration_safety": "UNQUALIFIED",
+    "legacy_json_import": "EXISTS; no implicit import allowed in preparation"
+  },
+  "runtime_attestation": "UNKNOWN",
+  "production_ready": false
+}

@@ -1,0 +1,42 @@
+{
+  "format": "blago-release100-readiness-1",
+  "base_main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "audit_pr": 38,
+  "audit_sha": "d62b6bb24dc5604ccfa6b3da453879c264040d6a",
+  "local_tests": {
+    "total": 76,
+    "baseline": 27,
+    "release_negative_and_contract": 49,
+    "status": "PASS",
+    "seconds": 5.589
+  },
+  "runtime_files_changed": false,
+  "production_migrations_executed": false,
+  "deployment_executed": false,
+  "real_tag_reservation_executed": false,
+  "manual_workflow_dispatched": false,
+  "real_environment_negative_drill": "NOT EXECUTED",
+  "actor_permissions_live_check": "NOT EXECUTED",
+  "git_ref_CAS": "SIMULATED_ONLY",
+  "github_owner_controls": "UNKNOWN",
+  "classic_main_protection": {
+    "status": "UNKNOWN",
+    "read_error": "403 Resource not accessible by integration"
+  },
+  "visible_rulesets": [],
+  "legacy_workflow": {
+    "id": 383106331,
+    "path": ".github/workflows/huggingface-space.yml",
+    "last_known_main_run": 38441506701,
+    "last_known_main_run_conclusion": "success",
+    "current_enabled_state": "UNKNOWN"
+  },
+  "hf_metadata": "../../release/hf-observed.json",
+  "runtime_attestation": "UNKNOWN",
+  "publisher_present": false,
+  "source_build": "TO_BE_CONFIRMED_ON_COMMITTED_HEAD_AND_CI",
+  "merge": "NO-GO until owner bootstrap/checklist and separate permission",
+  "deployment": "NO-GO; publisher absent",
+  "next_isolated_integration": "CONDITIONAL_GO after guard adoption and explicit baseline review",
+  "ci": "PENDING"
+}

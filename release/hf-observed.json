@@ -1,0 +1,14 @@
+{
+  "format": "blago-hf-public-observation-1",
+  "space": "RomanMaloev/space",
+  "repo_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+  "running_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+  "stage": "RUNNING",
+  "observed_on": "2026-11-18",
+  "evidence_scope": "Unauthenticated public metadata only; no storage, user data, secrets or deployment inspected",
+  "github_main_equivalence": "UNKNOWN",
+  "runtime_image_digest": "UNKNOWN",
+  "sqlite_library": "UNKNOWN",
+  "runtime_attestation": "UNKNOWN",
+  "historical_audit_source": "PR38 d62b6bb24dc5604ccfa6b3da453879c264040d6a docs/master_audit/hf_public.json"
+}
