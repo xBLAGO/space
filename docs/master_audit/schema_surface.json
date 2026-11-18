@@ -1,0 +1,518 @@
+{
+  "main": {
+    "sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+    "ddl_sources": [
+      {
+        "path": "src/xblago/core/storage.py",
+        "sha256": "19a86217917b7e8fcfef12d7dfbd2e42ceeae1c6bbd0241c0d63a5f74bf250a7",
+        "literal_table_names": [
+          "channel_links",
+          "dialogue_turns",
+          "events",
+          "memory_facts",
+          "migrations",
+          "profiles",
+          "users"
+        ],
+        "version_literals": []
+      }
+    ],
+    "caveat": "Static literal extraction only; no DB opened/migrated. Dynamic DDL and resulting actual deployed schema not attested."
+  },
+  "sovereign12": {
+    "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+    "ddl_sources": [
+      {
+        "path": "src/xblago/core/identity_runtime_schema.py",
+        "sha256": "409cba221bff470b4260a88e7931b264bcd17da29959b1a68ff6183cf564164a",
+        "literal_table_names": [
+          "identity_recovery_state",
+          "identity_runtime_migrations",
+          "telegram_exchanges",
+          "telegram_proofs",
+          "webauthn_pending"
+        ],
+        "version_literals": [
+          "foundation05_runtime_002"
+        ]
+      },
+      {
+        "path": "src/xblago/core/identity_schema.py",
+        "sha256": "3a67ddb05d838bd34bd95393a94dd1ae6ae2fb412ef7652a369ef147fc024090",
+        "literal_table_names": [
+          "activity_events",
+          "auth_challenges",
+          "consent_records",
+          "identity_schema_migrations",
+          "passkey_credentials",
+          "security_signals",
+          "user_devices"
+        ],
+        "version_literals": [
+          "foundation05_identity_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/pilot_schema.py",
+        "sha256": "9169fa0117ef0104478ddb585fecb7d4980782fd8124632f248b402bc8e13695",
+        "literal_table_names": [
+          "pilot_safety_state",
+          "pilot_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation05_pilot_004"
+        ]
+      },
+      {
+        "path": "src/xblago/core/privacy_schema.py",
+        "sha256": "3769291d99a20bb66d0dd8cd42b757a7d6a073e003f0f119ada08d6800bb9c2e",
+        "literal_table_names": [
+          "privacy_aliases",
+          "privacy_delete_challenges",
+          "privacy_outbox",
+          "privacy_schema_migrations",
+          "privacy_state"
+        ],
+        "version_literals": [
+          "foundation05_privacy_003"
+        ]
+      },
+      {
+        "path": "src/xblago/core/security_journal.py",
+        "sha256": "1b3cfba149809f6601e75ccdbef0ded54ee4de46bb60f1cb7f39b6c55afd1c2c",
+        "literal_table_names": [
+          "entries"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/core/sovereign_schema.py",
+        "sha256": "9a224a6cf37bf477bccab5d8ccc885729f20d37229bd6f612bcdbf7e0a690116",
+        "literal_table_names": [
+          "identity_consents",
+          "identity_controllers",
+          "identity_credentials",
+          "identity_events",
+          "identity_wallet_links",
+          "sovereign_challenges",
+          "sovereign_identities",
+          "sovereign_recovery_holds",
+          "sovereign_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation07_identity_core_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/storage.py",
+        "sha256": "7ba75267e8c8ddc85b2ea2397a4e1d12be0262f4c65084d37dcabfe73a736404",
+        "literal_table_names": [
+          "channel_links",
+          "dialogue_turns",
+          "events",
+          "memory_facts",
+          "migrations",
+          "profiles",
+          "semantic_memory",
+          "users"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/integrations/web.py",
+        "sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659",
+        "literal_table_names": [
+          "account_link_codes",
+          "blago_assets",
+          "blago_contribution_events",
+          "blago_fulfillment_events",
+          "blago_needs",
+          "blago_payment_request_offers",
+          "blago_payment_requests",
+          "blago_resource_offers",
+          "blago_resources",
+          "web_credentials",
+          "web_sessions"
+        ],
+        "version_literals": []
+      }
+    ],
+    "caveat": "Static literal extraction only; no DB opened/migrated. Dynamic DDL and resulting actual deployed schema not attested."
+  },
+  "recovery13": {
+    "sha": "d96ade9375f3499ad93095b2307abd750f0a8578",
+    "ddl_sources": [
+      {
+        "path": "src/xblago/core/identity_runtime_schema.py",
+        "sha256": "409cba221bff470b4260a88e7931b264bcd17da29959b1a68ff6183cf564164a",
+        "literal_table_names": [
+          "identity_recovery_state",
+          "identity_runtime_migrations",
+          "telegram_exchanges",
+          "telegram_proofs",
+          "webauthn_pending"
+        ],
+        "version_literals": [
+          "foundation05_runtime_002"
+        ]
+      },
+      {
+        "path": "src/xblago/core/identity_schema.py",
+        "sha256": "3a67ddb05d838bd34bd95393a94dd1ae6ae2fb412ef7652a369ef147fc024090",
+        "literal_table_names": [
+          "activity_events",
+          "auth_challenges",
+          "consent_records",
+          "identity_schema_migrations",
+          "passkey_credentials",
+          "security_signals",
+          "user_devices"
+        ],
+        "version_literals": [
+          "foundation05_identity_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/pilot_schema.py",
+        "sha256": "9169fa0117ef0104478ddb585fecb7d4980782fd8124632f248b402bc8e13695",
+        "literal_table_names": [
+          "pilot_safety_state",
+          "pilot_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation05_pilot_004"
+        ]
+      },
+      {
+        "path": "src/xblago/core/privacy_schema.py",
+        "sha256": "3769291d99a20bb66d0dd8cd42b757a7d6a073e003f0f119ada08d6800bb9c2e",
+        "literal_table_names": [
+          "privacy_aliases",
+          "privacy_delete_challenges",
+          "privacy_outbox",
+          "privacy_schema_migrations",
+          "privacy_state"
+        ],
+        "version_literals": [
+          "foundation05_privacy_003"
+        ]
+      },
+      {
+        "path": "src/xblago/core/security_journal.py",
+        "sha256": "1b3cfba149809f6601e75ccdbef0ded54ee4de46bb60f1cb7f39b6c55afd1c2c",
+        "literal_table_names": [
+          "entries"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/core/sovereign_schema.py",
+        "sha256": "9a224a6cf37bf477bccab5d8ccc885729f20d37229bd6f612bcdbf7e0a690116",
+        "literal_table_names": [
+          "identity_consents",
+          "identity_controllers",
+          "identity_credentials",
+          "identity_events",
+          "identity_wallet_links",
+          "sovereign_challenges",
+          "sovereign_identities",
+          "sovereign_recovery_holds",
+          "sovereign_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation07_identity_core_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/storage.py",
+        "sha256": "7ba75267e8c8ddc85b2ea2397a4e1d12be0262f4c65084d37dcabfe73a736404",
+        "literal_table_names": [
+          "channel_links",
+          "dialogue_turns",
+          "events",
+          "memory_facts",
+          "migrations",
+          "profiles",
+          "semantic_memory",
+          "users"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/integrations/web.py",
+        "sha256": "4eab2941a843edfa9a99fa81afb09d253dc82d6f3418adaadbbff468bd2af659",
+        "literal_table_names": [
+          "account_link_codes",
+          "blago_assets",
+          "blago_contribution_events",
+          "blago_fulfillment_events",
+          "blago_needs",
+          "blago_payment_request_offers",
+          "blago_payment_requests",
+          "blago_resource_offers",
+          "blago_resources",
+          "web_credentials",
+          "web_sessions"
+        ],
+        "version_literals": []
+      }
+    ],
+    "caveat": "Static literal extraction only; no DB opened/migrated. Dynamic DDL and resulting actual deployed schema not attested."
+  },
+  "lab17": {
+    "sha": "44a5d52a4ac8022478a247f4e1bbd2eaea551142",
+    "ddl_sources": [
+      {
+        "path": "src/xblago/core/storage.py",
+        "sha256": "19a86217917b7e8fcfef12d7dfbd2e42ceeae1c6bbd0241c0d63a5f74bf250a7",
+        "literal_table_names": [
+          "channel_links",
+          "dialogue_turns",
+          "events",
+          "memory_facts",
+          "migrations",
+          "profiles",
+          "users"
+        ],
+        "version_literals": []
+      }
+    ],
+    "caveat": "Static literal extraction only; no DB opened/migrated. Dynamic DDL and resulting actual deployed schema not attested."
+  },
+  "governance37": {
+    "sha": "4706a60e7ec675ed1ae16b9c9cd551cde291cfd3",
+    "ddl_sources": [
+      {
+        "path": "src/xblago/core/asset_registry_schema.py",
+        "sha256": "9337f76251bc950164e0cf8895e7305f846a86ec7479910bbcd6f9b5eae0459b",
+        "literal_table_names": [
+          "assetreg_challenges",
+          "assetreg_holds",
+          "assetreg_migrations",
+          "assetreg_operations",
+          "assetreg_records",
+          "assetreg_versions"
+        ],
+        "version_literals": [
+          "foundation09_asset_registry_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/capital_schema.py",
+        "sha256": "69b4be44e37642d17c315b33936a00b42b07efd8cfaf43ee6b934465f2edfb0f",
+        "literal_table_names": [
+          "capital_funds",
+          "capital_holds",
+          "capital_members",
+          "capital_migrations",
+          "capital_versions"
+        ],
+        "version_literals": [
+          "capital_local_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/context_schema.py",
+        "sha256": "7be28f8e7eb6ddc04ddedf43b70716d50a2230180e5a30696f38ca2bf49937cf",
+        "literal_table_names": [
+          "context_generations",
+          "context_schema_migrations",
+          "context_versions"
+        ],
+        "version_literals": [
+          "foundation_privacy_context_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/governance_schema.py",
+        "sha256": "b2c6a2f370a80c4ae8d68eb62c6fb929960109a5b64232f8b441b28e673110d3",
+        "literal_table_names": [
+          "govcap_holds",
+          "govcap_migrations"
+        ],
+        "version_literals": [
+          "capital_governance_002"
+        ]
+      },
+      {
+        "path": "src/xblago/core/help_schema.py",
+        "sha256": "bf7084d9ba41bef2a75de1b5a678823e698115057bc054cbe96ad4aa356a9bbc",
+        "literal_table_names": [
+          "help_audience",
+          "help_challenges",
+          "help_events",
+          "help_holds",
+          "help_offers",
+          "help_operations",
+          "help_requests",
+          "help_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation_help_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/identity_runtime_schema.py",
+        "sha256": "409cba221bff470b4260a88e7931b264bcd17da29959b1a68ff6183cf564164a",
+        "literal_table_names": [
+          "identity_recovery_state",
+          "identity_runtime_migrations",
+          "telegram_exchanges",
+          "telegram_proofs",
+          "webauthn_pending"
+        ],
+        "version_literals": [
+          "foundation05_runtime_002"
+        ]
+      },
+      {
+        "path": "src/xblago/core/identity_schema.py",
+        "sha256": "3a67ddb05d838bd34bd95393a94dd1ae6ae2fb412ef7652a369ef147fc024090",
+        "literal_table_names": [
+          "activity_events",
+          "auth_challenges",
+          "consent_records",
+          "identity_schema_migrations",
+          "passkey_credentials",
+          "security_signals",
+          "user_devices"
+        ],
+        "version_literals": [
+          "foundation05_identity_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/lifecycle_schema.py",
+        "sha256": "a61bbf725c0080355e695b6d6e9f56a7988fcdd9b112cf7e5aad180b41c5b46c",
+        "literal_table_names": [
+          "lifecycle_backups",
+          "lifecycle_generation_times",
+          "lifecycle_help_evidence",
+          "lifecycle_history_pairs",
+          "lifecycle_holds",
+          "lifecycle_policy",
+          "lifecycle_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation_privacy_lifecycle_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/pilot_schema.py",
+        "sha256": "9169fa0117ef0104478ddb585fecb7d4980782fd8124632f248b402bc8e13695",
+        "literal_table_names": [
+          "pilot_safety_state",
+          "pilot_schema_migrations"
+        ],
+        "version_literals": [
+          "foundation05_pilot_004"
+        ]
+      },
+      {
+        "path": "src/xblago/core/privacy_schema.py",
+        "sha256": "3769291d99a20bb66d0dd8cd42b757a7d6a073e003f0f119ada08d6800bb9c2e",
+        "literal_table_names": [
+          "privacy_aliases",
+          "privacy_delete_challenges",
+          "privacy_outbox",
+          "privacy_schema_migrations",
+          "privacy_state"
+        ],
+        "version_literals": [
+          "foundation05_privacy_003"
+        ]
+      },
+      {
+        "path": "src/xblago/core/retention_ops.py",
+        "sha256": "5d624e8f0313a4cf998616d20538ce3fb2456577a156d96152da6c5292d3713c",
+        "literal_table_names": [
+          "ops_binding",
+          "ops_runs",
+          "ops_schema",
+          "ops_state"
+        ],
+        "version_literals": [
+          "retention_operations_001"
+        ]
+      },
+      {
+        "path": "src/xblago/core/security_journal.py",
+        "sha256": "4f35d32b04b0534d6aef4b220e2a4b39085f7abd46c179e4cf9f719d3e6a0bf1",
+        "literal_table_names": [
+          "entries"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/core/storage.py",
+        "sha256": "3b60f2556d35c4d79656a69a8454b05b953871f4df659d4ea3ded8b350025279",
+        "literal_table_names": [
+          "channel_links",
+          "dialogue_turns",
+          "events",
+          "memory_facts",
+          "migrations",
+          "profiles",
+          "semantic_memory",
+          "users"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/core/uel_checkpoint.py",
+        "sha256": "c86e49aca2874cecffa849e28fabeb6b7deb57e2e2994304e95feae6d6b85349",
+        "literal_table_names": [
+          "checkpoints",
+          "metadata"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/core/uel_schema.py",
+        "sha256": "51828ed9009f23d4c3c3f9c7a75eb2116b89102a85bab1fbc461d92979c685b1",
+        "literal_table_names": [
+          "uel_binding",
+          "uel_events",
+          "uel_migrations",
+          "uel_state"
+        ],
+        "version_literals": [
+          "uel_local_002"
+        ]
+      },
+      {
+        "path": "src/xblago/domain/collective_calculator.py",
+        "sha256": "35f8f12714016c1f79052d2cd7d84d840213588b3952db46bcec2d1d432d5a65",
+        "literal_table_names": [
+          "challenges",
+          "denials",
+          "events",
+          "goods",
+          "metadata",
+          "principals",
+          "valuations"
+        ],
+        "version_literals": []
+      },
+      {
+        "path": "src/xblago/integrations/web.py",
+        "sha256": "8b564af00a67ed5256d01585cae9355177e3fdea479784b4d0341a7b51a175fd",
+        "literal_table_names": [
+          "account_link_codes",
+          "blago_assets",
+          "blago_contribution_events",
+          "blago_fulfillment_events",
+          "blago_needs",
+          "blago_payment_request_offers",
+          "blago_payment_requests",
+          "blago_resource_offers",
+          "blago_resources",
+          "web_credentials",
+          "web_sessions"
+        ],
+        "version_literals": []
+      }
+    ],
+    "caveat": "Static literal extraction only; no DB opened/migrated. Dynamic DDL and resulting actual deployed schema not attested."
+  }
+}

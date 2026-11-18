@@ -1,0 +1,80 @@
+{
+  "scope": "All-event exact-head API lookup for PR heads without PR-triggered wrapper results",
+  "prs": [
+    {
+      "number": 8,
+      "head_sha": "183d85e6083fb0806127e569036d2bb7012dfaf7",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 40014959680,
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/xBLAGO/space/actions/runs/40014959680",
+          "head_sha": "183d85e6083fb0806127e569036d2bb7012dfaf7"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "head_sha": "37be0437578125503f0a851c6ce9a86222937cdc",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 40016287991,
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/xBLAGO/space/actions/runs/40016287991",
+          "head_sha": "37be0437578125503f0a851c6ce9a86222937cdc"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "head_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76",
+      "total_count": 1,
+      "runs": [
+        {
+          "id": 40076089703,
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/xBLAGO/space/actions/runs/40076089703",
+          "head_sha": "2d6d65913d9091e7d42966532162a0d1de9d0c76"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "head_sha": "03cdbf82ec45ee10ec45567ba60f3bfb06fbca5f",
+      "total_count": 0,
+      "runs": []
+    },
+    {
+      "number": 18,
+      "head_sha": "6f83b66db0ef8fc87a93dd0a7de70fdcecca4428",
+      "total_count": 0,
+      "runs": []
+    },
+    {
+      "number": 21,
+      "head_sha": "e65a696cacc76df3a4b7f0d1b6edf3bf25e66691",
+      "total_count": 0,
+      "runs": []
+    },
+    {
+      "number": 28,
+      "head_sha": "e049b62860a8170d17e879ce94766fc371f1decb",
+      "total_count": 0,
+      "runs": []
+    },
+    {
+      "number": 34,
+      "head_sha": "fffa5b2cd3c9c411c0e7f1c9c022de751f0dbc17",
+      "total_count": 0,
+      "runs": []
+    }
+  ]
+}

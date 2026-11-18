@@ -1,0 +1,22 @@
+{
+  "run_id": 44314309823,
+  "head_sha": "4706a60e7ec675ed1ae16b9c9cd551cde291cfd3",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 134836298839,
+      "name": "tests",
+      "conclusion": "success"
+    },
+    {
+      "id": 134836299400,
+      "name": "docker",
+      "conclusion": "success"
+    }
+  ],
+  "full_suite_log_matches": [
+    "Ran 773 tests in 331.405s",
+    "Ran 773 tests in 342.079s"
+  ],
+  "limits": "Existing remote run inspected; this audit does not dispatch jobs or deploy. Same-author tests, synthetic data and virtual devices."
+}

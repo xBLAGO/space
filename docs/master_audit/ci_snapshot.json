@@ -1,0 +1,408 @@
+{
+  "observed_at": "2026-11-18 13:50:41 UTC",
+  "scope": "PR-triggered runs returned for exact current head; absence is UNKNOWN, not FAIL",
+  "prs": {
+    "2": {
+      "workflow_runs": [
+        {
+          "id": 38478463327,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 25,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/38478463327/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/38478463327/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "3": {
+      "workflow_runs": [
+        {
+          "id": 39905173451,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 36,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39905173451/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39905173451/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "4": {
+      "workflow_runs": [
+        {
+          "id": 39979523604,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 38,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39979523604/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39979523604/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "5": {
+      "workflow_runs": [
+        {
+          "id": 39986772105,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 40,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39986772105/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/39986772105/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "6": {
+      "workflow_runs": [
+        {
+          "id": 40000255798,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 42,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40000255798/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40000255798/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "7": {
+      "workflow_runs": [
+        {
+          "id": 40015200505,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 49,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40015200505/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40015200505/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "8": {
+      "workflow_runs": []
+    },
+    "9": {
+      "workflow_runs": []
+    },
+    "10": {
+      "workflow_runs": [
+        {
+          "id": 40075042228,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 57,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40075042228/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40075042228/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "11": {
+      "workflow_runs": []
+    },
+    "12": {
+      "workflow_runs": [
+        {
+          "id": 40568551246,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 63,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40568551246/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40568551246/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "13": {
+      "workflow_runs": [
+        {
+          "id": 40584412666,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 67,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40584412666/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/40584412666/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "14": {
+      "workflow_runs": [
+        {
+          "id": 41520088632,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 73,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41520088632/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41520088632/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "15": {
+      "workflow_runs": []
+    },
+    "16": {
+      "workflow_runs": [
+        {
+          "id": 41704965826,
+          "name": "Protocol conformance (offline design fixtures)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 4,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41704965826/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41704965826/logs",
+          "workflow_id": 406070685
+        }
+      ]
+    },
+    "17": {
+      "workflow_runs": [
+        {
+          "id": 41714974472,
+          "name": "Federation synthetic stateful lab",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 4,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41714974472/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41714974472/logs",
+          "workflow_id": 406185551
+        }
+      ]
+    },
+    "18": {
+      "workflow_runs": []
+    },
+    "19": {
+      "workflow_runs": [
+        {
+          "id": 41902654438,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 77,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41902654438/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/41902654438/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "20": {
+      "workflow_runs": [
+        {
+          "id": 42086997631,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 82,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42086997631/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42086997631/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "21": {
+      "workflow_runs": []
+    },
+    "22": {
+      "workflow_runs": [
+        {
+          "id": 42268869991,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 86,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42268869991/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42268869991/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "23": {
+      "workflow_runs": [
+        {
+          "id": 42415883355,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 90,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42415883355/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42415883355/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "24": {
+      "workflow_runs": [
+        {
+          "id": 42512606444,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 96,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42512606444/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42512606444/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "25": {
+      "workflow_runs": [
+        {
+          "id": 42674576765,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 102,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42674576765/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42674576765/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "26": {
+      "workflow_runs": [
+        {
+          "id": 42684136342,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 106,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42684136342/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42684136342/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "27": {
+      "workflow_runs": [
+        {
+          "id": 42691802588,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 112,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42691802588/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42691802588/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "28": {
+      "workflow_runs": []
+    },
+    "29": {
+      "workflow_runs": [
+        {
+          "id": 42699564273,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 116,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42699564273/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42699564273/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "30": {
+      "workflow_runs": [
+        {
+          "id": 42707794630,
+          "name": "Universal Ledger specification",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 4,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42707794630/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/42707794630/logs",
+          "workflow_id": 412617259
+        }
+      ]
+    },
+    "31": {
+      "workflow_runs": [
+        {
+          "id": 43100095523,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 122,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/43100095523/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/43100095523/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "32": {
+      "workflow_runs": [
+        {
+          "id": 43483535901,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 128,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/43483535901/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/43483535901/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "34": {
+      "workflow_runs": []
+    },
+    "35": {
+      "workflow_runs": [
+        {
+          "id": 44080330203,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 136,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44080330203/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44080330203/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "36": {
+      "workflow_runs": [
+        {
+          "id": 44300119298,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 140,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44300119298/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44300119298/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    },
+    "37": {
+      "workflow_runs": [
+        {
+          "id": 44314309823,
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 144,
+          "jobs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44314309823/jobs",
+          "logs_url": "https://api.github.com/repos/xBLAGO/space/actions/runs/44314309823/logs",
+          "workflow_id": 383549635
+        }
+      ]
+    }
+  }
+}
