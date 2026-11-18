@@ -1,0 +1,72 @@
+{
+  "format": "blago-master-audit-checks-1",
+  "main_sha": "3c218dc5757879c26b3aec520af3636b2d702715",
+  "reviewed_runtime_sha": "4706a60e7ec675ed1ae16b9c9cd551cde291cfd3",
+  "mode": "isolated synthetic tests; no real LLM calls or production access",
+  "checks": {
+    "main_baseline": {
+      "status": "PASS",
+      "tests": 27,
+      "seconds": 0.477,
+      "summary": "OK",
+      "sha256": "5deb700808688a87fefb5fe6c6661ee834a0d08300425b498a68a389a59c73ee",
+      "command_log_file": "blago-master-main-tests.log"
+    },
+    "context_initial_sandbox": {
+      "status": "FAILED",
+      "tests": 60,
+      "seconds": 43.312,
+      "summary": "FAILED (errors=1)",
+      "sha256": "7c4d8bd559976b5dd1c678e0176c0ee09cfddd016d4ddb58c9e982054ae26bfd",
+      "command_log_file": "blago-master-context-tests.log"
+    },
+    "context_localhost_permitted": {
+      "status": "PASS",
+      "tests": 60,
+      "seconds": 44.514,
+      "summary": "OK",
+      "sha256": "a25ae86ae27b73d35c717b7acb8e318a67b48c5f82ebb9d8aaa3061cfb7d2d05",
+      "command_log_file": "blago-master-context-tests-qualified.log"
+    },
+    "full_initial_sandbox": {
+      "status": "FAILED",
+      "tests": 773,
+      "seconds": 1055.255,
+      "summary": "FAILED (failures=87, errors=33)",
+      "sha256": "3a75590bb78de14f9cb2c77671d617c65ef57df25def85a9d84835493dc50f6a",
+      "command_log_file": "blago-master-source37-full.log",
+      "environment_diagnosis": {
+        "operation_not_permitted_occurrences": 120,
+        "failures": 87,
+        "errors": 33,
+        "qualified_rerun": "full_localhost_permitted PASS"
+      }
+    },
+    "full_localhost_permitted": {
+      "status": "PASS",
+      "tests": 773,
+      "seconds": 1283.643,
+      "summary": "OK",
+      "sha256": "9e971d1cb87cacc8a43a2051f4dfec8d3b0cfff7995c6674c2378c4d87f9ed79",
+      "command_log_file": "blago-master-source37-qualified.log"
+    }
+  },
+  "limitations": [
+    "Initial direct main command lacked PYTHONPATH; 3 discovery errors corrected by documented PYTHONPATH=src",
+    "Initial sandbox context run: 1 localhost bind EPERM; approved rerun passed",
+    "Initial full sandbox run: 87 failures and 33 errors with 120 Operation not permitted occurrences; synthetic custodian/local HTTP could not bind",
+    "Docker not rebuilt by this docs-only audit; exact #37 existing CI Docker success independently read",
+    "No physical device tests, independent operators, live HF model or actual production SQLite inspection",
+    "Branch PR CI is not configured on inherited main; no workflow dispatch or deployment requested"
+  ],
+  "probe": "context_probe.json",
+  "source_runtime_tracked_diff": [],
+  "documentation_validation": {
+    "status": "PASS",
+    "json_parse": "all evidence files",
+    "local_links": "all required-document links resolve",
+    "exact_source_line_anchors": 17,
+    "tracked_change_scope": "docs only",
+    "source_runtime_tracked_diff": []
+  }
+}

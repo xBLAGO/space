@@ -1,0 +1,39 @@
+{
+  "space": "RomanMaloev/space",
+  "repo_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+  "running_sha": "b95c630eb69ec4a505e2008a15a4417b12a74553",
+  "stage": "RUNNING",
+  "scope": "Four public source files only; no storage contents, secrets or authenticated user requests",
+  "files": {
+    "Dockerfile": {
+      "sha256": "1839a9144eade8b9f58a4d87ced5107c3e7ce7b26afdf2e9814f8a8f8e33dcc9",
+      "matching_github_heads": [
+        "8b63b8795490a11ad2b5a709b9a258033b7d6381",
+        "8820d7852f0db6c4fc5101f9e281211ba7b6b074",
+        "af94ac93dde649747b1a89104000f92f75ecb7fc",
+        "224ad9d2a1775a8372354af35d542f433cb8bdde",
+        "183d85e6083fb0806127e569036d2bb7012dfaf7"
+      ]
+    },
+    "pyproject.toml": {
+      "sha256": "b318a54f2a69c9cf81021bec4db17363641c5f5847b789815cba609a82e5423f",
+      "matching_github_heads": [
+        "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a",
+        "8820d7852f0db6c4fc5101f9e281211ba7b6b074",
+        "af94ac93dde649747b1a89104000f92f75ecb7fc"
+      ]
+    },
+    "src/xblago/integrations/web.py": {
+      "sha256": "047cb86905c2f42da0550d1c5b6809b7530e54c5f0e5ce9150cc5515fc8d29ff",
+      "matching_github_heads": [
+        "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a"
+      ]
+    },
+    "src/xblago/integrations/telegram.py": {
+      "sha256": "d9b678fae774fab6bb05bc773ee4fc302aecdb4499e18c5c526fa2b923fb189e",
+      "matching_github_heads": [
+        "4bc48f2a6b23f198ca88a022e4bad0f03f709e8a"
+      ]
+    }
+  }
+}

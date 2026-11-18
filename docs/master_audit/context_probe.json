@@ -1,0 +1,30 @@
+{
+  "context_fields": [
+    "agent_profile",
+    "user_text",
+    "memory",
+    "history",
+    "conversation",
+    "purpose",
+    "context_version"
+  ],
+  "semantic_record_fields": [
+    "record_id",
+    "key",
+    "value",
+    "category",
+    "source",
+    "status",
+    "confidence",
+    "created_at",
+    "updated_at"
+  ],
+  "history_input_turns": 30,
+  "history_visible_turns": 24,
+  "history_first_visible": "synthetic turn 6",
+  "name_for_generic_followup": {},
+  "direct_self_fact_extractable": true,
+  "compound_fact_question_extractable": false,
+  "third_party_extractable": false,
+  "source_turn_id_available": false
+}

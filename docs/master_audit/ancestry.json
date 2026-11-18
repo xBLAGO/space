@@ -1,0 +1,32 @@
+{
+  "10->19": {
+    "ancestor": true,
+    "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+    "left_right_commits": "0\t2"
+  },
+  "12->37": {
+    "ancestor": false,
+    "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+    "left_right_commits": "3\t38"
+  },
+  "13->37": {
+    "ancestor": false,
+    "merge_base": "d11a2a555efe57e6818450d534655020bf47b9ca",
+    "left_right_commits": "5\t38"
+  },
+  "17->37": {
+    "ancestor": false,
+    "merge_base": "3c218dc5757879c26b3aec520af3636b2d702715",
+    "left_right_commits": "5\t86"
+  },
+  "35->36": {
+    "ancestor": true,
+    "merge_base": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+    "left_right_commits": "0\t2"
+  },
+  "36->37": {
+    "ancestor": true,
+    "merge_base": "c3c6896076c9e24932ebdb0ee14e7c04065b91dd",
+    "left_right_commits": "0\t2"
+  }
+}
