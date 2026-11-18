@@ -32,8 +32,10 @@ def repair_index(path):
         db.execute('PRAGMA foreign_keys=ON')
         db.execute('BEGIN IMMEDIATE')
         actual = dict(db.execute("SELECT name,sql FROM sqlite_master WHERE name LIKE 'uel_%' AND sql IS NOT NULL"))
-        triggers = {s.split()[2]: s for s in uel_schema.DDL if s.startswith('CREATE TRIGGER')}
-        expected = {s.split()[2]: s for s in uel_schema.DDL}
+        from xblago.core import capital_schema
+        ddl = capital_schema.uel_ddl() if capital_schema.installed(db) else uel_schema.DDL
+        triggers = {s.split()[2]: s for s in ddl if s.startswith('CREATE TRIGGER')}
+        expected = {s.split()[2]: s for s in ddl}
         if set(actual) - set(expected) or any(actual.get(name) != sql for name, sql in expected.items() if name not in triggers):
             raise JournalUnavailable('Unsupported UEL structural damage; preserve offline copy')
         original_index = {

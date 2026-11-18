@@ -1,0 +1,41 @@
+{
+  "format": "foundation09-1-durable-lab-1",
+  "status": "PASS",
+  "participants": 100,
+  "balance": {
+    "currency": "RUB",
+    "declared_minor": 1000000000,
+    "unverified_minor": 0,
+    "verified_minor": 1000000000,
+    "available_minor": 247000000,
+    "reserved_minor": 50000000,
+    "spent_minor": 703000000,
+    "refunded_minor": 0,
+    "net_spent_minor": 703000000,
+    "real_funds_verified": false,
+    "fund": "synthetic-collective",
+    "version": 12,
+    "scope": "SYNTHETIC_PINNED_MEMBERS_ONLY"
+  },
+  "offline_verification": {
+    "status": "VERIFIED_SYNTHETIC_HISTORY",
+    "events": 12,
+    "head": "baa9e3214e22ecb11774df36c055e8c54bde3dec3ead8134cf21edf09b1cfa98",
+    "balance": {
+      "currency": "RUB",
+      "declared_minor": 1000000000,
+      "unverified_minor": 0,
+      "verified_minor": 1000000000,
+      "available_minor": 247000000,
+      "reserved_minor": 50000000,
+      "spent_minor": 703000000,
+      "refunded_minor": 0,
+      "net_spent_minor": 703000000,
+      "real_funds_verified": false
+    },
+    "independent_audit": false
+  },
+  "feature_default": "OFF",
+  "real_users": "NO-GO",
+  "independent_operator": "NOT EXECUTED"
+}

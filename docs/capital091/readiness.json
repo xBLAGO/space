@@ -1,0 +1,18 @@
+{
+  "format": "capital091-readiness-1",
+  "runtime_source_sha": "66bb337e212f1ab63eba6c31549028b2c4439e57",
+  "isolated_synthetic_durable_capital": "GO_SUBJECT_TO_FINAL_HEAD_CI",
+  "real_users": "NO-GO",
+  "real_funds": "NO-GO",
+  "production": "NO-GO",
+  "independent_federation": "NO-GO",
+  "default_enabled": false,
+  "existing_gates_changed": false,
+  "blockers": [
+    "Independent verifier implementation and security review",
+    "Real collective retention/erasure policy",
+    "Policy rotation/quorum and key custody governance",
+    "Operational controls and real-device/provider release gates",
+    "Explicit separate admission decision"
+  ]
+}

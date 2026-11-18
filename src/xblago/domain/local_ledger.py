@@ -26,6 +26,7 @@ class LocalLedger:
     def _views(self,db,uid,c):
         heads=uel_local.heads(db);views=[]
         for key,s in sorted(uel_local.sources(db,c).items()):
+            if key[0]=='CAPITAL':continue  # Private capital has a separate authorized projection.
             row=heads.get(key);kind=key[0];root=s['root']
             if not row or row['phase']!='OBSERVED' or row['source_version']!=root['version'] or row['source_state']!=s['state'] or uel_local.row_refs(kind,s['rows'][-1],c.journal)!=(row['source_ref'],row['payload_ref']):
                 raise JournalUnavailable('UEL UNKNOWN_RECOVERY: no verified current observation')

@@ -133,6 +133,9 @@ class PrivacyService:
                     for key in ('payment_reference_digest','evidence_digest'):
                         row.pop(key,None)
                 tables[table]=records
+            from xblago.domain.capital import personal_export as capital_export
+            from xblago.core import capital_schema
+            if capital_schema.installed(db):tables['synthetic_capital_membership']=[take(item) for member in family for item in capital_export(db,member)]
             from xblago.domain.asset_registry import personal_export as asset_export
             from xblago.core import asset_registry_schema
             if asset_registry_schema.validate(db):tables['asset_registry']=[take(item) for member in family for item in asset_export(db,member)]

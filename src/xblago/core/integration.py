@@ -79,7 +79,9 @@ def preflight(path: Path):
         asset_registry_schema.validate(db,mandatory=asset_registry_schema.enabled())
         from xblago.core import uel_schema
         uel_schema.validate(db,mandatory=uel_schema.enabled())
-        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS|lifecycle_schema.OBJECTS|asset_registry_schema.OBJECTS|uel_schema.OBJECTS}
+        from xblago.core import capital_schema
+        capital_objects=capital_schema.OBJECTS if capital_schema.installed(db) else set()
+        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS|lifecycle_schema.OBJECTS|asset_registry_schema.OBJECTS|uel_schema.OBJECTS|capital_objects}
         if actual_shape!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
         for module,table in zip(MODULES,('identity_schema_migrations','identity_runtime_migrations','privacy_schema_migrations','pilot_schema_migrations')):
             if table not in objects or db.execute(f'SELECT version,checksum FROM {table}').fetchall()!=[(module.VERSION,module.CHECKSUM)]:
