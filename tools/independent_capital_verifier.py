@@ -195,8 +195,12 @@ class Replay:
         elif t in ('PolicyVoted','PolicyVoteRevoked','PolicyActivated'):
             require(self.active(k,at,'GOV'),'direct governance');q=s['policy_proposals'][d['proposal']];require(q['status']=='PENDING' and q['base']==hash_json(p),'current policy proposal')
             if t=='PolicyVoted':
-                require(k not in q['votes'],'duplicate governor');q['votes'].append(k);q['ready_at']=at+p['activation_delay'] if sum(self.active(x,at,'GOV') for x in q['votes'])>=p['governance_quorum'] else None
-            elif t=='PolicyVoteRevoked':require(k in q['votes'],'missing vote');q['votes'].remove(k);q['ready_at']=None
+                require(k not in q['votes'],'duplicate governor');q['votes'].append(k)
+                if sum(self.active(x,at,'GOV') for x in q['votes'])<p['governance_quorum']:q['ready_at']=None
+                elif q['ready_at'] is None:q['ready_at']=at+p['activation_delay']
+            elif t=='PolicyVoteRevoked':
+                require(k in q['votes'],'missing vote');q['votes'].remove(k)
+                if sum(self.active(x,at,'GOV') for x in q['votes'])<p['governance_quorum']:q['ready_at']=None
             else:
                 require(sum(self.active(x,at,'GOV') for x in q['votes'])>=p['governance_quorum'] and q['ready_at'] is not None and at>=q['ready_at'],'policy quorum/delay');self.replacement(q['policy']);q['status']='ACTIVATED';s['policy']=copy.deepcopy(q['policy'])
                 for a in s['approvals'].values():
@@ -233,7 +237,8 @@ def verify_bundle(bundle,pins):
 def _verify(b,pins):
     require(set(b)=={'format','history','uel_headers','uel_leaves','checkpoint','binding','binding_signature'} and b['format']=='capital-governance-proof-2','proof schema')
     require(set(pins)=={'policy_hash','checkpoint_hash','custodian_key','stream','node_key'},'external pins')
-    history=b['history'];events=history['events'];require(history['format']=='capital-private-audit-1' and type(events) is list and 1<=len(events)<=1024,'history shape')
+    history=b['history'];require(type(history) is dict and set(history)=={'format','fund','events'},'history fields')
+    events=history['events'];require(history['format']=='capital-private-audit-1' and type(events) is list and 1<=len(events)<=1024,'history shape')
     first=events[0];p=first['policy'];policy_check(p)
     require(hash_json(p)==pins['policy_hash'] and p['privacy_key']==pins['node_key'] and p['id']==history['fund'] and first['type']=='PolicyEnrolled','genesis pin')
     require(set(first['signatures'])==set(p['members']),'genesis signatures')
@@ -241,6 +246,9 @@ def _verify(b,pins):
     for key,signature in first['signatures'].items():sig(p['members'][key]['public_key'],signature,p,'BLAGO-CAPITAL-GOVERNANCE-POLICY-0.2\n')
     engine=Replay(p);prior=ZERO;last_time=0;seen=set();ops=set()
     for n,e in enumerate(events,1):
+        common={'type','recorded_at','state_hash','currency','amount_minor','event_id','version','fund','previous'}
+        require(set(e)==common|({'policy','signatures'} if n==1 else {'command','signature'}),'event fields')
+        require(type(e['event_id']) is str and re.fullmatch('[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}',e['event_id']),'event ID')
         require(e['fund']==history['fund'] and e['version']==n and integer(e['version']) and e['event_id'] not in seen and e['previous']==prior and integer(e['recorded_at']) and e['recorded_at']>=last_time,'event order')
         seen.add(e['event_id']);last_time=e['recorded_at']
         if n>1:
@@ -249,6 +257,7 @@ def _verify(b,pins):
         prior=hash_json(e)
     checkpoint=b['checkpoint'];require(set(checkpoint)=={'body','signature'} and hash_json(checkpoint)==pins['checkpoint_hash'],'external checkpoint frontier')
     cb=checkpoint['body'];require(set(cb)=={'profile','stream','generation','previous','journal_seq','journal_root','uel_seq','uel_root'} and cb['profile']==PROFILE and cb['stream']==pins['stream'],'checkpoint scope')
+    for name in ('previous','journal_root','uel_root','stream'):require(type(cb[name]) is str and re.fullmatch('[0-9a-f]{64}',cb[name]),'checkpoint hash encoding')
     sig(pins['custodian_key'],checkpoint['signature'],cb,PROFILE+'/checkpoint\0')
     for k in ('generation','journal_seq','uel_seq'):require(integer(cb[k]) and 0<=cb[k]<=65536,'checkpoint counters')
     require(cb['uel_seq']<=cb['journal_seq'],'checkpoint order')

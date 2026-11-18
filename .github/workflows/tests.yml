@@ -72,7 +72,9 @@ jobs:
       - name: UEL 0.3 checkpoint custody and repair evidence
         run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
       - name: Collective governance and independent verifier (synthetic only)
-        run: PYTHONPATH=.:src python -m tools.governance_lab --output "$RUNNER_TEMP/governance092-lab.json"
+        run: |
+          PYTHONPATH=.:src python -m tools.governance_lab --output "$RUNNER_TEMP/governance092-lab.json" --proof-output "$RUNNER_TEMP/governance092-proof.json" --pins-output "$RUNNER_TEMP/governance092-producer-pins.json"
+          python tools/independent_capital_verifier.py "$RUNNER_TEMP/governance092-proof.json" --pins "$RUNNER_TEMP/governance092-producer-pins.json" > "$RUNNER_TEMP/governance092-independent-result.json"
       - name: Durable synthetic capital and signed approvals
         run: PYTHONPATH=.:src python -m tools.capital_lab --output "$RUNNER_TEMP/capital091-lab.json"
       - name: Foundation 09 synthetic 100-participant collective planning
@@ -106,6 +108,9 @@ jobs:
             ${{ runner.temp }}/foundation09-lab.json
             ${{ runner.temp }}/capital091-lab.json
             ${{ runner.temp }}/governance092-lab.json
+            ${{ runner.temp }}/governance092-proof.json
+            ${{ runner.temp }}/governance092-producer-pins.json
+            ${{ runner.temp }}/governance092-independent-result.json
 
   docker:
     runs-on: ubuntu-latest

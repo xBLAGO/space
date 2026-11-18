@@ -32,7 +32,7 @@
 
 ## История и UEL
 
-Используются прежние capital_funds/members/versions и тот же UEL CAPITAL source. Governance events — версии канонического capital domain, не второй универсальный журнал. Аддитивная govcap_migrations/governance_002 и govcap_holds не изменяет старые migration checksums. Состояния старых v1 фондов не меняются при установке.
+Используются прежние capital_funds/members/versions и тот же UEL CAPITAL source. Governance events — версии канонического capital domain, не второй универсальный журнал. Аддитивная govcap_migrations/capital_governance_002 и govcap_holds не изменяет старые migration checksums. Состояния старых v1 фондов не меняются при установке.
 
 Private audit export оставляет не относящиеся к фонду UEL leaves opaque. Он всё же раскрывает общее число UEL events. Поэтому portable proof выдаётся только прямому действующему GOV аудитору, а не публикуется. Для private payload refs нужен node attestation. Наличие контрольной точки не доказывает истину реального поступления, независимость участников или текущую свежесть без внешнего закрепления tip.
 

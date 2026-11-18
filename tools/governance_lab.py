@@ -60,7 +60,7 @@ def proof_export(service,token,fid):
         return result,pins
 
 
-def run():
+def run(proof_output=None,pins_output=None):
     from tools.independent_capital_verifier import verify_bundle
     with lab(100) as state:
         service,keys,oracle,policy=setup(state);tokens=state['tokens'];counter=0
@@ -83,12 +83,22 @@ def run():
             act(99,'MemberExited',{})
             observed=service.inspect(tokens[0],policy['id']);bundle,pins=proof_export(service,tokens[1],policy['id'])
             verified=verify_bundle(bundle,pins)
+            proof_hash=pins_hash=None
+            if proof_output is not None and pins_output is not None:
+                import hashlib
+                for path,value in ((proof_output,bundle),(pins_output,pins)):
+                    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+                    with os.fdopen(fd,'w') as output:output.write(canonical(value)+'\n')
+                proof_hash=hashlib.sha256(Path(proof_output).read_bytes()).hexdigest();pins_hash=hashlib.sha256(Path(pins_output).read_bytes()).hexdigest()
         assert observed['available_minor']==297000000 and observed['spent_minor']==703000000 and verified['balance']['available_minor']==297000000
         return {'format':'capital-governance-lab-2','status':'PASS','participants':100,'policy_version':2,'exited_members':1,'balance':observed,
-                'independent_implementation_verifier':verified,'independent_operator':'NOT EXECUTED','independent_audit':'NOT EXECUTED','real_users':'NO-GO'}
+                'independent_implementation_verifier':verified,'proof_sha256':proof_hash,'producer_pins_sha256':pins_hash,'pins_source':'SYNTHETIC_PRODUCER_NOT_INDEPENDENT_PINNING','independent_operator':'NOT EXECUTED','independent_audit':'NOT EXECUTED','real_users':'NO-GO'}
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.write_text(json.dumps(run(),indent=2)+'\n');print('Governance / independent verifier / 100 synthetic participants: PASS')
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--proof-output',type=Path);p.add_argument('--pins-output',type=Path);a=p.parse_args()
+    if (a.proof_output is None)!=(a.pins_output is None):p.error('Both proof and producer-pins output paths required')
+    a.output.write_text(json.dumps(run(a.proof_output,a.pins_output),indent=2)+'\n');print('Governance / independent verifier / 100 synthetic participants: PASS')
 
 if __name__=='__main__':main()

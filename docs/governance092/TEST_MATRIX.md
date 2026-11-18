@@ -5,7 +5,7 @@
 | Точная policy version и fixed electorate | Подмена/понижение security floors запрещены | PureGovernanceTests: политика, пороги, electorate |
 | Quorum расходов | Один principal/signer не заменяет двух | Два независимых согласования; duplicate vote/proxy |
 | Делегирование | Scoped proposal/amount/TTL, no GOV, no chains | Положительный путь, revoke, expiry, повтор principal |
-| Supermajority и delay | Активация до порога/срока отклоняется | PolicyProposed/Voted/Activated; vote revoke resets readiness |
+| Supermajority и delay | Активация до порога/срока отклоняется | PolicyProposed/Voted/Activated; vote revoke resets readiness only below quorum |
 | Отзыв ключа | Одного governor недостаточно, четыре точные подписи действуют | AuthorityRevoked positive/negative/domain binding |
 | Новая policy | Старые незавершённые grants/reserves закрыты | Новый hash, version+1, освобождение без нового расхода |
 | Exit / account deletion | Фонд и не затронутые права остаются | Integration: MemberExited, privacy challenge, deny old erase |

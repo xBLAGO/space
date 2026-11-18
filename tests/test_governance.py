@@ -12,7 +12,7 @@ import time
 import unittest
 from unittest.mock import patch
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-from tools.foundation09_lab import lab
+from tools.foundation09_lab import lab,PASSWORD
 from tools.governance_lab import setup,command,proof_export
 from tools.capital_lab import sign,receipt
 from tools.independent_capital_verifier import verify_bundle,InvalidProof,Replay
@@ -182,6 +182,20 @@ class PureGovernanceTests(unittest.TestCase):
         with self.assertRaises(cap.CapitalError):cap.transition(self.state,c,signature,self.now)
         with self.assertRaises(InvalidProof):self.reference.apply(c,signature,self.now)
 
+    def test_лишний_голос_не_откладывает_активацию_кворума(self):
+        self.policy_proposed()
+        for actor in (1,3,4,5):self.act(actor,'PolicyVoted',{'proposal':'policy'})
+        ready=self.state['policy_proposals']['policy']['ready_at'];self.now+=30
+        self.act(6,'PolicyVoted',{'proposal':'policy'});self.assertEqual(self.state['policy_proposals']['policy']['ready_at'],ready)
+        self.now+=31;self.act(1,'PolicyActivated',{'proposal':'policy'});self.assertEqual(self.state['policy']['version'],2)
+
+    def test_отзыв_лишнего_голоса_не_даёт_миноритарного_вето(self):
+        self.policy_proposed()
+        for actor in (1,3,4,5,6):self.act(actor,'PolicyVoted',{'proposal':'policy'})
+        ready=self.state['policy_proposals']['policy']['ready_at'];self.now+=30
+        self.act(6,'PolicyVoteRevoked',{'proposal':'policy'});self.assertEqual(self.state['policy_proposals']['policy']['ready_at'],ready)
+        self.now+=31;self.act(1,'PolicyActivated',{'proposal':'policy'});self.assertEqual(self.state['policy']['version'],2)
+
 
 def worker(cfg,token,c,signature,clock,pipe,phase):
     os.environ.update(cfg)
@@ -268,7 +282,7 @@ class GovernanceIntegrationTests(unittest.TestCase):
 
     def test_инъекции_подмена_событий_и_UEL_отклоняются(self):
         self.received();bundle,pins=proof_export(self.service,self.tokens[1],self.policy['id'])
-        alterations=[lambda b:b['history']['events'].pop(),lambda b:b['uel_headers'][0].update(source_version=2),lambda b:b['uel_leaves'].__setitem__(0,'0'*64),lambda b:b['binding'].update(history_count=1),lambda b:b['checkpoint']['body'].update(stream='0'*64),lambda b:b['history']['events'][-1].update(state_hash='0'*64)]
+        alterations=[lambda b:b['history']['events'][-1].update(signature='0'*128),lambda b:b['history']['events'][-1].update(extra_field='injection'),lambda b:b['history']['events'].pop(),lambda b:b['uel_headers'][0].update(source_version=2),lambda b:b['uel_leaves'].__setitem__(0,'0'*64),lambda b:b['binding'].update(history_count=1),lambda b:b['checkpoint']['body'].update(stream='0'*64),lambda b:b['history']['events'][-1].update(state_hash='0'*64)]
         for mutate in alterations:
             bad=copy.deepcopy(bundle);mutate(bad)
             with self.assertRaises(InvalidProof):verify_bundle(bad,pins)
@@ -300,6 +314,19 @@ class GovernanceIntegrationTests(unittest.TestCase):
         target=self.state['root']/'fresh-restored.sqlite3';target.write_bytes(backup.read_bytes());restore(target,Path(self.state['cfg']['XBLAGO_SECURITY_JOURNAL_DIR']))
         with sqlite3.connect(target) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM govcap_holds').fetchone()[0],0);self.assertEqual(json.loads(db.execute('SELECT state FROM capital_funds').fetchone()[0])['lots']['lot']['amount'],10000)
+        app=WebApp(preflight(target));service=cap.CapitalLedger(app)
+        tokens={i:app.login(f'foundation09_synthetic_{i:03d}',PASSWORD)[0] for i in (0,1,2,3)}
+        self.assertEqual(service.inspect(tokens[0],self.policy['id'])['available_minor'],10000)
+        actions=[(0,'ProposalCreated',{'proposal':'post-restore','amount_minor':6000,'purpose':'tools','destination':'fixture','expires_at':int(time.time())+600},None),
+                 (1,'ApprovalGranted',{'proposal':'post-restore','approval':'after-a'},None),
+                 (3,'ApprovalGranted',{'proposal':'post-restore','approval':'after-a'},None),
+                 (2,'BudgetReserved',{'approval':'after-a','reservation':'after-r','allocations':{'lot':6000}},None),
+                 (2,'CapitalSpent',{'reservation':'after-r'},receipt(self.oracle,self.policy,'SPENT','after-r',6000,'after-receipt'))]
+        for n,(actor,kind,data,evidence) in enumerate(actions):
+            c=command(service,tokens[actor],self.policy,actor,kind,data,'post-restore-'+str(n),evidence)
+            service.execute(tokens[actor],c,sign(self.keys[actor],c,gov.DOMAIN))
+        self.assertEqual(service.inspect(tokens[0],self.policy['id'])['spent_minor'],6000)
+
 
     def processes(self,commands,phase='normal'):
         ctx=multiprocessing.get_context('spawn');jobs=[]

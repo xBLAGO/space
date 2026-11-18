@@ -35,3 +35,12 @@ Signed MemberExited удаляет только приватную UID-binding �
 ## Откат кода
 
 Выключить флаг, сохранить совместимый код обработки schema/privacy/recovery. Runtime #36 не знает govcap schema и должен отказать. Не удалять новые таблицы или control evidence для запуска старого кода. Down-migration и перенос реальных данных не предусмотрены. Непроверенный frozen фонд не переводить в новый active фонд и не считать его капитал свободным.
+
+## Экспорт воспроизводимого synthetic proof
+
+```sh
+PYTHONPATH=.:src python -m tools.governance_lab --output /tmp/gov-lab.json --proof-output /tmp/gov-proof.json --pins-output /tmp/gov-producer-pins.json
+python tools/independent_capital_verifier.py /tmp/gov-proof.json --pins /tmp/gov-producer-pins.json
+```
+
+Proof/pins пути должны быть новыми, файлы не перезаписываются. Это исключительно test pins того же производителя; не заменять ими независимый trust bootstrap. В GitHub Actions соответствующие JSON сохраняются как synthetic evidence.

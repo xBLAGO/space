@@ -201,10 +201,14 @@ def transition(previous,c,signature,now):
         votes=pending['votes']
         if kind=='PolicyVoted':
             if actor in votes:raise cap.CapitalError('One governor one vote')
-            votes.append(actor);pending['ready_at']=now+p['activation_delay'] if len([k for k in votes if direct(s,k,'GOV',now)])>=p['governance_quorum'] else None
+            votes.append(actor)
+            if len([k for k in votes if direct(s,k,'GOV',now)])>=p['governance_quorum']:
+                if pending['ready_at'] is None:pending['ready_at']=now+p['activation_delay']
+            else:pending['ready_at']=None
         elif kind=='PolicyVoteRevoked':
             if actor not in votes:raise cap.CapitalError('No vote to revoke')
-            votes.remove(actor);pending['ready_at']=None
+            votes.remove(actor)
+            if len([k for k in votes if direct(s,k,'GOV',now)])<p['governance_quorum']:pending['ready_at']=None
         else:
             if len([k for k in votes if direct(s,k,'GOV',now)])<p['governance_quorum'] or pending['ready_at'] is None or now<pending['ready_at']:raise cap.CapitalError('Quorum and delay required')
             change_policy(p,pending['policy']);pending['status']='ACTIVATED';s['policy']=copy.deepcopy(pending['policy'])
