@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "tip": "dbeaa5c3e7aebfd07b6e5a0a003caeb6323fadcca6144127113921d6d102ad9d",
+  "index": 3,
+  "epoch": 2,
+  "balance": {
+    "currency": "RUB",
+    "declared_minor": 1000000000,
+    "unverified_minor": 0,
+    "verified_minor": 1000000000,
+    "available_minor": 1000000000,
+    "reserved_minor": 0,
+    "spent_minor": 0,
+    "refunded_minor": 0,
+    "net_spent_minor": 0,
+    "real_funds_verified": false
+  },
+  "spending_authority_restored": false,
+  "freshness": "NOT_CHECKED",
+  "source_truth_proven": false
+}

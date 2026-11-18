@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/foundation-09-1-durable-capital", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/foundation-09-2-capital-governance", "feat/foundation-09-1-durable-capital", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -71,6 +71,18 @@ jobs:
           PYTHONPATH=src python docs/ledger01/check_vectors.py --output "$RUNNER_TEMP/uel-offline-results.json"
       - name: UEL 0.3 checkpoint custody and repair evidence
         run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
+      - name: Three-node private custody and origin loss (synthetic only)
+        run: |
+          PYTHONPATH=.:src python -m tools.capital_custody_lab --output "$RUNNER_TEMP/custody093.json" --archive-output "$RUNNER_TEMP/custody093-archive.json" --pin-output "$RUNNER_TEMP/custody093-pin.json" --floor-output "$RUNNER_TEMP/custody093-floor.json"
+          PYTHONPATH=.:src python - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          from tools.capital_custody_verify import verify_archive
+          directory=Path(os.environ['RUNNER_TEMP'])
+          report=verify_archive(json.loads((directory/'custody093-archive.json').read_text()),json.loads((directory/'custody093-pin.json').read_text())['genesis_pin'],json.loads((directory/'custody093-floor.json').read_text()))
+          assert report['balance']['verified_minor']==1000000000 and report['epoch']==2 and not report['spending_authority_restored']
+          (directory/'custody093-independent.json').write_text(json.dumps(report))
+          PYCODE
       - name: Collective governance and independent verifier (synthetic only)
         run: |
           PYTHONPATH=.:src python -m tools.governance_lab --output "$RUNNER_TEMP/governance092-lab.json" --proof-output "$RUNNER_TEMP/governance092-proof.json" --pins-output "$RUNNER_TEMP/governance092-producer-pins.json"
@@ -107,6 +119,7 @@ jobs:
             ${{ runner.temp }}/uel03-full-regression.json
             ${{ runner.temp }}/foundation09-lab.json
             ${{ runner.temp }}/capital091-lab.json
+            ${{ runner.temp }}/custody093*.json
             ${{ runner.temp }}/governance092-lab.json
             ${{ runner.temp }}/governance092-proof.json
             ${{ runner.temp }}/governance092-producer-pins.json
@@ -373,3 +386,6 @@ jobs:
         run: |
           docker run --rm --network none -v "$PWD/tools:/app/tools:ro" --entrypoint python \
             xblago-space:${{ github.sha }} -m tools.foundation09_lab --output /tmp/foundation09-lab.json
+
+      - name: Docker three-node custody rehearsal (local only, no network)
+        run: docker run --rm --network none -v "$PWD/tools:/app/tools:ro" -v "$PWD/experiments:/app/experiments:ro" --entrypoint python xblago-space:${{ github.sha }} -m tools.capital_custody_lab --output /tmp/custody093.json
