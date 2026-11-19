@@ -23,8 +23,14 @@ class LiveAcceptanceHarnessTests(unittest.TestCase):
             self.assertEqual(run()['status'],'NOT EXECUTED')
         provider.assert_not_called()
     def test_mocked_transport_exercises_real_agent_but_never_qualifies_quality(self):
+        getenv=os.getenv
+        def isolated_getenv(key,*args):
+            if key in ('HF_TOKEN','OPENAI_API_KEY','XBLAGO_LLM_API_KEY'):
+                raise AssertionError('Production provider configuration must not be read')
+            return getenv(key,*args)
         with patch.dict(os.environ,{'BLAGO_TEST_HF_TOKEN':'synthetic-only-key',
-                'BLAGO_TEST_HF_MODEL':'synthetic-model','BLAGO_TEST_HF_APPROVED':'synthetic-only'}), patch.object(
+                'BLAGO_TEST_HF_MODEL':'synthetic-model','BLAGO_TEST_HF_APPROVED':'synthetic-only',
+                'HF_TOKEN':'production-sentinel','OPENAI_API_KEY':'production-sentinel'}), patch('os.getenv',side_effect=isolated_getenv), patch.object(
                 OpenAICompatibleProvider,'_request',return_value=Completion('Ответ тестового транспорта.','stop',False)):
             result=run()
         self.assertTrue(all(result['state_checks'].values()))

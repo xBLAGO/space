@@ -101,7 +101,7 @@ def run():
         with patch.dict(os.environ, {FLAG: 'false'}):
             cfg = create(Path(directory)/'new', help_enabled=True, context_fencing=True, lifecycle=True)
         cfg.update(XBLAGO_WEB_INVITE_CODE='synthetic-live-context', TELEGRAM_BOT_TOKEN='123:synthetic-help011-only')
-        with patch.dict(os.environ, cfg), patch('xblago.integrations.web.build_chat_provider', return_value=provider), patch('xblago.integrations.telegram.build_chat_provider', return_value=provider):
+        with patch.dict(os.environ, cfg), patch('xblago.integrations.web.load_llm_config', return_value=provider.config), patch('xblago.integrations.telegram.load_llm_config', return_value=provider.config), patch('xblago.integrations.web.build_chat_provider', return_value=provider), patch('xblago.integrations.telegram.build_chat_provider', return_value=provider):
             path = Path(cfg['XBLAGO_DATA_DIR'])/'blago.sqlite3'
             migrate(path)
             os.environ[FLAG] = 'true'
