@@ -1,5 +1,6 @@
 """Harness safety tests, not evidence of live inference or physical devices."""
 import os
+import json
 import unittest
 from unittest.mock import patch
 
@@ -24,6 +25,13 @@ class LiveAcceptanceHarnessTests(unittest.TestCase):
         provider.assert_not_called()
     def test_mocked_transport_exercises_real_agent_but_never_qualifies_quality(self):
         getenv=os.getenv
+        prompts={}
+        system_prompt=OpenAICompatibleProvider._system_prompt
+        def capture_prompt(provider,context):
+            result=system_prompt(provider,context)
+            if context.purpose=='conversation':
+                prompts[context.user_text]=json.loads(result.split('Relevant personal memory: ',1)[1])['memory']
+            return result
         def isolated_getenv(key,*args):
             if key in ('HF_TOKEN','OPENAI_API_KEY','XBLAGO_LLM_API_KEY'):
                 raise AssertionError('Production provider configuration must not be read')
@@ -31,7 +39,7 @@ class LiveAcceptanceHarnessTests(unittest.TestCase):
         with patch.dict(os.environ,{'BLAGO_TEST_HF_TOKEN':'synthetic-only-key',
                 'BLAGO_TEST_HF_MODEL':'synthetic-model','BLAGO_TEST_HF_APPROVED':'synthetic-only',
                 'HF_TOKEN':'production-sentinel','OPENAI_API_KEY':'production-sentinel'}), patch('os.getenv',side_effect=isolated_getenv), patch.object(
-                OpenAICompatibleProvider,'_request',return_value=Completion('Ответ тестового транспорта.','stop',False)):
+                OpenAICompatibleProvider,'_request',return_value=Completion('Ответ тестового транспорта.','stop',False)), patch.object(OpenAICompatibleProvider,'_system_prompt',new=capture_prompt):
             result=run()
         self.assertTrue(all(result['state_checks'].values()))
         self.assertEqual(result['answer_quality'],'PENDING HUMAN REVIEW')
@@ -40,6 +48,8 @@ class LiveAcceptanceHarnessTests(unittest.TestCase):
         self.assertLessEqual(result['requests'],96)
         self.assertEqual(next(t for t in result['turns'] if t['stage']=='deleted_mini')['selected_facts'].get('city'),None)
         self.assertTrue(any(t['stage']=='C02_boundary' for t in result['turns']))
+        boundary=next(t for t in result['turns'] if t['stage']=='C02_boundary')
+        self.assertEqual(boundary['selected_facts'],prompts[boundary['input']])
     def test_request_budget_is_checked_before_network(self):
         provider=RecordedProvider.__new__(RecordedProvider)
         provider.calls=[{}]*96

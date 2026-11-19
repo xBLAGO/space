@@ -123,6 +123,11 @@ def run():
                     answer = app.chat(who, text, session)
                 context = provider.contexts[-1] if len(provider.contexts) > contexts_before else None
                 visible_history = model_history(context.history) if context else ()
+                # Match the production provider's short-follow-up selection,
+                # including the preceding user topic, not just the current text.
+                query = context.user_text if context else ''
+                if context and len(query.split()) <= 10:
+                    query += ' ' + next((t.text for t in reversed(context.history) if t.role == 'user'), '')
                 who = other if participant == 'B' else uid
                 rows.append({'stage': stage, 'channel': channel, 'participant': participant,
                     'input': text, 'answer': redact_sensitive_text(answer),
@@ -131,7 +136,8 @@ def run():
                     'requests': len(provider.calls)-before,
                     'visible_history_turns':len(visible_history),
                     'story_title_visible_in_history':any('Сиреневый парус' in t.text for t in visible_history),
-                    'selected_facts': explain(context.participant, context.memory, text) if context else {},
+                    'selection_query': query,
+                    'selected_facts': explain(context.participant, context.memory, query) if context else {},
                     'memory_after': app.store.all_memory(who),
                     'review': 'PENDING HUMAN REVIEW' if context else 'APPLICATION COMMAND, NOT MODEL QUALITY'})
             say('introduce', 'Меня зовут Алина')
