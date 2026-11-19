@@ -351,6 +351,8 @@ class SQLiteBlagoStore:
 
     def delete_memory(self, blago_user_id: str, key: str) -> bool:
         with self._locked_transaction() as connection:
+            from xblago.core.agent_context_schema import deny_address
+            if key == 'name':deny_address(connection,blago_user_id)
             from xblago.core.context_schema import present
             if present(connection):connection.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id=?",(blago_user_id,))
             cursor = connection.execute(
@@ -365,6 +367,8 @@ class SQLiteBlagoStore:
 
     def clear_memory(self, blago_user_id: str) -> None:
         with self._locked_transaction() as connection:
+            from xblago.core.agent_context_schema import deny_address
+            deny_address(connection,blago_user_id)
             from xblago.core.context_schema import present
             if present(connection):connection.execute("UPDATE context_versions SET revision=revision+1,epoch=lower(hex(randomblob(16))) WHERE blago_user_id=?",(blago_user_id,))
             connection.execute("DELETE FROM memory_facts WHERE blago_user_id = ?", (blago_user_id,))
@@ -416,7 +420,7 @@ class SQLiteBlagoStore:
     def append_exchange(
         self, blago_user_id: str, exchange: tuple[ConversationTurn, ConversationTurn],
         channel: str = "telegram", chat_id: int | None = None,
-    ) -> None:
+    ) -> tuple[int, int]:
         """Commit a user/assistant pair together using the existing privacy writer."""
         if len(exchange) != 2 or tuple(t.role for t in exchange) != ("user", "assistant"):
             raise ValueError("A complete user/assistant exchange is required")
@@ -429,6 +433,7 @@ class SQLiteBlagoStore:
                 ids.append(cursor.lastrowid)
             from xblago.core.lifecycle_schema import present
             if present(connection):connection.execute('INSERT INTO lifecycle_history_pairs VALUES (?,?)',ids)
+            return tuple(ids)
 
     def backup_database(self, destination_dir: Path | None = None) -> Path:
         target_dir = destination_dir or (self.path.parent / "backups" / "sqlite")

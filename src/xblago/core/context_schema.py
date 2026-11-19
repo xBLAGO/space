@@ -89,7 +89,9 @@ def migrate_context(path):
         expected=json.loads(Path(__file__).with_name('integration_help_schema.json' if has_help(db) else 'integration_schema.json').read_text())
         from xblago.core import lifecycle_schema
         lifecycle_schema.validate(db)
-        if {k:v for k,v in schema_shape(db).items() if k not in OBJECTS|lifecycle_schema.OBJECTS}!=expected:raise ValueError('Context migration requires frozen Integration/Help baseline')
+        from xblago.core import agent_context_schema
+        agent_context_schema.validate(db)
+        if {k:v for k,v in schema_shape(db).items() if k not in OBJECTS|lifecycle_schema.OBJECTS|agent_context_schema.OBJECTS}!=expected:raise ValueError('Context migration requires frozen Integration/Help baseline')
         if db.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise ValueError('Context baseline integrity')
         changed=not validate(db)
         if changed:

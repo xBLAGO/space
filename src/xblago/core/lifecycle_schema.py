@@ -90,7 +90,9 @@ def migrate_lifecycle(path):
         db.execute('PRAGMA foreign_keys=ON');db.execute('BEGIN IMMEDIATE')
         had_context=context_validate(db)
         expected=json.loads(Path(__file__).with_name('integration_help_schema.json' if has_help(db) else 'integration_schema.json').read_text())
-        if {k:v for k,v in schema_shape(db).items() if k not in OBJECTS|CONTEXT_OBJECTS}!=expected:raise ValueError('Lifecycle requires frozen baseline')
+        from xblago.core import agent_context_schema
+        agent_context_schema.validate(db)
+        if {k:v for k,v in schema_shape(db).items() if k not in OBJECTS|CONTEXT_OBJECTS|agent_context_schema.OBJECTS}!=expected:raise ValueError('Lifecycle requires frozen baseline')
         # Certified old baseline may predate Help/context while the retained
         # journal already contains their denials. Install canonical definitions
         # together offline, then replay; never initialize a new lineage.

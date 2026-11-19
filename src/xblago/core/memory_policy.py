@@ -31,7 +31,28 @@ def memory_veto(text: str) -> bool:
 
 
 def may_extract(text: str) -> bool:
-    return bool(_SELF.search(text)) and not _UNSAFE.search(text) and not is_sensitive_memory("", text)
+    return bool(assertion_text(text))
+
+
+def assertion_text(text: str) -> str:
+    """Only a standalone assertion or a leading assertion followed by a question.
+
+    Negation, uncertainty, quotes, third-party wording and storage veto remain
+    whole-message guards. We do not split arbitrary conjunctions into facts.
+    """
+    if is_sensitive_memory('', text) or memory_veto(text):
+        return ''
+    if _SELF.search(text) and not _UNSAFE.search(text):
+        return text
+    match = re.fullmatch(r'([^,;.!?\n]+),\s*((?:что|как|где|куда)\s+[^.!?\n]+\?)', text.strip(), re.I)
+    if not match:
+        return ''
+    prefix, question = match.groups()
+    # Only the question marker and its initial interrogative are exempt.
+    tail = re.sub(r'^(?:что|как|где|куда)\s+', '', question[:-1], flags=re.I)
+    if _SELF.search(prefix) and not _UNSAFE.search(prefix) and not _UNSAFE.search(tail):
+        return prefix.strip()
+    return ''
 
 
 def grounded(value: str, evidence: object, text: str) -> bool:
@@ -47,6 +68,7 @@ def grounded(value: str, evidence: object, text: str) -> bool:
         and may_extract(text)
         and may_extract(evidence)
         and value.casefold() in evidence.casefold()
+        and evidence in assertion_text(text)
     )
 
 

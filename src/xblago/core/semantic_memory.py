@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError
 from xblago.core.memory import SemanticMemoryRecord, is_sensitive_memory
-from xblago.core.memory_policy import may_extract, grounded, supported_relation
+from xblago.core.memory_policy import may_extract, grounded, supported_relation, assertion_text
 
 
 ALLOWED_CATEGORIES = {"fact", "interest", "preference", "skill", "goal", "need"}
@@ -32,7 +32,7 @@ class SemanticMemoryExtractor:
     def extract(self, context: ChatContext) -> tuple[MemoryCandidate, ...]:
         if len(context.user_text) > self.max_text_length or not may_extract(context.user_text):
             return ()
-        text = context.user_text
+        text = assertion_text(context.user_text)
         prompt = _extraction_prompt(text)
         raw = self.provider.generate(
             ChatContext(
