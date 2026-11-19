@@ -83,3 +83,7 @@ Scripted provider подтверждает передачу правильног
 GO возможно только для дальнейших изолированных испытаний после успешного CI данного HEAD. Общий пилот остаётся **NO-GO**; G02–G11 и независимость операторов не повышаются этим PR. Никаких production migrations, HF, webhook, реальных пользователей, merge или deployment.
 
 Первый CI на `c41a67d…`: tests PASS, Docker FAIL на формировании отчёта, потому что инструмент требовал `.git` внутри установленного образа. Исправление не выдумывает attestation: source SHA без VCS — UNKNOWN, связь с образом проверяется по CI checkout/build evidence. Отдельный no-Git localhost-прогон 11/11 PASS; актуальный Docker run и окончательное решение приведены в PR. Первые evidence и полный первый regression сохранены в неизменённой истории коммита `c41a67d…`.
+
+## Следующая приёмка: реальные ответы и устройства
+
+[Live/device acceptance](context-reliability/LIVE_AND_DEVICE_ACCEPTANCE.md) задаёт один воспроизводимый сценарий, рубрику самих ответов и отдельные требования к физическим Android / iPhone. `tools.agent_context_live_check` использует только специально разрешённые `BLAGO_TEST_HF_*`, создаёт новую синтетическую базу и сохраняет ответы вместе с источниками; при отсутствии допуска — `NOT EXECUTED`, ноль requests. Четыре теста проверяют safeguards / wiring инструмента с мок-транспортом и не являются live qualification. В [матрице C01–C14](context-reliability/SCENARIOS.md) live и physical-device результаты отделены от локальных PASS. Границы C02, C12 и C14 не меняются.
