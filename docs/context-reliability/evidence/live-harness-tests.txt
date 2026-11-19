@@ -1,0 +1,9 @@
+test_mocked_transport_exercises_real_agent_but_never_qualifies_quality (tests.test_agent_context_live_check.LiveAcceptanceHarnessTests.test_mocked_transport_exercises_real_agent_but_never_qualifies_quality) ... ok
+test_production_credentials_never_enable_live_run (tests.test_agent_context_live_check.LiveAcceptanceHarnessTests.test_production_credentials_never_enable_live_run) ... ok
+test_request_budget_is_checked_before_network (tests.test_agent_context_live_check.LiveAcceptanceHarnessTests.test_request_budget_is_checked_before_network) ... ok
+test_test_credential_without_explicit_scope_never_calls_provider (tests.test_agent_context_live_check.LiveAcceptanceHarnessTests.test_test_credential_without_explicit_scope_never_calls_provider) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 10.489s
+
+OK

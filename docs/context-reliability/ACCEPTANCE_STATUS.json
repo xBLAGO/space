@@ -1,0 +1,39 @@
+{
+  "format": "blago-context-acceptance-status-1",
+  "recorded_at": "2026-11-19T11:40:17.884416+00:00",
+  "runtime_baseline_head": "bac4955a579f212bf3823e7da4636af548a68afa",
+  "harness_code_commit": "c1bccfbee312a55c3ed8cc579f559b40fb212a24",
+  "live_model": {
+    "status": "NOT EXECUTED",
+    "requests": 0,
+    "reason": "Dedicated test token, model and synthetic-only approval required",
+    "actual_answers_available": false
+  },
+  "physical_android": {
+    "status": "NOT EXECUTED",
+    "approved_test_host": "NOT PROVIDED",
+    "device_artifacts": "NOT PROVIDED"
+  },
+  "physical_iphone": {
+    "status": "NOT EXECUTED",
+    "approved_test_host": "NOT PROVIDED",
+    "device_artifacts": "NOT PROVIDED"
+  },
+  "harness_safeguards": {
+    "tests": 4,
+    "status": "PASS",
+    "transport": "MOCKED; not live-model qualification"
+  },
+  "boundaries": {
+    "C02": "Arbitrary old topic retrieval unavailable; only retained grounded facts supported",
+    "C12": "Legacy/deleted origin UNKNOWN without verifiable source",
+    "C14": "Separate federation task; not implemented"
+  },
+  "answer_quality": "NOT EXECUTED",
+  "real_pilot": "NO-GO",
+  "production_access": false,
+  "evidence_sha256": {
+    "evidence/live-availability.json": "3bc7476a271347177ebee45424f1c5b2c91945f5344f097aa11e87d97b36dcf2",
+    "evidence/live-harness-tests.txt": "da1608255071a76cb91c8e49ace9e6f881502f3d1c658dd38b2ca6d454a17509"
+  }
+}

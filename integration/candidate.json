@@ -156,7 +156,7 @@
     "tools/agent_context_browser_check.py": "4ccc0bdb79f6657c9b8131a6bcfd8a22f43ceee854c589bd267937e0c3decc97",
     "tools/agent_context_check.py": "9044183bdd3a61d18adc28929497e5f8b95529302e64511167db8a1281492435",
     "tools/agent_context_lab.py": "41812134f473a99e32b48796c2443cbb337cebfa2157092c7a4ac90781d3dc1d",
-    "tools/agent_context_live_check.py": "48cd51f53d98d672cd7699cddf7d373f5bf09e2cc7cacae3bc3181a7c72617aa",
+    "tools/agent_context_live_check.py": "a862a8d41194d1c3ae2ca43a624742c5dcc481ef92c1cc27636d236bdb326b8c",
     "tools/build_macos_sqlite_driver.py": "746eb20f74bef46a9036d981041b9da71b169addf4c3058095c00b07d28268ea",
     "tools/build_sqlite.py": "eedd970c2a7724905ea2dec0821be819731be8edee36299aee94d36d8ae7d8b0",
     "tools/context_fencing_check.py": "eb565725c56881ce6382fa0b6cab6211ba4d55fbe4bca91d66aeb42be1f30869",
