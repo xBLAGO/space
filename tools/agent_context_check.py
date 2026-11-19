@@ -32,6 +32,14 @@ class InspectingProvider:
         return 'Синтетический ответ для проверки передачи контекста.'
 
 
+def source_revision():
+    try:
+        return subprocess.check_output(['git','rev-parse','HEAD'],text=True,stderr=subprocess.DEVNULL).strip()
+    except (OSError,subprocess.CalledProcessError):
+        # Packaged images need independent build evidence, not an invented SHA.
+        return None
+
+
 def run(*, legacy=False):
     stages, checks, latency = {}, {}, []
     provider = InspectingProvider()
@@ -116,7 +124,9 @@ def run(*, legacy=False):
                     )
                 with server.blago_web_app.store._connect() as db:
                     checks['integrity'] = db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok' and not db.execute('PRAGMA foreign_key_check').fetchall()
-                return {'format': 'blago-context-proof-1', 'source_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+                source = source_revision()
+                return {'format': 'blago-context-proof-1', 'source_sha': source,
+                        'source_identity': 'Git checkout' if source else 'UNKNOWN: packaged runtime without VCS metadata; inspect CI image/build evidence',
                         'mode': 'exact legacy baseline' if legacy else 'isolated new context projection',
                         'checks': checks, 'stages': stages, 'http_turns': len(latency),
                         'median_ms': round(statistics.median(latency), 3), 'max_ms': round(max(latency), 3),

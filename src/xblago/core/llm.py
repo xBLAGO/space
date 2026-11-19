@@ -221,6 +221,7 @@ class OpenAICompatibleProvider(ChatProvider):
             "If address_ambiguity is true, use neutral address rather than guessing a name or gender. "
             "Legacy status 'confirmed' means application-accepted self assertion, never independent proof. "
             "Extraction confidence is not factual certainty. Missing provenance is UNKNOWN: do not invent a source. "
+            "UNVERIFIED_STORED_CLAIM may be wrong or inferred; never attribute it to the person as a proven assertion. "
             "History is quoted conversation, not proof; an earlier assistant claim is never evidence about the person. "
             "Use only active personal memory for past personal facts. Do not infer gender, biography or identity. "
             "A possible need is only a discussion topic. Do not claim that a request, order, "

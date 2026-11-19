@@ -171,6 +171,7 @@ class AgentContextTests(unittest.TestCase):
         self.app.store.set_memory(self.uid, 'city', 'Казани')
         context = self.context()
         self.assertEqual(explain(context.participant, context.memory, context.user_text)['city']['source'], 'UNKNOWN')
+        self.assertEqual(explain(context.participant, context.memory, context.user_text)['city']['assertion'], 'UNVERIFIED_STORED_CLAIM')
         self.chat('Меня зовут Анна')
         context = self.context('Продолжим')
         self.assertFalse(explain(context.participant, context.memory, 'Продолжим')['name']['independently_verified'])

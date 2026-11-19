@@ -111,7 +111,7 @@ def explain(participant, memory, query):
     selected = select(memory, query)
     if participant.profile.get('address_ambiguity'):
         selected.pop('name',None)
-    return {k: {'value': v, 'assertion': 'SELF_DECLARED',
+    return {k: {'value': v, 'assertion': 'SELF_DECLARED' if participant.origins.get(k, {}).get('value') == v else 'UNVERIFIED_STORED_CLAIM',
                 'independently_verified': False,
                 'reason': 'stable_address_or_style' if k in ('name', 'preference:response_style') else 'query_relevance',
                 'source': participant.origins[k] if participant.origins.get(k, {}).get('value') == v else 'UNKNOWN'}
