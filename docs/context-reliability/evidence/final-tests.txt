@@ -549,6 +549,6 @@ test_web_data_survives_app_restart (test_web.WebAppTest.test_web_data_survives_a
 test_web_http_api_and_csrf (test_web.WebAppTest.test_web_http_api_and_csrf) ... ok
 
 ----------------------------------------------------------------------
-Ran 532 tests in 474.328s
+Ran 532 tests in 505.270s
 
 OK

@@ -1,6 +1,7 @@
 {
   "format": "blago-context-proof-1",
-  "source_sha": "2a22bcfbde7b3a802c50b09736ff9ae40b368a0d",
+  "source_sha": "4850c16cce2b30e384dce281bcec073a72a99300",
+  "source_identity": "Git checkout",
   "mode": "isolated new context projection",
   "checks": {
     "web_mini_same_participant": true,
@@ -221,8 +222,8 @@
     }
   },
   "http_turns": 45,
-  "median_ms": 194.608,
-  "max_ms": 844.081,
+  "median_ms": 226.654,
+  "max_ms": 563.489,
   "extra_llm_calls": 0,
   "live_model": "NOT EXECUTED",
   "physical_devices": "NOT EXECUTED",
