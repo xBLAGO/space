@@ -4,6 +4,6 @@ test_request_budget_is_checked_before_network (tests.test_agent_context_live_che
 test_test_credential_without_explicit_scope_never_calls_provider (tests.test_agent_context_live_check.LiveAcceptanceHarnessTests.test_test_credential_without_explicit_scope_never_calls_provider) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 10.750s
+Ran 4 tests in 10.497s
 
 OK
