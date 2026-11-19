@@ -1,0 +1,72 @@
+{
+  "format": "blago-context-reliability-results-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "runtime_source_sha": "2a22bcfbde7b3a802c50b09736ff9ae40b368a0d",
+  "baseline": {
+    "tests": 472,
+    "seconds": 478.004,
+    "status": "PASS",
+    "recorded_before_edits": true
+  },
+  "final_local_regression": {
+    "tests": 532,
+    "original_tests": 472,
+    "additional_tests": 60,
+    "original_G09_repeated_with_new_mode": 34,
+    "seconds": 474.328,
+    "status": "PASS"
+  },
+  "cross_channel": {
+    "checks": 11,
+    "status": "PASS",
+    "provider": "scripted only"
+  },
+  "browser": {
+    "checks": 7,
+    "status": "PASS",
+    "chrome": "150.0.7871.125",
+    "scope": "headless desktop / mobile emulation; synthetic Telegram SDK"
+  },
+  "migration": {
+    "old_checksums_unchanged": true,
+    "checksum": "ef6d9ae1d6d2431f176717712aa029086d729d8b26e9c273440c42d6c78b8feb",
+    "default_enabled": false,
+    "module": "xblago.core.agent_context_schema",
+    "optional": true,
+    "version": "agent_context_001",
+    "restore_and_id_reuse_checks": "PASS"
+  },
+  "latency_sample": {
+    "before_median_ms": 181.889,
+    "after_median_ms": 194.608,
+    "before_max_ms": 291.778,
+    "after_max_ms": 844.081,
+    "controlled_benchmark": false,
+    "extra_llm_calls": 0
+  },
+  "stand_launch": {
+    "healthz": 200,
+    "app": 200,
+    "sqlite_integrity": "ok",
+    "foreign_key_violations": 0,
+    "independent_failure_domains": "UNKNOWN"
+  },
+  "docker_local": "NOT EXECUTED: no Docker executable",
+  "ci": "Exact final HEAD results linked in Draft PR; do not infer PASS from this file",
+  "live_llm": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "C02": "PARTIAL: durable grounded facts only, not arbitrary old conversation",
+  "C12": "PARTIAL: new sourced writes; legacy UNKNOWN",
+  "C14": "NOT IMPLEMENTED / NOT EXECUTED",
+  "real_pilot": "NO-GO",
+  "production_access": false,
+  "merge": false,
+  "deployment": false,
+  "evidence_sha256": {
+    "evidence/after.json": "ab4dad99dd3fb0d268d1cbf0dd32538e88f4bb9da761ec35781bab89f64a4c18",
+    "evidence/baseline-tests.txt": "fa5d82c6166650bfe2c0d22fcb2cc13413a7b136c3f79db9c48bab8fdb31068a",
+    "evidence/before.json": "a460d4427f9cdcbcd8a80abb301b8bf57cc62f263c3613d2a734f8d721120bd0",
+    "evidence/browser.json": "4a8ca2ba8ec38aa36c4942436af62c25e0914615e69ec37e6f3072d22831095a",
+    "evidence/final-tests.txt": "c6078c95a380fe932a14a7dc22ae3f9a3880925fee13171b8cf43cb221297d9d"
+  }
+}

@@ -59,6 +59,16 @@ sequenceDiagram
 
 ## Доказательства и пределы
 
+Runtime source commit: `2a22bcfbde7b3a802c50b09736ff9ae40b368a0d`. Следующий коммит добавляет только отчёт и evidence; соответствие runtime проверяется отдельным diff. Точный финальный HEAD и GitHub Actions run указаны в Draft PR, чтобы не создавать самоссылочный SHA в файле.
+
+Итог локально: **532/532, 474.328 секунды**; прежние 472 сохранены, добавлены 60 проверок (26 контекстных и 34 повторных G09 с включённым новым режимом). Отдельный HTTP-прогон — 11/11 проверок, browser — 7/7. Stand init/inspect/serve проверены, `/healthz` и `/app` возвращают 200. Старые migration manifest/checksums неизменны; новая optional `agent_context_001` имеет checksum `ef6d9ae1d6d2431f176717712aa029086d729d8b26e9c273440c42d6c78b8feb`.
+
+Локальный Docker — NOT EXECUTED: исполняемый файл отсутствует. Docker build/runtime и новый межканальный контекстный smoke добавлены в CI; PASS допустим только по завершённому job точного HEAD, ссылка — в PR. Никакой release workflow не запускается: меняется только безопасный Tests workflow.
+
+В одинаковом 45-ходовом HTTP-сценарии медиана одного хода составила 181.889 мс до и 194.608 мс после (+12.719 мс); максимумы 291.778 и 844.081 мс. Это два локальных запуска с различной фоновой нагрузкой, **не контролируемый benchmark и не SLA**. Дополнительных вызовов модели нет. Source quotes и JSON evidence увеличивают prompt в пределах указанных лимитов; реальная стоимость зависит от модели и здесь не измерялась.
+
+[RESULTS.json](context-reliability/RESULTS.json) содержит machine-readable результаты и хеши [evidence](context-reliability/evidence). Полные исходный и финальный локальные test logs опубликованы только для синтетического стенда. Перед публикацией проверено отсутствие credential-format matches; реальные токены / пользовательские диалоги не использовались.
+
 - [Сценарии до / после](context-reliability/SCENARIOS.md).
 - [Threat model](context-reliability/THREAT_MODEL.md).
 - [Стенд, миграция, восстановление и rollback](context-reliability/RUNBOOK.md).
