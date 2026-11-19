@@ -1,8 +1,8 @@
 {
   "format": "blago-context-acceptance-status-1",
-  "recorded_at": "2026-11-19T11:40:17.884416+00:00",
+  "recorded_at": "2026-11-19T11:44:18.058641+00:00",
   "runtime_baseline_head": "bac4955a579f212bf3823e7da4636af548a68afa",
-  "harness_code_commit": "c1bccfbee312a55c3ed8cc579f559b40fb212a24",
+  "harness_code_commit": "86b467bade5fb32d08ec134426b13d7bd83cacd9",
   "live_model": {
     "status": "NOT EXECUTED",
     "requests": 0,
@@ -22,7 +22,8 @@
   "harness_safeguards": {
     "tests": 4,
     "status": "PASS",
-    "transport": "MOCKED; not live-model qualification"
+    "transport": "MOCKED; not live-model qualification",
+    "generic_provider_config_reads": "FORBIDDEN; checked with raising getenv guard"
   },
   "boundaries": {
     "C02": "Arbitrary old topic retrieval unavailable; only retained grounded facts supported",
@@ -33,7 +34,12 @@
   "real_pilot": "NO-GO",
   "production_access": false,
   "evidence_sha256": {
-    "evidence/live-availability.json": "3bc7476a271347177ebee45424f1c5b2c91945f5344f097aa11e87d97b36dcf2",
-    "evidence/live-harness-tests.txt": "da1608255071a76cb91c8e49ace9e6f881502f3d1c658dd38b2ca6d454a17509"
+    "evidence/live-availability.json": "44f880ad455cb58bab7aea1239cb5f36cd8f46e2d5bd48df6e73cdd0f2e4b988",
+    "evidence/live-harness-tests.txt": "58072f2e5a0b4523532993ba9f8d24b84212fdf0fc4691cdafbd72bf890a2a60"
+  },
+  "initial_harness_code_commit": "c1bccfbee312a55c3ed8cc579f559b40fb212a24",
+  "harness_source_sha256": {
+    "tools/agent_context_live_check.py": "749cd5b0d3d9183b0b77f9aa9c376538753f54d54eab65a1503696f28f8814f3",
+    "tests/test_agent_context_live_check.py": "0bd4e73dfcc05d6e84822ea683e535da7e7aabd4a752d516f1ea639fa21f174d"
   }
 }
