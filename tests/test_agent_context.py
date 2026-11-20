@@ -79,6 +79,47 @@ class AgentContextTests(unittest.TestCase):
         facts = explain(context.participant, context.memory, context.user_text)
         self.assertEqual(facts['name']['value'], 'Анна')
         self.assertEqual(facts['name']['reason'], 'stable_address_or_style')
+    def test_C12_displayed_name_source_before_and_after_history_clear(self):
+        self.chat('Меня зовут Алина')
+        count = len(self.provider.contexts)
+        known = self.chat('Откуда ты знаешь моё имя?')
+        self.assertIn('Алина', known)
+        self.assertIn('точный фрагмент: «Алина»', known)
+        self.assertNotIn('задавали вопрос', known)
+        self.chat('/clear-history')
+        unknown = self.chat('Откуда ты знаешь моё имя?')
+        self.assertIn('Алина', unknown)
+        self.assertIn('Исходная реплика сейчас недоступна', unknown)
+        self.assertNotIn('не знаю', unknown)
+        self.assertEqual(self.app.store.all_memory(self.uid)['name'], 'Алина')
+        self.assertEqual(len(self.provider.contexts), count)
+        self.app.delete_memory(self.uid, 'name')
+        missing = self.chat('Откуда ты знаешь моё имя?')
+        self.assertNotIn('Алина', missing)
+        self.assertIn('нет этих сведений', missing)
+
+    def test_C12_city_source_quotes_only_retained_value(self):
+        self.chat('Я живу в Перми')
+        reply = self.chat('Откуда ты знаешь, в каком городе я живу?')
+        self.assertIn('«Перми»', reply)
+        self.assertIn('твоё сообщение', reply)
+
+    def test_C12_source_reply_cannot_commit_after_concurrent_deletion(self):
+        from xblago.core.messages import UserMessage
+        self.chat('Меня зовут Алина')
+        generation = Generation(self.app.store, self.uid)
+        response = generation.agent(self.provider).respond(UserMessage('Откуда ты знаешь моё имя?'))
+        self.app.delete_memory(self.uid, 'name')
+        with self.assertRaises(ContextConflict):
+            generation.commit()
+        self.assertNotIn('name', self.app.store.all_memory(self.uid))
+
+    def test_source_question_about_someone_else_is_not_owner_lookup(self):
+        self.chat('Меня зовут Алина')
+        count = len(self.provider.contexts)
+        answer = self.chat('Откуда ты знаешь имя моего друга?')
+        self.assertEqual(len(self.provider.contexts), count+1)
+        self.assertNotIn('точный фрагмент', answer)
     def test_conflicting_chosen_names_use_neutral_address(self):
         self.app.update_me(self.uid,{'display_name':'Синтетическая Анна'})
         self.chat('Меня зовут Вера')

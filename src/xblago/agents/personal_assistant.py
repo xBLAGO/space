@@ -157,6 +157,11 @@ class PersonalAssistantAgent:
                 AgentResponse(("Я здесь." if language == "ru" else "I'm here.") if self._history or self._has_prior_dialogue else _text(language, "greeting")),
             )
 
+        from xblago.core.agent_context import provenance_reply
+        source_reply = provenance_reply(self.participant_context, self.memory.all(), message.text)
+        if source_reply is not None and not veto:
+            return self._record_and_return(message, AgentResponse(source_reply))
+
         edit = None if veto else parse_edit(message.text)
         facts = self.memory.all()
         resolution = resolve_edit(edit, facts) if edit else None

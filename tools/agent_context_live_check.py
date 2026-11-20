@@ -15,7 +15,7 @@ from unittest.mock import patch
 from tools.integration_fixture import create
 from tools.agent_context_check import source_revision
 from tools.unified_mvp_check import init_data, bot_update
-from xblago.core.agent_context import explain
+from xblago.core.agent_context import explain, snapshot, provenance_reply
 from xblago.core.agent_context_schema import migrate, FLAG
 from xblago.core.config import LlmConfig
 from xblago.core.conversation import model_history
@@ -129,6 +129,13 @@ def run():
                 if context and len(query.split()) <= 10:
                     query += ' ' + next((t.text for t in reversed(context.history) if t.role == 'user'), '')
                 who = other if participant == 'B' else uid
+                source_context = None
+                if context is None:
+                    facts = app.store.all_memory(who)
+                    with app.store._locked_transaction() as db:
+                        candidate = snapshot(db, who, facts, app.store.all_semantic_memory(who))
+                    if provenance_reply(candidate, facts, text) is not None:
+                        source_context = candidate
                 rows.append({'stage': stage, 'channel': channel, 'participant': participant,
                     'input': text, 'answer': redact_sensitive_text(answer),
                     'model_answer': redact_sensitive_text(provider.answers[-1]) if context and provider.answers[-1] else None,
@@ -137,11 +144,19 @@ def run():
                     'visible_history_turns':len(visible_history),
                     'story_title_visible_in_history':any('Сиреневый парус' in t.text for t in visible_history),
                     'selection_query': query,
-                    'selected_facts': explain(context.participant, context.memory, query) if context else {},
+                    'selected_facts': (explain(context.participant, context.memory, query) if context
+                                       else explain(source_context, facts, text) if source_context else {}),
+                    'answer_path': 'model' if context else 'verified_source_lookup' if source_context else 'application_command',
                     'memory_after': app.store.all_memory(who),
                     'review': 'PENDING HUMAN REVIEW' if context else 'APPLICATION COMMAND, NOT MODEL QUALITY'})
             say('introduce', 'Меня зовут Алина')
             say('self_fact', 'Я живу в Перми')
+            # Recent dialogue is not proof of a durable, traceable memory write.
+            with app.store._locked_transaction() as db:
+                prepared = snapshot(db, uid, app.store.all_memory(uid), app.store.all_semantic_memory(uid))
+            city_ready = (app.store.all_memory(uid).get('city') == 'Перми'
+                          and prepared.origins.get('city', {}).get('value') == 'Перми')
+            checks['C12_city_setup_ready'] = city_ready
             say('third_party', 'Мой знакомый живёт в Уфе. Это сведения о нём, не обо мне.')
             say('hypothesis', 'Наверное, я хотел бы переехать в Омск, но это только предположение.')
             checks['third_party_and_hypothesis_not_owner_fact'] = app.store.all_memory(uid).get('city') == 'Перми'
@@ -149,7 +164,12 @@ def run():
             for i, text in enumerate(FILLERS):
                 say('topic_change_'+str(i+1), text+' Ответь в одном предложении.')
             say('recall_after_35_turns', 'Где я живу? Если сведений нет, скажи прямо.')
-            say('source_before_clear', 'Откуда ты знаешь, в каком городе я живу?')
+            if city_ready:
+                say('source_before_clear', 'Откуда ты знаешь, в каком городе я живу?')
+            else:
+                rows.append({'stage':'source_before_clear', 'status':'NOT EXECUTED',
+                             'reason':'SETUP FAILED: durable city or verified source unavailable',
+                             'requests':0, 'answer':None})
             say('C02_boundary', 'Как назывался наш вымышленный рассказ? Если не знаешь, не придумывай.')
             # Long inference runs may outlive the existing fresh-auth window.
             # Reauthenticate legitimately; never extend/disable session guards.

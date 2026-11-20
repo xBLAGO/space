@@ -56,3 +56,20 @@ class LiveAcceptanceHarnessTests(unittest.TestCase):
         with patch.object(OpenAICompatibleProvider,'_request') as transport:
             with self.assertRaises(LlmProviderError):provider._request([],0,384)
         transport.assert_not_called()
+
+    def test_C12_failed_setup_is_not_a_source_test_pass(self):
+        from dataclasses import replace
+        from xblago.core.agent_context import snapshot
+        def without_city_source(*args):
+            participant = snapshot(*args)
+            return replace(participant, origins={})
+        with patch.dict(os.environ, {'BLAGO_TEST_HF_TOKEN':'synthetic-only-key',
+                'BLAGO_TEST_HF_MODEL':'synthetic-model','BLAGO_TEST_HF_APPROVED':'synthetic-only'}), patch.object(
+                OpenAICompatibleProvider, '_request', return_value=Completion('Ответ тестового транспорта.','stop',False)), patch(
+                'tools.agent_context_live_check.snapshot', side_effect=without_city_source):
+            result = run()
+        self.assertFalse(result['state_checks']['C12_city_setup_ready'])
+        stage = next(t for t in result['turns'] if t['stage']=='source_before_clear')
+        self.assertEqual(stage['status'], 'NOT EXECUTED')
+        self.assertIn('SETUP FAILED', stage['reason'])
+        self.assertEqual(stage['requests'], 0)

@@ -1,5 +1,6 @@
 {
   "format": "blago-context-acceptance-status-1",
+  "historical_snapshot_notice": "Original 2026-11-19 qualification retained; subsequent actual live observations and C12 correction are in C12_CORRECTION.json and C12_CORRECTION.md",
   "recorded_at": "2026-11-19T11:50:06.274899+00:00",
   "runtime_baseline_head": "bac4955a579f212bf3823e7da4636af548a68afa",
   "harness_code_commit": "7aa549b680438606dc284c09d9b6e80a63479b9f",

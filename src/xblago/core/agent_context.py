@@ -122,6 +122,35 @@ def render(participant, memory, query):
     return json.dumps({'profile': participant.profile, 'memory': explain(participant, memory, query)}, ensure_ascii=False)
 
 
+def provenance_reply(participant, memory, query):
+    """Bounded source lookup, not model inference or an assertion of truth.
+
+    Quote only the verified value span: the surrounding turn may contain a
+    different fact which has since been erased. UNKNOWN describes provenance,
+    never the availability of the retained value.
+    """
+    if participant is None:
+        return None
+    text = query.casefold().strip()
+    if not re.search(r'\bоткуда\b.*\bзнаешь\b', text):
+        return None
+    key = ('name' if re.search(r'\bмо[её]\s+имя\b', text)
+           else 'city' if re.search(r'\bгород\w*\b', text) and re.search(r'\bя\s+живу\b', text)
+           else None)
+    if key is None:
+        return None
+    value = memory.get(key)
+    if (not isinstance(value, str) or not value or len(value) > 240
+            or is_sensitive_memory(key, value)
+            or (key == 'name' and participant.profile.get('address_ambiguity'))):
+        return 'Сейчас в доступной памяти нет этих сведений.'
+    label = 'имя' if key == 'name' else 'город проживания'
+    origin = participant.origins.get(key, {})
+    if origin.get('value') == value:
+        return f'В памяти сохранено: {label} — {value}. Источник — твоё сообщение; точный фрагмент: «{origin["quote"]}».'
+    return f'В памяти сохранилось: {label} — {value}. Исходная реплика сейчас недоступна; происхождение записи неизвестно.'
+
+
 def apply_memory(buffer, memory, marker):
     """Attach source intent inside the same transaction as the canonical writes."""
     for method, args in buffer.operations:
