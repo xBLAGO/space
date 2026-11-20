@@ -1,0 +1,16 @@
+{
+  "format": "blago-C07-controlled-failure-1",
+  "source_sha": "ca11f21cc5a0b7aecd60f9ea23063ed9eead4e5d",
+  "test_source_sha256": "81ebac8675f8a43c6e47b414678d9f5db2aaf7ff3698254916672154e03242ac",
+  "tracked_worktree_clean": true,
+  "test_success": false,
+  "observations": {
+    "failed_reply": "Сейчас не получается связаться. Твоё сообщение осталось в диалоге.",
+    "pending_answers": {},
+    "saved_answers": {}
+  },
+  "provider": "controlled local stub; no HF requests",
+  "telegram": "synthetic transport; real local handlers",
+  "physical_devices": "NOT EXECUTED",
+  "real_pilot": "NO-GO"
+}

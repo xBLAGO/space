@@ -1,0 +1,18 @@
+{
+  "format": "blago-context-physical-review-1",
+  "source_head": "TO_BE_RECORDED",
+  "test_host": "NOT PROVIDED",
+  "test_account_transport_metadata_approved": false,
+  "required_no_production_changes": true,
+  "devices": [
+    {"alias": "Android", "physical": null, "os_version": null, "browser_version": null, "telegram_version": null, "status": "NOT EXECUTED", "results": []},
+    {"alias": "iPhone", "physical": null, "os_version": null, "browser_version": null, "telegram_version": null, "status": "NOT EXECUTED", "results": []}
+  ],
+  "result_row_fields": ["scenario", "participant_alias", "channel", "synthetic_input", "exact_answer", "expected", "actual", "source_or_UNKNOWN", "verdict", "evidence_sha256"],
+  "allowed_verdicts": ["PASS", "FAIL", "UNKNOWN", "NOT EXECUTED"],
+  "prohibited_fields": ["credentials", "cookies", "initData", "Telegram user ID", "phone", "IMEI", "MAC", "serial number", "fingerprint"],
+  "C02_arbitrary_old_topic": "UNAVAILABLE",
+  "C12_legacy_origin": "UNKNOWN",
+  "C14_independent_transfer": "SEPARATE FEDERATION TASK",
+  "real_pilot": "NO-GO"
+}

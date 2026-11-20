@@ -1,0 +1,22 @@
+{
+  "source_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "audit_sha": "d62b6bb24dc5604ccfa6b3da453879c264040d6a",
+  "recorded_at_utc": "2026-11-19T09:50:04.895389+00:00",
+  "before_runtime_edits": true,
+  "working_tree_was_clean": true,
+  "command": "PYTHONPATH=/tmp/blago-sqlite-driver-3541:.:src /tmp/blago-uel03-venv/bin/python -m unittest discover -s tests -v",
+  "tests": 472,
+  "seconds": 478.004,
+  "result": "PASS",
+  "log_sha256": "fa5d82c6166650bfe2c0d22fcb2cc13413a7b136c3f79db9c48bab8fdb31068a",
+  "probes": {
+    "C01_participant_field": false,
+    "C03_continuation_selects_name": false,
+    "C04_self_assertion_eligible": true,
+    "C05_mixed_assertion_eligible": false,
+    "C06_third_party_rejected": true,
+    "C12_source_turn_field": false
+  },
+  "live_model": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED"
+}

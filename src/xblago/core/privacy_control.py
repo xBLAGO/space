@@ -102,6 +102,9 @@ class PrivacyControl:
         if any(actual.get(statement.split()[2])!=statement for statement in DDL):
             raise JournalUnavailable('Privacy schema/trigger drift detected')
         self.rows,self.chain = journal.read()
+        from xblago.core import agent_context_schema
+        agent_context_schema.validate(db, mandatory=agent_context_schema.requested() or
+            any(json.loads(r[2])['kind'] in (agent_context_schema.KIND,agent_context_schema.ADDRESS_KIND) for r in self.rows))
         from xblago.core import lifecycle_schema
         lifecycle_schema.validate(db,mandatory=lifecycle_schema.required() or any(json.loads(r[2])['kind'].startswith('lifecycle_') for r in self.rows))
         from xblago.core import context_schema
@@ -188,6 +191,12 @@ class PrivacyControl:
         if kind.startswith('lifecycle_'):
             from xblago.core.data_lifecycle import apply_event
             apply_event(db,event,self.journal)
+        elif kind=='agent_history_floor':
+            from xblago.core.agent_context_schema import floor_event
+            floor_event(db,event,self.journal)
+        elif kind=='agent_address_permission':
+            from xblago.core.agent_context_schema import validate_address
+            validate_address(db,event,self.journal)
         elif kind=='context_version':
             from xblago.core.context_schema import apply_checkpoint
             apply_checkpoint(db,event,self.journal)

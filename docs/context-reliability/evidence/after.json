@@ -1,0 +1,232 @@
+{
+  "format": "blago-context-proof-1",
+  "source_sha": "4850c16cce2b30e384dce281bcec073a72a99300",
+  "source_identity": "Git checkout",
+  "mode": "isolated new context projection",
+  "checks": {
+    "web_mini_same_participant": true,
+    "shared_stored_history": true,
+    "profile_available": true,
+    "original_source_after_35_turns": true,
+    "stable_name": true,
+    "corrected_source": true,
+    "correction_not_raw_history": true,
+    "restart_uses_current_fact": true,
+    "deleted_fact_absent": true,
+    "no_foreign_memory": true,
+    "integrity": true
+  },
+  "stages": {
+    "profile": {
+      "selected": {},
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "long_dialogue": {
+      "selected": {
+        "name": {
+          "value": "Анна",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "stable_address_or_style",
+          "source": {
+            "value": "Анна",
+            "turn_id": 3,
+            "quote": "Анна",
+            "span": [
+              11,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        },
+        "city": {
+          "value": "Москве",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "query_relevance",
+          "source": {
+            "value": "Москве",
+            "turn_id": 5,
+            "quote": "Москве",
+            "span": [
+              9,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        }
+      },
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 24,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "generic_continuation": {
+      "selected": {
+        "name": {
+          "value": "Анна",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "stable_address_or_style",
+          "source": {
+            "value": "Анна",
+            "turn_id": 3,
+            "quote": "Анна",
+            "span": [
+              11,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        }
+      },
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 24,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_correction": {
+      "selected": {
+        "name": {
+          "value": "Анна",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "stable_address_or_style",
+          "source": {
+            "value": "Анна",
+            "turn_id": 3,
+            "quote": "Анна",
+            "span": [
+              11,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        },
+        "city": {
+          "value": "Казани",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "query_relevance",
+          "source": {
+            "value": "Казани",
+            "turn_id": 81,
+            "quote": "Казани",
+            "span": [
+              41,
+              47
+            ],
+            "source": "conversation_edit"
+          }
+        }
+      },
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_restart_in_mini": {
+      "selected": {
+        "name": {
+          "value": "Анна",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "stable_address_or_style",
+          "source": {
+            "value": "Анна",
+            "turn_id": 3,
+            "quote": "Анна",
+            "span": [
+              11,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        },
+        "city": {
+          "value": "Казани",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "query_relevance",
+          "source": {
+            "value": "Казани",
+            "turn_id": 81,
+            "quote": "Казани",
+            "span": [
+              41,
+              47
+            ],
+            "source": "conversation_edit"
+          }
+        }
+      },
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 2,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_deletion": {
+      "selected": {
+        "name": {
+          "value": "Анна",
+          "assertion": "SELF_DECLARED",
+          "independently_verified": false,
+          "reason": "stable_address_or_style",
+          "source": {
+            "value": "Анна",
+            "turn_id": 3,
+            "quote": "Анна",
+            "span": [
+              11,
+              15
+            ],
+            "source": "self_assertion"
+          }
+        }
+      },
+      "profile": {
+        "display_name": "Анна",
+        "language": "ru"
+      },
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "other_participant": {
+      "selected": {},
+      "profile": {
+        "display_name": "synthetic_context_stranger",
+        "language": "ru"
+      },
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    }
+  },
+  "http_turns": 45,
+  "median_ms": 226.654,
+  "max_ms": 563.489,
+  "extra_llm_calls": 0,
+  "live_model": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "C14_independent_node_transfer": "NOT IMPLEMENTED / NOT EXECUTED",
+  "real_pilot": "NO-GO"
+}

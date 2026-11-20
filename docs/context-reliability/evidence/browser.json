@@ -1,0 +1,18 @@
+{
+  "format": "blago-context-browser-1",
+  "checks": {
+    "one_linked_identity": true,
+    "web_source_retrieved_in_mini": true,
+    "restart_current_fact": true,
+    "no_old_history_in_context": true,
+    "delete_applied_to_context": true,
+    "no_horizontal_overflow": true,
+    "no_page_errors": true
+  },
+  "browser": "150.0.7871.125",
+  "provider": "scripted inspection, not live model quality",
+  "external_network": false,
+  "physical_android_telegram": "NOT EXECUTED",
+  "physical_ios_telegram": "NOT EXECUTED",
+  "real_pilot": "NO-GO"
+}

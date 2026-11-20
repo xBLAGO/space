@@ -1,0 +1,18 @@
+{
+  "format": "blago-context-live-1",
+  "source_sha": "7aa549b680438606dc284c09d9b6e80a63479b9f",
+  "synthetic_only": true,
+  "production_credentials_read": false,
+  "physical_android": "NOT EXECUTED",
+  "physical_iphone": "NOT EXECUTED",
+  "telegram_transport": "synthetic updates/initData, not real Telegram",
+  "C02_arbitrary_old_topic": "UNAVAILABLE",
+  "C12_legacy_origin": "UNKNOWN",
+  "C14_independent_transfer": "SEPARATE FEDERATION TASK",
+  "real_pilot": "NO-GO",
+  "status": "NOT EXECUTED",
+  "requests": 0,
+  "reason": "Dedicated test token, model and synthetic-only approval required",
+  "answer_quality": "NOT EXECUTED",
+  "turns": []
+}

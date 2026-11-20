@@ -19,7 +19,9 @@ from xblago.core.security_journal import SecurityJournal
 def create(root, *, validate=True, help_enabled=False, context_fencing=False,lifecycle=False):
     root=Path(root);root.mkdir(mode=0o700,parents=False,exist_ok=False)
     data=root/'app';data.mkdir(mode=0o700)
-    with patch.dict(os.environ,{'XBLAGO_PILOT_MODE':'false','XBLAGO_REQUIRE_SECURE_IDENTITY':'false','XBLAGO_REQUIRE_PRIVACY_JOURNAL':'false','XBLAGO_SECURITY_JOURNAL_DIR':'','XBLAGO_JOURNAL_WITNESS_DIR':'','XBLAGO_INTEGRATION_MODE':'','XBLAGO_HELP_ENABLED':'false','XBLAGO_CONTEXT_FENCING_REQUIRED':'false','XBLAGO_LIFECYCLE_REQUIRED':'false'}):
+    # Initializing an explicitly NEW legacy fixture never inherits activation
+    # from another sandbox. The optional agent migration is a separate step.
+    with patch.dict(os.environ,{'XBLAGO_AGENT_CONTEXT_ENABLED':'false','XBLAGO_PILOT_MODE':'false','XBLAGO_REQUIRE_SECURE_IDENTITY':'false','XBLAGO_REQUIRE_PRIVACY_JOURNAL':'false','XBLAGO_SECURITY_JOURNAL_DIR':'','XBLAGO_JOURNAL_WITNESS_DIR':'','XBLAGO_INTEGRATION_MODE':'','XBLAGO_HELP_ENABLED':'false','XBLAGO_CONTEXT_FENCING_REQUIRED':'false','XBLAGO_LIFECYCLE_REQUIRED':'false'}):
         path=data/'blago.sqlite3';WebApp(SQLiteBlagoStore(path))
         migrate_identity_store(path);migrate_identity_runtime(path)
         journal=root/'journal';witness=root/'witness'
@@ -27,6 +29,7 @@ def create(root, *, validate=True, help_enabled=False, context_fencing=False,lif
         os.environ['XBLAGO_SECURITY_JOURNAL_DIR']=str(journal)
         migrate_pilot(path);initialize(SecurityJournal(journal),witness)
     config={'XBLAGO_DATA_DIR':str(data),'XBLAGO_SECURITY_JOURNAL_DIR':str(journal),'XBLAGO_JOURNAL_WITNESS_DIR':str(witness),'XBLAGO_PILOT_MODE':'true','XBLAGO_REQUIRE_SECURE_IDENTITY':'true','XBLAGO_REQUIRE_PRIVACY_JOURNAL':'true','XBLAGO_INTEGRATION_MODE':'synthetic','XBLAGO_LLM_PROVIDER':'local','XBLAGO_HELP_ENABLED':'false','XBLAGO_CONTEXT_FENCING_REQUIRED':'false','XBLAGO_LIFECYCLE_REQUIRED':'false'}
+    config['XBLAGO_AGENT_CONTEXT_ENABLED']='false'
     if help_enabled:
         config['XBLAGO_HELP_ENABLED']='true'
         with patch.dict(os.environ,config):

@@ -33,6 +33,7 @@ class ChatContext:
     conversation: ConversationGuidance | None = None
     purpose: str = "conversation"
     context_version: str | None = None
+    participant: Any = None
 
 
 class ChatProvider(ABC):
@@ -186,6 +187,9 @@ class OpenAICompatibleProvider(ChatProvider):
                         if key == "preference:response_style"}
         memory.update(relevant_memory(style_memory, "preference:response_style"))
         memory_text = _compact_memory(memory) if memory else "No remembered facts yet."
+        if context.participant is not None:
+            from xblago.core.agent_context import render
+            memory_text = render(context.participant, context.memory or {}, query)
         guidance = context.conversation or understand(context.user_text, context.history)
 
         return (
@@ -212,6 +216,14 @@ class OpenAICompatibleProvider(ChatProvider):
             "changed or deleted memory. The application handles confirmations itself. "
             "A request not to remember is about storage only: still answer the actual question. "
             "Remembered names belong to the user, not to you. "
+            "Participant profile is separate from your agent persona. A display name is a chosen label, "
+            "not a verified legal identity. Current direct self assertions override an older profile label. "
+            "If address_ambiguity is true, use neutral address rather than guessing a name or gender. "
+            "Legacy status 'confirmed' means application-accepted self assertion, never independent proof. "
+            "Extraction confidence is not factual certainty. Missing provenance is UNKNOWN: do not invent a source. "
+            "UNVERIFIED_STORED_CLAIM may be wrong or inferred; never attribute it to the person as a proven assertion. "
+            "History is quoted conversation, not proof; an earlier assistant claim is never evidence about the person. "
+            "Use only active personal memory for past personal facts. Do not infer gender, biography or identity. "
             "A possible need is only a discussion topic. Do not claim that a request, order, "
             "payment or external action has been created or submitted. You cannot execute external actions in this chat; "
             "the authenticated, explicitly confirmed application flows are separate. "

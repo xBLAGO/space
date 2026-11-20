@@ -1,0 +1,47 @@
+{
+  "format": "blago-context-acceptance-status-1",
+  "historical_snapshot_notice": "Original 2026-11-19 qualification retained; subsequent actual live observations and C12 correction are in C12_CORRECTION.json and C12_CORRECTION.md",
+  "recorded_at": "2026-11-19T11:50:06.274899+00:00",
+  "runtime_baseline_head": "bac4955a579f212bf3823e7da4636af548a68afa",
+  "harness_code_commit": "7aa549b680438606dc284c09d9b6e80a63479b9f",
+  "live_model": {
+    "status": "NOT EXECUTED",
+    "requests": 0,
+    "reason": "Dedicated test token, model and synthetic-only approval required",
+    "actual_answers_available": false
+  },
+  "physical_android": {
+    "status": "NOT EXECUTED",
+    "approved_test_host": "NOT PROVIDED",
+    "device_artifacts": "NOT PROVIDED"
+  },
+  "physical_iphone": {
+    "status": "NOT EXECUTED",
+    "approved_test_host": "NOT PROVIDED",
+    "device_artifacts": "NOT PROVIDED"
+  },
+  "harness_safeguards": {
+    "tests": 4,
+    "status": "PASS",
+    "transport": "MOCKED; not live-model qualification",
+    "generic_provider_config_reads": "FORBIDDEN; checked with raising getenv guard",
+    "selection_trace": "Matches actual provider system prompt; checked with mock transport, not live quality"
+  },
+  "boundaries": {
+    "C02": "Arbitrary old topic retrieval unavailable; only retained grounded facts supported",
+    "C12": "Legacy/deleted origin UNKNOWN without verifiable source",
+    "C14": "Separate federation task; not implemented"
+  },
+  "answer_quality": "NOT EXECUTED",
+  "real_pilot": "NO-GO",
+  "production_access": false,
+  "evidence_sha256": {
+    "evidence/live-availability.json": "d654cfcb9fc28d4b1ca881255c2044d12f813119336e3316d3d179070c85ef66",
+    "evidence/live-harness-tests.txt": "f3d0cb5108f38d9ac0a7c017a65a2ddc69ccef16770be2e62bcc4d3a630ba776"
+  },
+  "initial_harness_code_commit": "c1bccfbee312a55c3ed8cc579f559b40fb212a24",
+  "harness_source_sha256": {
+    "tools/agent_context_live_check.py": "943a712fe3155f41025785d253d1f0aa14e3d2cc3288724d33aee0986b38ea22",
+    "tests/test_agent_context_live_check.py": "100257bb326ef509a67708aa5558271d47d56c093cae9f3829253e3391251226"
+  }
+}

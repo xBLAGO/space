@@ -1,0 +1,26 @@
+{
+  "format": "blago-c12-correction-1",
+  "baseline_head": "9fe62d6df06a4b1d390434842bd107b7bdeb72c8",
+  "corrected_runtime_head": "be2402bc97e92dda62b113ce73f14841ff86937b",
+  "ci_evidence_urls": ["https://github.com/xBLAGO/space/actions/runs/44717132654", "https://github.com/xBLAGO/space/actions/runs/44717120391"],
+  "observed_live_baseline": {
+    "model": "Qwen/Qwen3-14B",
+    "report_file": "qwen3-14b-c08-c12-20261120T093637Z.json",
+    "report_sha256": "02e71c924df53455b95e5ba67751c2dd626869b5dac11ba2fcf0969a5a3ce3f0",
+    "requests": 8,
+    "state_checks_passed": 4,
+    "C08": "Memory veto PASS; answer coherence issue observed",
+    "C12_known_city": "SETUP FAILED / NOT EXECUTED",
+    "C12_unknown_name_source": "FAIL: retained name incorrectly denied",
+    "continuation_stop_then_incomplete_root_cause": "UNKNOWN"
+  },
+  "corrected_live_run": "NOT EXECUTED",
+  "local_focused": {"tests":35,"status":"PASS","seconds":79.007,"transport":"MOCKED or deterministic; no HF calls"},
+  "intermediate_full_run": {"tests":540,"seconds":476.253,"status":"FAIL","errors":2,"reason":"Harness snapshot on ordinary SQLite connection lacked blago_tag; run started before final harness correction; both cases rerun in passing 35-test set"},
+  "physical_android": "NOT EXECUTED",
+  "physical_iphone": "NOT EXECUTED",
+  "additional_llm_calls_for_source_lookup": 0,
+  "new_migrations": 0,
+  "G09_protocol_changed": false,
+  "real_pilot": "NO-GO"
+}

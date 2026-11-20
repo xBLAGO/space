@@ -1,0 +1,84 @@
+{
+  "format": "blago-context-proof-1",
+  "source_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "mode": "exact legacy baseline",
+  "checks": {
+    "web_mini_same_participant": true,
+    "shared_stored_history": true,
+    "integrity": true
+  },
+  "stages": {
+    "profile": {
+      "selected": {},
+      "profile": null,
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "long_dialogue": {
+      "selected": {
+        "city": {
+          "value": "Москве",
+          "source": "UNKNOWN"
+        }
+      },
+      "profile": null,
+      "model_history_turns": 24,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "generic_continuation": {
+      "selected": {},
+      "profile": null,
+      "model_history_turns": 24,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_correction": {
+      "selected": {
+        "city": {
+          "value": "Казани",
+          "source": "UNKNOWN"
+        }
+      },
+      "profile": null,
+      "model_history_turns": 24,
+      "old_city_in_history": true,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_restart_in_mini": {
+      "selected": {
+        "city": {
+          "value": "Казани",
+          "source": "UNKNOWN"
+        }
+      },
+      "profile": null,
+      "model_history_turns": 24,
+      "old_city_in_history": true,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "after_deletion": {
+      "selected": {},
+      "profile": null,
+      "model_history_turns": 24,
+      "old_city_in_history": true,
+      "source_text_history_is_not_fact_authority": true
+    },
+    "other_participant": {
+      "selected": {},
+      "profile": null,
+      "model_history_turns": 0,
+      "old_city_in_history": false,
+      "source_text_history_is_not_fact_authority": true
+    }
+  },
+  "http_turns": 45,
+  "median_ms": 181.889,
+  "max_ms": 291.778,
+  "extra_llm_calls": 0,
+  "live_model": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "C14_independent_node_transfer": "NOT IMPLEMENTED / NOT EXECUTED",
+  "real_pilot": "NO-GO"
+}

@@ -1,0 +1,95 @@
+{
+  "format": "blago-context-reliability-results-1",
+  "base_sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "runtime_source_sha": "4850c16cce2b30e384dce281bcec073a72a99300",
+  "baseline": {
+    "tests": 472,
+    "seconds": 478.004,
+    "status": "PASS",
+    "recorded_before_edits": true
+  },
+  "final_local_regression": {
+    "tests": 532,
+    "original_tests": 472,
+    "additional_tests": 60,
+    "original_G09_repeated_with_new_mode": 34,
+    "seconds": 505.27,
+    "status": "PASS"
+  },
+  "cross_channel": {
+    "checks": 11,
+    "status": "PASS",
+    "provider": "scripted only"
+  },
+  "browser": {
+    "checks": 7,
+    "status": "PASS",
+    "chrome": "150.0.7871.125",
+    "scope": "headless desktop / mobile emulation; synthetic Telegram SDK"
+  },
+  "migration": {
+    "old_checksums_unchanged": true,
+    "checksum": "ef6d9ae1d6d2431f176717712aa029086d729d8b26e9c273440c42d6c78b8feb",
+    "default_enabled": false,
+    "module": "xblago.core.agent_context_schema",
+    "optional": true,
+    "version": "agent_context_001",
+    "restore_and_id_reuse_checks": "PASS"
+  },
+  "latency_sample": {
+    "before_median_ms": 181.889,
+    "after_median_ms": 226.654,
+    "before_max_ms": 291.778,
+    "after_max_ms": 563.489,
+    "controlled_benchmark": false,
+    "extra_llm_calls": 0
+  },
+  "stand_launch": {
+    "healthz": 200,
+    "app": 200,
+    "sqlite_integrity": "ok",
+    "foreign_key_violations": 0,
+    "independent_failure_domains": "UNKNOWN"
+  },
+  "docker_local": "NOT EXECUTED: no Docker executable",
+  "ci": "Exact final HEAD results linked in Draft PR; do not infer PASS from this file",
+  "live_llm": "NOT EXECUTED",
+  "physical_devices": "NOT EXECUTED",
+  "C02": "PARTIAL: durable grounded facts only, not arbitrary old conversation",
+  "C12": "PARTIAL: new sourced writes; legacy UNKNOWN",
+  "C14": "NOT IMPLEMENTED / NOT EXECUTED",
+  "real_pilot": "NO-GO",
+  "production_access": false,
+  "merge": false,
+  "deployment": false,
+  "evidence_sha256": {
+    "evidence/after.json": "64a2afdf7cb5ff9119091bb54758ab245b30ed32825110158853fce5c314a832",
+    "evidence/baseline-tests.txt": "fa5d82c6166650bfe2c0d22fcb2cc13413a7b136c3f79db9c48bab8fdb31068a",
+    "evidence/before.json": "a460d4427f9cdcbcd8a80abb301b8bf57cc62f263c3613d2a734f8d721120bd0",
+    "evidence/browser.json": "4a8ca2ba8ec38aa36c4942436af62c25e0914615e69ec37e6f3072d22831095a",
+    "evidence/final-tests.txt": "db44634aa568b23662caeacfa6e5bc057a529cba837d2e74ac64e3c44c3576d8",
+    "evidence/no-git.json": "a07dee715ec08fd6315a3ca206bbcad8565507b969247b7ad92ba74600336a0c"
+  },
+  "previous_evidence_commit": "c41a67d75c2cd2724cceb91514a0478b26fd9381",
+  "previous_runtime_source_sha": "2a22bcfbde7b3a802c50b09736ff9ae40b368a0d",
+  "first_local_regression": {
+    "tests": 532,
+    "seconds": 474.328,
+    "status": "PASS",
+    "evidence_git_ref": "c41a67d75c2cd2724cceb91514a0478b26fd9381:docs/context-reliability/evidence/final-tests.txt"
+  },
+  "packaged_probe_without_git": {
+    "checks": 11,
+    "status": "PASS",
+    "source_sha": null,
+    "runtime_attestation": "UNKNOWN; never inferred from environment"
+  },
+  "initial_ci": {
+    "head_sha": "c41a67d75c2cd2724cceb91514a0478b26fd9381",
+    "run": "https://github.com/xBLAGO/space/actions/runs/44506848889",
+    "tests": "PASS",
+    "docker": "FAIL",
+    "cause": "Probe incorrectly required .git in installed image",
+    "fix": "Report source SHA UNKNOWN without VCS; actual Docker rerun required"
+  }
+}
