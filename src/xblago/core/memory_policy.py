@@ -92,3 +92,22 @@ def supported_relation(key: str, category: str, evidence: str) -> bool:
         return False
     pattern = _RELATIONS.get(relation)
     return pattern is not None and bool(re.search(pattern, evidence, re.I))
+
+
+def extract_personal_facts(text: str) -> list[tuple[str, str]]:
+    normalized = " ".join(assertion_text(text).strip().split())
+    patterns = (
+        (r"^(?:меня зовут|мое имя|моё имя)\s+(.+)$", "name"),
+        (r"^(?:(?:исправление:|теперь)\s+)*(?:я живу в|мой город(?:\s*—|\s*-|\s*=)?|город)\s+(.+)$", "city"),
+        (r"^(?:мой часовой пояс|мой timezone|timezone)\s*(?:—|-|=|is)?\s*(.+)$", "timezone"),
+        (r"^(?:я работаю в|моя работа|я работаю)\s*(?:—|-|=|в)?\s*(.+)$", "work"),
+        (r"^(?:я люблю|мне нравится|мне нравятся)\s+(.+)$", "likes"),
+        (r"^(?:я предпочитаю|мне удобнее)\s+(.+)$", "preferences"),
+    )
+    for pattern, key in patterns:
+        match = re.match(pattern, normalized, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip(" .,!;:")
+            if 1 <= len(value) <= 160 and not re.search(r"[.;!\n]|,|\b(?:но|а|и)\b", value, re.I):
+                return [(key, value)]
+    return []

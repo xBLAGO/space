@@ -1,5 +1,5 @@
 """Private, bounded, owner-scoped context projection; no LLM or new data store."""
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, replace, field
 import json
 import os
 import re
@@ -19,6 +19,22 @@ class ParticipantContext:
     origins: dict
     history_floor: int
     has_prior_dialogue: bool
+    pending_corrections: dict = field(default_factory=dict)
+
+
+def city_correction(text):
+    from xblago.core.memory_commands import parse_edit
+    from xblago.core.memory_policy import extract_personal_facts
+    edit = parse_edit(text)
+    if edit and edit.key == 'city':
+        return edit.value
+    return dict(extract_personal_facts(text)).get('city')
+
+
+def unsaved_city_reply(value, stored):
+    return (f'Поправка о городе «{value}» не сохранена. '
+            f'В памяти по-прежнему указан город проживания: {stored}. '
+            'Последнее сообщение о новом городе осталось в истории, но не стало сохранённым фактом.')
 
 
 def snapshot(db, uid, facts, records):
@@ -95,7 +111,23 @@ def snapshot(db, uid, facts, records):
                     'quote': redact_sensitive_text(evidence), 'span': [offset, offset+len(evidence)],
                     'source': record.source.split('|')[0]}
     prior=bool(db.execute('SELECT 1 FROM dialogue_turns WHERE blago_user_id=? LIMIT 1',(uid,)).fetchone())
-    return ParticipantContext(profile, origins, floor, prior)
+    pending = {}
+    if db.execute("SELECT 1 FROM sqlite_master WHERE name='lifecycle_history_pairs'").fetchone():
+        pairs = db.execute('''SELECT u.id,u.text,a.text AS answer FROM lifecycle_history_pairs p
+            JOIN dialogue_turns u ON u.id=p.user_turn JOIN dialogue_turns a ON a.id=p.assistant_turn
+            WHERE u.blago_user_id=? AND a.blago_user_id=? AND u.id>?
+            AND u.role='user' AND a.role='assistant' ORDER BY u.id DESC LIMIT 64''', (uid,uid,floor)).fetchall()
+        for pair in pairs:
+            proposed = city_correction(pair['text'])
+            old = facts.get('city')
+            if proposed and proposed == old:
+                break  # A later successful reaffirmation supersedes the failed attempt.
+            if (isinstance(old,str) and proposed and proposed != old
+                    and not is_sensitive_memory('city',proposed)
+                    and pair['answer'] == unsaved_city_reply(proposed,old)):
+                pending['city'] = {'value':proposed,'turn_id':pair['id'],'status':'NOT_SAVED'}
+                break
+    return ParticipantContext(profile, origins, floor, prior, pending)
 
 
 def select(memory, query):
@@ -119,7 +151,17 @@ def explain(participant, memory, query):
 
 
 def render(participant, memory, query):
-    return json.dumps({'profile': participant.profile, 'memory': explain(participant, memory, query)}, ensure_ascii=False)
+    return json.dumps({'profile': participant.profile, 'memory': explain(participant, memory, query),
+                       'pending_corrections':participant.pending_corrections}, ensure_ascii=False)
+
+
+def pending_city_reply(participant, memory, query):
+    if participant is None or not re.search(r'\bгде\s+я\s+живу\b',query,re.I):
+        return None
+    pending = participant.pending_corrections.get('city')
+    if pending and memory.get('city'):
+        return unsaved_city_reply(pending['value'],memory['city'])
+    return None
 
 
 def provenance_reply(participant, memory, query):
@@ -147,8 +189,13 @@ def provenance_reply(participant, memory, query):
     label = 'имя' if key == 'name' else 'город проживания'
     origin = participant.origins.get(key, {})
     if origin.get('value') == value:
-        return f'В памяти сохранено: {label} — {value}. Источник — твоё сообщение; точный фрагмент: «{origin["quote"]}».'
-    return f'В памяти сохранилось: {label} — {value}. Исходная реплика сейчас недоступна; происхождение записи неизвестно.'
+        reply = f'В памяти сохранено: {label} — {value}. Источник — твоё сообщение; точный фрагмент: «{origin["quote"]}».'
+    else:
+        reply = f'В памяти сохранилось: {label} — {value}. Исходная реплика сейчас недоступна; происхождение записи неизвестно.'
+    pending = participant.pending_corrections.get(key)
+    if pending:
+        reply += f' Последняя поправка о городе «{pending["value"]}» ещё не сохранена.'
+    return reply
 
 
 def apply_memory(buffer, memory, marker):

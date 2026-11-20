@@ -183,6 +183,120 @@ class AgentContextTests(unittest.TestCase):
         self.assertFalse(any('Москве' in t.text for t in context.history))
         current = [r for r in self.app.store.all_semantic_memory(self.uid) if r.key == 'city']
         self.assertEqual(len(current), 1)
+
+    def test_C07_failed_correction_is_explicit_and_shared_across_channels(self):
+        import threading
+        from http.server import ThreadingHTTPServer
+        from tools.unified_mvp_check import Client, init_data, bot_update
+        from xblago.integrations.web import BlagoWebHandler
+        from xblago.integrations.telegram import TelegramBot
+        os.environ['TELEGRAM_BOT_TOKEN'] = '123:synthetic-help011-only'
+        os.environ['XBLAGO_COOKIE_SECURE'] = 'false'  # Disposable localhost HTTP only.
+        class Controlled(Capture):
+            fail = False
+            def generate(provider, context):
+                provider.contexts.append(context)
+                if provider.fail:
+                    raise LlmProviderError('Synthetic controlled failure', category='unavailable')
+                return 'В памяти указан город проживания: '+context.memory.get('city','UNKNOWN')+'.'
+        provider = Controlled()
+        self.providers.stop()
+        self.providers = patch('xblago.integrations.web.build_chat_provider',return_value=provider)
+        self.providers.start()
+        self.addCleanup(self.providers.stop)
+        with patch('xblago.integrations.telegram.build_chat_provider',return_value=provider):
+            server = ThreadingHTTPServer(('127.0.0.1',0),BlagoWebHandler)
+            server.blago_web_app = self.app
+            thread = threading.Thread(target=server.serve_forever,daemon=True)
+            thread.start()
+            try:
+                web,mini = [Client('http://127.0.0.1:'+str(server.server_port)) for _ in range(2)]
+                web.ok('POST','auth/login',{'username':'synthetic_context_owner','password':'synthetic-password-only'})
+                def say(client,text):
+                    return client.ok('POST','chat/messages',{'text':text})['reply']
+                say(web,'Я живу в Перми')
+                code = web.ok('POST','auth/link-code',{})['code']
+                bot = TelegramBot(None,Path(self.tmp.name)/'unused',self.app.store)
+                bot.replies_for_update(bot_update(97100,'/link '+code))
+                web.ok('POST','auth/login',{'username':'synthetic_context_owner','password':'synthetic-password-only'})
+                challenge = mini.ok('POST','auth/telegram/challenge',{})
+                mini.ok('POST','auth/telegram',{'challenge':challenge['challenge'],'init_data':init_data()})
+                self.assertEqual(mini.ok('GET','me')['profile']['blago_user_id'],self.uid)
+                correction = 'Я больше не живу в Перми, теперь живу в Томске'
+                provider.fail = True
+                failed = say(web,correction)
+                self.c07_evidence = {'failed_reply':failed,'pending_answers':{},'saved_answers':{}}
+                self.assertIn('не сохранена',failed)
+                self.assertIn('Перми',failed)
+                self.assertIn('Томске',failed)
+                self.assertEqual(self.app.store.all_memory(self.uid)['city'],'Перми')
+                # Reopen the store; process-local state must not carry the warning.
+                server.blago_web_app = WebApp(preflight(self.path))
+                bot = TelegramBot(None,Path(self.tmp.name)/'unused',server.blago_web_app.store)
+                for channel,answer in [('web',say(web,'Где я живу?')),
+                        ('bot','\n'.join(r['text'] for r in bot.replies_for_update(bot_update(97101,'Где я живу?')))),
+                        ('mini',say(mini,'Где я живу?'))]:
+                    with self.subTest(channel=channel,phase='failed'):
+                        self.c07_evidence['pending_answers'][channel] = answer
+                        self.assertIn('Перми',answer)
+                        self.assertIn('Томске',answer)
+                        self.assertIn('не сохранена',answer)
+                provider.fail = False
+                say(mini,correction)
+                for channel,answer in [('web',say(web,'Где я живу?')),
+                        ('bot','\n'.join(r['text'] for r in bot.replies_for_update(bot_update(97102,'Где я живу?')))),
+                        ('mini',say(mini,'Где я живу?'))]:
+                    with self.subTest(channel=channel,phase='saved'):
+                        self.c07_evidence['saved_answers'][channel] = answer
+                        self.assertIn('Томске',answer)
+                        self.assertNotIn('Перми',answer)
+                        self.assertNotIn('не сохранена',answer)
+                context = provider.contexts[-1]
+                origin = context.participant.origins['city']
+                with self.app.store._connect() as db:
+                    source = db.execute('SELECT text FROM dialogue_turns WHERE id=? AND blago_user_id=?',
+                                        (origin['turn_id'],self.uid)).fetchone()[0]
+                self.assertEqual(source,correction)
+                self.assertEqual(origin['quote'],'Томске')
+                self.assertEqual(source[slice(*origin['span'])],'Томске')
+                self.assertFalse(context.participant.pending_corrections)
+                self.c07_evidence['source'] = origin
+                self.c07_evidence['source_turn_text'] = source
+                self.c07_evidence['canonical_city'] = self.app.store.all_memory(self.uid)['city']
+            finally:
+                server.shutdown();server.server_close();thread.join(5)
+
+    def test_C07_pending_correction_removed_by_deletion_and_old_backup_restore(self):
+        self.chat('Я живу в Перми')
+        with patch.object(self.provider,'generate',side_effect=LlmProviderError('Synthetic failure',category='unavailable')):
+            self.assertIn('не сохранена',self.chat('Я живу в Томске'))
+        backup = self.app.store.backup_database()
+        self.assertEqual(self.context('Продолжим').participant.pending_corrections['city']['value'],'Томске')
+        self.app.delete_memory(self.uid,'city')
+        self.app = WebApp(restore(backup,Path(self.cfg['XBLAGO_SECURITY_JOURNAL_DIR'])))
+        self.token = self.app.login('synthetic_context_owner','synthetic-password-only')[0]
+        context = self.context('Продолжим')
+        self.assertNotIn('city',context.memory)
+        self.assertFalse(context.participant.pending_corrections)
+        self.assertNotIn('Томске',self.prompt(context))
+
+    def test_C07_pending_reply_rejected_if_fact_deleted_before_commit(self):
+        from xblago.core.messages import UserMessage
+        self.chat('Я живу в Перми')
+        with patch.object(self.provider,'generate',side_effect=LlmProviderError('Synthetic failure',category='incomplete')):
+            self.chat('Я больше не живу в Перми, теперь живу в Томске')
+        generation = Generation(self.app.store,self.uid)
+        generation.agent(self.provider).respond(UserMessage('Где я живу?'))
+        self.app.delete_memory(self.uid,'city')
+        with self.assertRaises(ContextConflict):
+            generation.commit()
+
+    def test_C07_reaffirmed_old_city_supersedes_pending_without_automatic_retry(self):
+        self.chat('Я живу в Перми')
+        with patch.object(self.provider,'generate',side_effect=LlmProviderError('Synthetic failure',category='unavailable')):
+            self.chat('Я живу в Томске')
+        self.chat('Я живу в Перми')
+        self.assertFalse(self.context('Продолжим').participant.pending_corrections)
     def test_current_correction_never_generates_from_old_memory_or_history(self):
         self.chat('Я живу в Москве')
         self.chat('Я живу в Казани')
