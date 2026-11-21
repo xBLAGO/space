@@ -1,0 +1,7 @@
+{
+  "base": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+  "sha256": {
+    "src/xblago/domain/help_service.py": "c473819d1a831c0d764f58279acfb18a5b75c1aff9875b809676e515a1af26f2",
+    "src/xblago/domain/asset_registry.py": "73834da1122da7591a021ebda792f78294f2e0cea0bf501d67face5e402f7ce2"
+  }
+}
