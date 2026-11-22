@@ -213,7 +213,9 @@ class AssetRegistry:
 
     def erase(self,token,aid):
         with self.tx(token) as (db,uid,c):
-            self.owned(db,uid,aid);db.execute('DELETE FROM blago_assets WHERE id=?',(aid,))
+            self.owned(db,uid,aid)
+            from xblago.domain.living_deeds import purge_asset
+            purge_asset(db,aid,c);db.execute('DELETE FROM blago_assets WHERE id=?',(aid,))
             return {'erased':True}
 
     def feed(self,token):

@@ -1,0 +1,32 @@
+{
+  "format": "living-deeds-local-event-profile-1",
+  "status": "DRAFT_SYNTHETIC_ONLY",
+  "private_event_format": "living-deeds-event-1",
+  "required_fields": ["format", "type", "occurred_at", "causation_id", "snapshot"],
+  "optional_fields": ["canonical_source_ref"],
+  "snapshot_fields": ["id", "owner_id", "kind", "version", "state"],
+  "authentication": "Fresh IdentityRuntime session plus sealed one-time command; HMAC UEL/journal; not a human-key signature",
+  "privacy": "Payloads stay in private domain versions; UEL carries protected references only",
+  "canonical_help_aliases": {
+    "publish": "NeedExpressed",
+    "offer": "FulfillmentProposed",
+    "accept": "FulfillmentAuthorized",
+    "confirm_incomplete": "ResultConfirmationRecorded",
+    "confirm_completed": "FulfillmentConfirmed",
+    "dispute": "DisputeOpened",
+    "revise": "RecordCorrected",
+    "withdraw": "DeclinedOrWithdrawn"
+  },
+  "private_domain_events": {
+    "NOTE": ["PrivateNoteRecorded", "RecordCorrected"],
+    "NEED_PERMISSION": ["ReferralScopeAuthorized", "DeclinedOrWithdrawn"],
+    "BRIDGE": ["ReferralBridgeProposed", "ConsentRequested", "ContactConsentGranted", "DeclinedOrWithdrawn"],
+    "RESOURCE": ["ResourceOffered", "DeclinedOrWithdrawn"],
+    "ATTACHMENT": ["FulfillmentProposed"],
+    "RESERVATION": ["ResourceReserved", "ResultConfirmationRecorded", "FulfillmentConfirmed", "DisputeOpened", "DeclinedOrWithdrawn"]
+  },
+  "accounting_identity": "Canonical Help request/event ID; reservation observations reference that source and never create another fulfillment",
+  "retirement": "Private payload may be erased; retained UEL retirement and denial proofs remain",
+  "federation": false,
+  "blockchain_anchoring": false
+}

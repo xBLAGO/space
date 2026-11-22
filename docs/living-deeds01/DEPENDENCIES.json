@@ -1,0 +1,17 @@
+{
+  "base": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+  "components": {
+    "Integration02": {
+      "sha": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+      "ancestor_of_base": true
+    },
+    "SovereignIdentity07.1": {
+      "sha": "b79cb603a58adbab1e8a5313a06393a2feb5532f",
+      "ancestor_of_base": false
+    },
+    "AgentContext41": {
+      "sha": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+      "ancestor_of_base": false
+    }
+  }
+}

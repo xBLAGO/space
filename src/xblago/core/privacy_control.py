@@ -38,6 +38,8 @@ def deletion_blockers(db, uid):
     known = set(OWNED) | set(ECONOMIC) | {'users','privacy_aliases'}
     from xblago.core import context_schema,lifecycle_schema,asset_registry_schema
     if asset_registry_schema.validate(db):known.update(asset_registry_schema.TABLES)
+    from xblago.core import living_schema
+    if living_schema.validate(db):known.update(living_schema.TABLES)
     if context_schema.validate(db):known.update(context_schema.TABLES)
     if lifecycle_schema.validate(db):known.update(lifecycle_schema.TABLES)
     from xblago.core.help_schema import present,validate,TABLES
@@ -59,6 +61,11 @@ def deletion_blockers(db, uid):
 def purge_user(db, uid):
     if deletion_blockers(db,uid):
         raise DeletionBlocked('Economic/unknown ownership retention requires review before account deletion')
+    from types import SimpleNamespace
+    from xblago.domain.living_deeds import purge_member
+    from xblago.core import living_schema
+    if living_schema.validate(db):
+        purge_member(db,uid,SimpleNamespace(journal=SecurityJournal(Path(os.environ['XBLAGO_SECURITY_JOURNAL_DIR']))))
     from xblago.domain.help_service import purge_user as purge_help
     from xblago.core.help_schema import present
     from xblago.core import lifecycle_schema
@@ -109,6 +116,8 @@ class PrivacyControl:
         context_schema.validate(db,mandatory=context_schema.required() or any(json.loads(r[2])['kind']=='context_version' for r in self.rows))
         from xblago.core import asset_registry_schema
         asset_registry_schema.validate(db,mandatory=asset_registry_schema.enabled() or any(json.loads(r[2])['kind']=='asset_state' for r in self.rows))
+        from xblago.core import living_schema
+        living_schema.validate(db,required=living_schema.enabled() or any(json.loads(r[2])['kind'].startswith('living_') for r in self.rows))
         from xblago.core import uel_schema
         if uel_schema.validate(db,mandatory=uel_schema.enabled() or any(json.loads(r[2])['kind']=='uel_local' for r in self.rows)):
             uel_schema.require_synthetic()
@@ -191,7 +200,10 @@ class PrivacyControl:
         db = self.db
         kind, owner, target, state = (event[k] for k in ('kind','owner','target','state'))
         uid = self._uid(owner)
-        if kind.startswith('lifecycle_'):
+        if kind.startswith('living_'):
+            from xblago.domain.living_deeds import apply_checkpoint
+            apply_checkpoint(db,event,self.journal)
+        elif kind.startswith('lifecycle_'):
             from xblago.core.data_lifecycle import apply_event
             apply_event(db,event,self.journal)
         elif kind=='context_version':

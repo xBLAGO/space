@@ -25,7 +25,7 @@ def heads(db):
 
 def insert_record(db,r,journal):
     if type(r) is not dict or set(r)!=FIELDS or type(r['sequence']) is not int or type(r['source_version']) is not int or r['sequence']<1 or r['source_version']<1:unavailable()
-    if r['source_kind'] not in ('ASSET','HELP') or r['phase'] not in ('OBSERVED','RETIRED') or r['coverage'] not in ('FROM_ORIGIN','BASELINE_CURRENT'):unavailable()
+    if r['source_kind'] not in ('ASSET','HELP','LIVING') or r['phase'] not in ('OBSERVED','RETIRED') or r['coverage'] not in ('FROM_ORIGIN','BASELINE_CURRENT'):unavailable()
     for field in ('source_ref','object_ref','previous','causal_ref','source_state','record_ref'):
         if type(r[field]) is not str or not re.fullmatch('[0-9a-f]{64}',r[field]):unavailable()
     if (r['phase']=='OBSERVED' and (type(r['payload_ref']) is not str or not re.fullmatch('[0-9a-f]{64}',r['payload_ref']))) or (r['phase']=='RETIRED' and r['payload_ref'] is not None):unavailable()
@@ -106,6 +106,8 @@ def sources(db,c):
             result[(kind,ctag)]={'id':oid,'root':dict(row),'rows':rows,'state':row['head_tag']}
     for kind,tag in latest:
         if (kind,tag) not in seen and not db.execute('SELECT 1 FROM '+('assetreg_holds' if kind=='asset_state' else 'help_holds')+' WHERE target_tag=?',(tag,)).fetchone():unavailable()
+    from xblago.domain.living_deeds import sources as living_sources
+    result.update(living_sources(db,c))
     return result
 
 
@@ -153,7 +155,7 @@ def synchronize(db,c,*,baseline=False,at_start=False):
             append(db,c,key,row['version'],'OBSERVED',coverage,ref,payload,source['state']);expected+=1;changed=True
     for key,prior in sorted(indexed.items()):
         if key not in live:
-            holds='assetreg_holds' if key[0]=='ASSET' else 'help_holds'
+            holds={'ASSET':'assetreg_holds','HELP':'help_holds','LIVING':'living_holds'}[key[0]]
             if not db.execute('SELECT 1 FROM '+holds+' WHERE target_tag=?',(key[1],)).fetchone():unavailable()
             if prior['phase']=='RETIRED':continue
             append(db,c,key,prior['source_version'],'RETIRED',prior['coverage'],c.journal.tag('uel-retirement-v2',key[0],key[1],prior['record_ref']),None,c.journal.tag('uel-retired-v2',key[0],key[1]));changed=True
