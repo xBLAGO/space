@@ -1,0 +1,206 @@
+{
+  "format": "living-deeds-lab-1",
+  "source_sha": "79d2a4d92bc75a6342604a89ace6f73fadcf8639",
+  "source_identity": "CLEAN_GIT_CHECKOUT",
+  "source_worktree_clean": true,
+  "source_manifest_sha256": "7b94191dabf556a53c09d90a8065caef0de71b7769cb6e44b75d82fb1d2b4f3f",
+  "base_sha": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+  "tests": 33,
+  "status": "PASS",
+  "seconds": 149.169,
+  "records": [
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_account_deletion_purges_owned_payloads_and_commands",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_atomic_migration_failure_preserves_original_headers_and_ledgers",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_bad_confirmation_expired_challenge_and_substitution_do_not_write",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_completed_previews_do_not_retain_private_text_after_erasure",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_concurrent_independent_processes_cannot_double_reserve",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_configuration_without_retained_enrollment_is_not_authority",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_correction_cannot_reuse_stale_privacy_context_or_lost_session",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_crash_after_commit_replay_has_one_source_event",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_crash_after_journal_before_sql_never_replays_a_grant",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_current_backup_and_restart_preserve_verified_closed_deed",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_decline_is_private_neutral_and_suppresses_repeat",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": {
+        "B_before_equals_after": true,
+        "neutral_status": "NO_AVAILABLE_MATCHES",
+        "private_negative_label_published": false,
+        "same_topic_repeat": "DENIED"
+      }
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_direct_help_accept_cannot_bypass_resource_reservation",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_dispute_and_correction_preserve_event_history",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_erased_private_payload_does_not_return_from_old_backup",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_erasing_a_reserved_resource_does_not_bypass_help_confirmation_guard",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_expiry_blocks_invitation_then_explicit_cleanup_erases_payload",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_exports_redact_foreign_internal_identity_references",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_foreign_user_cannot_consent_or_read_private_note",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_full_uel_index_rebuild_keeps_identical_verified_projection",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_invitation_preview_binds_exact_task_without_exposing_private_note",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_migration_idempotent_and_flag_off_still_checks_data",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_missing_checkpoint_evidence_fails_closed",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_need_revision_invalidates_invitation_authority",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_old_backup_never_reconstructs_missing_positive_consent",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_own_skill_hour_is_a_consented_canonical_capability_not_a_third_party_note",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_positive_canonical_cycle_and_no_double_count",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": {
+        "canonical_help_state": "COMPLETED",
+        "closed_deeds": 1,
+        "flow_count": 1,
+        "available_slots": 0,
+        "evidence": "MUTUAL_SESSION_CONFIRMATION; not independent verification"
+      }
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_private_note_and_headers_are_not_a_public_catalog_or_llm_memory",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_private_note_two_consents_then_same_help_lifecycle",
+      "expected": "PASS",
+      "actual": "PASS",
+      "evidence": {
+        "private_note_hidden_from_B": true,
+        "invitation_names_referrer": true,
+        "two_distinct_consents": true,
+        "B_exact_audience_extension": true,
+        "closed_deeds": 1
+      }
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_replay_after_restart_returns_original_receipt_without_new_events",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_replay_receipt_and_conflicting_key",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_revoked_resource_blocks_prepared_reservation_and_confirmations",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_rollback_before_uel_does_not_leave_note_or_authority",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds.LivingTests.test_withdrawal_of_completed_help_does_not_free_consumed_slot",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ],
+  "mode": "SYNTHETIC_LOCAL_ONLY",
+  "real_people": "NOT EXECUTED",
+  "independent_operators": "NOT EXECUTED",
+  "live_llm": "NOT EXECUTED",
+  "telegram_delivery": "NOT EXECUTED",
+  "financial_operations": false,
+  "private_source_loss": "UNKNOWN_RECOVERY; never reconstructed from public hashes",
+  "real_pilot": "NO-GO"
+}

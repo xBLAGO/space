@@ -172,3 +172,31 @@ Post-dispute settlement не добавлен поверх Help; `RecordCorrecte
 
 **GO возможно только для дальнейших синтетических локальных испытаний.
 NO-GO для реального пилота, production и финансовых операций.**
+
+## Фактические результаты runtime
+
+Runtime SHA: `79d2a4d92bc75a6342604a89ace6f73fadcf8639`.
+[RESULTS.json](living-deeds01/RESULTS.json), [readiness](living-deeds01/READINESS.json),
+[полный список файлов](living-deeds01/CHANGED_FILES.md),
+[чистый локальный прогон](living-deeds01/evidence/living-runtime.json).
+
+* Exact clean runtime: **33/33 PASS** локально.
+* [PR CI runtime](https://github.com/xBLAGO/space/actions/runs/45007643850):
+  **720/720 два раза**, отдельно Living suite 33/33; inherited browser,
+  G09/privacy/recovery, manifest и frozen contracts — PASS.
+* [Push CI runtime](https://github.com/xBLAGO/space/actions/runs/45007555910): PASS.
+* Docker: PASS, включая Living 33/33 при `--network none`; SQLite 3.54.1.
+* 72/72 старых offline vectors — PASS без изменения expected results.
+* VERSION/CHECKSUM девяти предшественников совпадают с exact base.
+
+Промежуточный локальный working-tree full run дал 717/717 PASS до завершения
+последних сценариев/контролей. Он не подменяет exact-SHA полные CI-прогоны.
+Новых источников физической достоверности эти результаты не создают.
+
+Старое `known_available_self_declared` в Asset/Calculator — заявленное количество,
+а не разрешение занять временной интервал. Living `available` — разрешённая
+доступность конкретного слота. Для выделения ресурса обязателен Living reservation
+контракт; ни декларация имущества, ни старый агрегат не выдаёт право использования.
+
+Итог: **GO для дальнейшего локального синтетического испытания; NO-GO для
+реальных участников, production, реальных средств и независимой федерации.**
