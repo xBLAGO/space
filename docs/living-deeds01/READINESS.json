@@ -1,0 +1,51 @@
+{
+  "format": "living-deeds-readiness-1",
+  "runtime_sha": "79d2a4d92bc75a6342604a89ace6f73fadcf8639",
+  "scope": "ISOLATED_SYNTHETIC_LOCAL_ONLY",
+  "evidence": "RESULTS.json",
+  "feature_flag": {
+    "name": "XBLAGO_LIVING_DEEDS_ENABLED",
+    "default": false
+  },
+  "canonical_sources": [
+    "IdentityRuntime",
+    "Help01",
+    "AssetRegistry",
+    "UEL03"
+  ],
+  "pass": [
+    "PRIVATE_NOTE_ISOLATION",
+    "TWO_DISTINCT_REFERRAL_CONSENTS",
+    "NEUTRAL_DECLINE",
+    "DURABLE_NO_CONTACT",
+    "ATOMIC_INTERVAL_RESERVATION",
+    "NO_DUPLICATE_FULFILLMENT",
+    "CRASH_REPLAY",
+    "CURRENT_BACKUP_PARITY",
+    "DERIVATIVE_INDEX_REBUILD",
+    "ERASURE_NO_POSITIVE_REPLAY",
+    "FRESH_CHECKPOINT_MANDATORY",
+    "PREDECESSOR_LEDGER_PARITY"
+  ],
+  "not_executed": [
+    "REAL_PEOPLE",
+    "PHYSICAL_DEVICES",
+    "LIVE_LLM",
+    "EXTERNAL_INVITATION_DELIVERY",
+    "INDEPENDENT_OPERATORS"
+  ],
+  "not_implemented": [
+    "MULTI_CAPACITY_OR_PARTIAL_RESERVATIONS",
+    "POST_DISPUTE_SETTLEMENT",
+    "RECONTACT_REAUTHORIZATION",
+    "LIVING_CHAT_TOOL_BINDING",
+    "SQLITE_AT_REST_ENCRYPTION"
+  ],
+  "inherited_release_gates": "UNCHANGED; not promoted by these synthetic tests",
+  "decisions": {
+    "synthetic_local_lab": "GO",
+    "real_isolated_pilot": "NO-GO",
+    "production": "NO-GO",
+    "real_finance": "NO-GO"
+  }
+}

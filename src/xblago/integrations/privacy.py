@@ -136,6 +136,9 @@ class PrivacyService:
             from xblago.domain.asset_registry import personal_export as asset_export
             from xblago.core import asset_registry_schema
             if asset_registry_schema.validate(db):tables['asset_registry']=[take(item) for member in family for item in asset_export(db,member)]
+            from xblago.domain.living_deeds import personal_export as living_export
+            from xblago.core import living_schema
+            if living_schema.validate(db):tables['living_deeds']=[take(item) for member in family for item in living_export(db,member)]
             from xblago.domain.help_service import personal_export
             from xblago.core.help_schema import present
             if present(db):tables['help']=[take(row) for member in family for row in personal_export(db,member)]

@@ -1,0 +1,99 @@
+{
+  "format": "living-deeds-results-1",
+  "base_sha": "e707a19b0b98324ffd914a28b08601237cd6aea2",
+  "runtime_sha": "79d2a4d92bc75a6342604a89ace6f73fadcf8639",
+  "draft_pr": "https://github.com/xBLAGO/space/pull/42",
+  "baseline": {
+    "tests": 684,
+    "seconds": 914.533,
+    "status": "PASS"
+  },
+  "local_clean_runtime": {
+    "tests": 33,
+    "seconds": 149.169,
+    "status": "PASS",
+    "evidence": "evidence/living-runtime.json"
+  },
+  "intermediate_worktree_full": {
+    "tests": 717,
+    "seconds": 995.648,
+    "status": "PASS",
+    "qualification": "INTERMEDIATE WORKTREE; not final exact-SHA attestation"
+  },
+  "runtime_ci": {
+    "status": "PASS",
+    "source_sha": "79d2a4d92bc75a6342604a89ace6f73fadcf8639",
+    "pull_request_run": "https://github.com/xBLAGO/space/actions/runs/45007643850",
+    "push_run": "https://github.com/xBLAGO/space/actions/runs/45007555910",
+    "full_regression": [
+      {
+        "tests": 720,
+        "seconds": 248.971,
+        "status": "PASS"
+      },
+      {
+        "tests": 720,
+        "seconds": 248.585,
+        "status": "PASS"
+      }
+    ],
+    "living_suite": {
+      "tests": 33,
+      "seconds": 47.397,
+      "status": "PASS"
+    },
+    "inherited_browser_and_G09_recovery": "PASS"
+  },
+  "docker": {
+    "status": "PASS",
+    "living_tests": 33,
+    "living_seconds": 39.937,
+    "network": "none",
+    "image_id": "sha256:215c6c68f65c2ce6cae64107f3404cb2ecaa8339331ffb5d7fce5ff279140816",
+    "sqlite_runtime": "3.54.1",
+    "production_attestation": false
+  },
+  "offline_vectors": {
+    "executed": 72,
+    "passed": 72,
+    "expected_results_changed": false
+  },
+  "predecessor_migrations": {
+    "checked": 9,
+    "version_checksum_changed": false,
+    "evidence": "PREDECESSOR_LEDGERS.json"
+  },
+  "new_migration": {
+    "checksum": "258b1adeb9b01cf2c038a39e0661e9ea707eb7e4aafcc1f55f08888bfd37c497",
+    "default_enabled": false,
+    "module": "xblago.core.living_schema",
+    "optional": true,
+    "requires": "enrolled live signed checkpoint, canonical Help/Asset/UEL",
+    "version": "living_deeds_001"
+  },
+  "source_manifest_sha256": "7b94191dabf556a53c09d90a8065caef0de71b7769cb6e44b75d82fb1d2b4f3f",
+  "physical_devices": "NOT EXECUTED",
+  "live_llm": "NOT EXECUTED",
+  "new_living_browser_flow": "NOT EXECUTED: no public routes",
+  "external_invitation_delivery": "NOT EXECUTED: local inbox only",
+  "independent_operators": "NOT EXECUTED: local processes only",
+  "release_gates_changed": false,
+  "production_access": false,
+  "merge_or_deployment": false,
+  "known_limits": [
+    "PRIVATE_SOURCE_LOSS_UNKNOWN_RECOVERY",
+    "NO_AT_REST_SQLITE_ENCRYPTION",
+    "REGISTERED_RECIPIENTS_ONLY",
+    "SINGLETON_INTERVALS_ONLY",
+    "POST_DISPUTE_SETTLEMENT_NOT_IMPLEMENTED",
+    "DO_NOT_DISTURB_RENEWAL_NOT_IMPLEMENTED",
+    "RETENTION_EXPLICIT_LAB_CLEANUP_ONLY",
+    "SIBLING_CAPITAL_SCHEMA_NOT_CERTIFIED",
+    "AGENT_CONTEXT_41_AND_SOVEREIGN_IDENTITY_12_NOT_INTEGRATED"
+  ],
+  "decision": {
+    "synthetic_local_lab": "GO",
+    "real_participants_pilot": "NO-GO",
+    "production_and_finance": "NO-GO"
+  }
+}

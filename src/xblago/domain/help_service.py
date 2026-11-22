@@ -182,7 +182,7 @@ class HelpService:
             if action=='revise':preview=dict(preview,text=args['text'],audience=[c.journal.tag('help-member',x) for x in args['members']])
             selection=next((o for o in preview['offers'] if o['id']==args.get('offer_id')),None)
             return {'challenge':raw,'action':action,'request':preview,'selection':selection,'args':{k:v for k,v in args.items() if k!='members'},'confirmation':'ПОДТВЕРЖДАЮ'}
-    def commit(self,token,challenge,confirmation):
+    def commit(self,token,challenge,confirmation,*,_living_reservation=None):
         if type(challenge) is not str or len(challenge)>100 or confirmation!='ПОДТВЕРЖДАЮ':raise ApiError(400,'Нужно явное подтверждение')
         with self.tx(token,True) as (db,uid,c):
             row=db.execute('SELECT * FROM help_challenges WHERE token_hash=? AND actor_id=?',(hashlib.sha256(challenge.encode()).hexdigest(),uid)).fetchone()
@@ -192,6 +192,11 @@ class HelpService:
             if row['receipt_json']:return json.loads(row['receipt_json']) # no repeated event/effect
             if row['expires_at']<=int(time.time()) or row['version']!=r['version']:raise ApiError(409,'Подтверждение устарело')
             action=row['action'];args=json.loads(row['args_json']);self._check(db,uid,r,action,args)
+            if _living_reservation is not None:
+                if action!='accept':raise ApiError(400,'Reservation adapter is only valid for acceptance')
+                _living_reservation(db,uid,c)
+            from xblago.domain.living_deeds import guard_help, observe_help
+            guard_help(db,uid,rid,action,args,c)
             owner=r['author_id']==uid
             if action=='publish':db.execute("UPDATE help_requests SET state='PUBLISHED' WHERE id=?",(rid,))
             elif action=='revise':
@@ -215,6 +220,7 @@ class HelpService:
                 column='owner_confirmed' if owner else 'helper_confirmed';db.execute(f'UPDATE help_requests SET {column}=1 WHERE id=?',(rid,));db.execute("UPDATE help_requests SET state=CASE WHEN owner_confirmed=1 AND helper_confirmed=1 THEN 'COMPLETED' ELSE 'AWAITING_CONFIRMATION' END WHERE id=?",(rid,))
             elif action=='dispute':db.execute("UPDATE help_requests SET state='DISPUTED',owner_confirmed=0,helper_confirmed=0 WHERE id=?",(rid,))
             db.execute('UPDATE help_requests SET version=version+1 WHERE id=?',(rid,));self.emit(db,c,rid,action,'owner' if owner else 'helper')
+            observe_help(db,rid,action,c)
             receipt={'id':rid,'version':r['version']+1,'state':db.execute('SELECT state FROM help_requests WHERE id=?',(rid,)).fetchone()[0]}
             # Clear stale plaintext previews; keep only the last content-free receipt.
             db.execute('DELETE FROM help_challenges WHERE request_id=?',(rid,))

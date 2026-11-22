@@ -33,6 +33,8 @@ def require_synthetic():
 
 
 def validate(db,mandatory=False):
+    from xblago.core import living_schema
+    if living_schema.installed(db):return living_schema.validate(db,required=True)
     actual=dict(db.execute("SELECT name,sql FROM sqlite_master WHERE name LIKE 'uel_%' AND sql IS NOT NULL"))
     if not actual:
         if mandatory:raise JournalUnavailable('Explicit UEL migration required; UNKNOWN_RECOVERY')
@@ -56,6 +58,13 @@ def migrate_local(path,*,allow_baseline=False):
     db.create_function('blago_tag',-1,journal.tag,deterministic=True);db.create_function('blago_replaying',0,lambda:1)
     try:
         db.execute('PRAGMA foreign_keys=ON');db.execute('BEGIN IMMEDIATE')
+        from xblago.core import living_schema
+        if living_schema.installed(db):
+            living_schema.validate(db,required=True)
+            from xblago.core.privacy_control import PrivacyControl
+            from xblago.core import uel_local
+            control=PrivacyControl.open(db);control.reconcile();uel_local.synchronize(db,control,at_start=True);control.flush()
+            db.commit();return False
         help_schema.validate(db,required=True);context_schema.validate(db,mandatory=True);lifecycle_schema.validate(db,mandatory=True);asset_registry_schema.validate(db,mandatory=True)
         expected=json.loads(Path(__file__).with_name('integration_help_schema.json').read_text())
         ignored=OBJECTS|context_schema.OBJECTS|lifecycle_schema.OBJECTS|asset_registry_schema.OBJECTS
