@@ -26,7 +26,7 @@ PINS={
 
 def dump(value):return json.dumps(value,sort_keys=True,indent=2)+'\n'
 def manifest(schema,help_schema=None):
- paths=sorted((ROOT/'src').rglob('*.py'))+sorted((ROOT/'src/xblago/integrations/static').glob('*'))+sorted((ROOT/'tools').glob('*.py'))+sorted((ROOT/'tests').rglob('*.py'))+[ROOT/p for p in ('Dockerfile','pyproject.toml','requirements-integration.lock','.github/workflows/tests.yml','.github/workflows/huggingface-space.yml')]
+ paths=sorted((ROOT/'src').rglob('*.py'))+sorted((ROOT/'src/xblago/integrations/static').glob('*'))+sorted((ROOT/'tools').glob('*.py'))+sorted((ROOT/'tools/living021_static').glob('*'))+sorted((ROOT/'tests').rglob('*.py'))+[ROOT/p for p in ('Dockerfile','pyproject.toml','requirements-integration.lock','.github/workflows/tests.yml','.github/workflows/huggingface-space.yml')]
  from xblago.core import asset_registry_schema,uel_schema
  from xblago.core.help_schema import VERSION,CHECKSUM
  from xblago.core.context_schema import VERSION as CONTEXT_VERSION,CHECKSUM as CONTEXT_CHECKSUM

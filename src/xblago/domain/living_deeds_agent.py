@@ -32,6 +32,16 @@ def enabled(flag):
 class AgentLivingDeeds(ld.LivingDeeds):
     """Human-authenticated commands; the model never receives a commit capability."""
 
+    def view(self, token):
+        # Listing is not opening. Never forward the legacy inbox's task,
+        # referrer, topic or delivery state to an unopened recipient.
+        result = super().view(token)
+        result['items'] = [({'id': item['id'], 'kind': 'INVITATION',
+                             'label': 'Локальное приглашение'}
+                            if item['kind'] == 'INVITATION' else item)
+                           for item in result['items']]
+        return result
+
     @contextmanager
     def tx(self, token, destructive=False):
         if not enabled(FLAG):

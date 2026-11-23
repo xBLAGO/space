@@ -1,0 +1,22 @@
+{
+  "format": "living-consent-021-readiness-1",
+  "base_sha": "6cce244f5b7cada33b00c08f7e6419acafc439a8",
+  "http_negative_tests": {
+    "executed": 7,
+    "status": "PASS",
+    "seconds": 78.546
+  },
+  "migration_contracts": {
+    "executed": 11,
+    "status": "PASS",
+    "new_migrations": []
+  },
+  "browser_development": "PASS_WITH_CONTRACT_BLOCKER; exact-source evidence pending",
+  "full_regression": "PENDING_CI",
+  "full_help_path": "BLOCKED_HELP_AUDIENCE_REQUIRED",
+  "help_accept_and_two_confirmations": "NOT_EXECUTED_BLOCKED",
+  "external_delivery": "NO-GO",
+  "real_people": "NO-GO",
+  "production": "NO-GO",
+  "release_gates": "UNCHANGED"
+}
