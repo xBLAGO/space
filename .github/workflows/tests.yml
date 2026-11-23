@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/living-deeds-01", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -74,6 +74,8 @@ jobs:
         run: PYTHONPATH=.:src python -m tools.uel03_lab_check --output "$RUNNER_TEMP/uel03-lab-evidence.json"
       - name: Living Deeds consent, slots, privacy and recovery (synthetic only)
         run: PYTHONPATH=.:src python -m tools.living_deeds_lab --output "$RUNNER_TEMP/living-deeds-evidence.json"
+      - name: Living Deeds 02 owner-memory mandates and local delivery faults
+        run: PYTHONPATH=.:src python -m tools.living_deeds_agent_lab --output "$RUNNER_TEMP/living-deeds-agent-evidence.json"
       - name: Foundation 09 synthetic 100-participant collective planning
         run: PYTHONPATH=.:src python -m tools.foundation09_lab --output "$RUNNER_TEMP/foundation09-lab.json"
       - name: Durable assets on guarded identity privacy and recovery
@@ -100,6 +102,7 @@ jobs:
             ${{ runner.temp }}/calculator-lab.json
             ${{ runner.temp }}/durable-asset-lab.json
             ${{ runner.temp }}/living-deeds-evidence.json
+            ${{ runner.temp }}/living-deeds-agent-evidence.json
             ${{ runner.temp }}/uel-offline-results.json
             ${{ runner.temp }}/uel03-lab-evidence.json
             ${{ runner.temp }}/uel03-full-regression.json
@@ -367,3 +370,8 @@ jobs:
         run: |
           docker run --rm --network none -v "$PWD/tools:/app/tools:ro" -v "$PWD/tests:/app/tests:ro" --entrypoint python \
             -e PYTHONPATH=/app xblago-space:${{ github.sha }} -m unittest tests.test_living_deeds -v
+      - name: Docker Living Deeds 02 isolated local adapter (no external network)
+        run: |
+          docker run --rm --network none -v "$PWD/tests:/acceptance/tests:ro" -v "$PWD/tools:/acceptance/tools:ro" \
+            -e PYTHONPATH=/acceptance:/app/src --entrypoint python xblago-space:${{ github.sha }} \
+            -m unittest tests.test_living_deeds_agent -v

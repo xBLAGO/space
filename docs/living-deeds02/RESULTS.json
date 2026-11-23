@@ -1,0 +1,17 @@
+{
+  "format": "living02-results-1",
+  "base_tests": 720,
+  "workingtree_combined": {
+    "executed": 90,
+    "status": "PASS",
+    "seconds": 202.836,
+    "command": "python -m unittest tests.test_living_deeds_agent tests.test_agent_context tests.test_agent_context_live_check -q",
+    "source_identity": "DIRTY_WORKTREE_NOT_EXACT_SHA",
+    "scope": "development check; final CI authoritative"
+  },
+  "stateful_workingtree_evidence": "evidence/stateful-workingtree.json",
+  "final_ci": "PENDING",
+  "docker_local": "NOT EXECUTED: Docker CLI unavailable; scheduled in CI",
+  "old_migration_parity": "MIGRATION_PARITY.json",
+  "real_pilot": "NO-GO"
+}

@@ -1,0 +1,83 @@
+{
+  "format": "living02-migration-parity-1",
+  "status": "PASS",
+  "modules": [
+    {
+      "module": "identity_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation05_identity_001",
+      "checksum": "0c037906348404d2e2b1dc5c17f59f8f88261d0bf1ca48b0399a935a250492c4",
+      "ddl_equal": true
+    },
+    {
+      "module": "identity_runtime_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation05_runtime_002",
+      "checksum": "faa85972c539a03042c49a08a1caa8e7b5a88396b012d0d261ca6b6fcb86af12",
+      "ddl_equal": true
+    },
+    {
+      "module": "privacy_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation05_privacy_003",
+      "checksum": "e48d094d2c6a4701f17a94d49a18d4c91e4bdae6db157be5051128e0bf395161",
+      "ddl_equal": true
+    },
+    {
+      "module": "pilot_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation05_pilot_004",
+      "checksum": "1dd618cdd1f35f7952aabdbb8dfac62cb59048f3ab06a0c258b68e72fb63da76",
+      "ddl_equal": true
+    },
+    {
+      "module": "help_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation_help_001",
+      "checksum": "134dda0be6d63c09c16c464646ac46d3d90fb96615d87dbb5b0f0ae01b8fa689",
+      "ddl_equal": true
+    },
+    {
+      "module": "context_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation_privacy_context_001",
+      "checksum": "79aed28a7444a8a4758d8133033dd636dee6a3a214c877faba338da315434aa0",
+      "ddl_equal": true
+    },
+    {
+      "module": "lifecycle_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation_privacy_lifecycle_001",
+      "checksum": "1549c5875e15571f35ae93c1f2535c42fcc690df65f04be29629ce3c2c89e02a",
+      "ddl_equal": true
+    },
+    {
+      "module": "asset_registry_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "foundation09_asset_registry_001",
+      "checksum": "cda14dd85a07bcc1917650af8a0aa62021e3255f38d52578ac98d50c1c7a078d",
+      "ddl_equal": true
+    },
+    {
+      "module": "uel_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "uel_local_002",
+      "checksum": "255eb5d96feaedbc6e92086173b404db2071afac0c689d70e6a192d39be2eb22",
+      "ddl_equal": true
+    },
+    {
+      "module": "living_schema",
+      "pin": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+      "version": "living_deeds_001",
+      "checksum": "258b1adeb9b01cf2c038a39e0661e9ea707eb7e4aafcc1f55f08888bfd37c497",
+      "ddl_equal": true
+    },
+    {
+      "module": "agent_context_schema",
+      "pin": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+      "version": "agent_context_001",
+      "checksum": "ef6d9ae1d6d2431f176717712aa029086d729d8b26e9c273440c42d6c78b8feb",
+      "ddl_equal": true
+    }
+  ]
+}

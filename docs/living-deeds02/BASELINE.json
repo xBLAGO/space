@@ -1,0 +1,22 @@
+{
+  "format": "living02-baseline-1",
+  "base_sha": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+  "memory_source_sha": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+  "common_ancestor": "34ed8a6c47eb7c90f7eaa5a6807bb1eee78f97a8",
+  "base_tests": {
+    "status": "PASS",
+    "executed": 720,
+    "seconds": 951.374,
+    "log_sha256": "f96f4a0072891dc0b269f3def07f99fa9173e15eebf0a83ed6b7d400074969af",
+    "command": "PYTHONPATH=<safe-sqlite>:.:src python -m unittest discover -s tests -v",
+    "worktree": "isolated immutable checkout at exact base"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "sqlite": "3.54.1",
+    "platform": "macOS x86_64",
+    "data": "new synthetic temporary profiles only"
+  },
+  "production_access": false,
+  "live_llm_calls": 0
+}

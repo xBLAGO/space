@@ -75,13 +75,12 @@ def preflight(path: Path):
         context_schema.validate(db,mandatory=context_schema.required())
         from xblago.core import lifecycle_schema
         lifecycle_schema.validate(db,mandatory=lifecycle_schema.required())
-        from xblago.core import asset_registry_schema
+        from xblago.core import asset_registry_schema, uel_schema, living_schema, agent_context_schema
         asset_registry_schema.validate(db,mandatory=asset_registry_schema.enabled())
-        from xblago.core import uel_schema
         uel_schema.validate(db,mandatory=uel_schema.enabled())
-        from xblago.core import living_schema
         living_schema.validate(db,required=living_schema.enabled())
-        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS|lifecycle_schema.OBJECTS|asset_registry_schema.OBJECTS|uel_schema.OBJECTS|living_schema.OBJECTS}
+        agent_context_schema.validate(db,mandatory=agent_context_schema.requested())
+        actual_shape={k:v for k,v in schema_shape(db).items() if k not in context_schema.OBJECTS|lifecycle_schema.OBJECTS|asset_registry_schema.OBJECTS|uel_schema.OBJECTS|living_schema.OBJECTS|agent_context_schema.OBJECTS}
         if actual_shape!=expected: raise IntegrationBlocked('Application schema differs from frozen integration baseline')
         for module,table in zip(MODULES,('identity_schema_migrations','identity_runtime_migrations','privacy_schema_migrations','pilot_schema_migrations')):
             if table not in objects or db.execute(f'SELECT version,checksum FROM {table}').fetchall()!=[(module.VERSION,module.CHECKSUM)]:
