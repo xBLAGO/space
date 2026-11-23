@@ -1,0 +1,191 @@
+{
+  "format": "living-consent-021-e2e-1",
+  "status": "PASS_WITH_CONTRACT_BLOCKER",
+  "base_sha": "6cce244f5b7cada33b00c08f7e6419acafc439a8",
+  "source_sha": "ebf5ec94a6292af1d55b09584b97a3a16f8b4063",
+  "source_clean_at_start": true,
+  "base_diff_sha256": "f9ea0731d9cd6a607f8800562e2790902386ae18a8b32a56156c4ee93bb48ff8",
+  "source_sha_at_end": "ebf5ec94a6292af1d55b09584b97a3a16f8b4063",
+  "source_clean_at_end": true,
+  "browser": "150.0.7871.125",
+  "browser_contexts": 3,
+  "synthetic_roles": {
+    "A": "ld021_a",
+    "B": "ld021_b",
+    "C": "ld021_c"
+  },
+  "aborted_passive_GET_at_context_cleanup": [],
+  "synthetic_password": "synthetic-living021-only",
+  "private_B_marker": "LD021_PRIVATE_B_MARKER_Q7M4",
+  "server_commands": [
+    [
+      "/private/tmp/blago-pr41-live-venv/bin/python",
+      "-m",
+      "tools.living_consent_lab",
+      "init",
+      "--new-root",
+      "/private/tmp/ld021-exact"
+    ],
+    [
+      "/private/tmp/blago-pr41-live-venv/bin/python",
+      "-m",
+      "tools.living_consent_lab",
+      "serve",
+      "--root",
+      "/private/tmp/ld021-exact",
+      "--enable-local-sandbox",
+      "--port",
+      "61891"
+    ],
+    [
+      "/private/tmp/blago-pr41-live-venv/bin/python",
+      "-m",
+      "tools.living_consent_lab",
+      "serve",
+      "--root",
+      "/private/tmp/ld021-exact",
+      "--enable-local-sandbox",
+      "--port",
+      "61891"
+    ]
+  ],
+  "all_business_actions": "visible browser controls only; no API writes or injected cookies",
+  "seed_contains_no_permissions_or_mandates": true,
+  "author_comparison": [
+    {
+      "path": "/api/state",
+      "response_indexes": [
+        258,
+        272,
+        287
+      ],
+      "body_sha256": [
+        "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c",
+        "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c",
+        "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c"
+      ],
+      "identical": true
+    },
+    {
+      "path": "/api/view",
+      "response_indexes": [
+        259,
+        273,
+        288
+      ],
+      "body_sha256": [
+        "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202",
+        "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202",
+        "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202"
+      ],
+      "identical": true
+    }
+  ],
+  "successful_task_release_steps": [
+    "positive-open",
+    "decline-open"
+  ],
+  "storage_before_restart": {
+    "holds": [
+      "42bf3be003b5418a781a5dab5311d6765a3dcc2181ce9e598cf56723365d62dc"
+    ],
+    "identities": {
+      "ld021_a": "1b9dcf6445d3d5adf3469213a7d003ac53244b4dce08606f72863b3ba787b842",
+      "ld021_b": "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82",
+      "ld021_c": "747fa7e5a9f8404ccbe305940452f67b7b9902cabe710a9edd0da3c1844a424c"
+    },
+    "audiences": [
+      [
+        "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ]
+    ],
+    "offers": 0
+  },
+  "storage_after_restart": {
+    "holds": [
+      "42bf3be003b5418a781a5dab5311d6765a3dcc2181ce9e598cf56723365d62dc"
+    ],
+    "identities": {
+      "ld021_a": "1b9dcf6445d3d5adf3469213a7d003ac53244b4dce08606f72863b3ba787b842",
+      "ld021_b": "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82",
+      "ld021_c": "747fa7e5a9f8404ccbe305940452f67b7b9902cabe710a9edd0da3c1844a424c"
+    },
+    "audiences": [
+      [
+        "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ]
+    ],
+    "offers": 0
+  },
+  "initial_storage": {
+    "holds": [],
+    "identities": {
+      "ld021_a": "1b9dcf6445d3d5adf3469213a7d003ac53244b4dce08606f72863b3ba787b842",
+      "ld021_b": "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82",
+      "ld021_c": "747fa7e5a9f8404ccbe305940452f67b7b9902cabe710a9edd0da3c1844a424c"
+    },
+    "audiences": [
+      [
+        "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ]
+    ],
+    "offers": 0
+  },
+  "final_storage": {
+    "holds": [
+      "42bf3be003b5418a781a5dab5311d6765a3dcc2181ce9e598cf56723365d62dc"
+    ],
+    "identities": {
+      "ld021_a": "1b9dcf6445d3d5adf3469213a7d003ac53244b4dce08606f72863b3ba787b842",
+      "ld021_b": "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82",
+      "ld021_c": "747fa7e5a9f8404ccbe305940452f67b7b9902cabe710a9edd0da3c1844a424c"
+    },
+    "audiences": [
+      [
+        "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ],
+      [
+        "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+        "7d577fd8de17c5bda28fcdbad0dbb70b34d7b4aad291d2eef3f8aa8d394a1a82"
+      ]
+    ],
+    "offers": 0
+  },
+  "help": "BLOCKED: HelpService._row requires existing help_audience membership",
+  "external_delivery": false,
+  "real_people": "NO-GO",
+  "production": "NO-GO",
+  "error": null
+}
