@@ -1,0 +1,61 @@
+{
+  "format": "living-consent-021-readiness-2",
+  "base_sha": "6cce244f5b7cada33b00c08f7e6419acafc439a8",
+  "runtime_sha": "ebf5ec94a6292af1d55b09584b97a3a16f8b4063",
+  "browser": "PASS_WITH_CONTRACT_BLOCKER",
+  "source_clean": true,
+  "business_actions": "visible browser controls only",
+  "task_release_boundary": "PASS",
+  "author_three_state_http_payload_equality": "PASS",
+  "marker_isolation_A_C": "PASS",
+  "restart_clear_new_attempt_contact_hold": "PASS",
+  "recipient_and_text_invalidation": "PASS",
+  "audience_unchanged": "PASS",
+  "help_offer": "BLOCKED_HELP_AUDIENCE_REQUIRED",
+  "help_accept_and_two_confirmations": "NOT_EXECUTED_BLOCKED",
+  "local_regression": {
+    "executed": 27,
+    "status": "PASS",
+    "seconds": 219.267
+  },
+  "migration_contracts": {
+    "executed": 11,
+    "status": "PASS",
+    "new_migrations": []
+  },
+  "final_ci": "Check exact publication HEAD in Draft PR #44; runtime and evidence source distinguished",
+  "decisions": {
+    "synthetic_consent_ui_lab": "GO with documented Help blocker; CI required",
+    "full_three_role_help_cycle": "NO-GO",
+    "external_delivery": "NO-GO",
+    "real_people": "NO-GO",
+    "production": "NO-GO"
+  },
+  "release_gates": "UNCHANGED",
+  "runtime_ci": {
+    "url": "https://github.com/xBLAGO/space/actions/runs/45253439588",
+    "head_sha": "ebf5ec94a6292af1d55b09584b97a3a16f8b4063",
+    "status": "PASS",
+    "full_regression": [
+      {
+        "executed": 820,
+        "seconds": 362.054,
+        "status": "PASS"
+      },
+      {
+        "executed": 820,
+        "seconds": 364.052,
+        "status": "PASS"
+      }
+    ],
+    "browser": "PASS_WITH_CONTRACT_BLOCKER",
+    "docker": "PASS",
+    "offline_vectors": {
+      "passed": 72,
+      "status": "PASS"
+    },
+    "artifact_id": 14858881874,
+    "artifact_digest": "sha256:3c3c5cd8a493c1932d28dceed4e2096b0b4f968b180c2273eb6e2acf91284609",
+    "expires_at": "2027-02-21T19:52:31Z"
+  }
+}

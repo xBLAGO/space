@@ -1,0 +1,869 @@
+[
+  {
+    "path": "/api/state",
+    "identical": true,
+    "responses": [
+      {
+        "state": "UNOPENED",
+        "network_index": 258,
+        "request_serial": 313,
+        "http_status": 200,
+        "body_sha256": "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c",
+        "json": {
+          "csrf": "REDACTED",
+          "data": {
+            "can_allow": false,
+            "can_revoke": true,
+            "permission": "61c89996-ebf2-552d-97e5-fe1126621692",
+            "request": {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "version": 2
+            },
+            "status": "Ожидаем добровольные предложения"
+          },
+          "role": "A",
+          "scenario": "decline"
+        }
+      },
+      {
+        "state": "RECEIVED",
+        "network_index": 272,
+        "request_serial": 327,
+        "http_status": 200,
+        "body_sha256": "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c",
+        "json": {
+          "csrf": "REDACTED",
+          "data": {
+            "can_allow": false,
+            "can_revoke": true,
+            "permission": "61c89996-ebf2-552d-97e5-fe1126621692",
+            "request": {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "version": 2
+            },
+            "status": "Ожидаем добровольные предложения"
+          },
+          "role": "A",
+          "scenario": "decline"
+        }
+      },
+      {
+        "state": "DECLINED",
+        "network_index": 287,
+        "request_serial": 342,
+        "http_status": 200,
+        "body_sha256": "a6611c4bb2c90de36795091176b597652a05a8b93d67444e2316f0e99d14411c",
+        "json": {
+          "csrf": "REDACTED",
+          "data": {
+            "can_allow": false,
+            "can_revoke": true,
+            "permission": "61c89996-ebf2-552d-97e5-fe1126621692",
+            "request": {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "version": 2
+            },
+            "status": "Ожидаем добровольные предложения"
+          },
+          "role": "A",
+          "scenario": "decline"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/api/view",
+    "identical": true,
+    "responses": [
+      {
+        "state": "UNOPENED",
+        "network_index": 259,
+        "request_serial": 314,
+        "http_status": 200,
+        "body_sha256": "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202",
+        "json": {
+          "federation": false,
+          "format": "living-deeds-view-1",
+          "items": [
+            {
+              "id": "2a52fa4a-8c47-5f0f-8095-5dd7ac82804d",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467142,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 4,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "5c5cc69c-0b7d-5b4f-ab37-355cb784372f",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467125,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE: нужна помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 2,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "61c89996-ebf2-552d-97e5-fe1126621692",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467220,
+                "invitation_text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+                "need_id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+                "need_version": 2,
+                "topic": "bike_decline"
+              },
+              "version": 1
+            },
+            {
+              "id": "6221bf93-992c-57c2-a241-3290e499c7e0",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": false,
+                "expires_at": 1795467179,
+                "invitation_text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+                "need_id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+                "need_version": 2,
+                "topic": "bike_revoke"
+              },
+              "version": 2
+            }
+          ],
+          "matches": "NO_AVAILABLE_MATCHES",
+          "needs": [
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                },
+                {
+                  "action": "revise",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 3
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 4
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "event_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "type": "NeedExpressed",
+                  "version": 2
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "event_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "type": "RecordCorrected",
+                  "version": 3
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "event_id": "499fe077-3350-497e-b913-e1e4fe9a5240",
+                  "type": "NeedExpressed",
+                  "version": 4
+                }
+              ],
+              "version": 4
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "event_id": "42a56b32-eae7-4277-8701-61a8cb4d7bab",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "event_id": "f7003262-02cf-41b0-af36-993d266cb133",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            }
+          ],
+          "scope": "authorized current records, not public census",
+          "summary": {
+            "available_resource_slots": 0,
+            "completed": 0,
+            "disputed": 0,
+            "global_coverage": "UNKNOWN",
+            "independently_verified_resources": null,
+            "open_needs": 3,
+            "resource_categories_visible": [],
+            "withdrawn": 0
+          }
+        }
+      },
+      {
+        "state": "RECEIVED",
+        "network_index": 273,
+        "request_serial": 328,
+        "http_status": 200,
+        "body_sha256": "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202",
+        "json": {
+          "federation": false,
+          "format": "living-deeds-view-1",
+          "items": [
+            {
+              "id": "2a52fa4a-8c47-5f0f-8095-5dd7ac82804d",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467142,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 4,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "5c5cc69c-0b7d-5b4f-ab37-355cb784372f",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467125,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE: нужна помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 2,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "61c89996-ebf2-552d-97e5-fe1126621692",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467220,
+                "invitation_text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+                "need_id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+                "need_version": 2,
+                "topic": "bike_decline"
+              },
+              "version": 1
+            },
+            {
+              "id": "6221bf93-992c-57c2-a241-3290e499c7e0",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": false,
+                "expires_at": 1795467179,
+                "invitation_text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+                "need_id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+                "need_version": 2,
+                "topic": "bike_revoke"
+              },
+              "version": 2
+            }
+          ],
+          "matches": "NO_AVAILABLE_MATCHES",
+          "needs": [
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                },
+                {
+                  "action": "revise",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 3
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 4
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "event_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "type": "NeedExpressed",
+                  "version": 2
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "event_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "type": "RecordCorrected",
+                  "version": 3
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "event_id": "499fe077-3350-497e-b913-e1e4fe9a5240",
+                  "type": "NeedExpressed",
+                  "version": 4
+                }
+              ],
+              "version": 4
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "event_id": "42a56b32-eae7-4277-8701-61a8cb4d7bab",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "event_id": "f7003262-02cf-41b0-af36-993d266cb133",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            }
+          ],
+          "scope": "authorized current records, not public census",
+          "summary": {
+            "available_resource_slots": 0,
+            "completed": 0,
+            "disputed": 0,
+            "global_coverage": "UNKNOWN",
+            "independently_verified_resources": null,
+            "open_needs": 3,
+            "resource_categories_visible": [],
+            "withdrawn": 0
+          }
+        }
+      },
+      {
+        "state": "DECLINED",
+        "network_index": 288,
+        "request_serial": 343,
+        "http_status": 200,
+        "body_sha256": "4afdbafdc5d1a083d9f13a6bf940c1b3052e6f5060498ba9bb8bad4c64c56202",
+        "json": {
+          "federation": false,
+          "format": "living-deeds-view-1",
+          "items": [
+            {
+              "id": "2a52fa4a-8c47-5f0f-8095-5dd7ac82804d",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467142,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 4,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "5c5cc69c-0b7d-5b4f-ab37-355cb784372f",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467125,
+                "invitation_text": "SYNTHETIC_TASK_POSITIVE: нужна помощь с велосипедом",
+                "need_id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+                "need_version": 2,
+                "topic": "bike_positive"
+              },
+              "version": 1
+            },
+            {
+              "id": "61c89996-ebf2-552d-97e5-fe1126621692",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": true,
+                "expires_at": 1795467220,
+                "invitation_text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+                "need_id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+                "need_version": 2,
+                "topic": "bike_decline"
+              },
+              "version": 1
+            },
+            {
+              "id": "6221bf93-992c-57c2-a241-3290e499c7e0",
+              "kind": "NEED_PERMISSION",
+              "state": {
+                "active": false,
+                "expires_at": 1795467179,
+                "invitation_text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+                "need_id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+                "need_version": 2,
+                "topic": "bike_revoke"
+              },
+              "version": 2
+            }
+          ],
+          "matches": "NO_AVAILABLE_MATCHES",
+          "needs": [
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                },
+                {
+                  "action": "revise",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 3
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 4
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "07c2f79e-22c1-5407-996b-f12c4c7267a9",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "3ba026c1-2956-4fc0-8090-49c87bf71f8b",
+                  "event_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "type": "NeedExpressed",
+                  "version": 2
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "22a12765-620f-40a2-8b23-65cc4a8d530f",
+                  "event_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "type": "RecordCorrected",
+                  "version": 3
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "e871bfcc-ef7c-48a8-bafa-246ea8c5a2fc",
+                  "event_id": "499fe077-3350-497e-b913-e1e4fe9a5240",
+                  "type": "NeedExpressed",
+                  "version": 4
+                }
+              ],
+              "version": 4
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "521d17a8-2131-549b-9f03-0ff04bd7bb7a",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_DECLINE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "a9a5aed9-7f73-4098-8343-56a8f07171e2",
+                  "event_id": "42a56b32-eae7-4277-8701-61a8cb4d7bab",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            },
+            {
+              "audience": [
+                "1a9cfb7caa9cc33559ecbe2cc2b4e0c015d18c64c7c932323453f8144d286db6"
+              ],
+              "events": [
+                {
+                  "action": "draft",
+                  "role": "owner",
+                  "state": "DRAFT",
+                  "version": 1
+                },
+                {
+                  "action": "publish",
+                  "role": "owner",
+                  "state": "PUBLISHED",
+                  "version": 2
+                }
+              ],
+              "fulfillment_evidence": "NOT_MUTUALLY_CONFIRMED",
+              "helper_confirmed": false,
+              "id": "7c84015a-00e4-5030-b13d-7eb0b47242c0",
+              "offers": [],
+              "owner": true,
+              "owner_confirmed": false,
+              "publication_evidence": "EXPLICIT_AUTHOR_SESSION",
+              "state": "PUBLISHED",
+              "text": "SYNTHETIC_TASK_REVOKE: нужна помощь с велосипедом",
+              "typed_events": [
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": null,
+                  "event_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "type": "NeedDraftRecorded",
+                  "version": 1
+                },
+                {
+                  "canonical_source": "HELP",
+                  "causation_id": "31a799c4-2659-455e-8d2a-9eb484b1a03f",
+                  "event_id": "f7003262-02cf-41b0-af36-993d266cb133",
+                  "type": "NeedExpressed",
+                  "version": 2
+                }
+              ],
+              "version": 2
+            }
+          ],
+          "scope": "authorized current records, not public census",
+          "summary": {
+            "available_resource_slots": 0,
+            "completed": 0,
+            "disputed": 0,
+            "global_coverage": "UNKNOWN",
+            "independently_verified_resources": null,
+            "open_needs": 3,
+            "resource_categories_visible": [],
+            "withdrawn": 0
+          }
+        }
+      }
+    ]
+  }
+]

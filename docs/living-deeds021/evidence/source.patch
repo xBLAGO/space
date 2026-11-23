@@ -1,0 +1,1363 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index 90fcaf1..2e7c7ec 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -4,7 +4,7 @@ on:
+   push:
+     branches: ["feat/**", "fix/**", "integration/**"]
+   pull_request:
+-    branches: ["feat/living-deeds-01", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
++    branches: ["feat/living-deeds-02", "feat/living-deeds-01", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+   workflow_dispatch:
+ 
+ permissions:
+@@ -76,6 +76,8 @@ jobs:
+         run: PYTHONPATH=.:src python -m tools.living_deeds_lab --output "$RUNNER_TEMP/living-deeds-evidence.json"
+       - name: Living Deeds 02 owner-memory mandates and local delivery faults
+         run: PYTHONPATH=.:src python -m tools.living_deeds_agent_lab --output "$RUNNER_TEMP/living-deeds-agent-evidence.json"
++      - name: Living Deeds 02.1 three-role browser consent and privacy (local only)
++        run: PYTHONPATH=.:src python -m tools.living_consent_browser_check --chrome "$(command -v google-chrome)" --new-root "/tmp/ld021-${{ github.run_id }}" --output "$RUNNER_TEMP/living021-browser"
+       - name: Foundation 09 synthetic 100-participant collective planning
+         run: PYTHONPATH=.:src python -m tools.foundation09_lab --output "$RUNNER_TEMP/foundation09-lab.json"
+       - name: Durable assets on guarded identity privacy and recovery
+@@ -103,6 +105,7 @@ jobs:
+             ${{ runner.temp }}/durable-asset-lab.json
+             ${{ runner.temp }}/living-deeds-evidence.json
+             ${{ runner.temp }}/living-deeds-agent-evidence.json
++            ${{ runner.temp }}/living021-browser
+             ${{ runner.temp }}/uel-offline-results.json
+             ${{ runner.temp }}/uel03-lab-evidence.json
+             ${{ runner.temp }}/uel03-full-regression.json
+@@ -375,3 +378,8 @@ jobs:
+           docker run --rm --network none -v "$PWD/tests:/acceptance/tests:ro" -v "$PWD/tools:/acceptance/tools:ro" \
+             -e PYTHONPATH=/acceptance:/app/src --entrypoint python xblago-space:${{ github.sha }} \
+             -m unittest tests.test_living_deeds_agent -v
++      - name: Docker Living Deeds 02.1 loopback and role isolation
++        run: |
++          docker run --rm --network none -v "$PWD/tests:/acceptance/tests:ro" -v "$PWD/tools:/acceptance/tools:ro" \
++            -e PYTHONPATH=/acceptance:/app/src --entrypoint python xblago-space:${{ github.sha }} \
++            -m unittest tests.test_living_consent_lab -v
+diff --git a/docs/BLAGO_LIVING_DEEDS_02_1.md b/docs/BLAGO_LIVING_DEEDS_02_1.md
+new file mode 100644
+index 0000000..2ed9bd5
+--- /dev/null
++++ b/docs/BLAGO_LIVING_DEEDS_02_1.md
+@@ -0,0 +1,60 @@
++# Living Deeds 02.1 — локальное согласие и три роли
++
++База: exact PR #43 `6cce244f5b7cada33b00c08f7e6419acafc439a8`. Изолированная ветка `feat/living-deeds-02-1`. Стенд не подключён к production Web App, Telegram, Hugging Face, LLM или внешней доставке. На всех HTML-экранах плашка `LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY`.
++
++Роли здесь: **A — автор HelpRequest; B — посредник и владелец частной памяти/NOTE; C — приглашённый получатель**. Это явное переименование ролей примера #43, а не новая идентичность.
++
++## Что изменено
++
++- Только явный CLI `tools.living_consent_lab serve --enable-local-sandbox` подключает отдельный HTTP handler. Bind — литерал `127.0.0.1`, проверяются peer, точный Host/Origin, session и CSRF; CORS нет. Существующие production routes не меняются. Импорт и `serve` не применяют миграции.
++- `AgentLivingDeeds.view()` теперь возвращает нейтральный INVITATION `{id, kind, label}` без task/referrer/topic/status. Legacy `LivingDeeds` профиль #42 сам по себе не является новой границей доставки и этим HTTP-мостом не публикуется.
++- C `/api/state` содержит только нейтральные delivery cards. Первое поле `task` передаётся только успешным `/api/action open` → `LocalPullAdapter.deliver()`. Отзыв до открытия даёт нейтральное «Приглашение недоступно», без текста.
++- A видит собственную просьбу, своё разрешение и канонические предложения Help. Ни список получателей, ни состояние открытия/отказа не входят в его DTO. Кнопка отзыва зависит от собственного разрешения A, а не состояния C.
++- B сам разрешает MATCH_PRIVATE и отдельной кнопкой запускает `candidates`. Поиск не выполняется из GET, polling или публикации просьбы. Только B получает результат с private marker. Превью INVITE_ONCE показывает адресата, точный согласованный текст, referrer и срок, явно исключая заметку. Смена адресата отзывает ephemeral preview nonce; новая версия просьбы инвалидирует его на сервере и экране.
++- Одна видимая кнопка B подтверждает показанную последовательность BRIDGE → адресация → INVITE_ONCE → локальная очередь. Каждая существующая команда сохраняет собственный durable commit. При частичном сбое возможен приватный подготовительный BRIDGE без delivery; он не раскрывает task и не считается отправкой. Автоматического достраивания/ретрая нет, требуется новое человеческое превью. `queued=true` возвращается только после последнего commit. Journal/witness guards не ослаблялись ради искусственной общей транзакции.
++
++Новых таблиц или миграций нет. Проверены VERSION/CHECKSUM/DDL 11 модулей: [MIGRATIONS.json](living-deeds021/MIGRATIONS.json). Help/Asset/Identity/UEL остаются каноническими; `HelpService` и его lifecycle не изменялись. Согласия и отказы проходят существующие доменные команды, а не отдельную UI базу.
++
++## Проверяемый разрыв Help
++
++В этой базе **положительная ветка останавливается после добровольного нажатия C «Предложить помощь»**:
++
++1. `HelpService.prepare(..., action='offer')`, `src/xblago/domain/help_service.py:171`, сначала вызывает `_row(db, uid, rid)`.
++2. `_row`, строки 104–110, требует owner либо `help_audience.member_id == uid` при не-DRAFT состоянии; специальное право previous_helper действует только для WITHDRAWN.
++3. C не owner, не включён в audience и ещё не помощник. Поэтому `_row` возвращает 404 **до** `_check(..., 'offer')`.
++
++Контактное согласие не меняет `help_audience`. Стенд намеренно не добавляет C, не перепубликует просьбу с C и не имитирует offer/accept/complete. На экране C и в JSON — `HELP_AUDIENCE_REQUIRED`. У A по-прежнему нет предложения и имени C. Принятие A и два подтверждения результата — **NOT EXECUTED / BLOCKED**, а не PASS.
++
++Старый положительный тест #43 с ручным расширением audience остаётся regression, но не является доказательством нового acceptance flow. Для продолжения нужен отдельный проверяемый контракт добровольного предложения по приглашению; нельзя превращать возможность прочесть forwarding text в общий доступ ко всем данным HelpRequest.
++
++## Воспроизведение на Mac
++
++Новая копия: `/tmp/blago-living021`. Python — `/private/tmp/blago-pr41-live-venv/bin/python` (3.12.10 x86_64), SQLite — 3.54.1, безопасный драйвер в `/private/tmp/blago-pr41-live-sqlite`. Playwright 1.64.1 находится в `/tmp/blago-context-browser-deps`. Эти пути относятся к данному Mac, а не к переносимой установке.
++
++```sh
++cd /tmp/blago-living021
++export PYTHONPATH=/private/tmp/blago-pr41-live-sqlite:/tmp/blago-context-browser-deps:.:src
++/usr/bin/arch -x86_64 /private/tmp/blago-pr41-live-venv/bin/python -m xblago.core.sqlite_safety --require-safe
++/usr/bin/arch -x86_64 /private/tmp/blago-pr41-live-venv/bin/python -m tools.living_consent_lab init --new-root /tmp/ld021-manual-new
++/usr/bin/arch -x86_64 /private/tmp/blago-pr41-live-venv/bin/python -m tools.living_consent_lab serve --root /tmp/ld021-manual-new --bind 127.0.0.1 --port 17861 --enable-local-sandbox
++```
++
++Открыть `http://127.0.0.1:17861` в трёх независимых browser profiles/contexts. Логины: `ld021_a`, `ld021_b`, `ld021_c`; общий **публичный синтетический** пароль `synthetic-living021-only`. Это не модель допуска к реальным данным. Приватная заметка B содержит контрольный маркер `LD021_PRIVATE_B_MARKER_Q7M4`. До старта seed создаёт только аккаунты, память/NOTE B и три исходные опубликованные просьбы A с audience B. Ни одного пользовательского мандата, forwarding permission, BRIDGE или delivery до браузерных действий нет.
++
++Автоматизированное воспроизведение теми же обычными кнопками:
++
++```sh
++PYTHONPATH=/private/tmp/blago-pr41-live-sqlite:/tmp/blago-context-browser-deps:.:src /usr/bin/arch -x86_64 /private/tmp/blago-pr41-live-venv/bin/python -m tools.living_consent_browser_check --new-root /tmp/ld021-check-new --output /tmp/ld021-check-evidence-new
++```
++
++Каждый `--new-root` и `--output` должен быть новым. Init не принимает существующее хранилище. Для restart использовать только `serve` с прежним `--root`, **без** повторного init. `Ctrl+C` останавливает HTTP и его локальный custodian. Сессия требует повторного входа после истечения штатного fresh-access срока; стенд этот срок не расширяет.
++
++## Evidence и ограничения
++
++Полная таблица с пятью колонками, дампы ответов A, network indexes, снимки трёх экранов и restart evidence — в отчёте `docs/living-deeds021/E2E_REPORT.md`, создаваемом после проверенного прогона. Machine-readable результаты — `RESULTS.json` и artifacts CI. Точный runtime SHA, patch от базы и его SHA256 записывает browser runner; исходный код и API payload не подменяются во время прогона.
++
++Браузерные действия не используют API writes, injected cookies, `page.evaluate` с бизнес-операциями или route fulfillment. Вне браузера выполняются только начальный seed, запуск/restart сервера, уничтожение browser contexts для очистки и read-only storage inspection. Сетевые JSON сканируются до редактирования CSRF/nonce для публикации; B marker запрещён в ответах/экранах A/C. В A сравниваются исходные SHA256 тел state/view, а не только очищенные JSON.
++
++Loopback не защищает от полностью скомпрометированного Mac или оператора с ключами. Локальные SQL/journal/custodian не доказывают независимость операторов. SQLite at-rest encryption, внешняя доставка, реальные устройства, живой LLM и общий допуск к пилоту не проверены. Старые release gates не повышаются.
++
++**GO — только локальная синтетическая проверка интерфейса и privacy boundary после фактического PASS evidence. NO-GO — полный целевой цикл Help до исправления контракта, реальные люди, внешняя доставка и production.** Merge/deploy не выполняются.
+diff --git a/docs/living-deeds021/MIGRATIONS.json b/docs/living-deeds021/MIGRATIONS.json
+new file mode 100644
+index 0000000..4eb20aa
+--- /dev/null
++++ b/docs/living-deeds021/MIGRATIONS.json
+@@ -0,0 +1,73 @@
++{
++  "base": "6cce244f5b7cada33b00c08f7e6419acafc439a8",
++  "new_migrations": [],
++  "status": "PASS",
++  "modules": [
++    {
++      "module": "identity_schema",
++      "version": "foundation05_identity_001",
++      "checksum": "0c037906348404d2e2b1dc5c17f59f8f88261d0bf1ca48b0399a935a250492c4",
++      "ddl_equal": true
++    },
++    {
++      "module": "identity_runtime_schema",
++      "version": "foundation05_runtime_002",
++      "checksum": "faa85972c539a03042c49a08a1caa8e7b5a88396b012d0d261ca6b6fcb86af12",
++      "ddl_equal": true
++    },
++    {
++      "module": "privacy_schema",
++      "version": "foundation05_privacy_003",
++      "checksum": "e48d094d2c6a4701f17a94d49a18d4c91e4bdae6db157be5051128e0bf395161",
++      "ddl_equal": true
++    },
++    {
++      "module": "pilot_schema",
++      "version": "foundation05_pilot_004",
++      "checksum": "1dd618cdd1f35f7952aabdbb8dfac62cb59048f3ab06a0c258b68e72fb63da76",
++      "ddl_equal": true
++    },
++    {
++      "module": "help_schema",
++      "version": "foundation_help_001",
++      "checksum": "134dda0be6d63c09c16c464646ac46d3d90fb96615d87dbb5b0f0ae01b8fa689",
++      "ddl_equal": true
++    },
++    {
++      "module": "context_schema",
++      "version": "foundation_privacy_context_001",
++      "checksum": "79aed28a7444a8a4758d8133033dd636dee6a3a214c877faba338da315434aa0",
++      "ddl_equal": true
++    },
++    {
++      "module": "lifecycle_schema",
++      "version": "foundation_privacy_lifecycle_001",
++      "checksum": "1549c5875e15571f35ae93c1f2535c42fcc690df65f04be29629ce3c2c89e02a",
++      "ddl_equal": true
++    },
++    {
++      "module": "asset_registry_schema",
++      "version": "foundation09_asset_registry_001",
++      "checksum": "cda14dd85a07bcc1917650af8a0aa62021e3255f38d52578ac98d50c1c7a078d",
++      "ddl_equal": true
++    },
++    {
++      "module": "uel_schema",
++      "version": "uel_local_002",
++      "checksum": "255eb5d96feaedbc6e92086173b404db2071afac0c689d70e6a192d39be2eb22",
++      "ddl_equal": true
++    },
++    {
++      "module": "living_schema",
++      "version": "living_deeds_001",
++      "checksum": "258b1adeb9b01cf2c038a39e0661e9ea707eb7e4aafcc1f55f08888bfd37c497",
++      "ddl_equal": true
++    },
++    {
++      "module": "agent_context_schema",
++      "version": "agent_context_001",
++      "checksum": "ef6d9ae1d6d2431f176717712aa029086d729d8b26e9c273440c42d6c78b8feb",
++      "ddl_equal": true
++    }
++  ]
++}
+diff --git a/docs/living-deeds021/RESULTS.json b/docs/living-deeds021/RESULTS.json
+new file mode 100644
+index 0000000..628e222
+--- /dev/null
++++ b/docs/living-deeds021/RESULTS.json
+@@ -0,0 +1,22 @@
++{
++  "format": "living-consent-021-readiness-1",
++  "base_sha": "6cce244f5b7cada33b00c08f7e6419acafc439a8",
++  "http_negative_tests": {
++    "executed": 7,
++    "status": "PASS",
++    "seconds": 78.546
++  },
++  "migration_contracts": {
++    "executed": 11,
++    "status": "PASS",
++    "new_migrations": []
++  },
++  "browser_development": "PASS_WITH_CONTRACT_BLOCKER; exact-source evidence pending",
++  "full_regression": "PENDING_CI",
++  "full_help_path": "BLOCKED_HELP_AUDIENCE_REQUIRED",
++  "help_accept_and_two_confirmations": "NOT_EXECUTED_BLOCKED",
++  "external_delivery": "NO-GO",
++  "real_people": "NO-GO",
++  "production": "NO-GO",
++  "release_gates": "UNCHANGED"
++}
+diff --git a/integration/candidate.json b/integration/candidate.json
+index db063d4..d15a6e2 100644
+--- a/integration/candidate.json
++++ b/integration/candidate.json
+@@ -93,7 +93,7 @@
+   "schema_sha256": "a0673f4c3f531961139633f5ce634d111ddc6fcdd5d695775b92d16184b2cf17",
+   "source_files_sha256": {
+     ".github/workflows/huggingface-space.yml": "e4e3fd36d331045c93e5c1d4b462e99f41a994e2881f3600c4bd9e60876b1faa",
+-    ".github/workflows/tests.yml": "5c3a5f1f6b68b16d373a63996152dbcafeb58d962c4b391b0ef01b6144793fad",
++    ".github/workflows/tests.yml": "aadfe16c9084b7e2906c2e3bdea8dedd4f973e1a554f0ab6879c0cd29284f879",
+     "Dockerfile": "277ab0717a8172723e47116d79fac59023eea974aaa7b7665135717d34accc01",
+     "pyproject.toml": "dd6de982922a7655e667b77558337ca0754afb71eecd16da42ad4ed71f185a79",
+     "requirements-integration.lock": "a07961af237437505e654d3f873924bf96f7ec0702d5a1b37c15a6becf4949f6",
+@@ -145,7 +145,7 @@
+     "src/xblago/domain/help_contracts.py": "7ba4d894a2d66bb08f35980de435ed022da6cf093ffd41c28736e7edb60f4681",
+     "src/xblago/domain/help_service.py": "c53a91f812bf8aeb7bf172f2700ea9f0ce1542f5777ac82f407233e312ad1e47",
+     "src/xblago/domain/living_deeds.py": "5b95b93167a36da82b47f22c003d7b08065bd310891775b9c579f550ce296f6a",
+-    "src/xblago/domain/living_deeds_agent.py": "0bb91e159dd3c4cbed10e2ce117c56aa85583419950b2df6b9948849f9e8f4fc",
++    "src/xblago/domain/living_deeds_agent.py": "012c38c2d8497b80736dc088601da4b0c993f9e1b071b8ea11f42e5360bca9b6",
+     "src/xblago/domain/local_ledger.py": "0f45330a544c73e86f49d9363e4376e5a3ab0f98830b564d4ed84df5f1e131e8",
+     "src/xblago/domain/universal_balance.py": "6a880503d5da2128a4af9ef4e967f1d398c597bdc5c3b96fe878cb13728b7209",
+     "src/xblago/integrations/__init__.py": "4dc8a8071679e11e0ce0adb7aa5e8708720a4669923495fcab63fdcd04bb589c",
+@@ -173,6 +173,7 @@
+     "tests/test_identity_runtime.py": "65b8b53ff2052f0f7dc1890f064a8d0e2ac01654db36c6888fa02db7407eed61",
+     "tests/test_identity_schema.py": "37b6ada49dc7032885d6b7a6835e304190c37ba30c49366547884fa1af93cc0d",
+     "tests/test_integration_candidate.py": "669c9a10c9dcb8cb8dc593da4ecd85e5727e960fd8ef9230ddc7fe250fd7f634",
++    "tests/test_living_consent_lab.py": "98a1655f7c2a43eebf3723ff4e8a51f1ce158d0e82eb8e9b93395ec0a7573cb7",
+     "tests/test_living_contracts.py": "49cb9f443ad6150e795177fed03b5e12a29cbb2cc3eed5eec04b0a27672cc335",
+     "tests/test_living_deeds.py": "6457de9863f0bc722f6921cc9c16bfcdd797938ebb262bbda100acd58de1119a",
+     "tests/test_living_deeds_agent.py": "a7901e54ac9ed2d90490c34c8baf1bdc771c428f8cb248aa499f7456dd566fea",
+@@ -200,7 +201,7 @@
+     "tools/context_fencing_check.py": "eb565725c56881ce6382fa0b6cab6211ba4d55fbe4bca91d66aeb42be1f30869",
+     "tools/durable_asset_lab.py": "aec738e5cb6cd5a536ab7d9df550bb434278f0a7c89d32c873f55e663ffb7d77",
+     "tools/foundation09_lab.py": "0858758fbda05426205719c179bd51278ace4f81e3eecf8802f7a9a84713e264",
+-    "tools/freeze_integration.py": "4142cfc3c061ce07d236f96c1feb7a98949be9da4dcd6087e0f51931423f714f",
++    "tools/freeze_integration.py": "1e76d65f8eb406056cd7ed7e216a210b8ec28d4413825b39f274b34dbccaf43c",
+     "tools/help_browser_check.py": "7bbde5fa0b68350dee6ebd9862c6c6dd55181f466a39177f0f30b205e37ea856",
+     "tools/help_demo.py": "37788b2c7f9704d8f856a046d3c0477319e1245f8c5e43a60863dd47c794d90c",
+     "tools/help_mobile_check.py": "a77d38b24bff48bcb0bb38abeb9b52f1410f37b83fc58aab6e1777368141556f",
+@@ -212,6 +213,14 @@
+     "tools/lifecycle_check.py": "8a0d538bfbc2edc997939d6aefffe04bdbd690b781c4d86cb3147654489ef7ac",
+     "tools/lifecycle_inventory.py": "f9cbd0dd0900876f5d414eef62fc6157947890e81cb63ea882b2a3153c286f06",
+     "tools/lifecycle_maintenance.py": "59e5e1085be0498b71219ee42cc7ba97237fdbff0734fe9d82d7c0195c5874c2",
++    "tools/living021_static/A.html": "a0d5eb312f13a0dd89c5d9dfccf0e47ecb45a88e0a678aeec747fe339d6fa962",
++    "tools/living021_static/B.html": "4cec06f881925d510d2f2b67dd06532b17f1ed90670cd1b58cc8d04accc05035",
++    "tools/living021_static/C.html": "119786c6e69988799dec46ef86ea6557a984c654288df2f6c2fed44d9725f955",
++    "tools/living021_static/login.html": "5cbd80b057cf321d4edc7c503ab437f4c917ef0ce57aff3ba7cb688d8d4c2fcf",
++    "tools/living021_static/ui.css": "e6c73587b593a0ed302d5cfcee02b5dc0500cfb98760df44354769781e3b67a0",
++    "tools/living021_static/ui.js": "3b4c031e2b6c9099048e9ed1abc7097ba4aae588b8584fd6d77b0f5ff15ac0fc",
++    "tools/living_consent_browser_check.py": "d310aaa35a24f4869bf9361943e5927bea01e7fa55b15130e63128d9c438a0f3",
++    "tools/living_consent_lab.py": "13f005382f8eeeb7fd330fc052fcc9423c7bf2517f4d75969587390e47a68953",
+     "tools/living_contract_check.py": "a71a1bba8ba821bb6901489f3c421cf1f718fb7a8ec578b11a44dde7e23a74ee",
+     "tools/living_deeds_agent_lab.py": "4f95b0b629a825602dc56168514ef7522c1aec0d1f7cb98578b17027e18c3d1d",
+     "tools/living_deeds_lab.py": "76c02bf043c21adbea8b4f18e4ce3d82296b366cfa6f47c48a1ffe95b10455b2",
+diff --git a/src/xblago/domain/living_deeds_agent.py b/src/xblago/domain/living_deeds_agent.py
+index 89e61ce..9bcad45 100644
+--- a/src/xblago/domain/living_deeds_agent.py
++++ b/src/xblago/domain/living_deeds_agent.py
+@@ -32,6 +32,16 @@ def enabled(flag):
+ class AgentLivingDeeds(ld.LivingDeeds):
+     """Human-authenticated commands; the model never receives a commit capability."""
+ 
++    def view(self, token):
++        # Listing is not opening. Never forward the legacy inbox's task,
++        # referrer, topic or delivery state to an unopened recipient.
++        result = super().view(token)
++        result['items'] = [({'id': item['id'], 'kind': 'INVITATION',
++                             'label': 'Локальное приглашение'}
++                            if item['kind'] == 'INVITATION' else item)
++                           for item in result['items']]
++        return result
++
+     @contextmanager
+     def tx(self, token, destructive=False):
+         if not enabled(FLAG):
+diff --git a/tests/test_living_consent_lab.py b/tests/test_living_consent_lab.py
+new file mode 100644
+index 0000000..19fc891
+--- /dev/null
++++ b/tests/test_living_consent_lab.py
+@@ -0,0 +1,120 @@
++"""Controlled HTTP negative tests. These are NOT the button-only browser evidence."""
++import http.client
++import json
++import os
++from pathlib import Path
++import tempfile
++import threading
++import unittest
++from unittest.mock import patch
++
++from tools.living_consent_lab import (init, custodian, configuration, Lab, Handler, LoopbackServer,
++    ROLES, PASSWORD, MARKER, UI_FLAG)
++
++
++class ConsentHTTPTests(unittest.TestCase):
++    def setUp(self):
++        tmp = tempfile.TemporaryDirectory(prefix='lc21-',dir='/tmp'); self.addCleanup(tmp.cleanup)
++        self.root = Path(tmp.name)/'new'
++        env = patch.dict(os.environ); env.start(); self.addCleanup(env.stop)
++        init(self.root); self.cfg = configuration(self.root); os.environ.update(self.cfg)
++        self.custody = custodian(self.root,self.cfg); self.custody.__enter__()
++        self.addCleanup(lambda:self.custody.__exit__(None,None,None))
++        os.environ[UI_FLAG]='true'
++        self.server = LoopbackServer(('127.0.0.1',0),Handler); self.server.lab=Lab(self.root)
++        thread=threading.Thread(target=self.server.serve_forever,daemon=True);thread.start()
++        self.addCleanup(lambda:(self.server.shutdown(),self.server.server_close(),thread.join(5)))
++        self.port=self.server.server_port; self.origin='http://127.0.0.1:'+str(self.port)
++        self.cookies={};self.csrf={}
++        for role,username in ROLES.items():
++            status,body,headers=self.request('POST','/api/login',{'username':username,'password':PASSWORD})
++            self.assertEqual(status,200);self.cookies[role]=headers['Set-Cookie'].split(';')[0]
++            self.csrf[role]=self.request('GET','/api/state?scenario=positive',role=role)[1]['csrf']
++
++    def request(self,method,path,body=None,role=None,headers=None):
++        h={'Origin':self.origin,'Content-Type':'application/json'}
++        if role:h.update(Cookie=self.cookies[role],**{'X-CSRF-Token':self.csrf.get(role,'')})
++        h.update(headers or {})
++        client=http.client.HTTPConnection('127.0.0.1',self.port,timeout=30)
++        client.request(method,path,json.dumps(body) if body is not None else None,h)
++        response=client.getresponse();raw=response.read();out=dict(response.getheaders())
++        status=response.status;client.close()
++        return status,json.loads(raw) if out['Content-Type'].startswith('application/json') else raw.decode(),out
++
++    def act(self,role,action,data=None,scenario='positive'):
++        return self.request('POST','/api/action',{'scenario':scenario,'action':action,'data':data or {}},role)
++
++    def preview(self,scenario='positive'):
++        self.assertEqual(self.act('A','allow',scenario=scenario)[0],200)
++        self.assertEqual(self.act('B','match',scenario=scenario)[0],200)
++        self.assertIn(MARKER,json.dumps(self.act('B','search',scenario=scenario)[1]))
++        status,preview,_=self.act('B','preview',{'recipient':'C'},scenario)
++        self.assertEqual(status,200);return preview
++
++    def test_loopback_explicit_activation_host_and_origin(self):
++        with self.assertRaises(ValueError):LoopbackServer(('0.0.0.0',0),Handler)
++        with patch.dict(os.environ,{UI_FLAG:'false'}):
++            with self.assertRaises(ValueError):Lab(self.root)
++        self.assertEqual(self.request('GET','/api/state?scenario=positive',role='A',headers={'Host':'evil.invalid'})[0],403)
++        self.assertEqual(self.request('POST','/api/action',{'scenario':'positive','action':'allow'},'A',{'Origin':'https://evil.invalid'})[0],403)
++
++    def test_csrf_roles_no_session_and_no_generic_write_route(self):
++        self.assertEqual(self.request('GET','/api/state?scenario=positive')[0],401)
++        self.assertEqual(self.request('POST','/api/action',{'scenario':'positive','action':'allow'},'A',{'X-CSRF-Token':'wrong'})[0],403)
++        self.assertEqual(self.act('C','allow')[0],403)
++        self.assertEqual(self.act('A','search')[0],403)
++        self.assertEqual(self.request('POST','/api/prepare',{},'C')[0],404)
++
++    def test_no_search_side_effect_or_permission_without_click_command(self):
++        for _ in range(2):
++            for role in ROLES:self.request('GET','/api/state?scenario=positive',role=role)
++        with self.server.lab.app.store._locked_transaction() as db:
++            self.assertEqual({r[0] for r in db.execute('SELECT kind FROM living_records')},{'NOTE'})
++        self.assertEqual(self.act('B','search')[0],409)
++        self.assertNotIn(MARKER,json.dumps(self.request('GET','/api/state?scenario=positive',role='A')[1]))
++
++    def test_unopened_common_view_and_withdrawn_open_never_return_task(self):
++        p=self.preview('revoke')
++        self.assertEqual(self.act('B','send',{'nonce':p['nonce'],'recipient':'C','text':p['task']},'revoke')[0],200)
++        status,state,headers=self.request('GET','/api/state?scenario=revoke',role='C')
++        self.assertEqual(headers['Cache-Control'],'no-store');self.assertNotIn('task',json.dumps(state))
++        did=state['data']['inbox'][0]['id']
++        self.assertNotIn('task',json.dumps(self.request('GET','/api/view?scenario=revoke',role='C')[1]))
++        self.assertEqual(self.act('C','contact',{'id':did},'revoke')[0],409)
++        self.assertEqual(self.act('A','revoke',scenario='revoke')[0],200)
++        status,value,_=self.act('C','open',{'id':did},'revoke')
++        self.assertNotEqual(status,200);self.assertEqual(value,{'error':'Приглашение недоступно'})
++
++    def test_author_responses_identical_unopened_opened_declined(self):
++        p=self.preview('decline');self.act('B','send',{'nonce':p['nonce'],'recipient':'C','text':p['task']},'decline')
++        did=self.request('GET','/api/state?scenario=decline',role='C')[1]['data']['inbox'][0]['id']
++        snapshots=[]
++        def snapshot():return [self.request('GET',path+'?scenario=decline',role='A')[1] for path in ('/api/state','/api/view')]
++        snapshots.append(snapshot())
++        status,value,_=self.act('C','open',{'id':did},'decline');self.assertEqual(status,200)
++        self.assertIn('task',value);self.assertIn('receipt',value);self.assertNotIn(MARKER,json.dumps(value))
++        snapshots.append(snapshot())
++        self.assertEqual(self.act('C','decline',{'id':did},'decline')[0],200)
++        snapshots.append(snapshot());self.assertEqual(snapshots[0],snapshots[1]);self.assertEqual(snapshots[1],snapshots[2])
++        self.assertTrue(snapshots[2][0]['data']['can_revoke'])
++
++    def test_recipient_and_text_changes_invalidate_confirmation(self):
++        p=self.preview()
++        self.act('B','invalidate',{'nonce':p['nonce']})
++        self.assertEqual(self.act('B','send',{'nonce':p['nonce'],'recipient':'C','text':p['task']})[0],409)
++        p=self.act('B','preview',{'recipient':'C'})[1]
++        self.assertEqual(self.act('B','send',{'nonce':p['nonce'],'recipient':'A','text':p['task']})[0],409)
++        p=self.act('B','preview',{'recipient':'C'})[1]
++        self.assertEqual(self.act('A','edit',{'text':'Исправленная синтетическая просьба о велосипеде'})[0],200)
++        self.assertEqual(self.act('B','send',{'nonce':p['nonce'],'recipient':'C','text':p['task']})[0],409)
++
++    def test_no_audience_expansion_when_volunteer_offer_is_blocked(self):
++        p=self.preview();self.act('B','send',{'nonce':p['nonce'],'recipient':'C','text':p['task']})
++        did=self.request('GET','/api/state?scenario=positive',role='C')[1]['data']['inbox'][0]['id']
++        self.act('C','open',{'id':did});self.act('C','contact',{'id':did})
++        status,value,_=self.act('C','offer',{'id':did})
++        self.assertEqual(status,200);self.assertEqual(value['blocker'],'HELP_AUDIENCE_REQUIRED')
++        with self.server.lab.app.store._locked_transaction() as db:
++            self.assertEqual(db.execute('SELECT count(*) FROM help_offers').fetchone()[0],0)
++            c=db.execute('SELECT blago_user_id FROM web_credentials WHERE username=?',(ROLES['C'],)).fetchone()[0]
++            self.assertEqual(db.execute('SELECT count(*) FROM help_audience WHERE member_id=?',(c,)).fetchone()[0],0)
+diff --git a/tools/freeze_integration.py b/tools/freeze_integration.py
+index 0c7c2dc..279f826 100644
+--- a/tools/freeze_integration.py
++++ b/tools/freeze_integration.py
+@@ -26,7 +26,7 @@ PINS={
+ 
+ def dump(value):return json.dumps(value,sort_keys=True,indent=2)+'\n'
+ def manifest(schema,help_schema=None):
+- paths=sorted((ROOT/'src').rglob('*.py'))+sorted((ROOT/'src/xblago/integrations/static').glob('*'))+sorted((ROOT/'tools').glob('*.py'))+sorted((ROOT/'tests').rglob('*.py'))+[ROOT/p for p in ('Dockerfile','pyproject.toml','requirements-integration.lock','.github/workflows/tests.yml','.github/workflows/huggingface-space.yml')]
++ paths=sorted((ROOT/'src').rglob('*.py'))+sorted((ROOT/'src/xblago/integrations/static').glob('*'))+sorted((ROOT/'tools').glob('*.py'))+sorted((ROOT/'tools/living021_static').glob('*'))+sorted((ROOT/'tests').rglob('*.py'))+[ROOT/p for p in ('Dockerfile','pyproject.toml','requirements-integration.lock','.github/workflows/tests.yml','.github/workflows/huggingface-space.yml')]
+  from xblago.core import asset_registry_schema,uel_schema
+  from xblago.core.help_schema import VERSION,CHECKSUM
+  from xblago.core.context_schema import VERSION as CONTEXT_VERSION,CHECKSUM as CONTEXT_CHECKSUM
+diff --git a/tools/living021_static/A.html b/tools/living021_static/A.html
+new file mode 100644
+index 0000000..c79e605
+--- /dev/null
++++ b/tools/living021_static/A.html
+@@ -0,0 +1 @@
++<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/ui.css"><title>BLAGO Local Consent Lab</title><header>LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY</header><main><h1>Автор A</h1><label>Сценарий <select id="scenario"><option value="positive">Согласие и Help</option><option value="decline">Отказ и перезапуск</option><option value="revoke">Отзыв до получения</option></select></label><button id="refresh">Обновить</button><h2>Моя просьба</h2><p id="request"></p><p id="status"></p><p>После явного подтверждения посредником получателю передаются согласованный текст просьбы, псевдонимный идентификатор посредника (referrer), локальная квитанция и служебные признаки приглашения. Личность получателя и статус приглашения вам не раскрываются. Вы увидите только добровольно отправленное предложение помощи.</p><button id="allow">Разрешить приглашение по этому тексту</button><button id="revoke">Отозвать разрешение</button><details><summary>Исправить собственную просьбу</summary><label>Новый текст<textarea id="edit-text"></textarea></label><button id="edit">Изменить и опубликовать с прежней аудиторией</button></details><h2>Предложения помощи</h2><div id="offers"></div><button id="confirm">Подтвердить завершение</button><p id="message" role="status" aria-live="polite"></p></main><script src="/ui.js"></script></html>
+\ No newline at end of file
+diff --git a/tools/living021_static/B.html b/tools/living021_static/B.html
+new file mode 100644
+index 0000000..7f3f0fe
+--- /dev/null
++++ b/tools/living021_static/B.html
+@@ -0,0 +1 @@
++<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/ui.css"><title>BLAGO Local Consent Lab</title><header>LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY</header><main><h1>Посредник B</h1><label>Сценарий <select id="scenario"><option value="positive">Согласие и Help</option><option value="decline">Отказ и перезапуск</option><option value="revoke">Отзыв до получения</option></select></label><button id="refresh">Обновить</button><h2>Разрешённая просьба</h2><p id="request"></p><p>MATCH_PRIVATE разрешает локальный поиск по моей частной памяти для этой просьбы. Публикации и приглашения не разрешает.</p><p id="expiry-info"></p><button id="match">Разрешить MATCH_PRIVATE</button><button id="search">Поиск по моей памяти</button><pre id="matches">Поиск не запускался</pre><label>Адресат<select id="recipient"><option value="C">Синтетический участник C</option><option value="A">Синтетический участник A</option></select></label><button id="preview">Подготовить точное превью</button><pre id="preview-text">Превью не подтверждено</pre><p>Получатель увидит согласованный текст и мой псевдонимный referrer. Моя личная заметка и её контрольный маркер остаются только у меня. Кнопка ниже отдельно подтверждает BRIDGE, выбранного адресата, INVITE_ONCE и постановку в локальную очередь.</p><button id="send" disabled>Направить превью приглашения</button><p id="message" role="status" aria-live="polite"></p></main><script src="/ui.js"></script></html>
+\ No newline at end of file
+diff --git a/tools/living021_static/C.html b/tools/living021_static/C.html
+new file mode 100644
+index 0000000..172db1a
+--- /dev/null
++++ b/tools/living021_static/C.html
+@@ -0,0 +1 @@
++<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/ui.css"><title>BLAGO Local Consent Lab</title><header>LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY</header><main><h1>Получатель C</h1><label>Сценарий <select id="scenario"><option value="positive">Согласие и Help</option><option value="decline">Отказ и перезапуск</option><option value="revoke">Отзыв до получения</option></select></label><button id="refresh">Обновить</button><h2>Входящие</h2><div id="inbox"></div><section id="opened" hidden><h2>Открытое приглашение</h2><p id="task"></p><p id="referrer"></p><p id="receipt"></p><button id="contact">Согласиться на контакт</button><button id="decline">Отклонить приглашение</button><section id="offer-area" hidden><p>При успешной отправке автор получит мой псевдонимный код участника, текст добровольного предложения и его статус. Приглашение само по себе этих сведений автору не передаёт.</p><button id="offer">Предложить помощь</button></section></section><p id="message" role="status" aria-live="polite"></p></main><script src="/ui.js"></script></html>
+\ No newline at end of file
+diff --git a/tools/living021_static/login.html b/tools/living021_static/login.html
+new file mode 100644
+index 0000000..35c131e
+--- /dev/null
++++ b/tools/living021_static/login.html
+@@ -0,0 +1 @@
++<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/ui.css"><title>BLAGO Local Consent Lab</title><header>LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY</header><main><h1>Локальный вход</h1><p>Только заранее подготовленные синтетические профили. Внешняя отправка отсутствует.</p><label>Логин<input id="username" autocomplete="username"></label><label>Пароль<input id="password" type="password" autocomplete="current-password"></label><button id="login">Войти</button><button id="enter" hidden>Открыть мой профиль</button><p id="message" role="status" aria-live="polite"></p></main><script src="/ui.js"></script></html>
+\ No newline at end of file
+diff --git a/tools/living021_static/ui.css b/tools/living021_static/ui.css
+new file mode 100644
+index 0000000..ac7dadb
+--- /dev/null
++++ b/tools/living021_static/ui.css
+@@ -0,0 +1 @@
++body{font:17px system-ui,sans-serif;background:#f4f6f5;color:#172d24;margin:0}header{position:sticky;top:0;padding:14px;background:#ffdf87;font-size:13px;font-weight:700;text-align:center}main{max-width:760px;margin:24px auto;padding:24px;background:white;border-radius:14px}button,select,input,textarea{font:inherit;padding:10px;margin:7px 5px 7px 0;border:1px solid #8aaba0;border-radius:6px}button{background:#e5f3ec;cursor:pointer}button:disabled{opacity:.45;cursor:default}label{display:block;margin-top:14px}input,textarea{box-sizing:border-box;width:100%}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;background:#f0f3f1}#message{min-height:2em;white-space:pre-wrap}section{margin-top:20px}p{line-height:1.55;overflow-wrap:anywhere}[hidden]{display:none!important}
+diff --git a/tools/living021_static/ui.js b/tools/living021_static/ui.js
+new file mode 100644
+index 0000000..84353bb
+--- /dev/null
++++ b/tools/living021_static/ui.js
+@@ -0,0 +1,120 @@
++'use strict';
++const $ = id => document.getElementById(id);
++let csrf = '', state, plan, activeDelivery, fingerprint, searching = false, readSequence = 0;
++function message(text) { $('message').textContent = text; }
++async function api(path, body) {
++  const response = await fetch(path, body === undefined ? {cache:'no-store'} : {
++    method:'POST', headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},
++    body:JSON.stringify(body), cache:'no-store'
++  });
++  const value = await response.json();
++  if (!response.ok) throw new Error(value.error || 'Локальная операция недоступна');
++  return value;
++}
++function action(name, data={}) {
++  return api('/api/action', {scenario:$('scenario').value, action:name, data});
++}
++function invalidate() {
++  const previous = plan; plan = null;
++  if ($('send')) $('send').disabled = true;
++  if ($('preview-text')) $('preview-text').textContent = 'Превью сброшено. Требуется новое подтверждение.';
++  if (previous) action('invalidate', {nonce:previous.nonce}).catch(()=>{});
++}
++async function refresh() {
++  const selected = $('scenario').value, sequence = ++readSequence;
++  const nextState = await api('/api/state?scenario='+selected);
++  if (sequence !== readSequence || selected !== $('scenario').value) return;
++  state = nextState; csrf = state.csrf;
++  if (state.role !== 'B') await api('/api/view?scenario='+selected);
++  if (sequence !== readSequence || selected !== $('scenario').value) return;
++  const d = state.data;
++  if (state.role === 'A') {
++    $('request').textContent = d.request.text; $('status').textContent = d.status;
++    $('allow').disabled = !d.can_allow; $('revoke').disabled = !d.can_revoke;
++    $('confirm').disabled = !['ACCEPTED','AWAITING_CONFIRMATION'].includes(d.request.state);
++    const offers = $('offers'); offers.replaceChildren();
++    if (!d.request.offers.length) offers.textContent = 'Предложений пока нет';
++    for (const offer of d.request.offers) {
++      const p = document.createElement('p'); p.textContent = offer.participant+': '+offer.note; offers.append(p);
++      if (offer.status === 'OFFERED') {
++        const b = document.createElement('button'); b.textContent = 'Принять предложение';
++        b.onclick = ()=>run('accept',{offer_id:offer.id}); offers.append(b);
++      }
++    }
++  } else if (state.role === 'B') {
++    const next = JSON.stringify([d.request.version,d.approved_text,d.permission]);
++    if (fingerprint !== undefined && fingerprint !== next) invalidate();
++    fingerprint = next; $('expiry-info').textContent = d.permission_expires_at ? 'Полномочия действуют не позднее: '+new Date(d.permission_expires_at*1000).toLocaleString() : 'Нужно разрешение автора'; $('request').textContent = d.approved_text || d.request.text;
++    $('match').disabled = !d.permission; $('search').disabled = !d.permission;
++    $('preview').disabled = !searching || !d.permission;
++  } else {
++    const inbox = $('inbox'); inbox.replaceChildren();
++    if (!d.inbox.length) inbox.textContent = 'Входящих приглашений нет';
++    for (const card of d.inbox) {
++      const p = document.createElement('p'); p.textContent = card.label;
++      const b = document.createElement('button'); b.textContent = 'Открыть'; b.dataset.delivery = card.id;
++      b.onclick = async ()=> {
++        try {
++          const result = await action('open',{id:card.id}); activeDelivery = card.id;
++          $('task').textContent = result.task; $('referrer').textContent = 'referrer: '+result.referrer;
++          $('receipt').textContent = 'Локальная квитанция: '+result.receipt; $('opened').hidden = false;
++          message('Приглашение открыто локально. Это не согласие на контакт или помощь.');
++        } catch(e) { $('opened').hidden = true; message(e.message); }
++      };
++      p.append(b); inbox.append(p);
++    }
++  }
++}
++async function run(name, data={}) {
++  try { const result = await action(name,data); message(result.message || (result.revoked ? 'Разрешение отозвано' : 'Подтверждено локально')); await refresh(); return result; }
++  catch(e) { message(e.message); }
++}
++if ($('login')) {
++  $('login').onclick = async ()=> {
++    try { await api('/api/login',{username:$('username').value,password:$('password').value});
++      $('login').disabled = true; $('enter').hidden = false; message('Вход выполнен. Откройте собственный профиль.'); }
++    catch(e) { message(e.message); }
++  };
++  $('enter').onclick = ()=>location.assign('/');
++} else {
++  $('refresh').onclick = ()=>refresh().catch(e=>message(e.message));
++  $('scenario').onchange = ()=> {
++    invalidate(); activeDelivery = null; searching = false; fingerprint = undefined;
++    if ($('opened')) $('opened').hidden = true;
++    if ($('matches')) $('matches').textContent = 'Поиск не запускался';
++    message(''); refresh().catch(e=>message(e.message));
++  };
++  if ($('allow')) {
++    $('allow').onclick = ()=>run('allow'); $('revoke').onclick = ()=>run('revoke');
++    $('edit').onclick = ()=>run('edit',{text:$('edit-text').value}); $('confirm').onclick = ()=>run('confirm');
++  }
++  if ($('match')) {
++    $('match').onclick = ()=>run('match');
++    $('search').onclick = async ()=> {
++      try { const result = await action('search'); $('matches').textContent = JSON.stringify(result,null,2); searching = true; await refresh(); message('Результат доступен только мне'); }
++      catch(e) { message(e.message); }
++    };
++    $('recipient').onchange = invalidate;
++    $('preview').onclick = async ()=> {
++      try { plan = await action('preview',{recipient:$('recipient').value});
++        $('preview-text').textContent = 'Адресат: '+plan.recipient+'\nТочный текст: '+plan.task+'\nПолучатель увидит referrer: '+plan.referrer+'\nСрок INVITE_ONCE: '+new Date(plan.expires_at*1000).toLocaleString()+'\nЛичная заметка НЕ передаётся';
++        $('send').disabled = false; message('Проверьте адресата, точный текст и раскрытие рекомендации');
++      } catch(e) { invalidate(); message(e.message); }
++    };
++    $('send').onclick = async ()=> {
++      const reviewed = plan;
++      if (!reviewed) return;
++      $('send').disabled = true;
++      try { await action('send',{nonce:reviewed.nonce,recipient:$('recipient').value,text:reviewed.task}); plan = null; message('Превью направлено в локальную очередь. Внешней доставки нет.'); }
++      catch(e) { invalidate(); message(e.message); }
++    };
++  }
++  if ($('contact')) {
++    $('contact').onclick = async ()=> { const result = await run('contact',{id:activeDelivery}); if (result) $('offer-area').hidden = false; };
++    $('decline').onclick = async ()=> { const result = await run('decline',{id:activeDelivery}); if (result) { $('opened').hidden = true; message('Вы отказались. Автор не получает имя или статус отказа.'); } };
++    $('offer').onclick = ()=>run('offer',{id:activeDelivery});
++  }
++  refresh().catch(e=>message(e.message));
++  // Reads only: no automatic matching, granting, publication or delivery.
++  setInterval(()=>refresh().catch(()=>{}), 15000);
++}
+diff --git a/tools/living_consent_browser_check.py b/tools/living_consent_browser_check.py
+new file mode 100644
+index 0000000..7ee452e
+--- /dev/null
++++ b/tools/living_consent_browser_check.py
+@@ -0,0 +1,347 @@
++"""Three independent browser contexts; business actions ONLY through visible controls.
++
++Outside the browser: initial synthetic seed, server start/restart, read-only
++SQLite evidence and artifact writing. No API writes, cookie injection, hidden
++audience expansion, route fulfillment or page.evaluate business operations.
++"""
++import argparse
++import hashlib
++import json
++import os
++from pathlib import Path
++import socket
++import sqlite3
++import subprocess
++import sys
++import time
++from urllib.parse import urlsplit
++from urllib.request import urlopen
++
++from tools.living_consent_lab import BANNER, PASSWORD, ROLES, MARKER
++
++
++def digest(data): return hashlib.sha256(data).hexdigest()
++
++
++def scrub(value):
++    if isinstance(value, dict):
++        return {k: ('REDACTED' if k in ('csrf', 'nonce', 'password') else scrub(v)) for k, v in value.items()}
++    if isinstance(value, list): return [scrub(v) for v in value]
++    return value
++
++
++class Run:
++    def __init__(self, args):
++        self.args = args; self.out = args.output.resolve(); self.out.mkdir(parents=True, exist_ok=False)
++        self.root = args.new_root.resolve(); self.events = []; self.steps = []; self.current = 'bootstrap'
++        self.pending = {}; self.raw = {}; self.errors = []; self.process = None; self.generation = 0
++        self.closing = False; self.seed_verified = False
++        self.cleanup_aborts = []
++        self.request_serial = 0; self.response_indexes = {}
++        self.pages = {}; self.contexts = {}; self.commands = []
++        self.source_sha = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
++        self.source_clean = not subprocess.check_output(['git','status','--porcelain'],text=True).strip()
++        self.source_patch = subprocess.check_output(['git','diff','--binary','6cce244f5b7cada33b00c08f7e6419acafc439a8'])
++        with socket.socket() as s: s.bind(('127.0.0.1', 0)); self.port = s.getsockname()[1]
++        self.url = 'http://127.0.0.1:' + str(self.port)
++
++    def command(self, tail): return [sys.executable, '-m', 'tools.living_consent_lab'] + tail
++
++    def initialize(self):
++        command = self.command(['init', '--new-root', str(self.root)])
++        self.commands.append(command)
++        subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++        with sqlite3.connect(self.root/'app/blago.sqlite3') as db:
++            assert {r[0] for r in db.execute('SELECT kind FROM living_records')} == {'NOTE'}
++            assert db.execute('SELECT count(*) FROM help_requests').fetchone()[0] == 3
++        self.seed_verified = True
++
++    def start(self):
++        self.generation += 1
++        command = self.command(['serve', '--root', str(self.root), '--enable-local-sandbox', '--port', str(self.port)])
++        self.commands.append(command)
++        self.log = (self.out/('server-'+str(self.generation)+'.log')).open('wb')
++        self.process = subprocess.Popen(command, stdout=self.log, stderr=self.log)
++        deadline = time.monotonic()+25
++        while True:
++            try:
++                with urlopen(self.url, timeout=1) as response:
++                    if response.status == 200: break
++            except OSError:
++                if self.process.poll() is not None or time.monotonic()>deadline: raise RuntimeError('Local server startup failed')
++                time.sleep(.1)
++
++    def stop(self):
++        if self.process:
++            self.process.terminate(); self.process.wait(15); self.log.close(); self.process = None
++
++    def browser(self, pw):
++        env = {k:v for k,v in os.environ.items() if k not in ('LD_PRELOAD','LD_LIBRARY_PATH','DYLD_LIBRARY_PATH')}
++        self.chrome = pw.chromium.launch(executable_path=self.args.chrome, headless=True, env=env)
++        self.browser_version = self.chrome.version
++        self.pages = {}; self.contexts = {}
++        for role in ROLES:
++            context = self.chrome.new_context(viewport={'width':1100,'height':1000}, service_workers='block')
++            self.contexts[role] = context
++            def route(request, role=role):
++                if request.request.url.startswith(self.url+'/'): request.continue_()
++                else: self.errors.append('External URL blocked'); request.abort()
++            context.route('**/*', route)
++            page = context.new_page(); self.pages[role] = page
++            page.on('pageerror', lambda e: self.errors.append(str(e)))
++            page.on('request', lambda req, role=role: self.request_started(req, role))
++            page.on('response', lambda res, role=role: self.response(res, role))
++
++    def close_browser(self):
++        self.closing = True
++        try:
++            # Ordinary navigation ends passive polling before closing contexts.
++            for page in self.pages.values():
++                if not page.is_closed(): page.goto('about:blank')
++            self.chrome.close()
++        finally: self.closing = False
++
++    def request_started(self, request, role):
++        self.request_serial += 1
++        self.pending[request] = (self.current, role, self.request_serial)
++
++    def response(self, response, role):
++        try:
++            request = response.request
++            step, _, serial = self.pending.get(request, (self.current, role, -1))
++            # HTML/JS/CSS are fixed reviewed assets, not data projections. Only
++            # JSON APIs carry user state; reading obsolete navigation resources
++            # after a new document loads is not a reliable Network capture.
++            if not urlsplit(response.url).path.startswith('/api/'): return
++            raw = response.body(); text = raw.decode('utf-8')
++            if role != 'B' and MARKER in text: raise AssertionError('PRIVATE MARKER LEAK')
++            value = json.loads(text)
++            post = request.post_data_json if request.method == 'POST' else None
++            nonce_hash = digest(post['data']['nonce'].encode()) if isinstance(post,dict) and post.get('data',{}).get('nonce') else None
++            index = len(self.events)
++            self.raw[index] = value
++            self.response_indexes[request] = index
++            self.events.append({'index':index,'step':step,'role':role,'method':request.method,
++                'request_serial':serial,
++                'path':urlsplit(response.url).path,'status':response.status,'request':scrub(post),
++                'nonce_sha256':nonce_hash,'json':scrub(value),'body_sha256':digest(raw),
++                'cache_control':response.headers.get('cache-control')})
++        except Exception as exc:
++            if self.closing and response.request.method == 'GET':
++                self.cleanup_aborts.append({'role':role,'path':urlsplit(response.url).path,'stage':'browser context destroyed'})
++                return
++            self.errors.append(type(exc).__name__+': '+str(exc))
++
++    def click(self, role, selector, expected_action):
++        page = self.pages[role]
++        with page.expect_response(lambda r: urlsplit(r.url).path == '/api/action' and
++                r.request.method == 'POST' and r.request.post_data_json.get('action') == expected_action) as response:
++            page.locator(selector).click()
++        return response.value.json(), response.value.status
++
++    def fresh(self, scenario):
++        from playwright.sync_api import expect
++        self.current = scenario+'-login'
++        for role, page in self.pages.items():
++            page.goto(self.url)
++            page.locator('#username').fill(ROLES[role]); page.locator('#password').fill(PASSWORD)
++            page.locator('#login').click()
++            expect(page.locator('#enter')).to_be_visible()
++            page.locator('#enter').click()
++            expect(page.locator('h1')).to_have_text({'A':'Автор A','B':'Посредник B','C':'Получатель C'}[role])
++            page.locator('#scenario').select_option(scenario)
++        return self.capture('Три отдельных входа', 'A/B/C', 'Войти собственным синтетическим профилем')
++
++    def capture(self, label, role, confirmed):
++        from playwright.sync_api import expect
++        snaps = {}
++        for r, p in self.pages.items():
++            selected = p.locator('#scenario').input_value()
++            threshold = self.request_serial
++            def fresh_response(response, path):
++                return (response.url == self.url+path+'?scenario='+selected and
++                        self.pending.get(response.request, ('', '', -1))[2] > threshold)
++            if r != 'B':
++                with p.expect_response(lambda response: fresh_response(response,'/api/view')) as view_response:
++                    with p.expect_response(lambda response: fresh_response(response,'/api/state')) as response:
++                        p.locator('#refresh').click()
++                view_response.value.body()
++            else:
++                with p.expect_response(lambda response: fresh_response(response,'/api/state')) as response:
++                    p.locator('#refresh').click()
++            observed = response.value.json()['data']
++            if r in ('A','B'):
++                expect(p.locator('#request')).to_have_text(observed.get('approved_text') or observed['request']['text'])
++                if r == 'A':
++                    if observed['can_revoke']: expect(p.locator('#revoke')).to_be_enabled()
++                    else: expect(p.locator('#revoke')).to_be_disabled()
++            elif observed['inbox']:
++                expect(p.locator('#inbox button')).to_have_count(len(observed['inbox']))
++                expect(p.locator('#inbox button').first).to_be_visible()
++            else: expect(p.locator('#inbox')).to_have_text('Входящих приглашений нет')
++            if r != 'B':
++                # Wait for the normal page refresh's view request, never fetch
++                # the projection using an injected API call.
++                expect(p.locator('header')).to_have_text(BANNER)
++                p.wait_for_timeout(100)
++            body = p.locator('body').inner_text()
++            if r != 'B': assert MARKER not in body
++            name = self.current+'-'+r
++            p.screenshot(path=str(self.out/(name+'.png')), full_page=True)
++            (self.out/(name+'.txt')).write_text(body)
++            buttons = [{'text':b.inner_text(),'disabled':b.is_disabled()} for b in p.locator('button').all()]
++            refs = {'/api/state':self.response_indexes[response.value.request]}
++            if r != 'B': refs['/api/view'] = self.response_indexes[view_response.value.request]
++            assert all(self.events[i]['request_serial'] > threshold for i in refs.values())
++            snaps[r] = {'ui':name+'.txt','screenshot':name+'.png','body':body,'buttons':buttons,'responses':refs}
++        row = {'step':self.current,'actor':role,'label':label,'confirmed':confirmed,'roles':snaps}
++        self.steps.append(row)
++        return row
++
++    def step(self, scenario, name, role, selector, action, label):
++        from playwright.sync_api import expect
++        self.current = scenario+'-'+name
++        value, status = self.click(role, selector, action)
++        if status != 200: expect(self.pages[role].locator('#message')).to_have_text(value['error'])
++        elif action == 'open': expect(self.pages['C'].locator('#task')).to_have_text(value['task'])
++        elif action == 'contact': expect(self.pages['C'].locator('#offer-area')).to_be_visible()
++        elif value.get('message'): expect(self.pages[role].locator('#message')).to_have_text(value['message'])
++        self.capture(label, role, action)
++        return value, status
++
++    def invite(self, scenario, invalidation=False):
++        from playwright.sync_api import expect
++        self.step(scenario,'allow','A','#allow','allow','Разрешить конкретный текст и честный состав disclosure')
++        self.step(scenario,'match','B','#match','match','Отдельно разрешить MATCH_PRIVATE')
++        self.step(scenario,'search','B','#search','search','Человек сам запускает поиск')
++        assert MARKER in self.pages['B'].locator('#matches').inner_text()
++        self.step(scenario,'preview','B','#preview','preview','Проверить адресата, текст, referrer и запрет передачи заметки')
++        if invalidation:
++            self.current = scenario+'-recipient-change'
++            self.pages['B'].locator('#recipient').select_option('A')
++            expect(self.pages['B'].locator('#send')).to_be_disabled()
++            self.pages['B'].locator('#recipient').select_option('C')
++            self.capture('Смена адресата сбрасывает подтверждение','B','Выбран другой адресат; затем снова C')
++            self.step(scenario,'preview-again','B','#preview','preview','Новое явное превью после смены адресата')
++            self.current = scenario+'-text-change'
++            self.pages['A'].locator('summary').click()
++            self.pages['A'].locator('#edit-text').fill('SYNTHETIC_TASK_POSITIVE_UPDATED: нужна добровольная помощь с велосипедом')
++            self.click('A','#edit','edit')
++            self.capture('Автор изменяет текст, сохраняя аудиторию','A','Изменить и опубликовать с прежней аудиторией')
++            expect(self.pages['B'].locator('#send')).to_be_disabled()
++            self.step(scenario,'allow-updated','A','#allow','allow','Новое разрешение на исправленный текст')
++            self.step(scenario,'match-updated','B','#match','match','Отдельное разрешение чтения для новой версии')
++            self.step(scenario,'search-updated','B','#search','search','Повторный явный поиск')
++            self.step(scenario,'preview-updated','B','#preview','preview','Подтвердить актуальный текст и адресата')
++        value, status = self.step(scenario,'send','B','#send','send','Направить превью приглашения: BRIDGE + INVITE_ONCE + локальная очередь')
++        assert status == 200 and value['queued']
++
++    def open(self, scenario, suffix='open'):
++        return self.step(scenario,suffix,'C','#inbox button','open','Открыть нейтральную карточку через LocalPullAdapter')
++
++    def storage(self):
++        with sqlite3.connect((self.root/'app/blago.sqlite3').as_uri()+'?mode=ro', uri=True) as db:
++            return {'holds':sorted(r[0] for r in db.execute('SELECT target_tag FROM living_contact_holds')),
++                'identities':{r[0]:digest(r[1].encode()) for r in db.execute('SELECT username,blago_user_id FROM web_credentials')},
++                'audiences':[(r[0],digest(r[1].encode())) for r in db.execute('SELECT request_id,member_id FROM help_audience ORDER BY request_id,member_id')],
++                'offers':db.execute('SELECT count(*) FROM help_offers').fetchone()[0]}
++
++    def execute(self, pw):
++        self.initialize(); self.initial_storage = self.storage(); self.start(); self.browser(pw)
++        self.fresh('positive'); self.invite('positive', invalidation=True)
++        value, status = self.open('positive'); assert status==200 and value['task'].startswith('SYNTHETIC_TASK_POSITIVE_UPDATED') and value['receipt']
++        self.step('positive','contact','C','#contact','contact','Согласие только на контакт')
++        assert 'псевдонимный код' in self.pages['C'].locator('#offer-area').inner_text()
++        value, status = self.step('positive','offer','C','#offer','offer','Добровольно предложить помощь с указанным составом раскрытия')
++        assert status==200 and value['blocker']=='HELP_AUDIENCE_REQUIRED' and not value['offered']
++        self.close_browser(); self.browser(pw); self.fresh('revoke'); self.invite('revoke')
++        self.current = 'revoke-neutral-before-withdraw'
++        self.capture('C явно обновляет входящий список и видит нейтральную карточку до отзыва','C','Обновить')
++        self.step('revoke','withdraw','A','#revoke','revoke','Автор отзывает собственное разрешение до открытия')
++        value, status = self.open('revoke'); assert status != 200 and value['error']=='Приглашение недоступно'
++        self.close_browser(); self.browser(pw); self.fresh('decline'); self.invite('decline')
++        self.current = 'decline-unopened'; before = self.capture('До открытия: автор не знает получателя и статус','A','Обновить')
++        self.open('decline')
++        self.current = 'decline-received'; received = self.capture('После открытия: авторский ответ тот же','A','Обновить')
++        self.step('decline','declined','C','#decline','decline','Отказаться без публичного негативного статуса')
++        self.current = 'decline-after-refusal'; declined = self.capture('После отказа: авторский ответ тот же','A','Обновить')
++        self.author_comparison = []
++        for path in ('/api/state','/api/view'):
++            indexes = [s['roles']['A']['responses'][path] for s in (before,received,declined)]
++            hashes = [self.events[i]['body_sha256'] for i in indexes]
++            assert len(set(hashes))==1
++            self.author_comparison.append({'path':path,'response_indexes':indexes,'body_sha256':hashes,'identical':True})
++        assert before['roles']['A']['body']==received['roles']['A']['body']==declined['roles']['A']['body']
++        assert before['roles']['A']['buttons']==received['roles']['A']['buttons']==declined['roles']['A']['buttons']
++        self.before_restart = self.storage(); assert self.before_restart['holds']
++        self.current = 'decline-restart-clear'; self.stop(); self.start()
++        self.close_browser()  # Destroy all contexts: cookies, session/local storage and cache.
++        self.browser(pw); self.fresh('decline')
++        self.after_restart = self.storage(); assert self.before_restart==self.after_restart
++        self.step('decline','new-match','B','#match','match','Новый вход и новое явное разрешение поиска')
++        self.step('decline','new-search','B','#search','search','Новый поиск после очистки браузеров')
++        self.step('decline','new-preview','B','#preview','preview','Новая попытка по тому же сочетанию посредник/получатель/тема')
++        value, status = self.step('decline','new-send','B','#send','send','Новая отправка, не replay ссылки или запроса')
++        assert status==409 and 'suppressed' in value['error'].lower()
++        self.final_storage = self.storage()
++        assert self.final_storage['audiences']==self.initial_storage['audiences'] and self.final_storage['offers']==0
++        successful_opens = []
++        def has_task(value):
++            if isinstance(value, dict): return 'task' in value or any(has_task(v) for v in value.values())
++            if isinstance(value, list): return any(has_task(v) for v in value)
++            return False
++        for event in self.events:
++            if event['role']!='C': continue
++            request = event.get('request') or {}; value = event['json']
++            contains = 'SYNTHETIC_TASK_' in json.dumps(value)
++            if contains or has_task(value):
++                assert request.get('action')=='open' and event['status']==200 and value.get('receipt')
++                successful_opens.append(event['step'])
++            if event['step'].startswith('revoke'): assert not contains and 'task' not in json.dumps(value)
++        sends = [e for e in self.events if e['role']=='B' and (e.get('request') or {}).get('action')=='send' and
++                 (e.get('request') or {}).get('scenario')=='decline']
++        assert len(sends)==2 and sends[0]['nonce_sha256']!=sends[1]['nonce_sha256']
++        assert not self.errors, self.errors
++        self.successful_opens = successful_opens
++
++    def save(self, error=None):
++        (self.out/'network.json').write_text(json.dumps(self.events,ensure_ascii=False,indent=2)+'\n')
++        (self.out/'steps.json').write_text(json.dumps(self.steps,ensure_ascii=False,indent=2)+'\n')
++        (self.out/'source.patch').write_bytes(self.source_patch)
++        result = {'format':'living-consent-021-e2e-1','status':'FAIL' if error else 'PASS_WITH_CONTRACT_BLOCKER',
++            'base_sha':'6cce244f5b7cada33b00c08f7e6419acafc439a8','source_sha':self.source_sha,
++            'source_clean_at_start':self.source_clean,'base_diff_sha256':digest(self.source_patch),
++            'source_sha_at_end':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
++            'source_clean_at_end':not subprocess.check_output(['git','status','--porcelain'],text=True).strip(),
++            'browser':getattr(self,'browser_version',None),'browser_contexts':3,'synthetic_roles':ROLES,
++            'aborted_passive_GET_at_context_cleanup':self.cleanup_aborts,
++            'synthetic_password':PASSWORD,'private_B_marker':MARKER,'server_commands':self.commands,
++            'all_business_actions':'visible browser controls only; no API writes or injected cookies',
++            'seed_contains_no_permissions_or_mandates':self.seed_verified,
++            'author_comparison':getattr(self,'author_comparison',None),'successful_task_release_steps':getattr(self,'successful_opens',None),
++            'storage_before_restart':getattr(self,'before_restart',None),'storage_after_restart':getattr(self,'after_restart',None),
++            'initial_storage':getattr(self,'initial_storage',None),'final_storage':getattr(self,'final_storage',None),
++            'help':'BLOCKED: HelpService._row requires existing help_audience membership',
++            'external_delivery':False,'real_people':'NO-GO','production':'NO-GO','error':error}
++        (self.out/'results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
++
++
++def main():
++    p = argparse.ArgumentParser(description=__doc__); p.add_argument('--new-root',type=Path,required=True)
++    p.add_argument('--output',type=Path,required=True)
++    p.add_argument('--chrome',default='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome')
++    args = p.parse_args(); run = Run(args)
++    from playwright.sync_api import sync_playwright
++    error = None
++    try:
++        with sync_playwright() as pw:
++            try: run.execute(pw)
++            finally:
++                if hasattr(run,'chrome'): run.close_browser()
++    except Exception as exc: error = type(exc).__name__+': '+str(exc)
++    finally: run.stop(); run.save(error)
++    print(json.dumps({'status':'FAIL' if error else 'PASS_WITH_CONTRACT_BLOCKER','output':str(run.out),'error':error},ensure_ascii=False))
++    if error: raise SystemExit(1)
++
++
++if __name__ == '__main__': main()
+diff --git a/tools/living_consent_lab.py b/tools/living_consent_lab.py
+new file mode 100644
+index 0000000..1a8857f
+--- /dev/null
++++ b/tools/living_consent_lab.py
+@@ -0,0 +1,413 @@
++"""Explicit loopback-only consent lab. No production routes or external delivery.
++
++Init alone may seed accounts, private memory and published source needs. All
++subsequent consent/search/invitation/Help operations require browser commands.
++"""
++import argparse
++from contextlib import contextmanager
++import hashlib
++from http.cookies import SimpleCookie
++from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
++import ipaddress
++import json
++import os
++from pathlib import Path
++import secrets
++import signal
++import subprocess
++import sys
++import threading
++import time
++from urllib.parse import urlsplit
++from unittest.mock import patch
++
++from tools.help_readiness_lab import initialize, configuration
++from xblago.core import agent_context_schema, living_schema, uel_schema, uel_checkpoint as cp
++from xblago.core.asset_registry_schema import migrate_registry
++from xblago.core.integration import preflight
++from xblago.core.security_journal import SecurityJournal, JournalUnavailable, canonical
++from xblago.domain.living_deeds_agent import AgentLivingDeeds, LocalPullAdapter, FLAG, DELIVERY_FLAG
++from xblago.domain.help_service import HelpService
++from xblago.integrations.web import WebApp, ApiError
++
++BANNER = 'LOCAL SANDBOX · SYNTHETIC DATA · NO EXTERNAL DELIVERY'
++UI_FLAG = 'XBLAGO_LIVING_CONSENT_UI_ENABLED'
++PASSWORD = 'synthetic-living021-only'
++MARKER = 'LD021_PRIVATE_B_MARKER_Q7M4'
++ROLES = {'A': 'ld021_a', 'B': 'ld021_b', 'C': 'ld021_c'}
++TASKS = {name: 'SYNTHETIC_TASK_' + name.upper() + ': нужна помощь с велосипедом'
++         for name in ('positive', 'decline', 'revoke')}
++CONFIRM = 'ПОДТВЕРЖДАЮ'
++STATIC = Path(__file__).with_name('living021_static')
++
++
++@contextmanager
++def custodian(root, cfg):
++    config = json.loads(Path(cfg['XBLAGO_UEL_CHECKPOINT_CONFIG']).read_text())
++    endpoint = Path(config['endpoint'])
++    endpoint.unlink(missing_ok=True)  # Only the socket in this private synthetic root.
++    child = subprocess.Popen([sys.executable, '-m', 'xblago.core.uel_checkpoint', 'serve',
++        '--directory', str(root/'custody'), '--endpoint', str(endpoint)],
++        env=os.environ | cfg, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
++    try:
++        deadline = time.monotonic() + 15
++        while not endpoint.exists():
++            if child.poll() is not None or time.monotonic() > deadline:
++                raise RuntimeError('Synthetic checkpoint did not start')
++            time.sleep(.05)
++        yield
++    finally:
++        child.terminate()
++        try: child.wait(8)
++        except subprocess.TimeoutExpired: child.kill(); child.wait()
++        child.stderr.close()
++
++
++def init(root):
++    root = root.resolve()
++    if len(str(root/'cp.sock').encode()) > 95:
++        raise ValueError('Use a short new /tmp path for the local checkpoint socket')
++    off = {name: 'false' for name in (living_schema.FLAG, agent_context_schema.FLAG,
++        FLAG, DELIVERY_FLAG, UI_FLAG, 'XBLAGO_ASSET_REGISTRY_ENABLED', 'XBLAGO_UEL_LOCAL_ENABLED')}
++    with patch.dict(os.environ, off): cfg = initialize(root)
++    cfg.update({k:v for k,v in off.items() if k != UI_FLAG})
++    os.environ.update(cfg)
++    migrate_registry(root/'app/blago.sqlite3')
++    cfg['XBLAGO_ASSET_REGISTRY_ENABLED'] = 'true'; os.environ.update(cfg)
++    uel_schema.migrate_local(root/'app/blago.sqlite3')
++    cfg['XBLAGO_UEL_LOCAL_ENABLED'] = 'true'
++    source = cp.create_key(root/'source.key')
++    stream = secrets.token_hex(32)
++    pinned = cp.initialize(root/'custody', stream, source)
++    cp_config = root/'checkpoint.json'
++    cp_config.write_bytes(cp.encode({'stream': stream, 'custodian_key': pinned,
++        'source_key_file': str(root/'source.key'), 'endpoint': str(root/'cp.sock')}))
++    cp_config.chmod(0o600)
++    cfg['XBLAGO_UEL_CHECKPOINT_CONFIG'] = str(cp_config)
++    os.environ.update(cfg)
++    with custodian(root, cfg):
++        cp.enroll(SecurityJournal(root/'journal'))
++        living_schema.migrate(root/'app/blago.sqlite3')
++        cfg[living_schema.FLAG] = 'true'; os.environ.update(cfg)
++        agent_context_schema.migrate(root/'app/blago.sqlite3')
++        cfg.update({agent_context_schema.FLAG: 'true', FLAG: 'true', DELIVERY_FLAG: 'true'})
++        os.environ.update(cfg)
++        app = WebApp(preflight(root/'app/blago.sqlite3'))
++        svc, help = AgentLivingDeeds(app), HelpService(app)
++        tokens = {role: app.register(username, PASSWORD, cfg['XBLAGO_WEB_INVITE_CODE'])[0]
++                  for role, username in ROLES.items()}
++        def action(token, name, data):
++            p = svc.prepare(token, name, data, 'seed-' + secrets.token_hex(16))
++            return svc.commit(token, p['challenge'], CONFIRM)['id']
++        uid = app.session(tokens['B'])[0]
++        app.store.set_memory(uid, 'skill', 'Синтетический ремонт велосипедов')
++        note = action(tokens['B'], 'note', {'text': MARKER + ': синтетическая знакомая чинит велосипеды',
++                                           'expires_at': int(time.time()) + 7200})
++        needs = {}
++        for name, text in TASKS.items():
++            rid = help.draft(tokens['A'], text, [help.code(tokens['B'])['code']],
++                'seed-request-' + name + '-synthetic')['id']
++            p = help.prepare(tokens['A'], rid, 1, 'publish', {})
++            help.commit(tokens['A'], p['challenge'], CONFIRM)
++            needs[name] = rid
++        seed = {'format': 'living-consent-synthetic-1', 'roles': ROLES,
++                'note_id': note, 'needs': needs, 'synthetic_only': True}
++    marker = json.loads((root/'lab-only.json').read_text()); marker['config'] = cfg
++    (root/'lab-only.json').write_text(json.dumps(marker, indent=2)+'\n')
++    (root/'lab-only.json').chmod(0o600)
++    (root/'ui-seed.json').write_text(json.dumps(seed, indent=2)+'\n')
++    (root/'ui-seed.json').chmod(0o600)
++
++
++class Lab:
++    def __init__(self, root):
++        self.root = Path(root).resolve()
++        cfg = configuration(self.root)
++        if os.getenv(UI_FLAG) != 'true': raise ValueError('Explicit local UI activation required')
++        cfg.pop(UI_FLAG, None)
++        os.environ.update(cfg)
++        seed = self.root/'ui-seed.json'
++        if seed.is_symlink() or seed.stat().st_mode & 0o077: raise ValueError('Private synthetic seed required')
++        self.seed = json.loads(seed.read_text())
++        if self.seed.get('format') != 'living-consent-synthetic-1' or self.seed.get('synthetic_only') is not True:
++            raise ValueError('Synthetic seed required')
++        self.app = WebApp(preflight(self.root/'app/blago.sqlite3'))
++        self.s = AgentLivingDeeds(self.app); self.h = HelpService(self.app)
++        self.plans = {}; self.lock = threading.Lock()
++
++    def identity(self, token):
++        with self.app.store._locked_transaction() as db:
++            row = self.app.identity.session_row(db, token, fresh=True)
++            uid, csrf = row['blago_user_id'], row['csrf']
++            username = db.execute('SELECT username FROM web_credentials WHERE blago_user_id=?', (uid,)).fetchone()[0]
++        role = next((r for r, n in ROLES.items() if n == username), None)
++        if not role: raise ApiError(403, 'Only seeded synthetic roles')
++        return role, uid, csrf
++
++    def member(self, db, role, c):
++        uid = db.execute('SELECT blago_user_id FROM web_credentials WHERE username=?', (ROLES[role],)).fetchone()[0]
++        return c.journal.tag('help-member', uid)
++
++    def permission(self, db, need):
++        for r in db.execute("SELECT * FROM living_records WHERE kind='NEED_PERMISSION' ORDER BY rowid DESC"):
++            state = json.loads(r['state'])
++            if state['need_id'] == need and state['active']:
++                return r, state
++        raise ApiError(409, 'Автор ещё не разрешил приглашение')
++
++    def read_mandate(self, db, uid, permission):
++        for r in db.execute("SELECT * FROM living_records WHERE owner_id=? AND kind='AGENT_MANDATE' ORDER BY rowid DESC", (uid,)):
++            state = json.loads(r['state'])
++            if state['permission_id'] == permission and state['scope'] == 'MATCH_PRIVATE' and state['active']:
++                return r['id']
++        raise ApiError(409, 'Сначала явно разрешите MATCH_PRIVATE')
++
++    def state(self, token, scenario):
++        role, uid, csrf = self.identity(token); need = self.seed['needs'][scenario]
++        # The author projection deliberately has no invitation/custody counters,
++        # timestamps, global frontier, recipient identifiers or status oracle.
++        with self.s.tx(token) as (db, _, c):
++            if role == 'A':
++                request = self.h._view(db, uid, self.h._row(db, uid, need))
++                try: p, _ = self.permission(db, need); permission = p['id']
++                except ApiError: permission = None
++                data = {'request': request, 'permission': permission,
++                        'status': 'Ожидаем добровольные предложения', 'can_revoke': permission is not None,
++                        'can_allow': permission is None or json.loads(p['state'])['need_version'] != request['version']}
++            elif role == 'B':
++                request = self.h._view(db, uid, self.h._row(db, uid, need))
++                try: p, ps = self.permission(db, need); permission = p['id']; task = ps['invitation_text']; expiry = ps['expires_at']
++                except ApiError: permission = None; task = None; expiry = None
++                if permission and ps['need_version'] != request['version']:
++                    permission = None; task = None; expiry = None
++                data = {'request': request, 'permission': permission, 'approved_text': task,
++                        'permission_expires_at': expiry,
++                        'recipients': [{'id': r, 'label': 'Синтетический участник '+r} for r in ('C', 'A')]}
++            else:
++                inbox = []
++                for row in db.execute("SELECT * FROM living_records WHERE kind='INVITATION_DELIVERY' ORDER BY id"):
++                    s = json.loads(row['state'])
++                    br = db.execute('SELECT state FROM living_records WHERE id=?', (s['bridge_id'],)).fetchone()
++                    if not br: continue
++                    b = json.loads(br[0])
++                    p = db.execute('SELECT state FROM living_records WHERE id=?', (b['permission_id'],)).fetchone()
++                    if b.get('recipient_id') == uid and p and json.loads(p[0])['need_id'] == need:
++                        inbox.append({'id': row['id'], 'label': 'Локальное приглашение'})
++                data = {'inbox': inbox}
++        return {'role': role, 'csrf': csrf, 'scenario': scenario, 'data': data}
++
++    def act(self, token, scenario, action, d):
++        role, uid, _ = self.identity(token); need = self.seed['needs'][scenario]
++        allowed = {'A': {'allow', 'revoke', 'edit', 'accept', 'confirm'}, 'B': {'match', 'search', 'preview', 'send', 'invalidate'},
++                   'C': {'open', 'contact', 'decline', 'offer', 'confirm'}}
++        if action not in allowed[role]: raise ApiError(403, 'Действие недоступно этой роли')
++        if action == 'invalidate':
++            with self.lock:
++                plan = self.plans.get(d.get('nonce'))
++                if plan and plan['session'] == hashlib.sha256(token.encode()).hexdigest(): self.plans.pop(d['nonce'])
++            return {'invalidated': True}
++        if action in ('accept', 'confirm'):
++            r = self.h.get(token, need)
++            p = self.h.prepare(token, need, r['version'], action, {'offer_id': d['offer_id']} if action == 'accept' else {})
++            return self.h.commit(token, p['challenge'], CONFIRM)
++        if action == 'send': return self.send(token, need, d)
++        if action == 'revoke':
++            with self.s.tx(token) as (db, _, c):
++                ids = [r['id'] for r in db.execute("SELECT * FROM living_records WHERE kind='NEED_PERMISSION'")
++                       if json.loads(r['state']).get('need_id') == need and json.loads(r['state']).get('active')]
++            for pid in ids: self.command(token, 'withdraw', {'id': pid})
++            return {'revoked': True}
++        if action in ('allow', 'edit', 'match', 'preview', 'search'):
++            if action == 'allow':
++                r = self.h.get(token, need)
++                with self.s.tx(token) as (db, _, c):
++                    try:
++                        current, state = self.permission(db, need)
++                        if state['need_version'] == r['version']: return {'id': current['id']}
++                    except ApiError: pass
++                return self.command(token, 'need_permission', {'need_id': need, 'topic': 'bike_'+scenario,
++                    'invitation_text': r['text'], 'expires_at': int(time.time())+3600})
++            if action == 'edit':
++                r = self.h.get(token, need)
++                p = self.h.prepare(token, need, r['version'], 'revise',
++                    {'text': d['text'], 'audience': r['audience']})
++                self.h.commit(token, p['challenge'], CONFIRM)
++                # Publishing the changed exact text is part of this explicitly
++                # labelled button; it never adds a new audience member.
++                r = self.h.get(token, need); p = self.h.prepare(token, need, r['version'], 'publish', {})
++                self.h.commit(token, p['challenge'], CONFIRM)
++                return {'saved': True}
++            with self.s.tx(token) as (db, _, c):
++                p, ps = self.permission(db, need)
++                if action == 'match':
++                    return self.command(token, 'grant_agent', {'agent': 'personal-agent', 'scope': 'MATCH_PRIVATE',
++                        'permission_id': p['id'], 'bridge_id': None, 'expires_at': ps['expires_at']})
++                if action == 'search':
++                    m = self.read_mandate(db, uid, p['id'])
++                    return self.s.candidates(token, m, 'велосипед')
++                if action == 'preview':
++                    m = self.read_mandate(db, uid, p['id']); self.s.mandate(db, uid, m, 'MATCH_PRIVATE')
++                    if d.get('recipient') not in ('C', 'A'): raise ApiError(400, 'Выберите адресата')
++                    note, _ = self.s.root(db, self.seed['note_id'], uid, 'NOTE')
++                    recipient = self.member(db, d['recipient'], c)
++                    plan = {'permission': p['id'], 'permission_version': p['version'], 'note_version': note['version'],
++                        'need_version': self.h.get(token, need)['version'], 'recipient': d['recipient'],
++                        'task': ps['invitation_text'], 'session': hashlib.sha256(token.encode()).hexdigest(),
++                        'expires_at': int(time.time())+120}
++                    nonce = secrets.token_urlsafe(32)
++                    with self.lock:
++                        self.plans = {k: v for k, v in self.plans.items() if v['expires_at'] > int(time.time())}
++                        if len(self.plans) >= 128: raise ApiError(429, 'Preview limit')
++                        self.plans[nonce] = plan
++                    return {'nonce': nonce, 'recipient': d['recipient'], 'task': plan['task'],
++                            'referrer': self.h.code(token)['code'], 'private_note_sent': False,
++                            'expires_at': ps['expires_at'],
++                            'authorizations': ['BRIDGE', 'адресация', 'INVITE_ONCE', 'локальная очередь']}
++        # Recipient actions resolve only a delivery addressed to THIS identity;
++        # a guessed ID never selects another role or the server's owner token.
++        if action == 'open':
++            with self.s.tx(token) as (db, _, c):
++                _, ds = self.s.root(db, d['id'], kind='INVITATION_DELIVERY')
++                _, bs = self.s.root(db, ds['bridge_id'], kind='BRIDGE')
++                _, ps = self.s.root(db, bs['permission_id'], kind='NEED_PERMISSION')
++                if bs['recipient_id'] != uid or ps['need_id'] != need: raise ApiError(404, 'Приглашение недоступно')
++            return LocalPullAdapter(self.s).deliver(token, d['id'])
++        with self.s.tx(token) as (db, _, c):
++            _, delivery = self.s.root(db, d['id'], kind='INVITATION_DELIVERY')
++            bridge, state = self.s.root(db, delivery['bridge_id'], kind='BRIDGE')
++            if state['recipient_id'] != uid: raise ApiError(404, 'Приглашение недоступно')
++            if delivery['status'] != 'ACKED': raise ApiError(409, 'Сначала откройте приглашение')
++            if action in ('contact', 'decline'):
++                return self.command(token, 'accept_invitation' if action == 'contact' else 'decline_invitation', {'id': bridge['id']})
++            if state['status'] != 'CONSENTED': raise ApiError(409, 'Сначала согласитесь на контакт')
++            # Deliberately exercise the canonical contract, with NO audience
++            # mutation. It currently rejects C at HelpService._row().
++            request = db.execute('SELECT version FROM help_requests WHERE id=?', (need,)).fetchone()
++            try:
++                prepared = self.h.prepare(token, need, request['version'], 'offer', {'note': 'Добровольно предлагаю синтетическую помощь'})
++            except ApiError as error:
++                if error.status != 404: raise
++                return {'offered': False, 'blocker': 'HELP_AUDIENCE_REQUIRED',
++                    'message': 'Предложение недоступно: действующий Help требует доступа к обращению. Аудитория не менялась.'}
++            return self.h.commit(token, prepared['challenge'], CONFIRM)
++
++    def send(self, token, need, data):
++        # One visible confirmation authorizes the exact displayed sequence.
++        # Each existing command retains its own durable commit boundary. Never
++        # flush/reinitialize privacy state to fake a multi-command transaction.
++        with self.s.tx(token) as (db, uid, control):
++            with self.lock: plan = self.plans.pop(data.get('nonce'), None)
++            if not plan or plan['session'] != hashlib.sha256(token.encode()).hexdigest() or plan['expires_at'] <= int(time.time()):
++                raise ApiError(409, 'Превью недействительно; подтвердите заново')
++            permission, ps = self.permission(db, need)
++            note, _ = self.s.root(db, self.seed['note_id'], uid, 'NOTE')
++            request = self.h._row(db, uid, need)
++            if (plan['recipient'] != data.get('recipient') or plan['task'] != data.get('text') or
++                permission['id'] != plan['permission'] or permission['version'] != plan['permission_version'] or
++                note['version'] != plan['note_version'] or request['version'] != plan['need_version']):
++                raise ApiError(409, 'Текст или адресат изменились; подтвердите заново')
++            self.s.mandate(db, uid, self.read_mandate(db, uid, permission['id']), 'MATCH_PRIVATE')
++            recipient = self.member(db, data['recipient'], control)
++            bridge = self.command(token, 'propose_bridge', {'note_id': note['id'], 'permission_id': permission['id']})['id']
++        self.command(token, 'request_consent', {'id': bridge, 'recipient': recipient})
++        mandate = self.command(token, 'grant_agent', {'agent': 'personal-agent', 'scope': 'INVITE_ONCE',
++            'permission_id': permission['id'], 'bridge_id': bridge, 'expires_at': ps['expires_at']})['id']
++        delivery = self.command(token, 'queue_invitation', {'mandate_id': mandate, 'bridge_id': bridge})['id']
++        return {'queued': True, 'id': delivery}
++
++    def command(self, token, action, data):
++        p = self.s.prepare(token, action, data, 'browser-command-' + secrets.token_hex(16))
++        return self.s.commit(token, p['challenge'], CONFIRM)
++
++
++class Handler(BaseHTTPRequestHandler):
++    def log_message(self, *args): pass  # Never log cookies, source text or memory.
++
++    def guard(self, write=False):
++        origin = 'http://127.0.0.1:' + str(self.server.server_port)
++        if not ipaddress.ip_address(self.client_address[0]).is_loopback or self.headers.get('Host') != origin[7:]:
++            raise ApiError(403, 'Loopback only')
++        if write and self.headers.get('Origin') != origin: raise ApiError(403, 'Same origin required')
++
++    def respond(self, status, value, content_type='application/json; charset=utf-8', cookie=None):
++        data = (canonical(value) if content_type.startswith('application/json') else value).encode()
++        self.send_response(status)
++        for k, v in {'Content-Type': content_type, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
++            'Referrer-Policy': 'no-referrer', 'Content-Security-Policy': "default-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"}.items(): self.send_header(k, v)
++        if cookie: self.send_header('Set-Cookie', cookie)
++        self.send_header('Content-Length', str(len(data))); self.end_headers(); self.wfile.write(data)
++
++    def token(self):
++        cookies = SimpleCookie(); cookies.load(self.headers.get('Cookie', ''))
++        return cookies['ld021'].value if 'ld021' in cookies else ''
++
++    def do_GET(self):
++        try:
++            self.guard(); path = urlsplit(self.path).path
++            if path in ('/ui.js', '/ui.css'):
++                return self.respond(200, (STATIC/path[1:]).read_text(), 'text/javascript' if path.endswith('.js') else 'text/css')
++            if path == '/':
++                try: role, _, _ = self.server.lab.identity(self.token())
++                except ApiError: role = 'login'
++                return self.respond(200, (STATIC/(role+'.html')).read_text(), 'text/html; charset=utf-8')
++            scenario = urlsplit(self.path).query.removeprefix('scenario=')
++            if scenario not in TASKS: raise ApiError(400, 'Unknown synthetic scenario')
++            if path == '/api/state': return self.respond(200, self.server.lab.state(self.token(), scenario))
++            if path == '/api/view': return self.respond(200, self.server.lab.s.view(self.token()))
++            raise ApiError(404, 'Not found')
++        except ApiError as e: self.respond(e.status, {'error': str(e)})
++        except JournalUnavailable: self.respond(503, {'error': 'UNKNOWN_RECOVERY'})
++        except (ValueError, KeyError, TypeError): self.respond(400, {'error': 'Invalid request'})
++
++    def do_POST(self):
++        role = None
++        try:
++            self.guard(True)
++            size = int(self.headers.get('Content-Length', '0'))
++            if not 0 < size <= 8192 or self.headers.get('Content-Type') != 'application/json': raise ApiError(400, 'Bounded JSON required')
++            d = json.loads(self.rfile.read(size))
++            if urlsplit(self.path).path == '/api/login':
++                if d.get('username') not in ROLES.values(): raise ApiError(403, 'Synthetic role only')
++                token, _ = self.server.lab.app.login(d['username'], d['password'])
++                return self.respond(200, {'signed_in': True}, cookie='ld021='+token+'; HttpOnly; SameSite=Strict; Path=/')
++            if urlsplit(self.path).path != '/api/action': raise ApiError(404, 'Not found')
++            role, _, csrf = self.server.lab.identity(self.token())
++            if self.headers.get('X-CSRF-Token') != csrf: raise ApiError(403, 'CSRF rejected')
++            if d['scenario'] not in TASKS: raise ApiError(400, 'Unknown scenario')
++            result = self.server.lab.act(self.token(), d['scenario'], d['action'], d.get('data', {}))
++            self.respond(200, result)
++        except ApiError as e:
++            self.respond(e.status, {'error': 'Приглашение недоступно' if role == 'C' else str(e)})
++        except JournalUnavailable: self.respond(503, {'error': 'UNKNOWN_RECOVERY'})
++        except (ValueError, KeyError, TypeError): self.respond(400, {'error': 'Invalid request'})
++
++
++class LoopbackServer(ThreadingHTTPServer):
++    daemon_threads = True
++    def __init__(self, address, handler):
++        if address[0] != '127.0.0.1': raise ValueError('Literal IPv4 loopback only')
++        super().__init__(address, handler)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    sub = parser.add_subparsers(dest='command', required=True)
++    p = sub.add_parser('init'); p.add_argument('--new-root', type=Path, required=True)
++    p = sub.add_parser('serve'); p.add_argument('--root', type=Path, required=True)
++    p.add_argument('--bind', choices=['127.0.0.1'], default='127.0.0.1')
++    p.add_argument('--port', type=int, default=17861)
++    p.add_argument('--enable-local-sandbox', action='store_true', required=True)
++    args = parser.parse_args()
++    if args.command == 'init': init(args.new_root); print(BANNER); return
++    cfg = configuration(args.root); cfg.pop(UI_FLAG, None); os.environ.update(cfg)
++    os.environ[UI_FLAG] = 'true'
++    signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(KeyboardInterrupt()))
++    with custodian(args.root.resolve(), cfg):
++        server = LoopbackServer((args.bind, args.port), Handler); server.lab = Lab(args.root)
++        print(BANNER + ' http://127.0.0.1:' + str(server.server_port), flush=True)
++        try: server.serve_forever()
++        except KeyboardInterrupt: pass
++        finally: server.server_close()
++
++
++if __name__ == '__main__': main()
