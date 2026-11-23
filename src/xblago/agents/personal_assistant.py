@@ -8,7 +8,7 @@ from xblago.core.llm import ChatContext, ChatProvider, LlmProviderError, LocalPl
 from xblago.core.conversation import HISTORY_TURN_LIMIT, SERVICE_STATUS_TEXTS, understand
 from xblago.core.memory import MemoryStore
 from xblago.core.memory import is_sensitive_memory, redact_sensitive_text, MemoryConflictError
-from xblago.core.memory_policy import may_extract, memory_veto
+from xblago.core.memory_policy import may_extract, memory_veto, assertion_text, extract_personal_facts as _extract_personal_facts
 from xblago.core.memory_commands import (
     MemoryEdit, clarification, family, natural_forget_query, parse_edit,
     resolve_edit, resolve_forget,
@@ -43,8 +43,11 @@ class PersonalAssistantAgent:
         history_clearer: Callable[[], None] | None = None,
         memory_extractor: SemanticMemoryExtractor | None = None,
         exchange_recorder: Callable[[tuple[ConversationTurn, ConversationTurn]], None] | None = None,
+        participant_context=None,
     ) -> None:
         self.memory = memory
+        self.participant_context = participant_context
+        self._has_prior_dialogue = bool(participant_context and participant_context.has_prior_dialogue)
         self.chat_provider = chat_provider or LocalPlanningProvider()
         self.history_limit = history_limit
         self.history_recorder = history_recorder
@@ -62,7 +65,7 @@ class PersonalAssistantAgent:
         ]
 
     def welcome_message(self) -> str:
-        if self._history:
+        if self._history or self._has_prior_dialogue:
             return "xBLAGO: Диалог сохранён. Можно продолжить."
         return (
             "xBLAGO: Привет. Я первый агент сети xBLAGO, твой персональный помощник. "
@@ -151,8 +154,14 @@ class PersonalAssistantAgent:
         if intent.name == "greeting":
             return self._record_and_return(
                 message,
-                AgentResponse(("Я здесь." if language == "ru" else "I'm here.") if self._history else _text(language, "greeting")),
+                AgentResponse(("Я здесь." if language == "ru" else "I'm here.") if self._history or self._has_prior_dialogue else _text(language, "greeting")),
             )
+
+        from xblago.core.agent_context import provenance_reply, pending_city_reply, unsaved_city_reply
+        source_reply = (pending_city_reply(self.participant_context, self.memory.all(), message.text)
+                        or provenance_reply(self.participant_context, self.memory.all(), message.text))
+        if source_reply is not None and not veto:
+            return self._record_and_return(message, AgentResponse(source_reply))
 
         edit = None if veto else parse_edit(message.text)
         facts = self.memory.all()
@@ -169,7 +178,21 @@ class PersonalAssistantAgent:
             for key in resolution.keys:
                 preview.pop(key, None)
             preview[edit.key] = edit.value
+        elif not veto:
+            # The response to a direct correction must not be generated from
+            # the old fact and fixed only afterwards. This is an ephemeral view;
+            # canonical writes still wait for success and the fenced commit.
+            for key,value in _extract_personal_facts(message.text):
+                for old in tuple(preview):
+                    if family(old,preview[old])==key:preview.pop(old)
+                preview[key]=value
+            denied=re.fullmatch(r'я (?:больше )?не живу в ([^.!?;]+)[.!]?',message.text.strip(),re.I)
+            if denied and isinstance(preview.get('city'),str) and preview['city'].casefold()==denied[1].strip().casefold():
+                preview.pop('city')
         response = self._generate_assistant_response(message.text, preview)
+        if (self.participant_context is not None and not self._last_generation_succeeded and isinstance(facts.get('city'),str)
+                and preview.get('city') and preview['city'] != facts['city']):
+            response = unsaved_city_reply(preview['city'],facts['city'])
         if self._last_generation_succeeded and edit:
             try:
                 self.memory.replace_semantic(edit.record(), resolution.keys, facts)
@@ -274,12 +297,18 @@ class PersonalAssistantAgent:
         return "\n".join(lines)
 
     def _generate_assistant_response(self, text: str, memory: dict | None = None) -> str:
+        history=self.history()
+        if self.participant_context and memory is not None and memory!=self.memory.all():
+            history=()
+        guidance=understand(_safe_history_text(text), history)
+        if self._has_prior_dialogue:guidance=replace(guidance,continuing=True)
         context = ChatContext(
             agent_profile=self.profile,
             user_text=_safe_history_text(text),
             memory=self.memory.all() if memory is None else memory,
-            history=self.history(),
-            conversation=understand(_safe_history_text(text), self.history()),
+            history=history,
+            conversation=guidance,
+            participant=self.participant_context,
         )
         try:
             response = self.chat_provider.generate(context)
@@ -435,24 +464,6 @@ def _missing_memory_text(language: str, key: str) -> str:
 
     return f"I did not find `{key}` in memory."
 
-
-def _extract_personal_facts(text: str) -> list[tuple[str, str]]:
-    normalized = " ".join(text.strip().split())
-    patterns = (
-        (r"^(?:меня зовут|мое имя|моё имя)\s+(.+)$", "name"),
-        (r"^(?:(?:исправление:|теперь)\s+)*(?:я живу в|мой город(?:\s*—|\s*-|\s*=)?|город)\s+(.+)$", "city"),
-        (r"^(?:мой часовой пояс|мой timezone|timezone)\s*(?:—|-|=|is)?\s*(.+)$", "timezone"),
-        (r"^(?:я работаю в|моя работа|я работаю)\s*(?:—|-|=|в)?\s*(.+)$", "work"),
-        (r"^(?:я люблю|мне нравится|мне нравятся)\s+(.+)$", "likes"),
-        (r"^(?:я предпочитаю|мне удобнее)\s+(.+)$", "preferences"),
-    )
-    for pattern, key in patterns:
-        match = re.match(pattern, normalized, re.IGNORECASE)
-        if match:
-            value = match.group(1).strip(" .,!;:")
-            if 1 <= len(value) <= 160 and not re.search(r"[.;!\n]|,|\b(?:но|а|и)\b", value, re.I):
-                return [(key, value)]
-    return []
 
 
 def _safe_history_text(text: str) -> str:

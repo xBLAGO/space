@@ -16,7 +16,9 @@ from xblago.integrations.web import ApiError
 EVENTS = {'PrivateNoteRecorded','NeedExpressed','ResourceOffered','ReferralBridgeProposed',
           'ConsentRequested','ResourceReserved','FulfillmentProposed','FulfillmentAuthorized',
           'FulfillmentConfirmed','DeclinedOrWithdrawn','DisputeOpened','RecordCorrected',
-          'ContactConsentGranted','ReferralScopeAuthorized','ResultConfirmationRecorded'}
+          'ContactConsentGranted','ReferralScopeAuthorized','ResultConfirmationRecorded',
+          'AgentMandateGranted','AgentMandateRevoked','InvitationQueued',
+          'InvitationAcceptedByInbox','InvitationDeliveryCancelled'}
 FIELDS = {'note':{'text','expires_at'}, 'need_permission':{'need_id','topic','invitation_text','expires_at'},
           'propose_bridge':{'note_id','permission_id'}, 'request_consent':{'id','recipient'},
           'accept_invitation':{'id'}, 'decline_invitation':{'id'},
@@ -35,6 +37,23 @@ def fingerprint(db,rid,journal,root=None):
 def retire(db,rid,c,reason='erased'):
     row=db.execute('SELECT * FROM living_records WHERE id=?',(rid,)).fetchone()
     if row is None:return
+    # Retention must not erase the evidence needed to suppress unanswered
+    # contact. Capture the negative control BEFORE removing its permission.
+    state=json.loads(row['state'])
+    pending=[row] if row['kind']=='BRIDGE' else []
+    if row['kind']=='NEED_PERMISSION':
+        pending=[r for r in db.execute("SELECT * FROM living_records WHERE kind='BRIDGE'")
+                 if json.loads(r['state']).get('permission_id')==rid]
+    for bridge in pending:
+        b=json.loads(bridge['state'])
+        if b.get('status')!='INVITED' or not b.get('recipient_id'):continue
+        permission=db.execute('SELECT state FROM living_records WHERE id=?',(b['permission_id'],)).fetchone()
+        if permission is None:continue  # Parent retirement already sealed it.
+        topic=json.loads(permission[0])['topic']
+        target=c.journal.tag('living-no-contact',bridge['owner_id'],b['recipient_id'],topic)
+        db.execute('INSERT OR IGNORE INTO living_contact_holds VALUES (?)',(target,))
+        denial={'kind':'living_contact_deny','owner':'','target':target,'state':'DENY','recorded_at':0}
+        db.execute('INSERT INTO privacy_outbox VALUES (?,?)',(uuid4().hex,canonical(denial)))
     if db.execute('SELECT 1 FROM living_slots WHERE record_id=?',(rid,)).fetchone():
         reason='restore'  # Occupancy cannot be inferred after erasure.
         need_tag=c.journal.tag('help-request',json.loads(row['state'])['need_id'])
@@ -43,7 +62,7 @@ def retire(db,rid,c,reason='erased'):
             event={'kind':kind,'owner':'','target':target,'state':'DENY','recorded_at':0}
             db.execute('INSERT INTO privacy_outbox VALUES (?,?)',(uuid4().hex,canonical(event)))
     dependencies=[r['id'] for r in db.execute('SELECT id,state FROM living_records')
-                  if r['id']!=rid and any(json.loads(r['state']).get(k)==rid for k in ('note_id','permission_id','resource_id'))]
+                  if r['id']!=rid and any(json.loads(r['state']).get(k)==rid for k in ('note_id','permission_id','resource_id','bridge_id','mandate_id'))]
     tag=c.journal.tag('living-record',rid)
     db.execute('INSERT OR IGNORE INTO living_holds VALUES (?,?)',(tag,reason))
     db.execute('DELETE FROM living_records WHERE id=?',(rid,))
@@ -281,6 +300,9 @@ class LivingDeeds:
                 if d['causation_id']!=prior:raise ApiError(409,'Correction must reference current source event')
             if action=='withdraw' and r['kind'] not in ('RESOURCE','NEED_PERMISSION'):raise ApiError(409,'Use canonical Help withdrawals or invitation decline')
         return refs
+    def _extra_review(self,db,uid,c,action,data):
+        return {}
+
     def prepare(self,token,action,data,key):
         if type(key) is not str or not re.fullmatch('[A-Za-z0-9_-]{16,100}',key):raise ApiError(400,'Idempotency key required')
         with self.tx(token,action=='erase') as (db,uid,c):
@@ -308,6 +330,7 @@ class LivingDeeds:
                 review={'task':self.help._row(db,uid,data['need_id'])['text'],'helper':c.journal.tag('help-member',resource['owner_id']),
                         'category':claim['category'],'unit':claim['unit'],'quantity':'1','conditions':claim['conditions'],
                         'starts_at':s['starts_at'],'ends_at':s['ends_at'],'evidence':'SELF_DECLARED'}
+            review.update(self._extra_review(db,uid,c,action,data))
             body=canonical({'action':action,'data':data,'review':review,'expected':refs,'context':context,'session':c.journal.tag('living-session',token)})
             raw=secrets.token_urlsafe(32);hashed=hashlib.sha256(raw.encode()).hexdigest();expires=int(time.time())+120
             seal=c.journal.tag('living-command',uid,key,h,body,str(expires),hashed)

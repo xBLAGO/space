@@ -1,0 +1,66 @@
+{
+  "format": "living02-results-2",
+  "runtime_sha": "a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+  "base_sha": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+  "memory_source_sha": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+  "validation_commit_runtime_src_unchanged": true,
+  "base_tests": {
+    "executed": 720,
+    "status": "PASS",
+    "evidence": "BASELINE.json"
+  },
+  "runtime_ci": {
+    "url": "https://github.com/xBLAGO/space/actions/runs/45142061348",
+    "head_sha": "a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+    "status": "PASS",
+    "full_regression": [
+      {
+        "executed": 811,
+        "seconds": 288.219,
+        "status": "PASS"
+      },
+      {
+        "executed": 811,
+        "seconds": 266.846,
+        "status": "PASS"
+      }
+    ],
+    "stateful": {
+      "executed": 18,
+      "seconds": 25.2,
+      "status": "PASS"
+    },
+    "docker": "PASS",
+    "browser_synthetic_mini_app": "PASS",
+    "G09_worker_probe": "PASS",
+    "artifact_id": 14803327116,
+    "artifact_digest": "sha256:01ebafdc5d152499606735b694104e129a12c99912d4d08f11871b294bdc610c",
+    "artifact_expires": "2027-02-21T08:52:01Z"
+  },
+  "docker_push_job": {
+    "job_id": 137582037302,
+    "stateful_executed": 18,
+    "seconds": 23.599,
+    "status": "PASS"
+  },
+  "local_stateful": "evidence/stateful-a8253d4.json",
+  "offline_vectors": {
+    "executed": 72,
+    "passed": 72,
+    "status": "PASS",
+    "byte_regeneration_parity": "PASS",
+    "evidence": "evidence/offline-72.json"
+  },
+  "supplemental_scenarios": "evidence/supplemental.json",
+  "migration_parity": "MIGRATION_PARITY.json",
+  "final_head_validation": {
+    "expected_full_tests": 813,
+    "expected_stateful_tests": 20,
+    "status": "CHECK_EXACT_HEAD_ON_GITHUB",
+    "url": "https://github.com/xBLAGO/space/pull/43/checks",
+    "rule": "Do not substitute runtime a825 CI for final HEAD CI. Final HEAD/SHA/run URLs reported in PR body after observed completion."
+  },
+  "docker_local": "NOT EXECUTED: no local Docker CLI; Docker tested by CI",
+  "real_pilot": "NO-GO",
+  "production_changed": false
+}

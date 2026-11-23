@@ -66,7 +66,14 @@ class Generation:
             self.version=tuple(row)
             db.execute("INSERT INTO context_generations(generation_id,blago_user_id,revision,epoch,state,channel,external_update_id) VALUES (?,?,?,?,'PREPARED',?,?)",(self.id,uid,*self.version,channel,update_id))
             self.memory=BufferedMemory(store.all_memory(uid),store.all_semantic_memory(uid,include_inactive=True))
+            from xblago.core.agent_context import snapshot
+            self.participant=snapshot(db,uid,self.memory.all(),self.memory.semantic_history())
             self.history=store.recent_history(uid,24)
+            if self.participant:
+                from xblago.core.messages import ConversationTurn
+                self.history=tuple(ConversationTurn(r['role'],r['text']) for r in reversed(db.execute(
+                    'SELECT role,text FROM dialogue_turns WHERE blago_user_id=? AND id>? ORDER BY id DESC LIMIT 24',
+                    (uid,self.participant.history_floor)).fetchall()))
     def current(self,db):
         row=db.execute("SELECT v.revision,v.epoch,g.state,u.status FROM context_versions v JOIN users u USING(blago_user_id) JOIN context_generations g USING(blago_user_id) WHERE g.generation_id=? AND g.blago_user_id=?",(self.id,self.uid)).fetchone()
         return bool(row and tuple(row[:2])==self.version and row[2]=='PREPARED' and row[3]=='active')
@@ -88,6 +95,7 @@ class Generation:
                 return provider.generate(replace(context,context_version=f'{generation.version[0]}:{generation.version[1]}'))
         bound=BoundProvider()
         return PersonalAssistantAgent(self.memory,bound,initial_history=self.history,
+            participant_context=self.participant,
             exchange_recorder=self.record,history_clearer=self.clear_history,
             memory_extractor=SemanticMemoryExtractor(bound) if isinstance(provider,OpenAICompatibleProvider) else None)
     def commit(self,replies=None):
@@ -100,9 +108,22 @@ class Generation:
                 if self.authorize is not None:self.authorize(db)
                 # CAS and all effects share this BEGIN IMMEDIATE. Mutators use the
                 # same connection; journal flush and SQL commit precede return.
-                self.memory.apply(self.store.memory_for_user(self.uid))
+                if self.participant:
+                    from xblago.core.agent_context import apply_memory
+                    if self.memory.operations and not self.exchange:raise ContextConflict()
+                    apply_memory(self.memory,self.store.memory_for_user(self.uid),'generation:'+self.id)
+                else:self.memory.apply(self.store.memory_for_user(self.uid))
                 if self.clear:self.store.clear_history(self.uid)
-                if self.exchange:self.store.append_exchange(self.uid,self.exchange,self.channel,self.chat_id)
+                if self.exchange:
+                    ids=self.store.append_exchange(self.uid,self.exchange,self.channel,self.chat_id)
+                    if self.participant:
+                        from xblago.core.agent_context import bind_sources
+                        bind_sources(db,self.uid,'generation:'+self.id,ids[0])
+                        if any(method in ('delete','clear','replace_semantic') for method,args in self.memory.operations):
+                            # The correction/retraction can quote the old value.
+                            # Preserve its pair for the owner, not in prompts.
+                            from xblago.core.agent_context_schema import barrier
+                            db.execute(barrier('?'),(self.uid,self.uid))
                 if replies is not None and self.update_id is not None:self.store.mark_update_processed(self.channel,self.update_id,replies)
                 revision,epoch=db.execute('SELECT revision,epoch FROM context_versions WHERE blago_user_id=?',(self.uid,)).fetchone()
                 db.execute("UPDATE context_generations SET state='COMMITTED',committed_revision=?,committed_epoch=? WHERE generation_id=?",(revision,epoch,self.id))

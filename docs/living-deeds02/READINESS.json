@@ -1,0 +1,40 @@
+{
+  "format": "living-deeds-readiness-2",
+  "base_sha": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+  "memory_source_sha": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+  "flags_default_off": [
+    "XBLAGO_LIVING_AGENT_ENABLED",
+    "XBLAGO_LIVING_DELIVERY_ENABLED",
+    "XBLAGO_AGENT_CONTEXT_ENABLED"
+  ],
+  "canonical_sources": [
+    "IdentityRuntime",
+    "Help01",
+    "AssetRegistry",
+    "UEL03"
+  ],
+  "evidence": "RESULTS.json",
+  "decisions": {
+    "synthetic_local_lab": "GO: exact runtime CI plus supplemental tests; publication requires current HEAD checks",
+    "real_people": "NO-GO",
+    "real_finance": "NO-GO",
+    "production": "NO-GO"
+  },
+  "not_executed": [
+    "LIVE_LLM",
+    "PHYSICAL_ANDROID",
+    "PHYSICAL_IPHONE",
+    "EXTERNAL_TELEGRAM_INVITATION",
+    "INDEPENDENT_OPERATORS"
+  ],
+  "not_implemented": [
+    "EXTERNAL_PUSH_TRANSPORT",
+    "AUTONOMOUS_AGENT_KEY_AUTHENTICATION",
+    "AUTOMATIC_MEMORY_COPY",
+    "RECONTACT_REAUTHORIZATION",
+    "SQLITE_AT_REST_ENCRYPTION"
+  ],
+  "inherited_release_gates": "UNCHANGED",
+  "runtime_sha": "a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+  "final_head_checks": "https://github.com/xBLAGO/space/pull/43/checks"
+}

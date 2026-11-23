@@ -1,0 +1,21 @@
+{
+  "format": "living02-supplemental-tests-1",
+  "source_identity": "expanded test worktree; runtime src identical to a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+  "executed": 2,
+  "seconds": 29.167,
+  "status": "PASS",
+  "log_sha256": "93bb73f1ebe8cd7e07635cf28dc41cfd68e12aa5c7f3d12da1bc2248bd2ad161",
+  "expanded_test_sha256": "a7901e54ac9ed2d90490c34c8baf1bdc771c428f8cb248aa499f7456dd566fea",
+  "records": [
+    {
+      "test": "test_private_match_delivery_then_canonical_help_completion",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "test_current_backup_preserves_delivery_memory_and_owner_isolation",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ]
+}
