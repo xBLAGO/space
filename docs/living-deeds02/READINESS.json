@@ -15,7 +15,7 @@
   ],
   "evidence": "RESULTS.json",
   "decisions": {
-    "synthetic_local_lab": "PENDING_FINAL_FULL_CI",
+    "synthetic_local_lab": "GO: exact runtime CI plus supplemental tests; publication requires current HEAD checks",
     "real_people": "NO-GO",
     "real_finance": "NO-GO",
     "production": "NO-GO"
@@ -34,5 +34,7 @@
     "RECONTACT_REAUTHORIZATION",
     "SQLITE_AT_REST_ENCRYPTION"
   ],
-  "inherited_release_gates": "UNCHANGED"
+  "inherited_release_gates": "UNCHANGED",
+  "runtime_sha": "a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+  "final_head_checks": "https://github.com/xBLAGO/space/pull/43/checks"
 }

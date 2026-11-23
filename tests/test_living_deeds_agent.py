@@ -248,3 +248,40 @@ class AgentLivingTests(unittest.TestCase):
         with self.f.app.store._locked_transaction() as db:
             self.assertEqual(db.execute('SELECT count(*) FROM living_contact_holds').fetchone()[0], 1)
             self.assertIsNone(db.execute('SELECT id FROM living_records WHERE id=?', (d,)).fetchone())
+
+    def test_private_match_delivery_then_canonical_help_completion(self):
+        need, note, permission, bridge = self.f.bridge()
+        read = self.grant(permission)
+        draft = self.s.candidates(self.a, read, 'PRIVATE_NOTE_LENA')
+        self.assertEqual(draft['items'][0]['note_id'], note)
+        self.assertNotIn(note, json.dumps(self.s.view(self.b)))
+        self.action(self.a, 'request_consent', {'id': bridge, 'recipient': self.f.code(self.lena)})
+        mandate = self.grant(permission, bridge, 'INVITE_ONCE')
+        delivery = self.action(self.a, 'queue_invitation', {'mandate_id': mandate, 'bridge_id': bridge})
+        self.s.receive(self.lena, delivery)
+        self.action(self.lena, 'accept_invitation', {'id': bridge})
+        _, resource = self.f.resource()
+        self.f.help_action(self.b, need, 'revise', {'text': 'Нужна синтетическая помощь с ремонтом велосипеда',
+            'audience': [self.f.code(self.a), self.f.code(self.lena)]})
+        self.f.help_action(self.b, need, 'publish')
+        offer = self.f.offer(need, resource)
+        self.action(self.b, 'reserve', {'resource_id': resource, 'need_id': need, 'offer_id': offer})
+        self.f.help_action(self.b, need, 'confirm'); self.f.help_action(self.lena, need, 'confirm')
+        self.assertEqual(self.s.view(self.b)['summary']['completed'], 1)
+        from xblago.domain.local_ledger import LocalLedger
+        self.assertEqual(LocalLedger(self.f.app).balance(self.b)['fulfilled_occurrences'], 1)
+
+    def test_current_backup_preserves_delivery_memory_and_owner_isolation(self):
+        _, _, permission, _, _, delivery = self.invitation()
+        read = self.grant(permission)
+        uid = self.f.app.session(self.a)[0]
+        self.f.app.store.set_memory(uid, 'city', 'PRIVATE_PERM')
+        receipt = self.s.receive(self.lena, delivery)
+        backup = self.f.app.store.backup_database()
+        app = WebApp(restore(backup, self.f.lab.journal))
+        owner = app.login('uel_synthetic_owner', fixture.PASSWORD)[0]
+        recipient = app.login('uel_synthetic_outsider', fixture.PASSWORD)[0]
+        service = AgentLivingDeeds(app)
+        self.assertEqual(service.receive(recipient, delivery), receipt)
+        self.assertEqual(service.candidates(owner, read, 'PRIVATE_PERM')['items'][0]['value'], 'PRIVATE_PERM')
+        with self.assertRaises(ApiError): service.candidates(recipient, read, 'PRIVATE_PERM')

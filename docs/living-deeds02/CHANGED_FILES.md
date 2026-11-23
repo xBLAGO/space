@@ -1,0 +1,42 @@
+# Changed files relative to exact base #42
+
+- `.github/workflows/tests.yml`
+- `docs/BLAGO_LIVING_DEEDS_02.md`
+- `docs/living-deeds02/BASELINE.json`
+- `docs/living-deeds02/CHANGED_FILES.md`
+- `docs/living-deeds02/MIGRATION_PARITY.json`
+- `docs/living-deeds02/READINESS.json`
+- `docs/living-deeds02/RESULTS.json`
+- `docs/living-deeds02/RUNBOOK.md`
+- `docs/living-deeds02/SCENARIOS.md`
+- `docs/living-deeds02/THREAT_MODEL.md`
+- `docs/living-deeds02/evidence/offline-72.json`
+- `docs/living-deeds02/evidence/stateful-a8253d4.json`
+- `docs/living-deeds02/evidence/stateful-workingtree.json`
+- `docs/living-deeds02/evidence/supplemental.json`
+- `integration/candidate.json`
+- `src/xblago/agents/personal_assistant.py`
+- `src/xblago/core/agent_context.py`
+- `src/xblago/core/agent_context_schema.py`
+- `src/xblago/core/context_fencing.py`
+- `src/xblago/core/context_schema.py`
+- `src/xblago/core/integration.py`
+- `src/xblago/core/lifecycle_schema.py`
+- `src/xblago/core/llm.py`
+- `src/xblago/core/memory_policy.py`
+- `src/xblago/core/privacy_control.py`
+- `src/xblago/core/semantic_memory.py`
+- `src/xblago/core/storage.py`
+- `src/xblago/domain/living_deeds.py`
+- `src/xblago/domain/living_deeds_agent.py`
+- `tests/test_agent_context.py`
+- `tests/test_agent_context_live_check.py`
+- `tests/test_living_deeds_agent.py`
+- `tools/agent_context_check.py`
+- `tools/agent_context_lab.py`
+- `tools/agent_context_live_check.py`
+- `tools/freeze_integration.py`
+- `tools/integration_fixture.py`
+- `tools/living_deeds_agent_lab.py`
+
+No new delivery migration. Added optional agent_context_001 from exact PR #41; its VERSION/CHECKSUM/DDL and all ten predecessor contracts are unchanged (MIGRATION_PARITY.json). Dependencies, Dockerfile, old Help/Asset SQL and HF deployment workflow unchanged.

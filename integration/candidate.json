@@ -175,7 +175,7 @@
     "tests/test_integration_candidate.py": "669c9a10c9dcb8cb8dc593da4ecd85e5727e960fd8ef9230ddc7fe250fd7f634",
     "tests/test_living_contracts.py": "49cb9f443ad6150e795177fed03b5e12a29cbb2cc3eed5eec04b0a27672cc335",
     "tests/test_living_deeds.py": "6457de9863f0bc722f6921cc9c16bfcdd797938ebb262bbda100acd58de1119a",
-    "tests/test_living_deeds_agent.py": "d0b42144f9952d01607e14cfe51cb761a8476d828518bc6e9413025f037dbc14",
+    "tests/test_living_deeds_agent.py": "a7901e54ac9ed2d90490c34c8baf1bdc771c428f8cb248aa499f7456dd566fea",
     "tests/test_llm.py": "cac610242a6c0c03be36240b7b95cf34360525cb43249a0325c2a960c89b301b",
     "tests/test_memory_pilot.py": "f0fc53560f6cecfea8cd869fc12e50bb12947f68530edb8600c066dea05f8367",
     "tests/test_natural_conversation.py": "b22f85cbf58f35c55c93e08434b82ddc91d45ff82d599ea24dfa377d343f2e24",

@@ -1,0 +1,112 @@
+{
+  "format": "living-deeds-agent-lab-2",
+  "source_sha": "a8253d41d8d2ee3b0d4d217c803f43d39caae557",
+  "source_identity": "CLEAN_GIT_CHECKOUT",
+  "source_worktree_clean": true,
+  "source_manifest_sha256": "bba2a8b36511fe68eaa8210a891bd14f341a5d526eb502d7feb7dc58f3b79e3b",
+  "memory_source_sha": "3596fc67da794b8f5e550bd2ef5de08e2c64538e",
+  "base_sha": "117e90095baaf3fbae3fc7533ca10a3540c5c7ff",
+  "tests": 18,
+  "status": "PASS",
+  "seconds": 126.644,
+  "records": [
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_additive_agent_schema_repeated_migration_and_frozen_predecessors",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_crash_after_commit_lost_ack_reuses_receipt",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_crash_after_journal_before_sql_commit_no_success",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_decline_blocks_late_ack_and_neutral_requester_state",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_disk_failure_before_journal_returns_no_ack",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_erasure_cascades_queue_no_hash_reconstruction",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_explicit_preview_minimal_payload_and_no_requester_leak",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_flags_default_off_and_external_adapter_absent",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_generation_fencing_blocks_memory_delete_during_agent_response",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_memory_correction_deletion_and_restart_no_stale_candidate",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_old_backup_restores_no_permissions_and_unknown_recovery",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_owner_memory_match_is_private_read_only_and_model_independent",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_receipt_replay_restart_lost_ack_and_single_consumption",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_recipient_deletion_retires_delivery_without_exposing_note",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_retention_of_unanswered_invitation_preserves_suppression",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_revocation_expiry_cancel_and_permission_withdrawal_fail_closed",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_silence_creates_private_no_contact_hold",
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "test": "tests.test_living_deeds_agent.AgentLivingTests.test_two_processes_pull_one_durable_receipt",
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ],
+  "mode": "SYNTHETIC_LOCAL_ONLY",
+  "real_people": "NOT EXECUTED",
+  "independent_operators": "NOT EXECUTED",
+  "live_llm": "NOT EXECUTED",
+  "telegram_delivery": "NOT EXECUTED",
+  "financial_operations": false,
+  "private_source_loss": "UNKNOWN_RECOVERY; never reconstructed from public hashes",
+  "real_pilot": "NO-GO"
+}

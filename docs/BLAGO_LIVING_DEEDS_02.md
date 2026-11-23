@@ -16,7 +16,7 @@
 
 `AgentLivingDeeds.candidates(session, mandate_id, query, model_label=..., agent_id=...)` читает только память и NOTE текущего владельца внутри существующего защищённого transaction boundary. Другой UID не принимается из аргументов. MATCH_PRIVATE мандат проверяется по владельцу, назначенному agent ID, разрешённому need permission, его версии, активному состоянию и сроку. Превью явно сообщает, что чтение охватывает частную память владельца. Это широкий owner-private read scope, не право раскрытия.
 
-Результат — частный черновик с `published=false`, `sent=false`. Для memory claim возвращается HMAC `source_tag`, связанный с текущими value и revision/epoch. Исправленная или удалённая память не находится после нового запроса/перезапуска. Candidate/inactive semantic record не превращается в подтверждённый факт. Self-declared запись не считается независимо проверенной.
+Поиск ограничен первыми 128 ключами и 128 NOTE владельца и использует подстроку, а не семантическое ранжирование или доказательство полноты. Результат — частный черновик с `published=false`, `sent=false`. Для memory claim возвращается HMAC `source_tag`, связанный с текущими value и revision/epoch. Исправленная или удалённая память не находится после нового запроса/перезапуска. Candidate/inactive semantic record не превращается в подтверждённый факт. Self-declared запись не считается независимо проверенной.
 
 Память не копируется автоматически в NOTE и не включается в обычный LLM-контекст другого участника. Перенос частной зацепки в отдельную NOTE требует уже существующего человеческого `note` prepare/commit и является отдельным осознанным сохранением. Автоматическое копирование memory payload намеренно не реализовано: иначе удалённый факт мог бы остаться в незаметной копии. Модель и `model_label` не выдают полномочий. Выбор модели не меняет ACL или мандат.
 
@@ -64,5 +64,9 @@ flowchart LR
 ## Проверки и решение
 
 Сценарии, фактические результаты и точная идентификация runtime — [RESULTS.json](living-deeds02/RESULTS.json), [READINESS.json](living-deeds02/READINESS.json). Threat model — [THREAT_MODEL.md](living-deeds02/THREAT_MODEL.md). Команды не требуют LLM токена.
+
+Runtime `a8253d41d8d2ee3b0d4d217c803f43d39caae557`: полный CI **811/811 дважды**, Docker **18/18** новых сценариев, browser/synthetic Mini App и G09 worker probe — PASS. Ещё два теста проверили полное Help completion при всех новых flags и полный актуальный backup; **2/2 PASS** локально. Финальный набор расширен до **813** (20 Living Deeds 02). Точный HEAD и результат его CI проверяются отдельно по PR #43/checks; предыдущий зелёный runtime CI не заменяет эту проверку. При отчётном расширении все `src/` hashes совпадают с runtime a825.
+
+Матрица — [SCENARIOS.md](living-deeds02/SCENARIOS.md), список файлов — [CHANGED_FILES.md](living-deeds02/CHANGED_FILES.md). По подтверждённым runtime evidence: **GO для изолированного локального стенда**, **NO-GO для реальных людей/production**.
 
 GO может относиться только к воспроизводимому изолированному **локальному** стенду после полного CI. Физические Android/iPhone, живой провайдер, настоящие Telegram приглашения, независимые операторы и реальный пилот — NOT EXECUTED / NO-GO. Шифрование SQLite at rest и автономные агентские ключи не реализованы. Общие G04 и прочие release gates не закрываются результатом этих synthetic tests.
