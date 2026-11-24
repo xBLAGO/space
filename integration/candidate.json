@@ -199,7 +199,7 @@
     "tools/blockchain01/hash-vector.json": "58f252af764ac9b3df381353f7344496a2020bc38b7e04b099134e1273b8a780",
     "tools/blockchain01/lab.mjs": "62fd206478da25c854d549b27e5569c8df489a214b4e44b8f0695b1128f81e0f",
     "tools/blockchain01/local-network.mjs": "b33a0c278040cdda76f8bc23f68d982956efac03aeb5e60d640e0f36f9eb8259",
-    "tools/blockchain01/package-lock.json": "f000eaa49c98addb5f6873f1f83f5466f9fe618996b71218e9721d1308835ae5",
+    "tools/blockchain01/package-lock.json": "6642f103425085555117fdd10819434a4237a05cf01c775aaf4f38219b27ff26",
     "tools/blockchain01/package.json": "d684d16c6985481334e152b6e067bba4c7e0011bae6468eb5b0aa35d1baad916",
     "tools/blockchain01/test.mjs": "11eacd4d98f7eed8cd7ec46dcd0c4ba42be4b0a1c1f90a4d536002d1e875f616",
     "tools/blockchain01/verify.mjs": "3545838297ceb89f14aab25b50ce16e5a37fc080f0bf01b59010e190f7c10088",

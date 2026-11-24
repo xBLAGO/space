@@ -30,6 +30,8 @@ PYTHONPATH=/private/tmp/blago-pr41-live-sqlite:.:src BLAGO_LAB_PYTHON=/private/t
 
 Эти два абсолютных пути относятся к проверенному Mac; на другой машине подготовить свою безопасную Python/SQLite-среду. Не подменять системную SQLite. Node x64 на Mac запускает producer через `/usr/bin/arch -x86_64`, сохраняя согласованность driver architecture. Producer получает только новую временную БД из существующего lab(), не путь к реальным данным.
 
+В pinned package-lock восстановлено optional=true у bundled darwin-only fsevents2.3.2: родитель chokidar3.5.2 уже объявляет его optional dependency. Это исправляет EBADPLATFORM на Linux без --force и без изменения tarball integrity. Обычный npm ci использует закреплённую запись; npm install может вновь воспроизвести upstream metadata bug, поэтому не регенерировать lock без Linux CI.
+
 Команда по умолчанию занимает 127.0.0.1:18545, отказывается подключаться к уже занятому порту, выполняет S1–S5, записывает отчёт, изменённую копию, standalone-verifier и evidence, затем останавливает только собственный дочерний процесс сети. Другой порт — `--port 18546`. При UNKNOWN/revert вне ожидаемого сценария runner завершается ненулевым кодом; это не PASS.
 
 ## DeepSeek / отдельный проверяющий

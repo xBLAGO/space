@@ -83,7 +83,7 @@ Publisher стенда: `0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266`, первы
 | S5a точки999 нет | UNKNOWN, exit2 | POINT_ABSENT |
 | S5b локальный RPC недоступен | UNKNOWN, exit2 | NETWORK_UNAVAILABLE; действующая сеть доступна по другому порту |
 
-Фактические SHA/адрес/tx/версии и результаты сохраняются в `evidence.json`; команды и независимая сверка — [runbook](blockchain01/RUNBOOK.md). Результаты зафиксированного clean-checkout прогона будут приложены к PR. Unit tests и EVM integration не являются независимым аудитом.
+Фактические SHA/адрес/tx/версии и результаты — [clean-checkout evidence](blockchain01/clean-run/evidence.json), source `140ab2912b3cc5008219e78875ebf337f269ae72`, source_clean=true. Все пять сценариев дали ожидаемый результат; подробности — [результаты](blockchain01/TEST_RESULTS.md), команды и независимая сверка — [runbook](blockchain01/RUNBOOK.md). Unit tests и EVM integration не являются независимым аудитом.
 
 ## Ограничения и решение
 
