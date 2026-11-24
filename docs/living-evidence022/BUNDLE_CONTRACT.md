@@ -1,6 +1,6 @@
 # Контракт bundle v1
 
-Версия `blago-living-bundle-1`. Нормативная исполняемая модель: `tools/living_bundle_contract.py`; strict audit field set: `tools/living_bundle_verify.py:FIELDS`. JSON UTF-8, duplicate keys запрещены, SHA-256 по точным байтам; для expected/local_ui map используется canonical `wire()` (sorted keys, без пробелов, UTF-8). Хеши manifest сами себя не включают.
+Версия `blago-living-bundle-1`. Нормативная исполняемая модель: `tools/living_bundle_contract.py`; strict audit field set: `tools/living_bundle_verify.py:FIELDS`. `audit-row.schema.json` фиксирует обязательные поля и основные типы; семантические правила остаются в verifier. `expected-matrix.json` — машиночитаемый снимок всех 360 ожидаемых наблюдений. JSON UTF-8, duplicate keys запрещены, SHA-256 по точным байтам; для expected/local_ui map используется canonical `wire()` (sorted keys, без пробелов, UTF-8). Хеши manifest сами себя не включают.
 
 | Файл | Содержимое |
 |---|---|

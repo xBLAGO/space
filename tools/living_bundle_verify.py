@@ -98,6 +98,12 @@ def strings(value):
     return []
 
 
+def has_field(value, name):
+    if isinstance(value,dict): return name in value or any(has_field(v,name) for v in value.values())
+    if isinstance(value,list): return any(has_field(v,name) for v in value)
+    return False
+
+
 class Bundle:
     def __init__(self, directory): self.root=Path(directory).resolve()
     def read(self, name):
@@ -176,6 +182,9 @@ def verify(directory):
                 decoded='\n'.join(strings(value))
                 if forbidden_keys(value): raise ValueError('Credentials/refusal reason in network artifact')
                 if not row['request_id']: raise ValueError('Network request label required')
+                if row['role']=='C' and has_field(value['response_body'],'task') and not (
+                        row['action']=='recipient_receive' and row['marker_presence']['REQ_TEXT']):
+                    raise ValueError('Recipient task field outside successful opening, even without marker')
                 if row['action']=='recipient_receive' and row['marker_presence']['REQ_TEXT']:
                     body=value['response_body']
                     if tuple(sorted(body))!=tuple(sorted(DELIVERY_FIELDS)): raise ValueError('Unexpected invitation response fields')

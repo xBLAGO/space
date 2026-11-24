@@ -136,6 +136,12 @@ class BundleTests(unittest.TestCase):
         for r in self.rows:r['session_id']=r['session_id'].replace(r['branch']+'_','')
         self.reject()
 
+    def test_task_field_before_open_is_forbidden_without_control_marker(self):
+        r=next(r for r in self.rows if r['role']=='C' and r['step']=='recipient_inbox' and r['surface']=='network_response')
+        p=self.root/r['artifact'];data=json.loads(p.read_bytes())
+        data['response_body']['inbox']=[{'task':'sensitive text without marker'}]
+        p.write_bytes(wire(data));self.manifest['artifacts'][p.name]=sha(wire(data));self.reject()
+
     def test_no_auth_fields(self):
         self.manifest['cookies']='not even redacted';self.reject()
 
