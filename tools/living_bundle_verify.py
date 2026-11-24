@@ -93,7 +93,7 @@ def forbidden_keys(value):
 
 def strings(value):
     if isinstance(value,str): return [value]
-    if isinstance(value,dict): return [s for v in value.values() for s in strings(v)]
+    if isinstance(value,dict): return [s for k,v in value.items() for s in [str(k),*strings(v)]]
     if isinstance(value,list): return [s for v in value for s in strings(v)]
     return []
 

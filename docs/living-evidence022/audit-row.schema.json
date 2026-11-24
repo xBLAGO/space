@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Living evidence audit row v1 (semantic checks remain in verifier)",
+  "type": "object",
+  "required": [
+    "action",
+    "artifact",
+    "banner_dom",
+    "banner_screenshot",
+    "branch",
+    "checkpoint",
+    "consent_state",
+    "counters",
+    "endpoint",
+    "http_status",
+    "invitation_id",
+    "marker_presence",
+    "mask",
+    "recipient_first_text_delivery",
+    "refusal_state",
+    "request_id",
+    "request_text_sha256",
+    "response_field_names",
+    "revocation_state",
+    "role",
+    "screenshot",
+    "session_id",
+    "step",
+    "surface",
+    "timestamp",
+    "visible_field_names"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "action": {},
+    "artifact": {},
+    "banner_dom": {},
+    "banner_screenshot": {},
+    "branch": {
+      "enum": [
+        "decline",
+        "revoke",
+        "consent"
+      ]
+    },
+    "checkpoint": {},
+    "consent_state": {},
+    "counters": {},
+    "endpoint": {},
+    "http_status": {},
+    "invitation_id": {},
+    "marker_presence": {
+      "type": "object",
+      "required": [
+        "NOTE_SECRET",
+        "RECIPIENT_ID_C",
+        "REQ_TEXT"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "NOTE_SECRET": {
+          "type": "boolean"
+        },
+        "RECIPIENT_ID_C": {
+          "type": "boolean"
+        },
+        "REQ_TEXT": {
+          "type": "boolean"
+        }
+      }
+    },
+    "mask": {},
+    "recipient_first_text_delivery": {
+      "type": "boolean"
+    },
+    "refusal_state": {},
+    "request_id": {},
+    "request_text_sha256": {},
+    "response_field_names": {},
+    "revocation_state": {},
+    "role": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "screenshot": {},
+    "session_id": {},
+    "step": {},
+    "surface": {
+      "enum": [
+        "visible",
+        "full_dom",
+        "network_response"
+      ]
+    },
+    "timestamp": {},
+    "visible_field_names": {}
+  }
+}

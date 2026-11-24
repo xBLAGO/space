@@ -122,6 +122,20 @@ class BundleTests(unittest.TestCase):
         data=json.loads(p.read_bytes());data['request_body']['reason']='never'
         p.write_bytes(wire(data));self.manifest['artifacts'][p.name]=sha(wire(data));self.reject()
 
+    def test_json_key_is_also_a_disclosure_surface(self):
+        r=next(r for r in self.rows if r['role']=='A' and r['surface']=='network_response');p=self.root/r['artifact']
+        data=json.loads(p.read_bytes());data['response_body']['NOTE_SECRET_UNIT']='hidden in key'
+        p.write_bytes(wire(data));self.manifest['artifacts'][p.name]=sha(wire(data));self.reject()
+
+    def test_missing_whole_request_cannot_pass_on_marker_only(self):
+        r=next(r for r in self.rows if r['recipient_first_text_delivery']);p=self.root/r['artifact']
+        data=json.loads(p.read_bytes());data['response_body']['task']='REQ_TEXT_UNIT'
+        p.write_bytes(wire(data));self.manifest['artifacts'][p.name]=sha(wire(data));self.reject()
+
+    def test_session_cannot_be_shared_across_branches(self):
+        for r in self.rows:r['session_id']=r['session_id'].replace(r['branch']+'_','')
+        self.reject()
+
     def test_no_auth_fields(self):
         self.manifest['cookies']='not even redacted';self.reject()
 

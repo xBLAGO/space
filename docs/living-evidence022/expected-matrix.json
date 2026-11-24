@@ -1,0 +1,6122 @@
+[
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "recipient_decline",
+    "step": "recipient_decline",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "restart_cleanup_relogin",
+    "step": "restart_cleanup_relogin",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_match_private",
+    "step": "new_match_private",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_memory_search",
+    "step": "new_memory_search",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_preview",
+    "step": "new_preview",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "decline",
+    "checkpoint": "new_attempt_blocked",
+    "step": "new_attempt_blocked",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "author_revoke",
+    "step": "author_revoke",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "revoke",
+    "checkpoint": "recipient_open_denied",
+    "step": "recipient_open_denied",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "initial",
+    "step": "initial",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "role_binding_probes",
+    "step": "role_binding_probes",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP1",
+    "step": "author_forward_permission",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "match_private",
+    "step": "match_private",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "memory_search",
+    "step": "memory_search",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP2",
+    "step": "intermediary_preview",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "CP3",
+    "step": "intermediary_send",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_inbox",
+    "step": "recipient_inbox",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "recipient_receive",
+    "step": "recipient_receive",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "contact_consent",
+    "step": "contact_consent",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": true,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "FORBIDDEN",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_disclosure_preview",
+    "step": "offer_disclosure_preview",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "offer_help",
+    "step": "offer_help",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_accept",
+    "step": "author_accept",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "helper_confirm",
+    "step": "helper_confirm",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "A",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "A",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "A",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "REQUIRED",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "B",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "B",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "REQUIRED",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": true,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "B",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "C",
+    "surface": "visible",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "C",
+    "surface": "full_dom",
+    "banner_required": true,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "REQUIRED"
+    },
+    "full_request_required": true,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  },
+  {
+    "branch": "consent",
+    "checkpoint": "author_confirm",
+    "step": "author_confirm",
+    "role": "C",
+    "surface": "network_response",
+    "banner_required": false,
+    "markers": {
+      "NOTE_SECRET": "FORBIDDEN",
+      "RECIPIENT_ID_C": "OPTIONAL",
+      "REQ_TEXT": "FORBIDDEN"
+    },
+    "full_request_required": false,
+    "note_mask_required": false,
+    "counters_zero_required": false,
+    "refusal_reason": "N/A — причина не собирается"
+  }
+]
