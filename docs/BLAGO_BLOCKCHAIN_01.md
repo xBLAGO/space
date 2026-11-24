@@ -83,7 +83,7 @@ Publisher стенда: `0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266`, первы
 | S5a точки999 нет | UNKNOWN, exit2 | POINT_ABSENT |
 | S5b локальный RPC недоступен | UNKNOWN, exit2 | NETWORK_UNAVAILABLE; действующая сеть доступна по другому порту |
 
-Фактические SHA/адрес/tx/версии и результаты — [clean-checkout evidence](blockchain01/clean-run/evidence.json), source `140ab2912b3cc5008219e78875ebf337f269ae72`, source_clean=true. Все пять сценариев дали ожидаемый результат; подробности — [результаты](blockchain01/TEST_RESULTS.md), команды и независимая сверка — [runbook](blockchain01/RUNBOOK.md). Unit tests и EVM integration не являются независимым аудитом.
+Фактические SHA/адрес/tx/версии и результаты — [clean-checkout evidence](blockchain01/clean-run-fixed-lock/evidence.json), source `a031a45d4f04d39c8da035290558f37bb2966238`, source_clean=true. Все пять сценариев дали ожидаемый результат, Linux CI с EVM/Docker и 824 тестами дважды SUCCESS: [45336377558](https://github.com/xBLAGO/space/actions/runs/45336377558). Прежний Mac source140ab291 и failed Linux installation сохранены отдельно; подробности — [результаты](blockchain01/TEST_RESULTS.md), команды и независимая сверка — [runbook](blockchain01/RUNBOOK.md). Unit tests и EVM integration не являются независимым аудитом.
 
 ## Ограничения и решение
 

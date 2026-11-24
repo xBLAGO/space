@@ -9,8 +9,8 @@
 | Python tests | 3/3 PASS: independent hash reference, reuse/no-overwrite, rejection before output |
 | Первый actual CapitalLedger→chain lab | S1 MATCH, S2 MISMATCH, S3/S4 mined revert, S5a/S5b UNKNOWN |
 | npm ci Linux target в пустом каталоге | PASS; это проверка установки lockfile, не Linux runtime |
-| Clean checkout acceptance | PASS, source 140ab2912b3cc5008219e78875ebf337f269ae72, source_clean=true; clean-run/evidence.json |
-| Полный regression / Docker / Linux EVM | Фактические CI ссылки и статусы публикуются в Draft PR; не наследуются от #39 |
+| Clean checkout acceptance | PASS, source a031a45d4f04d39c8da035290558f37bb2966238, source_clean=true; clean-run-fixed-lock/evidence.json; прежний Mac source140 сохранён отдельно |
+| Полный regression / Docker / Linux EVM | Source a031a45: CI45336377558 SUCCESS,824/824 дважды,Docker/EVM PASS; не наследуется от #39 |
 | Независимый DeepSeek / operator audit | NOT EXECUTED |
 
 Локально: Node24.14.0, npm11.9.0, Ganache7.9.2, Python3.12.10 x86_64, SQLite3.54.1 (изолированный driver). Node output в source check: 4 tests / 0 fail / 0 skipped. Python: 3 tests / 0 errors/failures. Реальные EVM assertions включают strict growth, zero digest refusal, skipped point, wrong genesis, missing contract code, stopped network, и CLI exit codes0/1.
@@ -51,4 +51,28 @@ Source CI: https://github.com/xBLAGO/space/actions/runs/45335921791 (PR), https:
 
 На source140ab291 job blockchain01 в run45335921791 остановился при npm ci: EBADPLATFORM fsevents2.3.2 (darwin-only). Локальный Linux-target install не доказал Linux runtime/проверку реальной process.platform. Этот failed run не объявляется PASS.
 
-Причина — bundled extraneous metadata Ganache: chokidar3.5.2 объявляет fsevents~2.3.2 в optionalDependencies, но bundled lock entry потерял optional=true. В новом lockfile восстановлен только optional=true для этой записи; version/resolved/integrity не менялись. --force, отключение platform checks, изменение приложения и тестовых ожиданий не используются. Новый Linux CI должен фактически подтвердить исправление. Старый clean-run отражает Mac source140ab291 и сохраняется как исторический; его PASS не переносится на иной SHA.
+Причина — bundled extraneous metadata Ganache: chokidar3.5.2 объявляет fsevents~2.3.2 в optionalDependencies, но bundled lock entry потерял optional=true. В новом lockfile восстановлен только optional=true для этой записи; version/resolved/integrity не менялись. --force, отключение platform checks, изменение приложения и тестовых ожиданий не используются. Linux CI исправленного source фактически подтвердил исправление, см. ниже. Старый clean-run отражает Mac source140ab291 и сохраняется как исторический; его PASS не переносится на иной SHA.
+
+## Исправленный source и успешный Linux CI
+
+Source `a031a45d4f04d39c8da035290558f37bb2966238`, exact base по-прежнему #39 f9d7353. [PR CI45336377558](https://github.com/xBLAGO/space/actions/runs/45336377558) **SUCCESS**:
+
+- 824/824 Python regression дважды, 281.704s / 284.056s, без ошибок/пропусков; в их числе все прежние821 и3 новых.
+- Docker SUCCESS; EVM job138249318365 SUCCESS: npm ci на настоящем Linux, compiler check,4 Node groups и S1–S5.
+- Старые source/schema/migration/dependency manifests PASS; приложение/DDL/checksums/requirements не изменены.
+- Artifact14893268767 `blockchain01-synthetic-evidence`, digest `sha256:a6d7a7022f349f81063cb0e8c6d8634de98755d3b4b7d697dab84714e478256d`, хранение до2027-02-22.
+
+После фиксации повторён и Mac clean checkout:
+
+```sh
+git worktree add --detach /tmp/blago-bc01-clean2 a031a45d4f04d39c8da035290558f37bb2966238
+cd /tmp/blago-bc01-clean2/tools/blockchain01
+npm ci --ignore-scripts --no-audit --no-fund
+node compile.mjs --check
+cd ../..
+PYTHONPATH=/private/tmp/blago-pr41-live-sqlite:.:src BLAGO_LAB_PYTHON=/private/tmp/blago-pr41-live-venv/bin/python node tools/blockchain01/lab.mjs --new-root /tmp/blago-bc01-clean2-run --port 18547 --enable-synthetic-local
+```
+
+`clean-run-fixed-lock/evidence.json`: source_clean=true, S1 MATCH, S2 MISMATCH, S3/S4 mined receipt0, S5a/b UNKNOWN. Genesis `0x124744d5d20134cd61201e7531e264746ecfbac7fca97c8e0d2e23273983dafb`, contract `0x5FbDB2315678afecb367f032d93F642f64180aa3`, point1 digest `0xa44ef4d3121f851b83b4a4f0ac3e7a1e948847f9917666313f9a3997f6770676`, publication tx `0x6e0a9d7fa0de6e97cdd8c01d5552602fbf8ef3b4fce258d678529db52f1b6362`.
+
+Итог GO только для локальной синтетической фиксации версии. Реальные участники/отчёты/средства и production NO-GO. Independent DeepSeek verdict NOT EXECUTED. Документационный HEAD после этого source отличается: источником runtime evidence остаётся a031a45; не объявлять новый SHA протестированным автоматически.

@@ -1,0 +1,128 @@
+{
+  "format": "blago-blockchain01-lab-1",
+  "source_sha": "a031a45d4f04d39c8da035290558f37bb2966238",
+  "source_clean": true,
+  "synthetic_only": true,
+  "blago": {
+    "producer_pid": 20391,
+    "exit_status": 0,
+    "started_at": "2026-11-24T06:27:03.749Z",
+    "ended_at": "2026-11-24T06:27:21.408Z",
+    "server_started": false,
+    "producer_exited_before_chain_start": true
+  },
+  "versions": {
+    "node": "v24.14.0",
+    "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+    "producer": {
+      "synthetic_report": "WRITTEN",
+      "capital_uel_verification": "PASS",
+      "real_funds": false,
+      "python": "3.12.10",
+      "sqlite": "3.54.1"
+    }
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "expected": "MATCH",
+      "actual": {
+        "status": "MATCH",
+        "exit_code": 0,
+        "checkpoint": "1",
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "chain_id": "31337",
+        "genesis": "0x124744d5d20134cd61201e7531e264746ecfbac7fca97c8e0d2e23273983dafb",
+        "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "report_digest": "0xa44ef4d3121f851b83b4a4f0ac3e7a1e948847f9917666313f9a3997f6770676",
+        "anchored_digest": "0xa44ef4d3121f851b83b4a4f0ac3e7a1e948847f9917666313f9a3997f6770676",
+        "contract_code_sha256": "f4fa799e8282b3a8ccf6183f6ea40f532492f7fbc7e4d09c14ab3e5a91db0c08",
+        "meaning": "REPORT_VERSION_ONLY; NOT ACCOUNTING_TRUTH_OR_AUTHORITY"
+      }
+    },
+    {
+      "id": "S2",
+      "expected": "MISMATCH",
+      "changed_field": "verified.balance.available_minor",
+      "delta_minor": 1,
+      "actual": {
+        "status": "MISMATCH",
+        "exit_code": 1,
+        "checkpoint": "1",
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "chain_id": "31337",
+        "genesis": "0x124744d5d20134cd61201e7531e264746ecfbac7fca97c8e0d2e23273983dafb",
+        "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "report_digest": "0x2b578129d965e2435451dc4ca177a3e95eef4536a2f7320ee1f5a0b6ed10cd74",
+        "anchored_digest": "0xa44ef4d3121f851b83b4a4f0ac3e7a1e948847f9917666313f9a3997f6770676",
+        "contract_code_sha256": "f4fa799e8282b3a8ccf6183f6ea40f532492f7fbc7e4d09c14ab3e5a91db0c08",
+        "meaning": "REPORT_VERSION_ONLY; NOT ACCOUNTING_TRUTH_OR_AUTHORITY"
+      }
+    },
+    {
+      "id": "S3",
+      "expected": "REVERT",
+      "actual": {
+        "tx_hash": "0x9621340fab87125f1190b32b0f29325af2bfebdad3610f8a86678be57d8dfa57",
+        "receipt_status": 0
+      }
+    },
+    {
+      "id": "S4",
+      "expected": "REVERT",
+      "actual": {
+        "tx_hash": "0x3f474eb5a67bb2415c7a8ab0be0f364d2dd8fa4568a7dd1533b2be051fd7c61d",
+        "receipt_status": 0
+      }
+    },
+    {
+      "id": "S5a",
+      "expected": "UNKNOWN",
+      "actual": {
+        "status": "UNKNOWN",
+        "reason": "POINT_ABSENT",
+        "exit_code": 2
+      }
+    },
+    {
+      "id": "S5b",
+      "expected": "UNKNOWN",
+      "actual": {
+        "status": "UNKNOWN",
+        "reason": "NETWORK_UNAVAILABLE",
+        "exit_code": 2
+      }
+    }
+  ],
+  "real_users": "NO-GO",
+  "independent_operator": "NOT EXECUTED",
+  "chain_started_after_producer_at": "2026-11-24T06:27:21.597Z",
+  "network": {
+    "endpoint": "http://127.0.0.1:18547/",
+    "chain_id": "31337",
+    "genesis": "0x124744d5d20134cd61201e7531e264746ecfbac7fca97c8e0d2e23273983dafb",
+    "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "deployment_tx": "0xa418c91555b94f7bf08ff4ca7a5e7ff3f15df5bd1bf05b0c4aa65f14c57a9661",
+    "ganache": "7.9.2"
+  },
+  "publication": {
+    "checkpoint": 1,
+    "digest": "0xa44ef4d3121f851b83b4a4f0ac3e7a1e948847f9917666313f9a3997f6770676",
+    "tx_hash": "0x6e0a9d7fa0de6e97cdd8c01d5552602fbf8ef3b4fce258d678529db52f1b6362",
+    "block_number": 2,
+    "receipt_status": 1
+  },
+  "status": "PASS_LOCAL_SYNTHETIC_VERSION_ANCHOR_ONLY",
+  "files": {
+    "report_sha256": "ee0082b5c10fba752fd87b7e245f3c66d84d31f40224f26c9b4f48f55a70ec9f",
+    "changed_report_sha256": "3ea4d990d094a935f15d91e782064ab4047485bd347c29bc676e74c94202b086",
+    "package_lock_sha256": "6642f103425085555117fdd10819434a4237a05cf01c775aaf4f38219b27ff26",
+    "contract_source_sha256": "7b9bbd32a672f7b4755dc15c14f404f448ed6003b882c130386917b8c0b9e19a",
+    "standalone_verifier": {
+      "verify.mjs": "3545838297ceb89f14aab25b50ce16e5a37fc080f0bf01b59010e190f7c10088",
+      "core.mjs": "5cdebf43b6af116ca2651a266da445914a8db3c441d9bd4bc008ab5e6ad70c34",
+      "artifact.json": "497b130c2e36a32643579bc41463e2d7237052b7e07d246a48be29b3541df674"
+    }
+  }
+}

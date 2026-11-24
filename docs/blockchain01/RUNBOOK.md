@@ -5,6 +5,14 @@
 Из чистого checkout source SHA:
 
 ```sh
+git clone --no-checkout https://github.com/xBLAGO/space.git /tmp/blago-bc01-review-NEW
+git -C /tmp/blago-bc01-review-NEW checkout --detach a031a45d4f04d39c8da035290558f37bb2966238
+cd /tmp/blago-bc01-review-NEW
+```
+
+Этот source включает runtime и исправленный lockfile. Более поздний HEAD может добавлять документацию; не заменять source автоматически без сравнения.
+
+```sh
 python3 -m venv /tmp/blago-bc01-venv-NEW
 /tmp/blago-bc01-venv-NEW/bin/python -m pip install -r requirements-integration.lock
 /tmp/blago-bc01-venv-NEW/bin/python -m pip install --no-deps -e .
@@ -57,10 +65,18 @@ node /tmp/blago-bc01-independent-NEW/standalone-verifier/verify.mjs /tmp/blago-b
 Отдельная проверка операций исходного отчёта, не заменяющая on-chain сверку:
 
 ```sh
-python -c 'import json; from pathlib import Path; from tools.independent_capital_verifier import verify_bundle; r=json.loads(Path("/tmp/blago-bc01-independent-NEW/report.json").read_text()); print(verify_bundle(r["proof"],r["producer_pins"]))'
+python -c 'import json; from pathlib import Path; from tools.independent_capital_verifier import verify_bundle; r=json.loads(Path("/tmp/blago-bc01-independent-NEW/report.json").read_text()); checked=verify_bundle(r["proof"],r["producer_pins"]); assert checked==r["verified"], "Report projection mismatch"; print(checked)'
 ```
 
 Здесь pins synthetic producer-owned. Для реального аудита pins и человеческие полномочия требовали бы независимого закрепления — его нет.
+
+Независимый пересчёт byte fingerprint без Node и без BLAGO (путь к разрешённой копии заменить своим):
+
+```sh
+python -c 'from pathlib import Path; import hashlib; b=Path("/tmp/blago-bc01-independent-NEW/report.json").read_bytes(); print("0x"+hashlib.sha256(b"BLAGO/FUND-REPORT-CHECKPOINT/1\0"+len(b).to_bytes(8,"big")+b).hexdigest())'
+```
+
+Сравнить с publication.digest собственного evidence и записью сети. Сам по себе локальный evidence не заменяет сетевую сверку.
 
 Для независимой проверки rejected transactions прочитать S3/S4 tx_hash и вызвать обычный read-only JSON-RPC `eth_getTransactionReceipt` на том же localhost; status должен быть `0x0`. `eth_getTransactionByHash` покажет from/to/input, а `get(1)` и `last()` — неизменность точки. Это не отправляет новых транзакций. Пример с собственным TX_HASH:
 
