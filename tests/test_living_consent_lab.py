@@ -65,6 +65,15 @@ class ConsentHTTPTests(unittest.TestCase):
         self.assertEqual(self.act('A','search')[0],403)
         self.assertEqual(self.request('POST','/api/prepare',{},'C')[0],404)
 
+    def test_role_query_header_and_cookie_do_not_change_authenticated_context(self):
+        for role in ROLES:
+            expected=self.request('GET','/api/state?scenario=positive',role=role)[1]
+            other='B' if role!='B' else 'A'
+            status,observed,_=self.request('GET','/api/state?scenario=positive&role='+other,
+                role=role,headers={'X-Role':other,'Cookie':self.cookies[role]+'; role='+other})
+            self.assertEqual(status,200);self.assertEqual(observed,expected)
+            self.assertEqual(observed['role'],role)
+
     def test_no_search_side_effect_or_permission_without_click_command(self):
         for _ in range(2):
             for role in ROLES:self.request('GET','/api/state?scenario=positive',role=role)

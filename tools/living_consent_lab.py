@@ -18,7 +18,7 @@ import subprocess
 import sys
 import threading
 import time
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
 from unittest.mock import patch
 
 from tools.help_readiness_lab import initialize, configuration
@@ -350,7 +350,10 @@ class Handler(BaseHTTPRequestHandler):
                 try: role, _, _ = self.server.lab.identity(self.token())
                 except ApiError: role = 'login'
                 return self.respond(200, (STATIC/(role+'.html')).read_text(), 'text/html; charset=utf-8')
-            scenario = urlsplit(self.path).query.removeprefix('scenario=')
+            query = parse_qs(urlsplit(self.path).query)
+            scenarios = query.get('scenario', ['positive'])
+            if len(scenarios) != 1: raise ApiError(400, 'One scenario required')
+            scenario = scenarios[0]  # role query/header/cookie never select identity.
             if scenario not in TASKS: raise ApiError(400, 'Unknown synthetic scenario')
             if path == '/api/state': return self.respond(200, self.server.lab.state(self.token(), scenario))
             if path == '/api/view': return self.respond(200, self.server.lab.s.view(self.token()))

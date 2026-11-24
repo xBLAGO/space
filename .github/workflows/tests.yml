@@ -4,7 +4,7 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/living-deeds-02", "feat/living-deeds-01", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/living-deeds-02-1", "feat/living-deeds-02", "feat/living-deeds-01", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
@@ -76,8 +76,18 @@ jobs:
         run: PYTHONPATH=.:src python -m tools.living_deeds_lab --output "$RUNNER_TEMP/living-deeds-evidence.json"
       - name: Living Deeds 02 owner-memory mandates and local delivery faults
         run: PYTHONPATH=.:src python -m tools.living_deeds_agent_lab --output "$RUNNER_TEMP/living-deeds-agent-evidence.json"
-      - name: Living Deeds 02.1 three-role browser consent and privacy (local only)
-        run: PYTHONPATH=.:src python -m tools.living_consent_browser_check --chrome "$(command -v google-chrome)" --new-root "/tmp/ld021-${{ github.run_id }}" --output "$RUNNER_TEMP/living021-browser"
+      # Legacy capture persists the full synthetic intermediary note. Keep its
+      # historical evidence, but do not regenerate it under the 02.2 policy.
+      - name: Living evidence 02.2 preparation must remain BLOCKED (not E2E PASS)
+        run: |
+          set +e
+          PYTHONPATH=.:src python -m tools.living_evidence_prepare --sandbox-root "$RUNNER_TEMP/living022-private" --bundle "$RUNNER_TEMP/living022-bundle"
+          preparation=$?
+          PYTHONPATH=.:src python -m tools.living_bundle_verify "$RUNNER_TEMP/living022-bundle" > "$RUNNER_TEMP/living022-verification.json"
+          verification=$?
+          set -e
+          test "$preparation" -eq 2
+          test "$verification" -eq 2
       - name: Foundation 09 synthetic 100-participant collective planning
         run: PYTHONPATH=.:src python -m tools.foundation09_lab --output "$RUNNER_TEMP/foundation09-lab.json"
       - name: Durable assets on guarded identity privacy and recovery
@@ -105,7 +115,8 @@ jobs:
             ${{ runner.temp }}/durable-asset-lab.json
             ${{ runner.temp }}/living-deeds-evidence.json
             ${{ runner.temp }}/living-deeds-agent-evidence.json
-            ${{ runner.temp }}/living021-browser
+            ${{ runner.temp }}/living022-bundle
+            ${{ runner.temp }}/living022-verification.json
             ${{ runner.temp }}/uel-offline-results.json
             ${{ runner.temp }}/uel03-lab-evidence.json
             ${{ runner.temp }}/uel03-full-regression.json

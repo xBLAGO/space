@@ -1,0 +1,21 @@
+{
+  "source_sha": "37ad77235f60912ae0a6aba733f47d0ce2b26a01",
+  "scope": "private synthetic clone startup through Lab/preflight/custodian; no HTTP or consent actions",
+  "results": [
+    {
+      "branch": "decline",
+      "guarded_startup": "PASS",
+      "browser_executed": false
+    },
+    {
+      "branch": "revoke",
+      "guarded_startup": "PASS",
+      "browser_executed": false
+    },
+    {
+      "branch": "consent",
+      "guarded_startup": "PASS",
+      "browser_executed": false
+    }
+  ]
+}
