@@ -1,0 +1,15 @@
+{
+  "name": "blago-blockchain01-local-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compile": "node compile.mjs",
+    "test": "node --test test.mjs"
+  },
+  "devDependencies": {
+    "ganache": "7.9.2",
+    "ethers": "6.15.0",
+    "solc": "0.8.30"
+  }
+}

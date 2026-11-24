@@ -4,13 +4,50 @@ on:
   push:
     branches: ["feat/**", "fix/**", "integration/**"]
   pull_request:
-    branches: ["feat/foundation-09-2-capital-governance", "feat/foundation-09-1-durable-capital", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
+    branches: ["feat/foundation-09-3-collective-custody", "feat/foundation-09-2-capital-governance", "feat/foundation-09-1-durable-capital", "feat/foundation-09-collective-balance", "feat/uel-03-checkpoint-recovery", "feat/uel-02-local-durable-ledger", "docs/universal-event-ledger-01", "feat/collective-calculator-01", "integration/foundation-02-unified-mvp", "feat/privacy-01-4-operational-retention", "feat/privacy-01-3-data-lifecycle", "fix/privacy-01-2-context-fencing", "feat/foundation-help-01-1", "feat/foundation-help-01", "integration/foundation-01-06-1", "main", "feat/foundation-04-semantic-memory", "fix/foundation-04-memory-pilot", "feat/foundation-05-identity-store", "feat/foundation-05-secure-identity-runtime", "feat/foundation-05-privacy-recovery", "feat/foundation-06-human-interface-05-4"]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
+  blockchain01:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.14.0"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install isolated compiler and local network
+        working-directory: tools/blockchain01
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Recompile pinned contract and test actual local EVM
+        working-directory: tools/blockchain01
+        run: |
+          node compile.mjs --check
+          npm test
+      - name: Install synthetic export dependencies
+        run: |
+          python -m pip install -r requirements-integration.lock
+          python -m pip install --no-deps -e .
+          python tools/build_sqlite.py --prefix "$RUNNER_TEMP/bc01-sqlite"
+          echo "LD_LIBRARY_PATH=$RUNNER_TEMP/bc01-sqlite" >> "$GITHUB_ENV"
+          echo "LD_PRELOAD=$RUNNER_TEMP/bc01-sqlite/libsqlite3.so.0" >> "$GITHUB_ENV"
+      - name: Five acceptance scenarios with BLAGO producer OFF
+        env:
+          PYTHONPATH: .:src
+          BLAGO_LAB_PYTHON: python
+        run: node tools/blockchain01/lab.mjs --new-root "$RUNNER_TEMP/blockchain01" --enable-synthetic-local
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blockchain01-synthetic-evidence
+          path: ${{ runner.temp }}/blockchain01
+
   tests:
     runs-on: ubuntu-latest
     steps:

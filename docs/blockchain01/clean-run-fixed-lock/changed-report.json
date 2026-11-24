@@ -1,0 +1,426 @@
+{
+  "format": "blago-synthetic-fund-report-1",
+  "fund": "synthetic-governed-capital",
+  "participants": 8,
+  "pin_provenance": "SYNTHETIC_PRODUCER_NOT_INDEPENDENT_PINNING",
+  "producer_pins": {
+    "checkpoint_hash": "b85fef62ec5df3f3e4c9aae5727fcad9c7da3b46313a68e699ffd29ac3464398",
+    "custodian_key": "cf22bfdf47875517ad21a170dc644137072c63e5417c7afae6b4fee792530de0",
+    "node_key": "ed7b7494c168d99fe2ebe71cb30a38b1c4e070435ab8abf23bdcc4565125b997",
+    "policy_hash": "edddb6d629c3d09282e8f84f0c869fa7e2ed4322c2834bcef872353e96416a07",
+    "stream": "cd211969e8913a5451904507910771af44bbee7f40b285eaea1fff0774914b84"
+  },
+  "proof": {
+    "binding": {
+      "checkpoint_hash": "b85fef62ec5df3f3e4c9aae5727fcad9c7da3b46313a68e699ffd29ac3464398",
+      "format": "capital-uel-binding-2",
+      "fund": "synthetic-governed-capital",
+      "history_count": 5,
+      "history_head": "51c98f19b85f5aeef071e3d5f639b4de65da7a159039953253032a39a247541f",
+      "record_refs": [
+        "1b76f3743171c057ab9043c73c7ac2169dd85726d3e072b95faea6c5f8aefcd5",
+        "e64cb3a1641040fb1335cf07d24568f1754cb9913dff161ade6ce6d86a14922c",
+        "206cf7c5001677f1d2db563371d1635fdea466eebf4b81436eaee24043348e74",
+        "37b45c677ac0aec1f5854668449a01325736c2bcee006428d71725e55607b2f5",
+        "cb84efd88540ef35d31f97732ab15e00f21c0677f3dd8367c618a4bee4697d75"
+      ]
+    },
+    "binding_signature": "cddff6324dcb01828dcaf0aeadcaf53d914d0bdc3262bda3ba6b70c47d9fa20b32ba735d056766ae316e02e035c15edd032418b5a4373d0b0296404ae2d7440c",
+    "checkpoint": {
+      "body": {
+        "generation": 7,
+        "journal_root": "74dc1752ed498663a9b431894f01c6e98eb5c131a22d23770f643303f188e5a8",
+        "journal_seq": 147,
+        "previous": "5a2eb51d02d882fc9e8dc1128384f5652424593e2be6b4a543660f6fa371ba23",
+        "profile": "uel-checkpoint-0.3-lab.1",
+        "stream": "cd211969e8913a5451904507910771af44bbee7f40b285eaea1fff0774914b84",
+        "uel_root": "8b45e7b2fffba772b709f7cd32853c4e33c1dda894e8a127718b262a3bb4ed98",
+        "uel_seq": 41
+      },
+      "signature": "9fa472c0ddc290dc6ca808da83279beaada7d9ed3d18bf3c8bb09c2d05d0dcd08022763570e2296d96445bbdeab04c2b475ba8faaed0d170713ad33d76367807"
+    },
+    "format": "capital-governance-proof-2",
+    "history": {
+      "events": [
+        {
+          "amount_minor": 0,
+          "currency": "RUB",
+          "event_id": "58e994e3-f142-49da-a5a3-4df5678f6e45",
+          "fund": "synthetic-governed-capital",
+          "policy": {
+            "activation_delay": 60,
+            "currency": "RUB",
+            "delegation_seconds": 300,
+            "evidence_key": "281fb8d8b605ec93609d5a782140e53554c0b4ca2c8d4916c6113aadddcbda5e",
+            "format": "capital-governance-policy-2",
+            "governance_quorum": 4,
+            "governors": [
+              "actor001",
+              "actor003",
+              "actor004",
+              "actor005",
+              "actor006"
+            ],
+            "id": "synthetic-governed-capital",
+            "members": {
+              "actor000": {
+                "expires_at": 1795508824,
+                "public_key": "e49e9601992c564cfe0e66505f357c07fcdb459f63059ef0c293fa819d32d5ad",
+                "roles": [
+                  "VIEW",
+                  "DECLARE",
+                  "PROPOSE"
+                ]
+              },
+              "actor001": {
+                "expires_at": 1795508824,
+                "public_key": "2e65af0a39a85f168c7793623e1961b6af02cc7ffbd9d863e67683fc5a1937c7",
+                "roles": [
+                  "VIEW",
+                  "APPROVE",
+                  "VERIFY",
+                  "GOV"
+                ]
+              },
+              "actor002": {
+                "expires_at": 1795508824,
+                "public_key": "b13f447e8e644c935683592a141bcc94472120deea8ff1df77e2a02004b01dd5",
+                "roles": [
+                  "VIEW",
+                  "EXECUTE"
+                ]
+              },
+              "actor003": {
+                "expires_at": 1795508824,
+                "public_key": "9d7ff1fbdf46d72c3cd86a12ed05793b80c982e2bb34af46d1fd3ee601fa6207",
+                "roles": [
+                  "VIEW",
+                  "APPROVE",
+                  "VERIFY",
+                  "GOV"
+                ]
+              },
+              "actor004": {
+                "expires_at": 1795508824,
+                "public_key": "6c3adc452dc9becc0d4656b144af720348540f9bc28befad7b455354105e4c11",
+                "roles": [
+                  "VIEW",
+                  "APPROVE",
+                  "VERIFY",
+                  "GOV"
+                ]
+              },
+              "actor005": {
+                "expires_at": 1795508824,
+                "public_key": "24259147ab3f66cf3186f27bb02974fc28f3a07c10aa65bf9fd116dff18bc8e1",
+                "roles": [
+                  "VIEW",
+                  "GOV"
+                ]
+              },
+              "actor006": {
+                "expires_at": 1795508824,
+                "public_key": "4d77d7b8e5948930ccb21ec18a92b7f02e5064add73c189dc0f9eed326bfdfb2",
+                "roles": [
+                  "VIEW",
+                  "GOV"
+                ]
+              },
+              "actor007": {
+                "expires_at": 1795508824,
+                "public_key": "b1a693ffc97bae1ac50a069eedd7b5b05748ef94a915af7b046133f66180c778",
+                "roles": [
+                  "VIEW"
+                ]
+              }
+            },
+            "privacy_key": "ed7b7494c168d99fe2ebe71cb30a38b1c4e070435ab8abf23bdcc4565125b997",
+            "spend_quorum": 2,
+            "version": 1
+          },
+          "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+          "recorded_at": 1795501624,
+          "signatures": {
+            "actor000": "4794fa261b194f04442c3ccfb62a8cbf4bdcf5050645a6315cae0082a0e05f0c4367d72579f194727f304507afe0ed9b38abea091bf2d52f84ea7dca90474609",
+            "actor001": "4514350bac653e69536f3db26f2982abea9de203daadbfad7136aa1d5f9b7b7e5b39d03aec9b862c0bdb6cca22eca2632134db32b1720fa95ac155b962d6c20b",
+            "actor002": "53fa805a8b7916e954e8ac6a7b613a65f6d4e578ffb8e8947dc4a256689ae496651b6c501a7e20059b321cbd1a6de4a30bbf69411ae3b6d00bef71a4ddce690e",
+            "actor003": "6358bc81a0ddf4b1175ab27dcdc8473a6b02bc8ca172a3f22950f17a2c4d3b78af90d76b3d2da64b7223fff17e3c72a64690de7bdd809dcab777c970c24e6f00",
+            "actor004": "134721247e7b2ef53fbee8eeb3733c34799abe09c0ec8c9c9ddaba40daca6fc94787a42fe09c4a528c37f07d813f61ee5b0b3b87d5c813adbbb528ce712c110d",
+            "actor005": "0b4b3fe39d89abf21cbcaf75fd01d244fd29a8dfbbb6de3d62a6128ee4b7a10e38ab07dac4a1ca9034f7fcc76646eb21a0445c966cf6b96285764ce354494705",
+            "actor006": "d12597b37abcb4093d0bff1474c35432309c30b6a37c7f0670ae56de251ba620673a755be1a233cf11cd8716e06b808ad3ca722315cfa1dcace811d09ca0fb0a",
+            "actor007": "543930c86b37cb5c8e6af2bc437b6c1b28e80d908ab61d690d42c3f6c89c1a78f86505fe08afb5fe7f68d193fa3c0755dea88a15513aebfd1c4f4957e6048007"
+          },
+          "state_hash": "58041745422917646a2648c2e2118b38ecd180de5dd56a2d4d9e69794270c4a8",
+          "type": "PolicyEnrolled",
+          "version": 1
+        },
+        {
+          "amount_minor": 600000000,
+          "command": {
+            "data": {
+              "amount_minor": 600000000,
+              "lot": "first",
+              "source": "synthetic-first"
+            },
+            "evidence": null,
+            "expires_at": 1795505224,
+            "fund": "synthetic-governed-capital",
+            "key_id": "actor000",
+            "operation_id": "custody-source-1",
+            "policy_hash": "edddb6d629c3d09282e8f84f0c869fa7e2ed4322c2834bcef872353e96416a07",
+            "type": "CapitalReceived",
+            "version": 1
+          },
+          "currency": "RUB",
+          "event_id": "6c1b1809-e87f-4987-a8e3-58e3e62c744c",
+          "fund": "synthetic-governed-capital",
+          "previous": "5f47a759da79db6bca68b5da85e8dd7cdf1c36e74cceeac1879f169beaa9b0c5",
+          "recorded_at": 1795501624,
+          "signature": "d26040003eb38b45a3d7a0cfae0a7b29bac9cc11b9d84b58d13c035effdf34f11fe201472c04e3ffe42e7c1f2c22beb3afbc27353b5d92d5f245c4696a384109",
+          "state_hash": "7436580d4438faae0b699a6b03bc400993e2ea299c7ad563c8e03dd12e35b85e",
+          "type": "CapitalReceived",
+          "version": 2
+        },
+        {
+          "amount_minor": 600000000,
+          "command": {
+            "data": {
+              "lot": "first"
+            },
+            "evidence": {
+              "body": {
+                "amount_minor": 600000000,
+                "currency": "RUB",
+                "format": "capital-fixture-evidence-1",
+                "fund": "synthetic-governed-capital",
+                "kind": "RECEIVED",
+                "receipt_id": "evidence-first",
+                "subject": "first"
+              },
+              "signature": "42df7d0dd1d5c82a0882d85521b264a9e67a2d3601ca56afc4f5b19d80f1910047f7edccc230ecd2b92bac80b2ba5d32ee0aa2eb7ddd5cc3bf85a2c19c2ec001"
+            },
+            "expires_at": 1795505224,
+            "fund": "synthetic-governed-capital",
+            "key_id": "actor001",
+            "operation_id": "custody-source-2",
+            "policy_hash": "edddb6d629c3d09282e8f84f0c869fa7e2ed4322c2834bcef872353e96416a07",
+            "type": "CapitalVerified",
+            "version": 2
+          },
+          "currency": "RUB",
+          "event_id": "3c1f9dbf-dfe2-4c00-a78f-16ce1be4afed",
+          "fund": "synthetic-governed-capital",
+          "previous": "ff1917481ab13c7fb5a345169d3220b9d5d3e465c83bacc785a8f3dfc5239bd4",
+          "recorded_at": 1795501624,
+          "signature": "5e9a309804ccab913196ddd82dd01a7ba4e75690a5a215b1290b72bf2bc4b5162c91ac30a2bb850b86c6563c8543140cbe26d5e3296f0ecdff7307c35992c20b",
+          "state_hash": "596b103c85ba1039638466ec1c07a685c4e24efd72d0c5880f3c79219a7ab5a6",
+          "type": "CapitalVerified",
+          "version": 3
+        },
+        {
+          "amount_minor": 400000000,
+          "command": {
+            "data": {
+              "amount_minor": 400000000,
+              "lot": "second",
+              "source": "synthetic-second"
+            },
+            "evidence": null,
+            "expires_at": 1795505224,
+            "fund": "synthetic-governed-capital",
+            "key_id": "actor000",
+            "operation_id": "custody-source-3",
+            "policy_hash": "edddb6d629c3d09282e8f84f0c869fa7e2ed4322c2834bcef872353e96416a07",
+            "type": "CapitalReceived",
+            "version": 3
+          },
+          "currency": "RUB",
+          "event_id": "f8428a55-fc00-4041-bb47-0c257a0e016e",
+          "fund": "synthetic-governed-capital",
+          "previous": "0edcdacbfe9cdf910261f112ce9368bf765755531680396da1185a015db9f38c",
+          "recorded_at": 1795501624,
+          "signature": "c2d82636592304626825659ae8b595fe122b5c98454b09710eb4b6049ad8b713deb106323c7fbca2ea63e2752e0e7444e1f8994831839d34831766c76be78c02",
+          "state_hash": "88ae44b80b2fdab894431014cde02dd588a61c2e4362c68130a0d2e093af3405",
+          "type": "CapitalReceived",
+          "version": 4
+        },
+        {
+          "amount_minor": 400000000,
+          "command": {
+            "data": {
+              "lot": "second"
+            },
+            "evidence": {
+              "body": {
+                "amount_minor": 400000000,
+                "currency": "RUB",
+                "format": "capital-fixture-evidence-1",
+                "fund": "synthetic-governed-capital",
+                "kind": "RECEIVED",
+                "receipt_id": "evidence-second",
+                "subject": "second"
+              },
+              "signature": "537f6661183abd44f1a43a65f4e14f467763562f2b44eb59e63d279d23f3c9fb0906d6a27be32f58ad93e4a86c23f8ae8b645329208783be13de2220a859060f"
+            },
+            "expires_at": 1795505224,
+            "fund": "synthetic-governed-capital",
+            "key_id": "actor001",
+            "operation_id": "custody-source-4",
+            "policy_hash": "edddb6d629c3d09282e8f84f0c869fa7e2ed4322c2834bcef872353e96416a07",
+            "type": "CapitalVerified",
+            "version": 4
+          },
+          "currency": "RUB",
+          "event_id": "a77d19d6-b410-4df8-9700-e438d2570d0b",
+          "fund": "synthetic-governed-capital",
+          "previous": "70f1cc6b73f05ed2e50c17fe225e1ca29d44958475fadaad6318cb205e2b9573",
+          "recorded_at": 1795501624,
+          "signature": "9b7712951d0bd438e3ea700eed6217c07c06fa5cb45bb8b2e6c7f5d34f8932368ab2756827e85f216d7d1cc8648fb6e95d6d595b4adc268d53ba553ad77b2a02",
+          "state_hash": "60db91ac56999066163da97618137e3e9aa060ada23e115d47b7d2e1ec53de9a",
+          "type": "CapitalVerified",
+          "version": 5
+        }
+      ],
+      "format": "capital-private-audit-1",
+      "fund": "synthetic-governed-capital"
+    },
+    "uel_headers": [
+      {
+        "causal_ref": "0000000000000000000000000000000000000000000000000000000000000000",
+        "coverage": "FROM_ORIGIN",
+        "object_ref": "f3ac8993945b259524aa4487319a2b11018b0f8ec87d51031ae5bf0c24e957dc",
+        "payload_ref": "2ea6ff9585bc04a6b2a5b6a59e5e2993831d4dee84264cccbcdfc9b50efae4fc",
+        "phase": "OBSERVED",
+        "previous": "c6b3d520625be74f5c485f921d2b89c1c6a87377d365ec48e8e4fb20fc1142c3",
+        "record_ref": "1b76f3743171c057ab9043c73c7ac2169dd85726d3e072b95faea6c5f8aefcd5",
+        "sequence": 37,
+        "source_kind": "CAPITAL",
+        "source_ref": "f4885eeebef3bbf343dbc617b41a8e8fbafbaaea7fd5ae2e93f81eba358aa967",
+        "source_state": "469c6d066dda0c86e7cd08d5d42524b0b2b32de01909374bfcaa19887e497b3c",
+        "source_version": 1
+      },
+      {
+        "causal_ref": "1b76f3743171c057ab9043c73c7ac2169dd85726d3e072b95faea6c5f8aefcd5",
+        "coverage": "FROM_ORIGIN",
+        "object_ref": "f3ac8993945b259524aa4487319a2b11018b0f8ec87d51031ae5bf0c24e957dc",
+        "payload_ref": "5055eaa3e06a70a0291339e4d5da8b2548a1f731c5861c8de1420e74f640982d",
+        "phase": "OBSERVED",
+        "previous": "1b76f3743171c057ab9043c73c7ac2169dd85726d3e072b95faea6c5f8aefcd5",
+        "record_ref": "e64cb3a1641040fb1335cf07d24568f1754cb9913dff161ade6ce6d86a14922c",
+        "sequence": 38,
+        "source_kind": "CAPITAL",
+        "source_ref": "05e9e833f8596b986898096f642f4d3824ee88185e34ca3f98c46ad2069f5f72",
+        "source_state": "43cbe8f5190b348a09ccf7f7dcdb0f45f4a84b40d31ad39787518ce5cbdefe7d",
+        "source_version": 2
+      },
+      {
+        "causal_ref": "e64cb3a1641040fb1335cf07d24568f1754cb9913dff161ade6ce6d86a14922c",
+        "coverage": "FROM_ORIGIN",
+        "object_ref": "f3ac8993945b259524aa4487319a2b11018b0f8ec87d51031ae5bf0c24e957dc",
+        "payload_ref": "9a0689a68762b8b5aab161c1e2356aaf679356488ecf68fcc4dcb6139871b124",
+        "phase": "OBSERVED",
+        "previous": "e64cb3a1641040fb1335cf07d24568f1754cb9913dff161ade6ce6d86a14922c",
+        "record_ref": "206cf7c5001677f1d2db563371d1635fdea466eebf4b81436eaee24043348e74",
+        "sequence": 39,
+        "source_kind": "CAPITAL",
+        "source_ref": "17a5867a1ac5497f147852d68cd0feef0f7f06303a412f9a84648f2299b239cc",
+        "source_state": "b3e6fc07d1b7b3f9e8468a14824ce88bd440257240232c84e201bd34e78901ae",
+        "source_version": 3
+      },
+      {
+        "causal_ref": "206cf7c5001677f1d2db563371d1635fdea466eebf4b81436eaee24043348e74",
+        "coverage": "FROM_ORIGIN",
+        "object_ref": "f3ac8993945b259524aa4487319a2b11018b0f8ec87d51031ae5bf0c24e957dc",
+        "payload_ref": "b14a905e481bc7f75172fa72cb0011c0ac5433412ea5ce5ad415f2f6de6a6977",
+        "phase": "OBSERVED",
+        "previous": "206cf7c5001677f1d2db563371d1635fdea466eebf4b81436eaee24043348e74",
+        "record_ref": "37b45c677ac0aec1f5854668449a01325736c2bcee006428d71725e55607b2f5",
+        "sequence": 40,
+        "source_kind": "CAPITAL",
+        "source_ref": "bb176378a51a1b9be0d364991206a184a8c9dc1ddfc647a7589647e2e95c077e",
+        "source_state": "e88e6fb4807038b4d21b4447538b305a365575bb4c73937994a552a409f7e383",
+        "source_version": 4
+      },
+      {
+        "causal_ref": "37b45c677ac0aec1f5854668449a01325736c2bcee006428d71725e55607b2f5",
+        "coverage": "FROM_ORIGIN",
+        "object_ref": "f3ac8993945b259524aa4487319a2b11018b0f8ec87d51031ae5bf0c24e957dc",
+        "payload_ref": "21e1b269035d2ba58427976d3f619c2fc59e1a66dd838ad7ce9357fffee0b671",
+        "phase": "OBSERVED",
+        "previous": "37b45c677ac0aec1f5854668449a01325736c2bcee006428d71725e55607b2f5",
+        "record_ref": "cb84efd88540ef35d31f97732ab15e00f21c0677f3dd8367c618a4bee4697d75",
+        "sequence": 41,
+        "source_kind": "CAPITAL",
+        "source_ref": "477293cdeefa834ff8ceae251223fdecd7564f21aa4d0787e554bd65f20cb0f6",
+        "source_state": "1f6441b73bbd5957eadb9ee43199e645d1bb4eb857e9c58ed8a7356d6ca297da",
+        "source_version": 5
+      }
+    ],
+    "uel_leaves": [
+      "08de084210e1f58c97bbcccde52e77809be93958a291ae11ce09449eada7d664",
+      "30d029e7efee27a36b1d7b3aa95cf534f915a626b11528c1683cf097a85b430a",
+      "9be18bbbb20db259d80cdcc0d332345d8d91676879062f9c7743e818a2bca7af",
+      "6b1b6d981ba745909c07eb5d8b81f89656cdaff251820da6efc503b14f5bc9c9",
+      "6846d8c337097940fa5978fbe97273a0001fb0866a558bbf02c4d8f71612ad2e",
+      "8a0347ed209fc39e526f1277662cb83ed17a31006f6c401d86aa96209ae3b8cd",
+      "dabce7c8eae1ba8e3f9d5165a5ebb281a801d883c9197c6d8d903efa3ae229aa",
+      "c1c1b951c4ec10a46a6f0ba64eadf6802b70d91a9fe378282a12fe4e17865319",
+      "78b32161ed9e10a892137114625384860d7f69377c1dd5b3dc9bc6325c4f88ed",
+      "5e2187b79d95e6966e97491311c97b3f304e3a9833b848fbae709adf06ad6eb0",
+      "c2eb0bbd00e25ed6f1093d4ae69323a48369437e5d5f3b2aa96007bb0fbdfd01",
+      "fbf8442cbfeadd10e59968fe7376ccc4f96673de8a68799736de9006e3b8fc5d",
+      "fdfcde26296b9e75032e55dbc95ccd1f7d79a8356590ac0f07373416a8cabcd0",
+      "90b536ec4541da59e3055507f82ca48f8d8f1fe60fa6b79ae999dc7da9917b65",
+      "0b7789364c49668f69320ea9637e52590d4c875c16c43cfdb75c86009b26a965",
+      "ecce8565695ac9d8ce54eae4640156bfed3ab6098351f1de7b89bba477198f02",
+      "e2fdafc6a705b01aee2335d15cd1b6efaf3392fe7ceefed6cc0ae3c696e8f616",
+      "77a626c7ea7984c6a38cc6f895960aa96e426c5708756264dbfbbcde3d87b7ab",
+      "536626aa5ce5354b476e333eb36a69b77da42b569c27b83d4c474b8c9082e3e1",
+      "e608e6863d0077bbe89207ae56ad9443265e86f37f1d542c6e1e4a77108e5e0c",
+      "0e4aeacb604ccd1264f0eeef482f5f37fec6bec9b3722281a60391b30e41efae",
+      "d18f494972bb0b3ce3593cf7e861d4d882b85ece0a23579373acde7a273caebf",
+      "a2ffb9f69904035a75b508ca3dea411cbed7aa39660a2f601279c7429a23846e",
+      "bdc7a5e26ef1441473534b2771edfa3f634f8e4de97e2c03f0cd6eaa1e29facd",
+      "3cc887c2556f980e84ef8f3b9d4a851ceba8bf056a8f90ecebe79c3d019e217e",
+      "b0cf58fadebf8694aa429cc38443971457da52c58068c924b3977e74f8ff6988",
+      "177bcba4edbdbcb866ef7fe7780644a1895b71a8433d82f3d881b820c1fdd7c9",
+      "3e84c56ce404a2d1b9143cd80df74d5648171ea64a68e48ffe19ac06a9ca3fd3",
+      "8a4d8d52e116cc2b8d5f94ca73dace02958da179eaa9545e7d1e9c8ee049f59a",
+      "674c05ed062942744daff9267233687912f7d562736ce84ec5d329d391ad9310",
+      "d55892bd88a9080e60e920a9370d42da30a993ddce43554d5c2d139c7f712059",
+      "b0ae637f234ebdf5ecea9d3236ff6b21ae6efb01b3ba8348a7e373b46248c74a",
+      "a1c33a550a3954c6670dc5aac024843a4de765c25365d6dac051c51ef3431b7e",
+      "b3f3d9165aeaca6732a3be8cd09bd68e76ac2fb8ae431be9fe173bdc9433c759",
+      "adcc201c808c9564b73aac15c5255404d0957dd016865e3eb27812a06a8e3f70",
+      "7c2ce855f3317105290af722ba264bc2da71ca16923fc69bd8b1ebdfac09a3e4",
+      "2e614717b181267288ab43cfc29e1e541305d93e89dfcec05cab52ce0c99a838",
+      "81f3bc0740856491487108111133b23b8a355b676f4d1f9894a3ca94acfa2c72",
+      "2304b2aa941f33e102cd91f22d732b21c15e5e6c900f6ba788ea5c6f1919b074",
+      "cc54b2b7ce537dab52924a5edf4b3fc61f0c1015d295ae432fd51a01d7e89dd0",
+      "a871806667774bfc8ff5779822dbfdf6c7a2bc5ad361e5a8615fb5b572e66161"
+    ]
+  },
+  "synthetic_only": true,
+  "verified": {
+    "balance": {
+      "available_minor": 1000000001,
+      "currency": "RUB",
+      "declared_minor": 1000000000,
+      "net_spent_minor": 0,
+      "real_funds_verified": false,
+      "refunded_minor": 0,
+      "reserved_minor": 0,
+      "spent_minor": 0,
+      "unverified_minor": 0,
+      "verified_minor": 1000000000
+    },
+    "events": 5,
+    "implementation": "INDEPENDENT_NO_RUNTIME_IMPORTS",
+    "independent_operator": "NOT EXECUTED",
+    "payload_binding": "TRUSTED_NODE_ATTESTATION",
+    "policy_version": 1,
+    "source_truth_proven": false,
+    "status": "PASS",
+    "uel_inclusion": "PINNED_SIGNED_CHECKPOINT"
+  }
+}

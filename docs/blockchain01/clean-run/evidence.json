@@ -1,0 +1,128 @@
+{
+  "format": "blago-blockchain01-lab-1",
+  "source_sha": "140ab2912b3cc5008219e78875ebf337f269ae72",
+  "source_clean": true,
+  "synthetic_only": true,
+  "blago": {
+    "producer_pid": 20221,
+    "exit_status": 0,
+    "started_at": "2026-11-24T05:48:59.066Z",
+    "ended_at": "2026-11-24T05:49:18.519Z",
+    "server_started": false,
+    "producer_exited_before_chain_start": true
+  },
+  "versions": {
+    "node": "v24.14.0",
+    "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+    "producer": {
+      "synthetic_report": "WRITTEN",
+      "capital_uel_verification": "PASS",
+      "real_funds": false,
+      "python": "3.12.10",
+      "sqlite": "3.54.1"
+    }
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "expected": "MATCH",
+      "actual": {
+        "status": "MATCH",
+        "exit_code": 0,
+        "checkpoint": "1",
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "chain_id": "31337",
+        "genesis": "0xe7366627da1a0d5b3296726fbe579c1a14ac791ad75756f8cb87929fe4f58e3a",
+        "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "report_digest": "0x9e8d3aa41318fd046830bfbd06968db458409e942a9edbe2d2d4ed9ea17fe6e0",
+        "anchored_digest": "0x9e8d3aa41318fd046830bfbd06968db458409e942a9edbe2d2d4ed9ea17fe6e0",
+        "contract_code_sha256": "f4fa799e8282b3a8ccf6183f6ea40f532492f7fbc7e4d09c14ab3e5a91db0c08",
+        "meaning": "REPORT_VERSION_ONLY; NOT ACCOUNTING_TRUTH_OR_AUTHORITY"
+      }
+    },
+    {
+      "id": "S2",
+      "expected": "MISMATCH",
+      "changed_field": "verified.balance.available_minor",
+      "delta_minor": 1,
+      "actual": {
+        "status": "MISMATCH",
+        "exit_code": 1,
+        "checkpoint": "1",
+        "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "chain_id": "31337",
+        "genesis": "0xe7366627da1a0d5b3296726fbe579c1a14ac791ad75756f8cb87929fe4f58e3a",
+        "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "report_digest": "0x4a05fa4d160a457009a73651f22a05aa87223245f82d7740acab72175d9b1326",
+        "anchored_digest": "0x9e8d3aa41318fd046830bfbd06968db458409e942a9edbe2d2d4ed9ea17fe6e0",
+        "contract_code_sha256": "f4fa799e8282b3a8ccf6183f6ea40f532492f7fbc7e4d09c14ab3e5a91db0c08",
+        "meaning": "REPORT_VERSION_ONLY; NOT ACCOUNTING_TRUTH_OR_AUTHORITY"
+      }
+    },
+    {
+      "id": "S3",
+      "expected": "REVERT",
+      "actual": {
+        "tx_hash": "0xd41e710e2a60a27b581b0e4135926d1299c18ddf3c2f3ea8494b59a092d6e8f8",
+        "receipt_status": 0
+      }
+    },
+    {
+      "id": "S4",
+      "expected": "REVERT",
+      "actual": {
+        "tx_hash": "0x3f474eb5a67bb2415c7a8ab0be0f364d2dd8fa4568a7dd1533b2be051fd7c61d",
+        "receipt_status": 0
+      }
+    },
+    {
+      "id": "S5a",
+      "expected": "UNKNOWN",
+      "actual": {
+        "status": "UNKNOWN",
+        "reason": "POINT_ABSENT",
+        "exit_code": 2
+      }
+    },
+    {
+      "id": "S5b",
+      "expected": "UNKNOWN",
+      "actual": {
+        "status": "UNKNOWN",
+        "reason": "NETWORK_UNAVAILABLE",
+        "exit_code": 2
+      }
+    }
+  ],
+  "real_users": "NO-GO",
+  "independent_operator": "NOT EXECUTED",
+  "chain_started_after_producer_at": "2026-11-24T05:49:18.582Z",
+  "network": {
+    "endpoint": "http://127.0.0.1:18545/",
+    "chain_id": "31337",
+    "genesis": "0xe7366627da1a0d5b3296726fbe579c1a14ac791ad75756f8cb87929fe4f58e3a",
+    "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "publisher": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "deployment_tx": "0xa418c91555b94f7bf08ff4ca7a5e7ff3f15df5bd1bf05b0c4aa65f14c57a9661",
+    "ganache": "7.9.2"
+  },
+  "publication": {
+    "checkpoint": 1,
+    "digest": "0x9e8d3aa41318fd046830bfbd06968db458409e942a9edbe2d2d4ed9ea17fe6e0",
+    "tx_hash": "0xcdfaf17d69460917fb23b7006d738ab04f6e158cfb96af350b3fb9f3857b0ca1",
+    "block_number": 2,
+    "receipt_status": 1
+  },
+  "status": "PASS_LOCAL_SYNTHETIC_VERSION_ANCHOR_ONLY",
+  "files": {
+    "report_sha256": "40a5880db66fafb02234efb9d23ba23bd02c09a44dd7ab9bd7150710b7addb7b",
+    "changed_report_sha256": "613295e5ebda24d433df5260b3031f849af43e8cf44b46eca1f8a59cb34678b8",
+    "package_lock_sha256": "f000eaa49c98addb5f6873f1f83f5466f9fe618996b71218e9721d1308835ae5",
+    "contract_source_sha256": "7b9bbd32a672f7b4755dc15c14f404f448ed6003b882c130386917b8c0b9e19a",
+    "standalone_verifier": {
+      "verify.mjs": "3545838297ceb89f14aab25b50ce16e5a37fc080f0bf01b59010e190f7c10088",
+      "core.mjs": "5cdebf43b6af116ca2651a266da445914a8db3c441d9bd4bc008ab5e6ad70c34",
+      "artifact.json": "497b130c2e36a32643579bc41463e2d7237052b7e07d246a48be29b3541df674"
+    }
+  }
+}
