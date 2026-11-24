@@ -1,0 +1,6 @@
+{
+  "format": "blago-checkpoint-hash-vector-1",
+  "note": "Hash-only format vector, not a CapitalLedger proof export",
+  "file_utf8": "{\"format\":\"blago-synthetic-fund-report-1\",\"synthetic_only\":true,\"amount_minor\":100}\n",
+  "expected_digest": "0x6bfe4971e300fc08c035b6312a4a6a6d0f251fabde531f532b273a57ce2d6328"
+}
